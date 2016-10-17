@@ -6,7 +6,7 @@ var config = {
     'webpack/hot/only-dev-server',
     'whatwg-fetch',
     'react-bootstrap',
-    __dirname + '/webapp/js/app.js'
+    __dirname + '/webapp/js/main.js'
   ],
   output: {
     path: __dirname + '/build/',
@@ -16,7 +16,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loaders: ['babel', 'eslint'],
         exclude: /node_modules/
       },
       {
@@ -32,6 +32,9 @@ var config = {
         loader: 'url'
       }
     ]
+  },
+  eslint: {
+    configFile: './.eslintrc'
   },
   devtool: "inline-sourcemap",
   devServer: {
