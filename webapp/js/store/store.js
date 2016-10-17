@@ -5,10 +5,14 @@ import logger from 'redux-logger';
 
 import reducers from '../reducers/reducers';
 
-const initialState = {
+const initialState = { }
 
-}
-
-const store = createStore(reducers, initialState, applyMiddleware(thunk, logger));
+const store = createStore(
+                reducers,
+                initialState,
+                compose (
+                  applyMiddleware(thunk, logger)
+                )
+              );
 
 export default store;

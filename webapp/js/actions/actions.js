@@ -1,8 +1,8 @@
 import * as action from '../constants/actionTypes';
 
-export function getDatastoreKeys (creds) {
+export function FetchDatastoreNamespaces ( filter ) {
   return {
-    type: action.GET_DATASTORE_KEYS,
-    creds: creds
+    type: action.FETCH_DATASTORE_NAMESPACES,
+    filter
   }
 }

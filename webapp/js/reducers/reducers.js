@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-
-import reducer from './reducer';
+import api from './apiReducer';
 
 const reducers = combineReducers({
-  reducer
+  api
 });
 
 export default reducers;
