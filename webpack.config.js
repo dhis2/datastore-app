@@ -16,7 +16,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel', 'eslint'],
+        loaders: ['babel' /*, 'eslint'*/ ],
         exclude: /node_modules/
       },
       {
@@ -33,9 +33,9 @@ var config = {
       }
     ]
   },
-  eslint: {
-    configFile: './.eslintrc'
-  },
+  // eslint: {
+  //   configFile: './.eslintrc'
+  // },
   devtool: "inline-sourcemap",
   devServer: {
     contentBase: __dirname + '/webapp/',

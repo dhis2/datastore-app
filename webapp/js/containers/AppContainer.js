@@ -4,8 +4,8 @@ import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-ro
 import { Provider } from 'react-redux';
 
 import Layout from './Layout';
-import Home from './Home';
-import About from './About';
+import HomePage from './HomePage';
+import AboutPage from './AboutPage';
 
 class AppContainer extends Component {
 
@@ -25,9 +25,9 @@ class AppContainer extends Component {
       <Provider store = { store }>
         <Router history={ hashHistory }>
           <Route path={ "/" } component={ Layout } >
-            <IndexRoute component={ Home } />
-            <Route path={ "/home" } component={ Home } />
-            <Route path={ "/about" } component={ About } />
+            <IndexRoute component={ HomePage } />
+            <Route path={ "/home" } component={ HomePage } />
+            <Route path={ "/about" } component={ AboutPage } />
           </Route>
 
         </Router>
