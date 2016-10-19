@@ -4,7 +4,7 @@ import * as actions from '../constants/actionTypes';
 const api = (state = {
   fetching: false,
   fetched: false,
-  namespaces: null
+  namespaces: []
 }, action) => {
   switch(action.type) {
     case actions.FETCH_DATASTORE_NAMESPACES_FULFILLED: {
