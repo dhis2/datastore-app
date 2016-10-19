@@ -1,12 +1,18 @@
 import * as actions from '../constants/actionTypes';
 
 
-const api = (state = {}, action) => {
+const api = (state = {
+  fetching: false,
+  fetched: false,
+  namespaces: null
+}, action) => {
   switch(action.type) {
-    case actions.FETCH_DATASTORE_NAMESPACES: {
+    case actions.FETCH_DATASTORE_NAMESPACES_FULFILLED: {
       return {
         ...state,
-        namespaces: action.namespaces
+        namespaces: action.namespaces,
+        fetched: true,
+        fetching: false
       };
     }
     default: {
