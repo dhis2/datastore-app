@@ -5,7 +5,8 @@ import List from "../components/List.js"
 
 const mapStateToProps = (state) => {
     return {
-        namespaces: state.api.namespaces
+        namespaces: state.api.namespaces,
+        fetchError: state.api.error
     }
 }
 class Folder extends Component {
@@ -14,7 +15,7 @@ class Folder extends Component {
     }
   render () {
       return (
-          <List items={this.props.namespaces} />
+          <List items={this.props.namespaces} error={this.props.fetchError}/>
       );
 
   }

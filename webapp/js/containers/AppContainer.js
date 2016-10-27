@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 import Layout from './Layout';
 import Home from './Home';
 import About from './About';
-
+import Folder from './Folder';
+import KeyFolder from './KeyFolder';
 class AppContainer extends Component {
 
   static propTypes = {
@@ -24,11 +25,14 @@ class AppContainer extends Component {
     return (
       <Provider store = { store }>
         <Router history={ hashHistory }>
-          <Route path={ "/" } component={ Layout } >
+            <Route path={ "/" } component={ Layout } >
             <IndexRoute component={ Home } />
             <Route path={ "/home" } component={ Home } />
+            <Route path={ "/browse"} component = {Folder} />
+              <Route path={"/browse/:namespace"} component = {KeyFolder} />
+
             <Route path={ "/about" } component={ About } />
-          </Route>
+            </Route>
 
         </Router>
       </Provider>

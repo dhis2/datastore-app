@@ -18,14 +18,16 @@ const api = (state = {
       return {
         ...state,
         fetching: false,
-        fetched: true
+        fetched: false,
+        error: true
       };
     }
 
     case actions.FETCH_DATASTORE_NAMESPACES_FULFILLED: {
+      const namespaces = action.payload.map(key => { return {key} });
       return {
         ...state,
-        namespaces: action.payload,
+        namespaces: namespaces,
         fetched: true,
         fetching: false
       };
