@@ -2,13 +2,12 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux'
 import { FetchDatastoreNamespaces} from '../actions/actions.js';
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         namespaces: state.api.namespaces
     }
 }
 class Folder extends Component {
-    componentWillMount() {
+    componentDidMount() {
         this.props.dispatch(FetchDatastoreNamespaces())
     }
   render () {
@@ -16,7 +15,7 @@ class Folder extends Component {
       if(!namespaces.length) {
           return <h2>Loading...</h2>
       }
-      const mappedNamespaces = namespaces.map(namespace => <li>{namespace}</li>);
+      const mappedNamespaces = namespaces.map(namespace => <li key={namespace}>{namespace}</li>);
     return (
       <div>
         <ul>

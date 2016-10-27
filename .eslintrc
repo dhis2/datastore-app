@@ -9,7 +9,7 @@
     "react"
   ],
   "env": {
-    "browser" : true
+      "browser" : true
   },
   "rules": {
     "key-spacing"          : 0,

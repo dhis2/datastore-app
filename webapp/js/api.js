@@ -14,14 +14,16 @@ class Api
 
     getNamespaces() {
         return fetch(this.url+'/dataStore', this.getHeaders())
-            .then(response => response.json());
     }
 
     getHeaders() {
         return {
-            'headers': {
-                'Authorization': this.auth
-            }
+            'method': 'GET',
+            'mode': 'cors',
+            headers: {
+                'Authorization': this.auth,
+                'Access-Control-Allow-Origin': '*',
+            },
         };
     }
 }

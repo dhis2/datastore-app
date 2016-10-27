@@ -16,7 +16,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel', 'eslint'],
+        loaders: ['babel'],
         exclude: /node_modules/
       },
       {
