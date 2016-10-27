@@ -30,6 +30,28 @@ const api = (state = {
         fetching: false
       };
     }
+    case actions.FETCH_DATASTORE_KEYS_FULFILLED: {
+      return {
+          ...state,
+          keys: action.payload,
+        fetched: true,
+        fetching: false
+      };
+    }
+    case actions.FETCH_DATASTORE_KEYS_PENDING: {
+      return {
+        ...state,
+        fetched: false,
+        fetching: true
+      };
+    }
+    case actions.FETCH_DATASTORE_KEYS_REJECTED: {
+      return {
+        ...state,
+        fetched: false,
+        fetching: false
+      };
+    }
     default: {
       return state;
     }

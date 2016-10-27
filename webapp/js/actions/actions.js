@@ -8,3 +8,10 @@ export function FetchDatastoreNamespaces () {
 
   }
 }
+
+export function FetchDataStoreKeys(namespace) {
+  return {
+    type: action.FETCH_DATASTORE_KEYS,
+    payload: api.getKeys(namespace)
+  }
+}
