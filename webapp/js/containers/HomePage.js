@@ -23,7 +23,6 @@ class HomePage extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
     listItems: state.data.items

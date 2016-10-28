@@ -2,6 +2,8 @@ import React, {PropTypes, Component} from 'react';
 
 import ListItem from './ListItem';
 
+import "../../style/list/list.scss";
+
 class List extends Component {
 
   static propTypes = {
@@ -15,10 +17,10 @@ class List extends Component {
   render() {
     const { items } = this.props;
     return (
-      <ul>
+      <ul className={"list"}>
         {items.map((item) => (
             <ListItem key = { item.id } text = { item.text } />
-          ))}
+        ))}
       </ul>
     )
   }

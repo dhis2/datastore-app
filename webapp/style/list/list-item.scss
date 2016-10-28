@@ -1,0 +1,36 @@
+
+
+li {
+  list-style: none;
+}
+
+.list-item {
+  width: 10em;
+  height: 10em;
+  margin: .8em;
+  border-radius: 5px;
+  background-color: rgb(203, 224, 220);
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.list-item-text {
+  width: 100%;
+  background-color: rgb(231, 123, 70);
+  bottom: 0;
+  position: absolute;
+  height: 2em;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  user-select: none;
+}
+
+.list-item-preview {
+}
