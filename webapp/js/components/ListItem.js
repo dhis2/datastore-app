@@ -8,7 +8,7 @@ class ListItem extends Component {
   render () {
     return (
         <LinkContainer to={"browse/"+this.props.item}>
-        <ListGroupItem>{this.props.item}</ListGroupItem>
+        <ListGroupItem>{this.props.item} <span className="glyphicon glyphicon-remove-circle"></span></ListGroupItem>
         </LinkContainer>
     );
   }

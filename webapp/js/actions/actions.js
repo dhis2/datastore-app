@@ -16,7 +16,7 @@ export function FetchDataStoreKeys(namespace) {
   }
 }
 
-export function FetchDataStoreValue(namespace,key) {
+export function FetchDatastoreValue(namespace,key) {
   return {
     type: action.FETCH_DATASTORE_VALUE,
     payload: api.getValue(namespace,key)

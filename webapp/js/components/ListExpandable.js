@@ -10,14 +10,16 @@ class ListExpandable extends Component {
         if (!items || !items.length) {
             return <h2>Loading...</h2>
         }
-
-        const mappedItems = items.map(item => <ListItemExpandable key={item} item={item} />);
+        const mappedItems = items.map(item =>
+            <ListItemExpandable key={item} item={item} handleItem={this.props.handleItem}
+            getCollapsedItem={this.props.getCollapsedItem}/>);
         return (
-            <Accordion>
+            <PanelGroup>
 
-                    {mappedItems}
+                {mappedItems}
 
-            </Accordion>
+            </PanelGroup>
+
         );
     }
 }
