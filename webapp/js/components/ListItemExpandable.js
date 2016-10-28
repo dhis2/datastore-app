@@ -14,17 +14,30 @@ class ListItemExpandable extends Component {
   }
 
   handleItem() {
-    if(this.state.open) {
+    if(this.state.open)
       this.props.handleItem(this.props.item)
-    }
   }
 
   handleClick() {
-    this.setState({open: !this.state.open})
-    handleItem()
+    this.setState({open: !this.state.open}, () => {
+      this.handleItem()
+    })
+  }
+
+  getCollapsedItem() {
+    if(!this.state.open) {
+      return "Loading..."
+    }
+
+    const items = this.props.getCollapsedItem(this.props.item)
+    if(!items || !items.length) {
+      return "Loading..."
+    } else {
+      return items.toString()
+    }
   }
   render () {
-    console.log(this.props)
+    const collapsed = this.getCollapsedItem()
     return (
 
         <div className="panel panel-default">
@@ -32,7 +45,7 @@ class ListItemExpandable extends Component {
               {this.props.item}
             </div>
           <Collapse in={this.state.open}>
-            <div className="panel-body">{this.props.getCollapsedItem(this.props.item)}</div>
+            <div className="panel-body">{collapsed}</div>
           </Collapse>
         </div>
 

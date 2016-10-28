@@ -6,7 +6,8 @@ import ListExpandable from "../components/ListExpandable"
 
 const mapStateToProps = (state,ownProps) => {
     return {
-        keys: state.api.keys
+        keys: state.api.keys,
+        values: state.api.values
     }
 }
 class KeyFolder extends Component {
@@ -16,22 +17,24 @@ class KeyFolder extends Component {
     }
 
     getValueOfKey(key) {
-        this.state.values;
+        console.log("Get value")
+        if(this.props.values) {
+            return this.props.values
+        }
+
     }
 
     handleItemClick(itemKey) {
+        console.log("fetch")
         this.props.dispatch(FetchDatastoreValue(this.props.params.namespace,itemKey));
     }
-  render () {
-      return (
-          <Panel header={this.props.params.namespace}>
-              <ListExpandable items={this.props.keys}
-                              handleItem={this.handleItemClick.bind(this)}
-                              getCollapsedItem={this.getValueOfKey.bind(this)}/>
-          </Panel>
-      );
-
-  }
+    render () {
+        return (
+            <ListExpandable items={this.props.keys} namespace={this.props.params.namespace}
+                            handleItem={this.handleItemClick.bind(this)}
+                            getCollapsedItem={this.getValueOfKey.bind(this)}/>
+        );
+    }
 }
 const KeyFold = connect(mapStateToProps)(KeyFolder)
 export default KeyFold
