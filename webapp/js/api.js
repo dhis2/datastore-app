@@ -44,22 +44,30 @@ class Api
             .then(response => response.json());
     }
 
-    createValue(namespace, key, value) {
+    createValue(namespace, key, value, log = true) {
         return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, {
             'method': 'POST',
             'body': JSON.stringify(value),
         }, this.getHeaders()))
             .then(response => this.successOnly(response))
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(response => {
+                log && this.updateHistory(namespace, key, value);
+                return response;
+            });
     }
 
-    updateValue(namespace, key, value) {
+    updateValue(namespace, key, value, log = true) {
         return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, {
             'method': 'PUT',
             'body': JSON.stringify(value),
         }, this.getHeaders()))
             .then(response => this.successOnly(response))
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(response => {
+                log && this.updateHistory(namespace, key, value);
+                return response;
+            });
     }
 
     deleteValue(namespace, key) {
@@ -67,14 +75,48 @@ class Api
             'method': 'DELETE',
         }, this.getHeaders()))
             .then(response => this.successOnly(response))
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(response => {
+                this.updateHistory(namespace, key, 'DELETED');
+                return response;
+            });
     }
+
+
+    getHistory(namespace, key) {
+
+        return fetch(this.url+'/dataStore/HISTORYSTORE/'+id, this.getHeaders());
+    }
+
+    updateHistory(namespace, key, newValue) {
+        const id = this.buildId(namespace, key);
+
+        return this.getHistory(namespace, key)
+            .then(response => {
+                if (response.status === 404) {
+                    this.createValue('HISTORYSTORE', id, [newValue], false);
+                    return null;
+                } else {
+                    return response.json();
+                }
+            }).then(history => {
+                if (history !== null) {
+                    history.unshift(newValue);
+                    this.updateValue('HISTORYSTORE', id, history, false);
+                }
+            });
+    }
+
 
     successOnly(response) {
         if (response.status >= 200 && response.status < 300) {
             return Promise.resolve(response);
         }
         return Promise.reject(response);
+    }
+
+    buildId(namespace, key) {
+        return encodeURIComponent(namespace+':'+key);
     }
 
     getHeaders() {
