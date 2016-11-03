@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import promiseMiddleware from 'redux-promise-middleware';
 import logger from 'redux-logger';
 
 import api from '../utils/api'
@@ -37,7 +38,7 @@ const store = createStore(
                 reducers,
                 initialState,
                 compose (
-                  applyMiddleware(thunk, logger)
+                  applyMiddleware(promiseMiddleware(), thunk, logger())
                 )
               );
 

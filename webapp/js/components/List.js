@@ -1,6 +1,8 @@
 import React, {PropTypes, Component} from 'react';
+import { connect } from 'react-redux';
 
 import ListItem from './ListItem';
+import { FetchDatastoreNamespaces } from '../actions/actions';
 
 import "../../style/list/list.scss";
 
@@ -14,6 +16,10 @@ class List extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.getItems();
+  }
+
   render() {
     const { items } = this.props;
     return (
@@ -25,5 +31,6 @@ class List extends Component {
     )
   }
 }
+
 
 export default List;
