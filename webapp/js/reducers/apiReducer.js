@@ -2,9 +2,6 @@ import * as actions from '../constants/actionTypes';
 
 
 const api = (state = { fetching: false, fetched: false, namespaces: [] }, action) => {
-
-
-
   switch(action.type) {
     case actions.FETCH_DATASTORE_NAMESPACES_PENDING: {
       return {
@@ -24,10 +21,13 @@ const api = (state = { fetching: false, fetched: false, namespaces: [] }, action
     }
 
     case actions.FETCH_DATASTORE_NAMESPACES_FULFILLED: {
-      const namespaces = action.payload.map(key => { return {key} });
+      const namespaces = {}
+      action.namespaces.map(key => { namespaces[key] = {} });
       return {
         ...state,
-        namespaces: namespaces,
+        namespaces: {
+          ...namespaces
+        },
         fetched: true,
         fetching: false,
         error: false
@@ -37,7 +37,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: [] }, action
     case actions.FETCH_DATASTORE_KEYS_FULFILLED: {
       return {
           ...state,
-          keys: action.payload,
+        keys: action.payload,
         fetched: true,
         fetching: false,
         error: false

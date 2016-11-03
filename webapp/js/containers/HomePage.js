@@ -12,7 +12,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   render () {
 
     const { listItems } = this.props;

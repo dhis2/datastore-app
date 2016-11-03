@@ -2,14 +2,14 @@ import React, {PropTypes, Component} from 'react';
 import { connect } from 'react-redux';
 
 import ListItem from './ListItem';
-import { FetchDatastoreNamespaces } from '../actions/actions';
+import { fetchNamespaces } from '../actions/actions';
 
 import "../../style/list/list.scss";
 
 class List extends Component {
 
   static propTypes = {
-    items: PropTypes.array
+    items: PropTypes.object
   }
 
   constructor(props) {
@@ -17,20 +17,39 @@ class List extends Component {
   }
 
   componentDidMount() {
-    this.props.getItems();
+    this.props.fetchNamespaces()
   }
 
   render() {
-    const { items } = this.props;
+    const { items, fetching } = this.props;
+
+    if (fetching) {
+      return (
+          <div>
+              LOADING!!
+          </div>
+      )
+    }
+
     return (
       <ul className={"list"}>
-        {items.map((item) => (
-            <ListItem key = { item.id } text = { item.text } />
+        {Object.keys(items).map((item, index) => (
+            <ListItem key = { index } text = { item } />
         ))}
       </ul>
     )
   }
 }
 
+const mapStateToProps = (state) => ({
+  items: state.api.namespaces,
+  fetching: state.api.fetching
+});
 
-export default List;
+const masDispatchToProps = (dispatch) => ({
+    fetchNamespaces() {
+      dispatch(fetchNamespaces());
+    }
+})
+
+export default connect(mapStateToProps, masDispatchToProps)(List);
