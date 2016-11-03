@@ -1,94 +1,74 @@
 import * as actions from '../constants/actionTypes';
 
+const fetchedState = {fetching: false, fetched: true, error: false}
+const fetchingState = {fetching: true, fetched: false, error: false}
+const errorState = {fetching: false, fetched: false, error: true}
 
-const api = (state = { fetching: false, fetched: false, namespaces: [] }, action) => {
+const api = (state = { fetching: false, fetched: false, namespaces: {} }, action) => {
+
   switch(action.type) {
-    case actions.FETCH_DATASTORE_NAMESPACES_PENDING: {
-      return {
-          ...state,
-          fetching: true,
-          fetched: false,
-          error:false
-      };
-    }
-    case actions.FETCH_DATASTORE_NAMESPACES_REJECTED: {
+
+    case actions.REQUEST_ASYNC_ACTION: {
       return {
         ...state,
-        fetching: false,
-        fetched: false,
-        error: true
-      };
+        ...fetchingState
+      }
     }
 
-    case actions.FETCH_DATASTORE_NAMESPACES_FULFILLED: {
-      const namespaces = {}
-      action.namespaces.map(key => { namespaces[key] = {} });
+    case actions.REJECT_ASYNC_ACTION: {
       return {
         ...state,
+        ...errorState
+      }
+    }
+
+    case actions.FETCH_NAMESPACES_FULFILLED: {
+      const namespaces = {};
+      action.namespaces.map(key => { namespaces[key] = {} })
+      return {
+        ...state,
+        ...fetchedState,
         namespaces: {
           ...namespaces
-        },
-        fetched: true,
-        fetching: false,
-        error: false
+        }
       };
     }
 
-    case actions.FETCH_DATASTORE_KEYS_FULFILLED: {
-      return {
-          ...state,
-        keys: action.payload,
-        fetched: true,
-        fetching: false,
-        error: false
-      };
-    }
-
-    case actions.FETCH_DATASTORE_KEYS_PENDING: {
+    case actions.FETCH_KEYS_FULFILLED: {
+      const { namespace, keys } = action;
       return {
         ...state,
-        fetched: false,
-        fetching: true,
-        error: false
+        ...fetchedState,
+        namespaces: {
+          [namespace]:{
+            keys: keys
+          }
+        }
       };
     }
 
-    case actions.FETCH_DATASTORE_KEYS_REJECTED: {
+    case actions.FETCH_VALUE_FULFILLED: {
+      const { namespace, key, value } = action;
       return {
         ...state,
-        fetched: false,
-        fetching: false
-      };
-    }
-
-    case actions.FETCH_DATASTORE_VALUE_FULFILLED: {
-      return {
-        ...state,
-        values: action.payload,
-        fetched: true,
-        fetching: false,
-        error: false
+        ...fetchedState,
+        namespaces: {
+          [namespace]: {
+            [key]: value
+          }
+        }
       }
     }
 
-    case actions.FETCH_DATASTORE_VALUE_PENDING: {
+    case actions.FETCH_HISTORY_FULFILLED: {
+      const { history } = action;
       return {
         ...state,
-        fetched: false,
-        fetching: true,
-        error: false
+        ...fetchedState,
+        history,
       }
     }
 
-    case actions.FETCH_DATASTORE_VALUE_REJECTED: {
-      return {
-        ...state,
-        values: action.payload,
-        fetched: false,
-        fetching: false,
-        error: true
-      }
-    }
     default: {
       return state;
     }
