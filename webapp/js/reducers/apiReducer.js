@@ -55,7 +55,9 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         ...state,
         ...fetchedState,
         namespaces: {
+          ...state.namespaces,
           [namespace]: {
+            ...state.namespaces[namespace].keys,
             [key]: value
           }
         }

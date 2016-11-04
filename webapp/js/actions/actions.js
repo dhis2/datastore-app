@@ -58,12 +58,12 @@ export function createValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestDeletion());
         return fetch(API_DATASTORE_URL + '/${namespace}/${key}', {
-            'method': 'POST',
-            'body': JSON.stringify(value)
-        }, getHeaders()).then(
-            success => success.json().then(json => dispatch(createSuccessfull(json))),
-            error => dispatch(createError(error))
-        )
+                'method': 'POST',
+                'body': JSON.stringify(value)
+            }, getHeaders())
+            .then(success => success.json()
+                .then(json => dispatch(createSuccessfull(json))))
+            .then(error => dispatch(createError(error)))
     }
 }
 
@@ -79,9 +79,9 @@ export function fetchNamespaces() {
 
         // Fetch namespaces from api
         return fetch(API_DATASTORE_URL, getHeaders())
-        .then(success => success.json()
-          .then(json => dispatch(recieveNamespaces(json))))
-        .catch(error => dispatch(rejectAsyncAction(error)))
+            .then(success => success.json()
+                .then(json => dispatch(recieveNamespaces(json))))
+            .catch(error => dispatch(rejectAsyncAction(error)))
     }
 }
 
@@ -93,9 +93,9 @@ export function fetchKeys(namespace) {
 
         // Fetch keys from api using given namespace
         return fetch(API_DATASTORE_URL + '/' + namespace, getHeaders())
-        .then(success => success.json()
-          .then(json => dispatch(recieveKeys(json, namespace))))
-        .catch(error => dispatch(rejectAsyncAction(error)))
+            .then(success => success.json()
+                .then(json => dispatch(recieveKeys(json, namespace))))
+            .catch(error => dispatch(rejectAsyncAction(error)))
     }
 }
 
@@ -107,9 +107,9 @@ export function fetchValue(namespace, key) {
 
         // Fetch keys from api using given namespace
         return fetch(API_DATASTORE_URL + '/${namespace}/${key}', getHeaders())
-        .then(success => success.json()
-          .then(json => dispatch(recieveNamespaces(json, nemespace))))
-        .catch(error => dispatch(rejectAsyncAction(error)))
+            .then(success => success.json()
+                .then(json => dispatch(recieveNamespaces(json, nemespace))))
+            .catch(error => dispatch(rejectAsyncAction(error)))
     }
 }
 
@@ -121,9 +121,9 @@ export function fetchHistory(id) {
 
         // Fetch history from datastore using given identifier
         return fetch(API_DATASTORE_URL + '/HISTORYSTORE/${id}', getHeaders())
-        .then(success => success.json()
-          .then(json => dispatch()))
-        .catch(error => dispatch(rejectAsyncAction(error)))
+            .then(success => success.json()
+                .then(json => dispatch()))
+            .catch(error => dispatch(rejectAsyncAction(error)))
     }
 }
 
@@ -134,12 +134,12 @@ export function updateValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestDeletion());
         return fetch(API_DATASTORE_URL + '/${namespace}/${key}', {
-            'method': 'PUT',
-            'body': JSON.stringify(value)
-        }, getHeaders())
-        .then(success => success.json()
-          .then(json => dispatch(createSuccessfull(json))))
-        .catch(error => dispatch(rejectAsyncAction()))
+                'method': 'PUT',
+                'body': JSON.stringify(value)
+            }, getHeaders())
+            .then(success => success.json()
+                .then(json => dispatch(createSuccessfull(json))))
+            .catch(error => dispatch(rejectAsyncAction()))
     }
 }
 
@@ -157,7 +157,7 @@ export function updateHistory(namespace, key, newValue) {
                 history.unshift(newValue);
                 updateValue('HISTORYSTORE', id, history)
             }
-        })
+        }).catch(error => dispatch(rejectAsyncAction(error)))
     }
 }
 
@@ -168,12 +168,11 @@ export function deleteValue(namespace, key) {
     return dispatch => {
         dispatch(requestDeletion());
         return fetch(API_DATASTORE_URL + '/${namespace}/${key}', {
-            'method': 'DELETE'
-        }, getHeaders()).then(
-            success => success.json().then(json => dispatch(deleteSuccessfull(json))).catch(
-              error => dispatch(deleteError(error))
-            )
-        )
+                'method': 'DELETE'
+            }, getHeaders())
+            .then(success => success.json()
+                .then(json => dispatch(deleteSuccessfull(json))))
+            .catch(error => dispatch(deleteError(error)))
     }
 }
 
@@ -194,10 +193,10 @@ const refresh = () => {
 }
 
 const handleErrors = (response) => {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
 }
 
 const getHeaders = () => {
