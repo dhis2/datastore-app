@@ -92,6 +92,7 @@ class Api
 
 
     getHistory(namespace, key) {
+        const id = this.buildId(namespace, key);
 
         return fetch(this.url+'/dataStore/HISTORYSTORE/'+id, this.getHeaders());
     }
