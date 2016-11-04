@@ -17,7 +17,7 @@ class ListItem extends Component {
 
   render() {
 
-    const { text, type } = this.props;
+    const { text, type, event } = this.props;
 
     switch(type) {
       case "namespace": {
@@ -35,7 +35,7 @@ class ListItem extends Component {
       }
       default: {
         return (
-          <li className={"list-item list-item-defaul"}>
+          <li onClick={() => event(text)} className={"list-item list-item-defaul"}>
             <div className={"list-item-preview"}></div>
             <div className={"list-item-text"}>{text}</div>
           </li>

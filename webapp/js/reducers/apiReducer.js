@@ -36,10 +36,12 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
 
     case actions.FETCH_KEYS_FULFILLED: {
       const { namespace, keys } = action;
+      console.log(namespace)
       return {
         ...state,
         ...fetchedState,
         namespaces: {
+          ...state.namespaces,
           [namespace]:{
             keys: keys
           }

@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 var config = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack-dev-server/client?http://0.0.0.0:8081',
     'webpack/hot/only-dev-server',
     'whatwg-fetch',
     'react-bootstrap',
@@ -39,7 +39,7 @@ var config = {
   devtool: "inline-sourcemap",
   devServer: {
     contentBase: __dirname + '/webapp/',
-    port: 8080,
+    port: 8081,
     inline: true,
     hot: true
   },
