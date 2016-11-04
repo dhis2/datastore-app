@@ -10,12 +10,20 @@ class Api
     constructor(url, auth) {
         this.url = url;
         this.auth = auth;
+        this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
     }
 
     getNamespaces() {
+        const ignoredStores = this.ignoredStores;
+
         return fetch(this.url+'/dataStore', this.getHeaders())
             .then(response => this.successOnly(response))
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(response => {
+                return response.filter(function(value) {
+                    return ignoredStores.indexOf(value) === -1;
+                })
+            });
     }
 
     deleteNamespace(namespace) {
@@ -84,6 +92,7 @@ class Api
 
 
     getHistory(namespace, key) {
+        const id = this.buildId(namespace, key);
 
         return fetch(this.url+'/dataStore/HISTORYSTORE/'+id, this.getHeaders());
     }
