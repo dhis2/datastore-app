@@ -55,7 +55,8 @@ const api = (state = {
       return {
         ...state,
         fetched: false,
-        fetching: false
+        fetching: false,
+        error: true
       };
     }
     case actions.FETCH_DATASTORE_VALUE_FULFILLED: {

@@ -17,7 +17,6 @@ class KeyFolder extends Component {
     }
 
     getValueOfKey(key) {
-        console.log("Get value")
         if(this.props.values) {
             return this.props.values
         }
@@ -25,7 +24,6 @@ class KeyFolder extends Component {
     }
 
     handleItemClick(itemKey) {
-        console.log("fetch")
         this.props.dispatch(FetchDatastoreValue(this.props.params.namespace,itemKey));
     }
     render () {

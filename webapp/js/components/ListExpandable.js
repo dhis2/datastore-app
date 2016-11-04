@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ListItemExpandable from './ListItemExpandable';
 import {LinkContainer} from 'react-router-bootstrap';
+import "../../style/main.scss";
 
 import {Accordion, Alert, PanelGroup, Button, Glyphicon} from 'react-bootstrap';
 class ListExpandable extends Component {
@@ -23,11 +24,10 @@ class ListExpandable extends Component {
                         <Button>
                             <Glyphicon glyph="glyphicon glyphicon-menu-left" /></Button>
                     </LinkContainer>
-                    {this.props.namespace}
+                   <h4> {this.props.namespace}</h4>
                 </div>
                 <div className="panel-body">
                     {mappedItems}
-
                 </div>
             </div>
 
