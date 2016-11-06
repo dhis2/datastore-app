@@ -99,18 +99,22 @@ class Api
 
     updateHistory(namespace, key, newValue) {
         const id = this.buildId(namespace, key);
+        const historyRecord = {
+            'date': new Date(),
+            'value': newValue
+        };
 
         return this.getHistory(namespace, key)
             .then(response => {
                 if (response.status === 404) {
-                    this.createValue('HISTORYSTORE', id, [newValue], false);
+                    this.createValue('HISTORYSTORE', id, [historyRecord], false);
                     return null;
                 } else {
                     return response.json();
                 }
             }).then(history => {
                 if (history !== null) {
-                    history.unshift(newValue);
+                    history.unshift(historyRecord);
                     this.updateValue('HISTORYSTORE', id, history, false);
                 }
             });
