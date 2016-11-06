@@ -42,6 +42,8 @@
     "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2",
     "react-hot-loader": "^3.0.0-beta.5",
+    "react-json": "^0.2.1",
+    "react-json-pretty": "^1.2.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-tools": "^0.13.3",

@@ -1,0 +1,91 @@
+
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.loading-small {
+	position: absolute;
+	width: 28px;
+	height: 28px;
+  margin-left: -20px;
+
+	.maskedCircle {
+		width: 20px;
+		height: 20px;
+		border-radius: 12px;
+		border: 3px solid black;
+	}
+
+	.mask {
+		width: 12px;
+		height: 12px;
+		overflow: hidden;
+	}
+
+	.spinner {
+	 position: absolute;
+	 left: 1px;
+	 top: 1px;
+	 width: 26px;
+	 height: 26px;
+	 animation: spin 1s infinite linear;
+ }
+}
+
+.loading-medium {
+	position: absolute;
+	width: 56px;
+	height: 56px;
+
+	.maskedCircle {
+		width: 40px;
+		height: 40px;
+		border-radius: 24px;
+		border: 3px solid black;
+	}
+
+	.mask {
+		width: 24px;
+		height: 24px;
+		overflow: hidden;
+	}
+
+	.spinner {
+	 position: absolute;
+	 left: 1px;
+	 top: 1px;
+	 width: 52px;
+	 height: 52px;
+	 animation: spin 1s infinite linear;
+ }
+}
+
+.loading-large {
+	position: absolute;
+	width: 112px;
+	height: 112px;
+
+	.maskedCircle {
+		width: 80px;
+		height: 80px;
+		border-radius: 48px;
+		border: 6px solid black;
+	}
+
+	.mask {
+		width: 48px;
+		height: 48px;
+		overflow: hidden;
+	}
+
+	.spinner {
+	 position: absolute;
+	 left: 1px;
+	 top: 1px;
+	 width: 104px;
+	 height: 104px;
+	 animation: spin 1s infinite linear;
+ }
+}

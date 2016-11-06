@@ -4,10 +4,11 @@ import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-ro
 import { Provider } from 'react-redux';
 
 import Layout from './Layout';
-import Home from './Home';
-import About from './About';
-import Folder from './Folder';
-import KeyFolder from './KeyFolder';
+import HomePage from './HomePage';
+import AboutPage from './AboutPage';
+
+import '../../style/main.scss';
+
 class AppContainer extends Component {
 
   static propTypes = {
@@ -25,14 +26,11 @@ class AppContainer extends Component {
     return (
       <Provider store = { store }>
         <Router history={ hashHistory }>
-            <Route path={ "/" } component={ Layout } >
-            <IndexRoute component={ Home } />
-            <Route path={ "/home" } component={ Home } />
-            <Route path={ "/browse"} component = {Folder} />
-              <Route path={"/browse/:namespace"} component = {KeyFolder} />
-
-            <Route path={ "/about" } component={ About } />
-            </Route>
+          <Route path={ "/" } component={ Layout } >
+            <IndexRoute component={ HomePage } />
+            <Route path={ "/home" } component={ HomePage } />
+            <Route path={ "/about" } component={ AboutPage } />
+          </Route>
 
         </Router>
       </Provider>
