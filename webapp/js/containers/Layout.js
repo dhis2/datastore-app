@@ -9,7 +9,7 @@ class Layout extends Component {
     return (
       <div>
         <NavBarCustom />
-        <div className={"container custom-container"}>
+        <div>
           {this.props.children}
         </div>
       </div>

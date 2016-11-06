@@ -8,23 +8,12 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
 
   switch(action.type) {
 
-    case actions.REQUEST_ASYNC_ACTION: {
-      return {
-        ...state,
-        ...fetchingState
-      }
-    }
-
-    case actions.REJECT_ASYNC_ACTION: {
-      return {
-        ...state,
-        ...errorState
-      }
-    }
-
+    /**
+     *  Namespaces
+     */
     case actions.FETCH_NAMESPACES_FULFILLED: {
       const namespaces = {};
-      action.namespaces.map(key => { namespaces[key] = {} })
+      action.namespaces.map(key => { namespaces[key] = {'name': key} })
       return {
         ...state,
         ...fetchedState,
@@ -34,20 +23,72 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
       };
     }
 
-    case actions.FETCH_KEYS_FULFILLED: {
-      const { namespace, keys } = action;
-      console.log(namespace)
+    case actions.FETCH_NAMESPACES_PENDING: {
       return {
         ...state,
-        ...fetchedState,
+        ...fetchingState
+      };
+    }
+
+    case actions.FETCH_NAMESPACES_REJECTED: {
+      return {
+        ...state,
+        ...errorState
+      };
+    }
+
+    /**
+     *  Keys
+     */
+
+    case actions.FETCH_KEYS_FULFILLED: {
+      const { namespace } = action, keys = {};
+      action.keys.map(key => { keys[key] = {'key': key} })
+      return {
+        ...state,
         namespaces: {
           ...state.namespaces,
           [namespace]:{
+            ...state.namespaces[namespace],
+            ...fetchedState,
             keys: keys
           }
         }
       };
     }
+
+    case actions.FETCH_KEYS_PENDING: {
+      const { namespace } = action;
+      return {
+        ...state,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]:{
+            ...state.namespaces[namespace],
+            ...fetchingState
+          }
+        }
+      };
+    }
+
+    case actions.FETCH_KEYS_REJECTED: {
+      const { namespace, error } = action;
+      return {
+        ...state,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]: {
+            ...state.namespaces[namespace],
+            ...errorState,
+            errorMessage: error
+          }
+        }
+      };
+    }
+
+    /**
+     *  Values
+     */
 
     case actions.FETCH_VALUE_FULFILLED: {
       const { namespace, key, value } = action;
@@ -57,8 +98,56 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         namespaces: {
           ...state.namespaces,
           [namespace]: {
-            ...state.namespaces[namespace].keys,
-            [key]: value
+            ...state.namespaces[namespace],
+            keys: {
+              ...state.namespaces[namespace].keys,
+              [key]: {
+                ...state.namespaces[namespace].keys[key],
+                value: value
+              }
+            }
+          }
+        }
+      }
+    }
+
+    case actions.FETCH_VALUE_REJECTED: {
+      const { namespace, key} = action;
+      return {
+        ...state,
+        ...fetchedState,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]: {
+            ...state.namespaces[namespace],
+            keys: {
+              ...state.namespaces[namespace].keys,
+              [key]: {
+                ...state.namespaces[namespace].keys[key],
+                ...errorState
+              }
+            }
+          }
+        }
+      }
+    }
+
+    case actions.FETCH_VALUE_PENDING: {
+      const { namespace, key } = action;
+      return {
+        ...state,
+        ...fetchedState,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]: {
+            ...state.namespaces[namespace],
+            keys: {
+              ...state.namespaces[namespace].keys,
+              [key]: {
+                ...state.namespaces[namespace].keys[key],
+                ...fetchingState
+              }
+            }
           }
         }
       }
@@ -70,6 +159,20 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         ...state,
         ...fetchedState,
         history,
+      }
+    }
+
+    case actions.TOGGLE_NAMESPACE: {
+      const { namespace } = action;
+      return {
+        ...state,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]: {
+            ...state.namespaces[namespace],
+            open: !state.namespaces[namespace].open
+          }
+        }
       }
     }
 

@@ -7,6 +7,8 @@ import Layout from './Layout';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 
+import '../../style/main.scss';
+
 class AppContainer extends Component {
 
   static propTypes = {

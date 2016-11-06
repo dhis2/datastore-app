@@ -1,7 +1,10 @@
 import React, {PropTypes, Component} from 'react'
 import {connect} from 'react-redux';
 
-import List from '../components/List';
+import Sidebar from '../components/sidebar/Sidebar';
+import ValueArea from '../components/valueWindow/ValueArea'
+
+import '../../style/pages/homepage.scss';
 
 class HomePage extends Component {
 
@@ -12,13 +15,13 @@ class HomePage extends Component {
     }
 
     render() {
-        const {listItems} = this.props;
-        return (<List items={listItems}/>);
+        return (
+          <div className="home-container">
+            <Sidebar />
+            <ValueArea />
+          </div>
+        );
     }
 }
 
-const mapStateToProps = (state) => {
-    return {listItems: []}
-}
-
-export default connect(mapStateToProps, {})(HomePage);
+export default HomePage;

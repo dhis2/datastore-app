@@ -21,7 +21,7 @@ export function rejectAsyncAction(error) {
 }
 
 /**
- *  Async fulfillment action creators
+ *  Namespaces
  */
 export function recieveNamespaces(namespaces) {
     return {
@@ -30,6 +30,21 @@ export function recieveNamespaces(namespaces) {
     }
 }
 
+export function requestNamespaces() {
+    return {
+        type: actions.FETCH_NAMESPACES_PENDING
+    }
+}
+
+export function rejectNamespaces() {
+    return {
+        type: actions.FETCH_NAMESPACES_REJECTED
+    }
+}
+
+/**
+ *  Keys
+ */
 export function recieveKeys(keys, namespace) {
     return {
         type: actions.FETCH_KEYS_FULFILLED,
@@ -38,7 +53,22 @@ export function recieveKeys(keys, namespace) {
     }
 }
 
-export function recieveValue(namespace, key, value) {
+export function requestKeys(namespace) {
+    return {
+        type: actions.FETCH_KEYS_PENDING,
+        namespace
+    }
+}
+
+export function rejectKeys(namespace, error) {
+    return {
+        type: actions.FETCH_KEYS_REJECTED,
+        namespace,
+        error
+    }
+}
+
+export function recieveValue(value, namespace, key) {
     return {
         type: actions.FETCH_VALUE_FULFILLED,
         namespace,
@@ -47,9 +77,81 @@ export function recieveValue(namespace, key, value) {
     }
 }
 
+export function requestValue(namespace, key) {
+    return {
+        type: actions.FETCH_VALUE_PENDING,
+        namespace,
+        key
+    }
+}
+
+export function rejectValue(error, namespace, key) {
+    return {
+        type: actions.FETCH_VALUE_REJECTED,
+        namespace,
+        key,
+        error
+    }
+}
+
+export function toggleNamespace(namespace) {
+  return {
+    type: actions.TOGGLE_NAMESPACE,
+    namespace
+  }
+}
+
+export function selectKey(namespace, key, value) {
+  return {
+    type: actions.SELECT_KEY,
+    namespace,
+    key,
+    value
+  }
+}
+
 /**
  *  Async Action Functions
  */
+
+
+  export function fetchAndToggleNamespace(namespace) {
+    return (dispatch, getState) => {
+      if(!shouldFetchKeys(getState(), namespace)) {
+        return dispatch(toggleNamespace(namespace));
+      }
+        dispatch(requestKeys(namespace));
+
+        return fetch(API_DATASTORE_URL + "/" + namespace, getHeaders())
+         .then(response => response.json()
+           .then(json => {
+             dispatch(recieveKeys(json, namespace));
+             dispatch(toggleNamespace(namespace));
+           }))
+         .catch(error => dispatch(rejectKeys(namespace, error)));
+    }
+ }
+
+ export function fetchAndDisplayKeyValue(namespace, key) {
+   return (dispatch, getState) => {
+     if(!shouldFetchValue(getState(), namespace, key)){
+       return dispatch(selectKey(namespace, key, getState().api.namespaces[namespace].keys[key].value))
+     }
+     dispatch(requestValue(namespace, key));
+
+     return fetch(API_DATASTORE_URL + '/' + namespace + '/' + key, getHeaders())
+         .then(success => success.json()
+             .then(json => {
+                dispatch(recieveValue(json, namespace, key));
+                dispatch(selectKey(namespace, key, json));
+             }))
+         .catch(error => dispatch(rejectValue(error, namespace, key)))
+   }
+ }
+
+
+
+
 
 /**
  *  CREATE Functions
@@ -71,17 +173,18 @@ export function createValue(namespace, key, value) {
  * FETCH (READ) Functions
  */
 
+
 // Fetch namespaces from data store
 export function fetchNamespaces() {
     return dispatch => {
         // Prepare reducer for incomming namespaces
-        dispatch(requestAsynAction());
+        dispatch(requestNamespaces());
 
         // Fetch namespaces from api
         return fetch(API_DATASTORE_URL, getHeaders())
             .then(success => success.json()
                 .then(json => dispatch(recieveNamespaces(json))))
-            .catch(error => dispatch(rejectAsyncAction(error)))
+            .catch(error => dispatch(rejectNamespaces(error)))
     }
 }
 
@@ -89,13 +192,13 @@ export function fetchNamespaces() {
 export function fetchKeys(namespace) {
     return dispatch => {
         // Prepare reducer from incomming keys
-        dispatch(requestAsynAction());
+        dispatch(requestKeys());
 
         // Fetch keys from api using given namespace
         return fetch(API_DATASTORE_URL + '/' + namespace, getHeaders())
             .then(success => success.json()
                 .then(json => dispatch(recieveKeys(json, namespace))))
-            .catch(error => dispatch(rejectAsyncAction(error)))
+            .catch(error => dispatch(rejectKeys(namespace, error)))
     }
 }
 
@@ -103,13 +206,13 @@ export function fetchKeys(namespace) {
 export function fetchValue(namespace, key) {
     return dispatch => {
         // Prepare reducer from incomming value
-        dispatch(requestAsynAction())
+        dispatch(requestValue(namespace, key));
 
         // Fetch keys from api using given namespace
-        return fetch(API_DATASTORE_URL + '/${namespace}/${key}', getHeaders())
+        return fetch(API_DATASTORE_URL + '/' + namespace + '/' + key, getHeaders())
             .then(success => success.json()
-                .then(json => dispatch(recieveNamespaces(json, nemespace))))
-            .catch(error => dispatch(rejectAsyncAction(error)))
+                .then(json => dispatch(recieveValue(json, namespace, key))))
+            .catch(error => dispatch(rejectValue(error, namespace, key)))
     }
 }
 
@@ -180,23 +283,36 @@ export function deleteValue(namespace, key) {
  *  HELPER Functions
  */
 
-const shouldUpdate = ({
-    namespaces
-}, namespace, key) => {
-    const value =
-        key ? namespaces[namespace][key] : namespaces[namespace]
-    return (typeof value !== 'undefined');
-}
-
-const refresh = () => {
-
-}
-
 const handleErrors = (response) => {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
+}
+
+const shouldFetchKeys = (state, namespace) => {
+  try {
+    return !state.api.namespaces[namespace].fetched;
+  } catch (e) {
+    return true;
+  }
+}
+
+const shouldFetchNamespaces = (state) => {
+  try {
+    return !state.api.fetched;
+  } catch (e) {
+    return true;
+  }
+}
+
+const shouldFetchValue = (state, namespace, key) => {
+  try {
+    const value = state.api.namespaces[namespace].keys[key].value;
+    return (typeof value === 'undefined') ? true : false;
+  } catch (e) {
+    return true;
+  }
 }
 
 const getHeaders = () => {

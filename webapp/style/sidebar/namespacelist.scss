@@ -1,0 +1,27 @@
+.folder-icon {
+  padding: 0 .5em 0 0;
+}
+
+.namespace-title {
+padding: 0.5em;
+  &:hover{
+    background-color: red;
+    cursor: pointer;
+  }
+}
+
+
+.loading-namespace {
+  float: right;
+}
+
+.folder {
+  width: 100%;
+  list-style: none;
+  text-decoration: none;
+  font-size: 1.2em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
