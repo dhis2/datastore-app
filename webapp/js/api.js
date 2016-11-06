@@ -10,6 +10,7 @@ class Api
     constructor(url, auth) {
         this.url = url;
         this.auth = auth;
+        this.cache = [];
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
     }
 
@@ -41,9 +42,21 @@ class Api
     }
 
     getValue(namespace, key) {
-        return fetch(this.url+'/dataStore/'+namespace+'/'+key, this.getHeaders())
-            .then(response => this.successOnly(response))
-            .then(response => response.json());
+        const k = this.buildId(namespace, key);
+        var cache = this.cache;
+
+        if (!cache[k]) {
+            return this.getMetaData(namespace, key)
+                .then(result => {
+                    cache[k] = result;
+                    return result.value;
+                });
+        }
+
+        return new Promise(function (resolve, reject) {
+            console.log('cache resolve');
+            resolve(cache[k].value);
+        });
     }
 
     getMetaData(namespace, key) {
