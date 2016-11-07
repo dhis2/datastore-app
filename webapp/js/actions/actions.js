@@ -2,7 +2,6 @@ import * as actions from '../constants/actionTypes';
 import {
     API_DATASTORE_URL
 } from '../constants/apiUrls';
-import api from '../utils/api';
 
 /**
  *  Generic request action creators

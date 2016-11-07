@@ -4,7 +4,6 @@ import logger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
 import { createStore, compose, applyMiddleware } from 'redux';
 
-import api from '../utils/api'
 import reducers from '../reducers/reducers';
 
 const initialState = {
@@ -17,7 +16,7 @@ const store = createStore(
                 reducers,
                 initialState,
                 compose (
-                  applyMiddleware(promiseMiddleware(), thunk, logger())
+                  applyMiddleware(thunk, logger())
                 )
               );
 
