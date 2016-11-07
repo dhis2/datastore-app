@@ -63,6 +63,7 @@ export function fetchValue(namespace, key) {
 
 export function fetchHistory(namespace, key) {
     return dispatch => {
+        dispatch(requestHistory());
         return api.getHistory(namespace, key)
             .then(history => console.log(history))
             .catch(error => console.log(error));
@@ -80,6 +81,7 @@ export function updateHistory(namespace, key, value) {
 
 export function updateValue(namespace, key, value) {
     return dispatch => {
+        dispatch(requestValue());
         return api.updateValue(namespace, key, value)
             .then(success => console.log(success))
             .catch(error => console.log(error));
@@ -88,6 +90,7 @@ export function updateValue(namespace, key, value) {
 
 export function deleteValue(namespace, key) {
     return dispatch => {
+        dispatch(requestValue());
         return api.deleteValue(namespace, key)
             .then(success => console.log(success))
             .catch(error => console.log(error));
@@ -96,16 +99,27 @@ export function deleteValue(namespace, key) {
 
 export function deleteNamespace(namespace) {
     return dispatch => {
+        dispatch(requestNamespaces());
         return api.deleteNamespace(namespace)
             .then(success => console.log(success))
             .catch(error => console.log(error));
     }
 }
 
+/**
+ *  Namesapce Action Creators
+ */
 export function recieveNamespaces(namespaces) {
     return {
         type: actions.FETCH_NAMESPACES_FULFILLED,
         namespaces
+    }
+}
+
+export function rejectNamespaces(error) {
+    return {
+        type: actions.FETCH_NAMESPACES_REJECTED,
+        error
     }
 }
 
@@ -115,12 +129,9 @@ export function requestNamespaces() {
     }
 }
 
-export function rejectNamespaces() {
-    return {
-        type: actions.FETCH_NAMESPACES_REJECTED
-    }
-}
-
+/**
+ *  Key Action Creators
+ */
 export function recieveKeys(namespace, keys) {
     return {
         type: actions.FETCH_KEYS_FULFILLED,
@@ -144,6 +155,10 @@ export function rejectKeys(namespace, error) {
     }
 }
 
+
+/**
+ *  Value Action Creators
+ */
 export function recieveValue(namespace, key, value) {
     return {
         type: actions.FETCH_VALUE_FULFILLED,
@@ -170,6 +185,19 @@ export function rejectValue(namespace, key, error) {
     }
 }
 
+/**
+ *  History Action Creators
+ */
+
+export function requestHistory() {
+  return {
+    type: actions.REQUEST_HISTORY_PENDING
+  }
+}
+
+/**
+ *  UI Action Creators
+ */
 export function toggleNamespace(namespace) {
     return {
         type: actions.TOGGLE_NAMESPACE,
