@@ -3,8 +3,8 @@ import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-ro
 import { Provider } from 'react-redux';
 
 import Layout from './Layout';
-import HomePage from './HomePage';
-import AboutPage from './AboutPage';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

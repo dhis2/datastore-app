@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 
-import Sidebar from '../components/sidebar/Sidebar';
-import ValueArea from '../components/valueWindow/ValueArea'
+import Sidebar from '../../components/sidebar/Sidebar';
+import ValueArea from '../../components/valueWindow/ValueArea'
 
 class HomePage extends Component {
 
