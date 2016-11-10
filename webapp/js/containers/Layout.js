@@ -8,7 +8,6 @@ class Layout extends Component {
   render () {
     return (
       <div>
-        <NavBarCustom />
         <div>
           {this.props.children}
         </div>
