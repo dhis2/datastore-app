@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
   error: state.api.error
 });
 
-const masDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
     fetchNamespaces() {
       dispatch(fetchNamespaces());
     },
@@ -74,5 +74,5 @@ const masDispatchToProps = (dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  masDispatchToProps
+  mapDispatchToProps
 )(NamespaceList)
