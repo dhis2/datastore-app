@@ -1,6 +1,4 @@
-/**
- * Created by pjurasek on 17.10.16.
- */
+import { API_URL } from 'constants/apiUrls';
 
 var apiClass = undefined;
 
@@ -159,7 +157,7 @@ class Api
 
 export default (function getApi() {
     if (typeof apiClass === 'undefined') {
-        apiClass = new Api('https://play.dhis2.org/demo/api', `Basic ${btoa('admin:district')}`);
+        apiClass = new Api(API_URL, `Basic ${btoa('admin:district')}`);
     }
 
     return apiClass;
