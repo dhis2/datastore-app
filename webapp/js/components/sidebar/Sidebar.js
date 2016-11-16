@@ -3,7 +3,7 @@ import React, {PropTypes, Component} from 'react';
 import '../../../style/sidebar/sidebar.scss';
 
 import NamespaceList from './NamespaceList';
-import WindowTitle from '../general/WindowTitle';
+import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -13,7 +13,9 @@ class Sidebar extends Component {
   render() {
     return (
       <div className={'sidebar'}>
-        <WindowTitle text={"navigation"} />
+        <Toolbar>
+          <ToolbarTitle text="Navigation" />
+        </Toolbar>
         <NamespaceList />
       </div>
     );
