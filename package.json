@@ -61,5 +61,8 @@
     "webpack-dev-server": "^1.16.2",
     "whatwg-fetch": "^1.0.0",
     "immutable": "^3.8.1"
+  },
+  "dependencies": {
+    "material-ui": "^0.16.2"
   }
 }

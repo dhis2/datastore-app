@@ -7,6 +7,9 @@ import Layout from './Layout';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import '../../style/main.scss';
 
 class AppContainer extends Component {
@@ -24,6 +27,7 @@ class AppContainer extends Component {
     const { store } = this.props;
 
     return (
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Provider store = { store }>
         <Router history={ hashHistory }>
           <Route path={ "/" } component={ Layout } >
@@ -34,6 +38,7 @@ class AppContainer extends Component {
 
         </Router>
       </Provider>
+      </MuiThemeProvider>
     );
   }
 }
