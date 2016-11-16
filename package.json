@@ -63,6 +63,8 @@
     "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
-    "material-ui": "^0.16.2"
+    "material-ui":"^0.16.2",
+    "jsoneditor": "^5.5.10",
+    "json-loader":"^0.5.4"
   }
 }

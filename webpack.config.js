@@ -30,6 +30,10 @@ var config = {
       {
         test: /\.(eot|woff2|woff|ttf|svg)$/,
         loader: 'url'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },

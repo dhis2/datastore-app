@@ -3,19 +3,31 @@ import  { connect } from 'react-redux';
 import JSONPretty from 'react-json-pretty';
 import { Spinner } from '../utils/Loaders';
 import Inspector from 'react-json-inspector';
-
+import Jsoneditor from 'jsoneditor/dist/jsoneditor-minimalist.min';
 import '../../../style/vendor/json-inspector.css';
 import Paper from 'material-ui/Paper';
+import JSONEditor from './JSONEditor';
+
 class DisplayArea extends Component {
 
   constructor (props) {
     super(props);
 
+    this.editor = null;
     this.renderEmpty = this.renderEmpty.bind(this);
     this.renderObject = this.renderObject.bind(this);
     this.renderLoading = this.renderLoading.bind(this);
+    this.renderEditor = this.renderEditor.bind(this);
   }
 
+  initEditor() {
+    const options = {
+      mode: 'tree',
+
+    }
+    const editor = new Jsoneditor(this.editorContainer,options);
+    return editor;
+  }
   renderEmpty() {
         return (
           <div>
@@ -26,11 +38,19 @@ class DisplayArea extends Component {
   renderObject() {
     return (
       <Paper className="value-area">
-        <div className="value-value">
-        <Inspector data={this.props.value}></Inspector>
-          </div>
+        <JSONEditor/>
       </Paper>
     )
+  }
+
+  renderEditor() {
+
+    return (
+        <Paper className="value-area">
+          <JSONEditor value={this.props.value}/>
+        </Paper>
+    )
+
   }
 
   renderLoading() {
@@ -53,14 +73,14 @@ class DisplayArea extends Component {
       return this.renderEmpty();
     }
 
-    if(typeof value === 'object') {
-      return this.renderObject();
-    }
+ /*   if(typeof value === 'object') {
+      return this.renderEditor();
+    } */
 
     if(fetching) {
       return this.renderLoading();
     }
-
+    return this.renderEditor();
     return (
         <Paper className="value-area">
           <div className="value-value">
