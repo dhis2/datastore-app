@@ -38,9 +38,9 @@
     "eslint-plugin-standard": "^2.0.0",
     "flow-bin": "^0.33.0",
     "node-sass": "^3.11.1",
-    "react": "^15.3.2",
+    "react": "^15.4.0",
     "react-bootstrap": "^0.30.5",
-    "react-dom": "^15.3.2",
+    "react-dom": "^15.4.0",
     "react-hot-loader": "^3.0.0-beta.5",
     "react-json": "^0.2.1",
     "react-json-pretty": "^1.2.1",
@@ -65,6 +65,7 @@
   "dependencies": {
     "material-ui":"^0.16.2",
     "jsoneditor": "^5.5.10",
-    "json-loader":"^0.5.4"
+    "json-loader":"^0.5.4",
+    "react-tap-event-plugin": "^1.0.0"
   }
 }
