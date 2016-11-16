@@ -12,7 +12,7 @@ class ValueArea extends Component {
   render () {
     const { value } = this.props;
     return (
-      <div className={ 'value-area' }>
+      <div className={ 'value-container' }>
         <Toolbar>
           <ToolbarTitle text="Value" />
         </Toolbar>

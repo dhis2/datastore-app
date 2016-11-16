@@ -1,7 +1,17 @@
 
-.value-area {
+.value-container {
   height: 50em;
-  width: 100%;
+  width: 50%;
   flex:1;
   background-color: rgb(133, 131, 129);
+  overflow: hidden;
+}
+
+.value-area {
+  overflow: auto;
+  height:100%;
+}
+
+.value-value {
+  margin:10px;
 }
