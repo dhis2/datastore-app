@@ -4,6 +4,7 @@ import '../../../style/valueWindow/valueWindow.scss';
 import WindowTitle from '../general/WindowTitle';
 import DisplayArea from './DisplayArea';
 
+
 class ValueArea extends Component {
 
   constructor(props) {
@@ -13,7 +14,7 @@ class ValueArea extends Component {
   render () {
     const { value } = this.props;
     return (
-      <div className={ 'value-area' }>
+      <div className={ 'value-container' }>
         <WindowTitle text={ "value" } />
         <DisplayArea />
       </div>

@@ -2,7 +2,10 @@ import React, { PropTypes, Component } from 'react'
 import  { connect } from 'react-redux';
 import JSONPretty from 'react-json-pretty';
 import { Spinner } from '../utils/Loaders';
+import Inspector from 'react-json-inspector';
 
+import '../../../style/vendor/json-inspector.css';
+import Paper from 'material-ui/Paper';
 class DisplayArea extends Component {
 
   constructor (props) {
@@ -22,9 +25,11 @@ class DisplayArea extends Component {
 
   renderObject() {
     return (
-      <div>
-        <JSONPretty json={this.props.value}></JSONPretty>
-      </div>
+      <Paper className="value-area">
+        <div className="value-value">
+        <Inspector data={this.props.value}></Inspector>
+          </div>
+      </Paper>
     )
   }
 
@@ -57,9 +62,11 @@ class DisplayArea extends Component {
     }
 
     return (
-      <div>
-        {String(value)}
-      </div>
+        <Paper className="value-area">
+          <div className="value-value">
+          {String(value)}
+            </div>
+        </Paper>
     )
   }
 }
