@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
@@ -10,13 +9,11 @@ import AboutPage from './AboutPage';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import '../../style/main.scss';
-
 class AppContainer extends Component {
 
   static propTypes = {
     store: PropTypes.object.isRequired
-  }
+  };
 
   shouldComponentUpdate () {
     return false

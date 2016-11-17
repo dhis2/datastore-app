@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react'
-import {connect} from 'react-redux';
 
 import Sidebar from '../components/sidebar/Sidebar';
 import ValueArea from '../components/valueWindow/ValueArea'
