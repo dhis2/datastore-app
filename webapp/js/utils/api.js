@@ -43,17 +43,18 @@ class Api
         const k = this.buildId(namespace, key);
         var cache = this.cache;
 
-        //if (!cache[k]) {
+        if (!cache[k]) {
             return this.getMetaData(namespace, key)
                 .then(result => {
-                    cache[k] = result;
-                    return JSON.parse(result.value);
+                    const val = JSON.parse(result.value);
+                    cache[k] = val;
+                    return val;
                 });
-      //  }
+        }
 
         return new Promise(function (resolve, reject) {
             console.log('cache resolve');
-            resolve(JSON.parse(cache[k].value));
+            resolve(cache[k]);
         });
     }
 
@@ -84,6 +85,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
+                this.cache[this.buildId(namespace,key)] = value;
                 log && this.updateHistory(namespace, key, value);
                 return response;
             });
