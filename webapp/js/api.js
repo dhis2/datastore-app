@@ -47,13 +47,13 @@ class Api
             return this.getMetaData(namespace, key)
                 .then(result => {
                     cache[k] = result;
-                    return result.value;
+                    return JSON.parse(result.value);
                 });
         }
 
         return new Promise(function (resolve, reject) {
             console.log('cache resolve');
-            resolve(cache[k].value);
+            resolve(JSON.parse(cache[k].value));
         });
     }
 
