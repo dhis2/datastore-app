@@ -81,6 +81,7 @@ export function updateHistory(namespace, key, value) {
 
 export function updateValue(namespace, key, value) {
     return dispatch => {
+        console.log("update value");
         dispatch(requestUpdateValue(namespace,key,value));
         return api.updateValue(namespace, key, value)
             .then(success => dispatch(receiveUpdateValue(namespace,key,value)))

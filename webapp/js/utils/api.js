@@ -79,7 +79,7 @@ class Api
     updateValue(namespace, key, value, log = true) {
         return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, {
             'method': 'PUT',
-            'body': JSON.stringify(value),
+            'body': JSON.stringify(value)
         }, this.getHeaders()))
             .then(response => this.successOnly(response))
             .then(response => response.json())
