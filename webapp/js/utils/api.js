@@ -1,4 +1,4 @@
-import { API_URL } from 'constants/apiUrls';
+import { API_URL } from '../constants/apiUrls';
 
 var apiClass = undefined;
 
@@ -43,13 +43,13 @@ class Api
         const k = this.buildId(namespace, key);
         var cache = this.cache;
 
-        if (!cache[k]) {
+        //if (!cache[k]) {
             return this.getMetaData(namespace, key)
                 .then(result => {
                     cache[k] = result;
                     return JSON.parse(result.value);
                 });
-        }
+      //  }
 
         return new Promise(function (resolve, reject) {
             console.log('cache resolve');

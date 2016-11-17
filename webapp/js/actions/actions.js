@@ -14,7 +14,7 @@ export function fetchAndToggleNamespace(namespace) {
 }
 
 export function fetchAndDisplayKeyValue(namespace, key) {
-    return (dispatch, getState) => {
+    return dispatch => {
         dispatch(requestValue(namespace, key));
         return api.getValue(namespace, key)
             .then(value => {
@@ -81,10 +81,10 @@ export function updateHistory(namespace, key, value) {
 
 export function updateValue(namespace, key, value) {
     return dispatch => {
-        dispatch(requestValue());
+        dispatch(requestUpdateValue(namespace,key,value));
         return api.updateValue(namespace, key, value)
-            .then(success => console.log(success))
-            .catch(error => console.log(error));
+            .then(success => dispatch(receiveUpdateValue(namespace,key,value)))
+            .catch(error => dispatch(rejectUpdateValue(namespace,key,value)));
     }
 }
 
@@ -185,6 +185,33 @@ export function rejectValue(namespace, key, error) {
     }
 }
 
+function requestUpdateValue(namespace,key,value) {
+    return {
+        type: actions.UPDATE_VALUE_PENDING,
+        namespace,
+        key,
+        value
+    }
+}
+
+function receiveUpdateValue(namespace,key,value) {
+    return {
+        type: actions.UPDATE_VALUE_FULFILLED,
+        namespace,
+        key,
+        value
+    }
+}
+
+function rejectUpdateValue(namespace,key,value,error) {
+    return {
+        type: actions.UPDATE_VALUE_FULFILLED,
+        namespace,
+        key,
+        value,
+        error
+    }
+}
 /**
  *  History Action Creators
  */

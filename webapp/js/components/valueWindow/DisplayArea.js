@@ -59,7 +59,7 @@ class DisplayArea extends Component {
       //dispatch update value to api
       console.log(this.props);
       const {namespace, selectedKey, value } = this.props;
-      this.props.updateValue(namespace, selectedKey , value);
+      this.props.updateValue(namespace, selectedKey , this.state.currJson);
     }
   }
 
