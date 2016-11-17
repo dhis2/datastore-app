@@ -26,9 +26,9 @@ class Api
     }
 
     deleteNamespace(namespace) {
-        return fetch(this.url+'/dataStore/'+namespace, Object.assign({}, {
+        return fetch(this.url+'/dataStore/'+namespace, Object.assign({}, this.getHeaders(), {
             'method': 'DELETE',
-        }, this.getHeaders()))
+        }))
             .then(response => this.successOnly(response))
             .then(response => response.json());
     }
@@ -64,10 +64,10 @@ class Api
     }
 
     createValue(namespace, key, value, log = true) {
-        return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, {
+        return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, this.getHeaders(), {
             'method': 'POST',
             'body': JSON.stringify(value),
-        }, this.getHeaders()))
+        }))
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
@@ -77,10 +77,10 @@ class Api
     }
 
     updateValue(namespace, key, value, log = true) {
-        return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, {
+        return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, this.getHeaders(), {
             'method': 'PUT',
             'body': JSON.stringify(value)
-        }, this.getHeaders()))
+        }))
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
@@ -90,9 +90,9 @@ class Api
     }
 
     deleteValue(namespace, key) {
-        return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, {
+        return fetch(this.url+'/dataStore/'+namespace+'/'+key, Object.assign({}, this.getHeaders(), {
             'method': 'DELETE',
-        }, this.getHeaders()))
+        }))
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
