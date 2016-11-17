@@ -90,7 +90,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
      *  Values
      */
 
-    case actions.FETCH_VALUE_FULFILLED: {
+    case actions.FETCH_VALUE_FULFILLED || actions.UPDATE_VALUE_FULFILLED: {
       const { namespace, key, value } = action;
       return {
         ...state,
