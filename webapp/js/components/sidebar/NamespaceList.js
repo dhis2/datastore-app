@@ -1,10 +1,9 @@
 import React, {PropTypes, Component} from 'react';
 import { connect } from 'react-redux';
 
-import '../../../style/sidebar/namespacelist.scss';
-
-import NamespaceListItem from './NamespaceListItem';
+import NamespaceItem from './NamespaceItem';
 import { fetchNamespaces, fetchAndToggleNamespace } from '../../actions/actions';
+import {List} from 'material-ui/List';
 
 class NamespaceList extends Component {
   constructor(props) {
@@ -34,12 +33,12 @@ class NamespaceList extends Component {
   renderList() {
     const {items, fetchAndToggleNamespace} = this.props;
     return (
-      <ul className={"sidebar-navigation"}>
+        <List>
         {Object.keys(items).map((item, index) => (
-            <NamespaceListItem namespace={items[item]} event={fetchAndToggleNamespace} key={index} />
+            <NamespaceItem namespace={items[item]} event={fetchAndToggleNamespace} key={index} />
         ))}
-      </ul>
-    )
+        </List>
+    );
   }
 
   render() {
@@ -70,7 +69,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchAndToggleNamespace(namespace) {
       dispatch(fetchAndToggleNamespace(namespace));
     }
-})
+});
 
 export default connect(
   mapStateToProps,

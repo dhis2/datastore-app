@@ -1,7 +1,5 @@
 import React, {PropTypes, Component} from 'react';
 
-import '../../../style/sidebar/sidebar.scss';
-
 import NamespaceList from './NamespaceList';
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 
