@@ -38,12 +38,13 @@
     "eslint-plugin-standard": "^2.0.0",
     "flow-bin": "^0.33.0",
     "node-sass": "^3.11.1",
-    "react": "^15.3.2",
+    "react": "^15.4.0",
     "react-bootstrap": "^0.30.5",
-    "react-dom": "^15.3.2",
+    "react-dom": "^15.4.0",
     "react-hot-loader": "^3.0.0-beta.5",
     "react-json": "^0.2.1",
     "react-json-pretty": "^1.2.1",
+    "react-json-inspector": "^7.0.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-tools": "^0.13.3",
@@ -59,10 +60,13 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2",
-    "whatwg-fetch": "^1.0.0",
-    "immutable": "^3.8.1"
+    "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
-    "material-ui": "^0.16.2"
+    "whatwg-fetch": "^1.0.0",
+    "material-ui":"^0.16.2",
+    "jsoneditor": "^5.5.10",
+    "json-loader":"^0.5.4",
+    "react-tap-event-plugin": "^1.0.0"
   }
 }
