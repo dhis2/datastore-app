@@ -1,6 +1,5 @@
 
 import React, { PropTypes, Component } from 'react'
-import { Glyphicon } from 'react-bootstrap';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file';

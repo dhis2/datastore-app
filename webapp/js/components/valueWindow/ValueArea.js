@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react'
 
-import '../../../style/valueWindow/valueWindow.scss';
 import DisplayArea from './DisplayArea';
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 

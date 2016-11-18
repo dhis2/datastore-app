@@ -1,8 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import { connect } from 'react-redux';
 
-// import '../../../style/sidebar/namespacelist.scss';
-
 import NamespaceItem from './NamespaceItem';
 import { fetchNamespaces, fetchAndToggleNamespace } from '../../actions/actions';
 import {List} from 'material-ui/List';
