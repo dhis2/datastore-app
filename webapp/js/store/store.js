@@ -12,11 +12,11 @@ const initialState = {
 }
 
 const store = createStore(
-                reducers,
-                initialState,
-                compose (
-                  applyMiddleware(thunk, logger())
-                )
-              );
+    reducers,
+    initialState,
+    compose (
+        applyMiddleware(thunk, logger())
+    )
+);
 
 export default store;

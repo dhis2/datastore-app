@@ -29,6 +29,23 @@ const ui = (state = {}, action) => {
             ...fetchingState
           }
         }
+
+        case actions.UPDATE_VALUE_FULFILLED: {
+            const {namespace, key, value} = action;
+            return {
+                ...state,
+                ...errorState,
+                value
+            }
+        }
+
+        case actions.UPDATE_VALUE_REJECTED: {
+            return {
+                ...state,
+                updateError: true
+            }
+
+        }
         default:{
           return state;
         }

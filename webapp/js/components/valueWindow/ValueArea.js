@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 
-import '../../../style/valueWindow/valueWindow.scss';
-import WindowTitle from '../general/WindowTitle';
 import DisplayArea from './DisplayArea';
-
+import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 
 class ValueArea extends Component {
 
@@ -15,7 +13,9 @@ class ValueArea extends Component {
     const { value } = this.props;
     return (
       <div className={ 'value-container' }>
-        <WindowTitle text={ "value" } />
+        <Toolbar>
+          <ToolbarTitle text="Value" />
+        </Toolbar>
         <DisplayArea />
       </div>
     )
