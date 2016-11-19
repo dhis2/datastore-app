@@ -97,9 +97,6 @@ class DisplayArea extends Component {
 
     return (
         <Paper className="value-area">
-          <FloatingActionButton onClick={this.saveData.bind(this)}>
-            <ContentSave />
-            </FloatingActionButton>
           <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
           <Snackbar
               open={this.state.snackbarOpen}
