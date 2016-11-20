@@ -32,8 +32,12 @@ class NamespaceList extends Component {
 
   renderList() {
     const {items, fetchAndToggleNamespace} = this.props;
+    const style = { //toolbar height is 56px
+      overflowY: 'auto',
+      height:'calc(100% - 56px)'
+    };
     return (
-        <List>
+        <List style={style}>
         {Object.keys(items).map((item, index) => (
             <NamespaceItem namespace={items[item]} event={fetchAndToggleNamespace} key={index} />
         ))}

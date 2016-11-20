@@ -7,6 +7,7 @@
 }
 
 .value-area {
+  display: flex;
   flex: 1;
 }
 
@@ -16,4 +17,5 @@
 
 #jsoneditor {
   height: 100%;
+  width: 100%;
 }
