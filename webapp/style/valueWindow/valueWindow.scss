@@ -3,12 +3,13 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  background-color: rgb(133, 131, 129);
+  background-color: rgb(238, 238, 238);
 }
 
 .value-area {
   display: flex;
   flex: 1;
+  padding-top: 8px;
 }
 
 .value-value {
@@ -18,4 +19,5 @@
 #jsoneditor {
   height: 100%;
   width: 100%;
+  background-color: white;
 }

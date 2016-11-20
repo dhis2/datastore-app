@@ -10,6 +10,7 @@ import ContentSave from 'material-ui/svg-icons/content/save';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
 import JSONEditor from './JSONEditor';
+import AppContainer from '../../containers/AppContainer'
 import {updateValue } from '../../actions/actions'
 
 class DisplayArea extends Component {
@@ -95,7 +96,7 @@ class DisplayArea extends Component {
     }
 
     return (
-        <Paper className="value-area">
+        <div className="value-area" style={{paddingTop:'8px', backgroundColor:AppContainer.theme.palette.primary3Color}}>
           <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
           <Snackbar
               open={this.state.snackbarOpen}
@@ -103,7 +104,7 @@ class DisplayArea extends Component {
               autoHideDuration={4000}
               onRequestClose={this.handleSnackbarClose.bind(this)}
           />
-        </Paper>
+        </div>
     )
   }
 }

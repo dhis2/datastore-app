@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import NamespaceItem from './NamespaceItem';
 import { fetchNamespaces, fetchAndToggleNamespace } from '../../actions/actions';
 import {List} from 'material-ui/List';
-
+import AppContainer from '../../containers/AppContainer'
 class NamespaceList extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +34,8 @@ class NamespaceList extends Component {
     const {items, fetchAndToggleNamespace} = this.props;
     const style = { //toolbar height is 56px
       overflowY: 'auto',
-      height:'calc(100% - 56px)'
+      height:'calc(100% - 56px)',
+      backgroundColor:AppContainer.theme.palette.primary3Color
     };
     return (
         <List style={style}>
