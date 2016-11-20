@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { FileIcon } from '../utils/Icons';
 import {ListItem} from 'material-ui/List';
+import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file';
 
 class KeyItem extends Component {
 
@@ -15,7 +16,7 @@ class KeyItem extends Component {
   render () {
     const {text, namespace, event} = this.props;
     return (
-      <ListItem primaryText={text} leftIcon={<FileIcon/>} onClick={() => event(namespace, text)}/>
+      <ListItem primaryText={text} leftIcon={<EditorInsertDriveFile />} onClick={() => event(namespace, text)}/>
     );
   }
 }

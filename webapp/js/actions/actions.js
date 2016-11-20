@@ -21,7 +21,7 @@ export function fetchAndDisplayKeyValue(namespace, key) {
                 dispatch(recieveValue(namespace, key, value));
                 dispatch(selectKey(namespace, key, value));
             })
-            .catch(error => rejectValue(namespace, key, error));
+            .catch(error => dispatch(rejectValue(namespace, key, error)));
     }
 }
 

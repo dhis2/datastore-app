@@ -1,6 +1,6 @@
 
 import React, { PropTypes, Component } from 'react'
-
+import "../../../style/utils/loaders.scss"
 export class Spinner extends Component {
 
   constructor(props){

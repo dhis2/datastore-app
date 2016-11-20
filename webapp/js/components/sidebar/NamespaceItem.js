@@ -6,6 +6,8 @@ import { Spinner } from '../utils/Loaders';
 import { OpenFolderIcon, ClosedFolderIcon, ErrorIcon } from '../utils/Icons';
 import KeyItem from './KeyItem'
 import {ListItem} from 'material-ui/List';
+import FileFolder from 'material-ui/svg-icons/file/folder';
+import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import { fetchAndDisplayKeyValue } from '../../actions/actions';
 
 class NamespaceItem extends Component {
@@ -44,12 +46,17 @@ class NamespaceItem extends Component {
 
         if (keys) {
             Object.keys(keys).forEach((item, index) => {
-                items.push(<KeyItem key={ index } namespace={ name } text={ item } event={ fetchAndDisplayKeyValue }/>);
+                items.push(<KeyItem key={ index } namespace={ name }
+                                    text={ item }
+                                    event={ fetchAndDisplayKeyValue }/>);
             });
         }
 
         return (
-            <ListItem primaryText={name} open={this.state.open} leftIcon={this.state.open ? <OpenFolderIcon/> : <ClosedFolderIcon/>} nestedItems={items} onClick={this.toggleHandler} />
+            <ListItem primaryText={name}
+                      open={this.state.open}
+                      leftIcon={this.state.open ? <FileFolderOpen/> : <FileFolder />}
+                      nestedItems={items} onClick={this.toggleHandler} />
         );
     }
 
@@ -58,7 +65,7 @@ class NamespaceItem extends Component {
       const { event } = this.props;
 
         return (
-            <ListItem primaryText={name} leftIcon={<ClosedFolderIcon />} onClick={() => event(name)} />
+            <ListItem primaryText={name} leftIcon={<FileFolder />} onClick={() => event(name)} />
         );
     }
 
@@ -66,7 +73,7 @@ class NamespaceItem extends Component {
       const { name } = this.props.namespace;
 
         return (
-            <ListItem primaryText={name} leftIcon={<ClosedFolderIcon/>}>
+            <ListItem primaryText={name} leftIcon={<FileFolder />}>
                 <Spinner/>
             </ListItem>
         );
@@ -76,7 +83,7 @@ class NamespaceItem extends Component {
       const { name } = this.props.namespace;
 
         return (
-            <ListItem primaryText={name} leftIcon={<ClosedFolderIcon/>}>
+            <ListItem primaryText={name} leftIcon={<FileFolder />}>
                 <ErrorIcon/>
             </ListItem>
         );
