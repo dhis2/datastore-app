@@ -1,4 +1,5 @@
 import { API_URL } from '../constants/apiUrls';
+import {CREATED, UPDATED, DELETED, RESTORED} from  '../constants/apiHistoryActions';
 
 var apiClass = undefined;
 
@@ -10,6 +11,11 @@ class Api
         this.auth = auth;
         this.cache = [];
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
+
+        fetch(this.url+'/me', this.getHeaders())
+            .then(response => this.successOnly(response))
+            .then(response => response.json())
+            .then(user => this.userId = user.id);
     }
 
     getNamespaces() {
@@ -72,7 +78,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-                log && this.updateHistory(namespace, key, value);
+                log && this.updateHistory(namespace, key, value, CREATED);
                 return response;
             });
     }
@@ -86,7 +92,7 @@ class Api
             .then(response => response.json())
             .then(response => {
                 this.cache[this.buildId(namespace,key)] = value;
-                log && this.updateHistory(namespace, key, value);
+                log && this.updateHistory(namespace, key, value, UPDATED);
                 return response;
             });
     }
@@ -98,7 +104,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-                this.updateHistory(namespace, key, 'DELETED');
+                this.updateHistory(namespace, key, this.getValue(namespace, key), DELETED);
                 return response;
             });
     }
@@ -110,10 +116,12 @@ class Api
         return fetch(this.url+'/dataStore/HISTORYSTORE/'+id, this.getHeaders());
     }
 
-    updateHistory(namespace, key, newValue) {
+    updateHistory(namespace, key, newValue, action) {
         const id = this.buildId(namespace, key);
         const historyRecord = {
+            'action': action,
             'date': new Date(),
+            'user': this.userId,
             'value': newValue
         };
 
