@@ -63,6 +63,15 @@ const ui = (state = {openNamespaceDialog:false}, action) => {
                 },
             }
         }
+        case actions.VALUE_CHANGE: {
+            const {namespace, key, value} = action;
+            return {
+                ...state,
+                namespace,
+                key,
+                editedValue: value
+            }
+        }
         default:{
           return state;
         }

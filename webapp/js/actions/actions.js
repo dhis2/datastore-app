@@ -293,6 +293,15 @@ export function requestHistory() {
 /**
  *  UI Action Creators
  */
+
+export function valueChange(namespace, key, value) {
+    return {
+        type: actions.VALUE_CHANGE,
+        namespace,
+        key,
+        value
+    }
+}
 export function toggleNamespace(namespace) {
     return {
         type: actions.TOGGLE_NAMESPACE,

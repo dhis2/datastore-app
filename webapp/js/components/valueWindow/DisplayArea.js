@@ -1,17 +1,12 @@
 import React, { PropTypes, Component } from 'react'
 import  { connect } from 'react-redux';
-import JSONPretty from 'react-json-pretty';
 import { Spinner } from '../utils/Loaders';
-import Inspector from 'react-json-inspector';
-import Jsoneditor from 'jsoneditor/dist/jsoneditor-minimalist.min';
 import '../../../style/vendor/json-inspector.css';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentSave from 'material-ui/svg-icons/content/save';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
 import JSONEditor from './JSONEditor';
 import AppContainer from '../../containers/AppContainer'
-import {updateValue } from '../../actions/actions'
+import {updateValue, valueChange } from '../../actions/actions'
 
 class DisplayArea extends Component {
 
@@ -19,7 +14,6 @@ class DisplayArea extends Component {
     super(props);
 
     this.state = {
-      currJson: null,
       snackbarOpen: false
     };
     this.renderEmpty = this.renderEmpty.bind(this);
@@ -40,28 +34,15 @@ class DisplayArea extends Component {
   }
 
   dataFromJSONEditor(editor) {
-
+    const {namespace, selectedKey } = this.props;
     try { //throws error if not valid json
       var data = editor.get();
-      this.setState({
-        currJson: data
-      });
-    } catch(err) { //do something with not valid json
+      this.props.valueChange(namespace,selectedKey,data)
+    } catch(err) { //do something with not valid json, dispatch rejectedValueChange
         console.log(err);
     }
-    console.log(this.props)
-    console.log(this.state);
   }
 
-  saveData() {
-    console.log("save data");
-    if(this.state.currJson) {
-      //dispatch update value to api
-      console.log(this.props);
-      const {namespace, selectedKey, value } = this.props;
-      this.props.updateValue(namespace, selectedKey , this.state.currJson);
-    }
-  }
 
   handleSnackbarClose() {
     this.setState({
@@ -87,9 +68,6 @@ class DisplayArea extends Component {
 
   render () {
     const {value, fetching} = this.props;
-    if(!value) {
-    //  return this.renderEmpty();
-    }
 
     if(fetching) {
       return this.renderLoading();
@@ -120,6 +98,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   updateValue(namespace,key,value) {
     dispatch(updateValue(namespace,key,value))
+  },
+  valueChange(namespace,key,value) {
+    dispatch(valueChange(namespace,key,value))
   }
 })
 

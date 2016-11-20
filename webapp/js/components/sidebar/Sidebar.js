@@ -22,7 +22,6 @@ class Sidebar extends Component {
     }
 
     render() {
-        console.log("dialog: " + this.state.showDialog)
         return (
             <div className={'sidebar'}>
                 <Paper style={{zIndex:5}}>
