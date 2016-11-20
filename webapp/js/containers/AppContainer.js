@@ -9,8 +9,11 @@ import AboutPage from './pages/AboutPage';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import '../../style/main.scss';
 
 injectTapEventPlugin();
+
+
 class AppContainer extends Component {
 
   static propTypes = {
@@ -27,16 +30,16 @@ class AppContainer extends Component {
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Provider store = { store }>
-        <Router history={ hashHistory }>
-          <Route path={ "/" } component={ Layout } >
-            <IndexRoute component={ HomePage } />
-            <Route path={ "/home" } component={ HomePage } />
-            <Route path={ "/about" } component={ AboutPage } />
-          </Route>
+        <Provider store = { store }>
+          <Router history={ hashHistory }>
+            <Route path={ "/" } component={ Layout } >
+              <IndexRoute component={ HomePage } />
+              <Route path={ "/home" } component={ HomePage } />
+              <Route path={ "/about" } component={ AboutPage } />
+            </Route>
 
-        </Router>
-      </Provider>
+          </Router>
+        </Provider>
       </MuiThemeProvider>
     );
   }

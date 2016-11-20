@@ -1,7 +1,10 @@
 import React, {PropTypes, Component} from 'react';
 
 import NamespaceList from './NamespaceList';
-import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
+import RaisedButton from 'material-ui/RaisedButton';
+
+import '../../../style/sidebar/sidebar.scss';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -12,7 +15,10 @@ class Sidebar extends Component {
     return (
       <div className={'sidebar'}>
         <Toolbar>
-          <ToolbarTitle text="Navigation" />
+          <ToolbarTitle text="Namespace"/>
+          <ToolbarGroup lastChild={true}>
+            <RaisedButton label="New" primary={true} />
+          </ ToolbarGroup>
         </Toolbar>
         <NamespaceList />
       </div>

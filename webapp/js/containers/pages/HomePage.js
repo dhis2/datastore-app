@@ -1,7 +1,9 @@
-import React, {PropTypes, Component} from 'react'
+import React, {PropTypes, Component} from 'react';
 
 import Sidebar from '../../components/sidebar/Sidebar';
 import ValueArea from '../../components/valueWindow/ValueArea'
+
+import '../../../style/pages/homepage.scss';
 
 class HomePage extends Component {
 
@@ -13,7 +15,7 @@ class HomePage extends Component {
 
     render() {
         return (
-          <div className="home-container">
+          <div className="home-page-container">
             <Sidebar />
             <ValueArea />
           </div>

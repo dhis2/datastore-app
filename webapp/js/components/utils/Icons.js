@@ -21,7 +21,7 @@ export class OpenFolderIcon extends Component {
 export class ClosedFolderIcon extends Component {
   render() {
     return(
-      <FileFolder style={iconStyles} />
+      <FileFolder />
     )
   }
 }

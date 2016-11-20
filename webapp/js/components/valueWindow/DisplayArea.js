@@ -28,12 +28,11 @@ class DisplayArea extends Component {
 
   renderLoading() {
     const style = {
-      position: 'relative',
-      left: '50%',
-      top: '40%'
+      alignItems: 'center',
+      justifyContent: 'center'
     }
     return (
-      <div style={style}>
+      <div className="value-area"   style={style}>
         <Spinner size={'large'}/>
       </div>
     )
@@ -88,7 +87,7 @@ class DisplayArea extends Component {
   render () {
     const {value, fetching} = this.props;
     if(!value) {
-      return this.renderEmpty();
+    //  return this.renderEmpty();
     }
 
     if(fetching) {
@@ -97,9 +96,6 @@ class DisplayArea extends Component {
 
     return (
         <Paper className="value-area">
-          <FloatingActionButton onClick={this.saveData.bind(this)}>
-            <ContentSave />
-            </FloatingActionButton>
           <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
           <Snackbar
               open={this.state.snackbarOpen}
