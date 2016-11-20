@@ -6,6 +6,7 @@ import ContentSave from 'material-ui/svg-icons/content/save';
 import FontIcon from 'material-ui/FontIcon';
 
 import '../../../style/valueWindow/valueWindow.scss';
+import Paper from 'material-ui/Paper';
 
 class ValueArea extends Component {
 
@@ -16,15 +17,16 @@ class ValueArea extends Component {
     render() {
         const {value} = this.props;
         return (
-            <div className={'value-container'}>
+            <Paper className={'value-container'}>
+                <Paper style={{zIndex:5}}>
                 <Toolbar>
                     <ToolbarTitle text="Value"/>
                     <ToolbarGroup>
                         <ContentSave />
                     </ToolbarGroup>
-                </Toolbar>
+                </Toolbar></Paper>
                 <DisplayArea/>
-            </div>
+            </Paper>
         )
     }
 }

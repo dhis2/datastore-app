@@ -32,9 +32,11 @@ class NamespaceList extends Component {
 
   renderList() {
     const {items, fetchAndToggleNamespace} = this.props;
-    const style = { //toolbar height is 56px
+    const style = { //toolbar height is 56px + 8px margin
       overflowY: 'auto',
-      height:'calc(100% - 56px)',
+      height:'calc(100% - 72px)',
+      paddingTop:0,
+      margin: '8px 0px',
       backgroundColor:AppContainer.theme.palette.primary3Color
     };
     return (
