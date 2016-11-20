@@ -111,10 +111,14 @@ export function deleteValue(namespace, key) {
 
 export function deleteNamespace(namespace) {
     return dispatch => {
-        dispatch(requestNamespaces());
+        dispatch(requestDeleteNamespace(namespace));
         return api.deleteNamespace(namespace)
-            .then(success => console.log(success))
-            .catch(error => console.log(error));
+            .then(success => {
+                dispatch(fetchNamespaces());
+                dispatch(receiveDeleteNamespace(namespace));
+                return success;
+            })
+            .catch(error => dispatch(rejectDeleteNamespace(namespace)));
     }
 }
 
@@ -255,6 +259,27 @@ function rejectUpdateValue(namespace,key,value,error) {
         error
     }
 }
+
+function requestDeleteNamespace(namespace) {
+    return {
+        type: actions.DELETE_NAMESPACE_PENDING,
+        namespace
+    }
+}
+
+function receiveDeleteNamespace(namespace) {
+    return {
+        type: actions.DELETE_NAMESPACE_FULFILLED,
+        namespace
+    }
+}
+
+function rejectDeleteNamespace(namespace) {
+    return {
+        type: actions.DELETE_NAMESPACE_REJECTED,
+        namespace
+    }
+}
 /**
  *  History Action Creators
  */
@@ -296,6 +321,7 @@ export function createNewNamespace(namespace, key) {
         key
     }
 }
+
 
 export function saveValueFromEditor() {
     

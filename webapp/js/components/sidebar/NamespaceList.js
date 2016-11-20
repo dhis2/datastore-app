@@ -51,7 +51,7 @@ class NamespaceList extends Component {
   render() {
     const {fetching, error, items} = this.props;
 
-    if(fetching && Object.keys(items).length <=1) {
+    if(fetching && Object.keys(items).length < 1) {
       return this.renderLoading()
     }
 

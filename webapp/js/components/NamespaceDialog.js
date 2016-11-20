@@ -16,7 +16,6 @@ class NamespaceDialog extends Component {
         }
     }
 
-
     handleNamespaceInput(event) {
         this.setState({
             namespaceValue: event.target.value
@@ -41,6 +40,7 @@ class NamespaceDialog extends Component {
             this.props.createNamespace(namespaceValue, keyValue)
         }
     }
+
     render() {
         const actions = [
             <FlatButton
@@ -51,7 +51,6 @@ class NamespaceDialog extends Component {
             <FlatButton
                 label="Create"
                 primary={true}
-                keyboardFocused={true}
                 onTouchTap={this.handleCreate.bind(this)}
             />,
         ];
@@ -59,6 +58,7 @@ class NamespaceDialog extends Component {
             display: 'block',
             width:'100%'
         }
+
         return (
 
             <div>
@@ -71,7 +71,7 @@ class NamespaceDialog extends Component {
                     onRequestClose={this.handleClose.bind(this)}
                 >
                     Create a new namespace. You must also provide the first value-key of the namespace.
-                    <TextField hintText="Namespace" style={fieldStyle} onChange={this.handleNamespaceInput.bind(this)} />
+                    <TextField hintText="Namespace" autoFocus style={fieldStyle} onChange={this.handleNamespaceInput.bind(this)} />
                     <TextField hintText="Value key" style={fieldStyle} onChange={this.handleKeyInput.bind(this)} />
                 </Dialog>
             </div>

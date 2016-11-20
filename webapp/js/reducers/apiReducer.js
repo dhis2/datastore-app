@@ -54,7 +54,6 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
             ...state.namespaces[namespace],
             ...fetchedState,
             keys: keys,
-            open: false
           }
         }
       };
@@ -169,7 +168,6 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     case actions.TOGGLE_NAMESPACE: {
 
       const { namespace } = action;
-      console.log(state.namespaces)
       return {
         ...state,
         namespaces: {

@@ -8,7 +8,10 @@ import KeyItem from './KeyItem'
 import {ListItem} from 'material-ui/List';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-import { fetchAndDisplayKeyValue, fetchAndToggleNamespace, toggleNamespace } from '../../actions/actions';
+import Delete from 'material-ui/svg-icons/action/delete';
+import IconButton from 'material-ui/IconButton'
+import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
+    toggleNamespace, deleteNamespace } from '../../actions/actions';
 
 class NamespaceItem extends Component {
 
@@ -38,7 +41,7 @@ class NamespaceItem extends Component {
                 this.props.event(this.props.namespace.name);
             }
         });*/
-
+        console.log("toggle handler");
         if(!namespace.open) {
             this.props.fetchAndToggleNamespace(namespace.name);
         } else {
@@ -47,10 +50,20 @@ class NamespaceItem extends Component {
 
     };
 
+    handleDelete() {
+        console.log("asf)");
+        this.props.deleteNamespace(this.props.namespace.name);
+    }
+
     renderOpen() {
         const {keys, name, open} = this.props.namespace, {event, fetchAndDisplayKeyValue} = this.props;
         const items = [];
-
+        const nestedStyle = {
+            marginLeft: '15px'
+        }
+       /* const iconButton = (<IconButton onClick={this.props.deleteNamespace(name)}>
+            <Delete />
+        </IconButton>); */
         if (keys) {
             Object.keys(keys).forEach((item, index) => {
                 items.push(<KeyItem key={ index } namespace={ name }
@@ -63,7 +76,13 @@ class NamespaceItem extends Component {
             <ListItem primaryText={name}
                       open={open}
                       leftIcon={open ? <FileFolderOpen/> : <FileFolder />}
-                      nestedItems={items} onClick={this.toggleHandler.bind(this)} />
+                      rightIconButton={<IconButton onTouchTap={this.handleDelete.bind(this)}
+                      >
+                <Delete />
+            </IconButton>}
+                      nestedItems={items}
+                      onTouchTap={this.toggleHandler.bind(this)}
+                      nestedListStyle={nestedStyle} />
         );
     }
 
@@ -80,7 +99,7 @@ class NamespaceItem extends Component {
       const { name } = this.props.namespace;
 
         return (
-            <ListItem primaryText={name} leftIcon={<FileFolder />}>
+            <ListItem primaryText={name} leftIcon={<FileFolder />} rightIcon={<Delete />}>
                 <Spinner/>
             </ListItem>
         );
@@ -122,6 +141,8 @@ const mapDispatchToProps = (dispatch) => ({
     },
     toggleNamespace(namespace) {
         dispatch(toggleNamespace(namespace));
+    }, deleteNamespace(namespace) {
+        dispatch(deleteNamespace(namespace));
     }
 });
 
