@@ -36,7 +36,7 @@ class NamespaceList extends Component {
       overflowY: 'auto',
       height:'calc(100% - 72px)',
       paddingTop:0,
-      margin: '8px 0px',
+      margin: '8px 5px',
       backgroundColor:AppContainer.theme.palette.primary3Color
     };
     return (
@@ -49,9 +49,9 @@ class NamespaceList extends Component {
   }
 
   render() {
-    const {fetching, error} = this.props;
+    const {fetching, error, items} = this.props;
 
-    if(fetching) {
+    if(fetching && Object.keys(items).length <=1) {
       return this.renderLoading()
     }
 

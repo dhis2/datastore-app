@@ -12,8 +12,10 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
      *  Namespaces
      */
     case actions.FETCH_NAMESPACES_FULFILLED: {
-      const namespaces = {};
-      action.namespaces.map(key => { namespaces[key] = {'name': key} })
+      let namespaces = {};
+      action.namespaces.map(key => {
+        namespaces[key] = {'name': key, 'open':false}
+      })
       return {
         ...state,
         ...fetchedState,
@@ -51,7 +53,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
           [namespace]:{
             ...state.namespaces[namespace],
             ...fetchedState,
-            keys: keys
+            keys: keys,
+            open: false
           }
         }
       };
@@ -90,7 +93,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
      *  Values
      */
 
-    case actions.FETCH_VALUE_FULFILLED || actions.UPDATE_VALUE_FULFILLED: {
+    case actions.FETCH_VALUE_FULFILLED:
+    case actions.UPDATE_VALUE_FULFILLED: {
       const { namespace, key, value } = action;
       return {
         ...state,
@@ -163,7 +167,9 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     }
 
     case actions.TOGGLE_NAMESPACE: {
+
       const { namespace } = action;
+      console.log(state.namespaces)
       return {
         ...state,
         namespaces: {

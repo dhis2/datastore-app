@@ -8,7 +8,7 @@ import KeyItem from './KeyItem'
 import {ListItem} from 'material-ui/List';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-import { fetchAndDisplayKeyValue } from '../../actions/actions';
+import { fetchAndDisplayKeyValue, fetchAndToggleNamespace, toggleNamespace } from '../../actions/actions';
 
 class NamespaceItem extends Component {
 
@@ -30,18 +30,25 @@ class NamespaceItem extends Component {
     }
 
     toggleHandler = () => {
-        this.setState({
+        const {namespace} = this.props;
+        /*this.setState({
             open: !this.state.open,
         }, () => {
             if (this.state.open) {
                 this.props.event(this.props.namespace.name);
             }
-        });
+        });*/
+
+        if(!namespace.open) {
+            this.props.fetchAndToggleNamespace(namespace.name);
+        } else {
+            this.props.toggleNamespace(namespace.name);
+        }
+
     };
 
     renderOpen() {
-        const {keys, name} = this.props.namespace, {event, fetchAndDisplayKeyValue} = this.props;
-
+        const {keys, name, open} = this.props.namespace, {event, fetchAndDisplayKeyValue} = this.props;
         const items = [];
 
         if (keys) {
@@ -54,9 +61,9 @@ class NamespaceItem extends Component {
 
         return (
             <ListItem primaryText={name}
-                      open={this.state.open}
-                      leftIcon={this.state.open ? <FileFolderOpen/> : <FileFolder />}
-                      nestedItems={items} onClick={this.toggleHandler} />
+                      open={open}
+                      leftIcon={open ? <FileFolderOpen/> : <FileFolder />}
+                      nestedItems={items} onClick={this.toggleHandler.bind(this)} />
         );
     }
 
@@ -109,6 +116,12 @@ class NamespaceItem extends Component {
 const mapDispatchToProps = (dispatch) => ({
     fetchAndDisplayKeyValue(namespace, key) {
         dispatch(fetchAndDisplayKeyValue(namespace, key))
+    },
+    fetchAndToggleNamespace(namespace) {
+        dispatch(fetchAndToggleNamespace(namespace));
+    },
+    toggleNamespace(namespace) {
+        dispatch(toggleNamespace(namespace));
     }
 });
 
