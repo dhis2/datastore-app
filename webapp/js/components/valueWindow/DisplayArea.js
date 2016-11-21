@@ -5,6 +5,7 @@ import '../../../style/vendor/json-inspector.css';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
 import JSONEditor from './JSONEditor';
+import ModeComment from 'material-ui/svg-icons/editor/mode-comment';
 import AppContainer from '../../containers/AppContainer'
 import {updateValue, valueChange } from '../../actions/actions'
 
@@ -52,8 +53,23 @@ class DisplayArea extends Component {
   }
 
   renderEmpty() {
+    const style = {
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+    const iconStyle = {
+      fill: 'rgb(117, 117, 117)',
+      display:'block',
+      margin:'0 auto 0 auto',
+      width:'100px',
+      height:'auto'
+    }
     return (
-        <div>
+        <div className="value-area" style={style}>
+          <div>
+            <ModeComment style={iconStyle}/>
+            <p>Select a namespace and a key to edit.</p>
+          </div>
         </div>
     )
   }
@@ -68,6 +84,10 @@ class DisplayArea extends Component {
 
   render () {
     const {value, fetching} = this.props;
+
+    if(!value) {
+      return this.renderEmpty();
+    }
 
     if(fetching) {
       return this.renderLoading();

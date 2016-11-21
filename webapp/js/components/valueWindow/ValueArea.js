@@ -4,6 +4,7 @@ import DisplayArea from './DisplayArea';
 import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import IconButton from 'material-ui/IconButton';
+import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import FontIcon from 'material-ui/FontIcon';
 import '../../../style/valueWindow/valueWindow.scss';
 import Paper from 'material-ui/Paper';
@@ -22,12 +23,15 @@ class ValueArea extends Component {
         }
     }
     render() {
-        const {value} = this.props;
+        const { namespace, selectedKey } = this.props;
+        const titleSelected = (<span className="toolbar-title">{namespace} <ChevronRight /> {selectedKey}</span>)
+        const titleValue = (<span className="toolbar-title">Value</span>)
+        const title = namespace && selectedKey ? titleSelected : titleValue;
         return (
             <Paper className={'value-container'}>
                 <Paper style={{zIndex:5}}>
                 <Toolbar>
-                    <ToolbarTitle text="Value"/>
+                    {title}
                     <ToolbarGroup>
                         <IconButton onTouchTap={this.handleSave.bind(this)}>
                             <ContentSave/>

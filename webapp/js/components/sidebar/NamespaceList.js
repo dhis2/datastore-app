@@ -32,6 +32,7 @@ class NamespaceList extends Component {
 
   renderList() {
     const {items, fetchAndToggleNamespace} = this.props;
+
     const style = { //toolbar height is 56px + 8px margin
       overflowY: 'auto',
       height:'calc(100% - 72px)',
@@ -63,6 +64,7 @@ class NamespaceList extends Component {
   }
 }
 
+
 const mapStateToProps = (state) => ({
   items: state.api.namespaces,
   fetching: state.api.fetching,
@@ -77,7 +79,6 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(fetchAndToggleNamespace(namespace));
     }
 });
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
