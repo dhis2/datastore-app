@@ -8,7 +8,14 @@ import KeyItem from './KeyItem'
 import {ListItem} from 'material-ui/List';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-import { fetchAndDisplayKeyValue } from '../../actions/actions';
+import {grey500, darkBlack, lightBlack} from 'material-ui/styles/colors';
+import Delete from 'material-ui/svg-icons/action/delete';
+import IconButton from 'material-ui/IconButton'
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
+    toggleNamespace, deleteNamespace } from '../../actions/actions';
 
 class NamespaceItem extends Component {
 
@@ -30,20 +37,42 @@ class NamespaceItem extends Component {
     }
 
     toggleHandler = () => {
-        this.setState({
-            open: !this.state.open,
-        }, () => {
-            if (this.state.open) {
-                this.props.event(this.props.namespace.name);
-            }
-        });
+        const {namespace} = this.props;
+        if(!namespace.open) {
+            this.props.fetchAndToggleNamespace(namespace.name);
+        } else {
+            this.props.toggleNamespace(namespace.name);
+        }
+
     };
 
+    handleDelete() {
+        this.props.deleteNamespace(this.props.namespace.name);
+    }
+
     renderOpen() {
-        const {keys, name} = this.props.namespace, {event, fetchAndDisplayKeyValue} = this.props;
-
+        const {keys, name, open} = this.props.namespace, {event, fetchAndDisplayKeyValue} = this.props;
         const items = [];
+        const nestedStyle = {
+            marginLeft: '15px'
+        }
+        const iconButtonElement = (
+            <IconButton
+                touch={true}
+                tooltip="more"
+                tooltipPosition="bottom-left"
+            >
+                <MoreVertIcon color={grey500}/>
+            </IconButton>
+        );
 
+        const rightIconMenu = (
+            <IconMenu iconButtonElement={iconButtonElement}
+                      anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+                      targetOrigin={{vertical: 'top', horizontal: 'left',}}>
+                <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDelete.bind(this)}>Delete</MenuItem>
+            </IconMenu>
+        );
         if (keys) {
             Object.keys(keys).forEach((item, index) => {
                 items.push(<KeyItem key={ index } namespace={ name }
@@ -54,9 +83,12 @@ class NamespaceItem extends Component {
 
         return (
             <ListItem primaryText={name}
-                      open={this.state.open}
-                      leftIcon={this.state.open ? <FileFolderOpen/> : <FileFolder />}
-                      nestedItems={items} onClick={this.toggleHandler} />
+                      open={open}
+                      leftIcon={open ? <FileFolderOpen/> : <FileFolder />}
+                      rightIconButton={rightIconMenu}
+                      nestedItems={items}
+                      onTouchTap={this.toggleHandler.bind(this)}
+                      nestedListStyle={nestedStyle} />
         );
     }
 
@@ -73,7 +105,7 @@ class NamespaceItem extends Component {
       const { name } = this.props.namespace;
 
         return (
-            <ListItem primaryText={name} leftIcon={<FileFolder />}>
+            <ListItem primaryText={name} leftIcon={<FileFolder />} rightIcon={<MoreVertIcon />}>
                 <Spinner/>
             </ListItem>
         );
@@ -109,6 +141,14 @@ class NamespaceItem extends Component {
 const mapDispatchToProps = (dispatch) => ({
     fetchAndDisplayKeyValue(namespace, key) {
         dispatch(fetchAndDisplayKeyValue(namespace, key))
+    },
+    fetchAndToggleNamespace(namespace) {
+        dispatch(fetchAndToggleNamespace(namespace));
+    },
+    toggleNamespace(namespace) {
+        dispatch(toggleNamespace(namespace));
+    }, deleteNamespace(namespace) {
+        dispatch(deleteNamespace(namespace));
     }
 });
 

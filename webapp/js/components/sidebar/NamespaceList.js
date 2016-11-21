@@ -32,11 +32,12 @@ class NamespaceList extends Component {
 
   renderList() {
     const {items, fetchAndToggleNamespace} = this.props;
+
     const style = { //toolbar height is 56px + 8px margin
       overflowY: 'auto',
       height:'calc(100% - 72px)',
       paddingTop:0,
-      margin: '8px 0px',
+      margin: '8px 5px',
       backgroundColor:AppContainer.theme.palette.primary3Color
     };
     return (
@@ -49,9 +50,9 @@ class NamespaceList extends Component {
   }
 
   render() {
-    const {fetching, error} = this.props;
+    const {fetching, error, items} = this.props;
 
-    if(fetching) {
+    if(fetching && Object.keys(items).length < 1) {
       return this.renderLoading()
     }
 
@@ -62,6 +63,7 @@ class NamespaceList extends Component {
     return this.renderList();
   }
 }
+
 
 const mapStateToProps = (state) => ({
   items: state.api.namespaces,
@@ -77,7 +79,6 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(fetchAndToggleNamespace(namespace));
     }
 });
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
