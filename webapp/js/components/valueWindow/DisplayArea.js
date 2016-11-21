@@ -85,12 +85,12 @@ class DisplayArea extends Component {
   render () {
     const {value, fetching} = this.props;
 
-    if(!value) {
-      return this.renderEmpty();
-    }
-
     if(fetching) {
       return this.renderLoading();
+    }
+
+    if(!value) {
+      return this.renderEmpty();
     }
 
     return (
