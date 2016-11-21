@@ -11,6 +11,7 @@ import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
 import JSONEditor from './JSONEditor';
 import {updateValue } from '../../actions/actions'
+import BrowsingList from '../utils/BrowsingList';
 
 class DisplayArea extends Component {
 
@@ -21,6 +22,7 @@ class DisplayArea extends Component {
       currJson: null,
       snackbarOpen: false
     };
+
     this.renderEmpty = this.renderEmpty.bind(this);
     this.renderLoading = this.renderLoading.bind(this);
   }
@@ -28,11 +30,12 @@ class DisplayArea extends Component {
 
   renderLoading() {
     const style = {
-      alignItems: 'center',
-      justifyContent: 'center'
+      position: 'relative',
+      left: '50%',
+      top: '40%'
     }
     return (
-      <div className="value-area"   style={style}>
+      <div style={style}>
         <Spinner size={'large'}/>
       </div>
     )
@@ -87,7 +90,7 @@ class DisplayArea extends Component {
   render () {
     const {value, fetching} = this.props;
     if(!value) {
-    //  return this.renderEmpty();
+      return this.renderEmpty();
     }
 
     if(fetching) {
@@ -96,18 +99,22 @@ class DisplayArea extends Component {
 
     return (
         <Paper className="value-area">
-          <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
-          <Snackbar
-              open={this.state.snackbarOpen}
-              message="Failed to update"
-              autoHideDuration={4000}
-              onRequestClose={this.handleSnackbarClose.bind(this)}
-          />
+
+          <DetailedList />
+
+
         </Paper>
     )
   }
 }
 
+          // <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
+          // <Snackbar
+          //     open={this.state.snackbarOpen}
+          //     message="Failed to update"
+          //     autoHideDuration={4000}
+          //     onRequestClose={this.handleSnackbarClose.bind(this)}
+          // />
 const mapStateToProps = (state) => ({
   value: state.ui.value,
   namespace: state.ui.namespace,

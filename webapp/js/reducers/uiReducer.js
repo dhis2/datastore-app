@@ -6,6 +6,13 @@ const errorState = {fetching: false, fetched: false, error: true}
 
 const ui = (state = {}, action) => {
     switch (action.type) {
+
+        case actions.SET_WINDOW_VIEW: {
+          return {
+            ...state,
+          }
+        }
+
         case actions.SELECT_NAMESPACE: {
           const { selectedNamespace } = action;
           return {

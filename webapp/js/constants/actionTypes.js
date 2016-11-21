@@ -4,6 +4,10 @@ export const SELECT_NAMESPACE = 'SELECT_NAMESPACE';
 export const SELECT_KEY = 'SELECT_KEY';
 export const TOGGLE_NAMESPACE = 'TOGGLE_NAMESPACE';
 export const UPDATE_VALUE = 'UPDATE_VALUE';
+export const CHANGE_WINDOW = 'CHANGE_WINDOW';
+
+export const SET_EDIT_WINDOW = 'SET_EDIT_WINDOW';
+export const SET_BROWSER_WINDOW = 'SET_BROWSER_WINDOW';
 
 /**
  *  Async Action Types

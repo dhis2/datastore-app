@@ -5,10 +5,12 @@ import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import FontIcon from 'material-ui/FontIcon';
 
+import BrowseWindow from './BrowseWindow';
+
 import '../../../style/valueWindow/valueWindow.scss';
 
-class ValueArea extends Component {
 
+class EditWindow extends Component {
     constructor(props) {
         super(props);
     }
@@ -23,10 +25,10 @@ class ValueArea extends Component {
                         <ContentSave />
                     </ToolbarGroup>
                 </Toolbar>
-                <DisplayArea/>
+                <BrowseWindow />
             </div>
         )
     }
 }
 
-export default ValueArea
+export default EditWindow

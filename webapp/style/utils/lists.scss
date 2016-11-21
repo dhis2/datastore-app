@@ -1,0 +1,51 @@
+
+.d-l-i {
+  padding: 5px;
+}
+
+.detailed-list-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: solid black 1px;
+}
+
+.d-l-name {
+  flex: 2;
+  font-size: 1.4em;
+}
+
+.d-l-last-modified {
+  flex: 1;
+}
+
+.sort-bar {
+  width: 100%;
+  height: 2em;
+  background-color: rgb(231, 226, 230);
+}
+
+.sort-bar-item-name {
+  flex: 2;
+}
+
+.sort-bar-item-last-modified {
+  flex: 1;
+}
+
+.sort-bar-item {
+  height: 100%;
+
+  transition: .2s;
+
+  &:hover {
+    background-color: rgb(170, 166, 171);
+  }
+}
+
+.sort-bar-layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}

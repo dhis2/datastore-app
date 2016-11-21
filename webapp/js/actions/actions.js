@@ -241,3 +241,7 @@ export function selectKey(namespace, key, value) {
         value
     }
 }
+
+export function setWindow() {
+  
+}
