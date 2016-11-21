@@ -20,7 +20,8 @@ const ui = (state = {openNamespaceDialog:false}, action) => {
               ...fetchedState,
               namespace,
               key,
-              value
+              value,
+              editedValue:{}
           }
         }
         case actions.FETCH_VALUE_PENDING: {
