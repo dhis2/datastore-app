@@ -1959,14 +1959,6 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.2.1.tgz#622061630a43e11f845017b9044aaa648ed3f731"
-  dependencies:
-    core-js "^1.0.0"
-    promise "^7.0.3"
-    whatwg-fetch "^0.9.0"
-
 fbjs@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.6.1.tgz#9636b7705f5ba9684d44b72f78321254afc860f7"
@@ -1983,6 +1975,17 @@ fbjs@^0.8.1, fbjs@^0.8.4:
   dependencies:
     core-js "^1.0.0"
     immutable "^3.7.6"
+    isomorphic-fetch "^2.1.1"
+    loose-envify "^1.0.0"
+    object-assign "^4.1.0"
+    promise "^7.1.1"
+    ua-parser-js "^0.7.9"
+
+fbjs@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.6.tgz#7eb67d6986b2d5007a9b6e92e0e7cb6f75cad290"
+  dependencies:
+    core-js "^1.0.0"
     isomorphic-fetch "^2.1.1"
     loose-envify "^1.0.0"
     object-assign "^4.1.0"
@@ -2988,9 +2991,9 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
-material-ui@^0.16.2:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.16.2.tgz#4bdd966b1fd2f6a6def9d19d13fff13db6c8bfcb"
+material-ui@^0.16.4:
+  version "0.16.4"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.16.4.tgz#b1ff4ea57069a89611b7e02a83d47c649e13c798"
   dependencies:
     babel-runtime "^6.11.6"
     inline-style-prefixer "^2.0.1"
@@ -3859,11 +3862,7 @@ react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
 
-"react-dom@^0.14.0 || ^15.0.0":
-  version "15.3.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.2.tgz#c46b0aa5380d7b838e7a59c4a7beff2ed315531f"
-
-react-dom@^15.4.0:
+"react-dom@^0.14.0 || ^15.0.0", react-dom@^15.4.0:
   version "15.4.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.0.tgz#6a97a69000966570db48c746bc4b7b0ca50d1534"
   dependencies:
@@ -3954,11 +3953,11 @@ react-router@^2.8.1:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-tap-event-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-1.0.0.tgz#7a248505a9e9abecc352b2dab313d17685c51adf"
+react-tap-event-plugin@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-2.0.1.tgz#316beb3bc6556e29ec869a7293e89c826a9074d2"
   dependencies:
-    fbjs "^0.2.1"
+    fbjs "^0.8.6"
 
 react-tools@^0.13.3:
   version "0.13.3"

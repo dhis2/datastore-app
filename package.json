@@ -63,11 +63,11 @@
     "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
-    "whatwg-fetch": "^1.0.0",
-    "material-ui":"^0.16.4",
-    "jsoneditor": "^5.5.10",
     "json-loader": "^0.5.4",
-    "react-tap-event-plugin": "^1.0.0",
-    "sprintf-js": "^1.0.3"
+    "jsoneditor": "^5.5.10",
+    "material-ui": "^0.16.4",
+    "react-tap-event-plugin": "^2.0.1",
+    "sprintf-js": "^1.0.3",
+    "whatwg-fetch": "^1.0.0"
   }
 }
