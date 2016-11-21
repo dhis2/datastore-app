@@ -10,6 +10,7 @@ import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import {grey500, darkBlack, lightBlack} from 'material-ui/styles/colors';
 import Delete from 'material-ui/svg-icons/action/delete';
+import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -45,6 +46,10 @@ class NamespaceItem extends Component {
         }
 
     };
+    
+    handleNewKey() {
+        
+    }
 
     handleDelete() {
         this.props.deleteNamespace(this.props.namespace.name);
@@ -70,6 +75,7 @@ class NamespaceItem extends Component {
             <IconMenu iconButtonElement={iconButtonElement}
                       anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                       targetOrigin={{vertical: 'top', horizontal: 'left',}}>
+                <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleDelete.bind(this)}>New Key</MenuItem>
                 <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDelete.bind(this)}>Delete</MenuItem>
             </IconMenu>
         );
