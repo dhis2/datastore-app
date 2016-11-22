@@ -30,7 +30,7 @@ export function createAndDisplayValue(namespace, key) {
         dispatch(createValue(namespace,key,{}))
             .then(() => dispatch(fetchNamespaces()))
             .then(success => dispatch(fetchAndToggleNamespace(namespace)))
-            .then(() => dispatch(setNamespaceDialogOpenState(false)))
+            .then(() => dispatch(closeDialog()))
             .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
             .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
     }
@@ -317,10 +317,24 @@ export function selectKey(namespace, key, value) {
         value
     }
 }
-export function setNamespaceDialogOpenState(open) {
+
+/* Open a modal with given props, if no props are given
+* dialogprops will be an empty object.*/
+export function openDialog(dialogprops) {
     return {
-        type: actions.SET_NAMESPACE_DIALOG_OPEN_STATE,
-        open
+        type: actions.OPEN_DIALOG,
+        dialogType: 'NEW_NAMESPACE',
+        dialogprops: {...dialogprops} //ensure empty object
+    }
+}
+
+/* Open a modal with given props, if no props are given
+ * dialogprops will be an empty object.*/
+export function closeDialog(dialogprops) {
+    return {
+        type: actions.CLOSE_DIALOG,
+        dialogType: 'NEW_NAMESPACE',
+        dialogprops: {...dialogprops} //ensure empty object
     }
 }
 export function createNewNamespace(namespace, key) {

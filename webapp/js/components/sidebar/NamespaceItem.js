@@ -16,7 +16,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
-    toggleNamespace, deleteNamespace } from '../../actions/actions';
+    toggleNamespace, deleteNamespace, openDialog } from '../../actions/actions';
 
 class NamespaceItem extends Component {
 
@@ -48,7 +48,7 @@ class NamespaceItem extends Component {
     };
     
     handleNewKey() {
-        
+        this.props.newKey(this.props.namespace.name);
     }
 
     handleDelete() {
@@ -64,7 +64,6 @@ class NamespaceItem extends Component {
         const iconButtonElement = (
             <IconButton
                 touch={true}
-                tooltip="more"
                 tooltipPosition="bottom-left"
             >
                 <MoreVertIcon color={grey500}/>
@@ -72,10 +71,10 @@ class NamespaceItem extends Component {
         );
 
         const rightIconMenu = (
-            <IconMenu iconButtonElement={iconButtonElement}
+            <IconMenu iconButtonElement={iconButtonElement} disableAutoFocus={true}
                       anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                       targetOrigin={{vertical: 'top', horizontal: 'left',}}>
-                <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleDelete.bind(this)}>New Key</MenuItem>
+                <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleNewKey.bind(this)}>New Key</MenuItem>
                 <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDelete.bind(this)}>Delete</MenuItem>
             </IconMenu>
         );
@@ -153,8 +152,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     toggleNamespace(namespace) {
         dispatch(toggleNamespace(namespace));
-    }, deleteNamespace(namespace) {
+    },
+    deleteNamespace(namespace) {
         dispatch(deleteNamespace(namespace));
+    },
+    newKey(namespace) {
+        dispatch(openDialog({namespace}));
     }
 });
 

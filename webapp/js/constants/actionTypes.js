@@ -5,7 +5,8 @@ export const SELECT_KEY = 'SELECT_KEY';
 export const TOGGLE_NAMESPACE = 'TOGGLE_NAMESPACE';
 export const VALUE_CHANGE = 'VALUE_CHANGE';
 export const CREATE_NAMESPACE = 'CREATE_NAMESPACE';
-export const SET_NAMESPACE_DIALOG_OPEN_STATE ='SET_NAMESPACE_DIALOG_OPEN_STATE';
+export const OPEN_DIALOG ='OPEN_DIALOG';
+export const CLOSE_DIALOG ='CLOSE_DIALOG';
 /**
  *  Async Action Types
  */

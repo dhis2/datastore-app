@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { setNamespaceDialogOpenState, createAndDisplayValue } from '../actions/actions'
+import { openDialog, closeDialog, createAndDisplayValue } from '../actions/actions'
 class NamespaceDialog extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +13,10 @@ class NamespaceDialog extends Component {
         this.state = {
             namespaceValue: "",
             keyValue: ""
-        }
+        };
+
+        this.newNamespaceDialog = this.newNamespaceDialog.bind(this);
+        this.newKeyDialog = this.newKeyDialog.bind(this);
     }
 
     handleNamespaceInput(event) {
@@ -35,17 +38,48 @@ class NamespaceDialog extends Component {
 
     handleCreate() {
         const {namespaceValue, keyValue } = this.state;
-        console.log("creating with " + namespaceValue + " " + keyValue)
-        if(namespaceValue && keyValue) {
-            this.props.createNamespace(namespaceValue, keyValue)
+        const { dialogprops } = this.props.dialog;
+        const namespace = dialogprops.namespace ? dialogprops.namespace : namespaceValue;
+        if(namespace && keyValue) {
+            this.props.createNamespace(namespace, keyValue)
         }
+    }
+
+    newNamespaceDialog(actions,fieldStyle,open) {
+
+        return (<Dialog
+                title="New Namespace"
+                actions={actions}
+                modal={false}
+                open={open}
+                contentStyle={{maxWidth:'500px'}}
+                onRequestClose={this.handleClose.bind(this)}
+            >
+                <TextField hintText="Namespace" autoFocus style={fieldStyle}
+                           onChange={this.handleNamespaceInput.bind(this)}/>
+                <TextField hintText="Key value" style={fieldStyle} onChange={this.handleKeyInput.bind(this)}/>
+            </Dialog>
+        );
+    }
+
+    newKeyDialog(actions,fieldStyle, open) {
+        return (<Dialog
+            title="New key"
+            actions={actions}
+            modal={false}
+            open={open}
+            contentStyle={{maxWidth:'500px'}}
+            onRequestClose={this.handleClose.bind(this)}
+        >
+            <TextField hintText="Key value" autoFocus style={fieldStyle} onChange={this.handleKeyInput.bind(this)}/>
+        </Dialog>)
     }
 
     render() {
         const actions = [
             <FlatButton
                 label="Cancel"
-                primary={true}
+                primary={false}
                 onTouchTap={this.handleClose.bind(this)}
             />,
             <FlatButton
@@ -58,22 +92,14 @@ class NamespaceDialog extends Component {
             display: 'block',
             width:'100%'
         }
-
+        const dialog = this.props.dialog;
+        const open = dialog.dialogType ? true : false;
+        const dialogComponent = dialog.dialogprops.namespace  ? this.newKeyDialog(actions,fieldStyle,open)
+            : this.newNamespaceDialog(actions,fieldStyle,open)
         return (
 
             <div>
-                <Dialog
-                    title="New Namespace"
-                    actions={actions}
-                    modal={false}
-                    open={this.props.open}
-                    contentStyle={{maxWidth:'500px'}}
-                    onRequestClose={this.handleClose.bind(this)}
-                >
-                    Create a new namespace. You must also provide the first value-key of the namespace.
-                    <TextField hintText="Namespace" autoFocus style={fieldStyle} onChange={this.handleNamespaceInput.bind(this)} />
-                    <TextField hintText="Value key" style={fieldStyle} onChange={this.handleKeyInput.bind(this)} />
-                </Dialog>
+                {dialogComponent}
             </div>
         );
     }
@@ -85,12 +111,12 @@ const mapStateToProps = (state) => ({
     selectedKey: state.ui.key,
     fetching: state.ui.fetching,
     updateError: state.ui.updateError,
-    open: state.ui.openNamespaceDialog
+    dialog: state.ui.dialog
 })
 
 const mapDispatchToProps = (dispatch) => ({
     closeDialog() {
-        dispatch(setNamespaceDialogOpenState(false))
+        dispatch(closeDialog())
     },
     createNamespace(namespace,key) {
         return dispatch(createAndDisplayValue(namespace,key))

@@ -5,7 +5,7 @@ import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import '../../../style/sidebar/sidebar.scss';
-import {setNamespaceDialogOpenState} from '../../actions/actions';
+import {openDialog} from '../../actions/actions';
 import NamespaceDialog from '../NamespaceDialog';
 
 class Sidebar extends Component {
@@ -18,7 +18,7 @@ class Sidebar extends Component {
     }
 
     showDialog() {
-        this.props.setDialogState(true);
+        this.props.openNamespaceDialog();
     }
 
     render() {
@@ -39,8 +39,8 @@ class Sidebar extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setDialogState(open) {
-        dispatch(setNamespaceDialogOpenState(open))
+    openNamespaceDialog() {
+        dispatch(openDialog())
     }
 })
 export default connect(null, mapDispatchToProps)(Sidebar)
