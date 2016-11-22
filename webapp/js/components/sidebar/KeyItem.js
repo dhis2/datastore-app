@@ -15,8 +15,9 @@ class KeyItem extends Component {
 
   render () {
     const {text, namespace, event} = this.props;
+    const primaryText = (<div style={{overflow: 'hidden', textOverflow:'ellipsis'}}>{text}</div>)
     return (
-      <ListItem primaryText={text} leftIcon={<EditorInsertDriveFile />} onClick={() => event(namespace, text)}/>
+      <ListItem primaryText={primaryText} leftIcon={<EditorInsertDriveFile />} onClick={() => event(namespace, text)}/>
     );
   }
 }

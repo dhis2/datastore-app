@@ -78,6 +78,7 @@ class NamespaceItem extends Component {
                 <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDelete.bind(this)}>Delete</MenuItem>
             </IconMenu>
         );
+        //Populate nestedItems if in props
         if (keys) {
             Object.keys(keys).forEach((item, index) => {
                 items.push(<KeyItem key={ index } namespace={ name }
@@ -87,11 +88,12 @@ class NamespaceItem extends Component {
         }
 
         return (
-            <ListItem primaryText={name}
+            <ListItem primaryText={<div style={{overflow: 'hidden', textOverflow:'ellipsis'}}>{name}</div>}
                       open={open}
                       leftIcon={open ? <FileFolderOpen/> : <FileFolder />}
                       rightIconButton={rightIconMenu}
                       nestedItems={items}
+
                       onTouchTap={this.toggleHandler.bind(this)}
                       nestedListStyle={nestedStyle} />
         );

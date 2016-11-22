@@ -1,8 +1,8 @@
 
 .sidebar {
-  width: 21em;
   background-color: rgb(238, 238, 238);
-  flex:1;
+  flex:0 0 300px;
+  overflow: hidden;
 }
 
 .sidebar-navigation {
