@@ -83,6 +83,7 @@ class NamespaceItem extends Component {
             Object.keys(keys).forEach((item, index) => {
                 items.push(<KeyItem key={ index } namespace={ name }
                                     text={ item }
+                                    rightIconButton = {iconButtonElement}
                                     event={ fetchAndDisplayKeyValue }/>);
             });
         }
@@ -112,7 +113,7 @@ class NamespaceItem extends Component {
       const { name } = this.props.namespace;
 
         return (
-            <ListItem primaryText={name} leftIcon={<FileFolder />} rightIcon={<MoreVertIcon />}>
+            <ListItem primaryText={<div style={{overflow: 'hidden', textOverflow:'ellipsis'}}>{name}</div>} leftIcon={<FileFolder />} rightIcon={<MoreVertIcon />}>
                 <Spinner/>
             </ListItem>
         );
