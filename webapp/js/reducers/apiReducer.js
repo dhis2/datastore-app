@@ -28,14 +28,16 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     case actions.FETCH_NAMESPACES_PENDING: {
       return {
         ...state,
-        ...fetchingState
+        ...fetchingState,
+        snackbarMessage: null
       };
     }
 
     case actions.FETCH_NAMESPACES_REJECTED: {
       return {
         ...state,
-        ...errorState
+        ...errorState,
+        snackbarMessage: action.error
       };
     }
 
@@ -69,7 +71,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
             ...state.namespaces[namespace],
             ...fetchingState
           }
-        }
+        },
+        snackbarMessage: null
       };
     }
 
@@ -84,7 +87,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
             ...errorState,
             errorMessage: error
           }
-        }
+        },
+        snackbarMessage: error
       };
     }
 
@@ -115,7 +119,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     }
 
     case actions.FETCH_VALUE_REJECTED: {
-      const { namespace, key} = action;
+      const { namespace, key, error} = action;
       return {
         ...state,
         ...fetchedState,
@@ -131,7 +135,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
               }
             }
           }
-        }
+        },
+        snackbarMessage: error
       }
     }
 
@@ -152,7 +157,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
               }
             }
           }
-        }
+        },
+        snackbarMessage: null
       }
     }
 
