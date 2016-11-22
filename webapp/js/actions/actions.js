@@ -50,7 +50,6 @@ export function createValue(namespace, key, value) {
         dispatch(requestCreateValue(namespace,key,value));
         return api.createValue(namespace, key, value)
             .then(success => dispatch(receivedCreateValue(namespace, key, value)))
-            .catch(error => dispatch(rejectCreateValue(namespace,key,value)))
     }
 }
 

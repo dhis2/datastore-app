@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import { connect } from 'react-redux';
 import Sidebar from '../../components/sidebar/Sidebar';
 import ValueArea from '../../components/valueWindow/ValueArea'
-import NamespaceDialog from '../../components/NamespaceDialog';
+import DialogRoot from '../../components/dialog/DialogRoot';
 import '../../../style/pages/homepage.scss';
 
 class HomePage extends Component {
@@ -18,7 +18,7 @@ class HomePage extends Component {
           <div className="home-page-container">
             <Sidebar />
             <ValueArea />
-              <NamespaceDialog open ={this.props.openNamespaceDialog} />
+              <DialogRoot />
           </div>
         );
     }

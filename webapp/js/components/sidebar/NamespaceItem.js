@@ -16,8 +16,9 @@ import {ListItem} from 'material-ui/List';
 import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import { openKeyDialog } from '../../actions/dialogActions';
 import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
-    toggleNamespace, deleteNamespace, openDialog, deleteValue } from '../../actions/actions';
+    toggleNamespace, deleteNamespace, deleteValue } from '../../actions/actions';
 
 
 const styles = {
@@ -202,7 +203,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(deleteNamespace(namespace));
     },
     newKey(namespace) {
-        dispatch(openDialog({namespace}));
+        dispatch(openKeyDialog({namespace}));
     },
     deleteKey(namespace,key) {
         dispatch(deleteValue(namespace,key));
