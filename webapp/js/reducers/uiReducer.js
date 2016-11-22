@@ -45,7 +45,6 @@ const ui = (state = {dialog: {...emptyDialog}}, action) => {
                 ...state,
                 updateError: true
             }
-
         }
         case actions.OPEN_DIALOG: {
             return {

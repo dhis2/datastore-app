@@ -96,16 +96,17 @@ export function updateValue(namespace, key, value) {
         dispatch(requestUpdateValue(namespace,key,value));
         return api.updateValue(namespace, key, value)
             .then(success => dispatch(receiveUpdateValue(namespace,key,value)))
-            .catch(error => dispatch(rejectUpdateValue(namespace,key,value)));
+            .catch(error => dispatch(rejectUpdateValue(namespace,key,value)))
     }
 }
 
 export function deleteValue(namespace, key) {
     return dispatch => {
-        dispatch(requestValue());
+        dispatch(requestDeleteValue(namespace,key));
         return api.deleteValue(namespace, key)
-            .then(success => console.log(success))
-            .catch(error => console.log(error));
+            .then(success => dispatch(receiveDeleteValue(namespace,key)))
+            .then(() => dispatch(fetchNamespaces()))
+            .catch(error => dispatch(rejectDeleteValue(namespace,key)));
     }
 }
 
@@ -123,7 +124,7 @@ export function deleteNamespace(namespace) {
 }
 
 /**
- *  Namesapce Action Creators
+ *  Namespace Action Creators
  */
 export function recieveNamespaces(namespaces) {
     return {
@@ -256,6 +257,31 @@ function rejectUpdateValue(namespace,key,value,error) {
         namespace,
         key,
         value,
+        error
+    }
+}
+
+function requestDeleteValue(namespace,key) {
+    return {
+        type: actions.DELETE_VALUE_PENDING,
+        namespace,
+        key
+    }
+}
+
+function receiveDeleteValue(namespace,key) {
+    return {
+        type: actions.DELETE_VALUE_FULFILLED,
+        namespace,
+        key,
+    }
+}
+
+function rejectDeleteValue(namespace,key,error) {
+    return {
+        type: actions.DELETE_VALUE_REJECTED,
+        namespace,
+        key,
         error
     }
 }
