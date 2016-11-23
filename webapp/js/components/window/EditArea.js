@@ -26,11 +26,9 @@ class EditArea extends Component {
     render () {
       const { value } = this.props;
       return (
-        <Paper>
-          <div className="window-area" style={{paddingTop:'8px', backgroundColor:AppContainer.theme.palette.primary3Color}}>
-            <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)} />
-          </div>
-        </Paper>
+        <div className="window-area" style={{paddingTop:'8px', backgroundColor:AppContainer.theme.palette.primary3Color}}>
+          <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)} />
+        </div>
       )
     }
 }

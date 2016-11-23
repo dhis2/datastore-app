@@ -7,8 +7,6 @@ class WindowToolbarTitle extends Component {
 
     const pathArray = path.split('/');
 
-    console.log(pathArray);
-
     return (
       <span className={'toolbar-title'}>
         {pathArray.map((item, index) => {

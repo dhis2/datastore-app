@@ -1,6 +1,13 @@
 import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 
+export function setBrowserList(list) {
+  return {
+    type: actions.SET_BROWSER_LIST,
+    payload: list
+  }
+}
+
 export function fetchAndToggleNamespace(namespace) {
     return dispatch => {
         dispatch(requestKeys(namespace));
@@ -40,7 +47,10 @@ export function fetchNamespaces() {
     return dispatch => {
         dispatch(requestNamespaces());
         return api.getNamespaces()
-            .then(namespaces => dispatch(recieveNamespaces(namespaces)))
+            .then(namespaces => {
+              dispatch(recieveNamespaces(namespaces))
+              dispatch(setBrowserList(namespaces))
+            })
             .catch(error => dispatch(rejectNamespaces(error)));
     }
 }
@@ -333,5 +343,5 @@ export function createNewNamespace(namespace, key) {
 
 
 export function saveValueFromEditor() {
-    
+
 }

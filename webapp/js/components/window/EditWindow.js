@@ -23,10 +23,10 @@ class EditWindow extends Component {
       let path = ""
 
       if(typeof namespace !== 'undefined'){
-        path += + namespace
+        path += namespace;
       }
       if(typeof selectedKey !== 'undefined'){
-        path += '/' + selectedKey
+        path += '/' + selectedKey;
       }
 
       return (

@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import FileFolder from 'material-ui/svg-icons/file/folder';
 
 
-class BrowsingListRow extends Component {
+class BrowserListRow extends Component {
   render () {
     return (
       <li className={"detailed-list-item"}>
@@ -13,4 +13,4 @@ class BrowsingListRow extends Component {
   }
 }
 
-export default BrowsingListRow;
+export default BrowserListRow;

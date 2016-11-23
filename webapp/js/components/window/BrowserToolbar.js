@@ -17,4 +17,4 @@ class BrowserToolbar extends React.Component {
 }
 
 
-export defaultn BrowserToolbar;
+export default BrowserToolbar;

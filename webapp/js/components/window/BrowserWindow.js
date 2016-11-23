@@ -2,9 +2,11 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 import Paper from 'material-ui/Paper';
-import BrowsingList from '../utils/BrowsingList';
 import SortBar from '../utils/SortBar'
 import '../../../style/utils/lists.scss';
+
+import BrowserToolbar from './BrowserToolbar';
+import BrowserArea from './BrowserArea';
 
 import WindowAreaHOC from '../hoc/WindowAreaHOC'
 
@@ -15,18 +17,25 @@ class BrowserWindow extends Component {
   }
 
   render () {
+
+    const {loading, error} = this.props;
+    const BrowserAreaImproved = WindowAreaHOC(BrowserArea, loading, error);
+
     return (
-        <Paper className="value-area">
-          <SortBar />
-          <DetailedList />
+        <Paper className={'value-container'}>
+          <BrowserToolbar />
+          <BrowserAreaImproved/>
         </Paper>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  items: state.window.browserItems
-})
+  loading: state.ui.fetching,
+  namespace: state.ui.namespace,
+  selectedKey: state.ui.key,
+  error: false
+});
 
 export default connect(
   mapStateToProps
