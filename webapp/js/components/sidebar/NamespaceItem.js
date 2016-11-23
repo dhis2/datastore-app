@@ -16,9 +16,8 @@ import {ListItem} from 'material-ui/List';
 import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import { openKeyDialog, openConfirmDeleteDialog } from '../../actions/dialogActions';
-import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
-    toggleNamespace, deleteNamespace, deleteValue } from '../../actions/actions';
+import { openKeyDialog, openConfirmDeleteNamespaceDialog, openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
+import { fetchAndDisplayKeyValue, fetchAndToggleNamespace, toggleNamespace, } from '../../actions/actions';
 
 
 const styles = {
@@ -88,7 +87,7 @@ class NamespaceItem extends Component {
     }
 
     handleDeleteKey(namespace, key) {
-        this.props.deleteKey(namespace,key)
+        this.props.deleteKeyInNamespace(namespace,key)
     }
 
     constructKeyItem(item, index) {
@@ -200,13 +199,13 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(toggleNamespace(namespace));
     },
     deleteNamespace(namespace) {
-        dispatch(openConfirmDeleteDialog({namespace}))
+        dispatch(openConfirmDeleteNamespaceDialog({namespace}))
     },
     newKey(namespace) {
         dispatch(openKeyDialog({namespace}));
     },
-    deleteKey(namespace,key) {
-        dispatch(deleteValue(namespace,key));
+    deleteKeyInNamespace(namespace,key) {
+        dispatch(openConfirmDeleteKeyDialog({namespace,key}));
     }
 });
 

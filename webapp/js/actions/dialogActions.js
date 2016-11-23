@@ -17,12 +17,20 @@ export function closeKeyDialog(dialogprops) {
     return closeDialog('NEW_KEY',dialogprops);
 }
 
-export function openConfirmDeleteDialog(dialogprops) {
+export function openConfirmDeleteNamespaceDialog(dialogprops) {
     return openDialog('CONFIRM_DELETE_NAMESPACE',dialogprops);
 }
 
-export function closeConfirmDeleteDialog(dialogprops) {
+export function closeConfirmDeleteNamespaceDialog(dialogprops) {
     return closeDialog('CONFIRM_DELETE_NAMESPACE',dialogprops);
+}
+
+export function openConfirmDeleteKeyDialog(dialogprops) {
+    return openDialog('CONFIRM_DELETE_KEY',dialogprops);
+}
+
+export function closeConfirmDeleteKeyDialog(dialogprops) {
+    return closeDialog('CONFIRM_DELETE_KEY',dialogprops);
 }
 
 /* Open a modal with given props, if no props are given

@@ -7,9 +7,11 @@ export function fetchAndToggleNamespace(namespace) {
         return api.getKeys(namespace)
             .then(keys => {
                 dispatch(recieveKeys(namespace, keys));
-                dispatch(toggleNamespace(namespace));
-            })
-            .catch(error => dispatch(rejectKeys(namespace, error)));
+               // dispatch(toggleNamespace(namespace)).catch(error => console.log(error));
+            }).then(() => dispatch(toggleNamespace(namespace)))
+            .catch(error => {
+                dispatch(rejectKeys(namespace, error))
+            });
     }
 }
 
@@ -25,12 +27,20 @@ export function fetchAndDisplayKeyValue(namespace, key) {
     }
 }
 
+export function createNewNamespaceDisplayEmpty(namespace,key) {
+    return dispatch => {
+        dispatch(createValue(namespace,key,{}))
+         //   .then(() => dispatch(createNewNamespace(namespace,key)))
+         //f   .then(success => dispatch(fetchAndToggleNamespace(namespace)))
+            .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
+            .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
+    }
+}
+
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
         dispatch(createValue(namespace,key,{}))
-            .then(() => dispatch(fetchNamespaces()))
             .then(success => dispatch(fetchAndToggleNamespace(namespace)))
-            .then(() => dispatch(closeDialog()))
             .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
             .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
     }
@@ -58,7 +68,6 @@ export function fetchKeys(namespace) {
         dispatch(requestKeys(namespace));
         return api.getKeys(namespace)
             .then(keys => dispatch(recieveKeys(namespace, keys)))
-            .catch(error => dispatch(rejectKeys(namespace, error)))
     }
 }
 
@@ -99,13 +108,26 @@ export function updateValue(namespace, key, value) {
     }
 }
 
-export function deleteValue(namespace, key) {
+export function deleteKey(namespace, key) {
     return dispatch => {
-        dispatch(requestDeleteValue(namespace,key));
+        dispatch(requestDeleteKey(namespace,key));
         return api.deleteValue(namespace, key)
-            .then(success => dispatch(receiveDeleteValue(namespace,key)))
-            .then(() => dispatch(fetchNamespaces()))
-            .catch(error => dispatch(rejectDeleteValue(namespace,key)));
+            .then(success => dispatch(receiveDeleteKey(namespace,key)))
+            .then(() => dispatch(fetchKeys(namespace)))
+            .catch(error => {
+                if(error.status === 404) {
+                    return dispatch(fetchNamespaces())
+                } else if (error) {
+                    throw error;
+                } else {
+                    return dispatch(toggleNamespace(namespace))
+                }
+            /*    return error.status === 404 ? dispatch(fetchNamespaces())
+                    : dispatch(toggleNamespace(namespace)) */
+            })
+            .catch(error => {
+                dispatch(rejectDeleteKey(namespace,key))
+            });
     }
 }
 
@@ -260,25 +282,25 @@ function rejectUpdateValue(namespace,key,value,error) {
     }
 }
 
-function requestDeleteValue(namespace,key) {
+function requestDeleteKey(namespace,key) {
     return {
-        type: actions.DELETE_VALUE_PENDING,
+        type: actions.DELETE_KEY_PENDING,
         namespace,
         key
     }
 }
 
-function receiveDeleteValue(namespace,key) {
+function receiveDeleteKey(namespace,key) {
     return {
-        type: actions.DELETE_VALUE_FULFILLED,
+        type: actions.DELETE_KEY_FULFILLED,
         namespace,
         key,
     }
 }
 
-function rejectDeleteValue(namespace,key,error) {
+function rejectDeleteKey(namespace,key,error) {
     return {
-        type: actions.DELETE_VALUE_REJECTED,
+        type: actions.DELETE_KEY_REJECTED,
         namespace,
         key,
         error

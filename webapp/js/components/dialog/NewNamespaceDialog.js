@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { createAndDisplayValue } from '../../actions/actions'
+import { createAndDisplayValue, createNewNamespaceDisplayEmpty } from '../../actions/actions'
 import { closeNamespaceDialog } from '../../actions/dialogActions';
 class NewNamespaceDialog extends Component {
 
@@ -103,7 +103,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(closeNamespaceDialog())
     },
     createNamespace(namespace,key) {
-        return dispatch(createAndDisplayValue(namespace,key))
+        dispatch(createNewNamespaceDisplayEmpty(namespace,key))
+        dispatch(closeNamespaceDialog())
     }
 })
 

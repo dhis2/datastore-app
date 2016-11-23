@@ -88,7 +88,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(closeKeyDialog())
     },
     createNamespace(namespace,key) {
-        return dispatch(createAndDisplayValue(namespace,key))
+        dispatch(createAndDisplayValue(namespace,key))
+        dispatch(closeKeyDialog())
     }
 })
 
