@@ -119,7 +119,7 @@ class NamespaceItem extends Component {
         const rightIconMenu = (
             <IconMenu iconButtonElement={iconButtonElement} disableAutoFocus={true}
                       anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-                      targetOrigin={{vertical: 'top', horizontal: 'left',}}>
+                      targetOrigin={{vertical: 'top', horizontal: 'left'}}>
                 <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleNewKey.bind(this)}>New key</MenuItem>
                 <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDeleteNamespace.bind(this)}>Delete</MenuItem>
             </IconMenu>

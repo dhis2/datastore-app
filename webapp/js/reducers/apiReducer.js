@@ -97,7 +97,27 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
      *  Values
      */
 
-    case actions.FETCH_VALUE_FULFILLED:
+    case actions.FETCH_VALUE_FULFILLED: {
+      const { namespace, key, value } = action;
+      return {
+        ...state,
+        ...fetchedState,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]: {
+            ...state.namespaces[namespace],
+            keys: {
+              ...state.namespaces[namespace].keys,
+              [key]: {
+                ...state.namespaces[namespace].keys[key],
+                value: value
+              }
+            }
+          }
+        }
+      }
+    }
+
     case actions.UPDATE_VALUE_FULFILLED: {
       const { namespace, key, value } = action;
       return {
@@ -115,6 +135,9 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
               }
             }
           }
+        },
+        snackbarMessage: {
+          message: "Successfully updated value!"
         }
       }
     }

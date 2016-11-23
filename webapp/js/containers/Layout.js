@@ -16,9 +16,14 @@ class Layout extends Component {
             alignItems: 'center'
         };
 
-        const snackbarMessage = this.props.snackbarMessage;
+        let message = this.props.snackbarMessage;
+        let snackbarMessage = null;
+        if(message) {
+            if(message.message) {
+                snackbarMessage = message.message;
+            }
+        }
         const showSnackbar = typeof snackbarMessage === 'string';
-
         return (
             <div className={"wrapper"}>
                 <div className={"layout-container"}>
@@ -28,7 +33,7 @@ class Layout extends Component {
                     </Toolbar>
                     { this.props.children }
                 </div>
-                <Snackbar open={showSnackbar} message={snackbarMessage || ''} autoHideDuration={5000} />
+                <Snackbar open={showSnackbar} message={<span>{snackbarMessage}</span>} autoHideDuration={5000} />
             </div>
         );
     }

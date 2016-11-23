@@ -31,7 +31,7 @@ export function createNewNamespaceDisplayEmpty(namespace,key) {
     return dispatch => {
         dispatch(createValue(namespace,key,{}))
          //   .then(() => dispatch(createNewNamespace(namespace,key)))
-         //f   .then(success => dispatch(fetchAndToggleNamespace(namespace)))
+            .then(success => dispatch(fetchAndToggleNamespace(namespace)))
             .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
             .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
     }
