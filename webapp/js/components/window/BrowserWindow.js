@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 import Paper from 'material-ui/Paper';
-import SortBar from '../utils/SortBar'
 import '../../../style/utils/lists.scss';
 
 import BrowserToolbar from './BrowserToolbar';
