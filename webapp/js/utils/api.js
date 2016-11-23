@@ -1,4 +1,6 @@
 import { API_URL } from '../constants/apiUrls';
+import {CREATED, UPDATED, DELETED, RESTORED} from  '../constants/apiHistoryActions';
+import {sprintf} from 'sprintf-js';
 
 var apiClass = undefined;
 
@@ -10,6 +12,11 @@ class Api
         this.auth = auth;
         this.cache = [];
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
+
+        fetch(this.url+'/me', this.getHeaders())
+            .then(response => this.successOnly(response))
+            .then(response => response.json())
+            .then(user => this.userId = user.id);
     }
 
     getNamespaces() {
@@ -72,7 +79,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-                log && this.updateHistory(namespace, key, value);
+                log && this.updateHistory(namespace, key, value, CREATED);
                 return response;
             });
     }
@@ -86,7 +93,7 @@ class Api
             .then(response => response.json())
             .then(response => {
                 this.cache[this.buildId(namespace,key)] = value;
-                log && this.updateHistory(namespace, key, value);
+                log && this.updateHistory(namespace, key, value, UPDATED);
                 return response;
             });
     }
@@ -98,22 +105,24 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-                this.updateHistory(namespace, key, 'DELETED');
+                this.updateHistory(namespace, key, this.getValue(namespace, key), DELETED);
                 return response;
             });
     }
 
 
-    getHistory(namespace, key) {
-        const id = this.buildId(namespace, key);
+    getHistory(namespace, key = null) {
+        const id = key === null ? namespace : this.buildId(namespace, key);
 
         return fetch(this.url+'/dataStore/HISTORYSTORE/'+id, this.getHeaders());
     }
 
-    updateHistory(namespace, key, newValue) {
+    updateHistory(namespace, key, newValue, action) {
         const id = this.buildId(namespace, key);
         const historyRecord = {
+            'action': action,
             'date': new Date(),
+            'user': this.userId,
             'value': newValue
         };
 
@@ -122,17 +131,48 @@ class Api
                 if (response.status === 404) {
                     this.createValue('HISTORYSTORE', id, [historyRecord], false);
                     return null;
-                } else {
-                    return response.json();
                 }
+                return response.json();
             }).then(history => {
                 if (history !== null) {
                     history.unshift(historyRecord);
                     this.updateValue('HISTORYSTORE', id, history, false);
                 }
+            }).then(foo => {
+                return this.updateNamespaceHistory(namespace, key, historyRecord);
             });
     }
 
+    updateNamespaceHistory(namespace, key, historyRecord) {
+        const namespaceHistoryRecord = {
+            'action': UPDATED,
+            'date': new Date(),
+            'user': historyRecord.user,
+            'value': sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase())
+        };
+
+        return this.getHistory(namespace)
+            .then(response => {
+                console.log(response);
+                if (response.status === 404) {
+                    const value = [{
+                        'action': CREATED,
+                        'date': namespaceHistoryRecord.date,
+                        'user': historyRecord.user,
+                        'value': 'Namespace was created.'
+                    }];
+
+                    return this.createValue('HISTORYSTORE', namespace, value, false)
+                        .then(response => {
+                            return new Promise((resolve, reject) => resolve(value));
+                        });
+                }
+                return response.json();
+            }).then(history => {
+                history.unshift(namespaceHistoryRecord);
+                this.updateValue('HISTORYSTORE', namespace, history, false);
+            });
+    }
 
     successOnly(response) {
         if (response.status >= 200 && response.status < 300) {

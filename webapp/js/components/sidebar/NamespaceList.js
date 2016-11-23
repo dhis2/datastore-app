@@ -5,6 +5,8 @@ import NamespaceItem from './NamespaceItem';
 import { fetchNamespaces, fetchAndToggleNamespace } from '../../actions/actions';
 import {List} from 'material-ui/List';
 import AppContainer from '../../containers/AppContainer'
+import RaisedButton from 'material-ui/RaisedButton';
+import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh'
 
 class NamespaceList extends Component {
   constructor(props) {
@@ -27,7 +29,11 @@ class NamespaceList extends Component {
 
   renderError(error) {
     return (
-      <span>ERROR!</span>
+      <RaisedButton
+          label="Try again"
+          icon={<NavigationRefresh/>}
+          onClick={this.props.fetchNamespaces}
+      />
     )
   }
 
@@ -36,6 +42,7 @@ class NamespaceList extends Component {
 
     const style = { //toolbar height is 56px + 8px margin
       overflowY: 'auto',
+      overflowX:'hidden',
       height:'calc(100% - 72px)',
       paddingTop:0,
       margin: '8px 5px',
@@ -80,7 +87,6 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(fetchAndToggleNamespace(namespace));
     }
 });
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps

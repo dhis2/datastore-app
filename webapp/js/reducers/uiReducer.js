@@ -3,8 +3,8 @@ import * as actions from '../constants/actionTypes';
 const fetchedState = {fetching: false, fetched: true, error: false}
 const fetchingState = {fetching: true, fetched: false, error: false}
 const errorState = {fetching: false, fetched: false, error: true}
-
-const ui = (state = {openNamespaceDialog:false}, action) => {
+const emptyDialog = {dialogType: null, dialogprops: {}}
+const ui = (state = {dialog: {...emptyDialog}}, action) => {
     switch (action.type) {
 
         case actions.SET_WINDOW_VIEW: {
@@ -52,12 +52,22 @@ const ui = (state = {openNamespaceDialog:false}, action) => {
                 ...state,
                 updateError: true
             }
-
         }
-        case actions.SET_NAMESPACE_DIALOG_OPEN_STATE: {
+        case actions.OPEN_DIALOG: {
             return {
                 ...state,
-                openNamespaceDialog: action.open
+                dialog: {
+                    dialogType: action.dialogType,
+                    dialogprops: action.dialogprops
+                }
+            }
+        }
+        case actions.CLOSE_DIALOG: {
+            return {
+                ...state,
+                dialog: {
+                    ...emptyDialog
+                }
             }
         }
 

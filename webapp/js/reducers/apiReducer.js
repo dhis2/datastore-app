@@ -20,7 +20,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         ...state,
         ...fetchedState,
         namespaces: {
-          ...namespaces
+          ...namespaces,
+
         }
       };
     }
@@ -28,14 +29,16 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     case actions.FETCH_NAMESPACES_PENDING: {
       return {
         ...state,
-        ...fetchingState
+        ...fetchingState,
+        snackbarMessage: null
       };
     }
 
     case actions.FETCH_NAMESPACES_REJECTED: {
       return {
         ...state,
-        ...errorState
+        ...errorState,
+        snackbarMessage: action.error
       };
     }
 
@@ -69,7 +72,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
             ...state.namespaces[namespace],
             ...fetchingState
           }
-        }
+        },
+        snackbarMessage: null
       };
     }
 
@@ -84,7 +88,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
             ...errorState,
             errorMessage: error
           }
-        }
+        },
+        snackbarMessage: error
       };
     }
 
@@ -114,8 +119,46 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
       }
     }
 
+    case actions.CREATE_VALUE_FULFILLED: {
+      const { namespace, key, value } = action;
+      const ns = {}
+      if(state.namespaces[namespace]) {
+        ns[namespace] = {...state.namespaces[namespace]};
+        ns[namespace].keys = {...state.namespaces[namespace].keys};
+        ns[namespace].keys[key] = key;
+      } else {
+          ns[namespace] = {'name': namespace, 'open':false, 'keys': {[key]: {'key:': key, value: {}}}}
+      }
+      return {
+        ...state,
+        ...fetchedState,
+        namespaces: {
+          ...state.namespaces,
+          ...ns
+        }
+      }
+    }
+
+    case actions.CREATE_NAMESPACE: {
+      const { namespace, key, value } = action;
+      return {
+        ...state,
+        ...fetchedState,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]: {
+            keys: {
+              [key]: {
+                value: value
+              }
+            }
+          }
+        }
+      }
+    }
+
     case actions.FETCH_VALUE_REJECTED: {
-      const { namespace, key} = action;
+      const { namespace, key, error} = action;
       return {
         ...state,
         ...fetchedState,
@@ -131,7 +174,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
               }
             }
           }
-        }
+        },
+        snackbarMessage: error
       }
     }
 
@@ -152,7 +196,8 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
               }
             }
           }
-        }
+        },
+        snackbarMessage: null
       }
     }
 

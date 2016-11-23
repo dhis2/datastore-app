@@ -96,7 +96,7 @@ class DisplayArea extends Component {
     }
 
     return (
-        <div className="value-area" style={{paddingTop:'8px', backgroundColor:AppContainer.theme.palette.primary3Color}}>
+        <div className="value-area" style={{backgroundColor:AppContainer.theme.palette.primary3Color}}>
           <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
           <Snackbar
               open={this.state.snackbarOpen}
