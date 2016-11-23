@@ -37,7 +37,7 @@ export class Spinner extends Component {
 
   renderLarge() {
     return (
-      <div className="loading-large">
+      <div className="loading-large ">
         <div className="spinner">
           <div className="mask">
             <div className="maskedCircle"></div>

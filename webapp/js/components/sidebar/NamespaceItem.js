@@ -73,7 +73,7 @@ class NamespaceItem extends Component {
         }
 
     };
-    
+
     handleNewKey() {
         this.props.newKey(this.props.namespace.name);
     }
@@ -155,9 +155,7 @@ class NamespaceItem extends Component {
       const { name } = this.props.namespace;
 
         return (
-            <ListItem primaryText={<div style={styles.innerText}>{name}</div>} leftIcon={<FileFolder />} rightIcon={<MoreVertIcon />}>
-                <Spinner/>
-            </ListItem>
+            <ListItem primaryText={<div style={styles.innerText}>{name}</div>} leftIcon={<Spinner/>} rightIcon={<MoreVertIcon />} />
         );
     }
 

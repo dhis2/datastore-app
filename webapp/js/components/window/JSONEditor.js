@@ -24,7 +24,6 @@ class JSONEditor extends Component {
             this.editor = new JSEditor(this.editorContainer,opts);
             this.editor.set(this.props.value);
         }
-
     }
 
     /* Need custom update condition as we only re-render when the value changes.*/
@@ -55,5 +54,3 @@ class JSONEditor extends Component {
 }
 
 export default JSONEditor;
-
-
