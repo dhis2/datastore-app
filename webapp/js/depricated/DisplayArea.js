@@ -1,17 +1,14 @@
 import React, { PropTypes, Component } from 'react'
 import  { connect } from 'react-redux';
-import JSONPretty from 'react-json-pretty';
 import { Spinner } from '../utils/Loaders';
-import Inspector from 'react-json-inspector';
-import Jsoneditor from 'jsoneditor/dist/jsoneditor-minimalist.min';
 import '../../../style/vendor/json-inspector.css';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentSave from 'material-ui/svg-icons/content/save';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
 import JSONEditor from './JSONEditor';
-import {updateValue } from '../../actions/actions'
-import BrowsingList from '../utils/BrowsingList';
+import ModeComment from 'material-ui/svg-icons/editor/mode-comment';
+import AppContainer from '../../containers/AppContainer'
+import {updateValue, valueChange } from '../../actions/actions'
+import { ModeCommentIconWithText } from '../utils/Icons';
 
 class DisplayArea extends Component {
 
@@ -19,7 +16,6 @@ class DisplayArea extends Component {
     super(props);
 
     this.state = {
-      currJson: null,
       snackbarOpen: false
     };
 
@@ -30,40 +26,26 @@ class DisplayArea extends Component {
 
   renderLoading() {
     const style = {
-      position: 'relative',
-      left: '50%',
-      top: '40%'
+      alignItems: 'center',
+      justifyContent: 'center'
     }
     return (
-      <div style={style}>
+      <div className="value-area" style={style}>
         <Spinner size={'large'}/>
       </div>
     )
   }
 
   dataFromJSONEditor(editor) {
-
+    const {namespace, selectedKey } = this.props;
     try { //throws error if not valid json
       var data = editor.get();
-      this.setState({
-        currJson: data
-      });
-    } catch(err) { //do something with not valid json
+      this.props.valueChange(namespace,selectedKey,data)
+    } catch(err) { //do something with not valid json, dispatch rejectedValueChange
         console.log(err);
     }
-    console.log(this.props)
-    console.log(this.state);
   }
 
-  saveData() {
-    console.log("save data");
-    if(this.state.currJson) {
-      //dispatch update value to api
-      console.log(this.props);
-      const {namespace, selectedKey, value } = this.props;
-      this.props.updateValue(namespace, selectedKey , this.state.currJson);
-    }
-  }
 
   handleSnackbarClose() {
     this.setState({
@@ -73,8 +55,23 @@ class DisplayArea extends Component {
   }
 
   renderEmpty() {
+    const style = {
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+    const iconStyle = {
+      fill: 'rgb(117, 117, 117)',
+      display:'block',
+      margin:'0 auto 0 auto',
+      width:'100px',
+      height:'auto'
+    }
     return (
-        <div>
+        <div className="value-area" style={style}>
+          <div>
+            <ModeComment style={iconStyle}/>
+            <p>Select a namespace and a key to edit.</p>
+          </div>
         </div>
     )
   }
@@ -89,32 +86,29 @@ class DisplayArea extends Component {
 
   render () {
     const {value, fetching} = this.props;
-    if(!value) {
-      return this.renderEmpty();
-    }
 
     if(fetching) {
       return this.renderLoading();
     }
 
+    if(!value) {
+      return this.renderEmpty();
+    }
+
     return (
-        <Paper className="value-area">
-
-          <DetailedList />
-
-
-        </Paper>
+        <div className="value-area" style={{paddingTop:'8px', backgroundColor:AppContainer.theme.palette.primary3Color}}>
+          <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
+          <Snackbar
+              open={this.state.snackbarOpen}
+              message="Failed to update"
+              autoHideDuration={4000}
+              onRequestClose={this.handleSnackbarClose.bind(this)}
+          />
+        </div>
     )
   }
 }
 
-          // <JSONEditor value={this.props.value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
-          // <Snackbar
-          //     open={this.state.snackbarOpen}
-          //     message="Failed to update"
-          //     autoHideDuration={4000}
-          //     onRequestClose={this.handleSnackbarClose.bind(this)}
-          // />
 const mapStateToProps = (state) => ({
   value: state.ui.value,
   namespace: state.ui.namespace,
@@ -126,6 +120,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   updateValue(namespace,key,value) {
     dispatch(updateValue(namespace,key,value))
+  },
+  valueChange(namespace,key,value) {
+    dispatch(valueChange(namespace,key,value))
   }
 })
 

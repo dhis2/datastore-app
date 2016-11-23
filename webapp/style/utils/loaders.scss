@@ -5,11 +5,19 @@
 	to { transform: rotate(360deg); }
 }
 
+.loader {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width:100%;
+		height: 100%;
+}
+
 .loading-small {
 	position: absolute;
 	width: 28px;
 	height: 28px;
-  margin-left: -20px;
+  margin-left: -55px;
 
 	.maskedCircle {
 		width: 20px;

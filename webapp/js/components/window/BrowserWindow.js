@@ -6,7 +6,9 @@ import BrowsingList from '../utils/BrowsingList';
 import SortBar from '../utils/SortBar'
 import '../../../style/utils/lists.scss';
 
-class BrowseWindow extends Component {
+import WindowAreaHOC from '../hoc/WindowAreaHOC'
+
+class BrowserWindow extends Component {
 
   constructor (props) {
     super(props);
@@ -28,4 +30,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps
-)(BrowseWindow);
+)(BrowserWindow);

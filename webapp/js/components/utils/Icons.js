@@ -1,43 +1,30 @@
 
 import React, { PropTypes, Component } from 'react'
-import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-import FileFolder from 'material-ui/svg-icons/file/folder';
-import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file';
-import AlertError from 'material-ui/svg-icons/alert/error';
+import ModeComment from 'material-ui/svg-icons/editor/mode-comment';
 
-const iconStyles = {
-  marginTop: 10,
-  marginRight: 12
-};
 
-export class OpenFolderIcon extends Component {
-  render() {
-    return(
-      <FileFolderOpen style={iconStyles} />
-    )
+  const style = {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
-}
-
-export class ClosedFolderIcon extends Component {
-  render() {
-    return(
-      <FileFolder />
-    )
+  const iconStyle = {
+    fill: 'rgb(117, 117, 117)',
+    display:'block',
+    margin:'0 auto 0 auto',
+    width:'100px',
+    height:'auto'
   }
-}
 
-export class FileIcon extends Component {
-  render() {
-    return(
-      <EditorInsertDriveFile style={iconStyles} />
-    )
-  }
-}
-
-export class ErrorIcon extends Component {
-  render() {
-    return(
-      <AlertError style={iconStyles} />
-    )
+export class ModeCommentIconWithText extends Component {
+  render () {
+      const { text } = this.props;
+      return (
+      <div className="value-area" style={style}>
+        <div>
+          <ModeComment style={iconStyle}/>
+          <p>{ text }</p>
+        </div>
+      </div>
+      )
   }
 }

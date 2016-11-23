@@ -25,6 +25,17 @@ export function fetchAndDisplayKeyValue(namespace, key) {
     }
 }
 
+export function createAndDisplayValue(namespace, key) {
+    return dispatch => {
+        dispatch(createValue(namespace,key,{}))
+            .then(() => dispatch(fetchNamespaces()))
+            .then(success => dispatch(fetchAndToggleNamespace(namespace)))
+            .then(() => dispatch(setNamespaceDialogOpenState(false)))
+            .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
+            .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
+    }
+}
+
 export function fetchNamespaces() {
     return dispatch => {
         dispatch(requestNamespaces());
@@ -36,10 +47,10 @@ export function fetchNamespaces() {
 
 export function createValue(namespace, key, value) {
     return dispatch => {
-        dispatch(requestCreate());
+        dispatch(requestCreateValue(namespace,key,value));
         return api.createValue(namespace, key, value)
-            .then(success => dispatch(createValue(namespace, key, value)))
-            .catch(error => dispatch(createValueE))
+            .then(success => dispatch(receivedCreateValue(namespace, key, value)))
+            .catch(error => dispatch(rejectCreateValue(namespace,key,value)))
     }
 }
 
@@ -100,10 +111,14 @@ export function deleteValue(namespace, key) {
 
 export function deleteNamespace(namespace) {
     return dispatch => {
-        dispatch(requestNamespaces());
+        dispatch(requestDeleteNamespace(namespace));
         return api.deleteNamespace(namespace)
-            .then(success => console.log(success))
-            .catch(error => console.log(error));
+            .then(success => {
+                dispatch(fetchNamespaces());
+                dispatch(receiveDeleteNamespace(namespace));
+                return success;
+            })
+            .catch(error => dispatch(rejectDeleteNamespace(namespace)));
     }
 }
 
@@ -154,6 +169,37 @@ export function rejectKeys(namespace, error) {
         namespace,
         error
     }
+}
+/* These are used for creation of namespaces, as you need
+* a key and a value to create a namespace*/
+
+function receivedCreateValue(namespace, key, value) {
+    return {
+        type: actions.CREATE_VALUE_FULFILLED,
+        namespace,
+        key,
+        value
+    }
+}
+
+function requestCreateValue(namespace,key,value) {
+    return {
+        type: actions.CREATE_VALUE_PENDING,
+        namespace,
+        key,
+        value
+    }
+}
+
+function rejectCreateValue(namespace,key,value, error) {
+    return {
+        type: actions.CREATE_VALUE_REJECTED,
+        namespace,
+        key,
+        value,
+        error
+    }
+
 }
 
 
@@ -213,6 +259,27 @@ function rejectUpdateValue(namespace,key,value,error) {
         error
     }
 }
+
+function requestDeleteNamespace(namespace) {
+    return {
+        type: actions.DELETE_NAMESPACE_PENDING,
+        namespace
+    }
+}
+
+function receiveDeleteNamespace(namespace) {
+    return {
+        type: actions.DELETE_NAMESPACE_FULFILLED,
+        namespace
+    }
+}
+
+function rejectDeleteNamespace(namespace) {
+    return {
+        type: actions.DELETE_NAMESPACE_REJECTED,
+        namespace
+    }
+}
 /**
  *  History Action Creators
  */
@@ -226,6 +293,15 @@ export function requestHistory() {
 /**
  *  UI Action Creators
  */
+
+export function valueChange(namespace, key, value) {
+    return {
+        type: actions.VALUE_CHANGE,
+        namespace,
+        key,
+        value
+    }
+}
 export function toggleNamespace(namespace) {
     return {
         type: actions.TOGGLE_NAMESPACE,
@@ -241,7 +317,21 @@ export function selectKey(namespace, key, value) {
         value
     }
 }
+export function setNamespaceDialogOpenState(open) {
+    return {
+        type: actions.SET_NAMESPACE_DIALOG_OPEN_STATE,
+        open
+    }
+}
+export function createNewNamespace(namespace, key) {
+    return {
+        type: actions.CREATE_NAMESPACE,
+        namespace,
+        key
+    }
+}
 
-export function setWindow() {
-  
+
+export function saveValueFromEditor() {
+    
 }
