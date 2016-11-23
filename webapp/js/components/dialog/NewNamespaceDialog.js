@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { createAndDisplayValue } from '../../actions/actions'
 import { closeNamespaceDialog } from '../../actions/dialogActions';
-class NamespaceDialog extends Component {
+class NewNamespaceDialog extends Component {
 
 
     constructor(props) {
@@ -79,7 +79,7 @@ class NamespaceDialog extends Component {
         }
         return (
             <Dialog
-                title="New Namespace"
+                title="New namespace"
                 actions={actions}
                 modal={false}
                 open={true}
@@ -110,6 +110,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     null,
     mapDispatchToProps
-)(NamespaceDialog);
+)(NewNamespaceDialog);
 
 

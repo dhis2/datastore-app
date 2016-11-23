@@ -16,7 +16,7 @@ import {ListItem} from 'material-ui/List';
 import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import { openKeyDialog } from '../../actions/dialogActions';
+import { openKeyDialog, openConfirmDeleteDialog } from '../../actions/dialogActions';
 import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
     toggleNamespace, deleteNamespace, deleteValue } from '../../actions/actions';
 
@@ -200,7 +200,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(toggleNamespace(namespace));
     },
     deleteNamespace(namespace) {
-        dispatch(deleteNamespace(namespace));
+        dispatch(openConfirmDeleteDialog({namespace}))
     },
     newKey(namespace) {
         dispatch(openKeyDialog({namespace}));

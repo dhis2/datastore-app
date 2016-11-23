@@ -2,18 +2,18 @@ import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import NewNamespaceDialog from './NewNamespaceDialog';
 import NewKeyDialog from './NewKeyDialog';
+import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 const DIALOG_COMPONENTS = {
     'NEW_NAMESPACE': NewNamespaceDialog,
     'NEW_KEY': NewKeyDialog,
-    'CONFIRM_DELETE': {}
+    'CONFIRM_DELETE_NAMESPACE': ConfirmDeleteDialog
 }
 
-class NamespaceDialog extends Component {
+class DialogRoot extends Component {
     constructor(props) {
         super(props);
 
     }
-
 
     render() {
         const { dialogType, dialogprops } = this.props.dialog;
@@ -37,4 +37,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps
-)(NamespaceDialog);
+)(DialogRoot);
