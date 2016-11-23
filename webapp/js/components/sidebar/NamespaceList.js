@@ -42,6 +42,7 @@ class NamespaceList extends Component {
 
     const style = { //toolbar height is 56px + 8px margin
       overflowY: 'auto',
+      overflowX:'hidden',
       height:'calc(100% - 72px)',
       paddingTop:0,
       margin: '8px 5px',

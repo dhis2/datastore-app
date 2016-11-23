@@ -7,9 +7,11 @@ export function fetchAndToggleNamespace(namespace) {
         return api.getKeys(namespace)
             .then(keys => {
                 dispatch(recieveKeys(namespace, keys));
-                dispatch(toggleNamespace(namespace));
-            })
-            .catch(error => dispatch(rejectKeys(namespace, error)));
+               // dispatch(toggleNamespace(namespace)).catch(error => console.log(error));
+            }).then(() => dispatch(toggleNamespace(namespace)))
+            .catch(error => {
+                dispatch(rejectKeys(namespace, error))
+            });
     }
 }
 
@@ -25,12 +27,20 @@ export function fetchAndDisplayKeyValue(namespace, key) {
     }
 }
 
+export function createNewNamespaceDisplayEmpty(namespace,key) {
+    return dispatch => {
+        dispatch(createValue(namespace,key,{}))
+         //   .then(() => dispatch(createNewNamespace(namespace,key)))
+         //f   .then(success => dispatch(fetchAndToggleNamespace(namespace)))
+            .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
+            .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
+    }
+}
+
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
         dispatch(createValue(namespace,key,{}))
-            .then(() => dispatch(fetchNamespaces()))
             .then(success => dispatch(fetchAndToggleNamespace(namespace)))
-            .then(() => dispatch(setNamespaceDialogOpenState(false)))
             .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
             .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
     }
@@ -50,7 +60,6 @@ export function createValue(namespace, key, value) {
         dispatch(requestCreateValue(namespace,key,value));
         return api.createValue(namespace, key, value)
             .then(success => dispatch(receivedCreateValue(namespace, key, value)))
-            .catch(error => dispatch(rejectCreateValue(namespace,key,value)))
     }
 }
 
@@ -59,7 +68,6 @@ export function fetchKeys(namespace) {
         dispatch(requestKeys(namespace));
         return api.getKeys(namespace)
             .then(keys => dispatch(recieveKeys(namespace, keys)))
-            .catch(error => dispatch(rejectKeys(namespace, error)))
     }
 }
 
@@ -96,16 +104,30 @@ export function updateValue(namespace, key, value) {
         dispatch(requestUpdateValue(namespace,key,value));
         return api.updateValue(namespace, key, value)
             .then(success => dispatch(receiveUpdateValue(namespace,key,value)))
-            .catch(error => dispatch(rejectUpdateValue(namespace,key,value)));
+            .catch(error => dispatch(rejectUpdateValue(namespace,key,value)))
     }
 }
 
-export function deleteValue(namespace, key) {
+export function deleteKey(namespace, key) {
     return dispatch => {
-        dispatch(requestValue());
+        dispatch(requestDeleteKey(namespace,key));
         return api.deleteValue(namespace, key)
-            .then(success => console.log(success))
-            .catch(error => console.log(error));
+            .then(success => dispatch(receiveDeleteKey(namespace,key)))
+            .then(() => dispatch(fetchKeys(namespace)))
+            .catch(error => {
+                if(error.status === 404) {
+                    return dispatch(fetchNamespaces())
+                } else if (error) {
+                    throw error;
+                } else {
+                    return dispatch(toggleNamespace(namespace))
+                }
+            /*    return error.status === 404 ? dispatch(fetchNamespaces())
+                    : dispatch(toggleNamespace(namespace)) */
+            })
+            .catch(error => {
+                dispatch(rejectDeleteKey(namespace,key))
+            });
     }
 }
 
@@ -123,7 +145,7 @@ export function deleteNamespace(namespace) {
 }
 
 /**
- *  Namesapce Action Creators
+ *  Namespace Action Creators
  */
 export function recieveNamespaces(namespaces) {
     return {
@@ -260,6 +282,31 @@ function rejectUpdateValue(namespace,key,value,error) {
     }
 }
 
+function requestDeleteKey(namespace,key) {
+    return {
+        type: actions.DELETE_KEY_PENDING,
+        namespace,
+        key
+    }
+}
+
+function receiveDeleteKey(namespace,key) {
+    return {
+        type: actions.DELETE_KEY_FULFILLED,
+        namespace,
+        key,
+    }
+}
+
+function rejectDeleteKey(namespace,key,error) {
+    return {
+        type: actions.DELETE_KEY_REJECTED,
+        namespace,
+        key,
+        error
+    }
+}
+
 function requestDeleteNamespace(namespace) {
     return {
         type: actions.DELETE_NAMESPACE_PENDING,
@@ -317,10 +364,24 @@ export function selectKey(namespace, key, value) {
         value
     }
 }
-export function setNamespaceDialogOpenState(open) {
+
+/* Open a modal with given props, if no props are given
+* dialogprops will be an empty object.*/
+export function openDialog(dialogprops) {
     return {
-        type: actions.SET_NAMESPACE_DIALOG_OPEN_STATE,
-        open
+        type: actions.OPEN_DIALOG,
+        dialogType: 'NEW_NAMESPACE',
+        dialogprops: {...dialogprops} //ensure empty object
+    }
+}
+
+/* Open a modal with given props, if no props are given
+ * dialogprops will be an empty object.*/
+export function closeDialog(dialogprops) {
+    return {
+        type: actions.CLOSE_DIALOG,
+        dialogType: 'NEW_NAMESPACE',
+        dialogprops: {...dialogprops} //ensure empty object
     }
 }
 export function createNewNamespace(namespace, key) {
