@@ -115,11 +115,11 @@ export function deleteKey(namespace, key) {
             .then(success => dispatch(receiveDeleteKey(namespace,key)))
             .then(() => dispatch(fetchKeys(namespace)))
             .catch(error => {
-                if(error.status === 404) {
+                if(error.status === 404) { //If not found, we remove the namespace from UI
                     return dispatch(fetchNamespaces())
-                } else if (error) {
+                } else if (error) { //propagate error
                     throw error;
-                } else {
+                } else {  //togglenamespace if not last key
                     return dispatch(toggleNamespace(namespace))
                 }
             /*    return error.status === 404 ? dispatch(fetchNamespaces())
