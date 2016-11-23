@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Sidebar from '../../components/sidebar/Sidebar';
 import DialogRoot from '../../components/dialog/DialogRoot';
 import WindowManager from '../../components/window/WindowManager'
-import NamespaceDialog from '../../components/dialogs/NamespaceDialog';
 import '../../../style/pages/homepage.scss';
 
 class HomePage extends Component {
@@ -32,4 +31,3 @@ export default connect(
     mapStateToProps,
     null
 )(HomePage);
-

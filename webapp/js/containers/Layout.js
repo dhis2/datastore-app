@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import '../../style/layout/layout.scss';
 import AppContainer from '../containers/AppContainer'
+import NavigationBar from './NavigationBar'
 import  { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 
