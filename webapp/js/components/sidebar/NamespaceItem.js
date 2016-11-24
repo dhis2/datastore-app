@@ -1,23 +1,28 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes, Component } from 'react';
 
 import { connect } from 'react-redux';
 
 import { Spinner } from '../utils/Loaders';
-import { OpenFolderIcon, ClosedFolderIcon, ErrorIcon } from '../utils/Icons';
+import { ErrorIcon } from '../utils/Icons';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import History from 'material-ui/svg-icons/action/history';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
+import { ListItem } from 'material-ui/List';
 import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Delete from 'material-ui/svg-icons/action/delete';
-import {grey500, darkBlack, lightBlack} from 'material-ui/styles/colors';
-import {ListItem} from 'material-ui/List';
-import IconButton from 'material-ui/IconButton'
+import { grey500 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import { openKeyDialog, openConfirmDeleteNamespaceDialog, openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
-import { fetchAndDisplayKeyValue, fetchAndToggleNamespace, toggleNamespace, } from '../../actions/actions';
+
+import { openKeyDialog,
+  openConfirmDeleteNamespaceDialog,
+  openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
+import { fetchAndDisplayKeyValue,
+  fetchAndToggleNamespace,
+  toggleNamespace } from '../../actions/actions';
 
 
 const styles = {
@@ -25,34 +30,29 @@ const styles = {
 
     },
     keyItemList: {
-        marginLeft: '15px'
+        marginLeft: '15px',
     },
     innerText: {
         overflow: 'hidden',
-        textOverflow:'ellipsis'
-    }
-
-}
+        textOverflow: 'ellipsis',
+    },
+};
 
 const iconButtonElement = (
     <IconButton
-        touch={true}
-        tooltipPosition="bottom-left">
-        <MoreVertIcon color={grey500}/>
+        touch
+        tooltipPosition="bottom-left"
+    >
+        <MoreVertIcon color={grey500} />
     </IconButton>
 );
 
 class NamespaceItem extends Component {
-
-    static propTypes() {
-
-    }
-
     constructor(props) {
         super(props);
 
         this.state = {
-            open: false
+            open: false,
         };
 
         this.handleDeleteKey = this.handleDeleteKey.bind(this);
@@ -64,15 +64,14 @@ class NamespaceItem extends Component {
         this.renderError = this.renderError.bind(this);
     }
 
-    toggleHandler = () => {
-        const {namespace} = this.props;
-        if(!namespace.open) {
+    toggleHandler() {
+        const { namespace } = this.props;
+        if (!namespace.open) {
             this.props.fetchAndToggleNamespace(namespace.name);
         } else {
             this.props.toggleNamespace(namespace.name);
         }
-
-    };
+    }
 
     handleNewKey() {
         this.props.newKey(this.props.namespace.name);
@@ -87,15 +86,17 @@ class NamespaceItem extends Component {
     }
 
     handleDeleteKey(namespace, key) {
-        this.props.deleteKeyInNamespace(namespace,key)
+        this.props.deleteKeyInNamespace(namespace, key);
     }
 
     constructKeyItem(item, index) {
         const namespace = this.props.namespace.name;
         const keyItemMenu = (
-            <IconMenu iconButtonElement={iconButtonElement} disableAutoFocus={true}
-                      anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-                      targetOrigin={{vertical: 'top', horizontal: 'left'}}>
+            <IconMenu iconButtonElement={iconButtonElement}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                disableAutoFocus
+                targetOrigin={{ vertical: 'top', horizontal: 'left' }}
+            >
                 <MenuItem leftIcon={<Delete />} onTouchTap={() => this.handleDeleteKey(namespace, item)}>
                     Delete key
                 </MenuItem>
@@ -103,51 +104,54 @@ class NamespaceItem extends Component {
                     History
                 </MenuItem>
             </IconMenu>);
-        return (<ListItem primaryText={<div style={styles.innerText}>{item}</div>}
-                          key={index}
-                          rightIconButton={keyItemMenu}
-                          leftIcon={<EditorInsertDriveFile />}
-                          onTouchTap={() => this.props.fetchAndDisplayKeyValue(namespace,item)}/>
-        )
-
+        return (
+          <ListItem primaryText={<div style={styles.innerText}>{item}</div>}
+              key={index}
+              rightIconButton={keyItemMenu}
+              leftIcon={<EditorInsertDriveFile />}
+              onTouchTap={() => this.props.fetchAndDisplayKeyValue(namespace, item)}
+          />
+        );
     }
 
     renderOpen() {
-        const {keys, name, open, fetching} = this.props.namespace;
+        const { keys, name, open, fetching } = this.props.namespace;
         const items = [];
 
         const rightIconMenu = (
-            <IconMenu iconButtonElement={iconButtonElement} disableAutoFocus={true}
-                      anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-                      targetOrigin={{vertical: 'top', horizontal: 'left'}}>
+            <IconMenu iconButtonElement={iconButtonElement} disableAutoFocus
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                targetOrigin={{ vertical: 'top', horizontal: 'left' }}
+            >
                 <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleNewKey.bind(this)}>New key</MenuItem>
                 <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDeleteNamespace.bind(this)}>Delete</MenuItem>
             </IconMenu>
         );
-        //Populate nestedItems if keys are loaded
+        // Populate nestedItems if keys are loaded
         if (keys) {
             Object.keys(keys).forEach((item, index) => {
-                items.push(this.constructKeyItem(item,index));
+                items.push(this.constructKeyItem(item, index));
             });
         }
-        let leftIcon = open ? (<FileFolderOpen/>) : (<FileFolder />)
-        if(fetching) {
-            leftIcon = (<Spinner />)
+        let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
+        if (fetching) {
+            leftIcon = (<Spinner />);
         }
         return (
-            <ListItem primaryText={<div style={{overflow: 'hidden', textOverflow:'ellipsis'}}>{name}</div>}
-                      open={open}
-                      leftIcon={leftIcon}
-                      rightIconButton={rightIconMenu}
-                      nestedItems={items}
-                      onTouchTap={this.toggleHandler.bind(this)}
-                      nestedListStyle={styles.keyItemList} />
+            <ListItem primaryText={<div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</div>}
+                open={open}
+                leftIcon={leftIcon}
+                rightIconButton={rightIconMenu}
+                nestedItems={items}
+                onTouchTap={this.toggleHandler.bind(this)}
+                nestedListStyle={styles.keyItemList}
+            />
         );
     }
 
     renderClosed() {
-      const { name } = this.props.namespace;
-      const { event } = this.props;
+        const { name } = this.props.namespace;
+        const { event } = this.props;
 
         return (
             <ListItem primaryText={name} leftIcon={<FileFolder />} onClick={() => event(name)} />
@@ -155,39 +159,58 @@ class NamespaceItem extends Component {
     }
 
     renderLoading() {
-      const { name } = this.props.namespace;
+        const { name } = this.props.namespace;
 
         return (
-            <ListItem primaryText={<div style={styles.innerText}>{name}</div>} leftIcon={<Spinner/>} rightIcon={<MoreVertIcon />} />
+            <ListItem primaryText={<div style={styles.innerText}>{name}</div>}
+                leftIcon={<Spinner />} rightIcon={<MoreVertIcon />}
+            />
         );
     }
 
     renderError() {
-      const { name } = this.props.namespace;
+        const { name } = this.props.namespace;
 
         return (
             <ListItem primaryText={name} leftIcon={<FileFolder />}>
-                <ErrorIcon/>
+                <ErrorIcon />
             </ListItem>
         );
     }
 
 
     render() {
-        const { error, fetching, open} = this.props.namespace;
+        const { error } = this.props.namespace;
 
         if (error) {
             return this.renderError();
         }
-        
-        return this.renderOpen();
 
+        return this.renderOpen();
     }
 }
 
+NamespaceItem.propTypes = {
+    fetchAndDisplayKeyValue: PropTypes.function,
+    fetchAndToggleNamespace: PropTypes.function,
+    toggleNamespace: PropTypes.function,
+    deleteNamespace: PropTypes.function,
+    newKey: PropTypes.function,
+    deleteKeyInNamespace: PropTypes.function,
+    event: PropTypes.function,
+    namespace: PropTypes.shape({
+        error: PropTypes.boolean,
+        fetching: PropTypes.boolean,
+        open: PropTypes.boolean,
+        name: PropTypes.string,
+        keys: PropTypes.array,
+    }),
+};
+
+
 const mapDispatchToProps = (dispatch) => ({
     fetchAndDisplayKeyValue(namespace, key) {
-        dispatch(fetchAndDisplayKeyValue(namespace, key))
+        dispatch(fetchAndDisplayKeyValue(namespace, key));
     },
     fetchAndToggleNamespace(namespace) {
         dispatch(fetchAndToggleNamespace(namespace));
@@ -196,17 +219,17 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(toggleNamespace(namespace));
     },
     deleteNamespace(namespace) {
-        dispatch(openConfirmDeleteNamespaceDialog({namespace}))
+        dispatch(openConfirmDeleteNamespaceDialog({ namespace }));
     },
     newKey(namespace) {
-        dispatch(openKeyDialog({namespace}));
+        dispatch(openKeyDialog({ namespace }));
     },
-    deleteKeyInNamespace(namespace,key) {
-        dispatch(openConfirmDeleteKeyDialog({namespace,key}));
-    }
+    deleteKeyInNamespace(namespace, key) {
+        dispatch(openConfirmDeleteKeyDialog({ namespace, key }));
+    },
 });
 
 export default connect(
     null,
     mapDispatchToProps
-)(NamespaceItem)
+)(NamespaceItem);

@@ -5,8 +5,8 @@ export const SELECT_KEY = 'SELECT_KEY';
 export const TOGGLE_NAMESPACE = 'TOGGLE_NAMESPACE';
 export const VALUE_CHANGE = 'VALUE_CHANGE';
 export const CREATE_NAMESPACE = 'CREATE_NAMESPACE';
-export const OPEN_DIALOG ='OPEN_DIALOG';
-export const CLOSE_DIALOG ='CLOSE_DIALOG';
+export const OPEN_DIALOG = 'OPEN_DIALOG';
+export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 /**
  *  Async Action Types
  */
@@ -57,12 +57,6 @@ export const REQUEST_ASYNC_ACTION = 'REQUEST_ASYNC_ACTION';
 export const REJECT_ASYNC_ACTION = 'REJECT_ASYNC_ACTION';
 
 
-
-
-
-
-
-
-export const SET_EDIT_WINDOW = 'SET_EDIT_WINDOW'
-export const SET_BROWSER_WINDOW = 'SET_BROWSER_WINDOW'
+export const SET_EDIT_WINDOW = 'SET_EDIT_WINDOW';
+export const SET_BROWSER_WINDOW = 'SET_BROWSER_WINDOW';
 export const SET_BROWSER_LIST = 'SET_BROWSER_LIST';

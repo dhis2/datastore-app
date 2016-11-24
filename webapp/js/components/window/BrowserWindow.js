@@ -7,33 +7,33 @@ import '../../../style/utils/lists.scss';
 import BrowserToolbar from './BrowserToolbar';
 import BrowserArea from './BrowserArea';
 
-import WindowAreaHOC from '../hoc/WindowAreaHOC'
+import WindowAreaHOC from '../hoc/WindowAreaHOC';
 
 class BrowserWindow extends Component {
 
-  constructor (props) {
-    super(props);
-  }
+    render() {
+        const { loading, error } = this.props;
+        const BrowserAreaImproved = WindowAreaHOC(BrowserArea, loading, error);
 
-  render () {
-
-    const {loading, error} = this.props;
-    const BrowserAreaImproved = WindowAreaHOC(BrowserArea, loading, error);
-
-    return (
+        return (
         <Paper className={'value-container'}>
           <BrowserToolbar />
           <BrowserAreaImproved />
         </Paper>
-    )
-  }
+        );
+    }
 }
 
+BrowserWindow.propTypes = {
+    loading: PropTypes.boolean,
+    error: PropTypes.boolean,
+};
+
 const mapStateToProps = (state) => ({
-  loading: state.ui.fetching,
-  namespace: state.ui.namespace,
-  selectedKey: state.ui.key,
-  error: false
+    loading: state.ui.fetching,
+    namespace: state.ui.namespace,
+    selectedKey: state.ui.key,
+    error: false,
 });
 
 export default connect(

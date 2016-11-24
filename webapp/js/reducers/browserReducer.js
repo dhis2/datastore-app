@@ -2,23 +2,18 @@
 import * as actions from '../constants/actionTypes';
 
 const browser = (state = {}, action) => {
-
-  switch(action.type) {
-
+    switch (action.type) {
     case actions.SET_BROWSER_LIST: {
-
-      const { payload } = action;
-
-      return {
-        ...state,
-        browserList: payload
-      }
+        const { payload } = action;
+        return {
+            ...state,
+            browserList: payload,
+        };
     }
 
     default: {
-      return state;
-    }
-  }
-}
+        return state;
+    }}
+};
 
 export default browser;

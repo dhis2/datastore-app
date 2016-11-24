@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 /* Material UI Imports */
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ContentSave from 'material-ui/svg-icons/content/save';
-import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 
 import { updateValue } from '../../actions/actions';
 
@@ -15,8 +15,7 @@ class EditToolbar extends React.Component {
 
     handleSave() {
         const { namespace, selectedKey, editedValue, updateValue } = this.props;
-        console.log(selectedKey);
-        if(editedValue) {
+        if (editedValue) {
             updateValue(namespace, selectedKey, editedValue);
         }
     }
@@ -26,10 +25,10 @@ class EditToolbar extends React.Component {
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
-                    <WindowToolbarTitle path={ path }/>
+                    <WindowToolbarTitle path={ path } />
                     <ToolbarGroup>
                         <IconButton onTouchTap={this.handleSave.bind(this)}>
-                            <ContentSave/>
+                            <ContentSave />
                         </IconButton>
                     </ToolbarGroup>
                 </Toolbar>
@@ -38,16 +37,24 @@ class EditToolbar extends React.Component {
     }
 }
 
+EditToolbar.propTypes = {
+    editedValue: PropTypes.string,
+    selectedKey: PropTypes.string,
+    namespace: PropTypes.string,
+    updateValue: PropTypes.function,
+    path: PropTypes.string,
+};
+
 const mapStateToProps = (state) => ({
     editedValue: state.ui.editedValue,
     selectedKey: state.ui.key,
-    namespace: state.ui.namespace
+    namespace: state.ui.namespace,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     updateValue(namespace, key, value) {
-        dispatch(updateValue(namespace, key, value))
-    }
+        dispatch(updateValue(namespace, key, value));
+    },
 });
 
 export default connect(
