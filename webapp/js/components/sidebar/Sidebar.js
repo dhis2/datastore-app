@@ -1,19 +1,19 @@
-import React, {PropTypes, Component} from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NamespaceList from './NamespaceList';
-import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
+import { Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import '../../../style/sidebar/sidebar.scss';
-import {openNamespaceDialog} from '../../actions/dialogActions';
+import { openNamespaceDialog } from '../../actions/dialogActions';
 
 class Sidebar extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            showDialog: false
-        }
+            showDialog: false,
+        };
     }
 
     showDialog() {
@@ -23,11 +23,11 @@ class Sidebar extends Component {
     render() {
         return (
             <div className={'sidebar'}>
-                <Paper style={{zIndex:5}}>
+                <Paper style={{ zIndex: 5 }}>
                     <Toolbar>
-                        <ToolbarTitle text="Namespace"/>
-                        <ToolbarGroup lastChild={true}>
-                            <RaisedButton label="New" onClick={this.showDialog.bind(this)} primary={true}/>
+                        <ToolbarTitle text="Namespace" />
+                        <ToolbarGroup lastChild>
+                            <RaisedButton label="New" onClick={this.showDialog.bind(this)} primary />
                         </ ToolbarGroup>
                     </Toolbar>
                 </Paper>
@@ -37,10 +37,17 @@ class Sidebar extends Component {
     }
 }
 
+Sidebar.propTypes = {
+    openNamespaceDialog: PropTypes.function,
+};
+
 const mapDispatchToProps = (dispatch) => ({
     openNamespaceDialog() {
-        dispatch(openNamespaceDialog())
-    }
-})
-export default connect(null, mapDispatchToProps)(Sidebar)
+        dispatch(openNamespaceDialog());
+    },
+});
 
+export default connect(
+  null,
+  mapDispatchToProps
+)(Sidebar);

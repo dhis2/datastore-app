@@ -1,28 +1,24 @@
-import React, {PropTypes, Component} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import NewNamespaceDialog from './NewNamespaceDialog';
 import NewKeyDialog from './NewKeyDialog';
 import ConfirmDeleteNamespaceDialog from './ConfirmDeleteNamespaceDialog';
 import ConfirmDeleteKeyDialog from './ConfirmDeleteKeyDialog';
 const DIALOG_COMPONENTS = {
-    'NEW_NAMESPACE': NewNamespaceDialog,
-    'NEW_KEY': NewKeyDialog,
-    'CONFIRM_DELETE_NAMESPACE': ConfirmDeleteNamespaceDialog,
-    'CONFIRM_DELETE_KEY': ConfirmDeleteKeyDialog
-}
+    NEW_NAMESPACE: NewNamespaceDialog,
+    NEW_KEY: NewKeyDialog,
+    CONFIRM_DELETE_NAMESPACE: ConfirmDeleteNamespaceDialog,
+    CONFIRM_DELETE_KEY: ConfirmDeleteKeyDialog,
+};
 
 class DialogRoot extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
         const { dialogType, dialogprops } = this.props.dialog;
-        if(!dialogType) {
+        if (!dialogType) {
             return null;
         }
-        const DialogType = DIALOG_COMPONENTS[dialogType]
+        const DialogType = DIALOG_COMPONENTS[dialogType];
         return (
 
             <div>
@@ -32,10 +28,16 @@ class DialogRoot extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    dialog: state.ui.dialog
-})
+DialogRoot.propTypes = {
+    dialog: PropTypes.shape({
+        dialogType: PropTypes.string.isRequired,
+        dialogprops: PropTypes.shape,
+    }),
+};
 
+const mapStateToProps = (state) => ({
+    dialog: state.ui.dialog,
+});
 
 export default connect(
     mapStateToProps

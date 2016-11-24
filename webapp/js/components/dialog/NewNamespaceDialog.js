@@ -1,12 +1,11 @@
-import React, {PropTypes, Component} from 'react';
-import {connect} from 'react-redux';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { createAndDisplayValue } from '../../actions/actions'
+import { createAndDisplayValue } from '../../actions/actions';
 import { closeNamespaceDialog } from '../../actions/dialogActions';
+
 class NewNamespaceDialog extends Component {
 
 
@@ -14,10 +13,10 @@ class NewNamespaceDialog extends Component {
         super(props);
 
         this.state = {
-            namespaceValue: "",
-            keyValue: "",
-            namespaceError: "",
-            keyError: ""
+            namespaceValue: '',
+            keyValue: '',
+            namespaceError: '',
+            keyError: '',
         };
         this.validate = this.validate.bind(this);
     }
@@ -26,38 +25,37 @@ class NewNamespaceDialog extends Component {
         const val = event.target.value;
         this.setState({
             namespaceError: this.validate(val),
-            namespaceValue: event.target.value
-        })
+            namespaceValue: event.target.value,
+        });
     }
 
     handleKeyInput(event) {
         const val = event.target.value;
         this.setState({
             keyError: this.validate(val),
-            keyValue: event.target.value
+            keyValue: event.target.value,
         });
     }
 
     handleClose() {
-        this.props.closeDialog()
+        this.props.closeDialog();
     }
 
     handleCreate() {
-        const {namespaceValue, keyValue} = this.state;
+        const { namespaceValue, keyValue } = this.state;
         if (namespaceValue && keyValue) {
-            this.props.createNamespace(namespaceValue, keyValue)
+            this.props.createNamespace(namespaceValue, keyValue);
         } else {
             this.setState({
                 keyError: this.validate(keyValue),
-                namespaceError: this.validate(namespaceValue)
-            })
+                namespaceError: this.validate(namespaceValue),
+            });
         }
     }
 
     validate(value) {
-        return value ? "" : "Invalid Input. Field required";
+        return value ? '' : 'Invalid Input. Field required';
     }
-
 
 
     render() {
@@ -69,48 +67,55 @@ class NewNamespaceDialog extends Component {
             />,
             <FlatButton
                 label="Create"
-                primary={true}
+                primary
                 onTouchTap={this.handleCreate.bind(this)}
             />,
         ];
         const fieldStyle = {
             display: 'block',
-            width:'100%'
-        }
+            width: '100%',
+        };
         return (
             <Dialog
                 title="New namespace"
                 actions={actions}
                 modal={false}
-                open={true}
-                contentStyle={{maxWidth:'500px'}}
+                open
+                contentStyle={{ maxWidth: '500px' }}
                 onRequestClose={this.handleClose.bind(this)}
             >
                 <TextField ref="namespace" hintText="Namespace" autoFocus style={fieldStyle}
-                           errorText={this.state.namespaceError}
-                           onChange={this.handleNamespaceInput.bind(this)}/>
+                    errorText={this.state.namespaceError}
+                    onChange={this.handleNamespaceInput.bind(this)}
+                />
                 <TextField ref="key" hintText="Key value" style={fieldStyle}
-                           errorText={this.state.keyError}
-                           onChange={this.handleKeyInput.bind(this)}/>
+                    errorText={this.state.keyError}
+                    onChange={this.handleKeyInput.bind(this)}
+                />
             </Dialog>
         );
     }
 }
 
+NewNamespaceDialog.propTypes = {
+    dialogprops: PropTypes.shape({
+        namespace: PropTypes.string.isRequired,
+    }),
+    closeDialog: PropTypes.function,
+    createNamespace: PropTypes.function,
+};
 
 const mapDispatchToProps = (dispatch) => ({
     closeDialog() {
-        dispatch(closeNamespaceDialog())
+        dispatch(closeNamespaceDialog());
     },
-    createNamespace(namespace,key) {
-        dispatch(createAndDisplayValue(namespace,key))
-        dispatch(closeNamespaceDialog())
-    }
-})
+    createNamespace(namespace, key) {
+        dispatch(createAndDisplayValue(namespace, key));
+        dispatch(closeNamespaceDialog());
+    },
+});
 
 export default connect(
     null,
     mapDispatchToProps
 )(NewNamespaceDialog);
-
-

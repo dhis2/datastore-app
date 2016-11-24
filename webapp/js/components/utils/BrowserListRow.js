@@ -1,16 +1,20 @@
-import React, { PropTypes, Component } from 'react'
-import FileFolder from 'material-ui/svg-icons/file/folder';
-
+import React, { PropTypes, Component } from 'react';
+import { TableRow, TableRowColumn } from 'material-ui/Table';
 
 class BrowserListRow extends Component {
-  render () {
-    return (
-      <li className={"detailed-list-item"}>
-        <span className={"d-l-i d-l-name"}>test</span>
-        <span className={"d-l-i d-l-last-modified"}>test</span>
-      </li>
-    )
-  }
+    render() {
+        return (
+            <TableRow>
+              <TableRowColumn>1</TableRowColumn>
+              <TableRowColumn>John Smith</TableRowColumn>
+              <TableRowColumn>Employed</TableRowColumn>
+            </TableRow>
+        );
+    }
 }
+
+BrowserListRow.propTypes = {
+
+};
 
 export default BrowserListRow;

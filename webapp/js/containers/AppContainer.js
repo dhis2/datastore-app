@@ -22,11 +22,7 @@ injectTapEventPlugin();
 
 
 class AppContainer extends Component {
-
-  static propTypes = {
-    store: PropTypes.object.isRequired
-  };
-
+  
   static theme = getMuiTheme({
     palette: {
       primary1Color: blue700,
@@ -71,5 +67,8 @@ class AppContainer extends Component {
   }
 }
 
+AppContainer.propTypes = {
+  store: PropTypes.object.isRequired
+};
 
 export default AppContainer;

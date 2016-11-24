@@ -1,5 +1,5 @@
-import React, {PropTypes, Component} from 'react'
-import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
+import React, { PropTypes, Component } from 'react';
+import { Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui/Toolbar';
 
 class NavigationBar extends Component {
     render() {
@@ -7,15 +7,16 @@ class NavigationBar extends Component {
             backgroundColor: this.props.theme.primary1Color,
             color: this.props.theme.alternateTextColor,
             alignItems: 'center',
-        }
+        };
         return (
             <Toolbar style={toolBarStyle}>
                 <img src="../../img/logo_front.png" style={{
-                    height: '20px'
-                }} alt="dhis2"/>
-              <ToolbarTitle text="dhis2 Datastore"/>
+                    height: '20px',
+                }} alt="dhis2"
+        />
+              <ToolbarTitle text="dhis2 Datastore" />
             </Toolbar>
-        )
+        );
     }
 }
 

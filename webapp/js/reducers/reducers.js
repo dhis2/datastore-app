@@ -5,7 +5,7 @@ import window from './windowReducer';
 import browser from './browserReducer';
 
 const reducers = combineReducers({
-  api, ui, browser, window
+    api, ui, browser, window,
 });
 
 export default reducers;

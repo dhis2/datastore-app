@@ -1,20 +1,18 @@
 {
-  "parser": "babel-eslint",
-  "extends": [
-    "standard",
-    "standard-react"
-  ],
+  "extends": "dhis2",
   "plugins": [
-    "babel",
-    "react"
+    "prefer-object-spread"
   ],
-  "env": {
-      "browser" : true
+  "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "classes": true,
+            "experimentalObjectRestSpread": true
+        }
   },
-  "rules": {
-    "key-spacing"          : 0,
-    "jsx-quotes"           : [2, "prefer-single"],
-    "max-len"              : [2, 120, 2],
-    "object-curly-spacing" : [2, "always"]
-  }
+  "rules":{
+    "prefer-object-spread/prefer-object-spread": 2
+  },
 }

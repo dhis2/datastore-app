@@ -1,8 +1,4 @@
-import React, {PropTypes, Component} from 'react'
-import {Toolbar, ToolbarTitle, ToolbarGroup} from 'material-ui/Toolbar';
-import ContentSave from 'material-ui/svg-icons/content/save';
-import FontIcon from 'material-ui/FontIcon';
-import Paper from 'material-ui/Paper';
+import React, { Component } from 'react';
 
 import LoadingArea from '../window/LoadingArea';
 
@@ -19,31 +15,29 @@ const WindowAreaHOC = (Area, loading, error) => class extends Component {
     }
 
     renderLoading() {
-      return <LoadingArea />
+        return <LoadingArea />;
     }
 
     renderError() {
-      return (
+        return (
         <div></div>
-      );
+        );
     }
 
     render() {
+        if (loading) {
+            return this.renderLoading();
+        }
 
-      console.log(loading);
+        if (error) {
+            return this.renderError();
+        }
 
-      if (loading) {
-        return this.renderLoading();
-      }
-
-      if (error) {
-        return this.renderError();
-      }
-
-      return (
+        return (
         <Area />
-      )
+        );
     }
-}
+};
+
 
 export default WindowAreaHOC;

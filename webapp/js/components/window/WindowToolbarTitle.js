@@ -1,40 +1,41 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes, Component } from 'react';
 
 import BreadcrumbHistoryButton from './BreadcrumbHistoryButton';
 
 class WindowToolbarTitle extends Component {
-  renderPath(path) {
+    renderPath(path) {
+        const pathArray = path.split('/');
 
-    const pathArray = path.split('/');
-
-    return (
+        return (
       <span className={'toolbar-title'}>
-        {pathArray.map((item, index) => {
-          return (
+        {pathArray.map((item, index) => (
            <BreadcrumbHistoryButton label={ item } key={ index } />
-          )
-        })}
+          ))}
       </span>
-    )
-  }
+        );
+    }
 
-  renderDefault() {
-    return (
+    renderDefault() {
+        return (
       <span className="toolbar-title">
         Value
       </span>
-    )
-  }
+        );
+    }
 
-  render () {
-    const { path } = this.props
-    if (path) {
-      return this.renderPath(path)
+    render() {
+        const { path } = this.props;
+
+        if (path) {
+            return this.renderPath(path);
+        }
+
+        return this.renderDefault();
     }
-    else {
-      return this.renderDefault();
-    }
-  }
 }
+
+WindowToolbarTitle.propTypes = {
+    path: PropTypes.string,
+};
 
 export default WindowToolbarTitle;
