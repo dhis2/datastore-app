@@ -8,38 +8,16 @@ import { ModeCommentIconWithText } from '../utils/Icons';
 import Paper from 'material-ui/Paper';
 
 class WindowManager extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.renderEditWindow = this.renderEditWindow.bind(this);
-    this.renderEditWindow = this.renderEditWindow.bind(this);
-    this.renderDefault = this.renderEmpty.bind(this);
-  }
-
-  renderEditWindow() {
-    return <EditWindow />
-  }
-
-  renderBrowserWindow() {
-    return <BrowserWindow />
-  }
-
-  renderEmpty() {
-    return <EmptyWindow />
-  }
-
   render () {
-    switch('edit') {
+    switch('browser') {
       case 'edit':
-        return this.renderEditWindow();
+        return <EditWindow />
       case 'browser':
-        return this.renderBrowserWindow();
+        return <BrowserWindow />
       default:
-        return this.renderEmpty();
+        return <EmptyWindow />
     }
   }
 }
-
 
 export default WindowManager;

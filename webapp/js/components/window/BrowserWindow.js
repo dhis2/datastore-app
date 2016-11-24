@@ -23,7 +23,7 @@ class BrowserWindow extends Component {
     return (
         <Paper className={'value-container'}>
           <BrowserToolbar />
-          <BrowserAreaImproved/>
+          <BrowserAreaImproved />
         </Paper>
     )
   }

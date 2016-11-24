@@ -4,16 +4,18 @@ import { ListItem } from 'material-ui/List';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
-class BrowserListRow extends Component {
+class BrowserListHeader extends Component {
   render () {
     return (
-            <TableRow>
-              <TableRowColumn>1</TableRowColumn>
-              <TableRowColumn>John Smith</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-          )
+        <TableHeader>
+          <TableRow>
+            <TableHeaderColumn>ID</TableHeaderColumn>
+            <TableHeaderColumn>Name</TableHeaderColumn>
+            <TableHeaderColumn>Status</TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+        )
   }
 }
 
-export default BrowserListRow;
+export default BrowserListHeader;
