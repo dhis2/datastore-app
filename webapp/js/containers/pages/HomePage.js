@@ -1,8 +1,8 @@
 import React, {PropTypes, Component} from 'react';
 import { connect } from 'react-redux';
 import Sidebar from '../../components/sidebar/Sidebar';
-import ValueArea from '../../components/valueWindow/ValueArea'
 import DialogRoot from '../../components/dialog/DialogRoot';
+import WindowManager from '../../components/window/WindowManager'
 import '../../../style/pages/homepage.scss';
 
 class HomePage extends Component {
@@ -15,11 +15,11 @@ class HomePage extends Component {
 
     render() {
         return (
-          <div className="home-page-container">
-            <Sidebar />
-            <ValueArea />
-              <DialogRoot />
-          </div>
+            <div className="home-page-container">
+                <Sidebar/>
+                <WindowManager />
+                <DialogRoot />
+            </div>
         );
     }
 }
@@ -31,4 +31,3 @@ export default connect(
     mapStateToProps,
     null
 )(HomePage);
-

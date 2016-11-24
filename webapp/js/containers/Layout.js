@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import '../../style/layout/layout.scss';
 import AppContainer from '../containers/AppContainer'
+import NavigationBar from './NavigationBar'
 import  { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -27,10 +28,7 @@ class Layout extends Component {
         return (
             <div className={"wrapper"}>
                 <div className={"layout-container"}>
-                    <Toolbar style={toolBarStyle}>
-                        <img src="https://play.dhis2.org/test/api/staticContent/logo_banner" style={{height:'20px'}} alt="dhis2"/>
-                        <ToolbarTitle text="dhis2 Datastore"/>
-                    </Toolbar>
+                    <NavigationBar theme={AppContainer.theme.palette}/>
                     { this.props.children }
                 </div>
                 <Snackbar open={showSnackbar} message={<span>{snackbarMessage}</span>} autoHideDuration={5000} />

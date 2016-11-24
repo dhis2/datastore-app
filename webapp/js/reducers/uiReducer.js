@@ -6,6 +6,13 @@ const errorState = {fetching: false, fetched: false, error: true}
 const emptyDialog = {dialogType: null, dialogprops: {}}
 const ui = (state = {dialog: {...emptyDialog}}, action) => {
     switch (action.type) {
+
+        case actions.SET_WINDOW_VIEW: {
+          return {
+            ...state,
+          }
+        }
+
         case actions.SELECT_NAMESPACE: {
           const { selectedNamespace } = action;
           return {

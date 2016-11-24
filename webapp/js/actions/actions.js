@@ -1,14 +1,20 @@
 import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 
+export function setBrowserList(list) {
+  return {
+    type: actions.SET_BROWSER_LIST,
+    payload: list
+  }
+}
+
 export function fetchAndToggleNamespace(namespace,openNamespace=false) {
     return dispatch => {
         dispatch(requestKeys(namespace));
         return api.getKeys(namespace)
             .then(keys => {
-                dispatch(recieveKeys(namespace, keys));
-               // dispatch(toggleNamespace(namespace)).catch(error => console.log(error));
-            }).then(() => dispatch(toggleNamespace(namespace,openNamespace)))
+                dispatch(recieveKeys(namespace, keys));})
+            .then(() => dispatch(toggleNamespace(namespace,openNamespace)))
             .catch(error => {
                 if(error.status === 404) { //If not found, we remove the namespace from UI
                     return dispatch(receiveDeleteNamespace(namespace))
@@ -59,7 +65,10 @@ export function fetchNamespaces() {
     return dispatch => {
         dispatch(requestNamespaces());
         return api.getNamespaces()
-            .then(namespaces => dispatch(recieveNamespaces(namespaces)))
+            .then(namespaces => {
+              dispatch(recieveNamespaces(namespaces))
+              dispatch(setBrowserList(namespaces))
+            })
             .catch(error => dispatch(rejectNamespaces(error)));
     }
 }
@@ -146,7 +155,7 @@ export function updateValue(namespace, key, value) {
  * @returns action thunk
  */
 export function deleteKey(namespace, key) {
-    return (dispatch,getState) => {
+    return dispatch => {
         dispatch(requestDeleteKey(namespace,key));
         return api.deleteValue(namespace, key)
             .then(success => dispatch(receiveDeleteKey(namespace,key)))
@@ -429,5 +438,5 @@ export function createNewNamespace(namespace, key) {
 
 
 export function saveValueFromEditor() {
-    
+
 }
