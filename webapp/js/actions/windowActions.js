@@ -4,7 +4,7 @@ import api from '../utils/api';
 
 export function requestHistory() {
   return {
-    type: actions.SET_EDIT_WINDOW
+    type: actions.SET_EDIT_WINDOW,
     payload: { }
   }
 }

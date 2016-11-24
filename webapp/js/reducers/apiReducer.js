@@ -11,17 +11,25 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     /**
      *  Namespaces
      */
+
+      /**
+       * Updates namespaces. New namespacee is added if it does
+       * not exist. Note that this do not remove namespaces from the
+       * state if they do not exist in the given action
+       */
     case actions.FETCH_NAMESPACES_FULFILLED: {
       let namespaces = {};
-      action.namespaces.map(key => {
+      action.namespaces.filter(key => {
+        return typeof state.namespaces[key] === 'undefined'
+      }).map(key => {
         namespaces[key] = {'name': key, 'open':false}
       })
       return {
         ...state,
         ...fetchedState,
         namespaces: {
-          ...namespaces,
-
+          ...state.namespaces,
+          ...namespaces
         }
       };
     }
@@ -97,8 +105,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
      *  Values
      */
 
-    case actions.FETCH_VALUE_FULFILLED:
-    case actions.UPDATE_VALUE_FULFILLED: {
+    case actions.FETCH_VALUE_FULFILLED: {
       const { namespace, key, value } = action;
       return {
         ...state,
@@ -119,6 +126,33 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
       }
     }
 
+    case actions.UPDATE_VALUE_FULFILLED: {
+      const { namespace, key, value } = action;
+      return {
+        ...state,
+        ...fetchedState,
+        namespaces: {
+          ...state.namespaces,
+          [namespace]: {
+            ...state.namespaces[namespace],
+            keys: {
+              ...state.namespaces[namespace].keys,
+              [key]: {
+                ...state.namespaces[namespace].keys[key],
+                value: value
+              }
+            }
+          }
+        },
+        snackbarMessage: {
+          message: "Successfully updated value!"
+        }
+      }
+    }
+
+      /**
+       * 
+       */
     case actions.CREATE_VALUE_FULFILLED: {
       const { namespace, key, value } = action;
       const ns = {}
@@ -211,16 +245,40 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     }
 
     case actions.TOGGLE_NAMESPACE: {
-
       const { namespace } = action;
+      const open = action.override || !state.namespaces[namespace].open
       return {
         ...state,
         namespaces: {
           ...state.namespaces,
           [namespace]: {
             ...state.namespaces[namespace],
-            open: !state.namespaces[namespace].open
+            open
           }
+        }
+      }
+    }
+
+    case actions.DELETE_NAMESPACE_FULFILLED: {
+      const namespaces = state.namespaces
+      delete namespaces[action.namespace]
+      return {
+        ...state,
+        namespaces: {
+          ...namespaces
+        }
+      }
+    }
+
+    case actions.DELETE_KEY_FULFILLED: {
+      const {namespace, key} = action;
+      const updatedNamespace = state.namespaces[namespace]
+      delete updatedNamespace.keys[key]
+      return {
+        ...state,
+        namespaces: {
+            ...state.namespaces,
+            [updatedNamespace.name]: updatedNamespace
         }
       }
     }
