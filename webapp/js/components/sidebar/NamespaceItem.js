@@ -113,13 +113,13 @@ class NamespaceItem extends Component {
     }
 
     renderOpen() {
-        const {keys, name, open} = this.props.namespace;
+        const {keys, name, open, fetching} = this.props.namespace;
         const items = [];
 
         const rightIconMenu = (
             <IconMenu iconButtonElement={iconButtonElement} disableAutoFocus={true}
                       anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-                      targetOrigin={{vertical: 'top', horizontal: 'left',}}>
+                      targetOrigin={{vertical: 'top', horizontal: 'left'}}>
                 <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleNewKey.bind(this)}>New key</MenuItem>
                 <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDeleteNamespace.bind(this)}>Delete</MenuItem>
             </IconMenu>
@@ -130,11 +130,14 @@ class NamespaceItem extends Component {
                 items.push(this.constructKeyItem(item,index));
             });
         }
-
+        let leftIcon = open ? (<FileFolderOpen/>) : (<FileFolder />)
+        if(fetching) {
+            leftIcon = (<Spinner />)
+        }
         return (
             <ListItem primaryText={<div style={{overflow: 'hidden', textOverflow:'ellipsis'}}>{name}</div>}
                       open={open}
-                      leftIcon={open ? <FileFolderOpen/> : <FileFolder />}
+                      leftIcon={leftIcon}
                       rightIconButton={rightIconMenu}
                       nestedItems={items}
                       onTouchTap={this.toggleHandler.bind(this)}
@@ -176,11 +179,7 @@ class NamespaceItem extends Component {
         if (error) {
             return this.renderError();
         }
-
-        if (fetching) {
-            return this.renderLoading();
-        }
-
+        
         return this.renderOpen();
 
     }

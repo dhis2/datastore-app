@@ -2,10 +2,7 @@ var webpack = require('webpack');
 
 var config = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8081',
-    'webpack/hot/only-dev-server',
     'whatwg-fetch',
-    'react-bootstrap',
     __dirname + '/webapp/js/main.js'
   ],
   output: {
@@ -40,20 +37,16 @@ var config = {
   // eslint: {
   //   configFile: './.eslintrc'
   // },
-  devtool: "inline-sourcemap",
-  devServer: {
-    contentBase: __dirname + '/webapp/',
-    port: 8081,
-    inline: true,
-    hot: true
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('development')
+        'NODE_ENV': JSON.stringify('production')
       }
     }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new webpack.optimize.AggressiveMergingPlugin(),
+
   ]
 }
 

@@ -8,14 +8,20 @@ export function setBrowserList(list) {
   }
 }
 
-export function fetchAndToggleNamespace(namespace) {
+export function fetchAndToggleNamespace(namespace,openNamespace=false) {
     return dispatch => {
         dispatch(requestKeys(namespace));
         return api.getKeys(namespace)
             .then(keys => {
-                dispatch(recieveKeys(namespace, keys));
-               // dispatch(toggleNamespace(namespace)).catch(error => console.log(error));
-            }).then(() => dispatch(toggleNamespace(namespace)))
+                dispatch(recieveKeys(namespace, keys));})
+            .then(() => dispatch(toggleNamespace(namespace,openNamespace)))
+            .catch(error => {
+                if(error.status === 404) { //If not found, we remove the namespace from UI
+                    return dispatch(receiveDeleteNamespace(namespace))
+                } else if (error) { //propagate error
+                    throw error;
+                }
+            })
             .catch(error => {
                 dispatch(rejectKeys(namespace, error))
             });
@@ -34,20 +40,22 @@ export function fetchAndDisplayKeyValue(namespace, key) {
     }
 }
 
-export function createNewNamespaceDisplayEmpty(namespace,key) {
-    return dispatch => {
-        dispatch(createValue(namespace,key,{}))
-         //   .then(() => dispatch(createNewNamespace(namespace,key)))
-         //f   .then(success => dispatch(fetchAndToggleNamespace(namespace)))
-            .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
-            .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
-    }
-}
+/**
+ * @function createAndDisplayValue
+ * Creates a value with key in namespace.
+ *
+ * On success, the namespace will be opened and the empty
+ * value will be displayed. Note that this is used both for
+ * creating namespaces and keys. See {@link createValue}
+ * @param namespace namespace to create or update
+ * @param key to create
+ * @returns action thunk
+ */
 
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
         dispatch(createValue(namespace,key,{}))
-            .then(success => dispatch(fetchAndToggleNamespace(namespace)))
+            .then(success => dispatch(fetchAndToggleNamespace(namespace,true)))
             .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
             .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
     }
@@ -65,6 +73,19 @@ export function fetchNamespaces() {
     }
 }
 
+/**
+ * @function createValue
+ * Creates a value with key in namespace.
+ *
+ * Because of how the API behaves, this is used for both creating
+ * keys and namespaces. We always create a value with empty values, and instead use
+ * updateValue to update values.
+ * If a namespace exists, the key will be created in namespace with an empty value
+ * If both namespace and key exists; rejectCreateValue will be dispatched.
+ * @param namespace to create or add key in
+ * @param key to create
+ * @returns action thunk
+ */
 export function createValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestCreateValue(namespace,key,value));
@@ -107,7 +128,14 @@ export function updateHistory(namespace, key, value) {
     }
 }
 
-
+/**@function updateValue
+ *
+ * Updates a value with key in namespace.
+ * @param namespace containing value
+ * @param key to update
+ * @param value to update
+ * @returns action thunk
+ */
 export function updateValue(namespace, key, value) {
     return dispatch => {
         console.log("update value");
@@ -118,6 +146,14 @@ export function updateValue(namespace, key, value) {
     }
 }
 
+/**
+ * Deletes a key from the API and store.
+ * If it's the last key in the namespace, the namespace is
+ * removed aswell (following the behavior of the API).
+ * @param namespace containing the key to be removed
+ * @param key to be removed
+ * @returns action thunk
+ */
 export function deleteKey(namespace, key) {
     return dispatch => {
         dispatch(requestDeleteKey(namespace,key));
@@ -125,18 +161,16 @@ export function deleteKey(namespace, key) {
             .then(success => dispatch(receiveDeleteKey(namespace,key)))
             .then(() => dispatch(fetchKeys(namespace)))
             .catch(error => {
-                if(error.status === 404) {
-                    return dispatch(fetchNamespaces())
-                } else if (error) {
+                if(error.status === 404) { //If not found, we remove the namespace from UI
+                    dispatch(receiveDeleteNamespace(namespace))
+                } else if (error) { //propagate error
                     throw error;
-                } else {
-                    return dispatch(toggleNamespace(namespace))
+                } else {  //togglenamespace if not last key
+                    dispatch(toggleNamespace(namespace,true))
                 }
-            /*    return error.status === 404 ? dispatch(fetchNamespaces())
-                    : dispatch(toggleNamespace(namespace)) */
             })
             .catch(error => {
-                dispatch(rejectDeleteKey(namespace,key))
+                dispatch(rejectDeleteKey(namespace,key,error))
             });
     }
 }
@@ -146,7 +180,6 @@ export function deleteNamespace(namespace) {
         dispatch(requestDeleteNamespace(namespace));
         return api.deleteNamespace(namespace)
             .then(success => {
-                dispatch(fetchNamespaces());
                 dispatch(receiveDeleteNamespace(namespace));
                 return success;
             })
@@ -359,10 +392,11 @@ export function valueChange(namespace, key, value) {
         value
     }
 }
-export function toggleNamespace(namespace) {
+export function toggleNamespace(namespace, override) {
     return {
         type: actions.TOGGLE_NAMESPACE,
-        namespace
+        namespace,
+        override
     }
 }
 

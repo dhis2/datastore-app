@@ -43,7 +43,10 @@ class Api
     getKeys(namespace) {
         return fetch(this.url+'/dataStore/'+namespace, this.getHeaders())
             .then(response => this.successOnly(response))
-            .then(response => response.json());
+            .then(response => response.json())
+            .catch(error => {
+                return Promise.reject(error)
+            });
     }
 
     getValue(namespace, key) {
