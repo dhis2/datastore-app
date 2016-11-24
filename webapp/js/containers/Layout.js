@@ -16,7 +16,7 @@ class Layout extends Component {
             alignItems: 'center'
         };
 
-        let message = this.props.snackbarMessage;
+        const message = this.props.snackbarMessage;
         let snackbarMessage = null;
         if(message) {
             if(message.message) {
@@ -28,7 +28,7 @@ class Layout extends Component {
             <div className={"wrapper"}>
                 <div className={"layout-container"}>
                     <Toolbar style={toolBarStyle}>
-                        <img src="../../img/logo_front.png" style={{height:'20px'}} alt="dhis2"/>
+                        <img src="https://play.dhis2.org/test/api/staticContent/logo_banner" style={{height:'20px'}} alt="dhis2"/>
                         <ToolbarTitle text="dhis2 Datastore"/>
                     </Toolbar>
                     { this.props.children }
