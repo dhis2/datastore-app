@@ -1,14 +1,21 @@
 import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 
-export function fetchAndToggleNamespace(namespace) {
+export function fetchAndToggleNamespace(namespace,openNamespace=false) {
     return dispatch => {
         dispatch(requestKeys(namespace));
         return api.getKeys(namespace)
             .then(keys => {
                 dispatch(recieveKeys(namespace, keys));
                // dispatch(toggleNamespace(namespace)).catch(error => console.log(error));
-            }).then(() => dispatch(toggleNamespace(namespace)))
+            }).then(() => dispatch(toggleNamespace(namespace,openNamespace)))
+            .catch(error => {
+                if(error.status === 404) { //If not found, we remove the namespace from UI
+                    return dispatch(receiveDeleteNamespace(namespace))
+                } else if (error) { //propagate error
+                    throw error;
+                }
+            })
             .catch(error => {
                 dispatch(rejectKeys(namespace, error))
             });
@@ -31,7 +38,7 @@ export function createNewNamespaceDisplayEmpty(namespace,key) {
     return dispatch => {
         dispatch(createValue(namespace,key,{}))
          //   .then(() => dispatch(createNewNamespace(namespace,key)))
-            .then(success => dispatch(fetchAndToggleNamespace(namespace)))
+            .then(success => dispatch(fetchAndToggleNamespace(namespace,true)))
             .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
             .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
     }
@@ -40,7 +47,7 @@ export function createNewNamespaceDisplayEmpty(namespace,key) {
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
         dispatch(createValue(namespace,key,{}))
-            .then(success => dispatch(fetchAndToggleNamespace(namespace)))
+            .then(success => dispatch(fetchAndToggleNamespace(namespace,true)))
             .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
             .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
     }
@@ -56,12 +63,12 @@ export function fetchNamespaces() {
 }
 
 /**
- * Creates a value within namespace with given key.
+ * Creates a value within namespace with given key in the API
  * If namespace or key doesn't exist they will be created.
  * @param namespace
  * @param key
  * @param value
- * @returns a action-promise
+ * @returns action thunk
  */
 export function createValue(namespace, key, value) {
     return dispatch => {
@@ -116,25 +123,31 @@ export function updateValue(namespace, key, value) {
     }
 }
 
+/**
+ * Deletes a key from the API and store.
+ * If it's the last key in the namespace, the namespace is
+ * removed aswell (following the behavior of the API).
+ * @param namespace containing the key to be removed
+ * @param key to be removed
+ * @returns action thunk
+ */
 export function deleteKey(namespace, key) {
-    return dispatch => {
+    return (dispatch,getState) => {
         dispatch(requestDeleteKey(namespace,key));
         return api.deleteValue(namespace, key)
             .then(success => dispatch(receiveDeleteKey(namespace,key)))
             .then(() => dispatch(fetchKeys(namespace)))
             .catch(error => {
                 if(error.status === 404) { //If not found, we remove the namespace from UI
-                    return dispatch(fetchNamespaces())
+                    dispatch(receiveDeleteNamespace(namespace))
                 } else if (error) { //propagate error
                     throw error;
                 } else {  //togglenamespace if not last key
-                    return dispatch(toggleNamespace(namespace))
+                    dispatch(toggleNamespace(namespacen,true))
                 }
-            /*    return error.status === 404 ? dispatch(fetchNamespaces())
-                    : dispatch(toggleNamespace(namespace)) */
             })
             .catch(error => {
-                dispatch(rejectDeleteKey(namespace,key))
+                dispatch(rejectDeleteKey(namespace,key,error))
             });
     }
 }
@@ -144,7 +157,6 @@ export function deleteNamespace(namespace) {
         dispatch(requestDeleteNamespace(namespace));
         return api.deleteNamespace(namespace)
             .then(success => {
-                dispatch(fetchNamespaces());
                 dispatch(receiveDeleteNamespace(namespace));
                 return success;
             })
@@ -357,10 +369,11 @@ export function valueChange(namespace, key, value) {
         value
     }
 }
-export function toggleNamespace(namespace) {
+export function toggleNamespace(namespace, override) {
     return {
         type: actions.TOGGLE_NAMESPACE,
-        namespace
+        namespace,
+        override
     }
 }
 
