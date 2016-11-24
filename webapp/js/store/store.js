@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const middlewares = [thunk];
-console.log(process.env.NODE_ENV)
+
 if (process.env.NODE_ENV === `development`) {
     const createLogger = require(`redux-logger`);
     const log = createLogger();

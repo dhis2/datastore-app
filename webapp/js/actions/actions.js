@@ -55,6 +55,14 @@ export function fetchNamespaces() {
     }
 }
 
+/**
+ * Creates a value within namespace with given key.
+ * If namespace or key doesn't exist they will be created.
+ * @param namespace
+ * @param key
+ * @param value
+ * @returns a action-promise
+ */
 export function createValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestCreateValue(namespace,key,value));
