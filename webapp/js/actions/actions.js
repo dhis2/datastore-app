@@ -34,15 +34,17 @@ export function fetchAndDisplayKeyValue(namespace, key) {
     }
 }
 
-export function createNewNamespaceDisplayEmpty(namespace,key) {
-    return dispatch => {
-        dispatch(createValue(namespace,key,{}))
-         //   .then(() => dispatch(createNewNamespace(namespace,key)))
-            .then(success => dispatch(fetchAndToggleNamespace(namespace,true)))
-            .then(success => dispatch(fetchAndDisplayKeyValue(namespace,key)))
-            .catch(error => dispatch(rejectCreateValue(namespace,key,{},error)))
-    }
-}
+/**
+ * @function createAndDisplayValue
+ * Creates a value with key in namespace.
+ *
+ * On success, the namespace will be opened and the empty
+ * value will be displayed. Note that this is used both for
+ * creating namespaces and keys. See {@link createValue}
+ * @param namespace namespace to create or update
+ * @param key to create
+ * @returns action thunk
+ */
 
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
@@ -63,11 +65,16 @@ export function fetchNamespaces() {
 }
 
 /**
- * Creates a value within namespace with given key in the API
- * If namespace or key doesn't exist they will be created.
- * @param namespace
- * @param key
- * @param value
+ * @function createValue
+ * Creates a value with key in namespace.
+ *
+ * Because of how the API behaves, this is used for both creating
+ * keys and namespaces. We always create a value with empty values, and instead use
+ * updateValue to update values.
+ * If a namespace exists, the key will be created in namespace with an empty value
+ * If both namespace and key exists; rejectCreateValue will be dispatched.
+ * @param namespace to create or add key in
+ * @param key to create
  * @returns action thunk
  */
 export function createValue(namespace, key, value) {
@@ -112,7 +119,14 @@ export function updateHistory(namespace, key, value) {
     }
 }
 
-
+/**@function updateValue
+ *
+ * Updates a value with key in namespace.
+ * @param namespace containing value
+ * @param key to update
+ * @param value to update
+ * @returns action thunk
+ */
 export function updateValue(namespace, key, value) {
     return dispatch => {
         console.log("update value");
@@ -143,7 +157,7 @@ export function deleteKey(namespace, key) {
                 } else if (error) { //propagate error
                     throw error;
                 } else {  //togglenamespace if not last key
-                    dispatch(toggleNamespace(namespacen,true))
+                    dispatch(toggleNamespace(namespace,true))
                 }
             })
             .catch(error => {
