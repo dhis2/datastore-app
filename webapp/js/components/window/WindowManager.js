@@ -4,14 +4,18 @@ import { connect } from 'react-redux';
 import EditWindow from './edit/EditWindow';
 import EmptyWindow from './empty/EmptyWindow';
 import BrowserWindow from './browser/BrowserWindow';
+import HistoryWindow from './history/HistoryWindow';
 
 class WindowManager extends Component {
     render() {
-        switch ('edit') {
+        const { currentWindow } = this.props;
+        switch (currentWindow) {
         case 'edit':
             return <EditWindow />;
         case 'browser':
             return <BrowserWindow />;
+        case 'history':
+            return <HistoryWindow />;
         default:
             return <EmptyWindow />;
         }

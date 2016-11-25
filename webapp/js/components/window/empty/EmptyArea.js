@@ -7,9 +7,7 @@ class EmptyArea extends Component {
     render() {
         return (
         <Paper className={'value-container'}>
-          <div clsasName="window">
             <ModeCommentIconWithText text={'Select a namespace and a key to edit.'} />
-          </div>
         </Paper>
         );
     }

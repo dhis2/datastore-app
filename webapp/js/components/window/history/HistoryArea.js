@@ -13,15 +13,15 @@ class HistoryArea extends Component {
               <div className="window-area" style={{
                   backgroundColor: AppContainer.theme.palette.primary3Color }}
               >
-                  <Table fixedHeader selectable multiSelectable>
-                    <TableHeader>
+                  <Table fixedHeader>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
                             <TableHeaderColumn>Key</TableHeaderColumn>
                             <TableHeaderColumn>Last By</TableHeaderColumn>
                             <TableHeaderColumn>Last Modified</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                      <TableBody showRowHover>
+                      <TableBody showRowHover displayRowCheckbox={false}>
                         {list.map((row, index) => (
                               <TableRow key={ index }>
                                   <TableRowColumn>{row.key}</TableRowColumn>

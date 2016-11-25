@@ -72,5 +72,22 @@
     "redux-promise-middleware": "^4.1.0",
     "redux-thunk": "^2.1.0",
     "whatwg-fetch": "^1.0.0"
+  },
+  "manifest.webapp": {
+  "name": "DHIS2 Datastore Webapp",
+  "icons": {
+    "48": "icon.png"
+  },
+  "developer": {
+    "name": "Steven, Birk and Pavel",
+    "email": "e@ma.il"
+  },
+  "activities": {
+    "dhis": {
+      "href": ".."
+    }
+  },
+  "launch_url": "index.html",
+  "default_locale": "en"
   }
 }

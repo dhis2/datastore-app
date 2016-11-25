@@ -288,7 +288,7 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
 export function changeWindow(window) {
     return {
         type: actions.CHANGE_WINDOW,
-        window,
+        currentWindow: window,
     };
 }
 

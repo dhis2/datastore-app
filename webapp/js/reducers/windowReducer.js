@@ -1,6 +1,6 @@
 import * as actions from '../constants/actionTypes';
 
-const window = (state = {}, action) => {
+const window = (state = { currentWindow: 'empty' }, action) => {
     switch (action.type) {
 
     case actions.CHANGE_WINDOW: {

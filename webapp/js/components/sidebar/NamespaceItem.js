@@ -43,7 +43,7 @@ const iconButtonElement = (
         touch
         tooltipPosition="bottom-left"
     >
-        <MoreVertIcon color={grey500} />
+        <MoreVertIcon color={ grey500 } />
     </IconButton>
 );
 
@@ -82,7 +82,7 @@ class NamespaceItem extends Component {
     }
 
     handleHistoryKey() {
-
+        
     }
 
     handleDeleteKey(namespace, key) {
