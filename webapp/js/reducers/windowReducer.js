@@ -3,11 +3,11 @@ import * as actions from '../constants/actionTypes';
 const window = (state = {}, action) => {
     switch (action.type) {
 
-    case actions.SET_EDIT_WINDOW: {
-        const { payload } = action;
+    case actions.CHANGE_WINDOW: {
+        const { currentWindow } = action;
         return {
             ...state,
-            currentWindow: payload,
+            currentWindow,
         };
     }
 

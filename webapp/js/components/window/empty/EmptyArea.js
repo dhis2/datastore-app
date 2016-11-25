@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ModeCommentIconWithText } from '../utils/Icons';
+import { ModeCommentIconWithText } from '../../utils/Icons';
 import Paper from 'material-ui/Paper';
-import '../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/valueWindow/valueWindow.scss';
 
 class EmptyArea extends Component {
     render() {

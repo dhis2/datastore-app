@@ -6,26 +6,20 @@ import Paper from 'material-ui/Paper';
 import BrowserToolbar from './BrowserToolbar';
 import BrowserArea from './BrowserArea';
 
-import WindowAreaHOC from '../hoc/WindowAreaHOC';
+import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
-import '../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/valueWindow/valueWindow.scss';
 
 class BrowserWindow extends Component {
 
     render() {
-        const { loading, error } = this.props;
-        let { list } = this.props;
+        const { loading, error, list } = this.props;
         const BrowserAreaImproved = WindowAreaHOC(BrowserArea, loading, error);
-
-        if (!list) {
-            list = [];
-        }
-
 
         return (
         <Paper className={'window'}>
             <BrowserToolbar />
-            <BrowserAreaImproved list={list} />
+            <BrowserAreaImproved list={list || []} />
         </Paper>
         );
     }

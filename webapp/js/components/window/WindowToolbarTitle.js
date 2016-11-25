@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-import BreadcrumbHistoryButton from './BreadcrumbHistoryButton';
+import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton';
 
 class WindowToolbarTitle extends Component {
     renderPath(path) {

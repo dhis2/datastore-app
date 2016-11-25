@@ -22,7 +22,7 @@ injectTapEventPlugin();
 
 
 class AppContainer extends Component {
-  
+
   static theme = getMuiTheme({
     palette: {
       primary1Color: blue700,
@@ -52,16 +52,15 @@ class AppContainer extends Component {
 
     return (
       <MuiThemeProvider muiTheme={AppContainer.theme}>
-        <Provider store = { store }>
-          <Router history={ hashHistory }>
-            <Route path={ "/" } component={ Layout } >
-              <IndexRoute component={ HomePage } />
-              <Route path={ "/home" } component={ HomePage } />
-              <Route path={ "/about" } component={ AboutPage } />
-            </Route>
-
-          </Router>
-        </Provider>
+          <Provider store = { store }>
+              <Router history={ hashHistory }>
+                  <Route path={ "/" } component={ Layout } >
+                      <IndexRoute component={ HomePage } />
+                      <Route path={ "/home" } component={ HomePage } />
+                      <Route path={ "/about" } component={ AboutPage } />
+                  </Route>
+              </Router>
+          </Provider>
       </MuiThemeProvider>
     );
   }

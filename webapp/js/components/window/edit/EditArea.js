@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import JSONEditor from './JSONEditor';
-import AppContainer from '../../containers/AppContainer';
-import { updateValue, valueChange } from '../../actions/actions';
-import '../../../style/valueWindow/valueWindow.scss';
+import JSONEditor from '../../utils/JSONEditor';
+import AppContainer from '../../../containers/AppContainer';
+import { updateValue, valueChange } from '../../../actions/actions';
+import '../../../../style/valueWindow/valueWindow.scss';
 
 class EditArea extends Component {
 

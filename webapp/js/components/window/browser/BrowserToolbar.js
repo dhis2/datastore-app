@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import { Toolbar } from 'material-ui/Toolbar';
-import WindowToolbarTitle from './WindowToolbarTitle';
+import WindowToolbarTitle from '../WindowToolbarTitle';
 
 class BrowserToolbar extends Component {
     render() {

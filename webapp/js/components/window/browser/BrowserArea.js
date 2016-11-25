@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import AppContainer from '../../containers/AppContainer';
+import AppContainer from '../../../containers/AppContainer';
 import Paper from 'material-ui/Paper';
-import '../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/valueWindow/valueWindow.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
 
 class BrowserArea extends Component {

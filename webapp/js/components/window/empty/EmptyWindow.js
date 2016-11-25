@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import EmptyToolbar from './EmptyToolbar';
 import EmptyArea from './EmptyArea';
 
-import '../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/valueWindow/valueWindow.scss';
 
 
 class Empty extends Component {

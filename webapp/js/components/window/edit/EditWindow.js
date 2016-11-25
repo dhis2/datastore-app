@@ -5,9 +5,9 @@ import Paper from 'material-ui/Paper';
 
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
-import WindowAreaHOC from '../hoc/WindowAreaHOC';
+import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
-import '../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/valueWindow/valueWindow.scss';
 
 
 class EditWindow extends Component {
