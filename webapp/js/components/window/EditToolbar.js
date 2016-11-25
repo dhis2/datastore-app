@@ -41,7 +41,7 @@ EditToolbar.propTypes = {
     editedValue: PropTypes.string,
     selectedKey: PropTypes.string,
     namespace: PropTypes.string,
-    updateValue: PropTypes.function,
+    updateValue: PropTypes.func,
     path: PropTypes.string,
 };
 

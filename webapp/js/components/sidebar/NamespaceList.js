@@ -48,6 +48,7 @@ class NamespaceList extends Component {
             margin: '8px 5px',
             backgroundColor: AppContainer.theme.palette.primary3Color,
         };
+
         return (
         <List style={style}>
         {Object.keys(items).map((item, index) => (
@@ -74,11 +75,11 @@ class NamespaceList extends Component {
 
 
 NamespaceList.propTypes = {
-    fetchNamespaces: PropTypes.function,
-    fetchAndToggleNamespace: PropTypes.function,
-    fetching: PropTypes.boolean,
-    error: PropTypes.boolean,
-    items: PropTypes.array,
+    fetchNamespaces: PropTypes.func,
+    fetchAndToggleNamespace: PropTypes.func,
+    fetching: PropTypes.bool,
+    error: PropTypes.bool,
+    items: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

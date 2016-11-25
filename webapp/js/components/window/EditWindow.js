@@ -26,18 +26,18 @@ class EditWindow extends Component {
 
         return (
         <Paper className={'value-container'}>
-          <EditToolbar path={path} />
-          <EditAreaImproved />
+            <EditToolbar path={path} />
+            <EditAreaImproved />
         </Paper>
         );
     }
 }
 
 EditWindow.propTypes = {
-    loading: PropTypes.boolean,
+    loading: PropTypes.bool,
     selectedKey: PropTypes.string,
     namespace: PropTypes.string,
-    error: PropTypes.boolean,
+    error: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

@@ -21,7 +21,7 @@ class EditArea extends Component {
         const { value } = this.props;
         return (
         <div className="window-area"
-            style={{ paddingTop: '8px', backgroundColor: AppContainer.theme.palette.primary3Color }}
+            style={{ backgroundColor: AppContainer.theme.palette.primary3Color }}
         >
           <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)} />
         </div>
@@ -34,8 +34,8 @@ EditArea.propTypes = {
     namespace: PropTypes.string,
     selectedKey: PropTypes.string,
     updateError: PropTypes.string,
-    updateValue: PropTypes.function,
-    valueChange: PropTypes.function,
+    updateValue: PropTypes.func,
+    valueChange: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

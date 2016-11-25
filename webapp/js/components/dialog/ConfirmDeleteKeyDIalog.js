@@ -57,8 +57,8 @@ ConfirmDeleteKeyDialog.propTypes = {
         namespace: PropTypes.string.isRequired,
         key: PropTypes.string.isRequired,
     }),
-    closeDialog: PropTypes.function,
-    deleteKeyInNamespace: PropTypes.function,
+    closeDialog: PropTypes.func,
+    deleteKeyInNamespace: PropTypes.func,
 };
 
 export default connect(

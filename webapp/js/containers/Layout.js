@@ -32,7 +32,7 @@ class Layout extends Component {
 
 Layout.propTypes = {
     snackbarMessage: PropTypes.string,
-    children: PropTypes.string,
+    children: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

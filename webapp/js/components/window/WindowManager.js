@@ -6,7 +6,7 @@ import BrowserWindow from './BrowserWindow';
 
 class WindowManager extends Component {
     render() {
-        switch ('edit') {
+        switch ('browser') {
         case 'edit':
             return <EditWindow />;
         case 'browser':

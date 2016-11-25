@@ -4,7 +4,7 @@ import { Table } from 'material-ui/Table';
 class BrowserList extends Component {
     render() {
         return (
-      <Table style={{ flex: '1' }}>
+      <Table fixedHeader selectable multiSelectable>
           {this.props.children}
       </Table>
         );

@@ -38,7 +38,7 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-    openNamespaceDialog: PropTypes.function,
+    openNamespaceDialog: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({

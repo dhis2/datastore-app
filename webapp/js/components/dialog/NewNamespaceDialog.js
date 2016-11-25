@@ -101,8 +101,8 @@ NewNamespaceDialog.propTypes = {
     dialogprops: PropTypes.shape({
         namespace: PropTypes.string.isRequired,
     }),
-    closeDialog: PropTypes.function,
-    createNamespace: PropTypes.function,
+    closeDialog: PropTypes.func,
+    createNamespace: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -191,17 +191,17 @@ class NamespaceItem extends Component {
 }
 
 NamespaceItem.propTypes = {
-    fetchAndDisplayKeyValue: PropTypes.function,
-    fetchAndToggleNamespace: PropTypes.function,
-    toggleNamespace: PropTypes.function,
-    deleteNamespace: PropTypes.function,
-    newKey: PropTypes.function,
-    deleteKeyInNamespace: PropTypes.function,
-    event: PropTypes.function,
+    fetchAndDisplayKeyValue: PropTypes.func,
+    fetchAndToggleNamespace: PropTypes.func,
+    toggleNamespace: PropTypes.func,
+    deleteNamespace: PropTypes.func,
+    newKey: PropTypes.func,
+    deleteKeyInNamespace: PropTypes.func,
+    event: PropTypes.func,
     namespace: PropTypes.shape({
-        error: PropTypes.boolean,
-        fetching: PropTypes.boolean,
-        open: PropTypes.boolean,
+        error: PropTypes.bool,
+        fetching: PropTypes.bool,
+        open: PropTypes.bool,
         name: PropTypes.string,
         keys: PropTypes.array,
     }),

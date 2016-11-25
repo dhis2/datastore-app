@@ -34,7 +34,7 @@ const WindowAreaHOC = (Area, loading, error) => class extends Component {
         }
 
         return (
-        <Area />
+        <Area {...this.props} {...this.state} />
         );
     }
 };
