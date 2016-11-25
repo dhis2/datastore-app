@@ -38,7 +38,7 @@ class EditToolbar extends React.Component {
 }
 
 EditToolbar.propTypes = {
-    editedValue: PropTypes.string,
+    editedValue: PropTypes.object,
     selectedKey: PropTypes.string,
     namespace: PropTypes.string,
     updateValue: PropTypes.func,

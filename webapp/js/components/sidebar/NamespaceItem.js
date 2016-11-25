@@ -203,7 +203,7 @@ NamespaceItem.propTypes = {
         fetching: PropTypes.bool,
         open: PropTypes.bool,
         name: PropTypes.string,
-        keys: PropTypes.array,
+        keys: PropTypes.object,
     }),
 };
 

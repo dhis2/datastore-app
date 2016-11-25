@@ -31,7 +31,7 @@ class Layout extends Component {
 }
 
 Layout.propTypes = {
-    snackbarMessage: PropTypes.string,
+    snackbarMessage: PropTypes.object,
     children: PropTypes.object,
 };
 

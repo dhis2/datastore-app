@@ -31,7 +31,7 @@ class DialogRoot extends Component {
 DialogRoot.propTypes = {
     dialog: PropTypes.shape({
         dialogType: PropTypes.string,
-        dialogprops: PropTypes.shape,
+        dialogprops: PropTypes.shape({}),
     }),
 };
 

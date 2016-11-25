@@ -51,7 +51,7 @@ class JSONEditor extends Component {
 }
 
 JSONEditor.propTypes = {
-    value: PropTypes.object,
+    value: PropTypes.array,
     dataChanged: PropTypes.func,
 };
 
