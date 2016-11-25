@@ -254,6 +254,7 @@ export function saveValueFromEditor() {
 
 }
 
+
 export function setBrowserList(list) {
     return {
         type: actions.SET_BROWSER_LIST,
@@ -267,6 +268,7 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
         return api.getKeys(namespace)
             .then(keys => {
                 dispatch(recieveKeys(namespace, keys));
+                dispatch(setBrowserList(keys));
             })
             .then(() => dispatch(toggleNamespace(namespace, openNamespace)))
             .catch(error => {
@@ -275,10 +277,18 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
                 } else if (error) { // propagate error
                     throw error;
                 }
+                return null;
             })
             .catch(error => {
                 dispatch(rejectKeys(namespace, error));
             });
+    };
+}
+
+export function changeWindow(window) {
+    return {
+        type: actions.CHANGE_WINDOW,
+        window,
     };
 }
 
@@ -289,10 +299,12 @@ export function fetchAndDisplayKeyValue(namespace, key) {
             .then(value => {
                 dispatch(recieveValue(namespace, key, value));
                 dispatch(selectKey(namespace, key, value));
+                dispatch(changeWindow('edit'));
             })
             .catch(error => dispatch(rejectValue(namespace, key, error)));
     };
 }
+
 
 /**
  * @function createAndDisplayValue
@@ -313,7 +325,6 @@ export function fetchNamespaces() {
         return api.getNamespaces()
             .then(namespaces => {
                 dispatch(recieveNamespaces(namespaces));
-                dispatch(setBrowserList(namespaces));
             })
             .catch(error => dispatch(rejectNamespaces(error)));
     };
@@ -376,11 +387,9 @@ export function fetchHistory(namespace, key) {
 }
 
 export function updateHistory(namespace, key, value) {
-    return dispatch => {
-        return api.updateHistory(namespace, key, value)
+    return dispatch => api.updateHistory(namespace, key, value)
             .then(success => console.log(success))
             .catch(error => console.log(error));
-    };
 }
 
 /** @function updateValue

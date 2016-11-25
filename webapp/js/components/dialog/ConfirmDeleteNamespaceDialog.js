@@ -51,11 +51,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 ConfirmDeleteNamespaceDialog.propTypes = {
-    closeDialog: PropTypes.function,
+    closeDialog: PropTypes.func,
     dialogprops: PropTypes.shape({
         namespace: PropTypes.string.isRequired,
     }),
-    deleteNamespace: PropTypes.function,
+    deleteNamespace: PropTypes.func,
 };
 
 export default connect(

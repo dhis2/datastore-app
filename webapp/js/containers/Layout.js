@@ -31,8 +31,8 @@ class Layout extends Component {
 }
 
 Layout.propTypes = {
-    snackbarMessage: PropTypes.string,
-    children: PropTypes.string,
+    snackbarMessage: PropTypes.object,
+    children: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

@@ -7,6 +7,7 @@ export const VALUE_CHANGE = 'VALUE_CHANGE';
 export const CREATE_NAMESPACE = 'CREATE_NAMESPACE';
 export const OPEN_DIALOG = 'OPEN_DIALOG';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
+export const CHANGE_WINDOW = 'CHANGE_WINDOW';
 /**
  *  Async Action Types
  */

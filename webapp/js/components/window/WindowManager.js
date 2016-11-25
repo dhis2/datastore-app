@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-import EditWindow from './EditWindow';
-import EmptyWindow from './EmptyWindow';
-import BrowserWindow from './BrowserWindow';
+import EditWindow from './edit/EditWindow';
+import EmptyWindow from './empty/EmptyWindow';
+import BrowserWindow from './browser/BrowserWindow';
 
 class WindowManager extends Component {
     render() {
@@ -17,4 +18,14 @@ class WindowManager extends Component {
     }
 }
 
-export default WindowManager;
+WindowManager.propType = {
+    currentWindow: PropTypes.string,
+};
+
+const connectStateToProps = (state) => ({
+    currentWindow: state.window.currentWindow,
+});
+
+export default connect(
+  connectStateToProps
+)(WindowManager);

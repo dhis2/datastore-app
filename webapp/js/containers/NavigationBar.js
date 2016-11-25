@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui/Toolbar';
+import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 
 class NavigationBar extends Component {
     render() {
@@ -13,11 +13,18 @@ class NavigationBar extends Component {
                 <img src="../../img/logo_front.png" style={{
                     height: '20px',
                 }} alt="dhis2"
-        />
+                />
               <ToolbarTitle text="dhis2 Datastore" />
             </Toolbar>
         );
     }
 }
+
+NavigationBar.propTypes = {
+    theme: PropTypes.shape({
+        primary1Color: PropTypes.string,
+        alternateTextColor: PropTypes.string,
+    }),
+};
 
 export default NavigationBar;

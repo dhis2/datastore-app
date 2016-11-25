@@ -51,8 +51,8 @@ class JSONEditor extends Component {
 }
 
 JSONEditor.propTypes = {
-    value: PropTypes.object,
-    dataChanged: PropTypes.function,
+    value: PropTypes.array,
+    dataChanged: PropTypes.func,
 };
 
 export default JSONEditor;
