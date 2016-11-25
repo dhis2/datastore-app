@@ -7,7 +7,6 @@ import BrowserWindow from './browser/BrowserWindow';
 
 class WindowManager extends Component {
     render() {
-        const { currentWindow } = this.props;
         switch ('edit') {
         case 'edit':
             return <EditWindow />;

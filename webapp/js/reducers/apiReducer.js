@@ -31,9 +31,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     case actions.FETCH_NAMESPACES_FULFILLED:
         {
             const namespaces = {};
-            action.namespaces.filter(key => {
-                return typeof state.namespaces[key] === 'undefined';
-            }).map(key => {
+            action.namespaces.filter(key => typeof state.namespaces[key] === 'undefined').map(key => {
                 namespaces[key] = {
                     name: key,
                     open: false,

@@ -306,8 +306,6 @@ export function fetchAndDisplayKeyValue(namespace, key) {
 }
 
 
-
-
 /**
  * @function createAndDisplayValue
  * Creates a value with key in namespace.
@@ -389,11 +387,9 @@ export function fetchHistory(namespace, key) {
 }
 
 export function updateHistory(namespace, key, value) {
-    return dispatch => {
-        return api.updateHistory(namespace, key, value)
+    return dispatch => api.updateHistory(namespace, key, value)
             .then(success => console.log(success))
             .catch(error => console.log(error));
-    };
 }
 
 /** @function updateValue
