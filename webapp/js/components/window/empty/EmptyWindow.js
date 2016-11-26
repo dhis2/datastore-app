@@ -7,16 +7,15 @@ import EmptyArea from './EmptyArea';
 
 import '../../../../style/valueWindow/valueWindow.scss';
 
-
-class Empty extends Component {
+class EmptyWindow extends Component {
     render() {
         return (
         <Paper className={'value-container'}>
-          <EmptyToolbar />
-          <EmptyArea />
+            <EmptyToolbar />
+            <EmptyArea />
         </Paper>
         );
     }
 }
 
-export default Empty;
+export default EmptyWindow;

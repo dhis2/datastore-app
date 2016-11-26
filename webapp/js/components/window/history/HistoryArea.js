@@ -3,42 +3,48 @@ import AppContainer from '../../../containers/AppContainer';
 import Paper from 'material-ui/Paper';
 import '../../../../style/valueWindow/valueWindow.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
+import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
 class HistoryArea extends Component {
     render() {
-        const { list } = this.props;
+        const { list, selectedKey } = this.props;
 
         return (
-          <Paper>
               <div className="window-area" style={{
                   backgroundColor: AppContainer.theme.palette.primary3Color }}
               >
-                  <Table fixedHeader selectable multiSelectable>
-                    <TableHeader>
+                  <Table fixedHeader headerStyle={{ 'border-bottom': 'solid grey 1px' }}>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
                             <TableHeaderColumn>Key</TableHeaderColumn>
-                            <TableHeaderColumn>Last By</TableHeaderColumn>
-                            <TableHeaderColumn>Last Modified</TableHeaderColumn>
+                            <TableHeaderColumn>Action</TableHeaderColumn>
+                            <TableHeaderColumn>Changed To</TableHeaderColumn>
+                            <TableHeaderColumn>Date Modified</TableHeaderColumn>
+                            <TableHeaderColumn>Modified By</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                      <TableBody showRowHover>
+                      <TableBody showRowHover displayRowCheckbox={false}>
                         {list.map((row, index) => (
                               <TableRow key={ index }>
-                                  <TableRowColumn>{row.key}</TableRowColumn>
-                                  <TableRowColumn>{row.lastModifiedBy}</TableRowColumn>
-                                  <TableRowColumn>{row.lastModifiedDate}</TableRowColumn>
+                                  <TableRowColumn>{selectedKey}</TableRowColumn>
+                                  <TableRowColumn>{row.action}</TableRowColumn>
+                                  <TableRowColumn>{typeof row.value === 'object' ?
+                                      JSON.stringify(row.value) : row.value}
+                                  </TableRowColumn>
+                                  <TableRowColumn>{row.date}</TableRowColumn>
+                                  <TableRowColumn>{row.user}</TableRowColumn>
                               </TableRow>
                         ))}
                       </TableBody>
                   </Table>
               </div>
-            </Paper>
         );
     }
 }
 
 HistoryArea.propTypes = {
     list: PropTypes.array,
+    selectedKey: PropTypes.string,
 };
 
-export default HistoryArea;
+export default WindowAreaHOC(HistoryArea);

@@ -110,8 +110,22 @@ class Api
 
     getHistory(namespace, key = null) {
         const id = key === null ? namespace : this.buildId(namespace, key);
-
         return fetch(`${this.url}/dataStore/HISTORYSTORE/${id}`, this.getHeaders());
+    }
+
+    getHistoryOfKey(namespace, key) {
+        const id = this.buildId(namespace, key);
+        return fetch(`${this.url}/dataStore/HISTORYSTORE/${id}`, this.getHeaders())
+          .then(response => this.successOnly(response))
+          .then(response => response.json())
+          .then(response => response);
+    }
+
+    getHistoryOfNamespace(namespace) {
+        return fetch(`${this.url}/dataStore/HISTORYSTORE/${namespace}`, this.getHeaders())
+          .then(response => this.successOnly(response))
+          .then(response => response.json())
+          .then(response => response);
     }
 
     updateHistory(namespace, key, newValue, action) {

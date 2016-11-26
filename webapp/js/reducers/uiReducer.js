@@ -31,6 +31,7 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
             editedValue: {},
         };
     }
+
     case actions.FETCH_VALUE_PENDING: {
         return {
             ...state,

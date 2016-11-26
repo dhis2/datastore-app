@@ -5,15 +5,12 @@ import Paper from 'material-ui/Paper';
 
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
-import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
 import '../../../../style/valueWindow/valueWindow.scss';
 
-
 class EditWindow extends Component {
     render() {
-        const { loading, error, namespace, selectedKey } = this.props;
-        const EditAreaImproved = WindowAreaHOC(EditArea, loading, error);
+        const { namespace, selectedKey } = this.props;
 
         let path = '';
 
@@ -27,24 +24,20 @@ class EditWindow extends Component {
         return (
         <Paper className={'value-container'}>
             <EditToolbar path={path} />
-            <EditAreaImproved />
+            <EditArea />
         </Paper>
         );
     }
 }
 
 EditWindow.propTypes = {
-    loading: PropTypes.bool,
     selectedKey: PropTypes.string,
     namespace: PropTypes.string,
-    error: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-    loading: state.ui.fetching,
     namespace: state.ui.namespace,
     selectedKey: state.ui.key,
-    error: false,
 });
 
 export default connect(
