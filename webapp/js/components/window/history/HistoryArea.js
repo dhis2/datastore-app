@@ -10,11 +10,10 @@ class HistoryArea extends Component {
         const { list, selectedKey } = this.props;
 
         return (
-          <Paper>
               <div className="window-area" style={{
                   backgroundColor: AppContainer.theme.palette.primary3Color }}
               >
-                  <Table fixedHeader headerStyle={{ 'border-bottom': 'solid black 1px' }}>
+                  <Table fixedHeader headerStyle={{ 'border-bottom': 'solid grey 1px' }}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
                             <TableHeaderColumn>Key</TableHeaderColumn>
@@ -39,7 +38,6 @@ class HistoryArea extends Component {
                       </TableBody>
                   </Table>
               </div>
-            </Paper>
         );
     }
 }

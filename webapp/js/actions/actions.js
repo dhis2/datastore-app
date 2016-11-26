@@ -204,12 +204,29 @@ export function recieveHistory(namespace, key, history) {
 }
 
 export function rejectHistory(namespace, key, error) {
-      return {
-          type: actions.FETCH_HISTORY_REJECTED  ,
-          namespace,
-          key,
-          error,
-      }
+    return {
+        type: actions.FETCH_HISTORY_REJECTED,
+        namespace,
+        key,
+        error,
+    };
+}
+
+
+export function recieveNamespaceHistory(namespace, history) {
+    return {
+        type: actions.FETCH_NAMESPACE_HISTORY_FULFILLED,
+        namespace,
+        history,
+    };
+}
+
+export function rejectNamespaceHistory(namespace, error) {
+    return {
+        type: actions.FETCH_NAMESPACE_HISTORY_REJECTED,
+        namespace,
+        error,
+    };
 }
 
 /**
@@ -405,6 +422,20 @@ export function fetchHistory(namespace, key) {
             })
             .catch(error => {
                 dispatch(rejectHistory(namespace, key, error));
+            });
+    };
+}
+
+export function fetchHistoryForNamespace(namespace) {
+    return dispatch => {
+        dispatch(requestHistory());
+        return api.getHistoryOfNamespace(namespace)
+            .then(history => {
+                dispatch(recieveNamespaceHistory(namespace, history));
+                dispatch(changeWindow('history'));
+            })
+            .catch(error => {
+                dispatch(rejectNamespaceHistory(namespace, error));
             });
     };
 }

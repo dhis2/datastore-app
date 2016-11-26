@@ -42,6 +42,26 @@ const window = (state = initialState, action) => {
         };
     }
 
+    case actions.FETCH_NAMESPACE_HISTORY_FULFILLED: {
+        const { history, namespace } = action;
+        return {
+            ...state,
+            loading: false,
+            namespace,
+            history,
+        };
+    }
+
+    case actions.FETCH_NAMESPACE_HISTORY_REJECTED: {
+        const { error, namespace } = action;
+        return {
+            ...state,
+            loading: false,
+            namespace,
+            error,
+        };
+    }
+
     case actions.FETCH_HISTORY_REJECTED: {
         return {
             ...state,
