@@ -4,6 +4,7 @@ import JSONEditor from '../../utils/JSONEditor';
 import AppContainer from '../../../containers/AppContainer';
 import { updateValue, valueChange } from '../../../actions/actions';
 import '../../../../style/valueWindow/valueWindow.scss';
+import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
 class EditArea extends Component {
 
@@ -57,4 +58,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditArea);
+)(WindowAreaHOC(EditArea));

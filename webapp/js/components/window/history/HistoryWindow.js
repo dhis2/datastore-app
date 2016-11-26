@@ -1,5 +1,3 @@
-// @flow
-
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -8,37 +6,32 @@ import Paper from 'material-ui/Paper';
 import HistoryToolbar from './HistoryToolbar';
 import HistoryArea from './HistoryArea';
 
-import WindowAreaHOC from '../../hoc/WindowAreaHOC';
-
 import '../../../../style/valueWindow/valueWindow.scss';
 
 class HistoryWindow extends Component {
 
     render() {
-        const { loading, error, list } = this.props;
-        const HistoryAreaImproved = WindowAreaHOC(HistoryArea, loading, error);
+        const { history, namespace, selectedKey } = this.props;
 
         return (
         <Paper className={'window'}>
-            <HistoryToolbar />
-            <HistoryAreaImproved list={list || []} />
+            <HistoryToolbar namespace={ namespace } selectedKey={ selectedKey } />
+            <HistoryArea list={ history } selectedKey={ selectedKey } />
         </Paper>
         );
     }
 }
 
 HistoryWindow.propTypes = {
-    loading: PropTypes.bool,
-    error: PropTypes.bool,
-    list: PropTypes.array,
+    history: PropTypes.array,
+    namespace: PropTypes.string,
+    selectedKey: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
-    loading: state.ui.fetching,
-    namespace: state.ui.namespace,
-    selectedKey: state.ui.key,
-    list: state.browser.browserList,
-    error: false,
+    namespace: state.window.namespace,
+    selectedKey: state.window.key,
+    history: state.window.history,
 });
 
 export default connect(

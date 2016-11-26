@@ -21,7 +21,7 @@ import { openKeyDialog,
   openConfirmDeleteNamespaceDialog,
   openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
 import { fetchAndDisplayKeyValue,
-  fetchAndToggleNamespace,
+  fetchAndToggleNamespace, fetchHistory,
   toggleNamespace } from '../../actions/actions';
 
 
@@ -81,8 +81,8 @@ class NamespaceItem extends Component {
         this.props.deleteNamespace(this.props.namespace.name);
     }
 
-    handleHistoryKey() {
-        
+    handleHistoryKey(namespace, key) {
+        this.props.fetchHistory(namespace, key);
     }
 
     handleDeleteKey(namespace, key) {
@@ -197,6 +197,7 @@ NamespaceItem.propTypes = {
     deleteNamespace: PropTypes.func,
     newKey: PropTypes.func,
     deleteKeyInNamespace: PropTypes.func,
+    fetchHistory: PropTypes.func,
     event: PropTypes.func,
     namespace: PropTypes.shape({
         error: PropTypes.bool,
@@ -226,6 +227,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     deleteKeyInNamespace(namespace, key) {
         dispatch(openConfirmDeleteKeyDialog({ namespace, key }));
+    },
+    fetchHistory(namespace, key) {
+        dispatch(fetchHistory(namespace, key));
     },
 });
 

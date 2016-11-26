@@ -190,8 +190,26 @@ function rejectDeleteNamespace(namespace) {
 
 export function requestHistory() {
     return {
-        type: actions.REQUEST_HISTORY_PENDING,
+        type: actions.FETCH_HISTORY_PENDING,
     };
+}
+
+export function recieveHistory(namespace, key, history) {
+    return {
+        type: actions.FETCH_HISTORY_FULFILLED,
+        namespace,
+        key,
+        history,
+    }
+}
+
+export function rejectHistory(namespace, key, error) {
+      return {
+          type: actions.FETCH_HISTORY_REJECTED  ,
+          namespace,
+          key,
+          error,
+      }
 }
 
 /**
@@ -380,9 +398,14 @@ export function fetchValue(namespace, key) {
 export function fetchHistory(namespace, key) {
     return dispatch => {
         dispatch(requestHistory());
-        return api.getHistory(namespace, key)
-            .then(history => console.log(history))
-            .catch(error => console.log(error));
+        return api.getHistoryOfKey(namespace, key)
+            .then(history => {
+                dispatch(recieveHistory(namespace, key, history));
+                dispatch(changeWindow('history'));
+            })
+            .catch(error => {
+                dispatch(rejectHistory(namespace, key, error));
+            });
     };
 }
 

@@ -114,6 +114,14 @@ class Api
         return fetch(`${this.url}/dataStore/HISTORYSTORE/${id}`, this.getHeaders());
     }
 
+    getHistoryOfKey(namespace, key) {
+        const id = this.buildId(namespace, key);
+        return fetch(`${this.url}/dataStore/HISTORYSTORE/${id}`, this.getHeaders())
+          .then(response => this.successOnly(response))
+          .then(response => response.json())
+          .then(response => response);
+    }
+
     updateHistory(namespace, key, newValue, action) {
         const id = this.buildId(namespace, key);
         const historyRecord = {

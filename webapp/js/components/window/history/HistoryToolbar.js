@@ -6,6 +6,7 @@ import WindowToolbarTitle from '../WindowToolbarTitle';
 class HistoryToolbar extends Component {
     render() {
         const { namespace, selectedKey } = this.props;
+
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
