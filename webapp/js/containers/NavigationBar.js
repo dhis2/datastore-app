@@ -14,7 +14,7 @@ class NavigationBar extends Component {
                     height: '20px',
                 }} alt="dhis2"
                 />
-              <ToolbarTitle text="dhis2 Datastore" />
+              <ToolbarTitle text="Datastore App" />
             </Toolbar>
         );
     }
