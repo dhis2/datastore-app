@@ -5,11 +5,12 @@ import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton';
 class WindowToolbarTitle extends Component {
     renderPath(path) {
         const pathArray = path.split('/');
+        const length = pathArray.length-1;
 
         return (
       <span className={'toolbar-title'}>
         {pathArray.map((item, index) => (
-           <BreadcrumbHistoryButton label={ item } key={ index } />
+           <BreadcrumbHistoryButton label={ item } key={ index } last={index === length} />
           ))}
       </span>
         );
