@@ -61,7 +61,7 @@ class StatisticsArea extends Component {
 
         return (
             <Paper className='window-area'>
-                <div style={{maxWidth:'700px'}}>
+                <div style={{width:'90%', margin:'0 auto 0 auto'}}>
                     <Line redraw data={data} options={opts}></Line>
                 </div>
             </Paper>
