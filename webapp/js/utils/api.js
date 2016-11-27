@@ -17,7 +17,7 @@ class Api
         fetch(`${this.url}/me`, this.getHeaders())
             .then(response => this.successOnly(response))
             .then(response => response.json())
-            .then(user => this.userId = user.id);
+            .then(user => this.userId = user.userCredentials.username);
     }
 
     getNamespaces() {
@@ -34,7 +34,15 @@ class Api
             method: 'DELETE',
         }))
             .then(response => this.successOnly(response))
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(response => {
+                this.cache[namespace] = [];
+                this.updateNamespaceHistory(namespace, null, {
+                    action: DELETED,
+                    user: this.userId,
+                });
+                return response;
+            });
     }
 
     getKeys(namespace) {
@@ -48,18 +56,21 @@ class Api
         const k = this.buildId(namespace, key);
         const cache = this.cache;
 
-        if (!cache[k]) {
+        if (cache[namespace] === undefined || cache[namespace][key] === undefined) {
             return this.getMetaData(namespace, key)
                 .then(result => {
                     const val = JSON.parse(result.value);
-                    cache[k] = val;
+                    if (cache[namespace] === undefined) {
+                        cache[namespace] = [];
+                    }
+                    cache[namespace][key] = val;
                     return val;
                 });
         }
 
         return new Promise((resolve) => {
             console.log('cache resolve');
-            resolve(cache[k]);
+            resolve(cache[namespace][key]);
         });
     }
 
@@ -77,6 +88,11 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
+                if (this.cache[namespace] === undefined) {
+                    this.cache[namespace] = [];
+                }
+
+                this.cache[namespace][key] = value;
                 log && this.updateHistory(namespace, key, value, CREATED);
                 return response;
             });
@@ -90,7 +106,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-                this.cache[this.buildId(namespace, key)] = value;
+                this.cache[namespace][key] = value;
                 log && this.updateHistory(namespace, key, value, UPDATED);
                 return response;
             });
@@ -103,6 +119,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
+                delete this.cache[namespace][key];
                 this.updateHistory(namespace, key, this.getValue(namespace, key), DELETED);
                 return response;
             });
@@ -132,6 +149,7 @@ class Api
     updateHistory(namespace, key, newValue, action) {
         const id = this.buildId(namespace, key);
         const historyRecord = {
+            name: key,
             action,
             date: new Date(),
             user: this.userId,
@@ -155,7 +173,8 @@ class Api
 
     updateNamespaceHistory(namespace, key, historyRecord) {
         const namespaceHistoryRecord = {
-            action: UPDATED,
+            name: namespace,
+            action: historyRecord.action,
             date: new Date(),
             user: historyRecord.user,
             value: sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase()),
@@ -166,6 +185,7 @@ class Api
                 console.log(response);
                 if (response.status === 404) {
                     const value = [{
+                        name: namespace,
                         action: CREATED,
                         date: namespaceHistoryRecord.date,
                         user: historyRecord.user,
@@ -178,6 +198,18 @@ class Api
                 return response.json();
             }).then(history => {
                 history.unshift(namespaceHistoryRecord);
+
+                if (historyRecord.action === DELETED && this.cache[namespace].length === 0) {
+                    history.unshift({
+                        name: namespace,
+                        action: DELETED,
+                        date: new Date(),
+                        user: historyRecord.user,
+                        value: 'Namespace was deleted.',
+                    });
+                    delete this.cache[namespace];
+                }
+
                 this.updateValue('HISTORYSTORE', namespace, history, false);
             });
     }

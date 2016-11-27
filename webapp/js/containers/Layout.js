@@ -16,13 +16,11 @@ class Layout extends Component {
         const message = this.props.snackbarMessage;
 
         let snackbarMessage = null;
-
         if (message) {
             if (message.message) {
                 snackbarMessage = message.message;
             }
         }
-
         const showSnackbar = typeof snackbarMessage === 'string';
         return (
             <div className={'wrapper'}>

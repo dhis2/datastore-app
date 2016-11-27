@@ -7,7 +7,7 @@ import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
 class HistoryArea extends Component {
     render() {
-        const { list, selectedKey } = this.props;
+        const { list } = this.props;
 
         return (
               <div className="window-area" style={{
@@ -16,7 +16,7 @@ class HistoryArea extends Component {
                   <Table fixedHeader headerStyle={{ 'border-bottom': 'solid grey 1px' }}>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>Key</TableHeaderColumn>
+                            <TableHeaderColumn>Namespace/Key</TableHeaderColumn>
                             <TableHeaderColumn>Action</TableHeaderColumn>
                             <TableHeaderColumn>Change</TableHeaderColumn>
                             <TableHeaderColumn>Date Modified</TableHeaderColumn>
@@ -26,7 +26,7 @@ class HistoryArea extends Component {
                       <TableBody showRowHover displayRowCheckbox={false}>
                         {list.map((row, index) => (
                               <TableRow key={ index }>
-                                  <TableRowColumn>{selectedKey}</TableRowColumn>
+                                  <TableRowColumn>{row.name}</TableRowColumn>
                                   <TableRowColumn>{row.action}</TableRowColumn>
                                   <TableRowColumn>{typeof row.value === 'object' ?
                                       JSON.stringify(row.value) : row.value}
@@ -44,7 +44,6 @@ class HistoryArea extends Component {
 
 HistoryArea.propTypes = {
     list: PropTypes.array,
-    selectedKey: PropTypes.string,
 };
 
 export default WindowAreaHOC(HistoryArea);

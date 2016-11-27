@@ -51,8 +51,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         {
             return {
                 ...state,
-                ...fetchingState,
-                snackbarMessage: null,
+                ...fetchingState
             };
         }
 
@@ -60,8 +59,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         {
             return {
                 ...state,
-                ...errorState,
-                snackbarMessage: action.error,
+                ...errorState
             };
         }
 
@@ -102,8 +100,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
                         ...state.namespaces[namespace],
                         ...fetchingState,
                     },
-                },
-                snackbarMessage: null,
+                }
             };
         }
 
@@ -119,8 +116,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
                         ...errorState,
                         errorMessage: error,
                     },
-                },
-                snackbarMessage: error,
+                }
             };
         }
 
@@ -168,9 +164,6 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
                             },
                         },
                     },
-                },
-                snackbarMessage: {
-                    message: 'Successfully updated value!',
                 },
             };
         }
@@ -245,8 +238,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
                             },
                         },
                     },
-                },
-                snackbarMessage: error,
+                }
             };
         }
 
@@ -269,8 +261,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
                             },
                         },
                     },
-                },
-                snackbarMessage: null,
+                }
             };
         }
 

@@ -46,7 +46,7 @@ class HistoryWindow extends Component {
         return (
         <Paper className={'window'}>
             <HistoryToolbar namespace={ namespace } selectedKey={ key } />
-            <HistoryArea list={ history } selectedKey={ key } />
+            <HistoryArea list={ history } />
         </Paper>
         );
     }
