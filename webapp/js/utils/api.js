@@ -47,18 +47,21 @@ class Api
         const k = this.buildId(namespace, key);
         const cache = this.cache;
 
-        if (!cache[k]) {
+        if (cache[namespace] === undefined || cache[namespace][key] === undefined) {
             return this.getMetaData(namespace, key)
                 .then(result => {
                     const val = JSON.parse(result.value);
-                    cache[k] = val;
+                    if (cache[namespace] === undefined) {
+                        cache[namespace] = [];
+                    }
+                    cache[namespace][key] = val;
                     return val;
                 });
         }
 
         return new Promise((resolve) => {
             console.log('cache resolve');
-            resolve(cache[k]);
+            resolve(cache[namespace][key]);
         });
     }
 
@@ -76,6 +79,11 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
+                if (this.cache[namespace] === undefined) {
+                    this.cache[namespace] = [];
+                }
+
+                this.cache[namespace][key] = value;
                 log && this.updateHistory(namespace, key, value, CREATED);
                 return response;
             });
@@ -89,7 +97,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-                this.cache[this.buildId(namespace, key)] = value;
+                this.cache[namespace][key] = value;
                 log && this.updateHistory(namespace, key, value, UPDATED);
                 return response;
             });
@@ -102,6 +110,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
+                delete this.cache[namespace][key];
                 this.updateHistory(namespace, key, this.getValue(namespace, key), DELETED);
                 return response;
             });
@@ -154,7 +163,7 @@ class Api
 
     updateNamespaceHistory(namespace, key, historyRecord) {
         const namespaceHistoryRecord = {
-            action: UPDATED,
+            action: historyRecord.action,
             date: new Date(),
             user: historyRecord.user,
             value: sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase()),
