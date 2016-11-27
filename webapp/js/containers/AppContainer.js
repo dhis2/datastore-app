@@ -3,8 +3,10 @@ import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-ro
 import { Provider } from 'react-redux';
 
 import Layout from './Layout';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
+
+import HistoryWindow from '../components/window/history/HistoryWindow';
+import EmptyWindow from '../components/window/empty/EmptyWindow';
+import EditWindow from '../components/window/edit/EditWindow';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -54,10 +56,11 @@ class AppContainer extends Component {
       <MuiThemeProvider muiTheme={AppContainer.theme}>
           <Provider store = { store }>
               <Router history={ hashHistory }>
-                  <Route path={ "/" } component={ Layout } >
-                      <IndexRoute component={ HomePage } />
-                      <Route path={ "/home" } component={ HomePage } />
-                      <Route path={ "/about" } component={ AboutPage } />
+                  <Route path={ "/" } component={ Layout }>
+                    <IndexRoute component={ EmptyWindow } />
+                    <Route path={ "history/:namespace" } component={ HistoryWindow } />
+                    <Route path={ "history/:namespace/:key" } component={ HistoryWindow } />
+                    <Route path={ "edit/:namespace/:key" } component={ EditWindow } />
                   </Route>
               </Router>
           </Provider>

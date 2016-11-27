@@ -147,6 +147,12 @@ function requestDeleteKey(namespace, key) {
     };
 }
 
+function loadValue() {
+    return {
+        type: actions.LOAD_VALUE,
+    }
+}
+
 function receiveDeleteKey(namespace, key) {
     return {
         type: actions.DELETE_KEY_FULFILLED,
@@ -211,7 +217,6 @@ export function rejectHistory(namespace, key, error) {
         error,
     };
 }
-
 
 export function recieveNamespaceHistory(namespace, history) {
     return {
@@ -285,11 +290,6 @@ export function createNewNamespace(namespace, key) {
 }
 
 
-export function saveValueFromEditor() {
-
-}
-
-
 export function setBrowserList(list) {
     return {
         type: actions.SET_BROWSER_LIST,
@@ -327,6 +327,13 @@ export function changeWindow(window) {
     };
 }
 
+const shouldFetchKeys = (state, namespace) => {
+    if (typeof state.api.namespaces[namespace] === 'undefined') {
+        return true;
+    }
+    return false;
+};
+
 export function fetchAndDisplayKeyValue(namespace, key) {
     return dispatch => {
         dispatch(requestValue(namespace, key));
@@ -334,12 +341,18 @@ export function fetchAndDisplayKeyValue(namespace, key) {
             .then(value => {
                 dispatch(recieveValue(namespace, key, value));
                 dispatch(selectKey(namespace, key, value));
-                dispatch(changeWindow('edit'));
             })
             .catch(error => dispatch(rejectValue(namespace, key, error)));
     };
 }
 
+export function getValue(namespace, key) {
+    return dispatch => {
+        dispatch(loadValue());
+        return api.getValue(namespace, key).
+            then(value => dispatch(selectKey(namespace, key, value)));
+    };
+}
 
 /**
  * @function createAndDisplayValue
@@ -352,8 +365,6 @@ export function fetchAndDisplayKeyValue(namespace, key) {
  * @param key to create
  * @returns action thunk
  */
-
-
 export function fetchNamespaces() {
     return dispatch => {
         dispatch(requestNamespaces());
@@ -364,6 +375,7 @@ export function fetchNamespaces() {
             .catch(error => dispatch(rejectNamespaces(error)));
     };
 }
+
 
 /**
  * @function createValue
@@ -440,12 +452,6 @@ export function fetchHistoryForNamespace(namespace) {
     };
 }
 
-export function updateHistory(namespace, key, value) {
-    return dispatch => api.updateHistory(namespace, key, value)
-            .then(success => console.log(success))
-            .catch(error => console.log(error));
-}
-
 /** @function updateValue
  *
  * Updates a value with key in namespace.
@@ -456,7 +462,6 @@ export function updateHistory(namespace, key, value) {
  */
 export function updateValue(namespace, key, value) {
     return dispatch => {
-        console.log('update value');
         dispatch(requestUpdateValue(namespace, key, value));
         return api.updateValue(namespace, key, value)
             .then(() => dispatch(receiveUpdateValue(namespace, key, value)))

@@ -20,7 +20,7 @@ const WindowAreaHOC = (Area) => {
 
         renderError() {
             return (
-                <div></div>
+            <div></div>
             );
         }
 

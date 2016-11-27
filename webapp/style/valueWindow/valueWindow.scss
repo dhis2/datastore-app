@@ -18,6 +18,13 @@
   flex: 1;
 }
 
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
 .window {
   display: flex;
   flex-direction: column;

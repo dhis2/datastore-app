@@ -18,7 +18,7 @@ class HistoryArea extends Component {
                         <TableRow>
                             <TableHeaderColumn>Key</TableHeaderColumn>
                             <TableHeaderColumn>Action</TableHeaderColumn>
-                            <TableHeaderColumn>Changed To</TableHeaderColumn>
+                            <TableHeaderColumn>Change</TableHeaderColumn>
                             <TableHeaderColumn>Date Modified</TableHeaderColumn>
                             <TableHeaderColumn>Modified By</TableHeaderColumn>
                         </TableRow>

@@ -5,8 +5,10 @@ import NamespaceItem from './NamespaceItem';
 import { fetchNamespaces, fetchAndToggleNamespace } from '../../actions/actions';
 import { List } from 'material-ui/List';
 import AppContainer from '../../containers/AppContainer';
-import RaisedButton from 'material-ui/RaisedButton';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
+import '../../../style/valueWindow/valueWindow.scss';
+import { Spinner } from '../utils/Loaders';
+import IconButton from 'material-ui/IconButton';
 
 class NamespaceList extends Component {
     constructor(props) {
@@ -23,17 +25,28 @@ class NamespaceList extends Component {
 
     renderLoading() {
         return (
-      <span>LOADING!</span>
+          <div className={'sidebar-list'} style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <Spinner size={'medium'} style={{marginTop: "-60px"}} />
+          </div>
         );
     }
-
     renderError() {
+
+        const iconStyle = {
+            fill: 'rgb(117, 117, 117)',
+            display: 'block',
+            margin: '0 auto 0 auto',
+            width: '75px',
+            height: 'auto',
+            marginTop: '-60px',
+        };
         return (
-      <RaisedButton
-          label="Try again"
-          icon={<NavigationRefresh />}
-          onClick={this.props.fetchNamespaces}
-      />
+          <div className={'sidebar-list'} style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <IconButton style={{ marginTop: '-60px' }} onTouchTap={this.props.fetchNamespaces}>
+                <NavigationRefresh />
+            </IconButton>
+            <p>Try again</p>
+          </div>
         );
     }
 

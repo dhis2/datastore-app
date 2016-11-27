@@ -7,18 +7,18 @@ class WindowToolbarTitle extends Component {
         const pathArray = path.split('/');
 
         return (
-      <span className={'toolbar-title'}>
-        {pathArray.map((item, index) => (
-           <BreadcrumbHistoryButton label={ item } key={ index } />
-          ))}
-      </span>
+          <span className={'toolbar-title'}>
+            {pathArray.map((item, index) => (
+               <BreadcrumbHistoryButton label={ item } key={ index } />
+              ))}
+          </span>
         );
     }
 
     renderDefault() {
         return (
       <span className="toolbar-title">
-        Value
+          Value
       </span>
         );
     }

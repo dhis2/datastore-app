@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack -p --config ./webpack.production.config.js",
     "lint": "eslint --fix webapp && ./node_modules/eslint/bin/eslint.js --env node,mocha --global expect,sinon,spy,stub --rule 'no-unused-expressions: 0' test && scss-lint",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "test": "mocha --require config/setup.js --require ignore-styles --compilers js:babel-core/register tests/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -26,25 +27,31 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "bootstrap": "^3.3.7",
+    "btoa": "^1.1.2",
     "chai": "^3.5.0",
     "css-loader": "^0.25.0",
     "d2": "24.0.x",
     "d2-manifest": "^1.0.0",
     "d2-ui": "24.0.x",
     "d2-utilizr": "^0.2.9",
+    "enzyme": "^2.6.0",
     "eslint": "^3.10.2",
     "eslint-config-dhis2": "^2.0.2",
     "eslint-plugin-prefer-object-spread": "^1.1.0",
     "eslint-plugin-react": "^4.1.0",
+    "ignore-styles": "^5.0.1",
+    "isomorphic-fetch": "^2.2.1",
     "jsdom": "^9.8.3",
     "json-loader": "^0.5.4",
     "mocha": "^3.1.2",
     "node-sass": "^3.11.1",
+    "react-addons-test-utils": "^15.4.1",
     "react-bootstrap": "^0.30.7",
     "react-hot-loader": "^3.0.0-beta.5",
     "react-tools": "^0.13.3",
     "redux-devtools": "^3.3.1",
     "redux-logger": "^2.7.0",
+    "redux-mock-store": "^1.2.1",
     "resolve-url-loader": "^1.6.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
@@ -74,20 +81,20 @@
     "whatwg-fetch": "^1.0.0"
   },
   "manifest.webapp": {
-  "name": "DHIS2 Datastore Webapp",
-  "icons": {
-    "48": "icon.png"
-  },
-  "developer": {
-    "name": "Steven, Birk and Pavel",
-    "email": "e@ma.il"
-  },
-  "activities": {
-    "dhis": {
-      "href": ".."
-    }
-  },
-  "launch_url": "index.html",
-  "default_locale": "en"
+    "name": "DHIS2 Datastore Webapp",
+    "icons": {
+      "48": "icon.png"
+    },
+    "developer": {
+      "name": "Steven, Birk and Pavel",
+      "email": "e@ma.il"
+    },
+    "activities": {
+      "dhis": {
+        "href": ".."
+      }
+    },
+    "launch_url": "index.html",
+    "default_locale": "en"
   }
 }

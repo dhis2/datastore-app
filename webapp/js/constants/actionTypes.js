@@ -8,6 +8,9 @@ export const CREATE_NAMESPACE = 'CREATE_NAMESPACE';
 export const OPEN_DIALOG = 'OPEN_DIALOG';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 export const CHANGE_WINDOW = 'CHANGE_WINDOW';
+
+export const LOAD_VALUE = 'LOAD_VALUE';
+
 /**
  *  Async Action Types
  */

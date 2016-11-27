@@ -253,6 +253,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
     case actions.FETCH_VALUE_PENDING:
         {
             const { namespace, key } = action;
+
             return {
                 ...state,
                 ...fetchedState,

@@ -1,6 +1,7 @@
 import { API_URL } from '../constants/apiUrls';
 import { CREATED, UPDATED, DELETED } from '../constants/apiHistoryActions';
 import { sprintf } from 'sprintf-js';
+import btoa from 'btoa';
 
 let apiClass = undefined;
 

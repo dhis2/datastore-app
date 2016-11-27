@@ -7,10 +7,13 @@ class HistoryToolbar extends Component {
     render() {
         const { namespace, selectedKey } = this.props;
 
+        const path = selectedKey ?
+          `${namespace}/${selectedKey}` : `${namespace}`;
+
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
-                    <WindowToolbarTitle path={`${namespace}/${selectedKey}`} />
+                    <WindowToolbarTitle path={ path } />
                 </Toolbar>
             </Paper>
         );

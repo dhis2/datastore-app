@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { Router, Route, Link, browserHistory, hashHistory } from 'react-router'
+
 import EditWindow from './edit/EditWindow';
 import EmptyWindow from './empty/EmptyWindow';
 import BrowserWindow from './browser/BrowserWindow';
