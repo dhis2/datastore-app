@@ -163,7 +163,7 @@ class Api
 
     updateNamespaceHistory(namespace, key, historyRecord) {
         const namespaceHistoryRecord = {
-            action: UPDATED,
+            action: historyRecord.action,
             date: new Date(),
             user: historyRecord.user,
             value: sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase()),
