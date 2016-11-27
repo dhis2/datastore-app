@@ -33,7 +33,15 @@ class Api
             method: 'DELETE',
         }))
             .then(response => this.successOnly(response))
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(response => {
+                this.cache[namespace] = [];
+                this.updateNamespaceHistory(namespace, null, {
+                    action: DELETED,
+                    user: this.userId,
+                });
+                return response;
+            });
     }
 
     getKeys(namespace) {
@@ -186,6 +194,17 @@ class Api
                 return response.json();
             }).then(history => {
                 history.unshift(namespaceHistoryRecord);
+
+                if (historyRecord.action === DELETED && this.cache[namespace].length === 0) {
+                    history.unshift({
+                        action: DELETED,
+                        date: new Date(),
+                        user: historyRecord.user,
+                        value: 'Namespace was deleted.',
+                    });
+                    delete this.cache[namespace];
+                }
+
                 this.updateValue('HISTORYSTORE', namespace, history, false);
             });
     }
