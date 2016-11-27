@@ -20,12 +20,17 @@ class StatisticsArea extends Component {
                 datesToValMap[date] = 1;
             }
         })
-        const dates = Object.keys(datesToValMap)
+        let today = new Date().toISOString().substring(0,10)
+        if(!datesToValMap[today]) { //add datapoint for now
+            datesToValMap[today] = 0;
+        }
+        let dates = Object.keys(datesToValMap).sort()
         dates.map((date,index) => yVal[index] = datesToValMap[date]);
         return {
                 labels: dates,
                 datasets: [{
                     data: yVal,
+                    lineTension: 0,
                     fill: false,
                     backgroundColor:'rgb(25, 118, 210)',
                     borderColor:'rgba(25,118,210,0.77)'
@@ -55,7 +60,7 @@ class StatisticsArea extends Component {
                         unit: 'day',
                         round: 'day'
                     },
-                }]
+                }],
             }
         }
 
