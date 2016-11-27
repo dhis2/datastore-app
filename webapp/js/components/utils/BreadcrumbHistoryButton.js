@@ -6,13 +6,13 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 
 class BreadcrumbHistoryButton extends Component {
     render() {
-        const { label } = this.props;
+        const { label, last } = this.props;
         return (
           <FlatButton
               label={ label }
               labelPosition="before"
               primary
-              icon={ <ChevronRight /> }
+              icon={ last ? null : <ChevronRight /> }
           />
         );
     }
