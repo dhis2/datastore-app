@@ -159,7 +159,6 @@ class Api
             user: historyRecord.user,
             value: sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase()),
         };
-
         return this.getHistory(namespace)
             .then(response => {
                 console.log(response);

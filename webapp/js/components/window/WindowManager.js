@@ -5,7 +5,7 @@ import EditWindow from './edit/EditWindow';
 import EmptyWindow from './empty/EmptyWindow';
 import BrowserWindow from './browser/BrowserWindow';
 import HistoryWindow from './history/HistoryWindow';
-
+import StatisticsWindow from './statistics/StatisticsWindow';
 class WindowManager extends Component {
     render() {
         const { currentWindow } = this.props;
@@ -16,6 +16,8 @@ class WindowManager extends Component {
             return <BrowserWindow />;
         case 'history':
             return <HistoryWindow />;
+        case 'statistics':
+            return <StatisticsWindow />;
         default:
             return <EmptyWindow />;
         }
