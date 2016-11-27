@@ -16,7 +16,7 @@ class Api
         fetch(`${this.url}/me`, this.getHeaders())
             .then(response => this.successOnly(response))
             .then(response => response.json())
-            .then(user => this.userId = user.id);
+            .then(user => this.userId = user.userCredentials.username);
     }
 
     getNamespaces() {

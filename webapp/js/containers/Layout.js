@@ -36,7 +36,7 @@ Layout.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    snackbarMessage: state.api.snackbarMessage,
+    snackbarMessage: state.ui.snackbarMessage,
 });
 
 export default connect(
