@@ -120,7 +120,7 @@ class Api
             .then(response => response.json())
             .then(response => {
                 delete this.cache[namespace][key];
-                this.updateHistory(namespace, key, this.getValue(namespace, key), DELETED);
+                this.updateHistory(namespace, key, null, DELETED);
                 return response;
             });
     }
