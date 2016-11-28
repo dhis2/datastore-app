@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import '../../../../style/valueWindow/valueWindow.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 import { Line } from 'react-chartjs-2';
+
 class StatisticsArea extends Component {
     prepareData() {
         const { list } = this.props;

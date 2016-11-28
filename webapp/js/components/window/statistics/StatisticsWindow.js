@@ -1,10 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
-
 import StatisticsToolbar from './StatisticsToolbar';
 import StatisticsArea from './StatisticsArea';
-
 import '../../../../style/valueWindow/valueWindow.scss';
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 

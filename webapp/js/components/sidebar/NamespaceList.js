@@ -1,12 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import NamespaceItem from './NamespaceItem';
-import { fetchNamespaces, fetchAndToggleNamespace } from '../../actions/actions';
+import { fetchNamespaces } from '../../actions/actions';
 import { List } from 'material-ui/List';
 import AppContainer from '../../containers/AppContainer';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
-import '../../../style/valueWindow/valueWindow.scss';
 import { Spinner } from '../utils/Loaders';
 import IconButton from 'material-ui/IconButton';
 

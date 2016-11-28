@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Spinner } from '../utils/Loaders';
 import Paper from 'material-ui/Paper';
 
