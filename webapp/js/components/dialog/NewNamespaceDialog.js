@@ -97,7 +97,7 @@ class NewNamespaceDialog extends Component {
 
 NewNamespaceDialog.propTypes = {
     dialogprops: PropTypes.shape({
-        namespace: PropTypes.string.isRequired,
+        namespace: PropTypes.string,
     }),
     closeDialog: PropTypes.func,
     createNamespace: PropTypes.func,

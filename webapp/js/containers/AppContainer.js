@@ -7,6 +7,7 @@ import Layout from './Layout';
 import HistoryWindow from '../components/window/history/HistoryWindow';
 import EmptyWindow from '../components/window/empty/EmptyWindow';
 import EditWindow from '../components/window/edit/EditWindow';
+import StatisticsWindow from '../components/window/statistics/StatisticsWindow';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -58,9 +59,11 @@ class AppContainer extends Component {
               <Router history={ hashHistory }>
                   <Route path={ "/" } component={ Layout }>
                     <IndexRoute component={ EmptyWindow } />
+                    <Route path={ "edit/:namespace/:key" } component={ EditWindow } />
                     <Route path={ "history/:namespace" } component={ HistoryWindow } />
                     <Route path={ "history/:namespace/:key" } component={ HistoryWindow } />
-                    <Route path={ "edit/:namespace/:key" } component={ EditWindow } />
+                    <Route path={ "stats/:namespace" } component={ StatisticsWindow } />
+                    <Route path={ "stats/:namespace/:key" } component={ StatisticsWindow } />
                   </Route>
               </Router>
           </Provider>

@@ -78,7 +78,8 @@
     "redux-devtools": "^3.3.1",
     "redux-promise-middleware": "^4.1.0",
     "redux-thunk": "^2.1.0",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "react-chartjs-2":"1.5.1"
   },
   "manifest.webapp": {
     "name": "DHIS2 Datastore Webapp",

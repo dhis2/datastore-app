@@ -20,7 +20,11 @@ const WindowAreaHOC = (Area) => {
 
         renderError() {
             return (
+<<<<<<< HEAD
+                <div></div>
+=======
             <div>ERROR</div>
+>>>>>>> master
             );
         }
 

@@ -1,17 +1,14 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Paper from 'material-ui/Paper';
 
-import HistoryToolbar from './HistoryToolbar';
-import HistoryArea from './HistoryArea';
-
-import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
+import StatisticsToolbar from './StatisticsToolbar';
+import StatisticsArea from './StatisticsArea';
 
 import '../../../../style/valueWindow/valueWindow.scss';
+import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 
-class HistoryWindow extends Component {
-
+class StatisticsWindow extends Component {
     componentDidMount() {
         const { namespace, key } = this.props.params;
         if (typeof key !== 'undefined') {
@@ -32,40 +29,32 @@ class HistoryWindow extends Component {
     }
 
     render() {
-        const { history } = this.props;
-        const { namespace, key } = this.props.params;
 
+        const { namespace } = this.props.params;
         return (
-        <Paper className={'window'}>
-            <HistoryToolbar namespace={ namespace } selectedKey={ key } />
-            <HistoryArea list={ history } />
+        <Paper className={'value-container'}>
+            <StatisticsToolbar namespace={this.props.namespace}/>
+            <StatisticsArea list={this.props.history} namespace={this.props.namespace}/>
         </Paper>
         );
     }
 }
 
-HistoryWindow.propTypes = {
-    history: PropTypes.array,
-    namespace: PropTypes.string,
-    selectedKey: PropTypes.string,
-};
-
 const mapStateToProps = (state) => ({
     namespace: state.window.namespace,
-    selectedKey: state.window.key,
     history: state.window.history,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     fetchHistoryForNamespace(namespace) {
-        dispatch(fetchHistoryForNamespace(namespace));
+        dispatch(fetchHistoryForNamespace(namespace))
     },
     fetchHistory(namespace, key) {
-        dispatch(fetchHistory(namespace, key));
+        dispatch(fetchHistory(namespace, key))
     },
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(HistoryWindow);
+)(StatisticsWindow);

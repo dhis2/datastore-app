@@ -150,7 +150,7 @@ function requestDeleteKey(namespace, key) {
 function loadValue() {
     return {
         type: actions.LOAD_VALUE,
-    }
+    };
 }
 
 function receiveDeleteKey(namespace, key) {
@@ -206,7 +206,7 @@ export function recieveHistory(namespace, key, history) {
         namespace,
         key,
         history,
-    }
+    };
 }
 
 export function rejectHistory(namespace, key, error) {
@@ -281,6 +281,7 @@ export function closeDialog(dialogprops) {
         dialogprops: { ...dialogprops }, //ensure empty object
     };
 }
+
 export function createNewNamespace(namespace, key) {
     return {
         type: actions.CREATE_NAMESPACE,
@@ -327,13 +328,6 @@ export function changeWindow(window) {
     };
 }
 
-const shouldFetchKeys = (state, namespace) => {
-    if (typeof state.api.namespaces[namespace] === 'undefined') {
-        return true;
-    }
-    return false;
-};
-
 export function fetchAndDisplayKeyValue(namespace, key) {
     return dispatch => {
         dispatch(requestValue(namespace, key));
@@ -376,7 +370,6 @@ export function fetchNamespaces() {
     };
 }
 
-
 /**
  * @function createValue
  * Creates a value with key in namespace.
@@ -398,6 +391,17 @@ export function createValue(namespace, key, value) {
     };
 }
 
+/**
+ * @function createAndDisplayValue
+ * Creates a value with key in namespace.
+ *
+ * On success, the namespace will be opened and the empty
+ * value will be displayed. Note that this is used both for
+ * creating namespaces and keys. See {@link createValue}
+ * @param namespace namespace to create or update
+ * @param key to create
+ * @returns action thunk
+ */
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
         dispatch(createValue(namespace, key, {}))
@@ -421,6 +425,20 @@ export function fetchValue(namespace, key) {
         return api.getValue(namespace, key)
             .then(value => dispatch(recieveValue(namespace, key, value)))
             .catch(error => dispatch(rejectValue(namespace, key, error)));
+    };
+}
+
+export function displayHistoryStatsForNamespace(namespace) {
+    return dispatch => {
+        dispatch(requestHistory());
+        return api.getHistoryOfNamespace(namespace)
+            .then(history => {
+                dispatch(recieveNamespaceHistory(namespace, history));
+                dispatch(changeWindow('statistics'));
+            })
+            .catch(error => {
+                dispatch(rejectNamespaceHistory(namespace, error));
+            });
     };
 }
 
