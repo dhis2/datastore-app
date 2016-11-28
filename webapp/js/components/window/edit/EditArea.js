@@ -31,7 +31,6 @@ class EditArea extends Component {
 }
 
 EditArea.propTypes = {
-    value: PropTypes.array,
     namespace: PropTypes.string,
     selectedKey: PropTypes.string,
     updateError: PropTypes.string,

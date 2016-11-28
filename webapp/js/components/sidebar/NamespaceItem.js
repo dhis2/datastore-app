@@ -12,6 +12,7 @@ import { ListItem } from 'material-ui/List';
 import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Delete from 'material-ui/svg-icons/action/delete';
+import ShowChart from 'material-ui/svg-icons/editor/show-chart';
 import { grey500 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -21,6 +22,7 @@ import { openKeyDialog,
          openConfirmDeleteNamespaceDialog,
          openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
 import { fetchAndDisplayKeyValue,
+         displayHistoryStatsForNamespace,
          fetchAndToggleNamespace,
          fetchHistory,
          toggleNamespace,
@@ -62,8 +64,6 @@ class NamespaceItem extends Component {
         this.handleHistoryNamespace = this.handleHistoryNamespace.bind(this);
         this.constructKeyItem = this.constructKeyItem.bind(this);
         this.renderOpen = this.renderOpen.bind(this);
-        this.renderClosed = this.renderClosed.bind(this);
-        this.renderLoading = this.renderLoading.bind(this);
         this.renderError = this.renderError.bind(this);
     }
 
@@ -96,6 +96,9 @@ class NamespaceItem extends Component {
         this.props.fetchHistoryForNamespace(namespace);
     }
 
+    handleHistoryStatsNamespace() {
+        this.props.displayStats(this.props.namespace.name);
+    }
     constructKeyItem(item, index) {
         const namespace = this.props.namespace.name;
         const keyItemMenu = (
@@ -104,11 +107,11 @@ class NamespaceItem extends Component {
                 disableAutoFocus
                 targetOrigin={{ vertical: 'top', horizontal: 'left' }}
             >
-                <MenuItem leftIcon={<Delete />} onTouchTap={() => this.handleDeleteKey(namespace, item)}>
-                    Delete key
-                </MenuItem>
                 <MenuItem leftIcon={<History />} onTouchTap={() => this.handleHistoryKey(namespace, item)}>
                     History
+                </MenuItem>
+                <MenuItem leftIcon={<Delete />} onTouchTap={() => this.handleDeleteKey(namespace, item)}>
+                    Delete key
                 </MenuItem>
             </IconMenu>);
         return (
@@ -131,8 +134,9 @@ class NamespaceItem extends Component {
                 targetOrigin={{ vertical: 'top', horizontal: 'left' }}
             >
                 <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleNewKey.bind(this)}>New key</MenuItem>
-                <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDeleteNamespace.bind(this)}>Delete</MenuItem>
                 <MenuItem leftIcon={<History />} onTouchTap={() => this.handleHistoryNamespace(name)}>History</MenuItem>
+                <MenuItem leftIcon={<ShowChart />} onTouchTap={this.handleHistoryStatsNamespace.bind(this)}>Statistics</MenuItem>
+                <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDeleteNamespace.bind(this)}>Delete</MenuItem>
             </IconMenu>
         );
         // Populate nestedItems if keys are loaded
@@ -153,25 +157,6 @@ class NamespaceItem extends Component {
                 nestedItems={items}
                 onTouchTap={this.toggleHandler.bind(this)}
                 nestedListStyle={styles.keyItemList}
-            />
-        );
-    }
-
-    renderClosed() {
-        const { name } = this.props.namespace;
-        const { event } = this.props;
-
-        return (
-            <ListItem primaryText={name} leftIcon={<FileFolder />} onClick={() => event(name)} />
-        );
-    }
-
-    renderLoading() {
-        const { name } = this.props.namespace;
-
-        return (
-            <ListItem primaryText={<div style={styles.innerText}>{name}</div>}
-                leftIcon={<Spinner />} rightIcon={<MoreVertIcon />}
             />
         );
     }
@@ -224,6 +209,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     fetchAndToggleNamespace(namespace) {
         dispatch(fetchAndToggleNamespace(namespace));
+    },
+    displayStats(namespace) {
+        dispatch(displayHistoryStatsForNamespace(namespace));
     },
     toggleNamespace(namespace) {
         dispatch(toggleNamespace(namespace));
