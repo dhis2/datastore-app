@@ -4,7 +4,8 @@ const fetchedState = { fetching: false, fetched: true, error: false };
 const fetchingState = { fetching: true, fetched: false, error: false };
 const errorState = { fetching: false, fetched: false, error: true };
 const emptyDialog = { dialogType: null, dialogprops: {} };
-const emptySnackbar = {snackbarMessage: {message: ''}};
+const emptySnackbar = { snackbarMessage: { message: '' } };
+
 const ui = (state = { dialog: { ...emptyDialog } }, action) => {
     switch (action.type) {
         case actions.SET_WINDOW_VIEW:

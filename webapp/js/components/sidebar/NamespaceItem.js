@@ -75,9 +75,6 @@ class NamespaceItem extends Component {
         this.props.deleteNamespace(this.props.namespace.name);
     }
 
-    handeDeleteKey() {
-        this.props.deleteNamespace(this.props.namespace.name);
-    }
 
     constructKeyItem(key, index) {
         const { deleteKeyInNamespace, namespace: { name: namespace } } = this.props;

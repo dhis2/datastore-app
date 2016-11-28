@@ -20,7 +20,7 @@ const WindowAreaHOC = (Area) => {
 
         renderError() {
             return (
-            <div>ERROR</div>
+                <div>ERROR</div>
             );
         }
 
@@ -43,7 +43,7 @@ const WindowAreaHOC = (Area) => {
 
     WindowAreaBase.propTypes = {
         loading: PropTypes.bool,
-        error: PropTypes.bool,
+        error: PropTypes.string,
     };
 
     const mapStateToProps = (state) => ({
