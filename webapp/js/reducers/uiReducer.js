@@ -68,7 +68,6 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
                 snackbarMessage: {
                     message: 'Failed to save.'
                 },
-                updateError: true,
             };
         }
         case actions.FETCH_HISTORY_REJECTED: {
@@ -162,7 +161,10 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
         }
         default:
         {
-            return state;
+            return {
+                ...state,
+                ...emptySnackbar
+            }
         }
     }
 };

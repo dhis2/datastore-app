@@ -34,6 +34,15 @@ const window = (state = initialState, action) => {
         };
     }
 
+    case actions.FETCH_VALUE_REJECTED: {
+        const { error  } = action;
+        return {
+            ...state,
+            error: true,
+            loading: false
+        }
+    }
+
     case actions.FETCH_HISTORY_FULFILLED: {
         const { history, namespace, key } = action;
         return {
@@ -62,7 +71,7 @@ const window = (state = initialState, action) => {
             ...state,
             loading: false,
             namespace,
-            error,
+            error: true
         };
     }
 

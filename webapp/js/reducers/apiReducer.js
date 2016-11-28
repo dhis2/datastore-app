@@ -35,6 +35,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
                 namespaces[key] = {
                     name: key,
                     open: false,
+                    keys: {}
                 };
             });
             return {
@@ -217,51 +218,6 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
                         },
                     },
                 },
-            };
-        }
-
-    case actions.FETCH_VALUE_REJECTED:
-        {
-            const { namespace, key, error } = action;
-            return {
-                ...state,
-                ...fetchedState,
-                namespaces: {
-                    ...state.namespaces,
-                    [namespace]: {
-                        ...state.namespaces[namespace],
-                        keys: {
-                            ...state.namespaces[namespace].keys,
-                            [key]: {
-                                ...state.namespaces[namespace].keys[key],
-                                ...errorState,
-                            },
-                        },
-                    },
-                }
-            };
-        }
-
-    case actions.FETCH_VALUE_PENDING:
-        {
-            const { namespace, key } = action;
-
-            return {
-                ...state,
-                ...fetchedState,
-                namespaces: {
-                    ...state.namespaces,
-                    [namespace]: {
-                        ...state.namespaces[namespace],
-                        keys: {
-                            ...state.namespaces[namespace].keys,
-                            [key]: {
-                                ...state.namespaces[namespace].keys[key],
-                                ...fetchingState,
-                            },
-                        },
-                    },
-                }
             };
         }
 
