@@ -16,12 +16,11 @@ class StatisticsWindow extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         const { getHistoryForKey, getHistoryForNamespace, params: currentParams } = this.props;
         const { params: prevParams } = prevProps;
 
-        if (currentParams.key !== prevParams.key &&
-            typeof currentParams.key !== 'undefined') {
+        if (currentParams.key !== prevParams.key) {
             getHistoryForKey(currentParams.namespace, currentParams.key);
         }
         else if (currentParams.namespace !== prevParams.namespace) {

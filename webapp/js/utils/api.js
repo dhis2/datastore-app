@@ -106,6 +106,11 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
+
+                if (this.cache[namespace] === undefined) {
+                    this.cache[namespace] = [];
+                }
+
                 this.cache[namespace][key] = value;
                 log && this.updateHistory(namespace, key, value, UPDATED);
                 return response;
@@ -119,8 +124,12 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-                delete this.cache[namespace][key];
-                this.updateHistory(namespace, key, null, DELETED);
+
+                if (this.cache[namespace] !== undefined && this.cache[namespace][key] !== undefined) {
+                  delete this.cache[namespace][key];
+                }
+
+                this.updateHistory(namespace, key, {}, DELETED);
                 return response;
             });
     }
@@ -198,7 +207,7 @@ class Api
             }).then(history => {
                 history.unshift(namespaceHistoryRecord);
 
-                if (historyRecord.action === DELETED && this.cache[namespace].length === 0) {
+                if (historyRecord.action === DELETED && this.cache[namespace] && this.cache[namespace].length === 0) {
                     history.unshift({
                         name: namespace,
                         action: DELETED,
