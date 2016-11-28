@@ -19,7 +19,7 @@ const WindowAreaHOC = (Area) => {
         }
 
         renderError() {
-            return <ErrorIconWithText  text="An error has occured."/>;
+            return <ErrorIconWithText text="An error has occured."/>;
         }
 
         render() {
@@ -41,7 +41,7 @@ const WindowAreaHOC = (Area) => {
 
     WindowAreaBase.propTypes = {
         loading: PropTypes.bool,
-        error: PropTypes.string,
+        error: PropTypes.bool,
     };
 
     const mapStateToProps = (state) => ({

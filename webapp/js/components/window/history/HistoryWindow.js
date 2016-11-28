@@ -13,11 +13,11 @@ import '../../../../style/valueWindow/valueWindow.scss';
 class HistoryWindow extends Component {
 
     componentDidMount() {
-        const { namespace, key } = this.props.params;
+        const { getHistoryForKey, getHistoryForNamespace, params: { namespace, key } } = this.props;
         if (typeof key !== 'undefined') {
-            this.props.fetchHistory(namespace, key);
+            getHistoryForKey(namespace, key);
         } else {
-            this.props.fetchHistoryForNamespace(namespace);
+            getHistoryForNamespace(namespace);
         }
     }
 
@@ -59,10 +59,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchHistoryForNamespace(namespace) {
+    getHistoryForNamespace(namespace) {
         dispatch(fetchHistoryForNamespace(namespace));
     },
-    fetchHistory(namespace, key) {
+    getHistoryForKey(namespace, key) {
         dispatch(fetchHistory(namespace, key));
     },
 });
