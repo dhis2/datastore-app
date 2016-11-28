@@ -5,8 +5,10 @@ import NamespaceItem from './NamespaceItem';
 import { fetchNamespaces, fetchAndToggleNamespace } from '../../actions/actions';
 import { List } from 'material-ui/List';
 import AppContainer from '../../containers/AppContainer';
-import RaisedButton from 'material-ui/RaisedButton';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
+import '../../../style/valueWindow/valueWindow.scss';
+import { Spinner } from '../utils/Loaders';
+import IconButton from 'material-ui/IconButton';
 
 class NamespaceList extends Component {
     constructor(props) {
@@ -23,22 +25,24 @@ class NamespaceList extends Component {
 
     renderLoading() {
         return (
-      <span>LOADING!</span>
+          <div className={'sidebar-list'} style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <Spinner size={'medium'} style={{ marginTop: '-60px' }} />
+          </div>
         );
     }
-
     renderError() {
         return (
-      <RaisedButton
-          label="Try again"
-          icon={<NavigationRefresh />}
-          onClick={this.props.fetchNamespaces}
-      />
+          <div className={'sidebar-list'} style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <IconButton style={{ marginTop: '-60px' }} onTouchTap={this.props.fetchNamespaces}>
+                <NavigationRefresh />
+            </IconButton>
+            <p>Try again</p>
+          </div>
         );
     }
 
     renderList() {
-        const { items, fetchAndToggleNamespace } = this.props;
+        const { items } = this.props;
 
         const style = { // toolbar height is 56px + 8px margin
             overflowY: 'auto',
@@ -52,7 +56,7 @@ class NamespaceList extends Component {
         return (
         <List style={style}>
         {Object.keys(items).map((item, index) => (
-            <NamespaceItem namespace={items[item]} event={fetchAndToggleNamespace} key={index} />
+            <NamespaceItem namespace={items[item]} key={index} />
         ))}
         </List>
         );
@@ -76,7 +80,6 @@ class NamespaceList extends Component {
 
 NamespaceList.propTypes = {
     fetchNamespaces: PropTypes.func,
-    fetchAndToggleNamespace: PropTypes.func,
     fetching: PropTypes.bool,
     error: PropTypes.bool,
     items: PropTypes.object,
@@ -91,9 +94,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     fetchNamespaces() {
         dispatch(fetchNamespaces());
-    },
-    fetchAndToggleNamespace(namespace) {
-        dispatch(fetchAndToggleNamespace(namespace));
     },
 });
 

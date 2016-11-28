@@ -20,6 +20,7 @@ class BreadcrumbHistoryButton extends Component {
 
 BreadcrumbHistoryButton.propTypes = {
     label: PropTypes.string,
+    last: PropTypes.bool,
 };
 
 export default BreadcrumbHistoryButton;

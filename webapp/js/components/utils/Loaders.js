@@ -14,7 +14,7 @@ export class Spinner extends Component {
 
     renderSmall() {
         return (
-      <div className="loading-small">
+      <div className="loading-small" style={this.props.style}>
         <div className="spinner">
           <div className="mask">
             <div className="maskedCircle"></div>
@@ -26,7 +26,7 @@ export class Spinner extends Component {
 
     renderMedium() {
         return (
-      <div className="loading-medium">
+      <div className="loading-medium" style={this.props.style}>
         <div className="spinner">
           <div className="mask">
             <div className="maskedCircle"></div>
@@ -38,7 +38,7 @@ export class Spinner extends Component {
 
     renderLarge() {
         return (
-      <div className="loading-large ">
+      <div className="loading-large" style={this.props.style}>
         <div className="spinner">
           <div className="mask">
             <div className="maskedCircle"></div>
@@ -61,8 +61,7 @@ export class Spinner extends Component {
         }
         default: {
             return this.renderSmall();
-        }
-        }
+        }}
     }
 }
 

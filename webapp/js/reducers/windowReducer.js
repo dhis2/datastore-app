@@ -17,7 +17,8 @@ const window = (state = initialState, action) => {
     }
 
     case actions.FETCH_HISTORY_PENDING:
-    case actions.FETCH_VALUE_PENDING: {
+    case actions.FETCH_VALUE_PENDING:
+    case actions.LOAD_VALUE: {
         return {
             ...state,
             loading: true,

@@ -9,7 +9,7 @@ import '../style/layout/layout.scss';
 
 const App = () => (
     <MuiThemeProvider>
-      <AppContainer store={store} />
+        <AppContainer store={store} />
     </MuiThemeProvider>
 );
 const render = () => {

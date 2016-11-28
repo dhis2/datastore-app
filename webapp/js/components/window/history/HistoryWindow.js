@@ -6,17 +6,39 @@ import Paper from 'material-ui/Paper';
 import HistoryToolbar from './HistoryToolbar';
 import HistoryArea from './HistoryArea';
 
+import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
+
 import '../../../../style/valueWindow/valueWindow.scss';
 
 class HistoryWindow extends Component {
 
+    componentDidMount() {
+        const { namespace, key } = this.props.params;
+        if (typeof key !== 'undefined') {
+            this.props.fetchHistory(namespace, key);
+        } else {
+            this.props.fetchHistoryForNamespace(namespace);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.params.key !== prevProps.params.key &&
+            typeof this.props.params.key !== 'undefined') {
+            this.props.fetchHistory(this.props.params.namespace, this.props.params.key);
+        }
+        else if (this.props.params.namespace !== prevProps.params.namespace) {
+                 this.props.fetchHistoryForNamespace(this.props.params.namespace);
+        }
+    }
+
     render() {
-        const { history, namespace, selectedKey } = this.props;
+        const { history } = this.props;
+        const { namespace, key } = this.props.params;
 
         return (
         <Paper className={'window'}>
-            <HistoryToolbar namespace={ namespace } selectedKey={ selectedKey } />
-            <HistoryArea list={ history } selectedKey={ selectedKey } />
+            <HistoryToolbar namespace={ namespace } selectedKey={ key } />
+            <HistoryArea list={ history } />
         </Paper>
         );
     }
@@ -34,6 +56,16 @@ const mapStateToProps = (state) => ({
     history: state.window.history,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+    fetchHistoryForNamespace(namespace) {
+        dispatch(fetchHistoryForNamespace(namespace));
+    },
+    fetchHistory(namespace, key) {
+        dispatch(fetchHistory(namespace, key));
+    },
+});
+
 export default connect(
-  mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(HistoryWindow);

@@ -6,12 +6,14 @@ import WindowToolbarTitle from '../WindowToolbarTitle';
 class HistoryToolbar extends Component {
     render() {
         const { namespace, selectedKey } = this.props;
-        const path = `${namespace}/` + (selectedKey ? `${selectedKey}/History` : 'History');
+
+        const path = selectedKey ?
+          `${namespace}/${selectedKey}` : `${namespace}`;
 
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
-                    <WindowToolbarTitle path={path} />
+                    <WindowToolbarTitle path={ path } />
                 </Toolbar>
             </Paper>
         );

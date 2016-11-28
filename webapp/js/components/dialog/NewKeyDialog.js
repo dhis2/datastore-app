@@ -5,6 +5,8 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { createAndDisplayValue } from '../../actions/actions';
 import { closeKeyDialog } from '../../actions/dialogActions';
+import { hashHistory } from 'react-router';
+
 class NamespaceDialog extends Component {
 
     constructor(props) {
@@ -26,7 +28,6 @@ class NamespaceDialog extends Component {
     }
 
     handleClose() {
-        console.log('close dialog');
         this.props.closeDialog();
     }
 
@@ -35,6 +36,7 @@ class NamespaceDialog extends Component {
         const { namespace } = this.props.dialogprops;
         if (namespace && keyValue) {
             this.props.createNamespace(namespace, keyValue);
+            hashHistory.push(`/edit/${namespace}/${keyValue}`);
         } else {
             this.setState({
                 keyError: this.validate(keyValue),

@@ -1,24 +1,29 @@
 import React, { Component, PropTypes } from 'react';
 import AppContainer from '../../../containers/AppContainer';
-import Paper from 'material-ui/Paper';
 import '../../../../style/valueWindow/valueWindow.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
+const tableHeaderStyle = {
+    borderBottom: 'solid grey 1px',
+};
+
 class HistoryArea extends Component {
     render() {
-        const { list, selectedKey } = this.props;
+        const { list } = this.props;
+
+        const backgroundStyle = {
+            backgroundColor: AppContainer.theme.palette.primary3Color,
+        };
 
         return (
-              <div className="window-area" style={{
-                  backgroundColor: AppContainer.theme.palette.primary3Color }}
-              >
-                  <Table fixedHeader headerStyle={{ 'border-bottom': 'solid grey 1px' }}>
+              <div className={ 'window-area' } style={ backgroundStyle }>
+                  <Table fixedHeader headerStyle={ tableHeaderStyle }>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>Key</TableHeaderColumn>
+                            <TableHeaderColumn>Namespace/Key</TableHeaderColumn>
                             <TableHeaderColumn>Action</TableHeaderColumn>
-                            <TableHeaderColumn>Changed To</TableHeaderColumn>
+                            <TableHeaderColumn>Change</TableHeaderColumn>
                             <TableHeaderColumn>Date Modified</TableHeaderColumn>
                             <TableHeaderColumn>Modified By</TableHeaderColumn>
                         </TableRow>
@@ -26,7 +31,7 @@ class HistoryArea extends Component {
                       <TableBody showRowHover displayRowCheckbox={false}>
                         {list.map((row, index) => (
                               <TableRow key={ index }>
-                                  <TableRowColumn>{selectedKey}</TableRowColumn>
+                                  <TableRowColumn>{row.name}</TableRowColumn>
                                   <TableRowColumn>{row.action}</TableRowColumn>
                                   <TableRowColumn>{typeof row.value === 'object' ?
                                       JSON.stringify(row.value) : row.value}
@@ -44,7 +49,6 @@ class HistoryArea extends Component {
 
 HistoryArea.propTypes = {
     list: PropTypes.array,
-    selectedKey: PropTypes.string,
 };
 
 export default WindowAreaHOC(HistoryArea);

@@ -8,7 +8,6 @@ import { closeNamespaceDialog } from '../../actions/dialogActions';
 
 class NewNamespaceDialog extends Component {
 
-
     constructor(props) {
         super(props);
 
@@ -56,7 +55,6 @@ class NewNamespaceDialog extends Component {
     validate(value) {
         return value ? '' : 'Invalid Input. Field required';
     }
-
 
     render() {
         const actions = [

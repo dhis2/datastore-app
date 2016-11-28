@@ -1,6 +1,7 @@
 import { API_URL } from '../constants/apiUrls';
 import { CREATED, UPDATED, DELETED } from '../constants/apiHistoryActions';
 import { sprintf } from 'sprintf-js';
+import btoa from 'btoa';
 
 let apiClass = undefined;
 
@@ -148,6 +149,7 @@ class Api
     updateHistory(namespace, key, newValue, action) {
         const id = this.buildId(namespace, key);
         const historyRecord = {
+            name: key,
             action,
             date: new Date(),
             user: this.userId,
@@ -171,6 +173,7 @@ class Api
 
     updateNamespaceHistory(namespace, key, historyRecord) {
         const namespaceHistoryRecord = {
+            name: namespace,
             action: historyRecord.action,
             date: new Date(),
             user: historyRecord.user,
@@ -181,6 +184,7 @@ class Api
                 console.log(response);
                 if (response.status === 404) {
                     const value = [{
+                        name: namespace,
                         action: CREATED,
                         date: namespaceHistoryRecord.date,
                         user: historyRecord.user,
@@ -196,6 +200,7 @@ class Api
 
                 if (historyRecord.action === DELETED && this.cache[namespace].length === 0) {
                     history.unshift({
+                        name: namespace,
                         action: DELETED,
                         date: new Date(),
                         user: historyRecord.user,

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Sidebar from '../../components/sidebar/Sidebar';
 import DialogRoot from '../../components/dialog/DialogRoot';
-import WindowManager from '../../components/window/WindowManager';
 import '../../../style/pages/homepage.scss';
 
 class HomePage extends Component {
@@ -11,7 +10,7 @@ class HomePage extends Component {
         return (
             <div className="home-page-container">
                 <Sidebar />
-                <WindowManager />
+                { this.props.children }
                 <DialogRoot />
             </div>
         );

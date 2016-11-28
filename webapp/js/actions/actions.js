@@ -147,6 +147,12 @@ function requestDeleteKey(namespace, key) {
     };
 }
 
+function loadValue() {
+    return {
+        type: actions.LOAD_VALUE,
+    };
+}
+
 function receiveDeleteKey(namespace, key) {
     return {
         type: actions.DELETE_KEY_FULFILLED,
@@ -200,7 +206,7 @@ export function recieveHistory(namespace, key, history) {
         namespace,
         key,
         history,
-    }
+    };
 }
 
 export function rejectHistory(namespace, key, error) {
@@ -211,7 +217,6 @@ export function rejectHistory(namespace, key, error) {
         error,
     };
 }
-
 
 export function recieveNamespaceHistory(namespace, history) {
     return {
@@ -254,6 +259,34 @@ export function selectKey(namespace, key, value) {
         namespace,
         key,
         value,
+    };
+}
+
+/* Open a modal with given props, if no props are given
+ * dialogprops will be an empty object.*/
+export function openDialog(dialogprops) {
+    return {
+        type: actions.OPEN_DIALOG,
+        dialogType: 'NEW_NAMESPACE',
+        dialogprops: { ...dialogprops }, //ensure empty object
+    };
+}
+
+/* Open a modal with given props, if no props are given
+ * dialogprops will be an empty object.*/
+export function closeDialog(dialogprops) {
+    return {
+        type: actions.CLOSE_DIALOG,
+        dialogType: 'NEW_NAMESPACE',
+        dialogprops: { ...dialogprops }, //ensure empty object
+    };
+}
+
+export function createNewNamespace(namespace, key) {
+    return {
+        type: actions.CREATE_NAMESPACE,
+        namespace,
+        key,
     };
 }
 
@@ -302,14 +335,30 @@ export function fetchAndDisplayKeyValue(namespace, key) {
             .then(value => {
                 dispatch(recieveValue(namespace, key, value));
                 dispatch(selectKey(namespace, key, value));
-                dispatch(changeWindow('edit'));
             })
             .catch(error => dispatch(rejectValue(namespace, key, error)));
     };
 }
 
+export function getValue(namespace, key) {
+    return dispatch => {
+        dispatch(loadValue());
+        return api.getValue(namespace, key).
+            then(value => dispatch(selectKey(namespace, key, value)));
+    };
+}
 
-
+/**
+ * @function createAndDisplayValue
+ * Creates a value with key in namespace.
+ *
+ * On success, the namespace will be opened and the empty
+ * value will be displayed. Note that this is used both for
+ * creating namespaces and keys. See {@link createValue}
+ * @param namespace namespace to create or update
+ * @param key to create
+ * @returns action thunk
+ */
 export function fetchNamespaces() {
     return dispatch => {
         dispatch(requestNamespaces());
@@ -421,12 +470,6 @@ export function fetchHistoryForNamespace(namespace) {
     };
 }
 
-export function updateHistory(namespace, key, value) {
-    return dispatch => api.updateHistory(namespace, key, value)
-            .then(success => console.log(success))
-            .catch(error => console.log(error));
-}
-
 /** @function updateValue
  *
  * Updates a value with key in namespace.
@@ -437,7 +480,6 @@ export function updateHistory(namespace, key, value) {
  */
 export function updateValue(namespace, key, value) {
     return dispatch => {
-        console.log('update value');
         dispatch(requestUpdateValue(namespace, key, value));
         return api.updateValue(namespace, key, value)
             .then(() => dispatch(receiveUpdateValue(namespace, key, value)))
