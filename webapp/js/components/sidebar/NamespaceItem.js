@@ -23,11 +23,8 @@ import { openKeyDialog,
          openConfirmDeleteNamespaceDialog,
          openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
 import { fetchAndDisplayKeyValue,
-         displayHistoryStatsForNamespace,
          fetchAndToggleNamespace,
-         fetchHistory,
-         toggleNamespace,
-         fetchHistoryForNamespace } from '../../actions/actions';
+         toggleNamespace } from '../../actions/actions';
 
 
 const styles = {
@@ -56,24 +53,20 @@ class NamespaceItem extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            open: false,
-        };
-
-        this.handleDeleteKey = this.handleDeleteKey.bind(this);
-        this.handleHistoryKey = this.handleHistoryKey.bind(this);
-        this.handleHistoryNamespace = this.handleHistoryNamespace.bind(this);
         this.constructKeyItem = this.constructKeyItem.bind(this);
+        this.handleNewKey = this.handleNewKey.bind(this);
+        this.handleDeleteNamespace = this.handleDeleteNamespace.bind(this);
         this.renderOpen = this.renderOpen.bind(this);
         this.renderError = this.renderError.bind(this);
+        this.toggleHandler = this.toggleHandler.bind(this);
     }
 
     toggleHandler() {
-        const { namespace } = this.props;
-        if (!namespace.open) {
-            this.props.fetchAndToggleNamespace(namespace.name);
+        const { openNamespace, closeNamespace, namespace: { open, name } } = this.props;
+        if (!open) {
+            openNamespace(name);
         } else {
-            this.props.toggleNamespace(namespace.name);
+            closeNamespace(name);
         }
     }
 
@@ -85,24 +78,12 @@ class NamespaceItem extends Component {
         this.props.deleteNamespace(this.props.namespace.name);
     }
 
-    handleHistoryKey(namespace, key) {
-        this.props.fetchHistory(namespace, key);
-    }
-
-    handleDeleteKey(namespace, key) {
-        this.props.deleteKeyInNamespace(namespace, key);
-    }
-
-    handleHistoryNamespace(namespace) {
-        this.props.fetchHistoryForNamespace(namespace);
-    }
-
-    handleHistoryStatsNamespace() {
-        this.props.displayStats(this.props.namespace.name);
+    handeDeleteKey() {
+        this.props.deleteNamespace(this.props.namespace.name);
     }
 
     constructKeyItem(key, index) {
-        const namespace = this.props.namespace.name;
+        const { deleteKeyInNamespace, namespace: { name: namespace } } = this.props;
         const keyItemMenu = (
             <IconMenu iconButtonElement={iconButtonElement}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
@@ -112,7 +93,7 @@ class NamespaceItem extends Component {
                 <MenuItem containerElement={<Link to={`/history/${namespace}/${key}`} />} leftIcon={<History />}>
                     History
                 </MenuItem>
-                <MenuItem leftIcon={<Delete />} onTouchTap={() => this.handleDeleteKey(namespace, key)}>
+                <MenuItem leftIcon={<Delete />} onTouchTap={() => deleteKeyInNamespace(namespace, key)}>
                     Delete key
                 </MenuItem>
             </IconMenu>);
@@ -127,15 +108,15 @@ class NamespaceItem extends Component {
     }
 
     renderOpen() {
-        const { keys, name, open, fetching } = this.props.namespace;
+        const { namespace: { keys, name, open, fetching } } = this.props;
         const items = [];
 
         const rightIconMenu = (
-            <IconMenu iconButtonElement={iconButtonElement} disableAutoFocus
+            <IconMenu disableAutoFocus iconButtonElement={ iconButtonElement }
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                 targetOrigin={{ vertical: 'top', horizontal: 'left' }}
             >
-                <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.handleNewKey.bind(this)}>
+                <MenuItem leftIcon={<NoteAdd />} onTouchTap={ this.handleNewKey }>
                     New key
                 </MenuItem>
                 <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>
@@ -144,48 +125,33 @@ class NamespaceItem extends Component {
                 <MenuItem containerElement={<Link to={`/history/${name}`} />} leftIcon={<History />}>
                     History
                 </MenuItem>
-                <MenuItem leftIcon={<Delete />} onTouchTap={this.handleDeleteNamespace.bind(this)}>
+                <MenuItem leftIcon={<Delete />} onTouchTap={ this.handleDeleteNamespace }>
                     Delete
                 </MenuItem>
             </IconMenu>
         );
+
         // Populate nestedItems if keys are loaded
         if (keys) {
             Object.keys(keys).forEach((item, index) => {
                 items.push(this.constructKeyItem(item, index));
             });
         }
+
         let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
+
         if (fetching) {
             leftIcon = (<Spinner />);
         }
+
         return (
             <ListItem primaryText={<div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</div>}
                 open={open}
                 leftIcon={leftIcon}
                 rightIconButton={rightIconMenu}
                 nestedItems={items}
-                onTouchTap={this.toggleHandler.bind(this)}
+                onTouchTap={this.toggleHandler}
                 nestedListStyle={styles.keyItemList}
-            />
-        );
-    }
-
-    renderClosed() {
-        const { name } = this.props.namespace;
-        const { event } = this.props;
-
-        return (
-            <ListItem primaryText={name} leftIcon={<FileFolder />} onClick={() => event(name)} />
-        );
-    }
-
-    renderLoading() {
-        const { name } = this.props.namespace;
-
-        return (
-            <ListItem primaryText={<div style={styles.innerText}>{name}</div>}
-                leftIcon={<Spinner />} rightIcon={<MoreVertIcon />}
             />
         );
     }
@@ -214,8 +180,8 @@ class NamespaceItem extends Component {
 
 NamespaceItem.propTypes = {
     fetchAndDisplayKeyValue: PropTypes.func,
-    fetchAndToggleNamespace: PropTypes.func,
-    toggleNamespace: PropTypes.func,
+    openNamespace: PropTypes.func,
+    closeNamespace: PropTypes.func,
     deleteNamespace: PropTypes.func,
     newKey: PropTypes.func,
     deleteKeyInNamespace: PropTypes.func,
@@ -234,13 +200,10 @@ const mapDispatchToProps = (dispatch) => ({
     fetchAndDisplayKeyValue(namespace, key) {
         dispatch(fetchAndDisplayKeyValue(namespace, key));
     },
-    fetchAndToggleNamespace(namespace) {
+    openNamespace(namespace) {
         dispatch(fetchAndToggleNamespace(namespace));
     },
-    displayStats(namespace) {
-        dispatch(displayHistoryStatsForNamespace(namespace));
-    },
-    toggleNamespace(namespace) {
+    closeNamespace(namespace) {
         dispatch(toggleNamespace(namespace));
     },
     deleteNamespace(namespace) {
@@ -251,12 +214,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     deleteKeyInNamespace(namespace, key) {
         dispatch(openConfirmDeleteKeyDialog({ namespace, key }));
-    },
-    fetchHistory(namespace, key) {
-        dispatch(fetchHistory(namespace, key));
-    },
-    fetchHistoryForNamespace(namespace) {
-        dispatch(fetchHistoryForNamespace(namespace));
     },
 });
 

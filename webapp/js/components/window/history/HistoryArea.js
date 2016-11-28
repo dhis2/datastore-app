@@ -1,19 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import AppContainer from '../../../containers/AppContainer';
-import Paper from 'material-ui/Paper';
 import '../../../../style/valueWindow/valueWindow.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
+
+const tableHeaderStyle = {
+    borderBottom: 'solid grey 1px',
+};
 
 class HistoryArea extends Component {
     render() {
         const { list } = this.props;
 
+        const backgroundStyle = {
+            backgroundColor: AppContainer.theme.palette.primary3Color,
+        };
+
         return (
-              <div className="window-area" style={{
-                  backgroundColor: AppContainer.theme.palette.primary3Color }}
-              >
-                  <Table fixedHeader headerStyle={{ 'border-bottom': 'solid grey 1px' }}>
+              <div className={ 'window-area' } style={ backgroundStyle }>
+                  <Table fixedHeader headerStyle={ tableHeaderStyle }>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
                             <TableHeaderColumn>Namespace/Key</TableHeaderColumn>

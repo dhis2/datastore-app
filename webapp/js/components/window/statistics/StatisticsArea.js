@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { ModeCommentIconWithText } from '../../utils/Icons';
 import Paper from 'material-ui/Paper';
 import '../../../../style/valueWindow/valueWindow.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
-import {Line, defaults } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 class StatisticsArea extends Component {
     prepareData() {
         const { list } = this.props;
@@ -24,7 +23,7 @@ class StatisticsArea extends Component {
             datesToValMap[today] = 0;
         }
 
-        let dates = Object.keys(datesToValMap).sort();
+        const dates = Object.keys(datesToValMap).sort();
         dates.map((date, index) => yVal[index] = datesToValMap[date]);
 
         return {
@@ -36,7 +35,7 @@ class StatisticsArea extends Component {
                 backgroundColor: 'rgb(25, 118, 210)',
                 borderColor: 'rgba(25,118,210,0.77)',
             }],
-        }
+        };
     }
 
     render() {
@@ -67,8 +66,8 @@ class StatisticsArea extends Component {
 
         return (
             <Paper className={'window-area'}>
-                <div style={{width:'90%', margin:'0 auto 0 auto'}}>
-                    <Line redraw data={data} options={opts}></Line>
+                <div style={{ width: '90%', margin: '0 auto 0 auto' }} >
+                    <Line redraw data={data} options={opts} />
                 </div>
             </Paper>
         );

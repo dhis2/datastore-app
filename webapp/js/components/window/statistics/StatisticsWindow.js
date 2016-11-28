@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 
@@ -10,47 +10,58 @@ import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions
 
 class StatisticsWindow extends Component {
     componentDidMount() {
-        const { namespace, key } = this.props.params;
+        const { getHistoryForKey, getHistoryForNamespace, params: { namespace, key } } = this.props;
         if (typeof key !== 'undefined') {
-            this.props.fetchHistory(namespace, key);
+            getHistoryForKey(namespace, key);
         } else {
-            this.props.fetchHistoryForNamespace(namespace);
+            getHistoryForNamespace(namespace);
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.params.key !== prevProps.params.key &&
-            typeof this.props.params.key !== 'undefined') {
-            this.props.fetchHistory(this.props.params.namespace, this.props.params.key);
+        const { getHistoryForKey, getHistoryForNamespace, params: currentParams } = this.props;
+        const { params: prevParams } = prevProps;
+
+        if (currentParams.key !== prevParams.key &&
+            typeof currentParams.key !== 'undefined') {
+            getHistoryForKey(currentParams.namespace, currentParams.key);
         }
-        else if (this.props.params.namespace !== prevProps.params.namespace) {
-                 this.props.fetchHistoryForNamespace(this.props.params.namespace);
+        else if (currentParams.namespace !== prevParams.namespace) {
+            getHistoryForNamespace(currentParams.namespace);
         }
     }
 
     render() {
-
-        const { namespace } = this.props.params;
+        const { history, params: { namespace } } = this.props;
         return (
-        <Paper className={'value-container'}>
-            <StatisticsToolbar namespace={this.props.namespace}/>
-            <StatisticsArea list={this.props.history} namespace={this.props.namespace}/>
+        <Paper className={ 'value-container' }>
+            <StatisticsToolbar namespace={ namespace } />
+            <StatisticsArea list={ history } namespace={ namespace } />
         </Paper>
         );
     }
 }
 
+StatisticsWindow.propTypes = {
+    getHistoryForKey: PropTypes.func,
+    getHistoryForNamespace: PropTypes.func,
+    history: PropTypes.array,
+    params: PropTypes.shape({
+        namespace: PropTypes.string,
+        key: PropTypes.string,
+    }),
+};
+
 const mapStateToProps = (state) => ({
-    namespace: state.window.namespace,
     history: state.window.history,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchHistoryForNamespace(namespace) {
-        dispatch(fetchHistoryForNamespace(namespace))
+    getHistoryForNamespace(namespace) {
+        dispatch(fetchHistoryForNamespace(namespace));
     },
-    fetchHistory(namespace, key) {
-        dispatch(fetchHistory(namespace, key))
+    getHistoryForKey(namespace, key) {
+        dispatch(fetchHistory(namespace, key));
     },
 });
 

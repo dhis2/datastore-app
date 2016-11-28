@@ -19,12 +19,12 @@ export class ModeCommentIconWithText extends Component {
     render() {
         const { text } = this.props;
         return (
-      <div className="value-area" style={style}>
-        <div>
-          <ModeComment style={iconStyle} />
-          <p>{ text }</p>
-        </div>
-      </div>
+          <div className="value-area" style={style}>
+            <div>
+              <ModeComment style={iconStyle} />
+              <p>{ text }</p>
+            </div>
+          </div>
         );
     }
 }

@@ -26,20 +26,11 @@ class NamespaceList extends Component {
     renderLoading() {
         return (
           <div className={'sidebar-list'} style={{ alignItems: 'center', justifyContent: 'center' }}>
-              <Spinner size={'medium'} style={{marginTop: "-60px"}} />
+              <Spinner size={'medium'} style={{ marginTop: '-60px' }} />
           </div>
         );
     }
     renderError() {
-
-        const iconStyle = {
-            fill: 'rgb(117, 117, 117)',
-            display: 'block',
-            margin: '0 auto 0 auto',
-            width: '75px',
-            height: 'auto',
-            marginTop: '-60px',
-        };
         return (
           <div className={'sidebar-list'} style={{ alignItems: 'center', justifyContent: 'center' }}>
             <IconButton style={{ marginTop: '-60px' }} onTouchTap={this.props.fetchNamespaces}>
@@ -51,7 +42,7 @@ class NamespaceList extends Component {
     }
 
     renderList() {
-        const { items, fetchAndToggleNamespace } = this.props;
+        const { items } = this.props;
 
         const style = { // toolbar height is 56px + 8px margin
             overflowY: 'auto',
@@ -65,7 +56,7 @@ class NamespaceList extends Component {
         return (
         <List style={style}>
         {Object.keys(items).map((item, index) => (
-            <NamespaceItem namespace={items[item]} event={fetchAndToggleNamespace} key={index} />
+            <NamespaceItem namespace={items[item]} key={index} />
         ))}
         </List>
         );
@@ -89,7 +80,6 @@ class NamespaceList extends Component {
 
 NamespaceList.propTypes = {
     fetchNamespaces: PropTypes.func,
-    fetchAndToggleNamespace: PropTypes.func,
     fetching: PropTypes.bool,
     error: PropTypes.bool,
     items: PropTypes.object,
@@ -104,9 +94,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     fetchNamespaces() {
         dispatch(fetchNamespaces());
-    },
-    fetchAndToggleNamespace(namespace) {
-        dispatch(fetchAndToggleNamespace(namespace));
     },
 });
 
