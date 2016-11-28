@@ -13,6 +13,7 @@ const window = (state = initialState, action) => {
         return {
             ...state,
             currentWindow,
+            error: null
         };
     }
 
@@ -22,6 +23,7 @@ const window = (state = initialState, action) => {
         return {
             ...state,
             loading: true,
+            error: null
         };
     }
 
@@ -50,6 +52,7 @@ const window = (state = initialState, action) => {
             loading: false,
             namespace,
             history,
+            error: null
         };
     }
 

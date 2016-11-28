@@ -13,7 +13,12 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
                 ...state,
             };
         }
-
+        case actions.LOAD_VALUE: {
+            return {
+                ...state,
+                ...emptySnackbar
+            }
+        }
         case actions.SELECT_NAMESPACE:
         {
             const {selectedNamespace} = action;
@@ -31,6 +36,7 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
                 namespace,
                 key,
                 value,
+                ...emptySnackbar,
                 editedValue: {},
             };
         }
@@ -64,6 +70,14 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
                 },
                 updateError: true,
             };
+        }
+        case actions.FETCH_HISTORY_REJECTED: {
+            return {
+                ...state,
+                snackbarMessage: {
+                    message: 'Failed to get history.'
+                }
+            }
         }
         case actions.OPEN_DIALOG:
         {

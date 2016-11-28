@@ -44,7 +44,7 @@ Layout.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    snackbarMessage: state.api.snackbarMessage,
+    snackbarMessage: state.ui.snackbarMessage,
     openNameSpaceDialog: state.ui.openNamespaceDialog,
 });
 
