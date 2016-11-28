@@ -1,15 +1,12 @@
-.folder-icon {
-  padding: 0 .5em 0 0;
-}
+@import "../icons";
 
 .namespace-title {
-padding: 0.5em;
+  padding: 0.5em;
   &:hover{
     background-color: red;
     cursor: pointer;
   }
 }
-
 
 .loading-namespace {
   float: right;
