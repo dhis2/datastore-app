@@ -1,6 +1,6 @@
 import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
-
+import {hashHistory, browserHistory} from 'react-router';
 
 /**
  *  Namespace Action Creators
@@ -262,42 +262,6 @@ export function selectKey(namespace, key, value) {
     };
 }
 
-/* Open a modal with given props, if no props are given
- * dialogprops will be an empty object.*/
-export function openDialog(dialogprops) {
-    return {
-        type: actions.OPEN_DIALOG,
-        dialogType: 'NEW_NAMESPACE',
-        dialogprops: { ...dialogprops }, //ensure empty object
-    };
-}
-
-/* Open a modal with given props, if no props are given
- * dialogprops will be an empty object.*/
-export function closeDialog(dialogprops) {
-    return {
-        type: actions.CLOSE_DIALOG,
-        dialogType: 'NEW_NAMESPACE',
-        dialogprops: { ...dialogprops }, //ensure empty object
-    };
-}
-
-export function createNewNamespace(namespace, key) {
-    return {
-        type: actions.CREATE_NAMESPACE,
-        namespace,
-        key,
-    };
-}
-
-
-export function setBrowserList(list) {
-    return {
-        type: actions.SET_BROWSER_LIST,
-        payload: list,
-    };
-}
-
 export function fetchAndToggleNamespace(namespace, openNamespace = false) {
     return dispatch => {
         dispatch(requestKeys(namespace));
@@ -348,14 +312,8 @@ export function getValue(namespace, key) {
 }
 
 /**
- * @function createAndDisplayValue
- * Creates a value with key in namespace.
- *
- * On success, the namespace will be opened and the empty
- * value will be displayed. Note that this is used both for
- * creating namespaces and keys. See {@link createValue}
- * @param namespace namespace to create or update
- * @param key to create
+ * @function fetchNamespaces
+ * Intial fetching of namespaces
  * @returns action thunk
  */
 export function fetchNamespaces() {
@@ -404,8 +362,8 @@ export function createValue(namespace, key, value) {
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
         dispatch(createValue(namespace, key, {}))
+            .then(() => hashHistory.push(`/edit/${namespace}/${key}`))
             .then(() => dispatch(fetchAndToggleNamespace(namespace, true)))
-            .then(() => dispatch(fetchAndDisplayKeyValue(namespace, key)))
             .catch(error => dispatch(rejectCreateValue(namespace, key, {}, error)));
     };
 }
