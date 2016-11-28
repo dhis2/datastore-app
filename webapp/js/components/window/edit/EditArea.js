@@ -36,14 +36,12 @@ class EditArea extends Component {
 EditArea.propTypes = {
     namespace: PropTypes.string,
     selectedKey: PropTypes.string,
-    updateError: PropTypes.string,
     updateValue: PropTypes.func,
     valueChange: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
     value: state.ui.value,
-    updateError: state.ui.updateError,
 });
 
 const mapDispatchToProps = (dispatch) => ({

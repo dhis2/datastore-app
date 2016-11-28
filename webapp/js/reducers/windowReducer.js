@@ -13,6 +13,7 @@ const window = (state = initialState, action) => {
         return {
             ...state,
             currentWindow,
+            error: null
         };
     }
 
@@ -22,6 +23,7 @@ const window = (state = initialState, action) => {
         return {
             ...state,
             loading: true,
+            error: null
         };
     }
 
@@ -30,6 +32,15 @@ const window = (state = initialState, action) => {
             ...state,
             loading: false,
         };
+    }
+
+    case actions.FETCH_VALUE_REJECTED: {
+        const { error  } = action;
+        return {
+            ...state,
+            error: true,
+            loading: false
+        }
     }
 
     case actions.FETCH_HISTORY_FULFILLED: {
@@ -50,6 +61,7 @@ const window = (state = initialState, action) => {
             loading: false,
             namespace,
             history,
+            error: null
         };
     }
 
@@ -59,7 +71,7 @@ const window = (state = initialState, action) => {
             ...state,
             loading: false,
             namespace,
-            error,
+            error: true
         };
     }
 

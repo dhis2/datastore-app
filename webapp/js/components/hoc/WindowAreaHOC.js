@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 import LoadingArea from '../window/LoadingArea';
-
+import { ErrorIconWithText } from '../utils/Icons';
 import '../../../style/valueWindow/valueWindow.scss';
 
 const WindowAreaHOC = (Area) => {
@@ -19,9 +19,7 @@ const WindowAreaHOC = (Area) => {
         }
 
         renderError() {
-            return (
-                <div>ERROR</div>
-            );
+            return <ErrorIconWithText  text="An error has occured."/>;
         }
 
         render() {

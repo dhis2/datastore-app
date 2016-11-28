@@ -304,7 +304,6 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
         return api.getKeys(namespace)
             .then(keys => {
                 dispatch(recieveKeys(namespace, keys));
-                dispatch(setBrowserList(keys));
             })
             .then(() => dispatch(toggleNamespace(namespace, openNamespace)))
             .catch(error => {

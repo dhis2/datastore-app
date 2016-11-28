@@ -6,26 +6,32 @@ import Paper from 'material-ui/Paper';
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
 
-import { getValue } from '../../../actions/actions';
+import { getValue,fetchAndDisplayKeyValue, fetchAndToggleNamespace } from '../../../actions/actions';
 
 import '../../../../style/valueWindow/valueWindow.scss';
 
 class EditWindow extends Component {
 
     componentDidMount() {
-        const { getValue, params: { namespace, key } } = this.props;
+        const { getValue, fetchedNamespaces,fetchKeysForNamespace,
+            params: { namespace, key } } = this.props;
         if (typeof namespace !== 'undefined' && typeof key !== 'undefined') {
             getValue(namespace, key);
         }
     }
 
-    componentDidUpdate(prevProps) {
-        const { getValue, params: currentParams } = this.props;
-        const { params: prevParams } = prevProps;
+    componentWillReceiveProps(nextProps) {
 
-        if (currentParams.namespace !== prevParams.namespace ||
-            currentParams.key !== prevParams.key) {
-            getValue(currentParams.namespace, currentParams.key);
+        const {fetchedNamespaces,fetchKeysForNamespace, params: nextParams } = nextProps;
+        const {getValue,params: currentParams} = this.props;
+
+        //This will trigger if we navigate with url and namespaces were not fetched
+        if(!this.props.fetchedNamespaces && fetchedNamespaces )  {
+            fetchKeysForNamespace(nextParams.namespace)
+        }
+        if(currentParams.namespace !== nextParams.namespace ||
+            currentParams.key !== nextParams.key) {
+            getValue(nextParams.namespace, nextParams.key);
         }
     }
 
@@ -61,12 +67,16 @@ EditWindow.propTypes = {
 
 const mapStateToProps = (state) => ({
     value: state.ui.value,
+    fetchedNamespaces : state.api.fetched
 });
 
 const mapDispatchToProps = (dispatch) => ({
     getValue(namespace, key) {
-        dispatch(getValue(namespace, key));
+        dispatch(fetchAndDisplayKeyValue(namespace, key));
     },
+    fetchKeysForNamespace(namespace) {
+        dispatch(fetchAndToggleNamespace(namespace))
+    }
 });
 
 export default connect(
