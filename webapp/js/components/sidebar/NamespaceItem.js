@@ -1,7 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-
 import { connect } from 'react-redux';
-
 import { Spinner } from '../utils/Loaders';
 import { ErrorIcon } from '../utils/Icons';
 import FileFolder from 'material-ui/svg-icons/file/folder';
@@ -17,8 +15,7 @@ import { grey500 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import { Link, browserHistory, hashHistory } from 'react-router';
-
+import { Link, hashHistory } from 'react-router';
 import { openKeyDialog,
          openConfirmDeleteNamespaceDialog,
          openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
@@ -78,9 +75,6 @@ class NamespaceItem extends Component {
         this.props.deleteNamespace(this.props.namespace.name);
     }
 
-    handeDeleteKey() {
-        this.props.deleteNamespace(this.props.namespace.name);
-    }
 
     constructKeyItem(key, index) {
         const { deleteKeyInNamespace, namespace: { name: namespace } } = this.props;

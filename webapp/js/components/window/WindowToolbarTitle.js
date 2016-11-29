@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-
 import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton';
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import '../../../style/toolbarTitle.scss';
+
 
 class WindowToolbarTitle extends Component {
     renderPath(path) {

@@ -19,7 +19,7 @@ const WindowAreaHOC = (Area) => {
         }
 
         renderError() {
-            return <ErrorIconWithText  text="An error has occured."/>;
+            return <ErrorIconWithText text="An error has occured."/>;
         }
 
         render() {

@@ -1,6 +1,4 @@
 import React, { PropTypes, Component } from 'react';
-
-import '../../../style/valueWindow/valueWindow.scss';
 import JSEditor from 'jsoneditor/dist/jsoneditor.min';
 import '../../../style/vendor/jsoneditor.css';
 
@@ -17,10 +15,8 @@ class JSONEditor extends Component {
 
     /* Need custom update condition as we only re-render when the value changes.*/
     shouldComponentUpdate(nextProps) {
-        if (this.props.value === nextProps.value) {
-            return false;
-        }
-        return true;
+        return this.props.value !== nextProps.value;
+
     }
 
     componentWillUpdate(nextProps) {
@@ -43,8 +39,13 @@ class JSONEditor extends Component {
     }
 
     render() {
+      
+        const style = {
+            backgroundColor: 'white'
+        };
+
         return (
-            <div id="jsoneditor" ref={(container) => this.editorContainer = container}>
+            <div id="jsoneditor" style={style} ref={(container) => this.editorContainer = container}>
             </div>
         );
     }
