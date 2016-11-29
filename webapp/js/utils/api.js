@@ -207,18 +207,26 @@ class Api
             }).then(history => {
                 history.unshift(namespaceHistoryRecord);
 
-                if (historyRecord.action === DELETED && this.cache[namespace] && this.cache[namespace].length === 0) {
-                    history.unshift({
-                        name: namespace,
-                        action: DELETED,
-                        date: new Date(),
-                        user: historyRecord.user,
-                        value: 'Namespace was deleted.',
-                    });
-                    delete this.cache[namespace];
-                }
+                if (historyRecord.action === DELETED) {
+                    this.getKeys(namespace)
+                        .then(response => {
+                            if (response.status === 404) {
+                                history.unshift({
+                                    name: namespace,
+                                    action: DELETED,
+                                    date: new Date(),
+                                    user: historyRecord.user,
+                                    value: 'Namespace was deleted.',
+                                });
 
-                this.updateValue('HISTORYSTORE', namespace, history, false);
+                                delete this.cache[namespace];
+                            }
+
+                            this.updateValue('HISTORYSTORE', namespace, history, false);
+                        });
+                } else {
+                    this.updateValue('HISTORYSTORE', namespace, history, false);
+                }
             });
     }
 
