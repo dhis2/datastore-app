@@ -9,9 +9,13 @@ class StatisticsArea extends Component {
         const { list } = this.props;
         const yVal = [];
         const datesToValMap = {};
-
+        const today = new Date().toISOString().substring(0, 10);
         list.map(obj => {
             const date = obj.date.substring(0, 10); // Get date only
+
+            if (date > today) {
+                return null;
+            }
             if (datesToValMap[date]) {
                 datesToValMap[date]++;
             } else {
@@ -19,7 +23,7 @@ class StatisticsArea extends Component {
             }
         });
 
-        const today = new Date().toISOString().substring(0, 10);
+
         if (!datesToValMap[today]) { // add datapoint for now
             datesToValMap[today] = 0;
         }

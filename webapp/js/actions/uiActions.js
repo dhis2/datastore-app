@@ -1,8 +1,8 @@
-import * as actions from '../constants/actions';
+import * as actions from '../constants/actionTypes';
 
-export function changeWindow(window) {
+export function searchSidebarChange(value) {
     return {
-        type: actions.CHANGE_WINDOW,
-        window,
+        type: actions.SEARCH_VALUE_CHANGE,
+        searchValue: value,
     };
 }
