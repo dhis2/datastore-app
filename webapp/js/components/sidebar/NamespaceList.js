@@ -39,6 +39,28 @@ class NamespaceList extends Component {
         );
     }
 
+    filterNamespaces(item) {
+        const { searchValue } = this.props;
+        let nameEnd = searchValue.indexOf('#');
+        // Seperator not present, search entire word
+        if (nameEnd < 0) {
+            nameEnd = searchValue.length;
+        }
+        const nameSearch = searchValue.substring(0, nameEnd)
+        return item.toLowerCase().includes(nameSearch);
+    }
+
+    filterKeys(item) {
+        const { searchValue } = this.props;
+        const keyInd = searchValue.indexOf('#') + 1;
+        //match all keys if seperator is not defined
+        if (keyInd <= 0) {
+            return true;
+        }
+        const keySearch = searchValue.substring(keyInd, searchValue.length)
+        return item.toLowerCase().includes(keySearch);
+    }
+
     renderList() {
         const { items, searchValue } = this.props;
 
@@ -53,9 +75,9 @@ class NamespaceList extends Component {
 
         return (
         <List style={style}>
-        {Object.keys(items).sort().filter((item) => item.toLowerCase().includes(searchValue))
+        {Object.keys(items).sort().filter(item => this.filterNamespaces.bind(this)(item))
             .map((item, index) => (
-                <NamespaceItem namespace={items[item]} key={index} />
+                <NamespaceItem namespace={items[item]} key={index} filter={this.filterKeys.bind(this)} />
         ))}
         </List>
         );

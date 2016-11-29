@@ -110,7 +110,7 @@ class NamespaceItem extends Component {
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                 targetOrigin={{ vertical: 'top', horizontal: 'left' }}
             >
-                <MenuItem leftIcon={<NoteAdd />} onTouchTap={ this.handleNewKey }>
+                <MenuItem leftIcon={<NoteAdd />} onClick={ this.handleNewKey }>
                     New key
                 </MenuItem>
                 <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>
@@ -127,7 +127,7 @@ class NamespaceItem extends Component {
 
         // Populate nestedItems if keys are loaded
         if (keys) {
-            Object.keys(keys).forEach((item, index) => {
+            Object.keys(keys).filter(item => this.props.filter(item)).forEach((item, index) => {
                 items.push(this.constructKeyItem(item, index));
             });
         }

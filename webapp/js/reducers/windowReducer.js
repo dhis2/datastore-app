@@ -40,6 +40,7 @@ const window = (state = initialState, action) => {
         };
     }
 
+    case actions.CREATE_VALUE_REJECTED:
     case actions.FETCH_VALUE_REJECTED: {
         const { error  } = action;
         return {
