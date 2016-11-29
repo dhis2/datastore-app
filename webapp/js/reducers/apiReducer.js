@@ -125,27 +125,6 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
          *  Values
          */
 
-    case actions.FETCH_VALUE_FULFILLED:
-        {
-            const { namespace, key, value } = action;
-            return {
-                ...state,
-                ...fetchedState,
-                namespaces: {
-                    ...state.namespaces,
-                    [namespace]: {
-                        ...state.namespaces[namespace],
-                        keys: {
-                            ...state.namespaces[namespace].keys,
-                            [key]: {
-                                ...state.namespaces[namespace].keys[key],
-                                value,
-                            },
-                        },
-                    },
-                },
-            };
-        }
 
     case actions.UPDATE_VALUE_FULFILLED:
         {
@@ -172,6 +151,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         /**
          *
          */
+    case actions.FETCH_VALUE_FULFILLED:
     case actions.CREATE_VALUE_FULFILLED:
         {
             const { namespace, key } = action;

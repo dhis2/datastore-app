@@ -41,6 +41,7 @@ class JSONEditor extends Component {
     render() {
         const style = {
             backgroundColor: 'white',
+            height:'100%'
         };
 
         return (

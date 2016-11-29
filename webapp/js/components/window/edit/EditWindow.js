@@ -6,15 +6,14 @@ import Paper from 'material-ui/Paper';
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
 
-import { getValue,fetchAndDisplayKeyValue, fetchAndToggleNamespace } from '../../../actions/actions';
+import { fetchAndDisplayKeyValue, fetchAndToggleNamespace } from '../../../actions/actions';
 
 import '../../../../style/valueWindow/valueWindow.scss';
 
 class EditWindow extends Component {
 
     componentDidMount() {
-        const { getValue, fetchedNamespaces,fetchKeysForNamespace,
-            params: { namespace, key } } = this.props;
+        const { getValue, params: { namespace, key } } = this.props;
         if (typeof namespace !== 'undefined' && typeof key !== 'undefined') {
             getValue(namespace, key);
         }
@@ -22,19 +21,20 @@ class EditWindow extends Component {
 
     componentWillReceiveProps(nextProps) {
 
-        const {fetchedNamespaces,fetchKeysForNamespace, params: nextParams } = nextProps;
-        const {getValue,params: currentParams} = this.props;
+        const { fetchedNamespaces, params: nextParams } = nextProps;
+        const { fetchKeysForNamespace,
+            getValue,params: currentParams} = this.props;
 
-        //This will trigger if we navigate with url and namespaces were not fetched
+        //Load keys for namespace if its not already loaded
         if(!this.props.fetchedNamespaces && fetchedNamespaces )  {
             fetchKeysForNamespace(nextParams.namespace)
         }
-        if(currentParams.namespace !== nextParams.namespace ||
-            currentParams.key !== nextParams.key) {
+        //Get value when url is different from last, and namespaces are fetched.
+        if((currentParams.namespace !== nextParams.namespace ||
+            currentParams.key !== nextParams.key)  && fetchedNamespaces) {
             getValue(nextParams.namespace, nextParams.key);
         }
     }
-
     render() {
         const { namespace, key } = this.props.params;
 

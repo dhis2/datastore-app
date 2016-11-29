@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton';
 import '../../../style/toolbarTitle.scss';
 
+
 class WindowToolbarTitle extends Component {
     renderPath(path) {
         const pathArray = path.split('/');

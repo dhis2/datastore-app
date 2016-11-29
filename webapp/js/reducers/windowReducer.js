@@ -16,7 +16,7 @@ const window = (state = initialState, action) => {
             error: null
         };
     }
-
+    case actions.CREATE_VALUE_PENDING:
     case actions.FETCH_HISTORY_PENDING:
     case actions.FETCH_VALUE_PENDING:
     case actions.LOAD_VALUE: {
@@ -26,7 +26,13 @@ const window = (state = initialState, action) => {
             error: null
         };
     }
-
+    case actions.FETCH_VALUE_FULFILLED:
+    case actions.CREATE_VALUE_FULFILLED: {
+        return {
+            ...state,
+            loading: false
+        }
+    }
     case actions.SELECT_KEY: {
         return {
             ...state,
