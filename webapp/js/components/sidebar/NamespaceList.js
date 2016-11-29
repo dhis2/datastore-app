@@ -40,7 +40,7 @@ class NamespaceList extends Component {
     }
 
     renderList() {
-        const { items } = this.props;
+        const { items, searchValue } = this.props;
 
         const style = { // toolbar height is 56px + 8px margin
             overflowY: 'auto',
@@ -53,8 +53,9 @@ class NamespaceList extends Component {
 
         return (
         <List style={style}>
-        {Object.keys(items).map((item, index) => (
-            <NamespaceItem namespace={items[item]} key={index} />
+        {Object.keys(items).sort().filter((item) => item.toLowerCase().includes(searchValue))
+            .map((item, index) => (
+                <NamespaceItem namespace={items[item]} key={index} />
         ))}
         </List>
         );
@@ -87,6 +88,7 @@ const mapStateToProps = (state) => ({
     items: state.api.namespaces,
     fetching: state.api.fetching,
     error: state.api.error,
+    searchValue: state.ui.searchValue,
 });
 
 const mapDispatchToProps = (dispatch) => ({
