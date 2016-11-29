@@ -4,6 +4,7 @@ import NamespaceList from './NamespaceList';
 import { Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+import Searchbar from './Searchbar';
 import '../../../style/sidebar/sidebar.scss';
 import { openNamespaceDialog } from '../../actions/dialogActions';
 
@@ -25,10 +26,11 @@ class Sidebar extends Component {
             <div className={'sidebar'}>
                 <Paper style={{ zIndex: 5 }}>
                     <Toolbar>
-                        <ToolbarTitle text="Namespace" />
-                        <ToolbarGroup lastChild>
+                        <Searchbar />
+                        <ToolbarGroup>
+
                             <RaisedButton label="New" onClick={this.showDialog.bind(this)} primary />
-                        </ ToolbarGroup>
+                        </ToolbarGroup>
                     </Toolbar>
                 </Paper>
                 <NamespaceList />

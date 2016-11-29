@@ -6,7 +6,7 @@ const errorState = { fetching: false, fetched: false, error: true };
 const emptyDialog = { dialogType: null, dialogprops: {} };
 const emptySnackbar = { snackbarMessage: { message: '' } };
 
-const ui = (state = { dialog: { ...emptyDialog } }, action) => {
+const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => {
     switch (action.type) {
         case actions.SET_WINDOW_VIEW:
         {
@@ -172,11 +172,17 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
                 }
             }
         }
+
+        case 'SEARCH_VALUE_CHANGE': {
+            return {
+                ...state,
+                searchValue: action.searchValue
+            }
+        }
         default:
         {
             return {
-                ...state,
-                ...emptySnackbar
+                ...state
             }
         }
     }

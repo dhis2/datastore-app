@@ -27,11 +27,12 @@ class EditToolbar extends React.Component {
                 <Toolbar>
 
                     <ToolbarGroup>
-                        <WindowToolbarTitle path={ path } />
-                        <ToolbarSeparator />
-                        <IconButton onTouchTap={this.handleSave.bind(this)}>
+                        <IconButton style={{ width: 'auto', padding: 0 }} onTouchTap={this.handleSave.bind(this)}>
                             <ContentSave />
                         </IconButton>
+
+                        <ToolbarSeparator />
+                        <WindowToolbarTitle path={ path } />
                     </ToolbarGroup>
                 </Toolbar>
             </Paper>
