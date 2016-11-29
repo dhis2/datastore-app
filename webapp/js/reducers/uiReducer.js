@@ -152,6 +152,18 @@ const ui = (state = { dialog: { ...emptyDialog } }, action) => {
                 }
             }
         }
+        case actions.CREATE_VALUE_PENDING: {
+            return {
+                ...state,
+                ...fetchingState
+            }
+        }
+        case actions.CREATE_VALUE_FULFILLED: {
+            return {
+                ...state,
+                ...fetchedState
+            }
+        }
         case actions.CREATE_VALUE_REJECTED: {
             return {
                 ...state,

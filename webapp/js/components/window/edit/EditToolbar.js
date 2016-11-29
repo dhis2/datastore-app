@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ContentSave from 'material-ui/svg-icons/content/save';
-import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 
 import { updateValue } from '../../../actions/actions';
 
@@ -25,8 +25,10 @@ class EditToolbar extends React.Component {
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
-                    <WindowToolbarTitle path={ path } />
+
                     <ToolbarGroup>
+                        <WindowToolbarTitle path={ path } />
+                        <ToolbarSeparator />
                         <IconButton onTouchTap={this.handleSave.bind(this)}>
                             <ContentSave />
                         </IconButton>

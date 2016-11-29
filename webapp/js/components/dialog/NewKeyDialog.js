@@ -36,7 +36,6 @@ class NamespaceDialog extends Component {
         const { namespace } = this.props.dialogprops;
         if (namespace && keyValue) {
             this.props.createNamespace(namespace, keyValue);
-            hashHistory.push(`/edit/${namespace}/${keyValue}`);
         } else {
             this.setState({
                 keyError: this.validate(keyValue),
