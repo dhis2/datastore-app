@@ -16,7 +16,6 @@ class JSONEditor extends Component {
     /* Need custom update condition as we only re-render when the value changes.*/
     shouldComponentUpdate(nextProps) {
         return this.props.value !== nextProps.value;
-
     }
 
     componentWillUpdate(nextProps) {

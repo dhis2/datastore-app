@@ -2,7 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import EmptyWindow from '../../webapp/js/components/window/empty/EmptyWindow';
-import { ModeCommentIconWithText } from '../../webapp/js/components/utils/Icons';
+import EmptyToolbar from '../../webapp/js/components/window/empty/EmptyToolbar';
+import EmptyArea from '../../webapp/js/components/window/empty/EmptyArea';
 import Paper from 'material-ui/Paper';
 
 describe('Component: EmptyWindow', () => {
@@ -17,8 +18,16 @@ describe('Component: EmptyWindow', () => {
         expect(component.length).to.equal(1);
     });
 
-    it('should render ModeCommentIconWithText component', () => {
+    it('should render Paper component', () => {
         expect(component.find(Paper)).to.have.length(1);
     });
-    
+
+    it('should render EmptyToolbar component', () => {
+        expect(component.find(EmptyToolbar)).to.have.length(1);
+    });
+
+    it('should render EmptyArea component', () => {
+        expect(component.find(EmptyArea)).to.have.length(1);
+    });
+
 });

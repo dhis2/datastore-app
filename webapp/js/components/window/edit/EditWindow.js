@@ -10,7 +10,7 @@ import { fetchAndDisplayKeyValue, fetchAndToggleNamespace } from '../../../actio
 
 import '../../../../style/valueWindow/valueWindow.scss';
 
-class EditWindow extends Component {
+export class EditWindow extends Component {
 
     componentDidMount() {
         const { getValue, params: { namespace, key } } = this.props;
