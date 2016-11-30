@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import { searchSidebarChange } from '../../actions/uiActions';
+import Tooltip from 'material-ui/internal/Tooltip';
 class Searchbar extends Component {
     constructor(props) {
         super(props);
@@ -19,18 +20,25 @@ class Searchbar extends Component {
         this.props.searchChanged('');
     }
     handleChange(e) {
-        const val = e.target.value.toLowerCase();
+        const val = e.target.value
         this.setState({
             searchVal: val,
         });
-        this.props.searchChanged(val);
+        this.props.searchChanged(val.toLowerCase());
     }
 
     render() {
         return (
-            <TextField name="searchbar" hintText="Search" value={this.state.searchVal}
+            <TextField name="searchbar"
+                       hintText="Namespace#Key"
+                       floatingLabelStyle={ { top: '25px' }}
+                       style={{ height:'auto' }}
+                       inputStyle={{ marginTop: '6px' }}
+                       floatingLabelText="Search"
+                       value={this.state.searchVal}
                        onChange={this.handleChange}
-            onFocus={this.handleFocus}/>
+                       onFocus={this.handleFocus}
+            />
         );
     }
 }
