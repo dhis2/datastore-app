@@ -8,7 +8,7 @@ const tableHeaderStyle = {
     borderBottom: 'solid grey 1px',
 };
 
-class HistoryArea extends Component {
+export class HistoryArea extends Component {
     render() {
         const { list } = this.props;
 
