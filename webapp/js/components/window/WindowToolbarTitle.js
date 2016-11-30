@@ -6,7 +6,7 @@ import '../../../style/toolbarTitle.scss';
 class WindowToolbarTitle extends Component {
     renderPath(path) {
         const pathArray = path.split('/');
-        const length = pathArray.length-1;
+        const length = pathArray.length - 1;
 
         return (
       <span className={'toolbar-title'}>

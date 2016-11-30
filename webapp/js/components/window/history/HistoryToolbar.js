@@ -3,6 +3,10 @@ import Paper from 'material-ui/Paper';
 import { Toolbar } from 'material-ui/Toolbar';
 import WindowToolbarTitle from '../WindowToolbarTitle';
 
+const toolbarContainerStyle = {
+    zIndex: 5,
+};
+
 class HistoryToolbar extends Component {
     render() {
         const { namespace, selectedKey } = this.props;
@@ -11,7 +15,7 @@ class HistoryToolbar extends Component {
           `${namespace}/${selectedKey}` : `${namespace}`;
 
         return (
-            <Paper style={{ zIndex: 5 }}>
+            <Paper style={ toolbarContainerStyle }>
                 <Toolbar>
                     <WindowToolbarTitle path={ path } />
                 </Toolbar>

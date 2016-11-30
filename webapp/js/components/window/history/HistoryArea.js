@@ -8,13 +8,13 @@ const tableHeaderStyle = {
     borderBottom: 'solid grey 1px',
 };
 
+const backgroundStyle = {
+};
+
 export class HistoryArea extends Component {
     render() {
         const { list } = this.props;
-
-        const backgroundStyle = {
-            backgroundColor: AppContainer.theme.palette.primary3Color,
-        };
+        backgroundStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
 
         return (
               <div className={ 'window-area' } style={ backgroundStyle }>
