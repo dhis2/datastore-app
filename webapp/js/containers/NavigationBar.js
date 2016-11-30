@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 
 class NavigationBar extends Component {
@@ -10,10 +11,11 @@ class NavigationBar extends Component {
         };
         return (
             <Toolbar style={toolBarStyle}>
+                <Link to="/">
                 <img src="../../img/logo_front.png" style={{
                     height: '20px',
                 }} alt="dhis2"
-                />
+                /></Link>
               <ToolbarTitle text="Datastore App" />
             </Toolbar>
         );

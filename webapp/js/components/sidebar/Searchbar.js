@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import { searchSidebarChange } from '../../actions/uiActions';
-import Tooltip from 'material-ui/internal/Tooltip';
+
 class Searchbar extends Component {
     constructor(props) {
         super(props);

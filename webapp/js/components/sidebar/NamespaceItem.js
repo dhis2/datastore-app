@@ -29,11 +29,12 @@ const styles = {
 
     },
     keyItemList: {
-        marginLeft: '15px',
     },
     innerText: {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        height: '18px', // fixes clipping when zoomed bug
     },
 };
 
