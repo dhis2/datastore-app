@@ -76,8 +76,9 @@ class NamespaceList extends Component {
         return (
         <List style={style}>
         {Object.keys(items).sort().filter(item => this.filterNamespaces.bind(this)(item))
-            .map((item, index) => (
-                <NamespaceItem namespace={items[item]} key={index} filter={this.filterKeys.bind(this)} />
+            .map(item => (
+                <NamespaceItem namespace={items[item]} key={item}
+                               filter={this.filterKeys.bind(this)} />
         ))}
         </List>
         );

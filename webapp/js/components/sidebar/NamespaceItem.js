@@ -56,6 +56,14 @@ class NamespaceItem extends Component {
         this.renderOpen = this.renderOpen.bind(this);
         this.renderError = this.renderError.bind(this);
         this.toggleHandler = this.toggleHandler.bind(this);
+        this.state = {
+            list: Object.keys(props.namespace.keys).map(key => {
+                return {
+                    key: key,
+                    elem: this.constructKeyItem(key, key),
+                };
+            }),
+        };
     }
 
     toggleHandler() {
@@ -75,7 +83,18 @@ class NamespaceItem extends Component {
         this.props.deleteNamespace(this.props.namespace.name);
     }
 
-
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.namespace.keys !== this.props.namespace.keys) {
+            this.setState({
+                list: Object.keys(nextProps.namespace.keys).map(key => {
+                    return {
+                        key: key,
+                        elem: this.constructKeyItem(key, key),
+                    };
+                }),
+            });
+        }
+    }
     constructKeyItem(key, index) {
         const { deleteKeyInNamespace, namespace: { name: namespace } } = this.props;
         const keyItemMenu = (
@@ -125,13 +144,8 @@ class NamespaceItem extends Component {
             </IconMenu>
         );
 
-        // Populate nestedItems if keys are loaded
-        if (keys) {
-            Object.keys(keys).filter(item => this.props.filter(item)).forEach((item, index) => {
-                items.push(this.constructKeyItem(item, index));
-            });
-        }
-
+        const list = this.state.list.filter(item => this.props.filter(item.key))
+            .map(item => item.elem)
         let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
 
         if (fetching) {
@@ -143,7 +157,7 @@ class NamespaceItem extends Component {
                 open={open}
                 leftIcon={leftIcon}
                 rightIconButton={rightIconMenu}
-                nestedItems={items}
+                nestedItems={list}
                 onTouchTap={this.toggleHandler}
                 nestedListStyle={styles.keyItemList}
             />
