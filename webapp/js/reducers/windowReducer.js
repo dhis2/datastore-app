@@ -8,14 +8,6 @@ const initialState = {
 const window = (state = initialState, action) => {
     switch (action.type) {
 
-    case actions.CHANGE_WINDOW: {
-        const { currentWindow } = action;
-        return {
-            ...state,
-            currentWindow,
-            error: null
-        };
-    }
     case actions.CREATE_VALUE_PENDING:
     case actions.FETCH_HISTORY_PENDING:
     case actions.FETCH_VALUE_PENDING:
@@ -40,6 +32,7 @@ const window = (state = initialState, action) => {
         };
     }
 
+    case actions.CREATE_VALUE_REJECTED:
     case actions.FETCH_VALUE_REJECTED: {
         const { error  } = action;
         return {

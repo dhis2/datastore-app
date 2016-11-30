@@ -24,11 +24,12 @@ export class HistoryWindow extends Component {
     componentDidUpdate(prevProps) {
         const { getHistoryForKey, getHistoryForNamespace, params: currentParams } = this.props;
         const { params: prevParams } = prevProps;
-
+        
         if (currentParams.key !== prevParams.key && typeof currentParams.key !== 'undefined') {
             getHistoryForKey(currentParams.namespace, currentParams.key);
         }
-        else if (currentParams.namespace !== prevParams.namespace) {
+        else if (currentParams.namespace !== prevParams.namespace ||
+            (typeof currentParams.key === 'undefined') && typeof prevParams.key !== 'undefined') {
             getHistoryForNamespace(currentParams.namespace);
         }
     }

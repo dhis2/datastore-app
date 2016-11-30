@@ -262,6 +262,16 @@ export function selectKey(namespace, key, value) {
     };
 }
 
+/**
+ * Fetches keys for a namespace and toggles the namespace
+ * in the list.
+ * If the namespace is not found in the API it will be removed
+ * from the list aswell. 
+ * @param namespace to get keys for.
+ * @param openNamespace overrides the toggling, if true it will always
+ * open regardless of previous state of the namespace.
+ * @returns action thunk
+ */
 export function fetchAndToggleNamespace(namespace, openNamespace = false) {
     return dispatch => {
         dispatch(requestKeys(namespace));
@@ -284,13 +294,14 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
     };
 }
 
-export function changeWindow(window) {
-    return {
-        type: actions.CHANGE_WINDOW,
-        currentWindow: window,
-    };
-}
-
+/**
+ * Fetches a value for given key and namespace.
+ * Selectkey will be called upon success, updating the
+ * state with the value and the key.
+ * @param namespace containing key
+ * @param key containing value
+ * @returns action thunk
+ */
 export function fetchAndDisplayKeyValue(namespace, key) {
     return dispatch => {
         dispatch(requestValue(namespace, key));
@@ -300,14 +311,6 @@ export function fetchAndDisplayKeyValue(namespace, key) {
                 dispatch(selectKey(namespace, key, value));
             })
             .catch(error => dispatch(rejectValue(namespace, key, error)));
-    };
-}
-
-export function getValue(namespace, key) {
-    return dispatch => {
-        dispatch(loadValue());
-        return api.getValue(namespace, key).
-            then(value => dispatch(selectKey(namespace, key, value)));
     };
 }
 
@@ -376,36 +379,18 @@ export function fetchKeys(namespace) {
     };
 }
 
-export function fetchValue(namespace, key) {
-    return dispatch => {
-        dispatch(requestValue(namespace, key));
-        return api.getValue(namespace, key)
-            .then(value => dispatch(recieveValue(namespace, key, value)))
-            .catch(error => dispatch(rejectValue(namespace, key, error)));
-    };
-}
-
-export function displayHistoryStatsForNamespace(namespace) {
-    return dispatch => {
-        dispatch(requestHistory());
-        return api.getHistoryOfNamespace(namespace)
-            .then(history => {
-                dispatch(recieveNamespaceHistory(namespace, history));
-                dispatch(changeWindow('statistics'));
-            })
-            .catch(error => {
-                dispatch(rejectNamespaceHistory(namespace, error));
-            });
-    };
-}
-
+/**
+ * Gets history for a key in a namespace
+ * @param namespace for key
+ * @param key in namespace
+ * @returns action thunk
+ */
 export function fetchHistory(namespace, key) {
     return dispatch => {
         dispatch(requestHistory());
         return api.getHistoryOfKey(namespace, key)
             .then(history => {
                 dispatch(recieveHistory(namespace, key, history));
-                dispatch(changeWindow('history'));
             })
             .catch(error => {
                 dispatch(rejectHistory(namespace, key, error));
@@ -419,7 +404,6 @@ export function fetchHistoryForNamespace(namespace) {
         return api.getHistoryOfNamespace(namespace)
             .then(history => {
                 dispatch(recieveNamespaceHistory(namespace, history));
-                dispatch(changeWindow('history'));
             })
             .catch(error => {
                 dispatch(rejectNamespaceHistory(namespace, error));
@@ -473,6 +457,12 @@ export function deleteKey(namespace, key) {
     };
 }
 
+/**
+ * Deletes a namespace from the state and API.
+ * This will also delete all keys in the namespace.
+ * @param namespace to delete
+ * @returns action thunk
+ */
 export function deleteNamespace(namespace) {
     return dispatch => {
         dispatch(requestDeleteNamespace(namespace));
