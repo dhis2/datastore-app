@@ -1,11 +1,5 @@
 import * as actions from '../constants/actionTypes';
 
-export function loadWindow() {
-    return {
-        type: actions.LOAD_WINDOW,
-        loading: true,
-    };
-}
 
 export function changeWindow(window) {
     return {

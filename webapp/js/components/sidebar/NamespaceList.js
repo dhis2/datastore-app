@@ -53,7 +53,7 @@ class NamespaceList extends Component {
     filterKeys(item) {
         const { searchValue } = this.props;
         const keyInd = searchValue.indexOf('#') + 1;
-        //match all keys if seperator is not defined
+        // match all keys if seperator is not defined
         if (keyInd <= 0) {
             return true;
         }

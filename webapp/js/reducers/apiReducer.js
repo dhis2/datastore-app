@@ -182,25 +182,6 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
             };
         }
 
-    case actions.CREATE_NAMESPACE:
-        {
-            const { namespace, key, value } = action;
-            return {
-                ...state,
-                ...fetchedState,
-                namespaces: {
-                    ...state.namespaces,
-                    [namespace]: {
-                        keys: {
-                            [key]: {
-                                value,
-                            },
-                        },
-                    },
-                },
-            };
-        }
-
     case actions.FETCH_HISTORY_FULFILLED:
         {
             const { history } = action;

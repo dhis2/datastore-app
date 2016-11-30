@@ -8,18 +8,7 @@ const emptySnackbar = { snackbarMessage: { message: '' } };
 
 const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => {
     switch (action.type) {
-        case actions.SET_WINDOW_VIEW:
-        {
-            return {
-                ...state,
-            };
-        }
-        case actions.LOAD_VALUE: {
-            return {
-                ...state,
-                ...emptySnackbar
-            }
-        }
+
         case actions.SELECT_NAMESPACE:
         {
             const {selectedNamespace} = action;
@@ -173,7 +162,7 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
             }
         }
 
-        case 'SEARCH_VALUE_CHANGE': {
+        case actions.SEARCH_VALUE_CHANGE: {
             return {
                 ...state,
                 searchValue: action.searchValue
