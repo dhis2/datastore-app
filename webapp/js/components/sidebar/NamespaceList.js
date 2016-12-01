@@ -13,38 +13,37 @@ const listStyle = {
 
 class NamespaceList extends Component {
     filterNamespaces(item) {
-        const { searchValue } = this.props;
-        let nameEnd = searchValue.indexOf('#');
+        const { search } = this.props;
+        let nameEnd = search.indexOf('#');
         // Seperator not present, search entire word
         if (nameEnd < 0) {
-            nameEnd = searchValue.length;
+            nameEnd = search.length;
         }
-        const nameSearch = searchValue.substring(0, nameEnd)
+        const nameSearch = search.substring(0, nameEnd);
         return item.toLowerCase().includes(nameSearch);
     }
 
     filterKeys(item) {
-        const { searchValue } = this.props;
-        const keyInd = searchValue.indexOf('#') + 1;
+        const { search } = this.props;
+        const keyInd = search.indexOf('#') + 1;
         // match all keys if seperator is not defined
         if (keyInd <= 0) {
             return true;
         }
-        const keySearch = searchValue.substring(keyInd, searchValue.length)
+        const keySearch = search.substring(keyInd, search.length);
         return item.toLowerCase().includes(keySearch);
     }
 
     render() {
-        const { items, search } = this.props;
+        const { items } = this.props;
         listStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
         return (
-		<List style={listStyle}>
-		{Object.keys(items).sort().filter(item => this.filterNamespaces.bind(this)(item))
-		 .map(item => (
-			 <NamespaceItem namespace={items[item]} key={item}
-                     filter={this.filterKeys.bind(this)} />
-		 ))}
-        </List>
+            <List style={listStyle}>
+                {Object.keys(items).sort().filter(item => this.filterNamespaces.bind(this)(item))
+                 .map(item => (
+                    <NamespaceItem namespace={ items[item] } key={ item } filter={ this.filterKeys.bind(this) } />
+                 ))}
+            </List>
         );
     }
 }

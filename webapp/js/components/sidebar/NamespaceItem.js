@@ -59,11 +59,24 @@ class NamespaceItem extends Component {
         this.state = {
             list: Object.keys(props.namespace.keys).map(key => {
                 return {
-                    key: key,
+                    key,
                     elem: this.constructKeyItem(key, key),
                 };
             }),
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.namespace.keys !== this.props.namespace.keys) {
+            this.setState({
+                list: Object.keys(nextProps.namespace.keys).map(key => {
+                    return {
+                        key,
+                        elem: this.constructKeyItem(key, key),
+                    };
+                }),
+            });
+        }
     }
 
     toggleHandler() {
@@ -83,18 +96,6 @@ class NamespaceItem extends Component {
         this.props.deleteNamespace(this.props.namespace.name);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.namespace.keys !== this.props.namespace.keys) {
-            this.setState({
-                list: Object.keys(nextProps.namespace.keys).map(key => {
-                    return {
-                        key: key,
-                        elem: this.constructKeyItem(key, key),
-                    };
-                }),
-            });
-        }
-    }
     constructKeyItem(key, index) {
         const { deleteKeyInNamespace, namespace: { name: namespace } } = this.props;
         const keyItemMenu = (
@@ -121,8 +122,7 @@ class NamespaceItem extends Component {
     }
 
     renderOpen() {
-        const { namespace: { keys, name, open, fetching } } = this.props;
-        const items = [];
+        const { namespace: { name, open, fetching } } = this.props;
 
         const rightIconMenu = (
             <IconMenu disableAutoFocus iconButtonElement={ iconButtonElement }
@@ -194,6 +194,7 @@ NamespaceItem.propTypes = {
     newKey: PropTypes.func,
     deleteKeyInNamespace: PropTypes.func,
     event: PropTypes.func,
+    filter: PropTypes.func,
     namespace: PropTypes.shape({
         error: PropTypes.bool,
         fetching: PropTypes.bool,
