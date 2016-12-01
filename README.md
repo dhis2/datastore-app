@@ -1,4 +1,4 @@
 # INF5750
 Project related to course INF5750
 
-# Tools
+# \#FFF group
