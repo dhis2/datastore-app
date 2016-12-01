@@ -16,7 +16,7 @@ class Layout extends Component {
             <div className={'fff-wrapper'}>
                 <div className={'fff-layout-container'}>
                     <NavigationBar theme={AppContainer.theme.palette} />
-                    <div className="fff-home-page-container">
+                    <div className="fff-page-container">
                         <Sidebar />
                         { this.props.children }
                         <DialogRoot />

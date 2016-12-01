@@ -24,7 +24,7 @@ export class HistoryWindow extends Component {
     componentDidUpdate(prevProps) {
         const { getHistoryForKey, getHistoryForNamespace, params: currentParams } = this.props;
         const { params: prevParams } = prevProps;
-        
+
         if (currentParams.key !== prevParams.key && typeof currentParams.key !== 'undefined') {
             getHistoryForKey(currentParams.namespace, currentParams.key);
         }
@@ -39,7 +39,7 @@ export class HistoryWindow extends Component {
         const { namespace, key } = this.props.params;
 
         return (
-        <Paper className={'window'}>
+        <Paper className={'fff-window'}>
             <HistoryToolbar namespace={ namespace } selectedKey={ key } />
             <HistoryArea list={ history } />
         </Paper>
