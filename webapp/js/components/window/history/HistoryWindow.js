@@ -10,7 +10,7 @@ import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions
 
 import '../../../../style/valueWindow/valueWindow.scss';
 
-class HistoryWindow extends Component {
+export class HistoryWindow extends Component {
 
     componentDidMount() {
         const { getHistoryForKey, getHistoryForNamespace, params: { namespace, key } } = this.props;
