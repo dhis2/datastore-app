@@ -1,13 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import Paper from 'material-ui/Paper';
-
 import BrowserToolbar from './BrowserToolbar';
 import BrowserArea from './BrowserArea';
-
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
-
 import '../../../../style/valueWindow/valueWindow.scss';
 
 class BrowserWindow extends Component {

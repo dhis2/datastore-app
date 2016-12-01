@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton';
 import '../../../style/toolbarTitle.scss';
 
-
 class WindowToolbarTitle extends Component {
     renderPath(path) {
         const pathArray = path.split('/');
@@ -18,11 +17,7 @@ class WindowToolbarTitle extends Component {
     }
 
     renderDefault() {
-        return (
-      <span className="toolbar-title">
-        Value
-      </span>
-        );
+        return (<span className="toolbar-title">Value</span>);
     }
 
     render() {

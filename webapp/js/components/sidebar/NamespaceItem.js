@@ -23,7 +23,6 @@ import { fetchAndDisplayKeyValue,
          fetchAndToggleNamespace,
          toggleNamespace } from '../../actions/actions';
 
-
 const styles = {
     namespaceItem: {
 

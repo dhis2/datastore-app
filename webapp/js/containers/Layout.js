@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-
-import HomePage from './pages/HomePage';
-
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../style/layout/layout.scss';
+import '../../style/pages/homepage.scss';
 import AppContainer from '../containers/AppContainer';
 import NavigationBar from './NavigationBar';
 import Snackbar from '../components/utils/Snackbar';

@@ -1,6 +1,6 @@
 import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
-import {hashHistory, browserHistory} from 'react-router';
+import {hashHistory} from 'react-router';
 
 /**
  *  Namespace Action Creators
