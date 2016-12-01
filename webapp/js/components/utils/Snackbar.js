@@ -14,7 +14,7 @@ export class Snackbar extends Component {
         return (
             <SnackbarUI open={showSnackbar} message={<span>{snackbarMessage}</span>}
                 autoHideDuration={5000}
-        />
+            />
         );
     }
 }

@@ -17,7 +17,6 @@ export class EditWindow extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
         const { fetchedNamespaces, params: nextParams } = nextProps;
         const { fetchKeysForNamespace,
             getValue, params: currentParams } = this.props;
@@ -56,6 +55,9 @@ export class EditWindow extends Component {
 EditWindow.propTypes = {
     selectedKey: PropTypes.string,
     namespace: PropTypes.string,
+    fetchedNamespaces: PropTypes.bool,
+    fetchKeysForNamespace: PropTypes.func,
+    getValue: PropTypes.func,
     params: PropTypes.shape({
         namespace: PropTypes.string,
         key: PropTypes.string,

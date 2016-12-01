@@ -16,7 +16,7 @@ export class StatisticsWindow extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         const { getHistoryForKey, getHistoryForNamespace, params: currentParams } = this.props;
         const { params: prevParams } = prevProps;
 

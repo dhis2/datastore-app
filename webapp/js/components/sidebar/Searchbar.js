@@ -26,7 +26,7 @@ export class Searchbar extends Component {
     }
 
     handleChange(e) {
-        const val = e.target.value
+        const val = e.target.value;
         const { searchChanged } = this.props;
 
         this.setState({
@@ -39,14 +39,14 @@ export class Searchbar extends Component {
     render() {
         return (
             <TextField name="searchbar"
-                       hintText="Namespace#Key"
-                       floatingLabelStyle={ { top: '25px' }}
-                       style={{ height:'auto' }}
-                       inputStyle={{ marginTop: '6px' }}
-                       floatingLabelText="Search"
-                       value={this.state.searchVal}
-                       onChange={this.handleChange}
-                       onFocus={this.handleFocus}
+                hintText="Namespace#Key"
+                floatingLabelStyle={ { top: '25px' }}
+                style={{ height: 'auto' }}
+                inputStyle={{ marginTop: '6px' }}
+                floatingLabelText="Search"
+                value={this.state.searchVal}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
             />
         );
     }
