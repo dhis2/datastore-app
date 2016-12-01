@@ -8,3 +8,6 @@ This web application has been created using React and Redux.
 - Birk as Birkbjo
 - Pavel as PavelJurasek
 - Steven as Glimlag & shicks1000
+
+# Credits
+Icon made by http://www.flaticon.com/authors/madebyoliver from www.flaticon.com
