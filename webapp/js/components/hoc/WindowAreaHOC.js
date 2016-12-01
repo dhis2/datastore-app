@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import LoadingArea from '../window/LoadingArea';
 import { ErrorIconWithText } from '../utils/Icons';
-import '../../../style/valueWindow/valueWindow.scss';
+import '../../../style/window/window.scss';
 
 const WindowAreaHOC = (Area) => {
     class WindowAreaBase extends Component {
@@ -18,7 +18,7 @@ const WindowAreaHOC = (Area) => {
         }
 
         renderError() {
-            return <ErrorIconWithText text="An error has occured."/>;
+            return <ErrorIconWithText text="An error has occured." />;
         }
 
         render() {

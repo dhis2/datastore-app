@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import { createAndDisplayValue } from '../../actions/actions';
 import { closeNamespaceDialog } from '../../actions/dialogActions';
 
-class NewNamespaceDialog extends Component {
+export class NewNamespaceDialog extends Component {
 
     constructor(props) {
         super(props);

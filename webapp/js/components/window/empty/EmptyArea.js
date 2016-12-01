@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { ModeCommentIconWithText } from '../../utils/Icons';
 import Paper from 'material-ui/Paper';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
-class EmptyArea extends Component {
+export class EmptyArea extends Component {
     render() {
         return (
-        <Paper className={'value-container'}>
+        <Paper className={'fff-window'}>
             <ModeCommentIconWithText text={'Select a namespace and a key to edit.'} />
         </Paper>
         );

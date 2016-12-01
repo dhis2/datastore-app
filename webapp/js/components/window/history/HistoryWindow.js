@@ -4,7 +4,8 @@ import Paper from 'material-ui/Paper';
 import HistoryToolbar from './HistoryToolbar';
 import HistoryArea from './HistoryArea';
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
-import '../../../../style/valueWindow/valueWindow.scss';
+
+import '../../../../style/window/window.scss';
 
 export class HistoryWindow extends Component {
 
@@ -20,7 +21,7 @@ export class HistoryWindow extends Component {
     componentDidUpdate(prevProps) {
         const { getHistoryForKey, getHistoryForNamespace, params: currentParams } = this.props;
         const { params: prevParams } = prevProps;
-        
+
         if (currentParams.key !== prevParams.key && typeof currentParams.key !== 'undefined') {
             getHistoryForKey(currentParams.namespace, currentParams.key);
         }
@@ -35,7 +36,7 @@ export class HistoryWindow extends Component {
         const { namespace, key } = this.props.params;
 
         return (
-        <Paper className={'window'}>
+        <Paper className={'fff-window'}>
             <HistoryToolbar namespace={ namespace } selectedKey={ key } />
             <HistoryArea list={ history } />
         </Paper>
@@ -47,6 +48,12 @@ HistoryWindow.propTypes = {
     history: PropTypes.array,
     namespace: PropTypes.string,
     selectedKey: PropTypes.string,
+    getHistoryForKey: PropTypes.func,
+    getHistoryForNamespace: PropTypes.func,
+    params: PropTypes.shape({
+        namespace: PropTypes.string,
+        key: PropTypes.string,
+    }),
 };
 
 const mapStateToProps = (state) => ({

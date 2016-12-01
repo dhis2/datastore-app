@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { deleteKey } from '../../actions/actions';
 import { closeConfirmDeleteKeyDialog } from '../../actions/dialogActions';
 
-class ConfirmDeleteKeyDialog extends Component {
+export class ConfirmDeleteKeyDialog extends Component {
 
     handleCancel() {
         this.props.closeDialog();
@@ -29,7 +29,7 @@ class ConfirmDeleteKeyDialog extends Component {
             />,
         ];
         return (
-            (<Dialog
+            <Dialog
                 actions={actions}
                 modal={false}
                 open
@@ -37,7 +37,7 @@ class ConfirmDeleteKeyDialog extends Component {
                 onRequestClose={this.handleCancel.bind(this)}
             >
                 Are you sure you want to delete '{this.props.dialogprops.key}' in {this.props.dialogprops.namespace}?
-            </Dialog>)
+            </Dialog>
         );
     }
 }

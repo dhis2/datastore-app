@@ -59,12 +59,16 @@ class NamespaceList extends Component {
         const keySearch = this.searchKeyPart();
         return (
             <List style={listStyle}>
-                {Object.keys(items).filter(item => this.filterNamespaces(item))
-                    .map(item => (
-                        <NamespaceItem namespace={items[item]}
-                                       search={keySearch}
-                                       key={item}
-                        />))}
+                {Object.keys(items).sort().map(item => {
+                    if (this.filterNamespaces(item)) {
+                        return (
+                          <NamespaceItem namespace={items[item]}
+                              search={keySearch}
+                              key={item}
+                          />
+                        );
+                    }})
+                }
             </List>
         );
     }

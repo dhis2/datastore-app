@@ -1,5 +1,7 @@
 import * as actions from '../constants/actionTypes';
 
+const errorState = { fetching: false, fetched: false, error: true };
+
 const initialState = {
     currentWindow: 'empty',
     history: [],
@@ -9,7 +11,6 @@ const initialState = {
 
 const window = (state = initialState, action) => {
     switch (action.type) {
-
     case actions.CREATE_VALUE_PENDING:
     case actions.FETCH_HISTORY_PENDING:
     case actions.FETCH_VALUE_PENDING:
@@ -17,16 +18,11 @@ const window = (state = initialState, action) => {
         return {
             ...state,
             loading: true,
-            error: null
+            error: null,
         };
     }
     case actions.FETCH_VALUE_FULFILLED:
-    case actions.CREATE_VALUE_FULFILLED: {
-        return {
-            ...state,
-            loading: false
-        }
-    }
+    case actions.CREATE_VALUE_FULFILLED:
     case actions.SELECT_KEY: {
         return {
             ...state,
@@ -36,12 +32,11 @@ const window = (state = initialState, action) => {
 
     case actions.CREATE_VALUE_REJECTED:
     case actions.FETCH_VALUE_REJECTED: {
-        const { error  } = action;
         return {
             ...state,
             error: true,
-            loading: false
-        }
+            loading: false,
+        };
     }
 
     case actions.FETCH_HISTORY_FULFILLED: {
@@ -62,7 +57,7 @@ const window = (state = initialState, action) => {
             loading: false,
             namespace,
             history,
-            error: null
+            error: null,
         };
     }
 
@@ -72,13 +67,14 @@ const window = (state = initialState, action) => {
             ...state,
             loading: false,
             namespace,
-            error: true
+            error: true,
         };
     }
 
     case actions.FETCH_HISTORY_REJECTED: {
         return {
             ...state,
+            ...errorState,
             loading: false,
         };
     }

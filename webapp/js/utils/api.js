@@ -157,7 +157,7 @@ class Api
             .then(response => {
                 // delete cache value
                 if (this.cache[namespace] !== undefined && this.cache[namespace][key] !== undefined) {
-                  delete this.cache[namespace][key];
+                    delete this.cache[namespace][key];
                 }
 
                 this.updateHistory(namespace, key, {}, DELETED);

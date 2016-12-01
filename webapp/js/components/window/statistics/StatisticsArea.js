@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 import { Line } from 'react-chartjs-2';
 
-class StatisticsArea extends Component {
+export class StatisticsArea extends Component {
     prepareData() {
         const { list } = this.props;
         const yVal = [];
@@ -72,7 +72,7 @@ class StatisticsArea extends Component {
         };
 
         return (
-            <Paper className={'window-area'}>
+            <Paper className={'fff-window-area'}>
                 <div style={{ width: '90%', margin: '0 auto 0 auto' }} >
                     <Line redraw data={data} options={opts} />
                 </div>
@@ -82,7 +82,6 @@ class StatisticsArea extends Component {
 }
 StatisticsArea.propTypes = {
     list: PropTypes.array,
-    selectedKey: PropTypes.string,
     namespace: PropTypes.string,
 };
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import StatisticsToolbar from './StatisticsToolbar';
 import StatisticsArea from './StatisticsArea';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 
 export class StatisticsWindow extends Component {
@@ -22,8 +22,7 @@ export class StatisticsWindow extends Component {
 
         if (currentParams.key !== prevParams.key) {
             getHistoryForKey(currentParams.namespace, currentParams.key);
-        }
-        else if (currentParams.namespace !== prevParams.namespace) {
+        } else if (currentParams.namespace !== prevParams.namespace) {
             getHistoryForNamespace(currentParams.namespace);
         }
     }
@@ -31,7 +30,7 @@ export class StatisticsWindow extends Component {
     render() {
         const { history, params: { namespace } } = this.props;
         return (
-        <Paper className={ 'value-container' }>
+        <Paper className={ 'fff-window' }>
             <StatisticsToolbar namespace={ namespace } />
             <StatisticsArea list={ history } namespace={ namespace } />
         </Paper>

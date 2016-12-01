@@ -1,9 +1,9 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { EditWindow } from '../../webapp/js/components/window/edit/EditWindow';
-import EditToolbar from '../../webapp/js/components/window/edit/EditToolbar';
-import EditArea from '../../webapp/js/components/window/edit/EditArea';
+import { EditWindow } from '../../../../webapp/js/components/window/edit/EditWindow';
+import EditToolbar from '../../../../webapp/js/components/window/edit/EditToolbar';
+import EditArea from '../../../../webapp/js/components/window/edit/EditArea';
 import Paper from 'material-ui/Paper';
 
 describe('Component: EditWindow', () => {

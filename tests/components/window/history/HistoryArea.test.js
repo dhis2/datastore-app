@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { HistoryArea } from '../../webapp/js/components/window/history/HistoryArea';
+import { HistoryArea } from '../../../../webapp/js/components/window/history/HistoryArea';
 import { TableRow } from 'material-ui/Table';
 
 describe('Component: HistoryArea', () => {

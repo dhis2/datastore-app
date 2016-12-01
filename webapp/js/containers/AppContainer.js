@@ -20,7 +20,6 @@ import {fade} from 'material-ui/utils/colorManipulator';
 
 injectTapEventPlugin();
 
-
 class AppContainer extends Component {
 
   static theme = getMuiTheme({
@@ -45,7 +44,6 @@ class AppContainer extends Component {
   shouldComponentUpdate () {
     return false
   }
-
 
   render() {
     const { store } = this.props;

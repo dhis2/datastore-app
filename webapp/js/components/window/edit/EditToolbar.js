@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 
-class EditToolbar extends React.Component {
+export class EditToolbar extends React.Component {
 
     handleSave() {
         const { namespace, selectedKey, editedValue, updateValue } = this.props;
@@ -26,7 +26,6 @@ class EditToolbar extends React.Component {
                         <IconButton style={{ width: 'auto', padding: 0 }} onTouchTap={this.handleSave.bind(this)}>
                             <ContentSave />
                         </IconButton>
-
                         <ToolbarSeparator />
                         <WindowToolbarTitle path={ path } />
                     </ToolbarGroup>
@@ -56,6 +55,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(EditToolbar);

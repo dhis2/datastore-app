@@ -8,7 +8,7 @@ import '../../../style/sidebar/sidebar.scss';
 import { openNamespaceDialog } from '../../actions/dialogActions';
 import SidebarAreaHOC from '../hoc/SidebarAreaHOC';
 
-class Sidebar extends Component {
+export class Sidebar extends Component {
     constructor(props) {
         super(props);
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import EmptyWindow from '../../webapp/js/components/window/empty/EmptyWindow';
-import EmptyToolbar from '../../webapp/js/components/window/empty/EmptyToolbar';
-import EmptyArea from '../../webapp/js/components/window/empty/EmptyArea';
+import EmptyWindow from '../../../../webapp/js/components/window/empty/EmptyWindow';
+import EmptyToolbar from '../../../../webapp/js/components/window/empty/EmptyToolbar';
+import EmptyArea from '../../../../webapp/js/components/window/empty/EmptyArea';
 import Paper from 'material-ui/Paper';
 
 describe('Component: EmptyWindow', () => {

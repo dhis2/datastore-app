@@ -1,24 +1,20 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { HistoryWindow } from '../../webapp/js/components/window/history/HistoryWindow';
-import HistoryToolbar from '../../webapp/js/components/window/history/HistoryToolbar';
-import HistoryArea from '../../webapp/js/components/window/history/HistoryArea';
+import { StatisticsWindow } from '../../../../webapp/js/components/window/statistics/StatisticsWindow';
+import StatisticsToolbar from '../../../../webapp/js/components/window/statistics/StatisticsToolbar';
+import StatisticsArea from '../../../../webapp/js/components/window/statistics/StatisticsArea';
 import Paper from 'material-ui/Paper';
-import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
 
-describe('Component: HistoryWindow', () => {
-
+describe('Component: StatisticsWindow', () => {
     let component;
-
     const routeParams = {
         namespace: 'test',
         key: 'test',
     }
 
     beforeEach(() => {
-        component = shallow(<HistoryWindow params={routeParams} />);
+        component = shallow(<StatisticsWindow params={routeParams} />);
     });
 
     it('should render without exploding', () => {
@@ -30,11 +26,11 @@ describe('Component: HistoryWindow', () => {
     });
 
     it('should render EmptyToolbar component', () => {
-        expect(component.find(HistoryToolbar)).to.have.length(1);
+        expect(component.find(StatisticsToolbar)).to.have.length(1);
     });
 
     it('should render EmptyArea component', () => {
-        expect(component.find(HistoryArea)).to.have.length(1);
+        expect(component.find(StatisticsArea)).to.have.length(1);
     });
 
 });

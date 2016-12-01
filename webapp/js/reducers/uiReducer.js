@@ -6,20 +6,25 @@ const errorState = { fetching: false, fetched: false, error: true };
 const emptyDialog = { dialogType: null, dialogprops: {} };
 const emptySnackbar = { snackbarMessage: { message: '' } };
 
-const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => {
-    switch (action.type) {
+const initialState = {
+    dialog: { ...emptyDialog },
+    searchValue: '',
+};
 
-        case actions.SELECT_NAMESPACE:
+const ui = (state = initialState, action) => {
+    switch (action.type) {
+    case actions.SELECT_NAMESPACE:
         {
-            const {selectedNamespace} = action;
+            const { selectedNamespace } = action;
             return {
                 ...state,
                 selectedNamespace,
             };
         }
-        case actions.SELECT_KEY:
+
+    case actions.SELECT_KEY:
         {
-            const {namespace, key, value} = action;
+            const { namespace, key, value } = action;
             return {
                 ...state,
                 ...fetchedState,
@@ -31,7 +36,7 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
             };
         }
 
-        case actions.FETCH_VALUE_PENDING:
+    case actions.FETCH_VALUE_PENDING:
         {
             return {
                 ...state,
@@ -39,36 +44,40 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
             };
         }
 
-        case actions.UPDATE_VALUE_FULFILLED:
+    case actions.UPDATE_VALUE_FULFILLED:
         {
-            const {value} = action;
+            const { value } = action;
             return {
                 ...state,
                 value,
                 snackbarMessage: {
-                    message: 'Value saved.'
+                    message: 'Value saved.',
                 },
             };
         }
 
-        case actions.UPDATE_VALUE_REJECTED:
+    case actions.UPDATE_VALUE_REJECTED:
         {
             return {
                 ...state,
                 snackbarMessage: {
-                    message: 'Failed to save.'
+                    message: 'Failed to save.',
                 },
             };
         }
-        case actions.FETCH_HISTORY_REJECTED: {
+
+    case actions.FETCH_HISTORY_REJECTED:
+        {
             return {
                 ...state,
+                ...errorState,
                 snackbarMessage: {
-                    message: 'Failed to get history.'
-                }
-            }
+                    message: 'Failed to get history.',
+                },
+            };
         }
-        case actions.OPEN_DIALOG:
+
+    case actions.OPEN_DIALOG:
         {
             return {
                 ...state,
@@ -78,7 +87,8 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
                 },
             };
         }
-        case actions.CLOSE_DIALOG:
+
+    case actions.CLOSE_DIALOG:
         {
             return {
                 ...state,
@@ -88,9 +98,9 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
             };
         }
 
-        case actions.CREATE_NAMESPACE:
+    case actions.CREATE_NAMESPACE:
         {
-            const {namespace, key} = action;
+            const { namespace, key } = action;
             return {
                 ...state,
                 namespaceToBeCreated: {
@@ -99,9 +109,10 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
                 },
             };
         }
-        case actions.VALUE_CHANGE:
+
+    case actions.VALUE_CHANGE:
         {
-            const {namespace, key, value} = action;
+            const { namespace, key, value } = action;
             return {
                 ...state,
                 namespace,
@@ -109,70 +120,80 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
                 editedValue: value,
             };
         }
-        case actions.FETCH_KEYS_REJECTED:
+
+    case actions.FETCH_KEYS_REJECTED:
         {
             return {
                 ...state,
                 ...errorState,
-                snakbarMessage: action.error
-            }
-        }
-        case actions.FETCH_NAMESPACES_REJECTED:
-        {
-            return {
-                ...state,
-                ...errorState,
-                snackbarMessage: action.error,
+                snakbarMessage: action.error,
             };
         }
-        case actions.DELETE_KEY_FULFILLED: {
-            return {
-                ...state,
-                snackbarMessage: {
-                    message: 'Key deleted.'
-                }
-            }
-        }
-        case actions.DELETE_NAMESPACE_FULFILLED: {
-            return {
-                ...state,
-                snackbarMessage: {
-                    message: 'Namespace deleted.'
-                }
-            }
-        }
-        case actions.CREATE_VALUE_PENDING: {
-            return {
-                ...state,
-                ...fetchingState
-            }
-        }
-        case actions.CREATE_VALUE_FULFILLED: {
-            return {
-                ...state,
-                ...fetchedState
-            }
-        }
-        case actions.CREATE_VALUE_REJECTED: {
-            return {
-                ...state,
-                snackbarMessage: {
-                    message: 'Failed to create.'
-                }
-            }
-        }
 
-        case actions.SEARCH_VALUE_CHANGE: {
-            return {
-                ...state,
-                searchValue: action.searchValue
-            }
-        }
-        default:
+    case actions.FETCH_NAMESPACES_REJECTED:
         {
             return {
-                ...state
-            }
+                ...state,
+                ...errorState,
+            };
+        }
+    case actions.DELETE_KEY_FULFILLED:
+        {
+            return {
+                ...state,
+                snackbarMessage: {
+                    message: 'Key deleted.',
+                },
+            };
+        }
+
+    case actions.DELETE_NAMESPACE_FULFILLED:
+        {
+            return {
+                ...state,
+                snackbarMessage: {
+                    message: 'Namespace deleted.',
+                },
+            };
+        }
+
+    case actions.CREATE_VALUE_PENDING:
+        {
+            return {
+                ...state,
+                ...fetchingState,
+            };
+        }
+    case actions.CREATE_VALUE_FULFILLED:
+        {
+            return {
+                ...state,
+                ...fetchedState,
+            };
+        }
+    case actions.CREATE_VALUE_REJECTED:
+        {
+            return {
+                ...state,
+                snackbarMessage: {
+                    message: 'Failed to create.',
+                },
+            };
+        }
+
+    case actions.SEARCH_VALUE_CHANGE:
+        {
+            return {
+                ...state,
+                searchValue: action.searchValue,
+            };
+        }
+
+    default:
+        {
+            return {
+                ...state,
+            };
         }
     }
 };

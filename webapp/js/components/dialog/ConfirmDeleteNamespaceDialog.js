@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { closeConfirmDeleteNamespaceDialog } from '../../actions/dialogActions';
 import { deleteNamespace } from '../../actions/actions';
 
-class ConfirmDeleteNamespaceDialog extends Component {
+export class ConfirmDeleteNamespaceDialog extends Component {
 
     handleCancel() {
         this.props.closeDialog();

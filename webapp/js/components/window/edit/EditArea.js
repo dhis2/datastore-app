@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import JSONEditor from '../../utils/JSONEditor';
 import AppContainer from '../../../containers/AppContainer';
 import { updateValue, valueChange } from '../../../actions/actions';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
-class EditArea extends Component {
+export class EditArea extends Component {
 
     dataFromJSONEditor(editor) {
         const { namespace, selectedKey } = this.props;
@@ -53,6 +53,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(WindowAreaHOC(EditArea));

@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "webpack -p --config ./webpack.production.config.js",
-    "lint": "eslint --fix webapp && ./node_modules/eslint/bin/eslint.js --env node,mocha --global expect,sinon,spy,stub --rule 'no-unused-expressions: 0' test && scss-lint",
+    "lint": "eslint --fix webapp --rule 'no-unused-expressions: 0'",
     "start": "webpack-dev-server",
     "test": "mocha --require config/setup.js --require ignore-styles --compilers js:babel-core/register tests/**/*.test.js"
   },
@@ -17,6 +17,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Glimlag/INF5750/issues"
+  },
+  "eslintConfig": {
+    "root": true
   },
   "homepage": "https://github.com/Glimlag/INF5750#readme",
   "devDependencies": {

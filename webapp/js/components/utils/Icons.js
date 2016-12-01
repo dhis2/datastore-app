@@ -2,10 +2,11 @@ import React, { PropTypes, Component } from 'react';
 import ModeComment from 'material-ui/svg-icons/editor/mode-comment';
 import ErrorIcon from 'material-ui/svg-icons/alert/error';
 
-const style = {
+const containerStyle = {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
 };
+
 const iconStyle = {
     fill: 'rgb(117, 117, 117)',
     display: 'block',
@@ -18,7 +19,7 @@ export class ModeCommentIconWithText extends Component {
     render() {
         const { text } = this.props;
         return (
-          <div className="value-area" style={style}>
+          <div className="fff-window-area" style={ containerStyle }>
             <div>
               <ModeComment style={iconStyle} />
               <p>{ text }</p>
@@ -32,9 +33,9 @@ export class ErrorIconWithText extends Component {
     render() {
         const { text } = this.props;
         return (
-            <div className="value-area" style={style}>
+            <div className="fff-window-area" style={ containerStyle }>
                 <div>
-                    <ErrorIcon style={iconStyle}/>
+                    <ErrorIcon style={iconStyle} />
                     <p>{ text }</p>
                 </div>
             </div>
@@ -49,4 +50,3 @@ ModeCommentIconWithText.propTypes = {
 ErrorIconWithText.propTypes = {
     text: PropTypes.string,
 };
-

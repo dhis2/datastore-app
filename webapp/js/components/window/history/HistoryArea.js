@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import AppContainer from '../../../containers/AppContainer';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
@@ -17,7 +17,7 @@ export class HistoryArea extends Component {
         backgroundStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
 
         return (
-              <div className={ 'window-area' } style={ backgroundStyle }>
+              <div className={ 'fff-window-area' } style={ backgroundStyle }>
                   <Table fixedHeader headerStyle={ tableHeaderStyle }>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>

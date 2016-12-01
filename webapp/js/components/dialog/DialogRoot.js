@@ -12,7 +12,7 @@ const DIALOG_COMPONENTS = {
     CONFIRM_DELETE_KEY: ConfirmDeleteKeyDialog,
 };
 
-class DialogRoot extends Component {
+export class DialogRoot extends Component {
 
     render() {
         const { dialogType, dialogprops } = this.props.dialog;
