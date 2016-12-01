@@ -8,6 +8,10 @@ let apiClass = undefined;
 class Api
 {
 
+    /**
+     * @param url API endpoint url
+     * @param auth Authentication HTTP header content
+     */
     constructor(url, auth) {
         this.url = url;
         this.auth = auth;
@@ -17,7 +21,7 @@ class Api
         fetch(`${this.url}/me`, this.getHeaders())
             .then(response => this.successOnly(response))
             .then(response => response.json())
-            .then(user => this.userId = user.userCredentials.username);
+            .then(user => this.userId = user.userCredentials.username); // fetch userId that is used for history logging
     }
 
     getNamespaces() {
@@ -52,18 +56,26 @@ class Api
             .catch(error => Promise.reject(error));
     }
 
+    /**
+     * @param namespace
+     * @param key
+     */
     getValue(namespace, key) {
         const k = this.buildId(namespace, key);
         const cache = this.cache;
 
+        // check for cache hit
         if (cache[namespace] === undefined || cache[namespace][key] === undefined) {
             return this.getMetaData(namespace, key)
                 .then(result => {
                     const val = JSON.parse(result.value);
+
+                    // cache result
                     if (cache[namespace] === undefined) {
                         cache[namespace] = [];
                     }
                     cache[namespace][key] = val;
+
                     return val;
                 });
         }
@@ -74,12 +86,22 @@ class Api
         });
     }
 
+    /**
+     * @param namespace
+     * @param key
+     */
     getMetaData(namespace, key) {
         return fetch(`${this.url}/dataStore/${namespace}/${key}/metaData`, this.getHeaders())
             .then(response => this.successOnly(response))
             .then(response => response.json());
     }
 
+    /**
+     * @param namespace
+     * @param key
+     * @param value
+     * @param log Should action be logged?
+     */
     createValue(namespace, key, value, log = true) {
         return fetch(`${this.url}/dataStore/${namespace}/${key}`, Object.assign({}, this.getHeaders(), {
             method: 'POST',
@@ -88,16 +110,25 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
+                // cache value
                 if (this.cache[namespace] === undefined) {
                     this.cache[namespace] = [];
                 }
 
                 this.cache[namespace][key] = value;
+
                 log && this.updateHistory(namespace, key, value, CREATED);
+
                 return response;
             });
     }
 
+    /**
+     * @param namespace
+     * @param key
+     * @param value
+     * @param log Should action be logged?
+     */
     updateValue(namespace, key, value, log = true) {
         return fetch(`${this.url}/dataStore/${namespace}/${key}`, Object.assign({}, this.getHeaders(), {
             method: 'PUT',
@@ -106,7 +137,7 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-
+                // cache value
                 if (this.cache[namespace] === undefined) {
                     this.cache[namespace] = [];
                 }
@@ -124,37 +155,55 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-
+                // delete cache value
                 if (this.cache[namespace] !== undefined && this.cache[namespace][key] !== undefined) {
                   delete this.cache[namespace][key];
                 }
 
                 this.updateHistory(namespace, key, {}, DELETED);
+
                 return response;
             });
     }
 
-
+    /**
+     * @private
+     * @param namespace
+     * @param key Return history of a key if presenter, history of namespace otherwise
+     */
     getHistory(namespace, key = null) {
         const id = key === null ? namespace : this.buildId(namespace, key);
         return fetch(`${this.url}/dataStore/HISTORYSTORE/${id}`, this.getHeaders());
     }
 
+    /**
+     * Explicitly access key history with response status check
+     * @param namespace
+     * @param key
+     */
     getHistoryOfKey(namespace, key) {
         const id = this.buildId(namespace, key);
         return fetch(`${this.url}/dataStore/HISTORYSTORE/${id}`, this.getHeaders())
           .then(response => this.successOnly(response))
-          .then(response => response.json())
-          .then(response => response);
+          .then(response => response.json());
     }
 
+    /**
+     * Explicitly access namespace history with respone status check
+     * @param namespace
+     */
     getHistoryOfNamespace(namespace) {
         return fetch(`${this.url}/dataStore/HISTORYSTORE/${namespace}`, this.getHeaders())
           .then(response => this.successOnly(response))
-          .then(response => response.json())
-          .then(response => response);
+          .then(response => response.json());
     }
 
+    /**
+     * @param namespace
+     * @param key
+     * @param newValue
+     * @param action
+     */
     updateHistory(namespace, key, newValue, action) {
         const id = this.buildId(namespace, key);
         const historyRecord = {
@@ -167,19 +216,24 @@ class Api
 
         return this.getHistory(namespace, key)
             .then(response => {
-                if (response.status === 404) {
+                if (response.status === 404) { // this history record is first
                     this.createValue('HISTORYSTORE', id, [historyRecord], false);
                     return null;
                 }
                 return response.json();
             }).then(history => {
-                if (history !== null) {
+                if (history !== null) { // update history
                     history.unshift(historyRecord);
                     this.updateValue('HISTORYSTORE', id, history, false);
                 }
-            }).then(foo => this.updateNamespaceHistory(namespace, key, historyRecord));
+            }).then(() => this.updateNamespaceHistory(namespace, key, historyRecord));
     }
 
+    /**
+     * @param namespace
+     * @param key
+     * @param historyRecord
+     */
     updateNamespaceHistory(namespace, key, historyRecord) {
         const namespaceHistoryRecord = {
             name: namespace,
@@ -188,10 +242,10 @@ class Api
             user: historyRecord.user,
             value: sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase()),
         };
+
         return this.getHistory(namespace)
             .then(response => {
-                console.log(response);
-                if (response.status === 404) {
+                if (response.status === 404) { // this history record is first
                     const value = [{
                         name: namespace,
                         action: CREATED,
@@ -207,10 +261,10 @@ class Api
             }).then(history => {
                 history.unshift(namespaceHistoryRecord);
 
-                if (historyRecord.action === DELETED) {
+                if (historyRecord.action === DELETED) { // special check for delete action
                     this.getKeys(namespace)
                         .then(response => {
-                            if (response.status === 404) {
+                            if (response.status === 404) { // last key in namespace was deleted, namespace got deleted too
                                 history.unshift({
                                     name: namespace,
                                     action: DELETED,
@@ -224,12 +278,16 @@ class Api
 
                             this.updateValue('HISTORYSTORE', namespace, history, false);
                         });
-                } else {
+                } else { // create or update action
                     this.updateValue('HISTORYSTORE', namespace, history, false);
                 }
             });
     }
 
+    /**
+     * Make sure the response status code is 2xx
+     * @param response
+     */
     successOnly(response) {
         if (response.status >= 200 && response.status < 300) {
             return Promise.resolve(response);
@@ -237,6 +295,10 @@ class Api
         return Promise.reject(response);
     }
 
+    /**
+     * @param namespace
+     * @param key
+     */
     buildId(namespace, key) {
         return encodeURIComponent(`${namespace}:${key}`);
     }
