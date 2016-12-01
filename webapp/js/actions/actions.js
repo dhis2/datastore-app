@@ -2,6 +2,11 @@ import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 import {hashHistory} from 'react-router';
 
+
+/**
+ * @module Actions
+ */
+
 /**
  *  Namespace Action Creators
  */
@@ -266,7 +271,7 @@ export function selectKey(namespace, key, value) {
  * Fetches keys for a namespace and toggles the namespace
  * in the list.
  * If the namespace is not found in the API it will be removed
- * from the list aswell. 
+ * from the list aswell.
  * @param namespace to get keys for.
  * @param openNamespace overrides the toggling, if true it will always
  * open regardless of previous state of the namespace.
@@ -315,7 +320,6 @@ export function fetchAndDisplayKeyValue(namespace, key) {
 }
 
 /**
- * @function fetchNamespaces
  * Intial fetching of namespaces
  * @returns action thunk
  */
@@ -331,7 +335,6 @@ export function fetchNamespaces() {
 }
 
 /**
- * @function createValue
  * Creates a value with key in namespace.
  *
  * Because of how the API behaves, this is used for both creating
@@ -352,7 +355,6 @@ export function createValue(namespace, key, value) {
 }
 
 /**
- * @function createAndDisplayValue
  * Creates a value with key in namespace.
  *
  * On success, the namespace will be opened and the empty
@@ -411,8 +413,7 @@ export function fetchHistoryForNamespace(namespace) {
     };
 }
 
-/** @function updateValue
- *
+/**
  * Updates a value with key in namespace.
  * @param namespace containing value
  * @param key to update

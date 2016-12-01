@@ -24,11 +24,10 @@ class EditArea extends Component {
         const backgroundStyle = {
             backgroundColor: AppContainer.theme.palette.primary3Color,
         };
-
         return (
-        <div className={ 'window-area' } style={ backgroundStyle }>
-          <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)} />
-        </div>
+            <div className={ 'window-area' } style={ backgroundStyle }>
+                <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
+            </div>
         );
     }
 }

@@ -27,7 +27,7 @@ const ui = (state = { dialog: { ...emptyDialog }, searchValue: "" }, action) => 
                 key,
                 value,
                 ...emptySnackbar,
-                editedValue: {},
+                editedValue: value,
             };
         }
 
