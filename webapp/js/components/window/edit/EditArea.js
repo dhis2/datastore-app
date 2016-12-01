@@ -6,7 +6,7 @@ import { updateValue, valueChange } from '../../../actions/actions';
 import '../../../../style/valueWindow/valueWindow.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
-class EditArea extends Component {
+export class EditArea extends Component {
 
     dataFromJSONEditor(editor) {
         const { namespace, selectedKey } = this.props;

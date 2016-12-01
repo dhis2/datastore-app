@@ -11,7 +11,7 @@ import { updateValue } from '../../../actions/actions';
 
 import WindowToolbarTitle from '../WindowToolbarTitle';
 
-class EditToolbar extends React.Component {
+export class EditToolbar extends React.Component {
 
     handleSave() {
         const { namespace, selectedKey, editedValue, updateValue } = this.props;

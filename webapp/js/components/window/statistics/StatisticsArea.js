@@ -4,7 +4,7 @@ import '../../../../style/valueWindow/valueWindow.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 import { Line } from 'react-chartjs-2';
 
-class StatisticsArea extends Component {
+export class StatisticsArea extends Component {
     prepareData() {
         const { list } = this.props;
         const yVal = [];
@@ -81,7 +81,6 @@ class StatisticsArea extends Component {
 }
 StatisticsArea.propTypes = {
     list: PropTypes.array,
-    selectedKey: PropTypes.string,
     namespace: PropTypes.string,
 };
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import WindowToolbarTitle from '../../webapp/js/components/window/WindowToolbarTitle';
-import BreadcrumbHistoryButton from '../../webapp/js/components/utils/BreadcrumbHistoryButton';
+import WindowToolbarTitle from '../../../webapp/js/components/window/WindowToolbarTitle';
+import BreadcrumbHistoryButton from '../../../webapp/js/components/utils/BreadcrumbHistoryButton';
 
 describe('Component: WindowToolbarTitle', () => {
     let component;
