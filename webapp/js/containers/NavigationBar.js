@@ -16,7 +16,7 @@ class NavigationBar extends Component {
 
         return (
             <Toolbar style={ toolBarStyle }>
-                <img src="../../img/logo_front.png" style={ imageStyle } alt="dhis2" />
+                <img src="https://play.dhis2.org/test/api/staticContent/logo_banner" style={ imageStyle } alt="dhis2" />
                 <ToolbarTitle text="Datastore App" />
             </Toolbar>
         );

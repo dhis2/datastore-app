@@ -81,5 +81,5 @@
     "redux-thunk": "^2.1.0",
     "whatwg-fetch": "^1.0.0",
     "react-chartjs-2": "1.5.1"
-  },
+  }
 }
