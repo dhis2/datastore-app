@@ -67,4 +67,5 @@ export class Spinner extends Component {
 
 Spinner.propTypes = {
     size: PropTypes.string,
+    style: PropTypes.object,
 };

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import AppContainer from '../../../containers/AppContainer';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 

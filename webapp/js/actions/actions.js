@@ -147,12 +147,6 @@ function requestDeleteKey(namespace, key) {
     };
 }
 
-function loadValue() {
-    return {
-        type: actions.LOAD_VALUE,
-    };
-}
-
 function receiveDeleteKey(namespace, key) {
     return {
         type: actions.DELETE_KEY_FULFILLED,

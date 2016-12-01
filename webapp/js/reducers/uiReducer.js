@@ -51,7 +51,7 @@ const ui = (state = initialState, action) => {
                 ...state,
                 value,
                 snackbarMessage: {
-                    message: 'Value saved.'
+                    message: 'Value saved.',
                 },
             };
         }
@@ -61,7 +61,7 @@ const ui = (state = initialState, action) => {
             return {
                 ...state,
                 snackbarMessage: {
-                    message: 'Failed to save.'
+                    message: 'Failed to save.',
                 },
             };
         }

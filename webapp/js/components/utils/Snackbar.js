@@ -14,17 +14,18 @@ class Snackbar extends Component {
         const showSnackbar = typeof snackbarMessage === 'string';
         return (
             <SnackbarUI open={showSnackbar} message={<span>{snackbarMessage}</span>}
-                        autoHideDuration={5000} />
+                autoHideDuration={5000}
+        />
         );
     }
 }
 
 Snackbar.propTypes = {
-    snackbarMessage: PropTypes.object
+    snackbarMessage: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
-    snackbarMessage: state.ui.snackbarMessage
+    snackbarMessage: state.ui.snackbarMessage,
 });
 
 export default connect(

@@ -8,7 +8,7 @@ import HistoryArea from './HistoryArea';
 
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 
 export class HistoryWindow extends Component {
 
@@ -27,8 +27,7 @@ export class HistoryWindow extends Component {
 
         if (currentParams.key !== prevParams.key && typeof currentParams.key !== 'undefined') {
             getHistoryForKey(currentParams.namespace, currentParams.key);
-        }
-        else if (currentParams.namespace !== prevParams.namespace ||
+        } else if (currentParams.namespace !== prevParams.namespace ||
             (typeof currentParams.key === 'undefined') && typeof prevParams.key !== 'undefined') {
             getHistoryForNamespace(currentParams.namespace);
         }

@@ -106,7 +106,6 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-
                 if (this.cache[namespace] === undefined) {
                     this.cache[namespace] = [];
                 }
@@ -124,9 +123,8 @@ class Api
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
-
                 if (this.cache[namespace] !== undefined && this.cache[namespace][key] !== undefined) {
-                  delete this.cache[namespace][key];
+                    delete this.cache[namespace][key];
                 }
 
                 this.updateHistory(namespace, key, {}, DELETED);

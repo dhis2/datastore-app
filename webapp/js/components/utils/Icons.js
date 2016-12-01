@@ -5,7 +5,7 @@ import ErrorIcon from 'material-ui/svg-icons/alert/error';
 
 const style = {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
 };
 const iconStyle = {
     fill: 'rgb(117, 117, 117)',

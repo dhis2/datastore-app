@@ -29,7 +29,7 @@ const api = (state = initialState, action) => {
                 namespaces[key] = {
                     name: key,
                     open: false,
-                    keys: {}
+                    keys: {},
                 };
             });
             return {
@@ -95,7 +95,7 @@ const api = (state = initialState, action) => {
                         ...state.namespaces[namespace],
                         ...fetchingState,
                     },
-                }
+                },
             };
         }
 
@@ -111,7 +111,7 @@ const api = (state = initialState, action) => {
                         ...errorState,
                         errorMessage: error,
                     },
-                }
+                },
             };
         }
 

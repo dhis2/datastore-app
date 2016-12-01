@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import JSONEditor from '../../utils/JSONEditor';
 import AppContainer from '../../../containers/AppContainer';
 import { updateValue, valueChange } from '../../../actions/actions';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
 export class EditArea extends Component {

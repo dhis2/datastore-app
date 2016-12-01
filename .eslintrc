@@ -1,4 +1,5 @@
 {
+  "root": true,
   "extends": "dhis2",
   "plugins": [
     "prefer-object-spread",
@@ -10,11 +11,17 @@
         "ecmaFeatures": {
             "jsx": true,
             "classes": true,
-            "experimentalObjectRestSpread": true
+            "experimentalObjectRestSpread": true,
         }
   },
   "rules":{
     "prefer-object-spread/prefer-object-spread": 2,
     "mocha/no-exclusive-tests": "error",
+    "no-multi-comp": "off",
+    "jsx-no-bind": ["off", {
+        "ignoreRefs": true  ,
+        "allowArrowFunctions": true,
+        "allowBind": true,
+    }],
   },
 }

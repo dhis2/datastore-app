@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
-import '../../../../style/valueWindow/valueWindow.scss';
+import '../../../../style/window/window.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 import { Line } from 'react-chartjs-2';
 

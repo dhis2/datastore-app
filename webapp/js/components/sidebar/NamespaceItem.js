@@ -57,24 +57,20 @@ class NamespaceItem extends Component {
         this.renderError = this.renderError.bind(this);
         this.toggleHandler = this.toggleHandler.bind(this);
         this.state = {
-            list: Object.keys(props.namespace.keys).map(key => {
-                return {
-                    key,
-                    elem: this.constructKeyItem(key, key),
-                };
-            }),
+            list: Object.keys(props.namespace.keys).map(key => ({
+                key,
+                elem: this.constructKeyItem(key, key),
+            })),
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.namespace.keys !== this.props.namespace.keys) {
             this.setState({
-                list: Object.keys(nextProps.namespace.keys).map(key => {
-                    return {
-                        key,
-                        elem: this.constructKeyItem(key, key),
-                    };
-                }),
+                list: Object.keys(nextProps.namespace.keys).map(key => ({
+                    key,
+                    elem: this.constructKeyItem(key, key),
+                })),
             });
         }
     }
@@ -145,7 +141,7 @@ class NamespaceItem extends Component {
         );
 
         const list = this.state.list.filter(item => this.props.filter(item.key))
-            .map(item => item.elem)
+            .map(item => item.elem);
         let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
 
         if (fetching) {
