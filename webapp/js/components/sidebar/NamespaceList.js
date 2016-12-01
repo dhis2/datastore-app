@@ -23,7 +23,7 @@ class NamespaceList extends Component {
 
     filterNamespaces(item) {
         const searchValue = this.props.search || '';
-        if(!searchValue) {
+        if (!searchValue) {
             return true;
         }
         let nameEnd = searchValue.indexOf('#');
@@ -31,7 +31,7 @@ class NamespaceList extends Component {
         if (nameEnd < 0) {
             nameEnd = searchValue.length;
         }
-        const nameSearch = searchValue.substring(0, nameEnd)
+        const nameSearch = searchValue.substring(0, nameEnd);
         return item.toLowerCase().includes(nameSearch);
     }
 
@@ -47,13 +47,13 @@ class NamespaceList extends Component {
      */
     searchKeyPart() {
         const { search } = this.props;
-        const filterKeyInd= search.indexOf('#') +1;
-        const keySearch = search.substring(filterKeyInd, search.length)
+        const filterKeyInd = search.indexOf('#') + 1;
+        const keySearch = search.substring(filterKeyInd, search.length);
         return filterKeyInd > 0 ? keySearch : '';
     }
 
     render() {
-        const { items, search } = this.props;
+        const { items } = this.props;
         listStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
 
         const keySearch = this.searchKeyPart();

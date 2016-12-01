@@ -60,7 +60,7 @@ class NamespaceItem extends Component {
         this.state = {
             list: Object.keys(props.namespace.keys).map(key => {
                 return {
-                    key: key,
+                    key,
                     elem: this.constructKeyItem(key, key),
                 };
             }),
@@ -72,7 +72,7 @@ class NamespaceItem extends Component {
             this.setState({
                 list: Object.keys(nextProps.namespace.keys).map(key => {
                     return {
-                        key: key,
+                        key,
                         elem: this.constructKeyItem(key, key),
                     };
                 }),
@@ -128,8 +128,7 @@ class NamespaceItem extends Component {
     }
 
     renderOpen() {
-        const { namespace: { keys, name, open, fetching } } = this.props;
-        const items = [];
+        const { namespace: { name, open, fetching } } = this.props;
 
         const rightIconMenu = (
             <IconMenu disableAutoFocus iconButtonElement={ iconButtonElement }
@@ -151,9 +150,9 @@ class NamespaceItem extends Component {
             </IconMenu>
         );
 
-        //Get a list of elements, filter on search-prop
+        // Get a list of elements, filter on search-prop
         const list = this.state.list.filter(item => this.filterKey(item.key))
-            .map(item => item.elem)
+            .map(item => item.elem);
         let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
 
         if (fetching) {
@@ -203,7 +202,7 @@ NamespaceItem.propTypes = {
     deleteKeyInNamespace: PropTypes.func,
     event: PropTypes.func,
     /**
-     * A string used to filter the nestedList(keys). 
+     * A string used to filter the nestedList(keys).
      */
     search: PropTypes.string,
     namespace: PropTypes.shape({

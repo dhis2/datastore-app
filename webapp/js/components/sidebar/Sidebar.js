@@ -26,7 +26,7 @@ export class Sidebar extends Component {
     }
 
     render() {
-        const { items, search, getNamespaces } = this.props;
+        const { items, getNamespaces } = this.props;
         const NamespaceListImproved = SidebarAreaHOC(NamespaceList, getNamespaces);
 
         return (
@@ -34,7 +34,7 @@ export class Sidebar extends Component {
                 <SideBarHeader>
                     <RaisedButton label="New" onClick={ this.showDialog.bind(this) } primary />
                 </SideBarHeader>
-                <NamespaceListImproved items= { items }/>
+                <NamespaceListImproved items= { items } />
             </div>
         );
     }
