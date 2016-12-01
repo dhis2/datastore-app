@@ -1,14 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
-
 import Layout from './Layout';
-
 import HistoryWindow from '../components/window/history/HistoryWindow';
 import EmptyWindow from '../components/window/empty/EmptyWindow';
 import EditWindow from '../components/window/edit/EditWindow';
 import StatisticsWindow from '../components/window/statistics/StatisticsWindow';
-
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -16,7 +13,7 @@ import '../../style/main.scss';
 import {
     blue500, blue700,blue900,
     pinkA200,
-    grey100,grey200, grey300, grey400, grey500,
+    grey100,grey200, grey300, grey500,
     white, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';

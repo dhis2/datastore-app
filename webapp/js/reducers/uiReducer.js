@@ -32,7 +32,7 @@ const ui = (state = initialState, action) => {
                 key,
                 value,
                 ...emptySnackbar,
-                editedValue: {},
+                editedValue: value,
             };
         }
 

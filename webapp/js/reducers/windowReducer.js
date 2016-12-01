@@ -5,6 +5,8 @@ const errorState = { fetching: false, fetched: false, error: true };
 const initialState = {
     currentWindow: 'empty',
     history: [],
+    loading: false,
+    error: false,
 };
 
 const window = (state = initialState, action) => {

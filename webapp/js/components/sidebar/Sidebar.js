@@ -34,7 +34,7 @@ export class Sidebar extends Component {
                 <SideBarHeader>
                     <RaisedButton label="New" onClick={ this.showDialog.bind(this) } primary />
                 </SideBarHeader>
-                <NamespaceListImproved items={ items } search={ search } />
+                <NamespaceListImproved items= { items }/>
             </div>
         );
     }
@@ -49,7 +49,7 @@ Sidebar.propTypes = {
 
 const mapStateToProps = (state) => ({
     items: state.api.namespaces,
-    search: state.ui.searchValue,
+   // search: state.ui.searchValue,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,11 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import Paper from 'material-ui/Paper';
-
 import HistoryToolbar from './HistoryToolbar';
 import HistoryArea from './HistoryArea';
-
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 
 import '../../../../style/window/window.scss';
@@ -27,7 +24,8 @@ export class HistoryWindow extends Component {
 
         if (currentParams.key !== prevParams.key && typeof currentParams.key !== 'undefined') {
             getHistoryForKey(currentParams.namespace, currentParams.key);
-        } else if (currentParams.namespace !== prevParams.namespace ||
+        }
+        else if (currentParams.namespace !== prevParams.namespace ||
             (typeof currentParams.key === 'undefined') && typeof prevParams.key !== 'undefined') {
             getHistoryForNamespace(currentParams.namespace);
         }

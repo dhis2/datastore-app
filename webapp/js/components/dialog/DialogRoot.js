@@ -4,6 +4,7 @@ import NewNamespaceDialog from './NewNamespaceDialog';
 import NewKeyDialog from './NewKeyDialog';
 import ConfirmDeleteNamespaceDialog from './ConfirmDeleteNamespaceDialog';
 import ConfirmDeleteKeyDialog from './ConfirmDeleteKeyDialog';
+
 const DIALOG_COMPONENTS = {
     NEW_NAMESPACE: NewNamespaceDialog,
     NEW_KEY: NewKeyDialog,

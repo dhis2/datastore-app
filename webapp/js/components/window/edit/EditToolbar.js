@@ -1,15 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
-/* Material UI Imports */
+import { updateValue } from '../../../actions/actions';
+import WindowToolbarTitle from '../WindowToolbarTitle';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
-
-import { updateValue } from '../../../actions/actions';
-
-import WindowToolbarTitle from '../WindowToolbarTitle';
 
 export class EditToolbar extends React.Component {
 

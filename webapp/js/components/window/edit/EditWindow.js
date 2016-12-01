@@ -1,11 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import Paper from 'material-ui/Paper';
-
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
-
 import { fetchAndDisplayKeyValue, fetchAndToggleNamespace } from '../../../actions/actions';
 
 import '../../../../style/window/window.scss';
@@ -20,6 +17,7 @@ export class EditWindow extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+
         const { fetchedNamespaces, params: nextParams } = nextProps;
         const { fetchKeysForNamespace,
             getValue, params: currentParams } = this.props;

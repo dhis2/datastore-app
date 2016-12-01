@@ -1,8 +1,14 @@
 import React, { PropTypes, Component } from 'react';
+<<<<<<< HEAD
 
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../style/layout/layout.scss';
 import '../../style/pages/pages.scss';
+=======
+import 'bootstrap/dist/css/bootstrap.css';
+import '../../style/layout/layout.scss';
+import '../../style/pages/homepage.scss';
+>>>>>>> master
 import AppContainer from '../containers/AppContainer';
 import NavigationBar from './NavigationBar';
 import Snackbar from '../components/utils/Snackbar';

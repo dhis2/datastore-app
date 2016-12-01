@@ -1,4 +1,3 @@
-
 import React, { PropTypes, Component } from 'react';
 import ModeComment from 'material-ui/svg-icons/editor/mode-comment';
 import ErrorIcon from 'material-ui/svg-icons/alert/error';

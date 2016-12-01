@@ -23,17 +23,17 @@ import { fetchAndDisplayKeyValue,
          fetchAndToggleNamespace,
          toggleNamespace } from '../../actions/actions';
 
-
 const styles = {
     namespaceItem: {
 
     },
     keyItemList: {
-        marginLeft: '15px',
     },
     innerText: {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        height: '18px', // fixes clipping when zoomed bug
     },
 };
 
@@ -56,21 +56,26 @@ class NamespaceItem extends Component {
         this.renderOpen = this.renderOpen.bind(this);
         this.renderError = this.renderError.bind(this);
         this.toggleHandler = this.toggleHandler.bind(this);
+        this.filterKey = this.filterKey.bind(this);
         this.state = {
-            list: Object.keys(props.namespace.keys).map(key => ({
-                key,
-                elem: this.constructKeyItem(key, key),
-            })),
+            list: Object.keys(props.namespace.keys).map(key => {
+                return {
+                    key: key,
+                    elem: this.constructKeyItem(key, key),
+                };
+            }),
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.namespace.keys !== this.props.namespace.keys) {
             this.setState({
-                list: Object.keys(nextProps.namespace.keys).map(key => ({
-                    key,
-                    elem: this.constructKeyItem(key, key),
-                })),
+                list: Object.keys(nextProps.namespace.keys).map(key => {
+                    return {
+                        key: key,
+                        elem: this.constructKeyItem(key, key),
+                    };
+                }),
             });
         }
     }
@@ -90,6 +95,11 @@ class NamespaceItem extends Component {
 
     handleDeleteNamespace() {
         this.props.deleteNamespace(this.props.namespace.name);
+    }
+
+    filterKey(item) {
+        const searchValue = this.props.search || '';
+        return item.toLowerCase().includes(searchValue);
     }
 
     constructKeyItem(key, index) {
@@ -118,7 +128,8 @@ class NamespaceItem extends Component {
     }
 
     renderOpen() {
-        const { namespace: { name, open, fetching } } = this.props;
+        const { namespace: { keys, name, open, fetching } } = this.props;
+        const items = [];
 
         const rightIconMenu = (
             <IconMenu disableAutoFocus iconButtonElement={ iconButtonElement }
@@ -140,8 +151,9 @@ class NamespaceItem extends Component {
             </IconMenu>
         );
 
-        const list = this.state.list.filter(item => this.props.filter(item.key))
-            .map(item => item.elem);
+        //Get a list of elements, filter on search-prop
+        const list = this.state.list.filter(item => this.filterKey(item.key))
+            .map(item => item.elem)
         let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
 
         if (fetching) {
@@ -190,7 +202,10 @@ NamespaceItem.propTypes = {
     newKey: PropTypes.func,
     deleteKeyInNamespace: PropTypes.func,
     event: PropTypes.func,
-    filter: PropTypes.func,
+    /**
+     * A string used to filter the nestedList(keys). 
+     */
+    search: PropTypes.string,
     namespace: PropTypes.shape({
         error: PropTypes.bool,
         fetching: PropTypes.bool,

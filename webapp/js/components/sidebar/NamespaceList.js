@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import NamespaceItem from './NamespaceItem';
 import { List } from 'material-ui/List';
 import AppContainer from '../../containers/AppContainer';
@@ -12,37 +13,58 @@ const listStyle = {
 };
 
 class NamespaceList extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.filterNamespaces = this.filterNamespaces.bind(this);
+        this.searchKeyPart = this.searchKeyPart.bind(this);
+    }
+
     filterNamespaces(item) {
-        const search = this.props.search || '';
-        let nameEnd = search.indexOf('#');
+        const searchValue = this.props.search || '';
+        if(!searchValue) {
+            return true;
+        }
+        let nameEnd = searchValue.indexOf('#');
         // Seperator not present, search entire word
         if (nameEnd < 0) {
-            nameEnd = search.length;
+            nameEnd = searchValue.length;
         }
-        const nameSearch = search.substring(0, nameEnd);
+        const nameSearch = searchValue.substring(0, nameEnd)
         return item.toLowerCase().includes(nameSearch);
     }
 
-    filterKeys(item) {
-        const search = this.props.search || '';
-        const keyInd = search.indexOf('#') + 1;
-        // match all keys if seperator is not defined
-        if (keyInd <= 0) {
-            return true;
-        }
-        const keySearch = search.substring(keyInd, search.length);
-        return item.toLowerCase().includes(keySearch);
+    /**
+     * This is used to split the searchValue at '#' to get the
+     * key-search part of the search. Used mainly for performance reasons,
+     * so that the NamespaceItem do not re-render unnecessarily.
+     * It only needs to re-render if the key-part of the search changes.
+     * If we passed the entire searchValue it would re-render the nested Keylist
+     * every time the searchValue changes - which is really bad performance wise.
+     * @returns A string following '#' (excluding), empty string if separator is not
+     * present.
+     */
+    searchKeyPart() {
+        const { search } = this.props;
+        const filterKeyInd= search.indexOf('#') +1;
+        const keySearch = search.substring(filterKeyInd, search.length)
+        return filterKeyInd > 0 ? keySearch : '';
     }
 
     render() {
         const { items, search } = this.props;
         listStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
+
+        const keySearch = this.searchKeyPart();
         return (
             <List style={listStyle}>
-                {Object.keys(items).sort().filter(item => this.filterNamespaces.bind(this)(item))
-                 .map(item => (
-                    <NamespaceItem namespace={ items[item] } key={ item } filter={ this.filterKeys.bind(this) } />
-                 ))}
+                {Object.keys(items).filter(item => this.filterNamespaces(item))
+                    .map(item => (
+                        <NamespaceItem namespace={items[item]}
+                                       search={keySearch}
+                                       key={item}
+                        />))}
             </List>
         );
     }
@@ -53,4 +75,11 @@ NamespaceList.propTypes = {
     search: PropTypes.string,
 };
 
-export default NamespaceList;
+const mapStateToProps = (state) => ({
+    search: state.ui.searchValue,
+});
+
+
+export default connect(
+    mapStateToProps
+)(NamespaceList);
