@@ -20,12 +20,7 @@ const window = (state = initialState, action) => {
         };
     }
     case actions.FETCH_VALUE_FULFILLED:
-    case actions.CREATE_VALUE_FULFILLED: {
-        return {
-            ...state,
-            loading: false,
-        };
-    }
+    case actions.CREATE_VALUE_FULFILLED:
     case actions.SELECT_KEY: {
         return {
             ...state,

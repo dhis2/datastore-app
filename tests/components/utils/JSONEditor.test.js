@@ -1,10 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import JSONEditor from '../../webapp/js/components/utils/JSONEditor';
+import JSONEditor from '../../../webapp/js/components/utils/JSONEditor';
 
 
-describe('Component: NavigationBar', () => {
+describe('Component: JSONEditor', () => {
     let component;
 
     const testObject = 'test';

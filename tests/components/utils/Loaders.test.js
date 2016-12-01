@@ -1,10 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { Spinner } from '../../webapp/js/components/utils/Loaders';
+import { Spinner } from '../../../webapp/js/components/utils/Loaders';
 
 
-describe('Component: NavigationBar', () => {
+describe('Component: Spinner', () => {
     let component;
 
     it('should render without exploding', () => {

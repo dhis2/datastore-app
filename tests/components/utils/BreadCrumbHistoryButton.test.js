@@ -2,10 +2,10 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import FlatButton from 'material-ui/FlatButton';
-import BreadcrumbHistoryButton from '../../webapp/js/components/utils/BreadcrumbHistoryButton';
+import BreadcrumbHistoryButton from '../../../webapp/js/components/utils/BreadcrumbHistoryButton';
 
 
-describe('Component: NavigationBar', () => {
+describe('Component: BreadcrumbHistoryButton', () => {
     let component;
 
     const testLabel = 'test';

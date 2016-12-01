@@ -1,9 +1,9 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { ModeCommentIconWithText, ErrorIconWithText } from '../../webapp/js/components/utils/Icons';
+import { ModeCommentIconWithText, ErrorIconWithText } from '../../../webapp/js/components/utils/Icons';
 
-describe('Component: NavigationBar', () => {
+describe('Component: ModeCommentIconWithText & ErrorIconWithText', () => {
     let component;
 
     const testText = 'test';

@@ -2,10 +2,10 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import SnackbarUI from 'material-ui/Snackbar';
-import { Snackbar } from '../../webapp/js/components/utils/Snackbar';
+import { Snackbar } from '../../../webapp/js/components/utils/Snackbar';
 
 
-describe('Component: NavigationBar', () => {
+describe('Component: Snackbar', () => {
     let component;
 
     const testMessage = 'test';
