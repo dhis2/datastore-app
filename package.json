@@ -18,9 +18,6 @@
   "bugs": {
     "url": "https://github.com/Glimlag/INF5750/issues"
   },
-  "eslintConfig": {
-    "root": true
-  },
   "homepage": "https://github.com/Glimlag/INF5750#readme",
   "devDependencies": {
     "babel-core": "^6.17.0",
@@ -85,21 +82,4 @@
     "whatwg-fetch": "^1.0.0",
     "react-chartjs-2": "1.5.1"
   },
-  "manifest.webapp": {
-    "name": "DHIS2 Datastore Webapp",
-    "icons": {
-      "48": "icon.png"
-    },
-    "developer": {
-      "name": "Steven, Birk and Pavel",
-      "email": "e@ma.il"
-    },
-    "activities": {
-      "dhis": {
-        "href": ".."
-      }
-    },
-    "launch_url": "index.html",
-    "default_locale": "en"
-  }
 }
