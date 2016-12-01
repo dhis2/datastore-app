@@ -2,12 +2,12 @@
     "version": "1.0",
     "name": "#FFF",
     "description": "DHIS2 Datastore App by #FFF",
-    "launch_path": "/build/index.html",
+    "launch_path": "index.html",
     "appType": "APP",
     "icons": {
-        "16": "/build/img/icons/database_16.png",
-        "48": "/build/img/icons/database_48.png",
-        "128": "/build/img/icons/database_128.png"
+        "16": "database_16.png",
+        "48": "database_48.png",
+        "128": "database_128.png"
     },
     "developer": {
         "name": "Birk, Steven, Pavel",
