@@ -13,7 +13,7 @@ const listStyle = {
 
 class NamespaceList extends Component {
     filterNamespaces(item) {
-        const { search } = this.props;
+        const search = this.props.search || '';
         let nameEnd = search.indexOf('#');
         // Seperator not present, search entire word
         if (nameEnd < 0) {
@@ -24,7 +24,7 @@ class NamespaceList extends Component {
     }
 
     filterKeys(item) {
-        const { search } = this.props;
+        const search = this.props.search || '';
         const keyInd = search.indexOf('#') + 1;
         // match all keys if seperator is not defined
         if (keyInd <= 0) {
@@ -35,7 +35,7 @@ class NamespaceList extends Component {
     }
 
     render() {
-        const { items } = this.props;
+        const { items, search } = this.props;
         listStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
         return (
             <List style={listStyle}>
