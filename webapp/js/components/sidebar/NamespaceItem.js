@@ -56,6 +56,7 @@ class NamespaceItem extends Component {
         this.renderOpen = this.renderOpen.bind(this);
         this.renderError = this.renderError.bind(this);
         this.toggleHandler = this.toggleHandler.bind(this);
+        this.filterKey = this.filterKey.bind(this);
         this.state = {
             list: Object.keys(props.namespace.keys).map(key => {
                 return {
@@ -64,6 +65,19 @@ class NamespaceItem extends Component {
                 };
             }),
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.namespace.keys !== this.props.namespace.keys) {
+            this.setState({
+                list: Object.keys(nextProps.namespace.keys).map(key => {
+                    return {
+                        key: key,
+                        elem: this.constructKeyItem(key, key),
+                    };
+                }),
+            });
+        }
     }
 
     toggleHandler() {
@@ -83,18 +97,11 @@ class NamespaceItem extends Component {
         this.props.deleteNamespace(this.props.namespace.name);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.namespace.keys !== this.props.namespace.keys) {
-            this.setState({
-                list: Object.keys(nextProps.namespace.keys).map(key => {
-                    return {
-                        key: key,
-                        elem: this.constructKeyItem(key, key),
-                    };
-                }),
-            });
-        }
+    filterKey(item) {
+        const searchValue = this.props.search || '';
+        return item.toLowerCase().includes(searchValue);
     }
+
     constructKeyItem(key, index) {
         const { deleteKeyInNamespace, namespace: { name: namespace } } = this.props;
         const keyItemMenu = (
@@ -144,7 +151,8 @@ class NamespaceItem extends Component {
             </IconMenu>
         );
 
-        const list = this.state.list.filter(item => this.props.filter(item.key))
+        //Get a list of elements, filter on search-prop
+        const list = this.state.list.filter(item => this.filterKey(item.key))
             .map(item => item.elem)
         let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
 
@@ -194,6 +202,10 @@ NamespaceItem.propTypes = {
     newKey: PropTypes.func,
     deleteKeyInNamespace: PropTypes.func,
     event: PropTypes.func,
+    /**
+     * A string used to filter the nestedList(keys). 
+     */
+    search: PropTypes.string,
     namespace: PropTypes.shape({
         error: PropTypes.bool,
         fetching: PropTypes.bool,
