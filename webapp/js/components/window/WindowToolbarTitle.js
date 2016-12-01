@@ -8,7 +8,7 @@ class WindowToolbarTitle extends Component {
         const length = pathArray.length - 1;
 
         return (
-            <span className={'toolbar-title'}>
+            <span className={'fff-toolbar-title'}>
               {pathArray.map((item, index) => (
                  <BreadcrumbHistoryButton label={ item } key={ index } last={index === length} />
                 ))}
@@ -18,7 +18,7 @@ class WindowToolbarTitle extends Component {
 
     renderDefault() {
         return (
-            <span className="toolbar-title">
+            <span className="fff-toolbar-title">
               Value
             </span>
         );
