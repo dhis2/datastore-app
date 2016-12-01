@@ -58,6 +58,7 @@ class StatisticsArea extends Component {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
+                        stepSize: 1
                     },
                 }],
                 xAxes: [{
