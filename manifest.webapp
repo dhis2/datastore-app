@@ -1,0 +1,23 @@
+{
+    "version": "1.0",
+    "name": "#FFF",
+    "description": "DHIS2 Datastore App by #FFF",
+    "launch_path": "/build/index.html",
+    "appType": "APP",
+    "icons": {
+        "16": "/build/img/icons/database_16.png",
+        "48": "/build/img/icons/database_48.png",
+        "128": "/build/img/icons/database_128.png"
+    },
+    "developer": {
+        "name": "Birk, Steven, Pavel",
+        "url": "https://wiki.uio.no/mn/ifi/inf5750/index.php/Fff"
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+            "href": "https://play.dhis2.org/test",
+            "namespace": "HISTORYSTORE"
+        }
+    }
+}
