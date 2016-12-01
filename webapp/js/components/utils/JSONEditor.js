@@ -7,6 +7,7 @@ class JSONEditor extends Component {
     constructor(props) {
         super(props);
         this.editor = null;
+        this.changedEvent = this.changedEvent.bind(this);
     }
 
     componentDidMount() {
@@ -31,7 +32,7 @@ class JSONEditor extends Component {
         if (!this.editor && this.editorContainer) {
             const opts = {
                 modes: ['tree', 'code'],
-                onChange: this.changedEvent.bind(this),
+                onChange: this.changedEvent,
             };
             this.editor = new JSEditor(this.editorContainer, opts);
             this.editor.set(this.props.value);

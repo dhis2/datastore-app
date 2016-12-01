@@ -3,6 +3,8 @@ import * as actions from '../constants/actionTypes';
 const initialState = {
     currentWindow: 'empty',
     history: [],
+    loading: false,
+    error: false,
 };
 
 const window = (state = initialState, action) => {
