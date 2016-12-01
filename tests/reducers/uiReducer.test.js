@@ -13,7 +13,7 @@ describe('Sidebar Reducer', () => {
           const action = {
               type: 'SELECT_NAMESPACE',
               selectedNamespace: 'test',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               selectedNamespace: 'test',
@@ -27,7 +27,7 @@ describe('Sidebar Reducer', () => {
               namespace: 'test',
               key: 'test',
               value: 'test',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               ...fetchedState,
@@ -35,7 +35,7 @@ describe('Sidebar Reducer', () => {
               namespace: 'test',
               key: 'test',
               value: 'test',
-              editedValue: {},
+              editedValue: 'test',
           });
       });
 
@@ -43,7 +43,7 @@ describe('Sidebar Reducer', () => {
           const initialState = {};
           const action = {
               type: 'FETCH_VALUE_PENDING',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               ...fetchingState,
@@ -55,7 +55,7 @@ describe('Sidebar Reducer', () => {
           const action = {
               type: 'UPDATE_VALUE_FULFILLED',
               value: 'test',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               value: 'test',
@@ -69,7 +69,7 @@ describe('Sidebar Reducer', () => {
           const initialState = {};
           const action = {
               type: 'UPDATE_VALUE_REJECTED',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               snackbarMessage: {
@@ -82,7 +82,7 @@ describe('Sidebar Reducer', () => {
           const initialState = {};
           const action = {
               type: 'FETCH_HISTORY_REJECTED',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               ...errorState,
@@ -98,7 +98,7 @@ describe('Sidebar Reducer', () => {
               type: 'OPEN_DIALOG',
               dialogType: 'test',
               dialogprops: 'test',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               dialog: {
@@ -112,12 +112,12 @@ describe('Sidebar Reducer', () => {
           const initialState = {};
           const action = {
               type: 'CLOSE_DIALOG',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               dialog: {
                   ...emptyDialog,
-              }
+              },
           });
       });
 
@@ -127,7 +127,7 @@ describe('Sidebar Reducer', () => {
               type: 'CREATE_NAMESPACE',
               namespace: 'test',
               key: 'test',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               namespaceToBeCreated: {
@@ -144,7 +144,7 @@ describe('Sidebar Reducer', () => {
               namespace: 'test',
               key: 'test',
               value: 'test',
-          }
+          };
           const newState = reducer(initialState, action);
           expect(newState).to.eql({
               namespace: 'test',

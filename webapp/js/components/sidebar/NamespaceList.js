@@ -12,7 +12,7 @@ const listStyle = {
     margin: '8px 5px',
 };
 
-class NamespaceList extends Component {
+export class NamespaceList extends Component {
 
     constructor(props) {
         super(props);

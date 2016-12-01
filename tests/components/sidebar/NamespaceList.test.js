@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import NamespaceList from '../../../webapp/js/components/sidebar/NamespaceList';
+import { NamespaceList } from '../../../webapp/js/components/sidebar/NamespaceList';
 import { List } from 'material-ui/List';
 
 describe('Component: NamespaceList', () => {
