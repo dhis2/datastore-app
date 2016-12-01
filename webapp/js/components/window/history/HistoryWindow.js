@@ -1,16 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import Paper from 'material-ui/Paper';
-
 import HistoryToolbar from './HistoryToolbar';
 import HistoryArea from './HistoryArea';
-
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
-
 import '../../../../style/valueWindow/valueWindow.scss';
 
-class HistoryWindow extends Component {
+export class HistoryWindow extends Component {
 
     componentDidMount() {
         const { getHistoryForKey, getHistoryForNamespace, params: { namespace, key } } = this.props;

@@ -1,16 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import Paper from 'material-ui/Paper';
-
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
-
 import { fetchAndDisplayKeyValue, fetchAndToggleNamespace } from '../../../actions/actions';
-
 import '../../../../style/valueWindow/valueWindow.scss';
 
-class EditWindow extends Component {
+export class EditWindow extends Component {
 
     componentDidMount() {
         const { getValue, params: { namespace, key } } = this.props;

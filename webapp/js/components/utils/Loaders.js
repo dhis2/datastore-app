@@ -1,4 +1,3 @@
-
 import React, { PropTypes, Component } from 'react';
 import '../../../style/utils/loaders.scss';
 

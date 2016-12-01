@@ -5,7 +5,7 @@ import WindowToolbarTitle from '../WindowToolbarTitle';
 
 class StatisticsToolbar extends Component {
     render() {
-        const { namespace, selectedKey } = this.props;
+        const { namespace } = this.props;
 
         return (
             <Paper style={{ zIndex: 5 }}>

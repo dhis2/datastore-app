@@ -1,6 +1,5 @@
 import * as actions from '../constants/actionTypes';
 
-
 export function changeWindow(window) {
     return {
         type: actions.CHANGE_WINDOW,

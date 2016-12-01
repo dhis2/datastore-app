@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NamespaceList from './NamespaceList';
-import { Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui/Toolbar';
+import { fetchNamespaces } from '../../actions/actions';
 import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
-import Searchbar from './Searchbar';
+import SideBarHeader from './SideBarHeader';
 import '../../../style/sidebar/sidebar.scss';
 import { openNamespaceDialog } from '../../actions/dialogActions';
+import SidebarAreaHOC from '../hoc/SidebarAreaHOC';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -17,23 +17,24 @@ class Sidebar extends Component {
         };
     }
 
+    componentDidMount() {
+        this.props.getNamespaces();
+    }
+
     showDialog() {
         this.props.openNamespaceDialog();
     }
 
     render() {
-        return (
-            <div className={'sidebar'}>
-                <Paper style={{ zIndex: 5 }}>
-                    <Toolbar>
-                        <Searchbar />
-                        <ToolbarGroup>
+        const { items, search, getNamespaces } = this.props;
+        const NamespaceListImproved = SidebarAreaHOC(NamespaceList, getNamespaces);
 
-                            <RaisedButton label="New" onClick={this.showDialog.bind(this)} primary />
-                        </ToolbarGroup>
-                    </Toolbar>
-                </Paper>
-                <NamespaceList />
+        return (
+            <div className={'fff-sidebar'}>
+                <SideBarHeader>
+                    <RaisedButton label="New" onClick={ this.showDialog.bind(this) } primary />
+                </SideBarHeader>
+                <NamespaceListImproved items= { items }/>
             </div>
         );
     }
@@ -41,15 +42,26 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
     openNamespaceDialog: PropTypes.func,
+    getNamespaces: PropTypes.func,
+    items: PropTypes.object,
+    search: PropTypes.string,
 };
+
+const mapStateToProps = (state) => ({
+    items: state.api.namespaces,
+   // search: state.ui.searchValue,
+});
 
 const mapDispatchToProps = (dispatch) => ({
     openNamespaceDialog() {
         dispatch(openNamespaceDialog());
     },
+    getNamespaces() {
+        dispatch(fetchNamespaces());
+    },
 });
 
 export default connect(
-  null,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Sidebar);

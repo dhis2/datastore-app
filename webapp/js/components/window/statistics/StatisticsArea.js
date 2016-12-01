@@ -45,10 +45,11 @@ class StatisticsArea extends Component {
 
     render() {
         const data = this.prepareData.bind(this)();
+        const { namespace } = this.props;
         const opts = {
             title: {
                 display: true,
-                text: '# of Edits in '+ this.props.namespace,
+                text: '# of Edits in '.concat(namespace),
             },
             legend: {
                 display: false,
@@ -57,6 +58,7 @@ class StatisticsArea extends Component {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
+                        stepSize: 1
                     },
                 }],
                 xAxes: [{
@@ -67,7 +69,7 @@ class StatisticsArea extends Component {
                     },
                 }],
             },
-        }
+        };
 
         return (
             <Paper className={'window-area'}>
@@ -81,6 +83,7 @@ class StatisticsArea extends Component {
 StatisticsArea.propTypes = {
     list: PropTypes.array,
     selectedKey: PropTypes.string,
+    namespace: PropTypes.string,
 };
 
 export default WindowAreaHOC(StatisticsArea);

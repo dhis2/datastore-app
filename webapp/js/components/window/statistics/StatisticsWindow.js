@@ -6,7 +6,7 @@ import StatisticsArea from './StatisticsArea';
 import '../../../../style/valueWindow/valueWindow.scss';
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 
-class StatisticsWindow extends Component {
+export class StatisticsWindow extends Component {
     componentDidMount() {
         const { getHistoryForKey, getHistoryForNamespace, params: { namespace, key } } = this.props;
         if (typeof key !== 'undefined') {

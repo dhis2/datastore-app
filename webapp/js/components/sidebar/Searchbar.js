@@ -10,21 +10,30 @@ class Searchbar extends Component {
         this.state = ({
             searchVal: '',
         });
+
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
     }
+
     handleFocus() {
+        const { searchChanged } = this.props;
+
         this.setState({
             searchVal: '',
         });
-        this.props.searchChanged('');
+
+        searchChanged('');
     }
+
     handleChange(e) {
         const val = e.target.value
+        const { searchChanged } = this.props;
+
         this.setState({
             searchVal: val,
         });
-        this.props.searchChanged(val.toLowerCase());
+
+        searchChanged(val.toLowerCase());
     }
 
     render() {
@@ -48,8 +57,12 @@ const mapDispatchToProps = dispatch => ({
         dispatch(searchSidebarChange(value));
     },
 });
-Searchbar.PropTypes = {
-    searchChanged: PropTypes.function,
-};
-export default connect(null, mapDispatchToProps)(Searchbar);
 
+Searchbar.propTypes = {
+    searchChanged: PropTypes.func,
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Searchbar);

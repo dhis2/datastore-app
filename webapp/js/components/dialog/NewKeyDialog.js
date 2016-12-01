@@ -5,7 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { createAndDisplayValue } from '../../actions/actions';
 import { closeKeyDialog } from '../../actions/dialogActions';
-import { hashHistory } from 'react-router';
 
 class NamespaceDialog extends Component {
 
