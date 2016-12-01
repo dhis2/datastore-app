@@ -51,6 +51,12 @@ HistoryWindow.propTypes = {
     history: PropTypes.array,
     namespace: PropTypes.string,
     selectedKey: PropTypes.string,
+    getHistoryForKey: PropTypes.func,
+    getHistoryForNamespace: PropTypes.func,
+    params: PropTypes.shape({
+        namespace: PropTypes.string,
+        key: PropTypes.string,
+    }),
 };
 
 const mapStateToProps = (state) => ({

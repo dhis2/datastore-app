@@ -1,22 +1,16 @@
 import * as actions from '../constants/actionTypes';
 
-const fetchedState = {
-    fetching: false,
-    fetched: true,
-    error: false,
-};
-const fetchingState = {
-    fetching: true,
-    fetched: false,
-    error: false,
-};
-const errorState = {
+const fetchedState = { fetching: false, fetched: true, error: false };
+const fetchingState = { fetching: true, fetched: false, error: false };
+const errorState = { fetching: false, fetched: false, error: true };
+
+const initialState = {
     fetching: false,
     fetched: false,
-    error: true,
+    namespaces: {},
 };
 
-const api = (state = { fetching: false, fetched: false, namespaces: {} }, action) => {
+const api = (state = initialState, action) => {
     switch (action.type) {
 
     /**
@@ -52,7 +46,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         {
             return {
                 ...state,
-                ...fetchingState
+                ...fetchingState,
             };
         }
 
@@ -60,7 +54,7 @@ const api = (state = { fetching: false, fetched: false, namespaces: {} }, action
         {
             return {
                 ...state,
-                ...errorState
+                ...errorState,
             };
         }
 

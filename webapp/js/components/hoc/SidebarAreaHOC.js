@@ -67,8 +67,8 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
     };
 
     const mapStateToProps = (state) => ({
-        loading: state.api.fetching,
-        error: state.api.error,
+        loading: state.sidebar.fetching,
+        error: state.sidebar.error,
     });
 
     return connect(

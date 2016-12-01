@@ -1,6 +1,6 @@
 import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
-import {hashHistory, browserHistory} from 'react-router';
+import { hashHistory } from 'react-router';
 
 /**
  *  Namespace Action Creators
@@ -266,7 +266,7 @@ export function selectKey(namespace, key, value) {
  * Fetches keys for a namespace and toggles the namespace
  * in the list.
  * If the namespace is not found in the API it will be removed
- * from the list aswell. 
+ * from the list aswell.
  * @param namespace to get keys for.
  * @param openNamespace overrides the toggling, if true it will always
  * open regardless of previous state of the namespace.
