@@ -13,7 +13,7 @@ const listStyle = {
 
 class NamespaceList extends Component {
     filterNamespaces(item) {
-        const { searchValue } = this.props;
+        const searchValue = this.props.searchValue || '';
         let nameEnd = searchValue.indexOf('#');
         // Seperator not present, search entire word
         if (nameEnd < 0) {
