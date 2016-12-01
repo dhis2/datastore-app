@@ -1,25 +1,13 @@
-.value-container {
+.fff-window {
   display: flex;
-  flex-grow: 3;
+  flex: 3;
   flex-direction: column;
   background-color: rgb(238, 238, 238);
 }
 
-.value-area {
+.fff-window-area {
   display: flex;
   flex-direction: column;
-  flex: 1;
-}
-
-.window-area {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  flex: 3;
   overflow-y: auto;
-}
-
-.window {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
 }

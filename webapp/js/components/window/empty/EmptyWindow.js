@@ -10,7 +10,7 @@ import '../../../../style/valueWindow/valueWindow.scss';
 class EmptyWindow extends Component {
     render() {
         return (
-        <Paper className={'value-container'}>
+        <Paper className={'fff-window'}>
             <EmptyToolbar />
             <EmptyArea />
         </Paper>

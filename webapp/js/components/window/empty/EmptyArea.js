@@ -7,7 +7,7 @@ import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 class EmptyArea extends Component {
     render() {
         return (
-        <Paper className={'value-container'}>
+        <Paper className={'fff-window'}>
             <ModeCommentIconWithText text={'Select a namespace and a key to edit.'} />
         </Paper>
         );

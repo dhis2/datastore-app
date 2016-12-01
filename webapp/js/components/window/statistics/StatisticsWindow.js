@@ -31,7 +31,7 @@ export class StatisticsWindow extends Component {
     render() {
         const { history, params: { namespace } } = this.props;
         return (
-        <Paper className={ 'value-container' }>
+        <Paper className={ 'fff-window' }>
             <StatisticsToolbar namespace={ namespace } />
             <StatisticsArea list={ history } namespace={ namespace } />
         </Paper>

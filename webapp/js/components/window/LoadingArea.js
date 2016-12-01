@@ -5,8 +5,8 @@ import Paper from 'material-ui/Paper';
 class LoadingArea extends Component {
     render() {
         return (
-          <Paper className={'window-area'}>
-              <div className={'window-area'} style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <Paper className={'fff-window-area'}>
+              <div className={'fff-window-area'} style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <Spinner size={'large'} />
               </div>
           </Paper>

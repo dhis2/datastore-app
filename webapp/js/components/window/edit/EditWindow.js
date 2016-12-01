@@ -48,7 +48,7 @@ export class EditWindow extends Component {
         }
 
         return (
-        <Paper className={'value-container'}>
+        <Paper className={'fff-window'}>
             <EditToolbar path={path} />
             <EditArea namespace={ namespace } selectedKey={ key } />
         </Paper>

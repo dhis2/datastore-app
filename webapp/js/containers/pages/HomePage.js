@@ -8,7 +8,7 @@ class HomePage extends Component {
 
     render() {
         return (
-            <div className="home-page-container">
+            <div className="fff-home-page-container">
                 <Sidebar />
                 { this.props.children }
                 <DialogRoot />

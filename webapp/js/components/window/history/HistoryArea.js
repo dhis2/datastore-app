@@ -17,7 +17,7 @@ export class HistoryArea extends Component {
         backgroundStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
 
         return (
-              <div className={ 'window-area' } style={ backgroundStyle }>
+              <div className={ 'fff-window-area' } style={ backgroundStyle }>
                   <Table fixedHeader headerStyle={ tableHeaderStyle }>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>

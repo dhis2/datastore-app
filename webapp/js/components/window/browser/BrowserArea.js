@@ -10,7 +10,7 @@ class BrowserArea extends Component {
 
         return (
           <Paper>
-              <div className="window-area" style={{
+              <div className="fff-window-area" style={{
                   backgroundColor: AppContainer.theme.palette.primary3Color }}
               >
                   <Table fixedHeader selectable multiSelectable>

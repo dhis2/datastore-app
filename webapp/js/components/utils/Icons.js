@@ -19,7 +19,7 @@ export class ModeCommentIconWithText extends Component {
     render() {
         const { text } = this.props;
         return (
-          <div className="value-area" style={style}>
+          <div className="fff-window-area" style={style}>
             <div>
               <ModeComment style={iconStyle} />
               <p>{ text }</p>
@@ -33,9 +33,9 @@ export class ErrorIconWithText extends Component {
     render() {
         const { text } = this.props;
         return (
-            <div className="value-area" style={style}>
+            <div className="fff-window-area" style={style}>
                 <div>
-                    <ErrorIcon style={iconStyle}/>
+                    <ErrorIcon style={iconStyle} />
                     <p>{ text }</p>
                 </div>
             </div>
@@ -50,4 +50,3 @@ ModeCommentIconWithText.propTypes = {
 ErrorIconWithText.propTypes = {
     text: PropTypes.string,
 };
-

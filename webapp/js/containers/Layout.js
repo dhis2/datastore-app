@@ -13,10 +13,10 @@ import DialogRoot from '../components/dialog/DialogRoot';
 class Layout extends Component {
     render() {
         return (
-            <div className={'wrapper'}>
-                <div className={'layout-container'}>
-                    <NavigationBar theme={AppContainer.theme.palette}/>
-                    <div className="home-page-container">
+            <div className={'fff-wrapper'}>
+                <div className={'fff-layout-container'}>
+                    <NavigationBar theme={AppContainer.theme.palette} />
+                    <div className="fff-home-page-container">
                         <Sidebar />
                         { this.props.children }
                         <DialogRoot />
