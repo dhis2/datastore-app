@@ -5,8 +5,6 @@ import { HistoryWindow } from '../../webapp/js/components/window/history/History
 import HistoryToolbar from '../../webapp/js/components/window/history/HistoryToolbar';
 import HistoryArea from '../../webapp/js/components/window/history/HistoryArea';
 import Paper from 'material-ui/Paper';
-import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
 
 describe('Component: HistoryWindow', () => {
 
