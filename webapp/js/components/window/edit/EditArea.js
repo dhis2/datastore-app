@@ -25,7 +25,7 @@ export class EditArea extends Component {
             backgroundColor: AppContainer.theme.palette.primary3Color,
         };
         return (
-            <div className={ 'window-area' } style={ backgroundStyle }>
+            <div className={ 'fff-window-area' } style={ backgroundStyle }>
                 <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
             </div>
         );
