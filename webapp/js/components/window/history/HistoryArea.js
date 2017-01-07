@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import AppContainer from '../../../containers/AppContainer';
+import Theme from '../../../utils/theme';
 import '../../../../style/window/window.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
@@ -14,7 +14,7 @@ const backgroundStyle = {
 export class HistoryArea extends Component {
     render() {
         const { list } = this.props;
-        backgroundStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
+        backgroundStyle.backgroundColor = Theme.palette.primary3Color;
 
         return (
               <div className={ 'fff-window-area' } style={ backgroundStyle }>

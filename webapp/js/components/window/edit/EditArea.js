@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import JSONEditor from '../../utils/JSONEditor';
-import AppContainer from '../../../containers/AppContainer';
+import Theme from '../../../utils/theme';
 import { updateValue, valueChange } from '../../../actions/actions';
 import '../../../../style/window/window.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
@@ -22,7 +22,7 @@ export class EditArea extends Component {
         const { value } = this.props;
 
         const backgroundStyle = {
-            backgroundColor: AppContainer.theme.palette.primary3Color,
+            backgroundColor: Theme.palette.primary3Color,
         };
         return (
             <div className={ 'fff-window-area' } style={ backgroundStyle }>

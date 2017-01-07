@@ -7,6 +7,7 @@ import EmptyWindow from '../components/window/empty/EmptyWindow';
 import EditWindow from '../components/window/edit/EditWindow';
 import StatisticsWindow from '../components/window/statistics/StatisticsWindow';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Theme from '../utils/theme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import '../../style/main.scss';
@@ -49,7 +50,7 @@ class AppContainer extends Component {
     const { store } = this.props;
 
     return (
-      <MuiThemeProvider muiTheme={AppContainer.theme}>
+      <MuiThemeProvider muiTheme={Theme}>
           <Provider store = { store }>
               <Router history={ hashHistory }>
                   <Route path={ "/" } component={ Layout }>

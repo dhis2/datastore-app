@@ -3,7 +3,7 @@ import React, { PropTypes, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../style/layout/layout.scss';
 import '../../style/pages/pages.scss';
-import AppContainer from '../containers/AppContainer';
+import Theme from '../utils/theme';
 import NavigationBar from './NavigationBar';
 import Snackbar from '../components/utils/Snackbar';
 import Sidebar from '../components/sidebar/Sidebar';
@@ -14,7 +14,7 @@ class Layout extends Component {
         return (
             <div className={'fff-wrapper'}>
                 <div className={'fff-layout-container'}>
-                    <NavigationBar theme={AppContainer.theme.palette} />
+                    <NavigationBar theme={Theme.palette} />
                     <div className="fff-page-container">
                         <Sidebar />
                         { this.props.children }

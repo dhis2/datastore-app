@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NamespaceItem from './NamespaceItem';
 import { List } from 'material-ui/List';
-import AppContainer from '../../containers/AppContainer';
+import Theme from '../../utils/theme';
 
 const listStyle = {
     overflowY: 'auto',
@@ -10,6 +10,7 @@ const listStyle = {
     height: 'calc(100% - 72px)',
     paddingTop: 0,
     margin: '8px 5px',
+    backgroundColor: Theme.palette.primary3Color,
 };
 
 export class NamespaceList extends Component {
@@ -54,7 +55,6 @@ export class NamespaceList extends Component {
 
     render() {
         const { items } = this.props;
-        listStyle.backgroundColor = AppContainer.theme.palette.primary3Color;
 
         const keySearch = this.searchKeyPart();
         return (
