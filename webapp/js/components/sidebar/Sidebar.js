@@ -14,6 +14,7 @@ export class Sidebar extends Component {
 
         this.state = {
             showDialog: false,
+            namespaceListImproved: SidebarAreaHOC(NamespaceList, props.getNamespaces)
         };
     }
 
@@ -27,7 +28,7 @@ export class Sidebar extends Component {
 
     render() {
         const { items, getNamespaces } = this.props;
-        const NamespaceListImproved = SidebarAreaHOC(NamespaceList, getNamespaces);
+        const NamespaceListImproved = this.state.namespaceListImproved;
 
         return (
             <div className={'fff-sidebar'}>

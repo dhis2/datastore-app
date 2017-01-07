@@ -25,7 +25,10 @@ import { fetchAndDisplayKeyValue,
 
 const styles = {
     namespaceItem: {
-
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        height: '18px', // fixes clipping when zoomed bug
     },
     keyItemList: {
     },
@@ -160,7 +163,7 @@ class NamespaceItem extends Component {
         }
 
         return (
-            <ListItem primaryText={<div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</div>}
+            <ListItem primaryText={<div style={styles.namespaceItem}>{name}</div>}
                 open={open}
                 leftIcon={leftIcon}
                 rightIconButton={rightIconMenu}
