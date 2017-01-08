@@ -17,7 +17,7 @@ class WindowToolbarTitle extends Component {
             <span className={'fff-toolbar-title'}>
                 {pathArray.map((item, index) => {
                     return (
-                        <span>
+                        <span key={"s"+index}>
                             <BreadcrumbHistoryButton label={ item } key={ index } />
                             { index === length ? null : <ChevronRight style={chevStyle} /> }
                         </span>

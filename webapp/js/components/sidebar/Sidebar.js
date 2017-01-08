@@ -50,7 +50,6 @@ Sidebar.propTypes = {
 
 const mapStateToProps = (state) => ({
     items: state.api.namespaces,
-   // search: state.ui.searchValue,
 });
 
 const mapDispatchToProps = (dispatch) => ({

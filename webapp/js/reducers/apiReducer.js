@@ -148,12 +148,15 @@ const api = (state = initialState, action) => {
     case actions.FETCH_VALUE_FULFILLED:
     case actions.CREATE_VALUE_FULFILLED:
         {
-            const { namespace, key } = action;
+            const { namespace, key, value } = action;
             const ns = {};
             if (state.namespaces[namespace]) {
                 ns[namespace] = { ...state.namespaces[namespace] };
                 ns[namespace].keys = { ...state.namespaces[namespace].keys };
-                ns[namespace].keys[key] = key;
+                ns[namespace].keys[key] = {
+                    key,
+                    value
+                }
             } else {
                 ns[namespace] = {
                     name: namespace,

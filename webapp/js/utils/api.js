@@ -189,7 +189,7 @@ class Api
     }
 
     /**
-     * Explicitly access namespace history with respone status check
+     * Explicitly access namespace history with response status check
      * @param namespace
      */
     getHistoryOfNamespace(namespace) {
