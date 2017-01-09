@@ -2,6 +2,7 @@ import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 import { hashHistory } from 'react-router';
 
+let getApi = api.init()
 /**
  *  Namespace Action Creators
  */
@@ -269,7 +270,7 @@ export function selectKey(namespace, key, value) {
 export function fetchAndToggleNamespace(namespace, openNamespace = false) {
     return dispatch => {
         dispatch(requestKeys(namespace));
-        return api.getKeys(namespace)
+        return getApi.then(api => api.getKeys(namespace)
             .then(keys => {
                 dispatch(recieveKeys(namespace, keys));
             })
@@ -284,7 +285,7 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
             })
             .catch(error => {
                 dispatch(rejectKeys(namespace, error));
-            });
+            }));
     };
 }
 
@@ -299,12 +300,12 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
 export function fetchAndDisplayKeyValue(namespace, key) {
     return dispatch => {
         dispatch(requestValue(namespace, key));
-        return api.getValue(namespace, key)
+        return getApi.then(api => api.getValue(namespace, key)
             .then(value => {
                 dispatch(recieveValue(namespace, key, value));
                 dispatch(selectKey(namespace, key, value));
             })
-            .catch(error => dispatch(rejectValue(namespace, key, error)));
+            .catch(error => dispatch(rejectValue(namespace, key, error))));
     };
 }
 
@@ -316,11 +317,11 @@ export function fetchAndDisplayKeyValue(namespace, key) {
 export function fetchNamespaces() {
     return dispatch => {
         dispatch(requestNamespaces());
-        return api.getNamespaces()
+        return getApi.then(api => api.getNamespaces()
             .then(namespaces => {
                 dispatch(recieveNamespaces(namespaces));
             })
-            .catch(error => dispatch(rejectNamespaces(error)));
+            .catch(error => dispatch(rejectNamespaces(error))));
     };
 }
 
@@ -340,8 +341,8 @@ export function fetchNamespaces() {
 export function createValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestCreateValue(namespace, key, value));
-        return api.createValue(namespace, key, value)
-            .then(() => dispatch(receivedCreateValue(namespace, key, value)));
+        return getApi.then(api => api.createValue(namespace, key, value)
+            .then(() => dispatch(receivedCreateValue(namespace, key, value))));
     };
 }
 
@@ -368,8 +369,8 @@ export function createAndDisplayValue(namespace, key) {
 export function fetchKeys(namespace) {
     return dispatch => {
         dispatch(requestKeys(namespace));
-        return api.getKeys(namespace)
-            .then(keys => dispatch(recieveKeys(namespace, keys)));
+        return getApi.then(api => api.getKeys(namespace)
+            .then(keys => dispatch(recieveKeys(namespace, keys))));
     };
 }
 
@@ -382,26 +383,26 @@ export function fetchKeys(namespace) {
 export function fetchHistory(namespace, key) {
     return dispatch => {
         dispatch(requestHistory());
-        return api.getHistoryOfKey(namespace, key)
+        return getApi.then(api => api.getHistoryOfKey(namespace, key)
             .then(history => {
                 dispatch(recieveHistory(namespace, key, history));
             })
             .catch(error => {
                 dispatch(rejectHistory(namespace, key, error));
-            });
+            }));
     };
 }
 
 export function fetchHistoryForNamespace(namespace) {
     return dispatch => {
         dispatch(requestHistory());
-        return api.getHistoryOfNamespace(namespace)
+        return getApi.then(api => api.getHistoryOfNamespace(namespace)
             .then(history => {
                 dispatch(recieveNamespaceHistory(namespace, history));
             })
             .catch(error => {
                 dispatch(rejectNamespaceHistory(namespace, error));
-            });
+            }));
     };
 }
 
@@ -416,9 +417,9 @@ export function fetchHistoryForNamespace(namespace) {
 export function updateValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestUpdateValue(namespace, key, value));
-        return api.updateValue(namespace, key, value)
+        return getApi.then(api => api.updateValue(namespace, key, value)
             .then(() => dispatch(receiveUpdateValue(namespace, key, value)))
-            .catch(() => dispatch(rejectUpdateValue(namespace, key, value)));
+            .catch(() => dispatch(rejectUpdateValue(namespace, key, value))));
     };
 }
 
@@ -433,7 +434,7 @@ export function updateValue(namespace, key, value) {
 export function deleteKey(namespace, key) {
     return dispatch => {
         dispatch(requestDeleteKey(namespace, key));
-        return api.deleteValue(namespace, key)
+        return getApi.then(api => api.deleteValue(namespace, key)
             .then(() => dispatch(receiveDeleteKey(namespace, key)))
             .then(() => dispatch(fetchKeys(namespace)))
             .catch(error => {
@@ -447,7 +448,7 @@ export function deleteKey(namespace, key) {
             })
             .catch(error => {
                 dispatch(rejectDeleteKey(namespace, key, error));
-            });
+            }));
     };
 }
 
@@ -460,11 +461,11 @@ export function deleteKey(namespace, key) {
 export function deleteNamespace(namespace) {
     return dispatch => {
         dispatch(requestDeleteNamespace(namespace));
-        return api.deleteNamespace(namespace)
+        return getApi.then(api => api.deleteNamespace(namespace)
             .then(success => {
                 dispatch(receiveDeleteNamespace(namespace));
                 return success;
             })
-            .catch(() => dispatch(rejectDeleteNamespace(namespace)));
+            .catch(() => dispatch(rejectDeleteNamespace(namespace))));
     };
 }

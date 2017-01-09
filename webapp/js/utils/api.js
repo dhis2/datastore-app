@@ -17,11 +17,26 @@ class Api
         this.auth = auth;
         this.cache = [];
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
+        this.inited=false;
 
-        fetch(`${this.url}/me`, this.getHeaders())
+    }
+
+    init() {
+        return this.checkSession().then(() => this)
+    }
+
+    checkSession() {
+        return fetch(`${this.url}/me`, this.getHeaders())
             .then(response => this.successOnly(response))
             .then(response => response.json())
-            .then(user => this.userId = user.userCredentials.username); // fetch userId that is used for history logging
+            .then(user => this.userId = user.userCredentials.username) // fetch userId that is used for history logging
+            .catch(() => {
+                //use auth in development, as no session exists
+                if (process.env.NODE_ENV === 'development') {
+                    this.auth = `Basic ${btoa('admin:district')}`
+                    return this.checkSession();
+                }
+            })
     }
 
     getNamespaces() {
@@ -304,12 +319,18 @@ class Api
     }
 
     getHeaders() {
+        let auth = null;
+        if(this.auth) {
+            auth = {
+                Authorization: this.auth
+            }
+        }
         return {
             method: 'GET',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: this.auth,
+                ...auth
             },
         };
     }
@@ -319,6 +340,6 @@ export default (function getApi() {
     if (typeof apiClass === 'undefined') {
         apiClass = new Api(API_URL, `Basic ${btoa('admin:district')}`);
     }
-
     return apiClass;
-}());
+
+})();

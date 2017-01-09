@@ -13,7 +13,7 @@ export class EditArea extends Component {
         try { // throws error if not valid json
             const data = editor.get();
             this.props.valueChange(namespace, selectedKey, data);
-        } catch (err) { // do something with not valid json, dispatch rejectedValueChange
+        } catch (err) { // TODO something with not valid json, dispatch rejectedValueChange
             console.log(err);
         }
     }
