@@ -3,11 +3,19 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
-import { fetchAndDisplayKeyValue, fetchAndToggleNamespace } from '../../../actions/actions';
+import { fetchAndDisplayKeyValue, fetchAndToggleNamespace, 
+    updateValue, valueChange, rejectUpdateValue } from '../../../actions/actions';
 
 import '../../../../style/window/window.scss';
 
 export class EditWindow extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+            valueError: null,
+        }
+    }
 
     componentDidMount() {
         const { getValue, params: { namespace, key } } = this.props;
@@ -31,6 +39,32 @@ export class EditWindow extends Component {
             getValue(nextParams.namespace, nextParams.key);
         }
     }
+
+    handleSaveValue() {
+        const { editedValue, updateValue, rejectUpdateValue } = this.props;
+        const { namespace, key } = this.props.params;
+        
+        if (this.state.valueError) {
+            rejectUpdateValue(namespace,key,editedValue, "Failed to update value: Not valid JSON");
+        }
+        else if (editedValue) {
+            updateValue(namespace, key, editedValue);
+        }
+    }
+
+    handleChangeValue(data, err) {
+        const { valueChange  } = this.props;
+        const { namespace, key } = this.props.params;
+        if (err) {
+            this.setState({
+                ...this.state,
+                valueError: err
+            });
+        } else {
+            valueChange(namespace,key,data)
+        }
+    }
+
     render() {
         const { namespace, key } = this.props.params;
 
@@ -45,8 +79,9 @@ export class EditWindow extends Component {
 
         return (
         <Paper className={'fff-window'}>
-            <EditToolbar path={path} />
-            <EditArea namespace={ namespace } selectedKey={ key } />
+            <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
+            <EditArea namespace={ namespace } selectedKey={ key } value={this.props.value}
+            valueChange={this.handleChangeValue.bind(this)}/>
         </Paper>
         );
     }
@@ -66,6 +101,7 @@ EditWindow.propTypes = {
 
 const mapStateToProps = (state) => ({
     value: state.ui.value,
+    editedValue: state.ui.editedValue,
     fetchedNamespaces: state.api.fetched,
 });
 
@@ -76,6 +112,15 @@ const mapDispatchToProps = (dispatch) => ({
     fetchKeysForNamespace(namespace) {
         dispatch(fetchAndToggleNamespace(namespace));
     },
+    updateValue(namespace, key, value) {
+        dispatch(updateValue(namespace, key, value));
+    },
+    valueChange(namespace, key, value) {
+        dispatch(valueChange(namespace, key, value));
+    },
+    rejectUpdateValue(namespace,key,value,err) {
+        dispatch(rejectUpdateValue(namespace,key,value,err));
+    }
 });
 
 export default connect(

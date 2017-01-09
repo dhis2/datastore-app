@@ -55,16 +55,19 @@ const ui = (state = initialState, action) => {
                 },
             };
         }
-
     case actions.UPDATE_VALUE_REJECTED:
-        {
-            return {
-                ...state,
-                snackbarMessage: {
-                    message: 'Failed to save.',
-                },
-            };
+    {
+        let msg = 'Failed to save.'
+        if (action.error && typeof action.error === 'string') {
+            msg = action.error;
         }
+        return {
+            ...state,
+            snackbarMessage: {
+                message: msg,
+            },
+        };
+    }
 
     case actions.FETCH_HISTORY_REJECTED:
         {

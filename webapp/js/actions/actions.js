@@ -130,7 +130,7 @@ function receiveUpdateValue(namespace, key, value) {
     };
 }
 
-function rejectUpdateValue(namespace, key, value, error) {
+export function rejectUpdateValue(namespace, key, value, error) {
     return {
         type: actions.UPDATE_VALUE_REJECTED,
         namespace,

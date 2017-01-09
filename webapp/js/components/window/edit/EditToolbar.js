@@ -9,21 +9,13 @@ import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 
 export class EditToolbar extends React.Component {
 
-    handleSave() {
-        const { namespace, selectedKey, editedValue, updateValue } = this.props;
-        if (editedValue) {
-            updateValue(namespace, selectedKey, editedValue);
-        }
-    }
-
     render() {
         const { path } = this.props;
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
-
                     <ToolbarGroup>
-                        <IconButton style={{ width: 'auto', padding: 0 }} onTouchTap={this.handleSave.bind(this)}>
+                        <IconButton style={{ width: 'auto', padding: 0 }} onTouchTap={this.props.handleSave}>
                             <ContentSave />
                         </IconButton>
                         <ToolbarSeparator />
@@ -36,25 +28,8 @@ export class EditToolbar extends React.Component {
 }
 
 EditToolbar.propTypes = {
-    selectedKey: PropTypes.string,
-    namespace: PropTypes.string,
-    updateValue: PropTypes.func,
+    handleSave: PropTypes.func,
     path: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-    editedValue: state.ui.editedValue,
-    selectedKey: state.ui.key,
-    namespace: state.ui.namespace,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    updateValue(namespace, key, value) {
-        dispatch(updateValue(namespace, key, value));
-    },
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(EditToolbar);
+export default EditToolbar;

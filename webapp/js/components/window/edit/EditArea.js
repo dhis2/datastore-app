@@ -9,12 +9,11 @@ import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 export class EditArea extends Component {
 
     dataFromJSONEditor(editor) {
-        const { namespace, selectedKey } = this.props;
         try { // throws error if not valid json
             const data = editor.get();
-            this.props.valueChange(namespace, selectedKey, data);
-        } catch (err) { // TODO something with not valid json, dispatch rejectedValueChange
-            console.log(err);
+            this.props.valueChange(data);
+        } catch (err) {
+            this.props.valueChange(err, true);
         }
     }
 
@@ -33,26 +32,8 @@ export class EditArea extends Component {
 }
 
 EditArea.propTypes = {
-    namespace: PropTypes.string,
-    selectedKey: PropTypes.string,
-    updateValue: PropTypes.func,
     valueChange: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-    value: state.ui.value,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-    updateValue(namespace, key, value) {
-        dispatch(updateValue(namespace, key, value));
-    },
-    valueChange(namespace, key, value) {
-        dispatch(valueChange(namespace, key, value));
-    },
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(WindowAreaHOC(EditArea));
+export default WindowAreaHOC(EditArea);
