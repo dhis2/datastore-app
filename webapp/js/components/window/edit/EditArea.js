@@ -1,8 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
 import JSONEditor from '../../utils/JSONEditor';
 import Theme from '../../../utils/theme';
-import { updateValue, valueChange } from '../../../actions/actions';
 import '../../../../style/window/window.scss';
 import WindowAreaHOC from '../../hoc/WindowAreaHOC';
 
