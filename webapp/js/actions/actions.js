@@ -241,6 +241,7 @@ export function valueChange(namespace, key, value) {
         value,
     };
 }
+
 export function toggleNamespace(namespace, override) {
     return {
         type: actions.TOGGLE_NAMESPACE,

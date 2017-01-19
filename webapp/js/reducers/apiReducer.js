@@ -10,6 +10,28 @@ const initialState = {
     namespaces: {},
 };
 
+const updateNamespaces = (currentNamespaces, newNamespaces) => {
+    const namespaces = {};
+    currentNamespaces.filter(key => typeof newNamespaces[key] === 'undefined').forEach(key => {
+        namespaces[key] = {
+            name: key,
+            open: false,
+            keys: {},
+        };
+    });
+    return namespaces;
+};
+
+const createKeysFromArray = (arrayOfKeys) => {
+    const keys = {};
+    arrayOfKeys.forEach(key => {
+        keys[key] = {
+            key,
+        };
+    });
+    return keys;
+};
+
 const api = (state = initialState, action) => {
     switch (action.type) {
 
@@ -19,25 +41,17 @@ const api = (state = initialState, action) => {
 
     /**
      * Updates namespaces. New namespacee is added if it does
-     * not exist. Note that this do not remove namespaces from the
+     * not exist. Note that this does not remove namespaces from the
      * state if they do not exist in the given action
      */
     case actions.FETCH_NAMESPACES_FULFILLED:
         {
-            const namespaces = {};
-            action.namespaces.filter(key => typeof state.namespaces[key] === 'undefined').map(key => {
-                namespaces[key] = {
-                    name: key,
-                    open: false,
-                    keys: {},
-                };
-            });
             return {
                 ...state,
                 ...fetchedState,
                 namespaces: {
                     ...state.namespaces,
-                    ...namespaces,
+                    ...updateNamespaces(action.namespaces, state.namespaces),
                 },
             };
         }
@@ -65,12 +79,6 @@ const api = (state = initialState, action) => {
     case actions.FETCH_KEYS_FULFILLED:
         {
             const { namespace } = action;
-            const keys = {};
-            action.keys.map(key => {
-                keys[key] = {
-                    key,
-                };
-            });
             return {
                 ...state,
                 namespaces: {
@@ -78,7 +86,7 @@ const api = (state = initialState, action) => {
                     [namespace]: {
                         ...state.namespaces[namespace],
                         ...fetchedState,
-                        keys,
+                        keys: createKeysFromArray(action.keys),
                     },
                 },
             };
@@ -119,7 +127,6 @@ const api = (state = initialState, action) => {
          *  Values
          */
 
-
     case actions.UPDATE_VALUE_FULFILLED:
         {
             const { namespace, key, value } = action;
@@ -150,12 +157,17 @@ const api = (state = initialState, action) => {
         {
             const { namespace, key, value } = action;
             const ns = {};
-            if (state.namespaces[namespace]) {
-                ns[namespace] = { ...state.namespaces[namespace] };
-                ns[namespace].keys = { ...state.namespaces[namespace].keys };
-                ns[namespace].keys[key] = {
-                    key,
-                    value,
+
+            if (typeof state.namespaces[namespace] !== 'undefined') {
+                ns[namespace] = {
+                    ...state.namespaces[namespace],
+                    keys: {
+                        ...state.namespaces[namespace].keys,
+                        [key]: {
+                            key,
+                            value,
+                        }
+                    }
                 };
             } else {
                 ns[namespace] = {
@@ -169,6 +181,7 @@ const api = (state = initialState, action) => {
                     },
                 };
             }
+
             return {
                 ...state,
                 ...fetchedState,

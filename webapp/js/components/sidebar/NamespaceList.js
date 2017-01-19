@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+
 import NamespaceItem from './NamespaceItem';
 import { List } from 'material-ui/List';
 import Theme from '../../utils/theme';
@@ -48,27 +49,23 @@ export class NamespaceList extends Component {
      */
     searchKeyPart() {
         const { search } = this.props;
-        const filterKeyInd = search.indexOf('#') + 1;
-        const keySearch = search.substring(filterKeyInd, search.length);
-        return filterKeyInd > 0 ? keySearch : '';
+        const filterKeyIndex = search.indexOf('#') + 1;
+        const keySearch = search.substring(filterKeyIndex, search.length);
+        return filterKeyIndex > 0 ? keySearch : '';
     }
 
     render() {
         const { items } = this.props;
-
-        const keySearch = this.searchKeyPart();
         return (
             <List style={listStyle}>
-                {Object.keys(items).sort().map(item => {
-                    if (this.filterNamespaces(item)) {
-                        return (
-                          <NamespaceItem namespace={items[item]}
-                              search={keySearch}
-                              key={item}
-                          />
-                        );
-                    }})
-                }
+                {Object.keys(items).filter(item => this.filterNamespaces(item)).sort().map(item => {
+                    return (
+                      <NamespaceItem namespace={items[item]}
+                          search={this.searchKeyPart()}
+                          key={item}
+                      />
+                    );
+                })}
             </List>
         );
     }

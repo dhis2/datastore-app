@@ -23,7 +23,7 @@ class AppContainer extends Component {
         const { store } = this.props;
 
         return (
-          <MuiThemeProvider muiTheme={Theme}>
+          <MuiThemeProvider muiTheme={ Theme }>
               <Provider store = { store }>
                   <Router history={ hashHistory }>
                       <Route path={ '/' } component={ Layout }>

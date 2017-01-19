@@ -18,7 +18,7 @@ const DisplayAreaHOC = (Area) => {
         }
 
         renderError() {
-            return <ErrorArea />;
+            return <ErrorArea error={ this.props.errorMessage } />;
         }
 
         render() {
@@ -41,11 +41,13 @@ const DisplayAreaHOC = (Area) => {
     DisplayAreaBase.propTypes = {
         loading: PropTypes.bool,
         error: PropTypes.bool,
+        errorMessage: PropTypes.object,
     };
 
     const mapStateToProps = (state) => ({
         loading: state.display.loading,
         error: state.display.error,
+        errorMessage: state.display.errorMessage,
     });
 
     return connect(

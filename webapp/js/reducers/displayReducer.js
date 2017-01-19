@@ -32,8 +32,10 @@ const display = (state = initialState, action) => {
 
     case actions.CREATE_VALUE_REJECTED:
     case actions.FETCH_VALUE_REJECTED: {
+        const { error } = action;
         return {
             ...state,
+            errorMessage: error,
             error: true,
             loading: false,
         };

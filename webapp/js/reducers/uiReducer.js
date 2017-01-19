@@ -58,11 +58,15 @@ const ui = (state = initialState, action) => {
     case actions.UPDATE_VALUE_REJECTED:
         {
             let msg = 'Failed to save.';
-            if (action.error && typeof action.error === 'string') {
+
+            const { error } = action;
+
+            if (error && typeof error === 'string') {
                 msg = action.error;
             }
             return {
                 ...state,
+                error,
                 snackbarMessage: {
                     message: msg,
                 },
