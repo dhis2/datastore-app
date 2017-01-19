@@ -9,7 +9,6 @@ class DisplayToolbarTitle extends Component {
         const chevStyle = {
             fill: Theme.palette.primary1Color,
             verticalAlign: 'middle',
-
         };
 
         const pathArray = path.split('/');

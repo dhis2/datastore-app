@@ -8,10 +8,10 @@ import '../../../../style/window/window.scss';
 class EmptyDisplay extends Component {
     render() {
         return (
-        <Paper className={'fff-window'}>
-            <EmptyToolbar />
-            <EmptyArea />
-        </Paper>
+            <Paper className={'fff-window'}>
+                <EmptyToolbar />
+                <EmptyArea />
+            </Paper>
         );
     }
 }

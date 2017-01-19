@@ -7,7 +7,7 @@ class EmptyToolbar extends Component {
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
-                  <ToolbarTitle text={'Value'} />
+                    <ToolbarTitle text={'Value'} />
                 </Toolbar>
             </Paper>
         );

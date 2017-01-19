@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import LoadingArea from '../display/LoadingArea';
-import { ErrorIconWithText } from '../utils/Icons';
+import ErrorArea from '../display/ErrorArea';
 import '../../../style/window/window.scss';
 
 const DisplayAreaHOC = (Area) => {
@@ -18,7 +18,7 @@ const DisplayAreaHOC = (Area) => {
         }
 
         renderError() {
-            return <ErrorIconWithText text="An error has occured." />;
+            return <ErrorArea />;
         }
 
         render() {
@@ -33,7 +33,7 @@ const DisplayAreaHOC = (Area) => {
             }
 
             return (
-            <Area {...this.props} {...this.state} />
+                <Area {...this.props} {...this.state} />
             );
         }
     }

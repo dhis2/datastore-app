@@ -14,7 +14,7 @@ export class Sidebar extends Component {
 
         this.state = {
             showDialog: false,
-            namespaceListImproved: SidebarAreaHOC(NamespaceList, props.getNamespaces)
+            namespaceListImproved: SidebarAreaHOC(NamespaceList, props.getNamespaces),
         };
     }
 

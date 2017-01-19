@@ -83,7 +83,6 @@ const mapStateToProps = (state) => ({
     search: state.ui.searchValue,
 });
 
-
 export default connect(
     mapStateToProps
 )(NamespaceList);

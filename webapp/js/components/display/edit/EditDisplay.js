@@ -80,8 +80,10 @@ export class EditDisplay extends Component {
         return (
         <Paper className={'fff-window'}>
             <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
-            <EditArea namespace={ namespace } selectedKey={ key } value={ this.props.value }
-            valueChange={this.handleChangeValue.bind(this)}
+            <EditArea namespace = { namespace }
+                selectedKey = { key }
+                value = { this.props.value }
+                valueChange = { this.handleChangeValue.bind(this) }
             />
         </Paper>
         );
