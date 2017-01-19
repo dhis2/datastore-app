@@ -17,12 +17,11 @@ class Api
         this.auth = auth;
         this.cache = [];
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
-        this.inited=false;
-
+        this.inited = false;
     }
 
     init() {
-        return this.checkSession().then(() => this)
+        return this.checkSession().then(() => this);
     }
 
     checkSession() {
@@ -31,27 +30,26 @@ class Api
             .then(response => response.json())
             .then(user => this.userId = user.userCredentials.username) // fetch userId that is used for history logging
             .catch(() => {
-                //use auth in development, as no session exists
+                // use auth in development, as no session exists
                 if (process.env.NODE_ENV === 'development') {
-                    this.auth = `Basic ${btoa('admin:district')}`
+                    this.auth = `Basic ${btoa('admin:district')}`;
                     return this.checkSession();
                 }
-            })
+            });
     }
 
     getNamespaces() {
-        const ignoredStores = this.ignoredStores;
-
         return fetch(`${this.url}/dataStore`, this.getHeaders())
             .then(response => this.successOnly(response))
             .then(response => response.json())
-            .then(response => response.filter((value) => ignoredStores.indexOf(value) === -1));
+            .then(response => response.filter((value) => this.ignoredStores.indexOf(value) === -1));
     }
 
     deleteNamespace(namespace) {
-        return fetch(`${this.url}/dataStore/${namespace}`, Object.assign({}, this.getHeaders(), {
+        return fetch(`${this.url}/dataStore/${namespace}`, {
+            ...this.getHeaders(),
             method: 'DELETE',
-        }))
+        })
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
@@ -76,7 +74,6 @@ class Api
      * @param key
      */
     getValue(namespace, key) {
-        const k = this.buildId(namespace, key);
         const cache = this.cache;
 
         // check for cache hit
@@ -118,10 +115,11 @@ class Api
      * @param log Should action be logged?
      */
     createValue(namespace, key, value, log = true) {
-        return fetch(`${this.url}/dataStore/${namespace}/${key}`, Object.assign({}, this.getHeaders(), {
+        return fetch(`${this.url}/dataStore/${namespace}/${key}`, {
+            ...this.getHeaders(),
             method: 'POST',
             body: JSON.stringify(value),
-        }))
+        })
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
@@ -145,10 +143,11 @@ class Api
      * @param log Should action be logged?
      */
     updateValue(namespace, key, value, log = true) {
-        return fetch(`${this.url}/dataStore/${namespace}/${key}`, Object.assign({}, this.getHeaders(), {
+        return fetch(`${this.url}/dataStore/${namespace}/${key}`, {
+            ...this.getHeaders(),
             method: 'PUT',
             body: JSON.stringify(value),
-        }))
+        })
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
@@ -164,9 +163,10 @@ class Api
     }
 
     deleteValue(namespace, key) {
-        return fetch(`${this.url}/dataStore/${namespace}/${key}`, Object.assign({}, this.getHeaders(), {
+        return fetch(`${this.url}/dataStore/${namespace}/${key}`, {
+            ...this.getHeaders(),
             method: 'DELETE',
-        }))
+        })
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(response => {
@@ -320,17 +320,17 @@ class Api
 
     getHeaders() {
         let auth = null;
-        if(this.auth) {
+        if (this.auth) {
             auth = {
-                Authorization: this.auth
-            }
+                Authorization: this.auth,
+            };
         }
         return {
             method: 'GET',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                ...auth
+                ...auth,
             },
         };
     }
@@ -341,5 +341,4 @@ export default (function getApi() {
         apiClass = new Api(API_URL, `Basic ${btoa('admin:district')}`);
     }
     return apiClass;
-
 })();

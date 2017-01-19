@@ -3,7 +3,7 @@ import FlatButton from 'material-ui/FlatButton';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 class BreadcrumbHistoryButton extends Component {
     render() {
-        const { label, last } = this.props;
+        const { label } = this.props;
         return (
           <FlatButton
               primary
