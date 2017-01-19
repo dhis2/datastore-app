@@ -12,21 +12,12 @@ import { fetchAndDisplayKeyValue,
 import NamespaceItemMenu from './NamespaceItemMenu';
 import KeyItem from './KeyItem';
 
-const styles = {
-    namespaceItem: {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        height: '18px', // fixes clipping when zoomed bug
-    },
-    keyItemList: {
-    },
-    innerText: {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        height: '18px', // fixes clipping when zoomed bug
-    },
+
+const namespaceItemStyle = {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    height: '18px', // fixes clipping when zoomed bug
 };
 
 class NamespaceItem extends Component {
@@ -38,6 +29,7 @@ class NamespaceItem extends Component {
         this.renderError = this.renderError.bind(this);
         this.toggleHandler = this.toggleHandler.bind(this);
         this.filterKey = this.filterKey.bind(this);
+
         this.state = {
             list: Object.keys(props.namespace.keys).map(key => {
                 return {
@@ -95,13 +87,12 @@ class NamespaceItem extends Component {
         }
 
         return (
-            <ListItem primaryText={<div style={styles.namespaceItem}>{name}</div>}
+            <ListItem primaryText={<div style={namespaceItemStyle}>{name}</div>}
                 open={open}
                 leftIcon={leftIcon}
                 rightIconButton={<NamespaceItemMenu name={name} />}
                 nestedItems={list}
                 onTouchTap={this.toggleHandler}
-                nestedListStyle={styles.keyItemList}
             />
         );
     }
@@ -133,9 +124,6 @@ NamespaceItem.propTypes = {
     openNamespace: PropTypes.func,
     closeNamespace: PropTypes.func,
     event: PropTypes.func,
-    /**
-     * A string used to filter the nestedList(keys).
-     */
     search: PropTypes.string,
     namespace: PropTypes.shape({
         error: PropTypes.bool,

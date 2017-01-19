@@ -33,11 +33,11 @@ class NamespaceItemMenu extends React.Component {
     }
 
     handleDeleteNamespace() {
-        this.props.deleteNamespace(this.props.namespace.name);
+        this.props.deleteNamespace(this.props.name);
     }
 
     handleNewKey() {
-        this.props.newKey(this.props.namespace.name);
+        this.props.newKey(this.props.name);
     }
 
     render() {
