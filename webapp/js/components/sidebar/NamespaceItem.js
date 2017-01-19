@@ -1,17 +1,18 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+
 import { Spinner } from '../utils/Loaders';
 import { ErrorIcon } from '../utils/Icons';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import { ListItem } from 'material-ui/List';
+
 import { fetchAndDisplayKeyValue,
          fetchAndToggleNamespace,
          toggleNamespace } from '../../actions/actions';
 
 import NamespaceItemMenu from './NamespaceItemMenu';
 import KeyItem from './KeyItem';
-
 
 const namespaceItemStyle = {
     overflow: 'hidden',
@@ -24,31 +25,17 @@ class NamespaceItem extends Component {
     constructor(props) {
         super(props);
 
-        this.constructKeyItem = this.constructKeyItem.bind(this);
-        this.renderOpen = this.renderOpen.bind(this);
-        this.renderError = this.renderError.bind(this);
         this.toggleHandler = this.toggleHandler.bind(this);
-        this.filterKey = this.filterKey.bind(this);
 
         this.state = {
-            list: Object.keys(props.namespace.keys).map(key => {
-                return {
-                    key,
-                    elem: this.constructKeyItem(key, key),
-                };
-            }),
+            list: Object.keys(props.namespace.keys),
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.namespace.keys !== this.props.namespace.keys) {
             this.setState({
-                list: Object.keys(nextProps.namespace.keys).map(key => {
-                    return {
-                        key,
-                        elem: this.constructKeyItem(key, key),
-                    };
-                }),
+                list: Object.keys(nextProps.namespace.keys),
             });
         }
     }
@@ -62,28 +49,28 @@ class NamespaceItem extends Component {
         }
     }
 
-    filterKey(item) {
-        const searchValue = this.props.search || '';
-        return item.toLowerCase().includes(searchValue);
-    }
+    render() {
+        const { search, namespace: { error, name, fetching, open } } = this.props;
 
-    constructKeyItem(key, index) {
-        const { namespace: { name: namespace } } = this.props;
-        return (
-          <KeyItem namespace={namespace} keyName={key} key={index} />
-        );
-    }
+        if (error) {
+            return (
+                <ListItem primaryText={name} leftIcon={<FileFolder />}>
+                    <ErrorIcon />
+                </ListItem>
+            );
+        }
 
-    renderOpen() {
-        const { namespace: { name, open, fetching } } = this.props;
+        let leftIcon;
 
         // Get a list of elements, filter on search-prop
-        const list = this.state.list.filter(item => this.filterKey(item.key))
-            .map(item => item.elem);
-        let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
+        const list = this.state.list
+            .filter(key => key.toLowerCase().includes(search || ''))
+            .map((key, index) => <KeyItem namespace={name} keyName={key} key={key.concat(index)} />);
 
         if (fetching) {
             leftIcon = (<Spinner />);
+        } else {
+            leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
         }
 
         return (
@@ -96,34 +83,12 @@ class NamespaceItem extends Component {
             />
         );
     }
-
-    renderError() {
-        const { name } = this.props.namespace;
-
-        return (
-            <ListItem primaryText={name} leftIcon={<FileFolder />}>
-                <ErrorIcon />
-            </ListItem>
-        );
-    }
-
-
-    render() {
-        const { error } = this.props.namespace;
-
-        if (error) {
-            return this.renderError();
-        }
-
-        return this.renderOpen();
-    }
 }
 
 NamespaceItem.propTypes = {
     fetchAndDisplayKeyValue: PropTypes.func,
     openNamespace: PropTypes.func,
     closeNamespace: PropTypes.func,
-    event: PropTypes.func,
     search: PropTypes.string,
     namespace: PropTypes.shape({
         error: PropTypes.bool,
