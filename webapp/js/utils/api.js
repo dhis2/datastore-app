@@ -25,18 +25,20 @@ class Api
         return this.checkSession().then(() => this)
     }
 
-    checkSession() {
+    checkSession(retry) {
         return fetch(`${this.url}/me`, this.getHeaders())
             .then(response => this.successOnly(response))
             .then(response => response.json())
             .then(user => this.userId = user.userCredentials.username) // fetch userId that is used for history logging
-            .catch(() => {
+            .catch(err => {
                 //use auth in development, as no session exists
-                if (process.env.NODE_ENV === 'development') {
+                if (process.env.NODE_ENV === 'development' && !retry) {
                     this.auth = `Basic ${btoa('admin:district')}`
-                    return this.checkSession();
+                    return this.checkSession(true);
+                } else {
+                    throw err;
                 }
-            })
+            });
     }
 
     getNamespaces() {
@@ -328,6 +330,7 @@ class Api
         return {
             method: 'GET',
             mode: 'cors',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 ...auth
@@ -338,7 +341,7 @@ class Api
 
 export default (function getApi() {
     if (typeof apiClass === 'undefined') {
-        apiClass = new Api(API_URL, `Basic ${btoa('admin:district')}`);
+        apiClass = new Api(API_URL);
     }
     return apiClass;
 
