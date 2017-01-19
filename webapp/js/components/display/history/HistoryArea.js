@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Theme from '../../../utils/theme';
 import '../../../../style/window/window.scss';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
-import WindowAreaHOC from '../../hoc/WindowAreaHOC';
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC';
 
 const tableHeaderStyle = {
     borderBottom: 'solid grey 1px',
@@ -51,4 +51,4 @@ HistoryArea.propTypes = {
     list: PropTypes.array,
 };
 
-export default WindowAreaHOC(HistoryArea);
+export default DisplayAreaHOC(HistoryArea);

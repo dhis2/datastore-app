@@ -3,13 +3,13 @@ import * as actions from '../constants/actionTypes';
 const errorState = { fetching: false, fetched: false, error: true };
 
 const initialState = {
-    currentWindow: 'empty',
+    currentDisplay: 'empty',
     history: [],
     loading: false,
     error: false,
 };
 
-const window = (state = initialState, action) => {
+const display = (state = initialState, action) => {
     switch (action.type) {
     case actions.CREATE_VALUE_PENDING:
     case actions.FETCH_HISTORY_PENDING:
@@ -84,4 +84,4 @@ const window = (state = initialState, action) => {
     }}
 };
 
-export default window;
+export default display;

@@ -1,4 +1,5 @@
 import * as actions from '../constants/actionTypes';
+import * as dialogs from '../constants/dialogTypes';
 
 /* Open a modal with given props, if no props are given
  * dialogprops will be an empty object.*/
@@ -19,33 +20,33 @@ function closeDialog(dialogType, dialogprops) {
 }
 
 export function openNamespaceDialog(dialogprops) {
-    return openDialog('NEW_NAMESPACE', dialogprops);
+    return openDialog(dialogs.NEW_NAMESPACE, dialogprops);
 }
 
 export function closeNamespaceDialog(dialogprops) {
-    return closeDialog('NEW_NAMESPACE', dialogprops);
+    return closeDialog(dialogs.NEW_NAMESPACE, dialogprops);
 }
 
 export function openKeyDialog(dialogprops) {
-    return openDialog('NEW_KEY', dialogprops);
+    return openDialog(dialogs.NEW_KEY, dialogprops);
 }
 
 export function closeKeyDialog(dialogprops) {
-    return closeDialog('NEW_KEY', dialogprops);
+    return closeDialog(dialogs.NEW_KEY, dialogprops);
 }
 
 export function openConfirmDeleteNamespaceDialog(dialogprops) {
-    return openDialog('CONFIRM_DELETE_NAMESPACE', dialogprops);
+    return openDialog(dialogs.CONFIRM_DELETE_NAMESPACE, dialogprops);
 }
 
 export function closeConfirmDeleteNamespaceDialog(dialogprops) {
-    return closeDialog('CONFIRM_DELETE_NAMESPACE', dialogprops);
+    return closeDialog(dialogs.CONFIRM_DELETE_NAMESPACE, dialogprops);
 }
 
 export function openConfirmDeleteKeyDialog(dialogprops) {
-    return openDialog('CONFIRM_DELETE_KEY', dialogprops);
+    return openDialog(dialogs.CONFIRM_DELETE_KEY, dialogprops);
 }
 
 export function closeConfirmDeleteKeyDialog(dialogprops) {
-    return closeDialog('CONFIRM_DELETE_KEY', dialogprops);
+    return closeDialog(dialogs.CONFIRM_DELETE_KEY, dialogprops);
 }

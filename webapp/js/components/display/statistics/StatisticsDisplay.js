@@ -6,7 +6,7 @@ import StatisticsArea from './StatisticsArea';
 import '../../../../style/window/window.scss';
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 
-export class StatisticsWindow extends Component {
+export class StatisticsDisplay extends Component {
     componentDidMount() {
         const { getHistoryForKey, getHistoryForNamespace, params: { namespace, key } } = this.props;
         if (typeof key !== 'undefined') {
@@ -38,7 +38,7 @@ export class StatisticsWindow extends Component {
     }
 }
 
-StatisticsWindow.propTypes = {
+StatisticsDisplay.propTypes = {
     getHistoryForKey: PropTypes.func,
     getHistoryForNamespace: PropTypes.func,
     history: PropTypes.array,
@@ -49,7 +49,7 @@ StatisticsWindow.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    history: state.window.history,
+    history: state.display.history,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -64,4 +64,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(StatisticsWindow);
+)(StatisticsDisplay);

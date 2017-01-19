@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import WindowToolbarTitle from '../WindowToolbarTitle';
+import DisplayToolbarTitle from '../DisplayToolbarTitle';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ContentSave from 'material-ui/svg-icons/content/save';
@@ -17,7 +17,7 @@ export class EditToolbar extends React.Component {
                             <ContentSave />
                         </IconButton>
                         <ToolbarSeparator />
-                        <WindowToolbarTitle path={ path } />
+                        <DisplayToolbarTitle path={ path } />
                     </ToolbarGroup>
                 </Toolbar>
             </Paper>

@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import JSONEditor from '../../utils/JSONEditor';
 import Theme from '../../../utils/theme';
 import '../../../../style/window/window.scss';
-import WindowAreaHOC from '../../hoc/WindowAreaHOC';
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC';
 
 export class EditArea extends Component {
 
@@ -21,9 +21,10 @@ export class EditArea extends Component {
         const backgroundStyle = {
             backgroundColor: Theme.palette.primary3Color,
         };
+
         return (
             <div className={ 'fff-window-area' } style={ backgroundStyle }>
-                <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)}/>
+                <JSONEditor value={ value } dataChanged={this.dataFromJSONEditor.bind(this)} />
             </div>
         );
     }
@@ -34,4 +35,4 @@ EditArea.propTypes = {
 };
 
 
-export default WindowAreaHOC(EditArea);
+export default DisplayAreaHOC(EditArea);

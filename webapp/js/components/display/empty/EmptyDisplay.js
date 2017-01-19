@@ -5,7 +5,7 @@ import EmptyArea from './EmptyArea';
 
 import '../../../../style/window/window.scss';
 
-class EmptyWindow extends Component {
+class EmptyDisplay extends Component {
     render() {
         return (
         <Paper className={'fff-window'}>
@@ -16,4 +16,4 @@ class EmptyWindow extends Component {
     }
 }
 
-export default EmptyWindow;
+export default EmptyDisplay;

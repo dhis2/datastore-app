@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import Layout from './Layout';
-import HistoryWindow from '../components/window/history/HistoryWindow';
-import EmptyWindow from '../components/window/empty/EmptyWindow';
-import EditWindow from '../components/window/edit/EditWindow';
-import StatisticsWindow from '../components/window/statistics/StatisticsWindow';
+import HistoryDisplay from '../components/display/history/HistoryDisplay';
+import EmptyDisplay from '../components/display/empty/EmptyDisplay';
+import EditDisplay from '../components/display/edit/EditDisplay';
+import StatisticsDisplay from '../components/display/statistics/StatisticsDisplay';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Theme from '../utils/theme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -54,12 +54,12 @@ class AppContainer extends Component {
           <Provider store = { store }>
               <Router history={ hashHistory }>
                   <Route path={ "/" } component={ Layout }>
-                    <IndexRoute component={ EmptyWindow } />
-                    <Route path={ "edit/:namespace/:key" } component={ EditWindow } />
-                    <Route path={ "history/:namespace" } component={ HistoryWindow } />
-                    <Route path={ "history/:namespace/:key" } component={ HistoryWindow } />
-                    <Route path={ "stats/:namespace" } component={ StatisticsWindow } />
-                    <Route path={ "stats/:namespace/:key" } component={ StatisticsWindow } />
+                    <IndexRoute component={ EmptyDisplay } />
+                    <Route path={ "edit/:namespace/:key" } component={ EditDisplay } />
+                    <Route path={ "history/:namespace" } component={ HistoryDisplay } />
+                    <Route path={ "history/:namespace/:key" } component={ HistoryDisplay } />
+                    <Route path={ "stats/:namespace" } component={ StatisticsDisplay } />
+                    <Route path={ "stats/:namespace/:key" } component={ StatisticsDisplay } />
                   </Route>
               </Router>
           </Provider>

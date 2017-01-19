@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
 import { Toolbar } from 'material-ui/Toolbar';
-import WindowToolbarTitle from '../WindowToolbarTitle';
+import DisplayToolbarTitle from '../DisplayToolbarTitle';
 
 const toolbarContainerStyle = {
     zIndex: 5,
@@ -17,7 +17,7 @@ class HistoryToolbar extends Component {
         return (
             <Paper style={ toolbarContainerStyle }>
                 <Toolbar>
-                    <WindowToolbarTitle path={ path } />
+                    <DisplayToolbarTitle path={ path } />
                 </Toolbar>
             </Paper>
         );

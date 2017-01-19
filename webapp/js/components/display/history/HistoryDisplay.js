@@ -7,7 +7,7 @@ import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions
 
 import '../../../../style/window/window.scss';
 
-export class HistoryWindow extends Component {
+export class HistoryDisplay extends Component {
 
     componentDidMount() {
         const { getHistoryForKey, getHistoryForNamespace, params: { namespace, key } } = this.props;
@@ -44,7 +44,7 @@ export class HistoryWindow extends Component {
     }
 }
 
-HistoryWindow.propTypes = {
+HistoryDisplay.propTypes = {
     history: PropTypes.array,
     namespace: PropTypes.string,
     selectedKey: PropTypes.string,
@@ -57,9 +57,9 @@ HistoryWindow.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    namespace: state.window.namespace,
-    selectedKey: state.window.key,
-    history: state.window.history,
+    namespace: state.display.namespace,
+    selectedKey: state.display.key,
+    history: state.display.history,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -74,4 +74,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(HistoryWindow);
+)(HistoryDisplay);

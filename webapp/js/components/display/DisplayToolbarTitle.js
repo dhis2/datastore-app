@@ -4,24 +4,26 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import '../../../style/toolbarTitle.scss';
 import Theme from '../../utils/theme';
 
-class WindowToolbarTitle extends Component {
+class DisplayToolbarTitle extends Component {
     renderPath(path) {
         const chevStyle = {
             fill: Theme.palette.primary1Color,
             verticalAlign: 'middle',
 
-        }
+        };
+
         const pathArray = path.split('/');
         const length = pathArray.length - 1;
         return (
             <span className={'fff-toolbar-title'}>
                 {pathArray.map((item, index) => {
                     return (
-                        <span key={"s"+index}>
+                        <span key={'s'.concat(index)}>
                             <BreadcrumbHistoryButton label={ item } key={ index } />
                             { index === length ? null : <ChevronRight style={chevStyle} /> }
                         </span>
-                    )})}
+                    );
+                })}
             </span>
         );
     }
@@ -41,8 +43,8 @@ class WindowToolbarTitle extends Component {
     }
 }
 
-WindowToolbarTitle.propTypes = {
+DisplayToolbarTitle.propTypes = {
     path: PropTypes.string,
 };
 
-export default WindowToolbarTitle;
+export default DisplayToolbarTitle;

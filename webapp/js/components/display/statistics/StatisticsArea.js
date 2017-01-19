@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
 import '../../../../style/window/window.scss';
-import WindowAreaHOC from '../../hoc/WindowAreaHOC';
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC';
 import { Line } from 'react-chartjs-2';
 
 export class StatisticsArea extends Component {
@@ -85,4 +85,4 @@ StatisticsArea.propTypes = {
     namespace: PropTypes.string,
 };
 
-export default WindowAreaHOC(StatisticsArea);
+export default DisplayAreaHOC(StatisticsArea);

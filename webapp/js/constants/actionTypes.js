@@ -11,6 +11,7 @@ export const CHANGE_WINDOW = 'CHANGE_WINDOW';
 export const SEARCH_VALUE_CHANGE = 'SEARCH_VALUE_CHANGE';
 export const LOAD_VALUE = 'LOAD_VALUE';
 
+
 /**
  *  Async Action Types
  */

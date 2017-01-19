@@ -2,7 +2,8 @@ import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 import { hashHistory } from 'react-router';
 
-let getApi = api.init()
+const getApi = api.init();
+
 /**
  *  Namespace Action Creators
  */

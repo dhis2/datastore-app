@@ -1,11 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import LoadingArea from '../window/LoadingArea';
+import LoadingArea from '../display/LoadingArea';
 import { ErrorIconWithText } from '../utils/Icons';
 import '../../../style/window/window.scss';
 
-const WindowAreaHOC = (Area) => {
-    class WindowAreaBase extends Component {
+const DisplayAreaHOC = (Area) => {
+    class DisplayAreaBase extends Component {
         constructor(props) {
             super(props);
 
@@ -38,19 +38,19 @@ const WindowAreaHOC = (Area) => {
         }
     }
 
-    WindowAreaBase.propTypes = {
+    DisplayAreaBase.propTypes = {
         loading: PropTypes.bool,
         error: PropTypes.bool,
     };
 
     const mapStateToProps = (state) => ({
-        loading: state.window.loading,
-        error: state.window.error,
+        loading: state.display.loading,
+        error: state.display.error,
     });
 
     return connect(
         mapStateToProps
-    )(WindowAreaBase);
+    )(DisplayAreaBase);
 };
 
-export default WindowAreaHOC;
+export default DisplayAreaHOC;

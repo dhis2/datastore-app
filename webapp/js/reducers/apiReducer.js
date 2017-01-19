@@ -155,8 +155,8 @@ const api = (state = initialState, action) => {
                 ns[namespace].keys = { ...state.namespaces[namespace].keys };
                 ns[namespace].keys[key] = {
                     key,
-                    value
-                }
+                    value,
+                };
             } else {
                 ns[namespace] = {
                     name: namespace,
