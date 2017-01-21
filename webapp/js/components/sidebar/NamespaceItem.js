@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import { Spinner } from '../utils/Loaders';
 import { ErrorIcon } from '../utils/Icons';
+import { ListItem } from 'material-ui/List';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-import { ListItem } from 'material-ui/List';
 
 import { fetchAndDisplayKeyValue,
          fetchAndToggleNamespace,
@@ -26,7 +26,6 @@ class NamespaceItem extends Component {
         super(props);
 
         this.toggleHandler = this.toggleHandler.bind(this);
-
         this.state = {
             list: Object.keys(props.namespace.keys),
         };
@@ -42,11 +41,7 @@ class NamespaceItem extends Component {
 
     toggleHandler() {
         const { openNamespace, closeNamespace, namespace: { open, name } } = this.props;
-        if (!open) {
-            openNamespace(name);
-        } else {
-            closeNamespace(name);
-        }
+        open ? closeNamespace(name) : openNamespace(name);
     }
 
     render() {

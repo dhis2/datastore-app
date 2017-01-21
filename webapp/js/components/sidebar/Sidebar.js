@@ -27,7 +27,7 @@ export class Sidebar extends Component {
     }
 
     render() {
-        const { items, getNamespaces } = this.props;
+        const { items } = this.props;
         const NamespaceListImproved = this.state.namespaceListImproved;
 
         return (

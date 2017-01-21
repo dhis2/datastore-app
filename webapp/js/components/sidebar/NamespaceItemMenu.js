@@ -25,21 +25,6 @@ const targetOrigin = {
 
 class NamespaceItemMenu extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.handleNewKey = this.handleNewKey.bind(this);
-        this.handleDeleteNamespace = this.handleDeleteNamespace.bind(this);
-    }
-
-    handleDeleteNamespace() {
-        this.props.deleteNamespace(this.props.name);
-    }
-
-    handleNewKey() {
-        this.props.newKey(this.props.name);
-    }
-
     render() {
         const { name, ...props } = this.props;
 
@@ -50,7 +35,7 @@ class NamespaceItemMenu extends React.Component {
                   targetOrigin={ targetOrigin }
                   {...props}
               >
-                  <MenuItem leftIcon={<NoteAdd />} onClick={ this.handleNewKey }>
+                  <MenuItem leftIcon={<NoteAdd />} onClick={ this.props.newKey.bind(this, name) }>
                       New key
                   </MenuItem>
                   <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>
@@ -59,7 +44,7 @@ class NamespaceItemMenu extends React.Component {
                   <MenuItem containerElement={<Link to={`/history/${name}`} />} leftIcon={<History />}>
                       History
                   </MenuItem>
-                  <MenuItem leftIcon={<Delete />} onTouchTap={ this.handleDeleteNamespace }>
+                  <MenuItem leftIcon={<Delete />} onTouchTap={ this.props.deleteNamespace.bind(this, name) }>
                       Delete
                   </MenuItem>
               </IconMenu>
