@@ -4,49 +4,19 @@ import { connect } from 'react-redux';
 import { searchSidebarChange } from '../../actions/uiActions';
 
 export class Searchbar extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = ({
-            searchVal: '',
-        });
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleFocus = this.handleFocus.bind(this);
-    }
-
-    handleFocus() {
-        const { searchChanged } = this.props;
-
-        this.setState({
-            searchVal: '',
-        });
-
-        searchChanged('');
-    }
-
-    handleChange(e) {
-        const val = e.target.value;
-        const { searchChanged } = this.props;
-
-        this.setState({
-            searchVal: val,
-        });
-
-        searchChanged(val.toLowerCase());
-    }
-
     render() {
+        const { searchChanged, searchValue } = this.props;
+
         return (
             <TextField name="searchbar"
                 hintText="Namespace#Key"
-                floatingLabelStyle={ { top: '25px' }}
+                floatingLabelStyle={{ top: '25px' }}
                 style={{ height: 'auto' }}
                 inputStyle={{ marginTop: '6px' }}
                 floatingLabelText="Search"
-                value={this.state.searchVal}
-                onChange={this.handleChange}
-                onFocus={this.handleFocus}
+                value={searchValue}
+                onChange={({ target: { value } }) => searchChanged(value)}
+                onFocus={() => searchChanged('')}
             />
         );
     }
@@ -58,11 +28,16 @@ const mapDispatchToProps = dispatch => ({
     },
 });
 
+const mapStateToProps = (state) => ({
+    searchValue: state.ui.searchValue,
+});
+
 Searchbar.propTypes = {
     searchChanged: PropTypes.func,
+    searchValue: PropTypes.string,
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Searchbar);

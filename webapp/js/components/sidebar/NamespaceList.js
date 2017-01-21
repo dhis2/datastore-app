@@ -24,7 +24,7 @@ export class NamespaceList extends Component {
     }
 
     filterNamespaces(item) {
-        const searchValue = this.props.search || '';
+        const searchValue = this.props.search.toLowerCase() || '';
         if (!searchValue) {
             return true;
         }
@@ -48,7 +48,7 @@ export class NamespaceList extends Component {
      * present.
      */
     searchKeyPart() {
-        const { search } = this.props;
+        const search = this.props.search.toLowerCase();
         const filterKeyIndex = search.indexOf('#') + 1;
         const keySearch = search.substring(filterKeyIndex, search.length);
         return filterKeyIndex > 0 ? keySearch : '';

@@ -5,9 +5,9 @@ import { Link } from 'react-router';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import Delete from 'material-ui/svg-icons/action/delete';
 import IconMenu from 'material-ui/IconMenu';
-import History from 'material-ui/svg-icons/action/history';
 import ShowChart from 'material-ui/svg-icons/editor/show-chart';
 import MenuItem from 'material-ui/MenuItem';
+import History from 'material-ui/svg-icons/action/history';
 
 import IconButtonElement from './IconButtonElement';
 import { openKeyDialog,

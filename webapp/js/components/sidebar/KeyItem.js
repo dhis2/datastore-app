@@ -20,7 +20,9 @@ class KeyItem extends Component {
         return (
             <ListItem primaryText={<div style={styles}>{ keyName }</div>}
                 key={index}
-                rightIconButton={<KeyItemMenu keyName={keyName} namespace={namespace} />}
+                keyName={keyName}
+                namespace={namespace}
+                rightIconButton={<KeyItemMenu />}
                 leftIcon={<EditorInsertDriveFile />}
                 onTouchTap={() => hashHistory.push(`/edit/${namespace}/${keyName}`)}
                 {...props}
