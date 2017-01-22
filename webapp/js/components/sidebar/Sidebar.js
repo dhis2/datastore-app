@@ -49,7 +49,7 @@ Sidebar.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    items: state.api.namespaces,
+    items: state.sidebar.namespaces,
 });
 
 const mapDispatchToProps = (dispatch) => ({

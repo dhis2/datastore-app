@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Delete from 'material-ui/svg-icons/action/delete';
-import IconButtonElement from './IconButtonElement';
+import IconButtonElement from '../utils/IconButtonElement';
 import History from 'material-ui/svg-icons/action/history';
 
 import { openConfirmDeleteKeyDialog } from '../../actions/dialogActions';

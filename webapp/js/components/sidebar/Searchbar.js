@@ -1,19 +1,18 @@
 import React, { PropTypes, Component } from 'react';
-import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
+import TextField from 'material-ui/TextField';
 import { searchSidebarChange } from '../../actions/uiActions';
 
 export class Searchbar extends Component {
     render() {
         const { searchChanged, searchValue } = this.props;
-
         return (
-            <TextField name="searchbar"
-                hintText="Namespace#Key"
+            <TextField name={ 'searchbar' }
+                hintText={ 'Namespace#Key' }
                 floatingLabelStyle={{ top: '25px' }}
                 style={{ height: 'auto' }}
                 inputStyle={{ marginTop: '6px' }}
-                floatingLabelText="Search"
+                floatingLabelText= { 'Search' }
                 value={searchValue}
                 onChange={({ target: { value } }) => searchChanged(value)}
                 onFocus={() => searchChanged('')}
@@ -29,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = (state) => ({
-    searchValue: state.ui.searchValue,
+    searchValue: state.sidebar.searchValue,
 });
 
 Searchbar.propTypes = {

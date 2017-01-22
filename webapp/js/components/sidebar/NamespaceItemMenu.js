@@ -9,7 +9,7 @@ import ShowChart from 'material-ui/svg-icons/editor/show-chart';
 import MenuItem from 'material-ui/MenuItem';
 import History from 'material-ui/svg-icons/action/history';
 
-import IconButtonElement from './IconButtonElement';
+import IconButtonElement from '../utils/IconButtonElement';
 import { openKeyDialog,
          openConfirmDeleteNamespaceDialog } from '../../actions/dialogActions';
 
@@ -35,7 +35,7 @@ class NamespaceItemMenu extends React.Component {
                   targetOrigin={ targetOrigin }
                   {...props}
               >
-                  <MenuItem leftIcon={<NoteAdd />} onClick={ this.props.newKey.bind(this, name) }>
+                  <MenuItem leftIcon={<NoteAdd />} onTouchTap={ this.props.newKey.bind(this, name) }>
                       New key
                   </MenuItem>
                   <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>

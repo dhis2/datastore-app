@@ -20,7 +20,7 @@ export class NamespaceList extends Component {
         super(props);
 
         this.filterNamespaces = this.filterNamespaces.bind(this);
-        this.searchKeyPart = this.searchKeyPart.bind(this);
+        this.filterKeys = this.filterKeys.bind(this);
     }
 
     filterNamespaces(item) {
@@ -47,7 +47,7 @@ export class NamespaceList extends Component {
      * @returns A string following '#' (excluding), empty string if separator is not
      * present.
      */
-    searchKeyPart() {
+    filterKeys() {
         const search = this.props.search.toLowerCase();
         const filterKeyIndex = search.indexOf('#') + 1;
         const keySearch = search.substring(filterKeyIndex, search.length);
@@ -60,8 +60,9 @@ export class NamespaceList extends Component {
             <List style={listStyle}>
                 {Object.keys(items).filter(item => this.filterNamespaces(item)).sort().map(item => {
                     return (
-                      <NamespaceItem namespace={items[item]}
-                          search={this.searchKeyPart()}
+                      <NamespaceItem
+                          namespace={items[item]}
+                          search={this.filterKeys()}
                           key={item}
                       />
                     );
@@ -77,7 +78,7 @@ NamespaceList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    search: state.ui.searchValue,
+    search: state.sidebar.searchValue,
 });
 
 export default connect(

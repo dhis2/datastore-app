@@ -25,7 +25,6 @@ class NamespaceItem extends Component {
     constructor(props) {
         super(props);
 
-        this.toggleHandler = this.toggleHandler.bind(this);
         this.state = {
             list: Object.keys(props.namespace.keys),
         };
@@ -39,13 +38,8 @@ class NamespaceItem extends Component {
         }
     }
 
-    toggleHandler() {
-        const { openNamespace, closeNamespace, namespace: { open, name } } = this.props;
-        open ? closeNamespace(name) : openNamespace(name);
-    }
-
     render() {
-        const { search, namespace: { error, name, fetching, open } } = this.props;
+        const { search, openNamespace, closeNamespace, namespace: { error, name, fetching, open } } = this.props;
 
         if (error) {
             return (
@@ -74,7 +68,7 @@ class NamespaceItem extends Component {
                 leftIcon={leftIcon}
                 rightIconButton={<NamespaceItemMenu name={name} />}
                 nestedItems={list}
-                onTouchTap={this.toggleHandler}
+                onTouchTap={open ? closeNamespace.bind(this, name) : openNamespace.bind(this, name)}
             />
         );
     }

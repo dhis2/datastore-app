@@ -12,6 +12,9 @@ export const SEARCH_VALUE_CHANGE = 'SEARCH_VALUE_CHANGE';
 export const LOAD_VALUE = 'LOAD_VALUE';
 
 
+export const FILTER_BY_SEARCH = 'FILTER_BY_SEARCH';
+
+
 /**
  *  Async Action Types
  */

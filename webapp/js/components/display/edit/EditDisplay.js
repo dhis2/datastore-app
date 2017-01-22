@@ -31,11 +31,12 @@ export class EditDisplay extends Component {
 
         // Load keys for namespace if its not already loaded
         if (!this.props.fetchedNamespaces && fetchedNamespaces) {
-            fetchKeysForNamespace(nextParams.namespace);
+            fetchKeysForNamespace(nextParams.namespace, true);
         }
-        // Get value when url is different from last, and namespaces are fetched.
+
+        // Get value when url is different from last.
         if ((currentParams.namespace !== nextParams.namespace ||
-            currentParams.key !== nextParams.key) && fetchedNamespaces) {
+            currentParams.key !== nextParams.key)) {
             getValue(nextParams.namespace, nextParams.key);
         }
     }
@@ -103,17 +104,17 @@ EditDisplay.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    value: state.ui.value,
-    editedValue: state.ui.editedValue,
-    fetchedNamespaces: state.api.fetched,
+    value: state.display.value,
+    editedValue: state.display.editedValue,
+    fetchedNamespaces: state.display.fetched,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     getValue(namespace, key) {
         dispatch(fetchAndDisplayKeyValue(namespace, key));
     },
-    fetchKeysForNamespace(namespace) {
-        dispatch(fetchAndToggleNamespace(namespace));
+    fetchKeysForNamespace(namespace, open) {
+        dispatch(fetchAndToggleNamespace(namespace, open));
     },
     updateValue(namespace, key, value) {
         dispatch(updateValue(namespace, key, value));

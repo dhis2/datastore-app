@@ -45,7 +45,7 @@ const DisplayAreaHOC = (Area) => {
     };
 
     const mapStateToProps = (state) => ({
-        loading: state.display.loading,
+        loading: state.display.fetching,
         error: state.display.error,
         errorMessage: state.display.errorMessage,
     });

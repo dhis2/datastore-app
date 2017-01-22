@@ -2,6 +2,9 @@ import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 import { hashHistory } from 'react-router';
 
+import { normalize } from 'normalizr';
+import * as schema from '../reducers/schema';
+
 const getApi = api.init();
 
 /**
@@ -251,6 +254,7 @@ export function toggleNamespace(namespace, override) {
 }
 
 export function selectKey(namespace, key, value) {
+    console.log(2);
     return {
         type: actions.SELECT_KEY,
         namespace,
@@ -258,6 +262,8 @@ export function selectKey(namespace, key, value) {
         value,
     };
 }
+
+
 
 /**
  * Fetches keys for a namespace and toggles the namespace
@@ -361,6 +367,7 @@ export function createValue(namespace, key, value) {
  */
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
+        console.log(namespace, key)
         dispatch(createValue(namespace, key, {}))
             .then(() => hashHistory.push(`/edit/${namespace}/${key}`))
             .then(() => dispatch(fetchAndToggleNamespace(namespace, true)))

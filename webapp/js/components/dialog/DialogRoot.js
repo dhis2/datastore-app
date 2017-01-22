@@ -15,7 +15,7 @@ const DIALOG_COMPONENTS = {
 export class DialogRoot extends Component {
 
     render() {
-        const { dialogType, dialogprops } = this.props.dialog;
+        const { dialogType, dialogprops } = this.props;
         if (!dialogType) {
             return null;
         }
@@ -30,14 +30,13 @@ export class DialogRoot extends Component {
 }
 
 DialogRoot.propTypes = {
-    dialog: PropTypes.shape({
-        dialogType: PropTypes.string,
-        dialogprops: PropTypes.shape({}),
-    }),
+    dialogType: PropTypes.string,
+    dialogprops: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({
-    dialog: state.ui.dialog,
+    dialogType: state.dialog.type,
+    dialogprops: state.dialog.props,
 });
 
 export default connect(
