@@ -184,7 +184,7 @@ export function rejectDeleteNamespace(namespace, error) {
     return {
         type: actions.DELETE_NAMESPACE_REJECTED,
         namespace,
-        error
+        error,
     };
 }
 /**
@@ -371,7 +371,6 @@ export function createValue(namespace, key, value) {
  */
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
-        console.log(namespace, key)
         dispatch(createValue(namespace, key, {}))
             .then(() => hashHistory.push(`/edit/${namespace}/${key}`))
             .then(() => dispatch(fetchAndToggleNamespace(namespace, true)))

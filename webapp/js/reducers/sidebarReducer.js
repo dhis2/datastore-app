@@ -160,7 +160,7 @@ const sidebar = (state = initialState, action) => {
                     open: false,
                     keys: {
                         [key]: {
-                            'key:': key,
+                            key,
                             value: {},
                         },
                     },
