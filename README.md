@@ -24,7 +24,7 @@ This web application has been created using React and Redux.
 
 # Group Members - #fff
 - Birk as Birkbjo
-- Pavel as PavelJurasek
+- Pavel as Pavel Jurasek
 - Steven as Glimlag & shicks1000
 
 # Credits
