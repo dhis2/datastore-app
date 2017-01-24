@@ -28,9 +28,10 @@ export class EditDisplay extends Component {
         const { fetchedNamespaces, params: nextParams } = nextProps;
         const { fetchKeysForNamespace,
             getValue, params: currentParams } = this.props;
-
         // Load keys for namespace if its not already loaded
-        if (!this.props.fetchedNamespaces && fetchedNamespaces) {
+
+        if (!this.props.fetchedNamespaces && fetchedNamespaces ||
+            !fetchedNamespaces) {
             fetchKeysForNamespace(nextParams.namespace, true);
         }
 
@@ -106,7 +107,7 @@ EditDisplay.propTypes = {
 const mapStateToProps = (state) => ({
     value: state.display.value,
     editedValue: state.display.editedValue,
-    fetchedNamespaces: state.display.fetched,
+    fetchedNamespaces: state.sidebar.fetched,
 });
 
 const mapDispatchToProps = (dispatch) => ({
