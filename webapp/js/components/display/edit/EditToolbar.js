@@ -13,7 +13,7 @@ export class EditToolbar extends React.Component {
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
                     <ToolbarGroup>
-                        <IconButton style={{ width: 'auto', padding: 0 }} onTouchTap={this.props.handleSave}>
+                        <IconButton onTouchTap={this.props.handleSave}>
                             <ContentSave />
                         </IconButton>
                         <ToolbarSeparator />
