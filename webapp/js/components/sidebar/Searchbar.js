@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
-import { searchSidebarChange } from '../../actions/uiActions';
+import { searchSidebarChange } from '../../actions/sidebarActions';
 
 export class Searchbar extends Component {
     render() {

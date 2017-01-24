@@ -6,16 +6,16 @@ import * as dialogs from '../constants/dialogTypes';
 function openDialog(dialogType, dialogprops) {
     return {
         type: actions.OPEN_DIALOG,
-        dialogType,
         dialogprops: { ...dialogprops },
+        dialogType,
     };
 }
 
 function closeDialog(dialogType, dialogprops) {
     return {
         type: actions.CLOSE_DIALOG,
-        dialogType,
         dialogprops: { ...dialogprops }, // ensure empty object
+        dialogType,
     };
 }
 

@@ -13,7 +13,7 @@ const styles = {
     height: '18px', // fixes clipping when zoomed bug
 };
 
-class KeyItem extends Component {
+export class KeyItem extends Component {
     render() {
         const { index, namespace, keyName, ...props } = this.props;
 

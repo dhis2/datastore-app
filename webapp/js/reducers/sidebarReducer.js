@@ -1,7 +1,5 @@
 import * as actions from '../constants/actionTypes';
 
-import _ from 'lodash';
-
 const fetchedState = { fetching: false, fetched: true, error: false };
 const fetchingState = { fetching: true, fetched: false, error: false };
 const errorState = { fetching: false, fetched: false, error: true };

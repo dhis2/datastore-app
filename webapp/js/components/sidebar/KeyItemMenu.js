@@ -21,19 +21,14 @@ const targetOrigin = {
     horizontal: 'left',
 };
 
-class KeyItemMenu extends Component {
+export class KeyItemMenu extends Component {
 
-    constructor(props) {
-        super(props);
-        this.handleDeleteKey = this.handleDeleteKey.bind(this);
-    }
-
-    handleDeleteKey(namespace, key) {
+    deleteKey(namespace, key) {
         this.props.deleteKeyInNamespace(namespace, key);
     }
 
     render() {
-        const { namespace, keyName, deleteKeyInNamespace, ...props } = this.props;
+        const { namespace, keyName, ...props } = this.props;
 
         return (
             <IconMenu disableAutoFocus
@@ -45,7 +40,7 @@ class KeyItemMenu extends Component {
                 <MenuItem containerElement={<Link to={`/history/${namespace}/${keyName}`} />} leftIcon={<History />}>
                     History
                 </MenuItem>
-                <MenuItem leftIcon={<Delete />} onTouchTap={() => deleteKeyInNamespace(namespace, keyName)}>
+                <MenuItem leftIcon={<Delete />} onTouchTap={this.deleteKey.bind(this, namespace, keyName)}>
                     Delete key
                 </MenuItem>
             </IconMenu>

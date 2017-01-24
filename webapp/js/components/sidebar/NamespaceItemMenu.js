@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -23,7 +23,16 @@ const targetOrigin = {
     horizontal: 'left',
 };
 
-class NamespaceItemMenu extends React.Component {
+export class NamespaceItemMenu extends Component {
+
+
+    createKey(name) {
+        this.props.newKey(name);
+    }
+
+    deleteNamespace(name) {
+        this.props.deleteNamespace(name);
+    }
 
     render() {
         const { name, ...props } = this.props;
@@ -35,7 +44,7 @@ class NamespaceItemMenu extends React.Component {
                   targetOrigin={ targetOrigin }
                   {...props}
               >
-                  <MenuItem leftIcon={<NoteAdd />} onTouchTap={ this.props.newKey.bind(this, name) }>
+                  <MenuItem leftIcon={<NoteAdd />} onTouchTap={ this.createKey.bind(this, name) }>
                       New key
                   </MenuItem>
                   <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>
@@ -44,7 +53,7 @@ class NamespaceItemMenu extends React.Component {
                   <MenuItem containerElement={<Link to={`/history/${name}`} />} leftIcon={<History />}>
                       History
                   </MenuItem>
-                  <MenuItem leftIcon={<Delete />} onTouchTap={ this.props.deleteNamespace.bind(this, name) }>
+                  <MenuItem leftIcon={<Delete />} onTouchTap={ this.deleteNamespace.bind(this, name) }>
                       Delete
                   </MenuItem>
               </IconMenu>

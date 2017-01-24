@@ -2,9 +2,6 @@ import * as actions from '../constants/actionTypes';
 import api from '../utils/api';
 import { hashHistory } from 'react-router';
 
-import { normalize } from 'normalizr';
-import * as schema from '../reducers/schema';
-
 const getApi = api.init();
 
 /**
@@ -58,7 +55,7 @@ export function rejectKeys(namespace, error) {
 /* These are used for creation of namespaces, as you need
  * a key and a value to create a namespace*/
 
-function receivedCreateValue(namespace, key, value) {
+export function receivedCreateValue(namespace, key, value) {
     return {
         type: actions.CREATE_VALUE_FULFILLED,
         namespace,
@@ -67,7 +64,7 @@ function receivedCreateValue(namespace, key, value) {
     };
 }
 
-function requestCreateValue(namespace, key, value) {
+export function requestCreateValue(namespace, key, value) {
     return {
         type: actions.CREATE_VALUE_PENDING,
         namespace,
@@ -76,7 +73,7 @@ function requestCreateValue(namespace, key, value) {
     };
 }
 
-function rejectCreateValue(namespace, key, value, error) {
+export function rejectCreateValue(namespace, key, value, error) {
     return {
         type: actions.CREATE_VALUE_REJECTED,
         namespace,
@@ -116,7 +113,7 @@ export function rejectValue(namespace, key, error) {
     };
 }
 
-function requestUpdateValue(namespace, key, value) {
+export function requestUpdateValue(namespace, key, value) {
     return {
         type: actions.UPDATE_VALUE_PENDING,
         namespace,
@@ -125,7 +122,7 @@ function requestUpdateValue(namespace, key, value) {
     };
 }
 
-function receiveUpdateValue(namespace, key, value) {
+export function receiveUpdateValue(namespace, key, value) {
     return {
         type: actions.UPDATE_VALUE_FULFILLED,
         namespace,
@@ -144,7 +141,7 @@ export function rejectUpdateValue(namespace, key, value, error) {
     };
 }
 
-function requestDeleteKey(namespace, key) {
+export function requestDeleteKey(namespace, key) {
     return {
         type: actions.DELETE_KEY_PENDING,
         namespace,
@@ -152,7 +149,7 @@ function requestDeleteKey(namespace, key) {
     };
 }
 
-function receiveDeleteKey(namespace, key) {
+export function receiveDeleteKey(namespace, key) {
     return {
         type: actions.DELETE_KEY_FULFILLED,
         namespace,
@@ -160,7 +157,7 @@ function receiveDeleteKey(namespace, key) {
     };
 }
 
-function rejectDeleteKey(namespace, key, error) {
+export function rejectDeleteKey(namespace, key, error) {
     return {
         type: actions.DELETE_KEY_REJECTED,
         namespace,
@@ -169,24 +166,25 @@ function rejectDeleteKey(namespace, key, error) {
     };
 }
 
-function requestDeleteNamespace(namespace) {
+export function requestDeleteNamespace(namespace) {
     return {
         type: actions.DELETE_NAMESPACE_PENDING,
         namespace,
     };
 }
 
-function receiveDeleteNamespace(namespace) {
+export function receiveDeleteNamespace(namespace) {
     return {
         type: actions.DELETE_NAMESPACE_FULFILLED,
         namespace,
     };
 }
 
-function rejectDeleteNamespace(namespace) {
+export function rejectDeleteNamespace(namespace, error) {
     return {
         type: actions.DELETE_NAMESPACE_REJECTED,
         namespace,
+        error
     };
 }
 /**
@@ -254,12 +252,18 @@ export function toggleNamespace(namespace, override) {
 }
 
 export function selectKey(namespace, key, value) {
-    console.log(2);
     return {
         type: actions.SELECT_KEY,
         namespace,
         key,
         value,
+    };
+}
+
+export function searchSidebarChange(value) {
+    return {
+        type: actions.SEARCH_VALUE_CHANGE,
+        searchValue: value,
     };
 }
 

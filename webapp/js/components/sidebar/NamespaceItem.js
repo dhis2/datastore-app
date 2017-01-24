@@ -21,7 +21,7 @@ const namespaceItemStyle = {
     height: '18px', // fixes clipping when zoomed bug
 };
 
-class NamespaceItem extends Component {
+export class NamespaceItem extends Component {
     constructor(props) {
         super(props);
 
@@ -38,8 +38,16 @@ class NamespaceItem extends Component {
         }
     }
 
+    openNamespace(name) {
+        this.props.openNamespace(name);
+    }
+
+    closeNamespace(name) {
+        this.props.closeNamespace(name);
+    }
+
     render() {
-        const { search, openNamespace, closeNamespace, namespace: { error, name, fetching, open } } = this.props;
+        const { search, namespace: { error, name, fetching, open } } = this.props;
 
         if (error) {
             return (
@@ -68,7 +76,8 @@ class NamespaceItem extends Component {
                 leftIcon={leftIcon}
                 rightIconButton={<NamespaceItemMenu name={name} />}
                 nestedItems={list}
-                onTouchTap={open ? closeNamespace.bind(this, name) : openNamespace.bind(this, name)}
+                onTouchTap={open ? this.closeNamespace.bind(this, name) :
+                   this.openNamespace.bind(this, name)}
             />
         );
     }
