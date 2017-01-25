@@ -6,7 +6,7 @@ import EditArea from './EditArea';
 import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
     updateValue, valueChange, rejectUpdateValue } from 'actions/actions';
 
-import '../../../../style/window/window.scss';
+import '../../../../style/display/display.scss';
 
 export class EditDisplay extends Component {
 
@@ -80,7 +80,7 @@ export class EditDisplay extends Component {
         }
 
         return (
-        <Paper className={'fff-window'}>
+        <Paper className={'fff-display'}>
             <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
             <EditArea namespace = { namespace }
                 selectedKey = { key }

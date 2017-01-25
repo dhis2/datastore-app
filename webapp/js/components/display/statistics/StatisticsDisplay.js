@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import StatisticsToolbar from './StatisticsToolbar';
 import StatisticsArea from './StatisticsArea';
 import { fetchHistoryForNamespace, fetchHistory } from 'actions/actions';
-import '../../../../style/window/window.scss';
+import '../../../../style/display/display.scss';
 
 export class StatisticsDisplay extends Component {
     componentDidMount() {
@@ -30,7 +30,7 @@ export class StatisticsDisplay extends Component {
     render() {
         const { history, params: { namespace } } = this.props;
         return (
-        <Paper className={ 'fff-window' }>
+        <Paper className={ 'fff-display' }>
             <StatisticsToolbar namespace={ namespace } />
             <StatisticsArea list={ history } namespace={ namespace } />
         </Paper>

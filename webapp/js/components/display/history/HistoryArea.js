@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Theme from 'utils/theme';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
 import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC';
-import '../../../../style/window/window.scss';
+import '../../../../style/display/display.scss';
 
 const tableHeaderStyle = {
     borderBottom: 'solid grey 1px',
@@ -17,7 +17,7 @@ export class HistoryArea extends Component {
         backgroundStyle.backgroundColor = Theme.palette.primary3Color;
 
         return (
-              <div className={ 'fff-window-area' } style={ backgroundStyle }>
+              <div className={ 'fff-display-area' } style={ backgroundStyle }>
                   <Table fixedHeader headerStyle={ tableHeaderStyle }>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>

@@ -5,7 +5,7 @@ import HistoryToolbar from './HistoryToolbar';
 import HistoryArea from './HistoryArea';
 import { fetchHistoryForNamespace, fetchHistory } from 'actions/actions';
 
-import '../../../../style/window/window.scss';
+import '../../../../style/display/display.scss';
 
 export class HistoryDisplay extends Component {
 
@@ -36,7 +36,7 @@ export class HistoryDisplay extends Component {
         const { namespace, key } = this.props.params;
 
         return (
-        <Paper className={'fff-window'}>
+        <Paper className={'fff-display'}>
             <HistoryToolbar namespace={ namespace } selectedKey={ key } />
             <HistoryArea list={ history } />
         </Paper>

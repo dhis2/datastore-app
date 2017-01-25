@@ -10,8 +10,8 @@ const alignmentStyle = {
 class LoadingArea extends Component {
     render() {
         return (
-          <Paper className={'fff-window-area'}>
-              <div className={'fff-window-area'} style={ alignmentStyle }>
+          <Paper className={'fff-display-area'}>
+              <div className={'fff-display-area'} style={ alignmentStyle }>
                 <Spinner size={'large'} />
               </div>
           </Paper>

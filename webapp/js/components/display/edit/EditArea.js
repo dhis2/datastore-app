@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import JSONEditor from 'components/utils/JSONEditor';
 import Theme from 'utils/theme';
 import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC';
-import '../../../../style/window/window.scss';
+import '../../../../style/display/display.scss';
 
 export class EditArea extends Component {
 
@@ -23,7 +23,7 @@ export class EditArea extends Component {
         };
 
         return (
-            <div className={ 'fff-window-area' } style={ backgroundStyle }>
+            <div className={ 'fff-display-area' } style={ backgroundStyle }>
                 <JSONEditor value={ value } dataChanged={this.dataFromJSONEditor.bind(this)} />
             </div>
         );

@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import LoadingArea from 'components/display/LoadingArea';
 import ErrorArea from 'components/display/ErrorArea';
-import '../../../style/window/window.scss';
+import '../../../style/display/display.scss';
 
 const DisplayAreaHOC = (Area) => {
     class DisplayAreaBase extends Component {

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { ModeCommentIconWithText } from 'components/utils/Icons';
 import Paper from 'material-ui/Paper';
 import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC';
-import '../../../../style/window/window.scss';
+import '../../../../style/display/display.scss';
 
 export class EmptyArea extends Component {
     render() {
         return (
-        <Paper className={'fff-window'}>
+        <Paper className={'fff-display'}>
             <ModeCommentIconWithText text={'Select a namespace and a key to edit.'} />
         </Paper>
         );
