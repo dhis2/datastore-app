@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import Layout from '../../webapp/js/containers/Layout';
+import Layout from '../../../webapp/js/components/app/Layout';
 
 describe('Component: Layout', () => {
     let component;

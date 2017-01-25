@@ -1,4 +1,4 @@
---require config/setup.js
+--require ./config/setup.js
 --require ignore-styles
 --recursive ./test
 --compilers js:babel-core/register

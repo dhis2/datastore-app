@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import NavigationBar from '../../webapp/js/containers/NavigationBar';
+import NavigationBar from '../../../webapp/js/components/app/NavigationBar';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 
 describe('Component: NavigationBar', () => {
