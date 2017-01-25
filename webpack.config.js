@@ -1,16 +1,16 @@
 var webpack = require('webpack');
-const path = require('path');
+var path = require('path');
+
 
 var config = {
     entry: [
         'webpack-dev-server/client?http://0.0.0.0:8081',
         'webpack/hot/only-dev-server',
         'whatwg-fetch',
-        'react-bootstrap',
-        __dirname + '/webapp/js/main.js',
+        __dirname.concat('/webapp/js/main.js'),
     ],
     output: {
-        path: __dirname + '/build/',
+        path: __dirname.concat('/build/'),
         filename: 'app.bundle.js',
     },
     module: {
@@ -43,12 +43,9 @@ var config = {
             path.resolve('./webapp/js'),
         ],
     },
-    // eslint: {
-    //   configFile: './.eslintrc'
-    // },
     devtool: 'inline-sourcemap',
     devServer: {
-        contentBase: __dirname + '/webapp/',
+        contentBase: __dirname.concat('/webapp/'),
         port: 8081,
         inline: true,
         hot: true,
