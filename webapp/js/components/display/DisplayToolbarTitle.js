@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton';
+import BreadcrumbHistoryButton from 'components/utils/BreadcrumbHistoryButton';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import Theme from 'utils/theme';
 import '../../../style/toolbarTitle.scss';
-import Theme from '../../utils/theme';
 
 class DisplayToolbarTitle extends Component {
     renderPath(path) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Theme from '../../utils/theme';
+import Theme from 'utils/theme';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 

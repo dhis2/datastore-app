@@ -1,17 +1,15 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import Delete from 'material-ui/svg-icons/action/delete';
 import IconMenu from 'material-ui/IconMenu';
 import ShowChart from 'material-ui/svg-icons/editor/show-chart';
 import MenuItem from 'material-ui/MenuItem';
 import History from 'material-ui/svg-icons/action/history';
-
-import IconButtonElement from '../utils/IconButtonElement';
+import IconButtonElement from 'components/utils/IconButtonElement';
 import { openKeyDialog,
-         openConfirmDeleteNamespaceDialog } from '../../actions/dialogActions';
+         openConfirmDeleteNamespaceDialog } from 'actions/dialogActions';
 
 const anchorOrigin = {
     vertical: 'bottom',

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import DisplayToolbarTitle from '../DisplayToolbarTitle';
+import DisplayToolbarTitle from 'components/display/DisplayToolbarTitle';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ContentSave from 'material-ui/svg-icons/content/save';

@@ -1,9 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
 import NamespaceItem from './NamespaceItem';
 import { List } from 'material-ui/List';
-import Theme from '../../utils/theme';
+import Theme from 'utils/theme';
 
 const listStyle = {
     overflowY: 'auto',

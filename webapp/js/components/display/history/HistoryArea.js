@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Theme from '../../../utils/theme';
-import '../../../../style/window/window.scss';
+import Theme from 'utils/theme';
 import { TableBody, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, Table } from 'material-ui/Table';
-import DisplayAreaHOC from '../../hoc/DisplayAreaHOC';
+import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC';
+import '../../../../style/window/window.scss';
 
 const tableHeaderStyle = {
     borderBottom: 'solid grey 1px',

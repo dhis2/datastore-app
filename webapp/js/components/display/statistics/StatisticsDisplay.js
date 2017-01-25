@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import StatisticsToolbar from './StatisticsToolbar';
 import StatisticsArea from './StatisticsArea';
+import { fetchHistoryForNamespace, fetchHistory } from 'actions/actions';
 import '../../../../style/window/window.scss';
-import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
 
 export class StatisticsDisplay extends Component {
     componentDidMount() {

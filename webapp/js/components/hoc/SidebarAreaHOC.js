@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
 import IconButton from 'material-ui/IconButton';
+import { Spinner } from 'components/utils/Loaders';
 import '../../../style/sidebar/sidebar.scss';
-import { Spinner } from '../utils/Loaders';
 
 const containerStyle = {
     alignItems: 'center',

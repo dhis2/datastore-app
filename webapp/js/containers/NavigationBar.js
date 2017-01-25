@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
-import Theme from '../utils/theme';
+import Theme from 'utils/theme';
 
 const imageStyle = {
     height: '20px',

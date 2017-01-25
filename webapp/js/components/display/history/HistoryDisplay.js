@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import HistoryToolbar from './HistoryToolbar';
 import HistoryArea from './HistoryArea';
-import { fetchHistoryForNamespace, fetchHistory } from '../../../actions/actions';
+import { fetchHistoryForNamespace, fetchHistory } from 'actions/actions';
 
 import '../../../../style/window/window.scss';
 

@@ -1,5 +1,5 @@
-import * as actions from '../constants/actionTypes';
-import * as dialogs from '../constants/dialogTypes';
+import * as actions from 'constants/actionTypes';
+import * as dialogs from 'constants/dialogTypes';
 
 /* Open a modal with given props, if no props are given
  * dialogprops will be an empty object.*/

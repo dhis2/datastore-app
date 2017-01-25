@@ -4,8 +4,7 @@ import {
     blue500, blue700, blue900,
     pinkA200, grey100, grey200,
     grey300, grey500, white,
-    darkBlack, fullBlack,
-} from 'material-ui/styles/colors';
+    darkBlack, fullBlack } from 'material-ui/styles/colors';
 
 export default getMuiTheme({
     palette: {

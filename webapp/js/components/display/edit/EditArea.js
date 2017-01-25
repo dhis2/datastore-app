@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import JSONEditor from '../../utils/JSONEditor';
-import Theme from '../../../utils/theme';
+import JSONEditor from 'components/utils/JSONEditor';
+import Theme from 'utils/theme';
+import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC';
 import '../../../../style/window/window.scss';
-import DisplayAreaHOC from '../../hoc/DisplayAreaHOC';
 
 export class EditArea extends Component {
 

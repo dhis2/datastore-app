@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NamespaceList from './NamespaceList';
-import { fetchNamespaces } from '../../actions/actions';
+import { fetchNamespaces } from 'actions/actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import SideBarHeader from './SideBarHeader';
+import { openNamespaceDialog } from 'actions/dialogActions';
+import SidebarAreaHOC from 'components/hoc/SidebarAreaHOC';
 import '../../../style/sidebar/sidebar.scss';
-import { openNamespaceDialog } from '../../actions/dialogActions';
-import SidebarAreaHOC from '../hoc/SidebarAreaHOC';
 
 export class Sidebar extends Component {
     constructor(props) {

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { createAndDisplayValue } from '../../actions/actions';
-import { closeKeyDialog } from '../../actions/dialogActions';
+import { createAndDisplayValue } from 'actions/actions';
+import { closeKeyDialog } from 'actions/dialogActions';
 
 export class NamespaceDialog extends Component {
 

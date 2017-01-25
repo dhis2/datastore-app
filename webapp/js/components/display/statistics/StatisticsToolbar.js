@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
 import { Toolbar } from 'material-ui/Toolbar';
-import DisplayToolbarTitle from '../DisplayToolbarTitle';
+import DisplayToolbarTitle from 'components/display/DisplayToolbarTitle';
 
 class StatisticsToolbar extends Component {
     render() {

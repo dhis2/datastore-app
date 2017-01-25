@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import { deleteKey } from '../../actions/actions';
-import { closeConfirmDeleteKeyDialog } from '../../actions/dialogActions';
+import { deleteKey } from 'actions/actions';
+import { closeConfirmDeleteKeyDialog } from 'actions/dialogActions';
 
 export class ConfirmDeleteKeyDialog extends Component {
 

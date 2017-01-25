@@ -1,4 +1,4 @@
-import * as actions from '../constants/actionTypes';
+import * as actions from 'constants/actionTypes';
 
 const fetchedState = { fetching: false, fetched: true, error: false };
 const fetchingState = { fetching: true, fetched: false, error: false };

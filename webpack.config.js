@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+const path = require('path');
 
 var config = {
     entry: [
@@ -35,6 +36,11 @@ var config = {
                 test: /\.json$/,
                 loader: 'json',
             },
+        ],
+    },
+    resolve: {
+        root: [
+            path.resolve('./webapp/js'),
         ],
     },
     // eslint: {

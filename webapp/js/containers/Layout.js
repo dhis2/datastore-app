@@ -1,11 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 
+import NavigationBar from './NavigationBar';
+import Snackbar from 'components/utils/Snackbar';
+import Sidebar from 'components/sidebar/Sidebar';
+import DialogRoot from 'components/dialog/DialogRoot';
 import '../../style/layout/layout.scss';
 import '../../style/pages/pages.scss';
-import NavigationBar from './NavigationBar';
-import Snackbar from '../components/utils/Snackbar';
-import Sidebar from '../components/sidebar/Sidebar';
-import DialogRoot from '../components/dialog/DialogRoot';
 
 class Layout extends Component {
     render() {

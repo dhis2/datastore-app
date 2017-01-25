@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import EmptyToolbar from './EmptyToolbar';
 import EmptyArea from './EmptyArea';
-
 import '../../../../style/window/window.scss';
 
 class EmptyDisplay extends Component {

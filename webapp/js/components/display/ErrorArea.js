@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ErrorIconWithText } from '../utils/Icons';
+import { ErrorIconWithText } from 'components/utils/Icons';
 
 class ErrorArea extends Component {
     render() {

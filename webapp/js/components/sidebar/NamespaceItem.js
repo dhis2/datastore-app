@@ -1,16 +1,13 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Spinner } from '../utils/Loaders';
-import { ErrorIcon } from '../utils/Icons';
+import { Spinner } from 'components/utils/Loaders';
+import { ErrorIcon } from 'components/utils/Icons';
 import { ListItem } from 'material-ui/List';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-
 import { fetchAndDisplayKeyValue,
          fetchAndToggleNamespace,
-         toggleNamespace } from '../../actions/actions';
-
+         toggleNamespace } from 'actions/actions';
 import NamespaceItemMenu from './NamespaceItemMenu';
 import KeyItem from './KeyItem';
 

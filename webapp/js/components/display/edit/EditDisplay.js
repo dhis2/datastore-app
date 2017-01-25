@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import EditToolbar from './EditToolbar';
 import EditArea from './EditArea';
 import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
-    updateValue, valueChange, rejectUpdateValue } from '../../../actions/actions';
+    updateValue, valueChange, rejectUpdateValue } from 'actions/actions';
 
 import '../../../../style/window/window.scss';
 

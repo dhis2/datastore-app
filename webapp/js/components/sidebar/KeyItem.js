@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { hashHistory } from 'react-router';
-
 import { ListItem } from 'material-ui/List';
 import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file';
-
 import KeyItemMenu from './KeyItemMenu';
 
 const styles = {
