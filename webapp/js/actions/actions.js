@@ -1,8 +1,8 @@
 import * as actions from 'constants/actionTypes';
-import api from 'utils/api';
+import apiObj from 'utils/api';
 import { hashHistory } from 'react-router';
 
-const getApi = api.init();
+const getApi = apiObj.init();
 
 /**
  *  Namespace Action Creators
@@ -266,7 +266,6 @@ export function searchSidebarChange(value) {
         searchValue: value,
     };
 }
-
 
 
 /**

@@ -57,15 +57,13 @@ export class NamespaceList extends Component {
         const { items } = this.props;
         return (
             <List style={listStyle}>
-                {Object.keys(items).filter(item => this.filterNamespaces(item)).sort().map(item => {
-                    return (
+                {Object.keys(items).filter(item => this.filterNamespaces(item)).sort().map(item => (
                       <NamespaceItem
                           namespace={items[item]}
                           search={this.filterKeys()}
                           key={item}
                       />
-                    );
-                })}
+                    ))}
             </List>
         );
     }

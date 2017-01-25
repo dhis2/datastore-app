@@ -9,7 +9,7 @@ import StatisticsDisplay from 'components/display/statistics/StatisticsDisplay';
 import Theme from 'utils/theme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import '../../style/main.scss';
+import '../../../style/main.scss';
 
 injectTapEventPlugin();
 

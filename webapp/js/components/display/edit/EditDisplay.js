@@ -43,14 +43,13 @@ export class EditDisplay extends Component {
     }
 
     handleSaveValue() {
-        const { editedValue, updateValue, rejectUpdateValue } = this.props;
+        const { editedValue } = this.props;
         const { namespace, key } = this.props.params;
 
         if (this.state.valueError) {
-            rejectUpdateValue(namespace, key, editedValue, 'Failed to update value: Not valid JSON');
-        }
-        else if (editedValue) {
-            updateValue(namespace, key, editedValue);
+            this.props.rejectUpdateValue(namespace, key, editedValue, 'Failed to update value: Not valid JSON');
+        } else if (editedValue) {
+            this.props.updateValue(namespace, key, editedValue);
         }
     }
 
@@ -97,6 +96,8 @@ EditDisplay.propTypes = {
     namespace: PropTypes.string,
     fetchedNamespaces: PropTypes.bool,
     fetchKeysForNamespace: PropTypes.func,
+    updateValue: PropTypes.func,
+    rejectUpdateValue: PropTypes.func,
     getValue: PropTypes.func,
     params: PropTypes.shape({
         namespace: PropTypes.string,

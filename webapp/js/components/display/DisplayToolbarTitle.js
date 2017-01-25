@@ -15,14 +15,12 @@ class DisplayToolbarTitle extends Component {
         const length = pathArray.length - 1;
         return (
             <span className={'fff-toolbar-title'}>
-                {pathArray.map((item, index) => {
-                    return (
+                {pathArray.map((item, index) => (
                         <span key={'s'.concat(index)}>
                             <BreadcrumbHistoryButton label={ item } key={ index } />
                             { index === length ? null : <ChevronRight style={chevStyle} /> }
                         </span>
-                    );
-                })}
+                    ))}
             </span>
         );
     }

@@ -31,7 +31,7 @@ class Api
             .catch(err => {
                 // use auth in development, as no session exists
                 if (process.env.NODE_ENV === 'development' && !retry) {
-                    this.auth = `Basic ${btoa('admin:district')}`
+                    this.auth = `Basic ${btoa('admin:district')}`;
                     return this.checkSession(true);
                 } else {
                     throw err;
@@ -343,4 +343,4 @@ export default (function getApi() {
         apiClass = new Api(API_URL);
     }
     return apiClass;
-})();
+}());
