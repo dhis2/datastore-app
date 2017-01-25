@@ -7,7 +7,7 @@
     "build": "webpack -p --config ./webpack.production.config.js",
     "lint": "eslint --fix webapp --rule 'no-unused-expressions: 0'",
     "start": "webpack-dev-server",
-    "test": "mocha test/**/*.test.js"
+    "test": "NODE_PATH=./webapp/js mocha test/**/*.test.js"
   },
   "repository": {
     "type": "git",

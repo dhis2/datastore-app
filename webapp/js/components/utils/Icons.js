@@ -19,7 +19,7 @@ export class ModeCommentIconWithText extends Component {
     render() {
         const { text } = this.props;
         return (
-          <div className="fff-display-area" style={ containerStyle }>
+          <div className={ 'fff-display-area' } style={ containerStyle }>
             <div>
               <ModeComment style={iconStyle} />
               <p>{ text }</p>
@@ -33,7 +33,7 @@ export class ErrorIconWithText extends Component {
     render() {
         const { text } = this.props;
         return (
-            <div className="fff-display-area" style={ containerStyle }>
+            <div className={ 'fff-display-area' } style={ containerStyle }>
                 <div>
                     <ErrorIcon style={iconStyle} />
                     <p>{ text }</p>
