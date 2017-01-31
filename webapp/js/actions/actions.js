@@ -5,7 +5,10 @@ import { hashHistory } from 'react-router';
 const getApi = apiObj.init();
 
 /**
- *  Namespace Action Creators
+ * recieveNamespaces - Deliver namespaces returned from request
+ *
+ * @param  {type} namespaces description
+ * @return {type}            description
  */
 export function recieveNamespaces(namespaces) {
     return {
@@ -14,6 +17,13 @@ export function recieveNamespaces(namespaces) {
     };
 }
 
+
+/**
+ * rejectNamespaces - Return reject signal for namespaces
+ *
+ * @param  {type} error description
+ * @return {type}       description
+ */
 export function rejectNamespaces(error) {
     return {
         type: actions.FETCH_NAMESPACES_REJECTED,
@@ -21,14 +31,25 @@ export function rejectNamespaces(error) {
     };
 }
 
+
+/**
+ * requestNamespaces - Return waiting signal for namespaces
+ *
+ * @return {type}  description
+ */
 export function requestNamespaces() {
     return {
         type: actions.FETCH_NAMESPACES_PENDING,
     };
 }
 
+
 /**
- *  Key Action Creators
+ * recieveKeys - Deliver keys returned from request
+ *
+ * @param  {type} namespace description
+ * @param  {type} keys      description
+ * @return {type}           description
  */
 export function recieveKeys(namespace, keys) {
     return {
@@ -38,6 +59,13 @@ export function recieveKeys(namespace, keys) {
     };
 }
 
+
+/**
+ * requestKeys - Return waiting signal for keys
+ *
+ * @param  {type} namespace description
+ * @return {type}           description
+ */
 export function requestKeys(namespace) {
     return {
         type: actions.FETCH_KEYS_PENDING,
@@ -45,6 +73,14 @@ export function requestKeys(namespace) {
     };
 }
 
+
+/**
+ * rejectKeys - Return reject signal for requested keys
+ *
+ * @param  {type} namespace description
+ * @param  {type} error     description
+ * @return {type}           description
+ */
 export function rejectKeys(namespace, error) {
     return {
         type: actions.FETCH_KEYS_REJECTED,
@@ -52,8 +88,7 @@ export function rejectKeys(namespace, error) {
         error,
     };
 }
-/* These are used for creation of namespaces, as you need
- * a key and a value to create a namespace*/
+
 
 export function receivedCreateValue(namespace, key, value) {
     return {
@@ -336,19 +371,20 @@ export function fetchNamespaces() {
     };
 }
 
-/**
- * @function createValue
- * Creates a value with key in namespace.
- *
- * Because of how the API behaves, this is used for both creating
- * keys and namespaces. We always create a value with empty values, and instead use
- * updateValue to update values.
- * If a namespace exists, the key will be created in namespace with an empty value
- * If both namespace and key exists; rejectCreateValue will be dispatched.
- * @param namespace to create or add key in
- * @param key to create
- * @returns action thunk
- */
+
+ /**
+  * createValue - Creates a value with key in namespace.
+  *               Because of how the API behaves, this is used for both creating
+  *               keys and namespaces. We always create a value with empty values, and instead use
+  *               updateValue to update values.
+  *               If a namespace exists, the key will be created in namespace with an empty value
+  *               If both namespace and key exists; rejectCreateValue will be dispatched.
+  *
+  * @param  {type} namespace Namespace to create or add key in
+  * @param  {type} key       Key for tied to value
+  * @param  {type} value     Value to create
+  * @return {type}           Action thunk
+  */
 export function createValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestCreateValue(namespace, key, value));
@@ -357,17 +393,16 @@ export function createValue(namespace, key, value) {
     };
 }
 
-/**
- * @function createAndDisplayValue
- * Creates a value with key in namespace.
- *
- * On success, the namespace will be opened and the empty
- * value will be displayed. Note that this is used both for
- * creating namespaces and keys. See {@link createValue}
- * @param namespace namespace to create or update
- * @param key to create
- * @returns action thunk
- */
+ /**
+  * createAndDisplayValue - Creates a value with key in namespace.
+  *                         On success, the namespace will be opened and the empty
+  *                         value will be displayed. Note that this is used both for
+  *                         creating namespaces and keys. See {@link createValue}
+  *
+  * @param  {type} namespace Namespace namespace to create or update
+  * @param  {type} key       Key to create
+  * @return {type}           Action thunk
+  */
 export function createAndDisplayValue(namespace, key) {
     return dispatch => {
         dispatch(createValue(namespace, key, {}))
@@ -377,6 +412,13 @@ export function createAndDisplayValue(namespace, key) {
     };
 }
 
+
+/**
+ * fetchKeys - Fetch keys
+ *
+ * @param  {type} namespace Fetch keys for given namespace
+ * @return {type}           Action thunk
+ */
 export function fetchKeys(namespace) {
     return dispatch => {
         dispatch(requestKeys(namespace));
@@ -385,12 +427,14 @@ export function fetchKeys(namespace) {
     };
 }
 
-/**
- * Gets history for a key in a namespace
- * @param namespace for key
- * @param key in namespace
- * @returns action thunk
- */
+
+ /**
+  * fetchHistory - Gets history for a key in a namespace
+  *
+  * @param  {type} namespace Namespace for key
+  * @param  {type} key       Key in namespace
+  * @return {type}           Action thunk
+  */
 export function fetchHistory(namespace, key) {
     return dispatch => {
         dispatch(requestHistory());
@@ -404,6 +448,13 @@ export function fetchHistory(namespace, key) {
     };
 }
 
+
+/**
+ * fetchHistoryForNamespace - Fetch history for namespace
+ *
+ * @param  {type} namespace Fetch histoory for given namespace
+ * @return {type}           Action thunk
+ */
 export function fetchHistoryForNamespace(namespace) {
     return dispatch => {
         dispatch(requestHistory());
@@ -417,14 +468,14 @@ export function fetchHistoryForNamespace(namespace) {
     };
 }
 
-/** @function updateValue
- *
- * Updates a value with key in namespace.
- * @param namespace containing value
- * @param key to update
- * @param value to update
- * @returns action thunk
- */
+ /**
+  * updateValue - Updates a value with key in namespace.
+  *
+  * @param  {type} namespace Namespace containing value
+  * @param  {type} key       Key to update
+  * @param  {type} value     Value to update
+  * @return {type}           Action thunk
+  */
 export function updateValue(namespace, key, value) {
     return dispatch => {
         dispatch(requestUpdateValue(namespace, key, value));
@@ -434,14 +485,16 @@ export function updateValue(namespace, key, value) {
     };
 }
 
-/**
- * Deletes a key from the API and store.
- * If it's the last key in the namespace, the namespace is
- * removed aswell (following the behavior of the API).
- * @param namespace containing the key to be removed
- * @param key to be removed
- * @returns action thunk
- */
+
+ /**
+  * deleteKey - Deletes a key from the API and store.
+  *             If it's the last key in the namespace, the namespace is
+  *             removed aswell (following the behavior of the API).
+  *
+  * @param  {type} namespace Namespace containing the key to be removed
+  * @param  {type} key       Key to be removed
+  * @return {type}           action thunk
+  */
 export function deleteKey(namespace, key) {
     return dispatch => {
         dispatch(requestDeleteKey(namespace, key));
@@ -464,11 +517,12 @@ export function deleteKey(namespace, key) {
 }
 
 /**
- * Deletes a namespace from the state and API.
- * This will also delete all keys in the namespace.
- * @param namespace to delete
- * @returns action thunk
- */
+* deleteNamespace - Deletes a namespace from the state and API.
+*                   This will also delete all keys in the namespace.
+*
+* @param  {type} namespace Namesapce to delete
+* @return {type}           Action thunk
+*/
 export function deleteNamespace(namespace) {
     return dispatch => {
         dispatch(requestDeleteNamespace(namespace));

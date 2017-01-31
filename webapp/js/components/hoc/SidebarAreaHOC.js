@@ -45,6 +45,14 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
         render() {
             const { loading, error, items } = this.props;
 
+            if(items.length < 1) {
+                return (
+                  <div>
+                      hello
+                  </div>
+                )
+            }
+
             if (loading || items.length < 1) {
                 return this.renderLoading();
             }

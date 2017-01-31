@@ -4,6 +4,18 @@ import TextField from 'material-ui/TextField';
 import { searchSidebarChange } from 'actions/sidebarActions';
 
 export class Searchbar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleKeys = this.handleKeys.bind(this);
+    }
+
+    handleKeys(event) {
+        if(event.keyCode === 27) {
+           this.refs.searchfield.blur();
+        }
+    }
+
     render() {
         const { searchChanged, searchValue } = this.props;
         return (
@@ -16,6 +28,8 @@ export class Searchbar extends Component {
                 value={searchValue}
                 onChange={({ target: { value } }) => searchChanged(value)}
                 onFocus={() => searchChanged('')}
+                onKeyUp={this.handleKeys}
+                ref={'searchfield'}
             />
         );
     }
