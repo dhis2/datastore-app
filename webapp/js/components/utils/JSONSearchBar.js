@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 
-class JSONSearchBar extends React.Component {
+export class JSONSearchBar extends React.Component {
     constructor(props) {
         super(props);
 
@@ -29,7 +29,6 @@ class JSONSearchBar extends React.Component {
 JSONSearchBar.propTypes = {
     style: PropTypes.obj,
     changeAction: PropTypes.func,
-
 };
 
 export default JSONSearchBar;

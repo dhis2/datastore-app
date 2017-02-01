@@ -1,278 +1,135 @@
 import { expect } from 'chai';
-import reducer from '../../webapp/js/reducers/sidebarReducer';
+import reducer from '../../webapp/js/reducers/jsonEditorReducer';
 
-const fetchedState = { fetching: false, fetched: true, error: false };
-const fetchingState = { fetching: true, fetched: false, error: false };
-const errorState = { fetching: false, fetched: false, error: true };
-
-describe('Sidebar Reducer', () => {
+describe('JSON Editor Reducer', () => {
     let initialState;
 
     beforeEach(() => {
-        initialState = {
-            searchValue: '',
-            history: [],
-            fetching: false,
-            fetched: false,
-            namespaces: { },
-        };
+        initialState = { };
     });
 
-    it('Should handle SEARCH_VALUE_CHANGE', () => {
+    it('Should handle SEARCH_JSON without error', () => {
         const action = {
-            type: 'SEARCH_VALUE_CHANGE',
-            searchValue: 'test',
+            type: 'SEARCH_JSON',
+            searchValue: 'testSearch',
         };
 
         const expectedResult = {
-            ...initialState,
-            searchValue: 'test',
+            jsonSearchValue: 'testSearch',
         };
 
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle TOGGLE_NAMESPACE', () => {
+    it('Should handle COLLAPSE_JSON without error', () => {
         const action = {
-            type: 'TOGGLE_NAMESPACE',
-            namespace: 'test',
-            override: true,
+            type: 'COLLAPSE_JSON',
         };
 
         const expectedResult = {
-            ...initialState,
-            namespaces: {
-                test: {
-                    open: true,
-                },
-            },
+            expand: false,
+            collapse: true,
         };
 
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle FETCH_NAMESPACES_FULFILLED', () => {
+    it('Should handle EXPAND_JSON without error', () => {
         const action = {
-            type: 'FETCH_NAMESPACES_FULFILLED',
-            namespaces: ['test'],
+            type: 'EXPAND_JSON',
         };
 
         const expectedResult = {
-            ...initialState,
-            ...fetchedState,
-            namespaces: {
-                test: {
-                    keys: { },
-                    name: 'test',
-                    open: false,
-                },
-            },
+            expand: true,
+            collapse: false,
         };
 
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle FETCH_NAMESPACES_PENDING', () => {
+    it('Should handle COMPACT_JSON without error', () => {
         const action = {
-            type: 'FETCH_NAMESPACES_PENDING',
-        }
-        const expectedResult = {
-            ...initialState,
-            ...fetchingState,
+            type: 'COMPACT_JSON',
         };
+
+        const expectedResult = {
+            compact: false,
+            format: true,
+        };
+
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle FETCH_NAMESPACES_REJECTED', () => {
+    it('Should handle FORMAT_JSON without error', () => {
         const action = {
-            type: 'FETCH_NAMESPACES_REJECTED',
+            type: 'FORMAT_JSON',
         };
+
         const expectedResult = {
-            ...initialState,
-            ...errorState,
+            compact: true,
+            format: false,
         };
+
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle FETCH_KEYS_FULFILLED', () => {
+    it('Should handle REDO_JSON without error', () => {
         const action = {
-            type: 'FETCH_KEYS_FULFILLED',
-            namespace: 'test',
-            keys: ['test'],
+            type: 'REDO_JSON',
         };
+
         const expectedResult = {
-            ...initialState,
-            namespaces: {
-                test: {
-                    ...fetchedState,
-                    keys: {
-                        test: {
-                            key: 'test',
-                        },
-                    },
-                },
-            },
+            redo: true,
         };
+
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle FETCH_KEYS_PENDING', () => {
+    it('Should handle UNDO_JSON without error', () => {
         const action = {
-            type: 'FETCH_KEYS_PENDING',
-            namespace: 'test',
+            type: 'UNDO_JSON',
         };
+
         const expectedResult = {
-            ...initialState,
-            namespaces: {
-                test: {
-                    ...fetchingState,
-                },
-            },
+            undo: true,
         };
+
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle FETCH_KEYS_REJECTED', () => {
+    it('Should handle CHANGE_JSON_MODE without error', () => {
         const action = {
-            type: 'FETCH_KEYS_REJECTED',
-            namespace: 'testNamespace',
-            error: 'testError',
+            type: 'CHANGE_JSON_MODE',
+            mode: 'code',
         };
+
         const expectedResult = {
-            ...initialState,
-            namespaces: {
-                testNamespace: {
-                    ...errorState,
-                    errorMessage: 'testError',
-                },
-            },
+            mode: 'code',
         };
+
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);
     });
 
-    it('Should handle FETCH_VALUE_FULFILLED', () => {
+    it('Should handle VALUE_CHANGE without error', () => {
         const action = {
-            type: 'FETCH_VALUE_FULFILLED',
-            namespace: 'testNamespace',
-            key: 'testKey',
-            value: 'testValue',
+            type: 'VALUE_CHANGE',
+            mode: 'code',
         };
+
         const expectedResult = {
-            ...initialState,
-            ...fetchedState,
-            namespaces: {
-                testNamespace: {
-                    name: 'testNamespace',
-                    open: false,
-                    keys: {
-                        testKey: {
-                            key: 'testKey',
-                            value: {},
-                        },
-                    },
-                },
-            },
+            undo: false,
+            redo: false,
         };
+
         const newState = reducer(initialState, action);
-        expect(newState).to.eql(expectedResult);
-    });
-
-    it('Should handle CREATE_VALUE_FULFILLED', () => {
-        const action = {
-            type: 'CREATE_VALUE_FULFILLED',
-            namespace: 'testNamespace',
-            key: 'testKey',
-            value: 'testValue',
-        };
-        const expectedResult = {
-            ...initialState,
-            ...fetchedState,
-            namespaces: {
-                testNamespace: {
-                    name: 'testNamespace',
-                    open: false,
-                    keys: {
-                        testKey: {
-                            key: 'testKey',
-                            value: {},
-                        },
-                    },
-                },
-            },
-        };
-        const newState = reducer(initialState, action);
-        expect(newState).to.eql(expectedResult);
-    });
-
-    it('Should handle SELECT_KEY', () => {
-        const action = {
-            type: 'SELECT_KEY',
-            namespace: 'testNamespace',
-            key: 'testKey',
-            value: 'testValue',
-        };
-        const expectedResult = {
-            ...initialState,
-            namespace: action.namespace,
-            key: action.key,
-            value: action.value,
-            editedValue: action.value,
-        };
-        const newState = reducer(initialState, action);
-        expect(newState).to.eql(expectedResult);
-    });
-
-    it('Should handle DELETE_NAMESPACE_FULFILLED', () => {
-        const action = {
-            type: 'DELETE_NAMESPACE_FULFILLED',
-            namespace: 'testNamespace',
-        };
-        const expectedResult = {
-            ...initialState,
-            namespaces: {
-            },
-        };
-        const newState = reducer(initialState, action);
-        expect(newState).to.eql(expectedResult);
-    });
-
-    it('Should handle DELETE_KEY_FULFILLED', () => {
-        const action = {
-            type: 'DELETE_KEY_FULFILLED',
-            namespace: 'testNamespace',
-            key: 'testKey',
-        };
-
-        const modifiedInitialState = {
-            ...initialState,
-            namespaces: {
-                testNamespace: {
-                    name: 'testNamespace',
-                    keys: {
-                        testKey: { },
-                    },
-                },
-            },
-        };
-
-        const expectedResult = {
-            ...modifiedInitialState,
-            namespaces: {
-                testNamespace: {
-                    name: 'testNamespace',
-                    keys: { },
-                },
-            },
-        };
-        const newState = reducer(modifiedInitialState, action);
         expect(newState).to.eql(expectedResult);
     });
 });

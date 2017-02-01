@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import JSEditor from 'jsoneditor/dist/jsoneditor.min.js';
 import '../../../style/vendor/jsoneditor.css';
 
-class JSONEditor extends Component {
+export class JSONEditor extends Component {
 
     constructor(props) {
         super(props);
@@ -31,19 +31,19 @@ class JSONEditor extends Component {
     }
 
     handleJsonEditor(props) {
-        const {search, collapse, expand, undo, redo, mode, compact, format} = props;
+        const { search, collapse, expand, undo, redo, mode, compact, format } = props;
 
         if(this.editor.getMode() !== 'code'){
             this.editor.search(search || '');
-            if(collapse) {
+            if (collapse) {
                 this.editor.collapseAll();
             }
 
-            if(expand) {
+            if (expand) {
                 this.editor.expandAll();
             }
 
-            if(undo) {
+            if (undo) {
                 this.editor._onUndo();
             }
 
@@ -52,20 +52,19 @@ class JSONEditor extends Component {
             }
         }
 
-        if(this.editor.getMode() !== 'tree') {
-            if(compact) {
+        if (this.editor.getMode() !== 'tree') {
+            if (compact) {
                 this.editor.compact();
             }
 
-            if(format) {
+            if (format) {
                 this.editor.format();
             }
         }
 
-        if(this.editor.options.mode !== mode) {
+        if (this.editor.options.mode !== mode) {
             this.editor.setMode(mode);
         }
-
     }
 
     initEditor() {
@@ -76,7 +75,6 @@ class JSONEditor extends Component {
             };
             this.editor = new JSEditor(this.editorContainer, opts);
             this.editor.set(this.props.value);
-            console.log(this)
         }
     }
 
@@ -106,7 +104,7 @@ const mapStateToProps = (state) => ({
     mode: state.jsonEditor.mode,
     compact: state.jsonEditor.compact,
     format: state.jsonEditor.format,
-})
+});
 
 export default connect(
     mapStateToProps

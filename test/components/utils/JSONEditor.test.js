@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import JSONEditor from '../../../webapp/js/components/utils/JSONEditor';
+import { JSONEditor } from '../../../webapp/js/components/utils/JSONEditor';
 
 
 describe('Component: JSONEditor', () => {
@@ -24,5 +24,4 @@ describe('Component: JSONEditor', () => {
         component = shallow(<JSONEditor value={ testArray } />);
         expect(component.length).to.equal(1);
     });
-
 });
