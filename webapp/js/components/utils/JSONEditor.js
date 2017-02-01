@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import JSEditor from 'jsoneditor/dist/jsoneditor.min';
+import { connect } from 'react-redux';
+import JSEditor from 'jsoneditor/dist/jsoneditor.min.js';
 import '../../../style/vendor/jsoneditor.css';
 
 class JSONEditor extends Component {
@@ -8,6 +9,7 @@ class JSONEditor extends Component {
         super(props);
         this.editor = null;
         this.changedEvent = this.changedEvent.bind(this);
+        this.handleJsonEditor = this.handleJsonEditor.bind(this);
     }
 
     componentDidMount() {
@@ -16,7 +18,36 @@ class JSONEditor extends Component {
 
     /* Need custom update condition as we only re-render when the value changes.*/
     shouldComponentUpdate(nextProps) {
+        this.handleJsonEditor(nextProps);
         return this.props.value !== nextProps.value;
+    }
+
+    handleJsonEditor(props) {
+        const {search, collapse, expand, undo, redo, mode} = props;
+
+        if(this.editor.getMode() !== 'text'){
+            this.editor.search(search || '');
+            if(collapse) {
+                this.editor.collapseAll();
+            }
+
+            if(expand) {
+                this.editor.expandAll();
+            }
+        }
+
+        if(undo) {
+            this.editor._onUndo();
+        }
+
+        if (redo) {
+            this.editor._onRedo();
+        }
+
+        if(this.editor.options.mode !== mode) {
+            this.editor.setMode(mode);
+        }
+
     }
 
     componentWillUpdate(nextProps) {
@@ -30,11 +61,12 @@ class JSONEditor extends Component {
     initEditor() {
         if (!this.editor && this.editorContainer) {
             const opts = {
-                modes: ['tree', 'code'],
+                modes: ['tree', 'view', 'text', 'form'],
                 onChange: this.changedEvent,
             };
             this.editor = new JSEditor(this.editorContainer, opts);
             this.editor.set(this.props.value);
+            console.log(this)
         }
     }
 
@@ -55,4 +87,15 @@ JSONEditor.propTypes = {
     dataChanged: PropTypes.func,
 };
 
-export default JSONEditor;
+const mapStateToProps = (state) => ({
+    search: state.jsonEditor.jsonSearchValue,
+    collapse: state.jsonEditor.collapse,
+    expand: state.jsonEditor.expand,
+    undo: state.jsonEditor.undo,
+    redo: state.jsonEditor.redo,
+    mode: state.jsonEditor.mode,
+})
+
+export default connect(
+    mapStateToProps
+)(JSONEditor);

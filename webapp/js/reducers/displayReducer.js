@@ -13,6 +13,14 @@ const initialState = {
 const display = (state = initialState, action) => {
     switch (action.type) {
 
+    case actions.SEARCH_JSON:
+        {
+            return {
+                ...state,
+                jsonSearchValue: action.searchValue,
+            };
+        }
+
     case actions.CREATE_VALUE_PENDING:
     case actions.FETCH_NAMESPACES_PENDING:
     case actions.FETCH_HISTORY_PENDING:
