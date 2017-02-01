@@ -28,15 +28,15 @@ import { searchJSON,
 
 const styles = {
     dropDownMenuIcon: {
-        fill: 'black'
+        fill: 'black',
     },
     dropDownMenu: {
         marginBottom: '6px',
     },
     searchBar: {
-        marginBottom: '25px'
-    }
-}
+        marginBottom: '25px',
+    },
+};
 
 export class EditToolbar extends React.Component {
 
@@ -49,41 +49,45 @@ export class EditToolbar extends React.Component {
     }
 
     handleDropDownMenuChange(event, index, value) {
-        this.props.jsonChangeMode(value)
+        this.props.jsonChangeMode(value);
     }
 
     renderTreeEdit() {
         const { path } = this.props;
         return (
-              <Paper style={{ zIndex: 5 }}>
-                  <Toolbar>
-                      <ToolbarGroup>
-                          <IconButton onTouchTap={this.props.handleSave}>
-                              <SaveIcon />
-                          </IconButton>
-                          <IconButton onTouchTap={this.props.jsonCollapse}>
-                              <ExpandLessIcon />
-                          </IconButton>
-                          <IconButton onTouchTap={this.props.jsonExpand}>
-                              <ExpandMoreIcon />
-                          </IconButton>
-                          <IconButton onTouchTap={this.props.jsonUndo}>
-                              <UndoIcon />
-                          </IconButton>
-                          <IconButton onTouchTap={this.props.jsonRedo}>
-                              <RedoIcon />
-                          </IconButton>
-                          <DropDownMenu value={this.props.mode} style={styles.dropDownMenu} onChange={this.handleDropDownMenuChange} iconStyle={styles.dropDownMenuIcon}>
-                              <MenuItem value={'tree'} primaryText="Tree" />
-                              <MenuItem value={'code'} primaryText="Code" />
-                          </DropDownMenu>
-                          <JSONSearchBar style={styles.searchBar} changeAction={this.props.jsonSearchAction} />
-                          <ToolbarSeparator />
-                          <DisplayToolbarTitle path={ path } />
-                      </ToolbarGroup>
-                  </Toolbar>
-              </Paper>
-        )
+            <Paper style={{ zIndex: 5 }}>
+                <Toolbar>
+                    <ToolbarGroup>
+                        <IconButton onTouchTap={this.props.handleSave}>
+                            <SaveIcon />
+                        </IconButton>
+                        <IconButton onTouchTap={this.props.jsonCollapse}>
+                            <ExpandLessIcon />
+                        </IconButton>
+                        <IconButton onTouchTap={this.props.jsonExpand}>
+                            <ExpandMoreIcon />
+                        </IconButton>
+                        <IconButton onTouchTap={this.props.jsonUndo}>
+                            <UndoIcon />
+                        </IconButton>
+                        <IconButton onTouchTap={this.props.jsonRedo}>
+                            <RedoIcon />
+                        </IconButton>
+                        <DropDownMenu value={this.props.mode}
+                            style={styles.dropDownMenu}
+                            onChange={this.handleDropDownMenuChange}
+                            iconStyle={styles.dropDownMenuIcon}
+                        >
+                            <MenuItem value={'tree'} primaryText="Tree" />
+                            <MenuItem value={'code'} primaryText="Code" />
+                        </DropDownMenu>
+                        <JSONSearchBar style={styles.searchBar} changeAction={this.props.jsonSearchAction} />
+                        <ToolbarSeparator />
+                        <DisplayToolbarTitle path={path} />
+                    </ToolbarGroup>
+                </Toolbar>
+            </Paper>
+        );
     }
 
     renderCodeEdit() {
@@ -101,12 +105,16 @@ export class EditToolbar extends React.Component {
                         <IconButton onTouchTap={this.props.jsonCompact}>
                             <FormatAlignJustifyIcon />
                         </IconButton>
-                        <DropDownMenu value={this.props.mode} style={styles.dropDownMenu} onChange={this.handleDropDownMenuChange} iconStyle={styles.dropDownMenuIcon}>
+                        <DropDownMenu value={this.props.mode}
+                            style={styles.dropDownMenu}
+                            onChange={this.handleDropDownMenuChange}
+                            iconStyle={styles.dropDownMenuIcon}
+                        >
                             <MenuItem value={'tree'} primaryText="Tree" />
                             <MenuItem value={'code'} primaryText="Code" />
                         </DropDownMenu>
                         <ToolbarSeparator />
-                        <DisplayToolbarTitle path={ path } />
+                        <DisplayToolbarTitle path={path} />
                     </ToolbarGroup>
                 </Toolbar>
             </Paper>
@@ -116,52 +124,60 @@ export class EditToolbar extends React.Component {
     render() {
         const { mode } = this.props;
 
-        if(mode === 'tree') {
-            return this.renderTreeEdit()
+        if (mode === 'tree') {
+            return this.renderTreeEdit();
         }
 
-        return this.renderCodeEdit()
+        return this.renderCodeEdit();
     }
 }
 
 EditToolbar.propTypes = {
     handleSave: PropTypes.func,
     path: PropTypes.string,
+    mode: PropTypes.string,
+    jsonCompact: PropTypes.func,
+    jsonSearchAction: PropTypes.func,
+    jsonCollapse: PropTypes.func,
+    jsonExpand: PropTypes.func,
+    jsonFormat: PropTypes.func,
+    jsonUndo: PropTypes.func,
+    jsonRedo: PropTypes.func,
+    jsonChangeMode: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     mode: state.jsonEditor.mode,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     jsonSearchAction(value) {
         dispatch(searchJSON(value));
     },
     jsonCollapse() {
-        dispatch(jsonEditorCollapse())
+        dispatch(jsonEditorCollapse());
     },
     jsonExpand() {
-        dispatch(jsonEditorExpand())
+        dispatch(jsonEditorExpand());
     },
     jsonCompact() {
-        dispatch(jsonEditorCompact())
+        dispatch(jsonEditorCompact());
     },
     jsonFormat() {
-        dispatch(jsonEditorFormat())
+        dispatch(jsonEditorFormat());
     },
     jsonUndo() {
-        dispatch(jsonEditorUndo())
+        dispatch(jsonEditorUndo());
     },
     jsonRedo() {
-        dispatch(jsonEditorRedo())
+        dispatch(jsonEditorRedo());
     },
     jsonChangeMode(mode) {
-        dispatch(jsonEditorChangeMode(mode))
-    }
+        dispatch(jsonEditorChangeMode(mode));
+    },
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)
-(EditToolbar);
+)(EditToolbar);

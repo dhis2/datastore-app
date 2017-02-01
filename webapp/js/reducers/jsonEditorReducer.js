@@ -73,7 +73,7 @@ const jsonEditor = (state = initialState, action) => {
             return {
                 ...state,
                 mode: action.mode,
-            }
+            };
         }
 
     case actions.VALUE_CHANGE:
@@ -82,7 +82,7 @@ const jsonEditor = (state = initialState, action) => {
                 ...state,
                 undo: false,
                 redo: false,
-            }
+            };
         }
 
     default:
