@@ -42,6 +42,14 @@ class JSONEditor extends Component {
             if(expand) {
                 this.editor.expandAll();
             }
+
+            if(undo) {
+                this.editor._onUndo();
+            }
+
+            if (redo) {
+                this.editor._onRedo();
+            }
         }
 
         if(this.editor.getMode() !== 'tree') {
@@ -52,14 +60,6 @@ class JSONEditor extends Component {
             if(format) {
                 this.editor.format();
             }
-        }
-
-        if(undo) {
-            this.editor._onUndo();
-        }
-
-        if (redo) {
-            this.editor._onRedo();
         }
 
         if(this.editor.options.mode !== mode) {

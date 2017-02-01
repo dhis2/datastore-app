@@ -24,7 +24,7 @@ import { searchJSON,
     jsonEditorChangeMode,
     jsonEditorCompact,
     jsonEditorFormat,
-} from 'actions/actions';
+} from 'actions/jsonEditorActions';
 
 const styles = {
     dropDownMenuIcon: {

@@ -1,8 +1,10 @@
-import * as actions from 'constants/actionTypes';
+import * as actions from 'constants/jsonEditorTypes';
 
 
 const initialState = {
     mode: 'tree',
+    undo: false,
+    redo: false,
 };
 
 const jsonEditor = (state = initialState, action) => {
@@ -33,22 +35,22 @@ const jsonEditor = (state = initialState, action) => {
             };
         }
 
-        case actions.COMPACT_JSON:
-            {
-                return {
-                    ...state,
-                    compact: false,
-                    format: true,
-                };
-            }
-        case actions.FORMAT_JSON:
-            {
-                return {
-                    ...state,
-                    compact: true,
-                    format: false,
-                };
-            }
+    case actions.COMPACT_JSON:
+        {
+            return {
+                ...state,
+                compact: false,
+                format: true,
+            };
+        }
+    case actions.FORMAT_JSON:
+        {
+            return {
+                ...state,
+                compact: true,
+                format: false,
+            };
+        }
 
     case actions.REDO_JSON:
         {
