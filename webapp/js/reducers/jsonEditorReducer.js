@@ -33,6 +33,23 @@ const jsonEditor = (state = initialState, action) => {
             };
         }
 
+        case actions.COMPACT_JSON:
+            {
+                return {
+                    ...state,
+                    compact: false,
+                    format: true,
+                };
+            }
+        case actions.FORMAT_JSON:
+            {
+                return {
+                    ...state,
+                    compact: true,
+                    format: false,
+                };
+            }
+
     case actions.REDO_JSON:
         {
             return {

@@ -17,7 +17,8 @@ export const COLLAPSE_JSON = 'COLLAPSE_JSON';
 export const REDO_JSON = 'REDO_JSON';
 export const UNDO_JSON = 'UNDO_JSON';
 export const CHANGE_JSON_MODE = 'CHANGE_JSON_MODE';
-
+export const FORMAT_JSON = 'FORMAT_JSON';
+export const COMPACT_JSON = 'COMPACT_JSON';
 
 export const FILTER_BY_SEARCH = 'FILTER_BY_SEARCH';
 

@@ -24,6 +24,18 @@ export function jsonEditorCollapse() {
     }
 }
 
+export function jsonEditorCompact() {
+    return {
+        type: actions.COMPACT_JSON,
+    }
+}
+
+export function jsonEditorFormat() {
+    return {
+        type: actions.FORMAT_JSON,
+    }
+}
+
 export function jsonEditorUndo() {
     return {
         type: actions.UNDO_JSON,

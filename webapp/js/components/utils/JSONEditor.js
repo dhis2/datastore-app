@@ -16,6 +16,14 @@ class JSONEditor extends Component {
         this.initEditor();
     }
 
+    componentWillUpdate(nextProps) {
+        this.editor.set(nextProps.value);
+    }
+
+    changedEvent() {
+        this.props.dataChanged(this.editor);
+    }
+
     /* Need custom update condition as we only re-render when the value changes.*/
     shouldComponentUpdate(nextProps) {
         this.handleJsonEditor(nextProps);
@@ -23,9 +31,9 @@ class JSONEditor extends Component {
     }
 
     handleJsonEditor(props) {
-        const {search, collapse, expand, undo, redo, mode} = props;
+        const {search, collapse, expand, undo, redo, mode, compact, format} = props;
 
-        if(this.editor.getMode() !== 'text'){
+        if(this.editor.getMode() !== 'code'){
             this.editor.search(search || '');
             if(collapse) {
                 this.editor.collapseAll();
@@ -33,6 +41,16 @@ class JSONEditor extends Component {
 
             if(expand) {
                 this.editor.expandAll();
+            }
+        }
+
+        if(this.editor.getMode() !== 'tree') {
+            if(compact) {
+                this.editor.compact();
+            }
+
+            if(format) {
+                this.editor.format();
             }
         }
 
@@ -48,14 +66,6 @@ class JSONEditor extends Component {
             this.editor.setMode(mode);
         }
 
-    }
-
-    componentWillUpdate(nextProps) {
-        this.editor.set(nextProps.value);
-    }
-
-    changedEvent() {
-        this.props.dataChanged(this.editor);
     }
 
     initEditor() {
@@ -94,6 +104,8 @@ const mapStateToProps = (state) => ({
     undo: state.jsonEditor.undo,
     redo: state.jsonEditor.redo,
     mode: state.jsonEditor.mode,
+    compact: state.jsonEditor.compact,
+    format: state.jsonEditor.format,
 })
 
 export default connect(

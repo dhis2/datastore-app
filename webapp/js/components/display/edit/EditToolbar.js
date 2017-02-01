@@ -8,6 +8,10 @@ import ExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import SaveIcon from 'material-ui/svg-icons/content/save';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
 import RedoIcon from 'material-ui/svg-icons/content/redo';
+
+import FormatAlignLeftIcon from 'material-ui/svg-icons/editor/format-align-left';
+import FormatAlignJustifyIcon from 'material-ui/svg-icons/editor/format-align-justify';
+
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
@@ -17,7 +21,9 @@ import { searchJSON,
     jsonEditorExpand,
     jsonEditorUndo,
     jsonEditorRedo,
-    jsonEditorChangeMode
+    jsonEditorChangeMode,
+    jsonEditorCompact,
+    jsonEditorFormat,
 } from 'actions/actions';
 
 const styles = {
@@ -36,6 +42,9 @@ export class EditToolbar extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.renderTreeEdit = this.renderTreeEdit.bind(this);
+        this.renderCodeEdit = this.renderCodeEdit.bind(this);
         this.handleDropDownMenuChange = this.handleDropDownMenuChange.bind(this);
     }
 
@@ -43,7 +52,41 @@ export class EditToolbar extends React.Component {
         this.props.jsonChangeMode(value)
     }
 
-    render() {
+    renderTreeEdit() {
+        const { path } = this.props;
+        return (
+              <Paper style={{ zIndex: 5 }}>
+                  <Toolbar>
+                      <ToolbarGroup>
+                          <IconButton onTouchTap={this.props.handleSave}>
+                              <SaveIcon />
+                          </IconButton>
+                          <IconButton onTouchTap={this.props.jsonCollapse}>
+                              <ExpandLessIcon />
+                          </IconButton>
+                          <IconButton onTouchTap={this.props.jsonExpand}>
+                              <ExpandMoreIcon />
+                          </IconButton>
+                          <IconButton onTouchTap={this.props.jsonUndo}>
+                              <UndoIcon />
+                          </IconButton>
+                          <IconButton onTouchTap={this.props.jsonRedo}>
+                              <RedoIcon />
+                          </IconButton>
+                          <DropDownMenu value={this.props.mode} style={styles.dropDownMenu} onChange={this.handleDropDownMenuChange} iconStyle={styles.dropDownMenuIcon}>
+                              <MenuItem value={'tree'} primaryText="Tree" />
+                              <MenuItem value={'code'} primaryText="Code" />
+                          </DropDownMenu>
+                          <JSONSearchBar style={styles.searchBar} changeAction={this.props.jsonSearchAction} />
+                          <ToolbarSeparator />
+                          <DisplayToolbarTitle path={ path } />
+                      </ToolbarGroup>
+                  </Toolbar>
+              </Paper>
+        )
+    }
+
+    renderCodeEdit() {
         const { path } = this.props;
         return (
             <Paper style={{ zIndex: 5 }}>
@@ -52,29 +95,32 @@ export class EditToolbar extends React.Component {
                         <IconButton onTouchTap={this.props.handleSave}>
                             <SaveIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonCollapse}>
-                            <ExpandLessIcon />
+                        <IconButton onTouchTap={this.props.jsonFormat}>
+                            <FormatAlignLeftIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonExpand}>
-                            <ExpandMoreIcon />
-                        </IconButton>
-                        <IconButton onTouchTap={this.props.jsonUndo}>
-                            <UndoIcon />
-                        </IconButton>
-                        <IconButton onTouchTap={this.props.jsonRedo}>
-                            <RedoIcon />
+                        <IconButton onTouchTap={this.props.jsonCompact}>
+                            <FormatAlignJustifyIcon />
                         </IconButton>
                         <DropDownMenu value={this.props.mode} style={styles.dropDownMenu} onChange={this.handleDropDownMenuChange} iconStyle={styles.dropDownMenuIcon}>
                             <MenuItem value={'tree'} primaryText="Tree" />
-                            <MenuItem value={'text'} primaryText="Text" />
+                            <MenuItem value={'code'} primaryText="Code" />
                         </DropDownMenu>
-                        <JSONSearchBar style={styles.searchBar} changeAction={this.props.jsonSearchAction} />
                         <ToolbarSeparator />
                         <DisplayToolbarTitle path={ path } />
                     </ToolbarGroup>
                 </Toolbar>
             </Paper>
         );
+    }
+
+    render() {
+        const { mode } = this.props;
+
+        if(mode === 'tree') {
+            return this.renderTreeEdit()
+        }
+
+        return this.renderCodeEdit()
     }
 }
 
@@ -96,6 +142,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     jsonExpand() {
         dispatch(jsonEditorExpand())
+    },
+    jsonCompact() {
+        dispatch(jsonEditorCompact())
+    },
+    jsonFormat() {
+        dispatch(jsonEditorFormat())
     },
     jsonUndo() {
         dispatch(jsonEditorUndo())
