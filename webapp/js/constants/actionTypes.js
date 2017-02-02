@@ -1,5 +1,3 @@
-
-
 export const SELECT_NAMESPACE = 'SELECT_NAMESPACE';
 export const SELECT_KEY = 'SELECT_KEY';
 export const TOGGLE_NAMESPACE = 'TOGGLE_NAMESPACE';

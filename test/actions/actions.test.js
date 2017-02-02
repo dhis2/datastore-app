@@ -41,7 +41,7 @@ describe('actions', () => {
         const namespace = 'testNamespace';
         const expectedAction = {
             type: types.FETCH_KEYS_PENDING,
-            namespace
+            namespace,
         };
         expect(actions.requestKeys(namespace)).to.eql(expectedAction);
     });
@@ -71,7 +71,6 @@ describe('actions', () => {
     it('should request and wait for a value', () => {
         const namespace = 'testNamespace';
         const key = 'testKey';
-        const value = 'testValue';
         const expectedAction = {
             type: types.FETCH_VALUE_PENDING,
             namespace,
