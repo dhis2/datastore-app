@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NamespaceList from './NamespaceList';
-import { fetchNamespaces } from '../../actions/actions';
+import { fetchNamespaces } from 'actions/actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import SideBarHeader from './SideBarHeader';
+import { openNamespaceDialog } from 'actions/dialogActions';
+import SidebarAreaHOC from 'components/hoc/SidebarAreaHOC';
 import '../../../style/sidebar/sidebar.scss';
-import { openNamespaceDialog } from '../../actions/dialogActions';
-import SidebarAreaHOC from '../hoc/SidebarAreaHOC';
 
 export class Sidebar extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export class Sidebar extends Component {
 
         this.state = {
             showDialog: false,
-            namespaceListImproved: SidebarAreaHOC(NamespaceList, props.getNamespaces)
+            namespaceListImproved: SidebarAreaHOC(NamespaceList, props.getNamespaces),
         };
     }
 
@@ -27,7 +27,7 @@ export class Sidebar extends Component {
     }
 
     render() {
-        const { items, getNamespaces } = this.props;
+        const { items } = this.props;
         const NamespaceListImproved = this.state.namespaceListImproved;
 
         return (
@@ -49,7 +49,7 @@ Sidebar.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    items: state.api.namespaces,
+    items: state.sidebar.namespaces,
 });
 
 const mapDispatchToProps = (dispatch) => ({

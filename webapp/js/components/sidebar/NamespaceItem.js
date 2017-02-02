@@ -1,198 +1,82 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Spinner } from '../utils/Loaders';
-import { ErrorIcon } from '../utils/Icons';
+import { Spinner } from 'components/utils/Loaders';
+import { ErrorIcon } from 'components/utils/Icons';
+import { ListItem } from 'material-ui/List';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-import History from 'material-ui/svg-icons/action/history';
-import NoteAdd from 'material-ui/svg-icons/action/note-add';
-import { ListItem } from 'material-ui/List';
-import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import Delete from 'material-ui/svg-icons/action/delete';
-import ShowChart from 'material-ui/svg-icons/editor/show-chart';
-import { grey500 } from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import { Link, hashHistory } from 'react-router';
-import { openKeyDialog,
-         openConfirmDeleteNamespaceDialog,
-         openConfirmDeleteKeyDialog } from '../../actions/dialogActions';
 import { fetchAndDisplayKeyValue,
          fetchAndToggleNamespace,
-         toggleNamespace } from '../../actions/actions';
+         toggleNamespace } from 'actions/actions';
+import NamespaceItemMenu from './NamespaceItemMenu';
+import KeyItem from './KeyItem';
 
-const styles = {
-    namespaceItem: {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        height: '18px', // fixes clipping when zoomed bug
-    },
-    keyItemList: {
-    },
-    innerText: {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        height: '18px', // fixes clipping when zoomed bug
-    },
+const namespaceItemStyle = {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    height: '18px', // fixes clipping when zoomed bug
 };
 
-const iconButtonElement = (
-    <IconButton
-        touch
-        tooltipPosition="bottom-left"
-    >
-        <MoreVertIcon color={ grey500 } />
-    </IconButton>
-);
-
-class NamespaceItem extends Component {
+export class NamespaceItem extends Component {
     constructor(props) {
         super(props);
 
-        this.constructKeyItem = this.constructKeyItem.bind(this);
-        this.handleNewKey = this.handleNewKey.bind(this);
-        this.handleDeleteNamespace = this.handleDeleteNamespace.bind(this);
-        this.renderOpen = this.renderOpen.bind(this);
-        this.renderError = this.renderError.bind(this);
-        this.toggleHandler = this.toggleHandler.bind(this);
-        this.filterKey = this.filterKey.bind(this);
         this.state = {
-            list: Object.keys(props.namespace.keys).map(key => {
-                return {
-                    key,
-                    elem: this.constructKeyItem(key, key),
-                };
-            }),
+            list: Object.keys(props.namespace.keys),
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.namespace.keys !== this.props.namespace.keys) {
             this.setState({
-                list: Object.keys(nextProps.namespace.keys).map(key => {
-                    return {
-                        key,
-                        elem: this.constructKeyItem(key, key),
-                    };
-                }),
+                list: Object.keys(nextProps.namespace.keys),
             });
         }
     }
 
-    toggleHandler() {
-        const { openNamespace, closeNamespace, namespace: { open, name } } = this.props;
-        if (!open) {
-            openNamespace(name);
-        } else {
-            closeNamespace(name);
+    openNamespace(name) {
+        this.props.openNamespace(name);
+    }
+
+    closeNamespace(name) {
+        this.props.closeNamespace(name);
+    }
+
+    render() {
+        const { search, namespace: { error, name, fetching, open } } = this.props;
+
+        if (error) {
+            return (
+                <ListItem primaryText={name} leftIcon={<FileFolder />}>
+                    <ErrorIcon />
+                </ListItem>
+            );
         }
-    }
 
-    handleNewKey() {
-        this.props.newKey(this.props.namespace.name);
-    }
-
-    handleDeleteNamespace() {
-        this.props.deleteNamespace(this.props.namespace.name);
-    }
-
-    filterKey(item) {
-        const searchValue = this.props.search || '';
-        return item.toLowerCase().includes(searchValue);
-    }
-
-    constructKeyItem(key, index) {
-        const { deleteKeyInNamespace, namespace: { name: namespace } } = this.props;
-        const keyItemMenu = (
-            <IconMenu iconButtonElement={iconButtonElement}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                disableAutoFocus
-                targetOrigin={{ vertical: 'top', horizontal: 'left' }}
-            >
-                <MenuItem containerElement={<Link to={`/history/${namespace}/${key}`} />} leftIcon={<History />}>
-                    History
-                </MenuItem>
-                <MenuItem leftIcon={<Delete />} onTouchTap={() => deleteKeyInNamespace(namespace, key)}>
-                    Delete key
-                </MenuItem>
-            </IconMenu>);
-        return (
-          <ListItem primaryText={<div style={styles.innerText}>{ key }</div>}
-              key={index}
-              rightIconButton={keyItemMenu}
-              leftIcon={<EditorInsertDriveFile />}
-              onTouchTap={() => hashHistory.push(`/edit/${namespace}/${key}`)}
-          />
-        );
-    }
-
-    renderOpen() {
-        const { namespace: { name, open, fetching } } = this.props;
-
-        const rightIconMenu = (
-            <IconMenu disableAutoFocus iconButtonElement={ iconButtonElement }
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                targetOrigin={{ vertical: 'top', horizontal: 'left' }}
-            >
-                <MenuItem leftIcon={<NoteAdd />} onClick={ this.handleNewKey }>
-                    New key
-                </MenuItem>
-                <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>
-                    Statistics
-                </MenuItem>
-                <MenuItem containerElement={<Link to={`/history/${name}`} />} leftIcon={<History />}>
-                    History
-                </MenuItem>
-                <MenuItem leftIcon={<Delete />} onTouchTap={ this.handleDeleteNamespace }>
-                    Delete
-                </MenuItem>
-            </IconMenu>
-        );
+        let leftIcon;
 
         // Get a list of elements, filter on search-prop
-        const list = this.state.list.filter(item => this.filterKey(item.key))
-            .map(item => item.elem);
-        let leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
+        const list = this.state.list
+            .filter(key => key.toLowerCase().includes(search || ''))
+            .map((key, index) => <KeyItem namespace={name} keyName={key} key={key.concat(index)} />);
 
         if (fetching) {
             leftIcon = (<Spinner />);
+        } else {
+            leftIcon = open ? (<FileFolderOpen />) : (<FileFolder />);
         }
 
         return (
-            <ListItem primaryText={<div style={styles.namespaceItem}>{name}</div>}
+            <ListItem primaryText={<div style={namespaceItemStyle}>{name}</div>}
                 open={open}
                 leftIcon={leftIcon}
-                rightIconButton={rightIconMenu}
+                rightIconButton={<NamespaceItemMenu name={name} />}
                 nestedItems={list}
-                onTouchTap={this.toggleHandler}
-                nestedListStyle={styles.keyItemList}
+                onTouchTap={open ? this.closeNamespace.bind(this, name) :
+                   this.openNamespace.bind(this, name)}
             />
         );
-    }
-
-    renderError() {
-        const { name } = this.props.namespace;
-
-        return (
-            <ListItem primaryText={name} leftIcon={<FileFolder />}>
-                <ErrorIcon />
-            </ListItem>
-        );
-    }
-
-
-    render() {
-        const { error } = this.props.namespace;
-
-        if (error) {
-            return this.renderError();
-        }
-
-        return this.renderOpen();
     }
 }
 
@@ -200,13 +84,6 @@ NamespaceItem.propTypes = {
     fetchAndDisplayKeyValue: PropTypes.func,
     openNamespace: PropTypes.func,
     closeNamespace: PropTypes.func,
-    deleteNamespace: PropTypes.func,
-    newKey: PropTypes.func,
-    deleteKeyInNamespace: PropTypes.func,
-    event: PropTypes.func,
-    /**
-     * A string used to filter the nestedList(keys).
-     */
     search: PropTypes.string,
     namespace: PropTypes.shape({
         error: PropTypes.bool,
@@ -227,15 +104,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     closeNamespace(namespace) {
         dispatch(toggleNamespace(namespace));
-    },
-    deleteNamespace(namespace) {
-        dispatch(openConfirmDeleteNamespaceDialog({ namespace }));
-    },
-    newKey(namespace) {
-        dispatch(openKeyDialog({ namespace }));
-    },
-    deleteKeyInNamespace(namespace, key) {
-        dispatch(openConfirmDeleteKeyDialog({ namespace, key }));
     },
 });
 

@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
-import api from './apiReducer';
-import ui from './uiReducer';
-import window from './windowReducer';
+import display from './displayReducer';
 import sidebar from './sidebarReducer';
+import snackbar from './snackbarReducer';
+import dialog from './dialogReducer';
+import jsonEditor from './jsonEditorReducer';
 
 const reducers = combineReducers({
-    api,
-    ui,
-    window,
+    display,
     sidebar,
+    snackbar,
+    dialog,
+    jsonEditor,
 });
 
 export default reducers;

@@ -4,15 +4,9 @@ import SnackbarUI from 'material-ui/Snackbar';
 
 export class Snackbar extends Component {
     render() {
-        const message = this.props.snackbarMessage;
-
-        let snackbarMessage = null;
-        if (message && message.message) {
-            snackbarMessage = message.message;
-        }
-        const showSnackbar = typeof snackbarMessage === 'string';
         return (
-            <SnackbarUI open={showSnackbar} message={<span>{snackbarMessage}</span>}
+            <SnackbarUI open={typeof this.props.message === 'string'}
+                message={<span>{this.props.message}</span>}
                 autoHideDuration={5000}
             />
         );
@@ -20,11 +14,11 @@ export class Snackbar extends Component {
 }
 
 Snackbar.propTypes = {
-    snackbarMessage: PropTypes.object,
+    message: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
-    snackbarMessage: state.ui.snackbarMessage,
+    message: state.snackbar.message,
 });
 
 export default connect(

@@ -1,5 +1,3 @@
-
-
 export const SELECT_NAMESPACE = 'SELECT_NAMESPACE';
 export const SELECT_KEY = 'SELECT_KEY';
 export const TOGGLE_NAMESPACE = 'TOGGLE_NAMESPACE';
@@ -10,6 +8,9 @@ export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 export const CHANGE_WINDOW = 'CHANGE_WINDOW';
 export const SEARCH_VALUE_CHANGE = 'SEARCH_VALUE_CHANGE';
 export const LOAD_VALUE = 'LOAD_VALUE';
+
+export const FILTER_BY_SEARCH = 'FILTER_BY_SEARCH';
+
 
 /**
  *  Async Action Types

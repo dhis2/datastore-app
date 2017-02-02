@@ -747,6 +747,7 @@ div.jsoneditor-menu {
   color: white;
   background-color: rgb(25, 118, 210);
   border-bottom: 1px solid rgb(25, 118, 210);
+  display: none;
 }
 
 div.jsoneditor-menu > button,

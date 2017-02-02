@@ -2,8 +2,8 @@
   "root": true,
   "extends": "dhis2",
   "plugins": [
-    "prefer-object-spread",
-    "mocha"
+      "prefer-object-spread",
+      "mocha",
   ],
   "parserOptions": {
         "ecmaVersion": 6,
@@ -15,13 +15,18 @@
         }
   },
   "rules":{
-    "prefer-object-spread/prefer-object-spread": 2,
-    "mocha/no-exclusive-tests": "error",
-    "no-multi-comp": "off",
-    "jsx-no-bind": ["off", {
-        "ignoreRefs": true  ,
-        "allowArrowFunctions": true,
-        "allowBind": true,
-    }],
+      "prefer-object-spread/prefer-object-spread": 2,
+      "mocha/no-exclusive-tests": "error",
+      "no-multi-comp": "off",
+      "jsx-no-bind": ["off", {
+          "ignoreRefs": true  ,
+          "allowArrowFunctions": true,
+          "allowBind": true,
+      }],
   },
+  "globals": {
+      "describe": false,
+      "beforeEach": false,
+      "it": false,
+  }
 }

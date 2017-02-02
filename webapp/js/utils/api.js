@@ -1,5 +1,5 @@
-import { API_URL } from '../constants/apiUrls';
-import { CREATED, UPDATED, DELETED } from '../constants/apiHistoryActions';
+import { API_URL } from 'constants/apiUrls';
+import { CREATED, UPDATED, DELETED } from 'constants/apiHistoryActions';
 import { sprintf } from 'sprintf-js';
 import btoa from 'btoa';
 
@@ -17,7 +17,6 @@ class Api
         this.auth = auth;
         this.cache = [];
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
-        
     }
 
     init() {
@@ -32,7 +31,7 @@ class Api
             .catch(err => {
                 // use auth in development, as no session exists
                 if (process.env.NODE_ENV === 'development' && !retry) {
-                    this.auth = `Basic ${btoa('admin:district')}`
+                    this.auth = `Basic ${btoa('admin:district')}`;
                     return this.checkSession(true);
                 } else {
                     throw err;
@@ -344,4 +343,4 @@ export default (function getApi() {
         apiClass = new Api(API_URL);
     }
     return apiClass;
-})();
+}());

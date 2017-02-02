@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import NamespaceItem from './NamespaceItem';
 import { List } from 'material-ui/List';
-import Theme from '../../utils/theme';
+import Theme from 'utils/theme';
 
 const listStyle = {
     overflowY: 'auto',
@@ -19,11 +19,11 @@ export class NamespaceList extends Component {
         super(props);
 
         this.filterNamespaces = this.filterNamespaces.bind(this);
-        this.searchKeyPart = this.searchKeyPart.bind(this);
+        this.filterKeys = this.filterKeys.bind(this);
     }
 
     filterNamespaces(item) {
-        const searchValue = this.props.search || '';
+        const searchValue = this.props.search.toLowerCase() || '';
         if (!searchValue) {
             return true;
         }
@@ -46,29 +46,24 @@ export class NamespaceList extends Component {
      * @returns A string following '#' (excluding), empty string if separator is not
      * present.
      */
-    searchKeyPart() {
-        const { search } = this.props;
-        const filterKeyInd = search.indexOf('#') + 1;
-        const keySearch = search.substring(filterKeyInd, search.length);
-        return filterKeyInd > 0 ? keySearch : '';
+    filterKeys() {
+        const search = this.props.search.toLowerCase();
+        const filterKeyIndex = search.indexOf('#') + 1;
+        const keySearch = search.substring(filterKeyIndex, search.length);
+        return filterKeyIndex > 0 ? keySearch : '';
     }
 
     render() {
         const { items } = this.props;
-
-        const keySearch = this.searchKeyPart();
         return (
             <List style={listStyle}>
-                {Object.keys(items).sort().map(item => {
-                    if (this.filterNamespaces(item)) {
-                        return (
-                          <NamespaceItem namespace={items[item]}
-                              search={keySearch}
-                              key={item}
-                          />
-                        );
-                    }})
-                }
+                {Object.keys(items).filter(item => this.filterNamespaces(item)).sort().map(item => (
+                      <NamespaceItem
+                          namespace={items[item]}
+                          search={this.filterKeys()}
+                          key={item}
+                      />
+                    ))}
             </List>
         );
     }
@@ -80,9 +75,8 @@ NamespaceList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    search: state.ui.searchValue,
+    search: state.sidebar.searchValue,
 });
-
 
 export default connect(
     mapStateToProps

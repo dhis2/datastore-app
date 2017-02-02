@@ -1,0 +1,13 @@
+.fff-display {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  background-color: rgb(238, 238, 238);
+}
+
+.fff-display-area {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  overflow-y: auto;
+}
