@@ -6,6 +6,13 @@ export class JSONSearchBar extends React.Component {
         super(props);
 
         this.changeEvent = this.changeEvent.bind(this);
+        this.handleKeys = this.handleKeys.bind(this);
+    }
+
+    handleKeys(event) {
+        if (event.keyCode === 27) {
+           this.searchField.blur();
+        }
     }
 
     changeEvent(event) {
@@ -18,9 +25,10 @@ export class JSONSearchBar extends React.Component {
                 floatingLabelText={'Search JSON'}
                 floatingLabelStyle={{ top: '42px' }}
                 inputStyle={{ marginTop: '13px' }}
-                style={{ height: 'auto' }}
                 onChange={this.changeEvent}
                 style={this.props.style}
+                onKeyUp={this.handleKeys}
+                ref={(searchField) => { this.searchField = searchField; }}
             />
         );
     }

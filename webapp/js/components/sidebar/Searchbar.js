@@ -11,25 +11,25 @@ export class Searchbar extends Component {
     }
 
     handleKeys(event) {
-        if(event.keyCode === 27) {
-           this.refs.searchfield.blur();
+        if (event.keyCode === 27) {
+            this.searchField.blur();
         }
     }
 
     render() {
         const { searchChanged, searchValue } = this.props;
         return (
-            <TextField name={ 'searchbar' }
-                hintText={ 'Namespace#Key' }
+            <TextField name={'searchbar'}
+                hintText={'Namespace#Key'}
                 floatingLabelStyle={{ top: '25px' }}
                 style={{ height: 'auto' }}
                 inputStyle={{ marginTop: '6px' }}
-                floatingLabelText= { 'Search' }
+                floatingLabelText={'Search'}
                 value={searchValue}
                 onChange={({ target: { value } }) => searchChanged(value)}
                 onFocus={() => searchChanged('')}
                 onKeyUp={this.handleKeys}
-                ref={'searchfield'}
+                ref={(searchField) => { this.searchField = searchField; }}
             />
         );
     }
