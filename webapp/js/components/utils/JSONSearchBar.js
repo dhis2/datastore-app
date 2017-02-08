@@ -11,7 +11,7 @@ export class JSONSearchBar extends React.Component {
 
     handleKeys(event) {
         if (event.keyCode === 27) {
-           this.searchField.blur();
+            this.searchField.blur();
         }
     }
 
@@ -35,7 +35,7 @@ export class JSONSearchBar extends React.Component {
 }
 
 JSONSearchBar.propTypes = {
-    style: PropTypes.obj,
+    style: PropTypes.object,
     changeAction: PropTypes.func,
 };
 

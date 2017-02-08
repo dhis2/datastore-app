@@ -4,12 +4,14 @@ import NewNamespaceDialog from './NewNamespaceDialog';
 import NewKeyDialog from './NewKeyDialog';
 import ConfirmDeleteNamespaceDialog from './ConfirmDeleteNamespaceDialog';
 import ConfirmDeleteKeyDialog from './ConfirmDeleteKeyDialog';
+import ErrorDialog from './ErrorDialog';
 
 const DIALOG_COMPONENTS = {
     NEW_NAMESPACE: NewNamespaceDialog,
     NEW_KEY: NewKeyDialog,
     CONFIRM_DELETE_NAMESPACE: ConfirmDeleteNamespaceDialog,
     CONFIRM_DELETE_KEY: ConfirmDeleteKeyDialog,
+    ERROR_DIALOG: ErrorDialog,
 };
 
 export class DialogRoot extends Component {
@@ -23,7 +25,7 @@ export class DialogRoot extends Component {
         return (
 
             <div>
-                <DialogType dialogprops = {dialogprops} />
+                <DialogType dialogprops={dialogprops} />
             </div>
         );
     }

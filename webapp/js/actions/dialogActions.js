@@ -118,3 +118,23 @@ export function openConfirmDeleteKeyDialog(dialogprops) {
 export function closeConfirmDeleteKeyDialog(dialogprops) {
     return closeDialog(dialogs.CONFIRM_DELETE_KEY, dialogprops);
 }
+
+/**
+ * openErrorDialog - description
+ *
+ * @param  {object} openErrorDialog Properties passed to dialog
+ * @return {object}                 Dialog action
+ */
+export function openErrorDialog(dialogprops) {
+    return openDialog(dialogs.ERROR_DIALOG, dialogprops);
+}
+
+/**
+ * openErrorDialog - description
+ *
+ * @param  {object} openErrorDialog Properties passed to dialog
+ * @return {object}                 Dialog action
+ */
+export function closeErrorDialog(dialogprops) {
+    return closeDialog(dialogs.ERROR_DIALOG, dialogprops);
+}
