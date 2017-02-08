@@ -183,16 +183,18 @@ class Api
         };
 
         return this.getHistory(namespace, key)
-            .then(response => {
-                if (response.status === 404) { // this history record is first
-                    this.createValue('HISTORYSTORE', id, [historyRecord], false);
-                    return null;
-                }
-                return response.json();
-            }).then(history => {
+            .then(history => {
                 if (history !== null) { // update history
                     history.unshift(historyRecord);
                     this.updateValue('HISTORYSTORE', id, history, false);
+                }
+            })
+            .catch(e => {
+                console.log(e)
+                if (e.httpStatusCode === 404) { // this history record is first
+                    console.log("createvalue")
+                    this.createValue('HISTORYSTORE', id, [historyRecord], false);
+                    return null;
                 }
             }).then(() => this.updateNamespaceHistory(namespace, key, historyRecord));
     }
@@ -210,29 +212,16 @@ class Api
             user: historyRecord.user,
             value: sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase()),
         };
-
+        console.log("update namespace history ")
         return this.getHistory(namespace)
-            .then(response => {
-                if (response.status === 404) { // this history record is first
-                    const value = [{
-                        name: namespace,
-                        action: CREATED,
-                        date: namespaceHistoryRecord.date,
-                        user: historyRecord.user,
-                        value: 'Namespace was created.',
-                    }];
-
-                    return this.createValue('HISTORYSTORE', namespace, value, false)
-                        .then(response => new Promise((resolve, reject) => resolve(value)));
-                }
-                return response.json();
-            }).then(history => {
+            .then(history => {
                 history.unshift(namespaceHistoryRecord);
 
                 if (historyRecord.action === DELETED) { // special check for delete action
                     this.getKeys(namespace)
                         .then(response => {
-                            if (response.status === 404) { // last key in namespace was deleted, namespace got deleted too
+                            console.log(response)
+                            if (response.length < 1) { // last key in namespace was deleted, namespace got deleted too
                                 history.unshift({
                                     name: namespace,
                                     action: DELETED,
@@ -245,12 +234,55 @@ class Api
                             }
 
                             this.updateValue('HISTORYSTORE', namespace, history, false);
-                        });
+                        }).catch(e => {
+                            console.log(e)
+                    });
                 } else { // create or update action
                     this.updateValue('HISTORYSTORE', namespace, history, false);
                 }
-            });
-    }
+            }).catch(e => {
+                console.log(e)
+                console.log(e.httpStatusCode);
+                if (e.httpStatusCode === 404) { // this history record is first
+                    console.log("status is 404")
+                    const value = [{
+                        name: namespace,
+                        action: CREATED,
+                        date: namespaceHistoryRecord.date,
+                        user: historyRecord.user,
+                        value: 'Namespace was created.',
+                    }];
+
+                    return this.createValue('HISTORYSTORE', namespace, value, false)
+                        .then(response => new Promise((resolve, reject) => resolve(value)))
+                        .then(history => {
+                            console.log("new history")
+                            history.unshift(namespaceHistoryRecord);
+
+                            if (historyRecord.action === DELETED) { // special check for delete action
+                                this.getKeys(namespace)
+                                    .then(response => {
+                                        if (response.length < 1) { // last key in namespace was deleted, namespace got deleted too
+                                            history.unshift({
+                                                name: namespace,
+                                                action: DELETED,
+                                                date: new Date(),
+                                                user: historyRecord.user,
+                                                value: 'Namespace was deleted.',
+                                            });
+
+                                            delete this.cache[namespace];
+                                        }
+
+                                        this.updateValue('HISTORYSTORE', namespace, history, false);
+                                    }).catch(e => {
+                                    console.log(e)
+                                });
+                            } else { // create or update action
+                                this.updateValue('HISTORYSTORE', namespace, history, false);
+                            }
+                        })}});
+                }
 
     /**
      * Make sure the response status code is 2xx
