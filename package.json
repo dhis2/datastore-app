@@ -79,6 +79,7 @@
     "redux-promise-middleware": "^4.1.0",
     "redux-thunk": "^2.1.0",
     "sprintf-js": "^1.0.3",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "d2": "24.0.x"
   }
 }
