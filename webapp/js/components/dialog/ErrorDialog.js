@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -17,7 +17,6 @@ export class ErrorDialog extends Component {
     }
 
     render() {
-        console.log(this.props.message)
         const actions = [
             <FlatButton
                 label="Ok"
@@ -38,6 +37,10 @@ export class ErrorDialog extends Component {
         );
     }
 }
+
+ErrorDialog.propTypes = {
+    message: PropTypes.string,
+};
 
 const mapStateToProps = state => ({
     message: state.dialog.props.message
