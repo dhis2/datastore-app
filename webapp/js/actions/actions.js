@@ -602,8 +602,12 @@ export function fetchKeys(namespace) {
     return dispatch => {
         dispatch(requestKeys(namespace));
         return api.getKeys(namespace)
-            .then(keys => dispatch(recieveKeys(namespace, keys)))
-            .catch(e => console.log(e));
+            .then(keys => {
+                if(keys.length < 1) {
+                    return Promise.reject({status: 404});
+                }
+                dispatch(recieveKeys(namespace, keys))
+            })
     };
 }
 

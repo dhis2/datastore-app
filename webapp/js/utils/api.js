@@ -235,16 +235,13 @@ class Api
 
                             this.updateValue('HISTORYSTORE', namespace, history, false);
                         }).catch(e => {
-                            console.log(e)
+                        console.log(e)
                     });
                 } else { // create or update action
                     this.updateValue('HISTORYSTORE', namespace, history, false);
                 }
             }).catch(e => {
-                console.log(e)
-                console.log(e.httpStatusCode);
                 if (e.httpStatusCode === 404) { // this history record is first
-                    console.log("status is 404")
                     const value = [{
                         name: namespace,
                         action: CREATED,
@@ -252,37 +249,17 @@ class Api
                         user: historyRecord.user,
                         value: 'Namespace was created.',
                     }];
-
                     return this.createValue('HISTORYSTORE', namespace, value, false)
                         .then(response => new Promise((resolve, reject) => resolve(value)))
                         .then(history => {
                             console.log("new history")
                             history.unshift(namespaceHistoryRecord);
-
-                            if (historyRecord.action === DELETED) { // special check for delete action
-                                this.getKeys(namespace)
-                                    .then(response => {
-                                        if (response.length < 1) { // last key in namespace was deleted, namespace got deleted too
-                                            history.unshift({
-                                                name: namespace,
-                                                action: DELETED,
-                                                date: new Date(),
-                                                user: historyRecord.user,
-                                                value: 'Namespace was deleted.',
-                                            });
-
-                                            delete this.cache[namespace];
-                                        }
-
-                                        this.updateValue('HISTORYSTORE', namespace, history, false);
-                                    }).catch(e => {
-                                    console.log(e)
-                                });
-                            } else { // create or update action
-                                this.updateValue('HISTORYSTORE', namespace, history, false);
-                            }
-                        })}});
+                            this.updateValue('HISTORYSTORE', namespace, history, false);
+                        })
                 }
+            });
+    }
+
 
     /**
      * Make sure the response status code is 2xx
