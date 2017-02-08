@@ -1,5 +1,5 @@
 import * as actions from 'constants/actionTypes';
-import api from 'utils/api2';
+import api from 'utils/api';
 import { hashHistory } from 'react-router';
 
 /**
