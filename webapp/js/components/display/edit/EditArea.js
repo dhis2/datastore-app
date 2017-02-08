@@ -23,8 +23,8 @@ export class EditArea extends Component {
         };
 
         return (
-            <div className={ 'fff-display-area' } style={ backgroundStyle }>
-                <JSONEditor value={ value } dataChanged={this.dataFromJSONEditor.bind(this)} />
+            <div className={'fff-display-area'} style={backgroundStyle}>
+                <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)} />
             </div>
         );
     }

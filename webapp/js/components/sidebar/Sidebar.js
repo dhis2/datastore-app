@@ -33,9 +33,9 @@ export class Sidebar extends Component {
         return (
             <div className={'fff-sidebar'}>
                 <SideBarHeader>
-                    <RaisedButton label="New" onClick={ this.showDialog.bind(this) } primary />
+                    <RaisedButton label="New" onClick={this.showDialog.bind(this)} primary />
                 </SideBarHeader>
-                <NamespaceListImproved items= { items } />
+                <NamespaceListImproved items={items} />
             </div>
         );
     }
