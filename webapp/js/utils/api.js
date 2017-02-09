@@ -17,7 +17,9 @@ class Api
         this.userId = "";
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
         let headers = process.env.NODE_ENV === 'development' ? { Authorization: 'Basic YWRtaW46ZGlzdHJpY3Q=' } : null;
-        this.d2 = init({baseUrl: 'https://play.dhis2.org/test/api', headers})
+        this.d2 = init({baseUrl: 'https://play.dhis2.org/test/api', headers}).then(d2 => {
+            this.userId = d2.currentUser.username;
+        });
         this.historyStore = getInstance().then(d2 => d2.dataStore.get('HISTORYSTORE'));
     }
 
@@ -32,7 +34,7 @@ class Api
                 this.cache[namespace] = [];
                 this.updateNamespaceHistory(namespace, null, {
                     action: DELETED,
-                    user: this.userId,
+                    user: d2.currentUser.username,
                 });
                 return response;
             });
@@ -220,7 +222,6 @@ class Api
                 if (historyRecord.action === DELETED) { // special check for delete action
                     this.getKeys(namespace)
                         .then(response => {
-                            console.log(response)
                             if (response.length < 1) { // last key in namespace was deleted, namespace got deleted too
                                 history.unshift({
                                     name: namespace,
@@ -252,7 +253,6 @@ class Api
                     return this.createValue('HISTORYSTORE', namespace, value, false)
                         .then(response => new Promise((resolve, reject) => resolve(value)))
                         .then(history => {
-                            console.log("new history")
                             history.unshift(namespaceHistoryRecord);
                             this.updateValue('HISTORYSTORE', namespace, history, false);
                         })
