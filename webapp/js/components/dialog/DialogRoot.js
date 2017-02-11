@@ -1,46 +1,50 @@
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
-import NewNamespaceDialog from './NewNamespaceDialog';
-import NewKeyDialog from './NewKeyDialog';
-import ConfirmDeleteNamespaceDialog from './ConfirmDeleteNamespaceDialog';
-import ConfirmDeleteKeyDialog from './ConfirmDeleteKeyDialog';
-import ErrorDialog from './ErrorDialog';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
-const DIALOG_COMPONENTS = {
-    NEW_NAMESPACE: NewNamespaceDialog,
-    NEW_KEY: NewKeyDialog,
-    CONFIRM_DELETE_NAMESPACE: ConfirmDeleteNamespaceDialog,
-    CONFIRM_DELETE_KEY: ConfirmDeleteKeyDialog,
-    ERROR_DIALOG: ErrorDialog,
-};
+class DialogRoot extends Component {
 
-export class DialogRoot extends Component {
+    static buildButton(action, text, primary = false) {
+        return (<FlatButton
+            label={text}
+            primary={primary}
+            onTouchTap={action}
+        />);
+    }
 
     render() {
-        const { dialogType, dialogprops } = this.props;
-        if (!dialogType) {
-            return null;
-        }
-        const DialogType = DIALOG_COMPONENTS[dialogType];
-        return (
+        const { title,
+                cancelAction,
+                cancelLabel,
+                approveAction,
+                approveLabel,
+                contentStyle } = this.props;
 
-            <div>
-                <DialogType dialogprops={dialogprops} />
-            </div>
-        );
+        const actions = [];
+
+        cancelAction && actions.push(DialogRoot.buildButton(cancelAction, cancelLabel || 'Cancel'));
+        approveAction && actions.push(DialogRoot.buildButton(approveAction, approveLabel || 'Done', true));
+
+        return (<Dialog
+            open
+            title={title}
+            actions={actions}
+            modal={false}
+            contentStyle={contentStyle || {}}
+            onRequestClose={cancelAction}
+        >
+            {this.props.children}
+        </Dialog>);
     }
 }
 
 DialogRoot.propTypes = {
-    dialogType: PropTypes.string,
-    dialogprops: PropTypes.shape({}),
+    title: PropTypes.string,
+    cancelLabel: PropTypes.string,
+    approveLabel: PropTypes.string,
+    cancelAction: PropTypes.func,
+    approveAction: PropTypes.func,
+    contentStyle: PropTypes.object,
 };
 
-const mapStateToProps = (state) => ({
-    dialogType: state.dialog.type,
-    dialogprops: state.dialog.props,
-});
-
-export default connect(
-    mapStateToProps
-)(DialogRoot);
+export default DialogRoot;

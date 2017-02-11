@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import { connect } from 'react-redux';
+import DialogRoot from './DialogRoot';
 import { createAndDisplayValue } from 'actions/actions';
 import { closeNamespaceDialog } from 'actions/dialogActions';
 
@@ -18,6 +17,7 @@ export class NewNamespaceDialog extends Component {
             keyError: '',
         };
         this.validate = this.validate.bind(this);
+        this.handleCreate = this.handleCreate.bind(this);
     }
 
     handleNamespaceInput(event) {
@@ -57,30 +57,16 @@ export class NewNamespaceDialog extends Component {
     }
 
     render() {
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={false}
-                onTouchTap={this.handleClose.bind(this)}
-            />,
-            <FlatButton
-                label="Create"
-                primary
-                onTouchTap={this.handleCreate.bind(this)}
-            />,
-        ];
         const fieldStyle = {
             display: 'block',
             width: '100%',
         };
         return (
-            <Dialog
+            <DialogRoot
                 title="New namespace"
-                actions={actions}
-                modal={false}
-                open
+                approveAction={this.handleCreate}
+                cancelAction={this.props.closeDialog}
                 contentStyle={{ maxWidth: '500px' }}
-                onRequestClose={this.handleClose.bind(this)}
             >
                 <TextField ref="namespace" hintText="Namespace" autoFocus style={fieldStyle}
                     errorText={this.state.namespaceError}
@@ -90,20 +76,22 @@ export class NewNamespaceDialog extends Component {
                     errorText={this.state.keyError}
                     onChange={this.handleKeyInput.bind(this)}
                 />
-            </Dialog>
+            </DialogRoot>
         );
     }
 }
 
 NewNamespaceDialog.propTypes = {
-    dialogprops: PropTypes.shape({
-        namespace: PropTypes.string,
-    }),
+    namespace: PropTypes.string,
     closeDialog: PropTypes.func,
     createNamespace: PropTypes.func,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapStateToProps = state => ({
+    namespace: state.dialog.namespace,
+});
+
+const mapDispatchToProps = dispatch => ({
     closeDialog() {
         dispatch(closeNamespaceDialog());
     },
@@ -114,6 +102,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(NewNamespaceDialog);

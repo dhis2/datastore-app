@@ -6,6 +6,8 @@ const initialState = {
 };
 
 const dialog = (state = initialState, action) => {
+
+    console.log(action);
     switch (action.type) {
 
     case actions.OPEN_DIALOG:
@@ -13,7 +15,7 @@ const dialog = (state = initialState, action) => {
             return {
                 ...state,
                 type: action.dialogType,
-                props: action.dialogprops,
+                ...action.dialogprops,
             };
         }
 

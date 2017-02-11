@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import DialogRoot from './DialogRoot';
 import TextField from 'material-ui/TextField';
 import { createAndDisplayValue } from 'actions/actions';
 import { closeKeyDialog } from 'actions/dialogActions';
@@ -15,6 +14,7 @@ export class NamespaceDialog extends Component {
             keyValue: '',
             keyError: '',
         };
+        this.handleCreate = this.handleCreate.bind(this);
         this.validate = this.validate.bind(this);
     }
 
@@ -26,13 +26,9 @@ export class NamespaceDialog extends Component {
         });
     }
 
-    handleClose() {
-        this.props.closeDialog();
-    }
-
     handleCreate() {
         const { keyValue } = this.state;
-        const { namespace } = this.props.dialogprops;
+        const { namespace } = this.props;
         if (namespace && keyValue) {
             this.props.createNamespace(namespace, keyValue);
         } else {
@@ -47,31 +43,16 @@ export class NamespaceDialog extends Component {
     }
 
     render() {
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={false}
-                onTouchTap={this.handleClose.bind(this)}
-            />,
-            <FlatButton
-                label="Create"
-                primary
-                onTouchTap={this.handleCreate.bind(this)}
-            />,
-        ];
-
         const fieldStyle = {
             display: 'block',
             width: '100%',
         };
 
-        return (<Dialog
+        return (<DialogRoot
             title="New key"
-            actions={actions}
-            modal={false}
-            open
+            approveAction={this.handleCreate}
+            cancelAction={this.props.closeDialog}
             contentStyle={{ maxWidth: '500px' }}
-            onRequestClose={this.handleClose.bind(this)}
         >
             <TextField hintText="Key value"
                 autoFocus
@@ -79,19 +60,21 @@ export class NamespaceDialog extends Component {
                 style={fieldStyle}
                 onChange={this.handleKeyInput.bind(this)}
             />
-        </Dialog>);
+        </DialogRoot>);
     }
 }
 
 NamespaceDialog.propTypes = {
-    dialogprops: PropTypes.shape({
-        namespace: PropTypes.string.isRequired,
-    }),
+    namespace: PropTypes.string.isRequired,
     closeDialog: PropTypes.func,
     createNamespace: PropTypes.func,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapStateToProps = state => ({
+    namespace: state.dialog.namespace,
+});
+
+const mapDispatchToProps = dispatch => ({
     closeDialog() {
         dispatch(closeKeyDialog());
     },
@@ -102,6 +85,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(NamespaceDialog);
