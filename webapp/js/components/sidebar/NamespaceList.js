@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import NamespaceItem from './NamespaceItem';
 import { List } from 'material-ui/List';
+import NamespaceItem from './NamespaceItem';
 import Theme from 'utils/theme';
 
 const listStyle = {

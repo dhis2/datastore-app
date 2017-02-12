@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import DialogRoot from './DialogRoot';
-import { closeConfirmDeleteNamespaceDialog } from 'actions/dialogActions';
 import { deleteNamespace } from 'actions/actions';
 
 export class ConfirmDeleteNamespaceDialog extends Component {
@@ -20,7 +19,6 @@ export class ConfirmDeleteNamespaceDialog extends Component {
             (<DialogRoot
                 approveAction={this.handleConfirmed}
                 approveLabel={'Delete'}
-                cancelAction={this.props.closeDialog}
                 contentStyle={{ maxWidth: '400px' }}
             >
                 Are you sure you want to delete '{this.props.namespace}'?
@@ -40,12 +38,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeDialog() {
-        dispatch(closeConfirmDeleteNamespaceDialog());
-    },
     deleteNamespace(namespace) {
         dispatch(deleteNamespace(namespace));
-        dispatch(closeConfirmDeleteNamespaceDialog());
     },
 });
 

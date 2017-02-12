@@ -23,16 +23,16 @@ class AppContainer extends Component {
         const { store } = this.props;
 
         return (
-          <MuiThemeProvider muiTheme={ Theme }>
-              <Provider store = { store }>
+          <MuiThemeProvider muiTheme={Theme}>
+              <Provider store = {store}>
                   <Router history={ hashHistory }>
-                      <Route path={ '/' } component={ Layout }>
-                          <IndexRoute component={ EmptyDisplay } />
-                          <Route path={ 'edit/:namespace/:key' } component={ EditDisplay } />
-                          <Route path={ 'history/:namespace' } component={ HistoryDisplay } />
-                          <Route path={ 'history/:namespace/:key' } component={ HistoryDisplay } />
-                          <Route path={ 'stats/:namespace' } component={ StatisticsDisplay } />
-                          <Route path={ 'stats/:namespace/:key' } component={ StatisticsDisplay } />
+                      <Route path={'/'} component={Layout}>
+                          <IndexRoute component={EmptyDisplay} />
+                          <Route path={'edit/:namespace/:key'} component={EditDisplay} />
+                          <Route path={'history/:namespace'} component={HistoryDisplay} />
+                          <Route path={'history/:namespace/:key'} component={HistoryDisplay} />
+                          <Route path={'stats/:namespace'} component={StatisticsDisplay} />
+                          <Route path={'stats/:namespace/:key'} component={StatisticsDisplay} />
                       </Route>
                   </Router>
               </Provider>

@@ -2,10 +2,13 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import DialogRoot from './DialogRoot';
 import TextField from 'material-ui/TextField';
-import { createAndDisplayValue } from 'actions/actions';
-import { closeKeyDialog } from 'actions/dialogActions';
+import { createAndDisplayValue } from 'actions/actions'
 
 export class NamespaceDialog extends Component {
+
+    static validate(value) {
+        return value ? '' : 'Invalid Input. Field required';
+    }
 
     constructor(props) {
         super(props);
@@ -15,14 +18,13 @@ export class NamespaceDialog extends Component {
             keyError: '',
         };
         this.handleCreate = this.handleCreate.bind(this);
-        this.validate = this.validate.bind(this);
     }
 
     handleKeyInput(event) {
         const val = event.target.value;
         this.setState({
-            keyError: this.validate(val),
-            keyValue: event.target.value,
+            keyError: NamespaceDialog.validate(val),
+            keyValue: val,
         });
     }
 
@@ -33,13 +35,9 @@ export class NamespaceDialog extends Component {
             this.props.createNamespace(namespace, keyValue);
         } else {
             this.setState({
-                keyError: this.validate(keyValue),
+                keyError: NamespaceDialog.validate(keyValue),
             });
         }
-    }
-
-    validate(value) {
-        return value ? '' : 'Invalid Input. Field required';
     }
 
     render() {
@@ -51,7 +49,6 @@ export class NamespaceDialog extends Component {
         return (<DialogRoot
             title="New key"
             approveAction={this.handleCreate}
-            cancelAction={this.props.closeDialog}
             contentStyle={{ maxWidth: '500px' }}
         >
             <TextField hintText="Key value"
@@ -66,7 +63,6 @@ export class NamespaceDialog extends Component {
 
 NamespaceDialog.propTypes = {
     namespace: PropTypes.string.isRequired,
-    closeDialog: PropTypes.func,
     createNamespace: PropTypes.func,
 };
 
@@ -75,12 +71,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeDialog() {
-        dispatch(closeKeyDialog());
-    },
     createNamespace(namespace, key) {
         dispatch(createAndDisplayValue(namespace, key));
-        dispatch(closeKeyDialog());
     },
 });
 

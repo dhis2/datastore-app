@@ -4,7 +4,8 @@ import NamespaceList from './NamespaceList';
 import { fetchNamespaces } from 'actions/actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import SideBarHeader from './SideBarHeader';
-import { openNamespaceDialog } from 'actions/dialogActions';
+import { openDialog } from 'actions/dialogActions';
+import * as dialog from 'constants/dialogTypes';
 import SidebarAreaHOC from 'components/hoc/SidebarAreaHOC';
 import '../../../style/sidebar/sidebar.scss';
 
@@ -48,13 +49,13 @@ Sidebar.propTypes = {
     search: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     items: state.sidebar.namespaces,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     openNamespaceDialog() {
-        dispatch(openNamespaceDialog());
+        dispatch(openDialog(dialog.NEW_NAMESPACE));
     },
     getNamespaces() {
         dispatch(fetchNamespaces());

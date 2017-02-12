@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import DialogRoot from './DialogRoot';
 import { deleteKey } from 'actions/actions';
-import { closeConfirmDeleteKeyDialog } from 'actions/dialogActions';
 
 export class ConfirmDeleteKeyDialog extends Component {
 
@@ -12,19 +11,18 @@ export class ConfirmDeleteKeyDialog extends Component {
     }
 
     handleConfirmed() {
-        const { namespace, key } = { ...this.props };
-        this.props.deleteKeyInNamespace(namespace, key);
+        const { namespace, keyValue } = { ...this.props };
+        this.props.deleteKeyInNamespace(namespace, keyValue);
     }
 
     render() {
         return (
             <DialogRoot
-                approveAction={this.props.closeDialog}
-                cancelAction={this.handleConfirmed}
+                approveAction={this.handleConfirmed}
                 approveLabel={'Delete'}
                 contentStyle={{ maxWidth: '400px' }}
             >
-                Are you sure you want to delete '{this.props.key}' in {this.props.namespace}?
+                Are you sure you want to delete '{this.props.keyValue}' in {this.props.namespace}?
             </DialogRoot>
         );
     }
@@ -32,22 +30,18 @@ export class ConfirmDeleteKeyDialog extends Component {
 
 const mapStateToProps = state => ({
     namespace: state.dialog.namespace,
-    key: state.dialog.key,
+    keyValue: state.dialog.key,
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeDialog() {
-        dispatch(closeConfirmDeleteKeyDialog());
-    },
     deleteKeyInNamespace(namespace, key) {
         dispatch(deleteKey(namespace, key));
-        dispatch(closeConfirmDeleteKeyDialog());
     },
 });
 
 ConfirmDeleteKeyDialog.propTypes = {
     namespace: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    keyValue: PropTypes.string.isRequired,
     closeDialog: PropTypes.func,
     deleteKeyInNamespace: PropTypes.func,
 };

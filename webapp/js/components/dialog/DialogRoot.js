@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import { closeDialog } from 'actions/dialogActions';
 
 class DialogRoot extends Component {
 
@@ -18,12 +20,19 @@ class DialogRoot extends Component {
                 cancelLabel,
                 approveAction,
                 approveLabel,
-                contentStyle } = this.props;
+                contentStyle,
+                defaultCloseDialog } = this.props;
 
         const actions = [];
 
-        cancelAction && actions.push(DialogRoot.buildButton(cancelAction, cancelLabel || 'Cancel'));
-        approveAction && actions.push(DialogRoot.buildButton(approveAction, approveLabel || 'Done', true));
+        // TODO: Clean this up
+        const finalAction = () => {
+            approveAction();
+            defaultCloseDialog();
+        };
+
+        actions.push(DialogRoot.buildButton(cancelAction || defaultCloseDialog, cancelLabel || 'Cancel'));
+        if (approveAction) actions.push(DialogRoot.buildButton(finalAction, approveLabel || 'Done', true));
 
         return (<Dialog
             open
@@ -31,7 +40,7 @@ class DialogRoot extends Component {
             actions={actions}
             modal={false}
             contentStyle={contentStyle || {}}
-            onRequestClose={cancelAction}
+            onRequestClose={defaultCloseDialog}
         >
             {this.props.children}
         </Dialog>);
@@ -44,7 +53,17 @@ DialogRoot.propTypes = {
     approveLabel: PropTypes.string,
     cancelAction: PropTypes.func,
     approveAction: PropTypes.func,
+    defaultCloseDialog: PropTypes.func,
     contentStyle: PropTypes.object,
 };
 
-export default DialogRoot;
+const mapDispatchToProps = dispatch => ({
+    defaultCloseDialog() {
+        dispatch(closeDialog());
+    },
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(DialogRoot);

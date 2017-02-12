@@ -3,7 +3,6 @@ import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import DialogRoot from './DialogRoot';
 import { createAndDisplayValue } from 'actions/actions';
-import { closeNamespaceDialog } from 'actions/dialogActions';
 
 export class NewNamespaceDialog extends Component {
 
@@ -92,12 +91,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeDialog() {
-        dispatch(closeNamespaceDialog());
-    },
     createNamespace(namespace, key) {
         dispatch(createAndDisplayValue(namespace, key));
-        dispatch(closeNamespaceDialog());
     },
 });
 
