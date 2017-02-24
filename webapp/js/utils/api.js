@@ -1,7 +1,7 @@
 import { API_URL } from 'constants/apiUrls';
 import { CREATED, UPDATED, DELETED } from 'constants/apiHistoryActions';
 import { sprintf } from 'sprintf-js';
-import { init, getInstance } from 'd2/lib/d2';
+import { init, getInstance, getManifest } from 'd2/lib/d2';
 
 class Api
 {
@@ -10,17 +10,33 @@ class Api
      * @param url API endpoint url
      * @param auth Authentication HTTP header content
      */
-    constructor(url, auth) {
+    constructor(url) {
         this.url = url;
-        this.auth = auth;
         this.cache = [];
         this.userId = "";
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
+
+    }
+
+    /**
+     * Initialized the Api to a d2 instance.
+     * @returns {Api}
+     */
+    initialize() {
         let headers = process.env.NODE_ENV === 'development' ? { Authorization: 'Basic YWRtaW46ZGlzdHJpY3Q=' } : null;
-        this.d2 = init({baseUrl: 'https://play.dhis2.org/test/api', headers}).then(d2 => {
-            this.userId = d2.currentUser.username;
-        });
+        this.d2 = getManifest('./manifest.webapp')
+            .then(manifest => {
+                const baseUrl = process.env.NODE_ENV === 'production' ? manifest.getBaseUrl() : this.url;
+                console.info("Using URL: " + baseUrl);
+                console.info(`Loading: ${manifest.name} v${manifest.version}`);
+                console.info(`Built ${manifest.manifest_generated_at}`);
+                return baseUrl + "/api";
+            }).catch(e => {
+                return this.url;
+            }).then(baseUrl  => init({baseUrl, headers}).then(d2 =>
+                this.userId = d2.currentUser.username));
         this.historyStore = getInstance().then(d2 => d2.dataStore.get('HISTORYSTORE'));
+        return this;
     }
 
     getNamespaces() {
@@ -144,6 +160,7 @@ class Api
      * @param key Return history of a key if presenter, history of namespace otherwise
      */
     getHistory(namespace, key = null) {
+        console.log("GETHISTORY")
         const id = key === null ? namespace : this.buildId(namespace, key);
         return this.historyStore.then(hsStore => hsStore.get(id));
     }
@@ -169,6 +186,8 @@ class Api
     }
 
     /**
+     * Updates the history of a key, and calls
+     * updateNamespaceHistory
      * @param namespace
      * @param key
      * @param newValue
@@ -202,6 +221,7 @@ class Api
     }
 
     /**
+     * Updates the history of the namespace
      * @param namespace
      * @param key
      * @param historyRecord
@@ -214,7 +234,7 @@ class Api
             user: historyRecord.user,
             value: sprintf('Key \'%s\' was %s.', key, historyRecord.action.toLowerCase()),
         };
-        console.log("update namespace history ")
+
         return this.getHistory(namespace)
             .then(history => {
                 history.unshift(namespaceHistoryRecord);
@@ -280,24 +300,7 @@ class Api
         return encodeURIComponent(`${namespace}:${key}`);
     }
 
-    getHeaders() {
-        let auth = null;
-        if (this.auth) {
-            auth = {
-                Authorization: this.auth,
-            };
-        }
-        return {
-            method: 'GET',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                ...auth,
-            },
-        };
-    }
 }
 
 export default (() =>
-    new Api(API_URL))();
+    new Api(API_URL).initialize())();
