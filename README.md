@@ -19,8 +19,8 @@ npm run test
 ``` 
 
 ##Config
- Edit app to use your DHIS2- instance.
- API-URL is in `/webapp/js/constands/apiUrl.js`
+ The app should use the current D2 instance API, but in dev you can configure
+ the API-endpoint in `/webapp/js/constants/apiUrl.js`
  
  
 ##Upload to DHIS2
