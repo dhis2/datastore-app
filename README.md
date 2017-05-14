@@ -1,4 +1,4 @@
-# INF5750
+# DHIS2 Datastore App
 Project related to course INF5750.
 
 #Installation
@@ -7,7 +7,6 @@ Project related to course INF5750.
 npm install
 npm start 
  ```
-
 Build: 
 ``` ssh 
 npm run build
@@ -19,13 +18,12 @@ Test:
 npm run test
 ``` 
 
-# Tools
-This web application has been created using React and Redux.
-
-# Group Members - #fff
-- Birk as Birkbjo
-- Pavel as Pavel Jurasek
-- Steven as Glimlag & shicks1000
-
-# Credits
-Icon made by http://www.flaticon.com/authors/madebyoliver from www.flaticon.com
+##Config
+ Edit app to use your DHIS2- instance.
+ API-URL is in `/webapp/js/constands/apiUrl.js`
+ 
+ 
+##Upload to DHIS2
+ Build the app. Zip contents in /build/. Note that you cannot zip the /build folder directly. 
+ Manifest needs to be in root of the archive.
+ Upload the archive to DHIS2 using the App Management app.

@@ -1,7 +1,7 @@
 {
     "version": "1.0",
-    "name": "#FFF",
-    "description": "DHIS2 Datastore App by #FFF",
+    "name": "Datastore App",
+    "description": "DHIS2 Datastore App. Allows you to manage namespaces and keys in the datastore.",
     "launch_path": "index.html",
     "appType": "APP",
     "icons": {
@@ -10,8 +10,8 @@
         "128": "database_128.png"
     },
     "developer": {
-        "name": "Birk, Steven, Pavel",
-        "url": "https://wiki.uio.no/mn/ifi/inf5750/index.php/Fff"
+        "name": "DHIS",
+        "url": "https://www.dhis2.org/"
     },
     "default_locale": "en",
     "activities": {
