@@ -1,7 +1,7 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { fade } from 'material-ui/utils/colorManipulator';
 import {
-    blue500, blue700, blue900,
+    blue300,blue500, blue700, blue900,
     pinkA200, grey100, grey200,
     grey300, grey500, white,
     darkBlack, fullBlack } from 'material-ui/styles/colors';
@@ -11,7 +11,7 @@ export default getMuiTheme({
         primary1Color: blue700,
         primary2Color: blue900,
         primary3Color: grey200,
-        accent1Color: pinkA200,
+        accent1Color: blue700,
         accent2Color: grey100,
         accent3Color: grey500,
         textColor: darkBlack,
