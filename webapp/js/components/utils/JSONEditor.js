@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import JSEditor from 'jsoneditor/dist/jsoneditor.min.js';
+import { jsonEditorChangeMode } from 'actions/jsonEditorActions';
+import { openErrorDialog } from 'actions/dialogActions';
 import '../../../style/vendor/jsoneditor.css';
 
 export class JSONEditor extends Component {
@@ -8,12 +10,20 @@ export class JSONEditor extends Component {
     constructor(props) {
         super(props);
         this.editor = null;
+
         this.changedEvent = this.changedEvent.bind(this);
         this.handleJsonEditor = this.handleJsonEditor.bind(this);
+        this.jsonEditorIsValid = this.jsonEditorIsValid.bind(this);
     }
 
     componentDidMount() {
         this.initEditor();
+    }
+
+    /* Need custom update condition as we only re-render when the value changes.*/
+    shouldComponentUpdate(nextProps) {
+        this.handleJsonEditor(nextProps);
+        return this.props.value !== nextProps.value;
     }
 
     componentWillUpdate(nextProps) {
@@ -24,16 +34,19 @@ export class JSONEditor extends Component {
         this.props.dataChanged(this.editor);
     }
 
-    /* Need custom update condition as we only re-render when the value changes.*/
-    shouldComponentUpdate(nextProps) {
-        this.handleJsonEditor(nextProps);
-        return this.props.value !== nextProps.value;
+    jsonEditorIsValid() {
+        try {
+            this.editor.get();
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 
     handleJsonEditor(props) {
         const { search, collapse, expand, undo, redo, mode, compact, format } = props;
 
-        if(this.editor.getMode() !== 'code'){
+        if (this.editor.getMode() !== 'code') {
             this.editor.search(search || '');
             if (collapse) {
                 this.editor.collapseAll();
@@ -62,8 +75,19 @@ export class JSONEditor extends Component {
             }
         }
 
-        if (this.editor.options.mode !== mode) {
-            this.editor.setMode(mode);
+        if (this.editor.getMode() !== mode) {
+            if (this.editor.options.mode === 'code') {
+                if (this.jsonEditorIsValid()) {
+                    this.editor.setMode(mode);
+                } else {
+                    this.props.openErrorMessage('There seems to be an issue with your json, please fix all remaining issues and try again');
+                    this.props.jsonChangeMode(this.editor.getMode());
+                }
+            }
+
+            if (this.editor.options.mode !== 'code') {
+                this.editor.setMode(mode);
+            }
         }
     }
 
@@ -93,6 +117,7 @@ export class JSONEditor extends Component {
 
 JSONEditor.propTypes = {
     dataChanged: PropTypes.func,
+    jsonChangeMode: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -106,6 +131,16 @@ const mapStateToProps = (state) => ({
     format: state.jsonEditor.format,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+    jsonChangeMode(mode) {
+        dispatch(jsonEditorChangeMode(mode));
+    },
+    openErrorMessage(message) {
+        dispatch(openErrorDialog({ message }));
+    },
+});
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(JSONEditor);

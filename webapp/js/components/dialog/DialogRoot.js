@@ -1,44 +1,69 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import NewNamespaceDialog from './NewNamespaceDialog';
-import NewKeyDialog from './NewKeyDialog';
-import ConfirmDeleteNamespaceDialog from './ConfirmDeleteNamespaceDialog';
-import ConfirmDeleteKeyDialog from './ConfirmDeleteKeyDialog';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+import { closeDialog } from 'actions/dialogActions';
 
-const DIALOG_COMPONENTS = {
-    NEW_NAMESPACE: NewNamespaceDialog,
-    NEW_KEY: NewKeyDialog,
-    CONFIRM_DELETE_NAMESPACE: ConfirmDeleteNamespaceDialog,
-    CONFIRM_DELETE_KEY: ConfirmDeleteKeyDialog,
-};
+class DialogRoot extends Component {
 
-export class DialogRoot extends Component {
+    static buildButton(action, text, primary = false) {
+        return (<FlatButton
+            label={text}
+            primary={primary}
+            onTouchTap={action}
+        />);
+    }
 
     render() {
-        const { dialogType, dialogprops } = this.props;
-        if (!dialogType) {
-            return null;
-        }
-        const DialogType = DIALOG_COMPONENTS[dialogType];
-        return (
+        const { title,
+                cancelAction,
+                cancelLabel,
+                approveAction,
+                approveLabel,
+                contentStyle,
+                defaultCloseDialog } = this.props;
 
-            <div>
-                <DialogType dialogprops = {dialogprops} />
-            </div>
-        );
+        const actions = [];
+
+        // TODO: Clean this up
+        const finalAction = () => {
+            approveAction();
+            defaultCloseDialog();
+        };
+
+        actions.push(DialogRoot.buildButton(cancelAction || defaultCloseDialog, cancelLabel || 'Cancel'));
+        if (approveAction) actions.push(DialogRoot.buildButton(finalAction, approveLabel || 'Done', true));
+
+        return (<Dialog
+            open
+            title={title}
+            actions={actions}
+            modal={false}
+            contentStyle={contentStyle || {}}
+            onRequestClose={defaultCloseDialog}
+        >
+            {this.props.children}
+        </Dialog>);
     }
 }
 
 DialogRoot.propTypes = {
-    dialogType: PropTypes.string,
-    dialogprops: PropTypes.shape({}),
+    title: PropTypes.string,
+    cancelLabel: PropTypes.string,
+    approveLabel: PropTypes.string,
+    cancelAction: PropTypes.func,
+    approveAction: PropTypes.func,
+    defaultCloseDialog: PropTypes.func,
+    contentStyle: PropTypes.object,
 };
 
-const mapStateToProps = (state) => ({
-    dialogType: state.dialog.type,
-    dialogprops: state.dialog.props,
+const mapDispatchToProps = dispatch => ({
+    defaultCloseDialog() {
+        dispatch(closeDialog());
+    },
 });
 
 export default connect(
-    mapStateToProps
+    null,
+    mapDispatchToProps
 )(DialogRoot);

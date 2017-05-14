@@ -48,8 +48,8 @@ export class EditToolbar extends React.Component {
         this.handleDropDownMenuChange = this.handleDropDownMenuChange.bind(this);
     }
 
-    handleDropDownMenuChange(event, index, value) {
-        this.props.jsonChangeMode(value);
+    handleDropDownMenuChange(event, index, mode) {
+        this.props.jsonChangeMode(mode);
     }
 
     renderTreeEdit() {

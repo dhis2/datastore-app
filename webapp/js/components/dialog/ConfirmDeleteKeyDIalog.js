@@ -1,67 +1,52 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import DialogRoot from './DialogRoot';
 import { deleteKey } from 'actions/actions';
-import { closeConfirmDeleteKeyDialog } from 'actions/dialogActions';
 
 export class ConfirmDeleteKeyDialog extends Component {
 
-    handleCancel() {
-        this.props.closeDialog();
+    constructor(props) {
+        super(props);
+        this.handleConfirmed = this.handleConfirmed.bind(this);
     }
 
     handleConfirmed() {
-        const { namespace, key } = { ...this.props.dialogprops };
-        this.props.deleteKeyInNamespace(namespace, key);
+        const { namespace, keyValue } = { ...this.props };
+        this.props.deleteKeyInNamespace(namespace, keyValue);
     }
 
     render() {
-        const actions = [<FlatButton
-            label="Cancel"
-            primary={false}
-            onTouchTap={this.handleCancel.bind(this)}
-        />,
-            <FlatButton
-                label="Delete"
-                primary
-                onTouchTap={this.handleConfirmed.bind(this)}
-            />,
-        ];
         return (
-            <Dialog
-                actions={actions}
-                modal={false}
-                open
+            <DialogRoot
+                approveAction={this.handleConfirmed}
+                approveLabel={'Delete'}
                 contentStyle={{ maxWidth: '400px' }}
-                onRequestClose={this.handleCancel.bind(this)}
             >
-                Are you sure you want to delete '{this.props.dialogprops.key}' in {this.props.dialogprops.namespace}?
-            </Dialog>
+                Are you sure you want to delete '{this.props.keyValue}' in {this.props.namespace}?
+            </DialogRoot>
         );
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    closeDialog() {
-        dispatch(closeConfirmDeleteKeyDialog());
-    },
+const mapStateToProps = state => ({
+    namespace: state.dialog.namespace,
+    keyValue: state.dialog.key,
+});
+
+const mapDispatchToProps = dispatch => ({
     deleteKeyInNamespace(namespace, key) {
         dispatch(deleteKey(namespace, key));
-        dispatch(closeConfirmDeleteKeyDialog());
     },
 });
 
 ConfirmDeleteKeyDialog.propTypes = {
-    dialogprops: PropTypes.shape({
-        namespace: PropTypes.string.isRequired,
-        key: PropTypes.string.isRequired,
-    }),
+    namespace: PropTypes.string.isRequired,
+    keyValue: PropTypes.string.isRequired,
     closeDialog: PropTypes.func,
     deleteKeyInNamespace: PropTypes.func,
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(ConfirmDeleteKeyDialog);

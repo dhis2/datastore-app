@@ -13,7 +13,7 @@ const dialog = (state = initialState, action) => {
             return {
                 ...state,
                 type: action.dialogType,
-                props: action.dialogprops,
+                ...action.dialogprops,
             };
         }
 
@@ -28,9 +28,7 @@ const dialog = (state = initialState, action) => {
 
     default:
         {
-            return {
-                ...state,
-            };
+            return state;
         }
     }
 };

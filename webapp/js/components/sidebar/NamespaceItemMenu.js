@@ -8,8 +8,8 @@ import ShowChart from 'material-ui/svg-icons/editor/show-chart';
 import MenuItem from 'material-ui/MenuItem';
 import History from 'material-ui/svg-icons/action/history';
 import IconButtonElement from 'components/utils/IconButtonElement';
-import { openKeyDialog,
-         openConfirmDeleteNamespaceDialog } from 'actions/dialogActions';
+import { openDialog } from 'actions/dialogActions';
+import * as dialog from 'constants/dialogTypes';
 
 const anchorOrigin = {
     vertical: 'bottom',
@@ -37,12 +37,12 @@ export class NamespaceItemMenu extends Component {
 
         return (
               <IconMenu disableAutoFocus
-                  iconButtonElement={ <IconButtonElement /> }
-                  anchorOrigin={ anchorOrigin }
-                  targetOrigin={ targetOrigin }
+                  iconButtonElement={<IconButtonElement />}
+                  anchorOrigin={anchorOrigin}
+                  targetOrigin={targetOrigin}
                   {...props}
               >
-                  <MenuItem leftIcon={<NoteAdd />} onTouchTap={ this.createKey.bind(this, name) }>
+                  <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.createKey.bind(this, name)}>
                       New key
                   </MenuItem>
                   <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>
@@ -51,7 +51,7 @@ export class NamespaceItemMenu extends Component {
                   <MenuItem containerElement={<Link to={`/history/${name}`} />} leftIcon={<History />}>
                       History
                   </MenuItem>
-                  <MenuItem leftIcon={<Delete />} onTouchTap={ this.deleteNamespace.bind(this, name) }>
+                  <MenuItem leftIcon={<Delete />} onTouchTap={this.deleteNamespace.bind(this, name)}>
                       Delete
                   </MenuItem>
               </IconMenu>
@@ -65,12 +65,12 @@ NamespaceItemMenu.propTypes = {
     newKey: PropTypes.func,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteNamespace(namespace) {
-        dispatch(openConfirmDeleteNamespaceDialog({ namespace }));
+        dispatch(openDialog(dialog.CONFIRM_DELETE_NAMESPACE, { namespace }));
     },
     newKey(namespace) {
-        dispatch(openKeyDialog({ namespace }));
+        dispatch(openDialog(dialog.NEW_KEY, { namespace }));
     },
 });
 

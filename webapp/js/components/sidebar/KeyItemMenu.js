@@ -6,7 +6,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Delete from 'material-ui/svg-icons/action/delete';
 import IconButtonElement from '../utils/IconButtonElement';
 import History from 'material-ui/svg-icons/action/history';
-import { openConfirmDeleteKeyDialog } from 'actions/dialogActions';
+import { openDialog } from 'actions/dialogActions';
+import * as dialog from 'constants/dialogTypes';
 
 
 const anchorOrigin = {
@@ -30,9 +31,9 @@ export class KeyItemMenu extends Component {
 
         return (
             <IconMenu disableAutoFocus
-                anchorOrigin={ anchorOrigin }
-                targetOrigin={ targetOrigin }
-                iconButtonElement={ <IconButtonElement /> }
+                anchorOrigin={anchorOrigin}
+                targetOrigin={targetOrigin}
+                iconButtonElement={<IconButtonElement />}
                 {...props}
             >
                 <MenuItem containerElement={<Link to={`/history/${namespace}/${keyName}`} />} leftIcon={<History />}>
@@ -52,9 +53,9 @@ KeyItemMenu.propTypes = {
     deleteKeyInNamespace: PropTypes.func,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteKeyInNamespace(namespace, key) {
-        dispatch(openConfirmDeleteKeyDialog({ namespace, key }));
+        dispatch(openDialog(dialog.CONFIRM_DELETE_KEY, { namespace, key }));
     },
 });
 

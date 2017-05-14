@@ -1,65 +1,50 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import { closeConfirmDeleteNamespaceDialog } from 'actions/dialogActions';
+import DialogRoot from './DialogRoot';
 import { deleteNamespace } from 'actions/actions';
 
 export class ConfirmDeleteNamespaceDialog extends Component {
 
-    handleCancel() {
-        this.props.closeDialog();
+    constructor(props) {
+        super(props);
+        this.handleConfirmed = this.handleConfirmed.bind(this);
     }
 
     handleConfirmed() {
-        this.props.deleteNamespace(this.props.dialogprops.namespace);
+        this.props.deleteNamespace(this.props.namespace);
     }
 
     render() {
-        const actions = [<FlatButton
-            label="Cancel"
-            primary={false}
-            onTouchTap={this.handleCancel.bind(this)}
-        />,
-            <FlatButton
-                label="Delete"
-                primary
-                onTouchTap={this.handleConfirmed.bind(this)}
-            />,
-        ];
         return (
-            (<Dialog
-                actions={actions}
-                modal={false}
-                open
+            (<DialogRoot
+                approveAction={this.handleConfirmed}
+                approveLabel={'Delete'}
                 contentStyle={{ maxWidth: '400px' }}
-                onRequestClose={this.handleCancel.bind(this)}
             >
-                Are you sure you want to delete '{this.props.dialogprops.namespace}'?
-            </Dialog>)
+                Are you sure you want to delete '{this.props.namespace}'?
+            </DialogRoot>)
         );
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    closeDialog() {
-        dispatch(closeConfirmDeleteNamespaceDialog());
-    },
-    deleteNamespace(namespace) {
-        dispatch(deleteNamespace(namespace));
-        dispatch(closeConfirmDeleteNamespaceDialog());
-    },
-});
-
 ConfirmDeleteNamespaceDialog.propTypes = {
+    namespace: PropTypes.string.isRequired,
     closeDialog: PropTypes.func,
-    dialogprops: PropTypes.shape({
-        namespace: PropTypes.string.isRequired,
-    }),
     deleteNamespace: PropTypes.func,
 };
 
+const mapStateToProps = state => ({
+    namespace: state.dialog.namespace,
+});
+
+const mapDispatchToProps = dispatch => ({
+    deleteNamespace(namespace) {
+        dispatch(deleteNamespace(namespace));
+    },
+});
+
+
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(ConfirmDeleteNamespaceDialog);
