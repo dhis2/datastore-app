@@ -4,18 +4,18 @@ A DHIS2 app for managing and editing keys and namespaces in the datastore.
 # Installation
  Unzip, cd to directory then:
 ``` ssh 
-npm install
-npm start 
+yarn install
+yarn start 
  ```
 Build: 
 ``` ssh 
-npm run build
+yarn run build
 ``` 
 
 
 Test:
 ``` ssh 
-npm run test
+yarn run test
 ``` 
 
 ## Config
