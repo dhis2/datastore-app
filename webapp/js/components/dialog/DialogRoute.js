@@ -10,7 +10,7 @@ class DialogRoute extends Component {
 }
 
 DialogRoute.propTypes = {
-    component: PropTypes.object,
+    component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 export default DialogRoute;
