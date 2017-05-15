@@ -5,7 +5,7 @@
     "launch_path": "index.html",
     "appType": "APP",
     "icons": {
-        "48": "icon.png",
+        "48": "icon.png"
     },
     "developer": {
         "name": "DHIS",
