@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
+import React, {Component} from 'react';
+import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import Theme from 'utils/theme';
+import Api from '../../utils/api';
 
 const imageStyle = {
     height: '20px',
@@ -16,8 +17,11 @@ class NavigationBar extends Component {
     render() {
         return (
             <Toolbar style={ toolBarStyle }>
-                <img src="https://play.dhis2.org/test/api/staticContent/logo_banner" style={ imageStyle } alt="dhis2" />
-                <ToolbarTitle text="Datastore App" />
+                <a href={Api.baseUrl}>
+                    <img src="https://play.dhis2.org/test/api/staticContent/logo_banner" style={ imageStyle }
+                         alt="dhis2"/>
+                </a>
+                <ToolbarTitle text="Datastore App"/>
             </Toolbar>
         );
     }

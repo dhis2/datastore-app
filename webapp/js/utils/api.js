@@ -14,6 +14,7 @@ class Api
         this.url = url;
         this.cache = [];
         this.userId = "";
+        this.baseUrl = "..";
         this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
 
     }
@@ -30,6 +31,7 @@ class Api
                 console.info("Using URL: " + baseUrl);
                 console.info(`Loading: ${manifest.name} v${manifest.version}`);
                 console.info(`Built ${manifest.manifest_generated_at}`);
+                this.baseUrl = baseUrl;
                 return baseUrl + "/api";
             }).catch(e => {
                 return this.url;

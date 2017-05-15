@@ -1,13 +1,11 @@
 {
     "version": "1.0",
     "name": "Datastore App",
-    "description": "DHIS2 Datastore App. Allows you to manage namespaces and keys in the datastore.",
+    "description": "The Datastore App allows you to manage namespaces and keys in a datastore.",
     "launch_path": "index.html",
     "appType": "APP",
     "icons": {
-        "16": "database_16.png",
-        "48": "database_48.png",
-        "128": "database_128.png"
+        "48": "icon.png",
     },
     "developer": {
         "name": "DHIS",
@@ -16,7 +14,7 @@
     "default_locale": "en",
     "activities": {
         "dhis": {
-            "href": "*",
+            "href": "..",
             "namespace": "HISTORYSTORE"
         }
     }
