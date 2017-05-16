@@ -30,7 +30,7 @@ export class StatisticsDisplay extends Component {
     render() {
         const { history, params: { namespace } } = this.props;
         return (
-        <Paper className={ 'fff-display' }>
+        <Paper zDepth={0} className={ 'fff-display' }>
             <StatisticsToolbar namespace={ namespace } />
             <StatisticsArea list={ history } namespace={ namespace } />
         </Paper>

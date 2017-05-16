@@ -79,7 +79,7 @@ export class EditDisplay extends Component {
         }
 
         return (
-        <Paper className={'fff-display'}>
+        <Paper zDepth={0} className={'fff-display'}>
             <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
             <EditArea namespace = { namespace }
                 selectedKey = { key }

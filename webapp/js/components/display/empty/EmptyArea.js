@@ -7,9 +7,9 @@ import '../../../../style/display/display.scss';
 export class EmptyArea extends Component {
     render() {
         return (
-        <Paper className={'fff-display'}>
+        <div className={'fff-display'}>
             <ModeCommentIconWithText text={'Select a namespace and a key to edit.'} />
-        </Paper>
+        </div>
         );
     }
 }

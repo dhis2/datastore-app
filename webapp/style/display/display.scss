@@ -2,7 +2,8 @@
   display: flex;
   flex: 3;
   flex-direction: column;
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(238, 238, 238) !important;
+
 }
 
 .fff-display-area {
@@ -10,4 +11,6 @@
   flex-direction: column;
   flex: 3;
   overflow-y: auto;
+  margin-top: 15px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 }

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Spinner } from '../utils/Loaders';
+import React, {Component} from 'react';
+import {Spinner} from '../utils/Loaders';
 import Paper from 'material-ui/Paper';
 
 const alignmentStyle = {
@@ -10,11 +10,9 @@ const alignmentStyle = {
 class LoadingArea extends Component {
     render() {
         return (
-          <Paper className={'fff-display-area'}>
-              <div className={'fff-display-area'} style={ alignmentStyle }>
-                <Spinner size={'large'} />
-              </div>
-          </Paper>
+            <Paper zDepth={0} className={'fff-display-area'} style={alignmentStyle}>
+                <Spinner size={'large'}/>
+            </Paper>
         );
     }
 }

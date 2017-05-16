@@ -35,7 +35,7 @@ export class HistoryDisplay extends Component {
         const { namespace, key } = this.props.params;
 
         return (
-        <Paper className={'fff-display'}>
+        <Paper zDepth={0} className={'fff-display'}>
             <HistoryToolbar namespace={ namespace } selectedKey={ key } />
             <HistoryArea list={ history } />
         </Paper>

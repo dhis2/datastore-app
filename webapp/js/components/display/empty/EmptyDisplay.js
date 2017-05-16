@@ -7,7 +7,7 @@ import '../../../../style/display/display.scss';
 class EmptyDisplay extends Component {
     render() {
         return (
-            <Paper className={'fff-display'}>
+            <Paper zDepth={0} className={'fff-display'}>
                 <EmptyToolbar />
                 <EmptyArea />
             </Paper>
