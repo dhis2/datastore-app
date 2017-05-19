@@ -1,7 +1,7 @@
 {
-  "name": "inf5750",
+  "name": "dhis-datastore",
   "version": "1.0.0",
-  "description": "Project related to course INF5750",
+  "description": "An app to edit and manage namespaces.",
   "main": "app.js",
   "scripts": {
     "build": "webpack -p --config ./webpack.production.config.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Glimlag/INF5750.git"
+    "url": "https://github.com/Glimlag/INF5750.git"
   },
   "author": "Steven Hicks, Pavel Jurásek & Birk",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Glimlag/INF5750/issues"
+    "url": "https://github.com/dhis2/datastore-app/issues"
   },
-  "homepage": "https://github.com/Glimlag/INF5750#readme",
+  "homepage": "https://github.com/dhis2/datastore-app",
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.1.1",

@@ -21,7 +21,7 @@ ErrorDialog.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    message: state.dialog.props.message,
+    message: state.dialog.message,
 });
 
 export default connect(

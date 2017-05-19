@@ -1,8 +1,9 @@
-import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
+import React, {PropTypes, Component} from 'react';
+import {connect} from 'react-redux';
 import JSEditor from 'jsoneditor/dist/jsoneditor.min.js';
-import { jsonEditorChangeMode } from 'actions/jsonEditorActions';
-import { openErrorDialog } from 'actions/dialogActions';
+import * as dialogTypes from 'constants/dialogTypes';
+import {jsonEditorChangeMode} from 'actions/jsonEditorActions';
+import {openDialog} from 'actions/dialogActions';
 import '../../../style/vendor/jsoneditor.css';
 
 export class JSONEditor extends Component {
@@ -20,14 +21,32 @@ export class JSONEditor extends Component {
         this.initEditor();
     }
 
-    /* Need custom update condition as we only re-render when the value changes.*/
+    /* Need custom update condition as we only re-render when switching keys/namespace .
+    * The state of the editor is lost if we update the state without saving*/
     shouldComponentUpdate(nextProps) {
-        this.handleJsonEditor(nextProps);
-        return this.props.value !== nextProps.value;
+        const {value, namespace, selectedKey} = this.props;
+        return value !== nextProps.value || namespace !== nextProps.namespace ||
+            selectedKey !== nextProps.selectedKey;
+    }
+
+    /* Handle the jsonEditor props here, as if we re-render the component, the state is lost,
+    * as it's inside the jsoneditor which is not a react-component. */
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.jsonEditor !== this.props.jsonEditor) {
+            this.handleJsonEditor(nextProps);
+        }
     }
 
     componentWillUpdate(nextProps) {
         this.editor.set(nextProps.value);
+        this.handleJsonEditor(nextProps);
+    }
+
+    removeBuiltInMenu() {
+        //Remove built-in menu
+        if (this.editor && this.editor.frame && this.editor.frame.contains(this.editor.menu)) {
+            this.editor.frame.removeChild(this.editor.menu);
+        }
     }
 
     changedEvent() {
@@ -44,7 +63,7 @@ export class JSONEditor extends Component {
     }
 
     handleJsonEditor(props) {
-        const { search, collapse, expand, undo, redo, mode, compact, format } = props;
+        const {search, collapse, expand, undo, redo, mode, compact, format} = props.jsonEditor;
 
         if (this.editor.getMode() !== 'code') {
             this.editor.search(search || '');
@@ -89,6 +108,7 @@ export class JSONEditor extends Component {
                 this.editor.setMode(mode);
             }
         }
+        this.removeBuiltInMenu();
     }
 
     initEditor() {
@@ -98,6 +118,7 @@ export class JSONEditor extends Component {
                 onChange: this.changedEvent,
             };
             this.editor = new JSEditor(this.editorContainer, opts);
+            this.removeBuiltInMenu();
             this.editor.set(this.props.value);
         }
     }
@@ -121,14 +142,7 @@ JSONEditor.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    search: state.jsonEditor.jsonSearchValue,
-    collapse: state.jsonEditor.collapse,
-    expand: state.jsonEditor.expand,
-    undo: state.jsonEditor.undo,
-    redo: state.jsonEditor.redo,
-    mode: state.jsonEditor.mode,
-    compact: state.jsonEditor.compact,
-    format: state.jsonEditor.format,
+    jsonEditor: state.jsonEditor
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -136,7 +150,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(jsonEditorChangeMode(mode));
     },
     openErrorMessage(message) {
-        dispatch(openErrorDialog({ message }));
+        dispatch(openDialog(dialogTypes.ERROR_DIALOG, {message}));
     },
 });
 

@@ -16,7 +16,7 @@ export class EditArea extends Component {
     }
 
     render() {
-        const { value } = this.props;
+        const { value, namespace, selectedKey } = this.props;
 
         const backgroundStyle = {
             backgroundColor: Theme.palette.primary3Color,
@@ -24,7 +24,9 @@ export class EditArea extends Component {
 
         return (
             <div className={'fff-display-area'} style={backgroundStyle}>
-                <JSONEditor value={value} dataChanged={this.dataFromJSONEditor.bind(this)} />
+                <JSONEditor value={value} namespace={namespace}
+                            selectedKey={selectedKey}
+                            dataChanged={this.dataFromJSONEditor.bind(this)} />
             </div>
         );
     }
@@ -32,6 +34,9 @@ export class EditArea extends Component {
 
 EditArea.propTypes = {
     valueChange: PropTypes.func,
+    selectedKey: PropTypes.string,
+    namespace: PropTypes.string,
+    value: PropTypes.any,
 };
 
 
