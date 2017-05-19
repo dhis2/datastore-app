@@ -33,7 +33,7 @@ export class NamespaceItemMenu extends Component {
     }
 
     render() {
-        const { name, ...props } = this.props;
+        const { name, deleteNamespace, newKey, ...props } = this.props;
 
         return (
               <IconMenu disableAutoFocus

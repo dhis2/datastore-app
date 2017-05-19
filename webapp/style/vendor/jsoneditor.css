@@ -224,8 +224,6 @@ div.jsoneditor-tree table.jsoneditor-tree {
 div.jsoneditor-outer {
   width: 100%;
   height: 100%;
-  margin: -35px 0 0 0;
-  padding: 35px 0 0 0;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

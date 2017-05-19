@@ -27,7 +27,7 @@ export class KeyItemMenu extends Component {
     }
 
     render() {
-        const { namespace, keyName, ...props } = this.props;
+        const { namespace, keyName, deleteKeyInNamespace, ...props } = this.props;
 
         return (
             <IconMenu disableAutoFocus

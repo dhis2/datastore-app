@@ -23,7 +23,7 @@ export class EditArea extends Component {
         };
 
         return (
-            <div className={'fff-display-area'} style={backgroundStyle}>
+            <div className={'fff-display-area'}>
                 <JSONEditor value={value} namespace={namespace}
                             selectedKey={selectedKey}
                             dataChanged={this.dataFromJSONEditor.bind(this)} />
