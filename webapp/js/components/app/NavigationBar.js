@@ -14,12 +14,14 @@ const toolBarStyle = {
 };
 
 class NavigationBar extends Component {
+
     render() {
         return (
             <Toolbar style={ toolBarStyle }>
                 <a href={Api.baseUrl}>
-                    <img src="https://play.dhis2.org/test/api/staticContent/logo_banner" style={ imageStyle }
-                         alt="dhis2"/>
+                    <img src={`${Api.baseUrl}/api/staticContent/logo_banner`} style={ imageStyle }
+                         alt="dhis2"
+                    />
                 </a>
                 <ToolbarTitle text="Datastore Manager"/>
             </Toolbar>
