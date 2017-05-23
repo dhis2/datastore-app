@@ -56,12 +56,17 @@ export class EditDisplay extends Component {
     handleChangeValue(data, err) {
         const { valueChange } = this.props;
         const { namespace, key } = this.props.params;
+
         if (err) {
             this.setState({
                 ...this.state,
                 valueError: err,
             });
         } else {
+            this.setState({
+                ...this.state,
+                valueError: false
+            });
             valueChange(namespace, key, data);
         }
     }

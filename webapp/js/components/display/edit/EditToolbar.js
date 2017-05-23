@@ -58,19 +58,19 @@ export class EditToolbar extends React.Component {
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
                     <ToolbarGroup>
-                        <IconButton onTouchTap={this.props.handleSave}>
+                        <IconButton onTouchTap={this.props.handleSave} tooltip="Save">
                             <SaveIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonCollapse}>
+                        <IconButton onTouchTap={this.props.jsonCollapse} tooltip="Collapse">
                             <ExpandLessIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonExpand}>
+                        <IconButton onTouchTap={this.props.jsonExpand} tooltip="Expand">
                             <ExpandMoreIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonUndo}>
+                        <IconButton onTouchTap={this.props.jsonUndo} tooltip="Undo">
                             <UndoIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonRedo}>
+                        <IconButton onTouchTap={this.props.jsonRedo} tooltip="Redo">
                             <RedoIcon />
                         </IconButton>
                         <DropDownMenu value={this.props.mode}
@@ -96,13 +96,13 @@ export class EditToolbar extends React.Component {
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
                     <ToolbarGroup>
-                        <IconButton onTouchTap={this.props.handleSave}>
+                        <IconButton onTouchTap={this.props.handleSave} tooltip="Save">
                             <SaveIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonFormat}>
+                        <IconButton onTouchTap={this.props.jsonFormat} tooltip="Format">
                             <FormatAlignLeftIcon />
                         </IconButton>
-                        <IconButton onTouchTap={this.props.jsonCompact}>
+                        <IconButton onTouchTap={this.props.jsonCompact} tooltip="Format Compact">
                             <FormatAlignJustifyIcon />
                         </IconButton>
                         <DropDownMenu value={this.props.mode}

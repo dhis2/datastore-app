@@ -21,7 +21,7 @@ class NavigationBar extends Component {
                     <img src="https://play.dhis2.org/test/api/staticContent/logo_banner" style={ imageStyle }
                          alt="dhis2"/>
                 </a>
-                <ToolbarTitle text="Datastore App"/>
+                <ToolbarTitle text="Datastore Manager"/>
             </Toolbar>
         );
     }

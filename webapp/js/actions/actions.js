@@ -477,6 +477,11 @@ export function selectKey(namespace, key, value) {
     };
 }
 
+export function emptySnackbar() {
+    return {
+        type: actions.SNACKBAR_EMPTY
+    }
+}
 
  /**
   * fetchAndToggleNamespace - Fetches keys for a namespace and toggles the namespace

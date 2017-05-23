@@ -80,6 +80,13 @@ const snackbar = (state = initialState, action) => {
                 message: 'Failed to create.',
             };
         }
+        case actions.SNACKBAR_EMPTY:
+        {
+            return {
+                ...emptySnackbar
+            }
+        }
+
 
     default:
         {

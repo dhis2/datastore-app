@@ -11,6 +11,7 @@ export const LOAD_VALUE = 'LOAD_VALUE';
 
 export const FILTER_BY_SEARCH = 'FILTER_BY_SEARCH';
 
+export const SNACKBAR_EMPTY = 'SNACKBAR_EMPTY';
 
 /**
  *  Async Action Types
