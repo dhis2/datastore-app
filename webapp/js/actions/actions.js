@@ -717,6 +717,9 @@ export function deleteNamespace(namespace) {
                 dispatch(receiveDeleteNamespace(namespace));
                 return success;
             })
-            .catch(() => dispatch(rejectDeleteNamespace(namespace)));
+            .catch((err) =>  {
+                console.log(err);
+                dispatch(rejectDeleteNamespace(namespace))
+            });
     };
 }

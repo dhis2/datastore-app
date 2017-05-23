@@ -63,10 +63,10 @@ export class JSONEditor extends Component {
     }
 
     handleJsonEditor(props) {
-        const {search, collapse, expand, undo, redo, mode, compact, format} = props.jsonEditor;
+        const {jsonSearchValue, collapse, expand, undo, redo, mode, compact, format} = props.jsonEditor;
 
         if (this.editor.getMode() !== 'code') {
-            this.editor.search(search || '');
+            this.editor.search(jsonSearchValue || '');
             if (collapse) {
                 this.editor.collapseAll();
             }

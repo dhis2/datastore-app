@@ -47,7 +47,7 @@ class Api
     }
 
     deleteNamespace(namespace) {
-        return getInstance().then(d2 => d2.dataStore.delete(namespace))
+        return getInstance().then(d2 => d2.dataStore.delete(namespace)
             .then(response => {
                 this.cache[namespace] = [];
                 this.updateNamespaceHistory(namespace, null, {
@@ -55,7 +55,7 @@ class Api
                     user: d2.currentUser.username,
                 });
                 return response;
-            });
+            }));
     }
 
     getKeys(namespace) {
