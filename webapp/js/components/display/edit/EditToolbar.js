@@ -35,6 +35,8 @@ const styles = {
     },
     searchBar: {
         marginBottom: '25px',
+        maxWidth: '150px',
+        paddingLeft: '16px'
     },
 };
 
@@ -57,32 +59,37 @@ export class EditToolbar extends React.Component {
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
+
                     <ToolbarGroup>
                         <IconButton onTouchTap={this.props.handleSave} tooltip="Save">
                             <SaveIcon />
                         </IconButton>
+                        <DropDownMenu value={this.props.mode}
+                                      style={styles.dropDownMenu}
+                                      onChange={this.handleDropDownMenuChange}
+                                      iconStyle={styles.dropDownMenuIcon}
+                        >
+                            <MenuItem value={'tree'} primaryText="Tree" />
+                            <MenuItem value={'code'} primaryText="Code" />
+                        </DropDownMenu>
                         <IconButton onTouchTap={this.props.jsonCollapse} tooltip="Collapse">
                             <ExpandLessIcon />
                         </IconButton>
                         <IconButton onTouchTap={this.props.jsonExpand} tooltip="Expand">
+
                             <ExpandMoreIcon />
                         </IconButton>
+
                         <IconButton onTouchTap={this.props.jsonUndo} tooltip="Undo">
                             <UndoIcon />
                         </IconButton>
                         <IconButton onTouchTap={this.props.jsonRedo} tooltip="Redo">
                             <RedoIcon />
                         </IconButton>
-                        <DropDownMenu value={this.props.mode}
-                            style={styles.dropDownMenu}
-                            onChange={this.handleDropDownMenuChange}
-                            iconStyle={styles.dropDownMenuIcon}
-                        >
-                            <MenuItem value={'tree'} primaryText="Tree" />
-                            <MenuItem value={'code'} primaryText="Code" />
-                        </DropDownMenu>
+
                         <JSONSearchBar style={styles.searchBar} changeAction={this.props.jsonSearchAction} />
-                        <ToolbarSeparator />
+                    </ToolbarGroup>
+                    <ToolbarGroup>
                         <DisplayToolbarTitle path={path} />
                     </ToolbarGroup>
                 </Toolbar>
@@ -99,21 +106,23 @@ export class EditToolbar extends React.Component {
                         <IconButton onTouchTap={this.props.handleSave} tooltip="Save">
                             <SaveIcon />
                         </IconButton>
+                        <DropDownMenu value={this.props.mode}
+                                      style={styles.dropDownMenu}
+                                      onChange={this.handleDropDownMenuChange}
+                                      iconStyle={styles.dropDownMenuIcon}
+                        >
+                            <MenuItem value={'tree'} primaryText="Tree" />
+                            <MenuItem value={'code'} primaryText="Code" />
+                        </DropDownMenu>
                         <IconButton onTouchTap={this.props.jsonFormat} tooltip="Format">
                             <FormatAlignLeftIcon />
                         </IconButton>
                         <IconButton onTouchTap={this.props.jsonCompact} tooltip="Format Compact">
                             <FormatAlignJustifyIcon />
                         </IconButton>
-                        <DropDownMenu value={this.props.mode}
-                            style={styles.dropDownMenu}
-                            onChange={this.handleDropDownMenuChange}
-                            iconStyle={styles.dropDownMenuIcon}
-                        >
-                            <MenuItem value={'tree'} primaryText="Tree" />
-                            <MenuItem value={'code'} primaryText="Code" />
-                        </DropDownMenu>
-                        <ToolbarSeparator />
+
+                    </ToolbarGroup>
+                    <ToolbarGroup>
                         <DisplayToolbarTitle path={path} />
                     </ToolbarGroup>
                 </Toolbar>

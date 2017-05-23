@@ -8,6 +8,7 @@ class DisplayToolbarTitle extends Component {
     renderPath(path) {
         const chevStyle = {
             fill: Theme.palette.primary1Color,
+            padding: '0 16px 0 16px',
             verticalAlign: 'middle',
         };
 

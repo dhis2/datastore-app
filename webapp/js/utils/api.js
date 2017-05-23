@@ -15,7 +15,7 @@ class Api
         this.cache = [];
         this.userId = "";
         this.baseUrl = "..";
-        this.ignoredStores = ['METADATASTORE', 'HISTORYSTORE'];
+        this.ignoredStores = ['HISTORYSTORE'];
 
     }
 
