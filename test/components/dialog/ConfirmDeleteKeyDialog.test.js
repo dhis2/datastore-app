@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import Dialog from 'material-ui/Dialog';
 import { ConfirmDeleteKeyDialog } from '../../../webapp/js/components/dialog/ConfirmDeleteKeyDialog';
+import DialogRoot from '../../../webapp/js/components/dialog/DialogRoot';
 
 describe('Component: ConfirmDeleteKeyDialog', () => {
     let component;
@@ -21,6 +22,10 @@ describe('Component: ConfirmDeleteKeyDialog', () => {
     });
 
     it('should render Dialog', () => {
-        expect(component.find(Dialog)).to.have.length(1);
+        expect(component.find(Dialog).at(2)).to.have.length(1);
     });
+
+    it('should render DialogRoot', () => {
+        expect(component.find(DialogRoot)).to.have.length(1);
+    })
 });

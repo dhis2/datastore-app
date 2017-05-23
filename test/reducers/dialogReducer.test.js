@@ -1,15 +1,13 @@
 import { expect } from 'chai';
 import reducer from '../../webapp/js/reducers/dialogReducer';
 
-const emptyDialog = { type: null, props: {} };
+const emptyDialog = { dialogType: null };
 
 describe('Dialog Reducer', () => {
     let initialState;
 
     beforeEach(() => {
-        initialState = {
-            ...emptyDialog,
-        };
+        initialState = emptyDialog;
     });
 
     it('should handle any action', () => {
@@ -19,15 +17,18 @@ describe('Dialog Reducer', () => {
     })
 
     it('Should handle OPEN_DIALOG', () => {
+
+        const props = {
+            prop: 'some prop'
+        }
         const action = {
             type: 'OPEN_DIALOG',
             dialogType: 'some type',
-            dialogprops: 'some props',
+            dialogprops:  props ,
         };
-
         const expectedResult = {
-            type: 'some type',
-            props: 'some props',
+            dialogType: 'some type',
+            ...props,
         };
 
         const newState = reducer(initialState, action);

@@ -12,7 +12,7 @@ describe('dialog actions', () => {
             dialogprops,
             dialogType,
         };
-        expect(actions.openNamespaceDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.openDialog(dialogType, dialogprops)).to.eql(expectedAction);
     });
 
     it('should close a namespace dialog', () => {
@@ -20,10 +20,8 @@ describe('dialog actions', () => {
         const dialogType = dialogTypes.NEW_NAMESPACE;
         const expectedAction = {
             type: actionTypes.CLOSE_DIALOG,
-            dialogprops,
-            dialogType,
         };
-        expect(actions.closeNamespaceDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.closeDialog()).to.eql(expectedAction);
     });
 
     it('should open a key dialog', () => {
@@ -31,10 +29,10 @@ describe('dialog actions', () => {
         const dialogType = dialogTypes.NEW_KEY;
         const expectedAction = {
             type: actionTypes.OPEN_DIALOG,
-            dialogprops,
             dialogType,
+            dialogprops
         };
-        expect(actions.openKeyDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.openDialog(dialogType, dialogprops)).to.eql(expectedAction);
     });
 
     it('should close a key dialog', () => {
@@ -42,10 +40,8 @@ describe('dialog actions', () => {
         const dialogType = dialogTypes.NEW_KEY;
         const expectedAction = {
             type: actionTypes.CLOSE_DIALOG,
-            dialogprops,
-            dialogType,
         };
-        expect(actions.closeKeyDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.closeDialog()).to.eql(expectedAction);
     });
 
     it('should open a delete namesapce dialog', () => {
@@ -56,7 +52,7 @@ describe('dialog actions', () => {
             dialogprops,
             dialogType,
         };
-        expect(actions.openConfirmDeleteNamespaceDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.openDialog(dialogType, dialogprops)).to.eql(expectedAction);
     });
 
     it('should close a delete namespace dialog', () => {
@@ -64,10 +60,8 @@ describe('dialog actions', () => {
         const dialogType = dialogTypes.CONFIRM_DELETE_NAMESPACE;
         const expectedAction = {
             type: actionTypes.CLOSE_DIALOG,
-            dialogprops,
-            dialogType,
         };
-        expect(actions.closeConfirmDeleteNamespaceDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.closeDialog()).to.eql(expectedAction);
     });
 
     it('should open a delete key dialog', () => {
@@ -78,17 +72,14 @@ describe('dialog actions', () => {
             dialogprops,
             dialogType,
         };
-        expect(actions.openConfirmDeleteKeyDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.openDialog(dialogType, dialogprops)).to.eql(expectedAction);
     });
 
     it('should close a delete key dialog', () => {
-        const dialogprops = { testProps: 'testProps' };
         const dialogType = dialogTypes.CONFIRM_DELETE_KEY;
         const expectedAction = {
             type: actionTypes.CLOSE_DIALOG,
-            dialogprops,
-            dialogType,
         };
-        expect(actions.closeConfirmDeleteKeyDialog(dialogprops)).to.eql(expectedAction);
+        expect(actions.closeDialog()).to.eql(expectedAction);
     });
 });

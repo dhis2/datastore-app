@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import * as actions from '../../webapp/js/actions/actions';
 import * as types from '../../webapp/js/constants/actionTypes';
+import { searchSidebarChange } from '../../webapp/js/actions/sidebarActions'
 
 describe('actions', () => {
     it('should search the sidebar use the search value', () => {
@@ -9,7 +10,7 @@ describe('actions', () => {
             type: types.SEARCH_VALUE_CHANGE,
             searchValue,
         };
-        expect(actions.searchSidebarChange(searchValue)).to.eql(expectedAction);
+        expect(searchSidebarChange(searchValue)).to.eql(expectedAction);
     });
 
     it('should request and wait for a set of namespaces', () => {

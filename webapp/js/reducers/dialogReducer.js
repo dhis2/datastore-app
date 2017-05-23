@@ -1,6 +1,6 @@
 import * as actions from 'constants/actionTypes';
 
-const emptyDialog = { type: null, props: {} };
+const emptyDialog = { dialogType: null };
 const initialState = {
     ...emptyDialog,
 };
@@ -10,10 +10,11 @@ const dialog = (state = initialState, action) => {
 
     case actions.OPEN_DIALOG:
         {
+            const { dialogType, dialogprops} = action;
             return {
                 ...state,
-                type: action.dialogType,
-                ...action.dialogprops,
+                dialogType,
+                ...dialogprops,
             };
         }
 

@@ -31,7 +31,7 @@ DialogRouter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    dialogType: state.dialog.type,
+    dialogType: state.dialog.dialogType,
 });
 
 export default connect(

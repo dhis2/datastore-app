@@ -10,7 +10,7 @@ import * as actions from 'constants/actionTypes';
 export function openDialog(dialogType, dialogprops) {
     return {
         type: actions.OPEN_DIALOG,
-        dialogprops: { ...dialogprops },
+        dialogprops: { ...dialogprops }, //ensure not null
         dialogType,
     };
 }
