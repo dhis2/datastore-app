@@ -1,12 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import Delete from 'material-ui/svg-icons/action/delete';
 import IconMenu from 'material-ui/IconMenu';
-import ShowChart from 'material-ui/svg-icons/editor/show-chart';
 import MenuItem from 'material-ui/MenuItem';
-import History from 'material-ui/svg-icons/action/history';
 import IconButtonElement from 'components/utils/IconButtonElement';
 import { openDialog } from 'actions/dialogActions';
 import * as dialog from 'constants/dialogTypes';
@@ -45,13 +42,8 @@ export class NamespaceItemMenu extends Component {
                   <MenuItem leftIcon={<NoteAdd />} onTouchTap={this.createKey.bind(this, name)}>
                       New key
                   </MenuItem>
-                  <MenuItem leftIcon={<ShowChart />} containerElement={<Link to={`/stats/${name}`} />}>
-                      Statistics
-                  </MenuItem>
-                  <MenuItem containerElement={<Link to={`/history/${name}`} />} leftIcon={<History />}>
-                      History
-                  </MenuItem>
-                  <MenuItem leftIcon={<Delete />} onTouchTap={this.deleteNamespace.bind(this, name)}>
+
+                  <MenuItem leftIcon={<Delete />} onTouchTap={ this.deleteNamespace.bind(this, name) }>
                       Delete
                   </MenuItem>
               </IconMenu>

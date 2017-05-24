@@ -15,7 +15,7 @@ class Api
         this.cache = [];
         this.userId = "";
         this.baseUrl = "..";
-        this.ignoredStores = ['HISTORYSTORE'];
+        this.ignoredStores = [''];
 
     }
 
@@ -37,7 +37,6 @@ class Api
                 return this.url;
             }).then(baseUrl  => init({baseUrl, headers}).then(d2 =>
                 this.userId = d2.currentUser.username));
-        this.historyStore = getInstance().then(d2 => d2.dataStore.get('HISTORYSTORE'));
         return this;
     }
 
@@ -50,10 +49,6 @@ class Api
         return getInstance().then(d2 => d2.dataStore.delete(namespace)
             .then(response => {
                 this.cache[namespace] = [];
-                this.updateNamespaceHistory(namespace, null, {
-                    action: DELETED,
-                    user: d2.currentUser.username,
-                });
                 return response;
             }));
     }
@@ -116,8 +111,6 @@ class Api
 
                 this.cache[namespace][key] = value;
 
-                log && this.updateHistory(namespace, key, value, CREATED);
-
                 return response;
             });
     }
@@ -137,7 +130,6 @@ class Api
                 }
 
                 this.cache[namespace][key] = value;
-                log && this.updateHistory(namespace, key, value, UPDATED);
                 return response;
             });
     }
@@ -149,78 +141,10 @@ class Api
                 if (this.cache[namespace] !== undefined && this.cache[namespace][key] !== undefined) {
                     delete this.cache[namespace][key];
                 }
-
-                this.updateHistory(namespace, key, {}, DELETED);
-
                 return response;
             });
     }
 
-    /**
-     * @private
-     * @param namespace
-     * @param key Return history of a key if presenter, history of namespace otherwise
-     */
-    getHistory(namespace, key = null) {
-        console.log("GETHISTORY")
-        const id = key === null ? namespace : this.buildId(namespace, key);
-        return this.historyStore.then(hsStore => hsStore.get(id));
-    }
-
-    /**
-     * Explicitly access key history with response status check
-     * @param namespace
-     * @param key
-     */
-    getHistoryOfKey(namespace, key) {
-        const id = this.buildId(namespace, key);
-        return this.historyStore.then(hsStore => {
-            return hsStore.get(id)
-        });
-    }
-
-    /**
-     * Explicitly access namespace history with response status check
-     * @param namespace
-     */
-    getHistoryOfNamespace(namespace) {
-        return this.historyStore.then(hsStore => hsStore.get(namespace));
-    }
-
-    /**
-     * Updates the history of a key, and calls
-     * updateNamespaceHistory
-     * @param namespace
-     * @param key
-     * @param newValue
-     * @param action
-     */
-    updateHistory(namespace, key, newValue, action) {
-        const id = this.buildId(namespace, key);
-        const historyRecord = {
-            name: key,
-            action,
-            date: new Date(),
-            user: this.userId,
-            value: newValue,
-        };
-
-        return this.getHistory(namespace, key)
-            .then(history => {
-                if (history !== null) { // update history
-                    history.unshift(historyRecord);
-                    this.updateValue('HISTORYSTORE', id, history, false);
-                }
-            })
-            .catch(e => {
-                console.log(e)
-                if (e.httpStatusCode === 404) { // this history record is first
-                    console.log("createvalue")
-                    this.createValue('HISTORYSTORE', id, [historyRecord], false);
-                    return null;
-                }
-            }).then(() => this.updateNamespaceHistory(namespace, key, historyRecord));
-    }
 
     /**
      * Updates the history of the namespace

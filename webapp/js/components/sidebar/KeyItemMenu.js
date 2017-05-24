@@ -5,9 +5,9 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Delete from 'material-ui/svg-icons/action/delete';
 import IconButtonElement from '../utils/IconButtonElement';
-import History from 'material-ui/svg-icons/action/history';
 import { openDialog } from 'actions/dialogActions';
 import * as dialog from 'constants/dialogTypes';
+import { openConfirmDeleteKeyDialog } from 'actions/dialogActions';
 
 
 const anchorOrigin = {
@@ -36,9 +36,6 @@ export class KeyItemMenu extends Component {
                 iconButtonElement={<IconButtonElement />}
                 {...props}
             >
-                <MenuItem containerElement={<Link to={`/history/${namespace}/${keyName}`} />} leftIcon={<History />}>
-                    History
-                </MenuItem>
                 <MenuItem leftIcon={<Delete />} onTouchTap={this.deleteKey.bind(this, namespace, keyName)}>
                     Delete key
                 </MenuItem>
