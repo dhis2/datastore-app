@@ -32,7 +32,7 @@ class DialogRoot extends Component {
         };
 
         actions.push(DialogRoot.buildButton(cancelAction || defaultCloseDialog, cancelLabel || 'Cancel'));
-        if (approveAction) actions.push(DialogRoot.buildButton(finalAction, approveLabel || 'Done', true));
+        if (approveAction) actions.push(DialogRoot.buildButton(finalAction, approveLabel || 'Create', true));
 
         return (<Dialog
             open

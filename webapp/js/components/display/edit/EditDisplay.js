@@ -7,7 +7,8 @@ import { fetchAndDisplayKeyValue, fetchAndToggleNamespace,
     updateValue, valueChange, rejectUpdateValue } from 'actions/actions';
 
 import '../../../../style/display/display.scss';
-
+import { withRouter } from 'react-router';
+import ConfirmNavigationDialog from '../../dialog/ConfirmNavigationDialog';
 export class EditDisplay extends Component {
 
     constructor() {
@@ -72,7 +73,7 @@ export class EditDisplay extends Component {
     }
 
     render() {
-        const { namespace, key } = this.props.params;
+        const { namespace, key, value, editedValue } = this.props.params;
 
         let path = '';
 
@@ -85,6 +86,8 @@ export class EditDisplay extends Component {
 
         return (
         <Paper zDepth={0} className={'fff-display'}>
+            <ConfirmNavigationDialog route={this.props.route} router={this.props.router}
+            value={this.props.value} editedValue={this.props.editedValue}/>
             <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
             <EditArea namespace = { namespace }
                 selectedKey = { key }
@@ -134,7 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditDisplay);
+)(EditDisplay));
