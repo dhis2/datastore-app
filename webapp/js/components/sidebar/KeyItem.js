@@ -20,7 +20,7 @@ const styles = {
 export class KeyItem extends Component {
     render() {
         const { index, namespace, keyName, router, params, routes, location, ...props } = this.props;
-        const isSelected = router.params.key === keyName;
+        const isSelected = params.key === keyName;
         return (
             <ListItem
                 primaryText={<div style={styles.primaryText}>{ keyName }</div>}

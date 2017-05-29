@@ -7,7 +7,7 @@ describe('Component: KeyItem', () => {
     let component;
 
     beforeEach(() => {
-        component = shallow(<KeyItem index={1} namespace={ 'test' } keyName={ 'test' } />);
+        component = shallow(<KeyItem index={1} params={{key:'test'}}namespace={ 'test' } keyName={ 'test' } />);
     });
 
     it('should render without exploding', () => {
