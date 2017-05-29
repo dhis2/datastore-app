@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 import TextField from 'material-ui/TextField';
 
 export class JSONSearchBar extends React.Component {
@@ -23,14 +23,16 @@ export class JSONSearchBar extends React.Component {
     render() {
         return (
             <TextField name={'searchbar'}
-                floatingLabelText={'Search JSON'}
-                floatingLabelStyle={{ top: '42px' }}
-                inputStyle={{ marginTop: '13px' }}
-                onChange={this.changeEvent}
-                value={this.props.value}
-                style={this.props.style}
-                onKeyUp={this.handleKeys}
-                ref={(searchField) => { this.searchField = searchField; }}
+                       floatingLabelText={'Search JSON'}
+                       floatingLabelStyle={{top: '42px'}}
+                       inputStyle={{marginTop: '13px'}}
+                       onChange={this.changeEvent}
+                       style={this.props.style}
+                       onKeyUp={this.handleKeys}
+                       underlineStyle={{maxWidth: '150px'}}
+                       ref={(searchField) => {
+                           this.searchField = searchField;
+                       }}
             />
         );
     }
@@ -39,7 +41,6 @@ export class JSONSearchBar extends React.Component {
 JSONSearchBar.propTypes = {
     style: PropTypes.object,
     changeAction: PropTypes.func,
-    value: PropTypes.string,
 };
 
 export default JSONSearchBar;

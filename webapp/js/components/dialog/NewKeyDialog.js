@@ -1,8 +1,8 @@
-import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
+import React, {PropTypes, Component} from 'react';
+import {connect} from 'react-redux';
 import DialogRoot from './DialogRoot';
 import TextField from 'material-ui/TextField';
-import { createAndDisplayValue } from 'actions/actions'
+import {createAndDisplayValue} from 'actions/actions'
 
 export class NamespaceDialog extends Component {
 
@@ -29,15 +29,22 @@ export class NamespaceDialog extends Component {
     }
 
     handleCreate() {
-        const { keyValue } = this.state;
-        const { namespace } = this.props;
-        if (namespace && keyValue) {
-            this.props.createNamespace(namespace, keyValue);
-        } else {
-            this.setState({
-                keyError: NamespaceDialog.validate(keyValue),
-            });
-        }
+        const {keyValue} = this.state;
+        const {namespace} = this.props;
+
+        return new Promise((resolve, reject) => {
+
+
+            if (namespace && keyValue) {
+                this.props.createNamespace(namespace, keyValue);
+                resolve();
+            } else {
+                this.setState({
+                    keyError: NamespaceDialog.validate(keyValue),
+                });
+                reject();
+            }
+        })
     }
 
     render() {
@@ -49,13 +56,13 @@ export class NamespaceDialog extends Component {
         return (<DialogRoot
             title="New key"
             approveAction={this.handleCreate}
-            contentStyle={{ maxWidth: '500px' }}
+            contentStyle={{maxWidth: '500px'}}
         >
             <TextField hintText="Key value"
-                autoFocus
-                errorText={this.state.keyError}
-                style={fieldStyle}
-                onChange={this.handleKeyInput.bind(this)}
+                       autoFocus
+                       errorText={this.state.keyError}
+                       style={fieldStyle}
+                       onChange={this.handleKeyInput.bind(this)}
             />
         </DialogRoot>);
     }

@@ -91,7 +91,7 @@ export class EditDisplay extends Component {
             <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
             <EditArea namespace = { namespace }
                 selectedKey = { key }
-                value = { valueToEditor }
+                value = { this.props.value }
                 valueChange = { this.handleChangeValue.bind(this) }
             />
         </Paper>

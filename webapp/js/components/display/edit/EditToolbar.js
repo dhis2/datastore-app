@@ -25,7 +25,7 @@ import { searchJSON,
     jsonEditorCompact,
     jsonEditorFormat,
 } from 'actions/jsonEditorActions';
-
+import { debounce } from '../../../utils/utils';
 const styles = {
     dropDownMenuIcon: {
         fill: 'black',
@@ -36,7 +36,7 @@ const styles = {
     searchBar: {
         marginBottom: '25px',
         maxWidth: '150px',
-        paddingLeft: '16px'
+        padding: '0 16px 0 16px'
     },
 };
 
@@ -48,12 +48,30 @@ export class EditToolbar extends React.Component {
         this.renderTreeEdit = this.renderTreeEdit.bind(this);
         this.renderCodeEdit = this.renderCodeEdit.bind(this);
         this.handleDropDownMenuChange = this.handleDropDownMenuChange.bind(this);
+
+        this.state = {
+            debounced: null
+        }
     }
 
     handleDropDownMenuChange(event, index, mode) {
         this.props.jsonChangeMode(mode);
     }
 
+    handleJsonSearch(value) {
+        const now = Date.now();
+        //debounce search
+        if(this.state.debounced) {
+            this.state.debounced(value);
+        } else {
+            const debounced = debounce((val) => {
+                console.log("asf")
+                this.props.jsonSearchAction(val);
+            }, 250);
+            this.setState({...this.state, debounced});
+            debounced(value);
+        }
+    }
     renderTreeEdit() {
         const { path } = this.props;
         return (
@@ -87,7 +105,7 @@ export class EditToolbar extends React.Component {
                             <RedoIcon />
                         </IconButton>
 
-                        <JSONSearchBar style={styles.searchBar} value={this.props.jsonEditor.jsonSearchValue} changeAction={this.props.jsonSearchAction} />
+                        <JSONSearchBar style={styles.searchBar} changeAction={this.handleJsonSearch.bind(this)} />
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <DisplayToolbarTitle path={path} />

@@ -27,8 +27,7 @@ class DialogRoot extends Component {
 
         // TODO: Clean this up
         const finalAction = () => {
-            approveAction();
-            defaultCloseDialog();
+            Promise.resolve(approveAction()).then(() => defaultCloseDialog()).catch(() => {})
         };
 
         actions.push(DialogRoot.buildButton(cancelAction || defaultCloseDialog, cancelLabel || 'Cancel'));

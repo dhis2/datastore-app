@@ -19,6 +19,7 @@ export class NewNamespaceDialog extends Component {
         this.handleCreate = this.handleCreate.bind(this);
     }
 
+
     handleNamespaceInput(event) {
         const val = event.target.value;
         this.setState({
@@ -41,14 +42,19 @@ export class NewNamespaceDialog extends Component {
 
     handleCreate() {
         const { namespaceValue, keyValue } = this.state;
-        if (namespaceValue && keyValue) {
-            this.props.createNamespace(namespaceValue, keyValue);
-        } else {
-            this.setState({
-                keyError: this.validate(keyValue),
-                namespaceError: this.validate(namespaceValue),
-            });
-        }
+        return new Promise((resolve, reject) => {
+            if (namespaceValue && keyValue) {
+                this.props.createNamespace(namespaceValue, keyValue);
+                resolve();
+            } else {
+                this.setState({
+                    keyError: this.validate(keyValue),
+                    namespaceError: this.validate(namespaceValue),
+                });
+                reject();
+            }
+        })
+
     }
 
     validate(value) {
@@ -60,22 +66,24 @@ export class NewNamespaceDialog extends Component {
             display: 'block',
             width: '100%',
         };
+
         return (
             <DialogRoot
                 title="New namespace"
                 approveAction={this.handleCreate}
                 cancelAction={this.props.closeDialog}
-                contentStyle={{ maxWidth: '500px' }}
+                contentStyle={{ maxWidth: '500px'}}
             >
-                <TextField ref="namespace" hintText="Namespace" autoFocus style={fieldStyle}
+                <TextField autoFocus hintText="Namespace" style={fieldStyle}
                     errorText={this.state.namespaceError}
                     onChange={this.handleNamespaceInput.bind(this)}
                 />
-                <TextField ref="key" hintText="Key value" style={fieldStyle}
+                <TextField hintText="Key value" style={{fieldStyle}}
                     errorText={this.state.keyError}
                     onChange={this.handleKeyInput.bind(this)}
                 />
             </DialogRoot>
+
         );
     }
 }
