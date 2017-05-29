@@ -4,8 +4,9 @@ import DialogRoot from './DialogRoot';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { withRouter } from 'react-router';
+import * as navigationActions from '../../actions/navigationActions';
 
-export default class ConfirmNavigationDialog extends Component {
+export class ConfirmNavigationDialog extends Component {
 
     constructor() {
         super();
@@ -41,8 +42,18 @@ export default class ConfirmNavigationDialog extends Component {
         const next = nextProps;
         const curr = this.props;
 
+        console.log(curr.ignoreNext);
+        console.log(next.ignoreNext);
+
+        if(this.props.ignoreNext) {
+            this.setState({...this.state, blockNext: false});
+            this.props.setIgnoreNext(false);
+            return;
+        }
         if(next.value !== next.editedValue) {
             this.setState({...this.state, blockNext: true});
+        } else {
+            this.setState({...this.state, blockNext: false, confirmed: false})
         }
     }
 
@@ -57,7 +68,7 @@ export default class ConfirmNavigationDialog extends Component {
             })
             return true;
         }
-        if(this.state.blockNext) {
+        if(this.state.blockNext && !this.props.ignoreNext) {
             this.setState({...this.state, show: true, blockNext: false, nextLocation})
             return false;
         }
@@ -83,10 +94,22 @@ export default class ConfirmNavigationDialog extends Component {
 
     }
 }
-
 ConfirmNavigationDialog.propTypes = {
     closeDialog: PropTypes.func,
     onConfirmNavigation: PropTypes.func,
     onCancelNavigation: PropTypes.func,
     router: PropTypes.object,
 };
+
+const mapStateToProps = (state) => ({
+    ignoreNext: state.navigation.ignoreNextConfirm,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    setIgnoreNext(ignoreNext) {
+        dispatch(navigationActions.setNextNavigationConfirm(ignoreNext));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmNavigationDialog);
+

@@ -1,10 +1,11 @@
-import * as actions from 'constants/jsonEditorTypes';
-
+import * as actions from '../constants/jsonEditorTypes';
+import * as displayActions from '../constants/actionTypes';
 
 const initialState = {
     mode: 'tree',
     undo: false,
     redo: false,
+    jsonSearchValue: '',
 };
 
 const jsonEditor = (state = initialState, action) => {
@@ -83,6 +84,12 @@ const jsonEditor = (state = initialState, action) => {
                 undo: false,
                 redo: false,
             };
+        }
+
+        case displayActions.SELECT_KEY: {
+            return {
+                ...initialState
+            }
         }
 
     default:

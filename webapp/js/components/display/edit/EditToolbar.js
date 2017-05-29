@@ -87,7 +87,7 @@ export class EditToolbar extends React.Component {
                             <RedoIcon />
                         </IconButton>
 
-                        <JSONSearchBar style={styles.searchBar} changeAction={this.props.jsonSearchAction} />
+                        <JSONSearchBar style={styles.searchBar} value={this.props.jsonEditor.jsonSearchValue} changeAction={this.props.jsonSearchAction} />
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <DisplayToolbarTitle path={path} />
@@ -157,6 +157,7 @@ EditToolbar.propTypes = {
 
 const mapStateToProps = state => ({
     mode: state.jsonEditor.mode,
+    jsonEditor: state.jsonEditor,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,7 +1,7 @@
 import * as actions from 'constants/actionTypes';
 import api from 'utils/api';
 import { hashHistory } from 'react-router';
-
+import * as navigationAction from '../actions/navigationActions';
 /**
  * recieveNamespaces - Deliver namespaces returned from request
  *
@@ -686,10 +686,18 @@ export function updateValue(namespace, key, value) {
   * @return {object}           action thunk
   */
 export function deleteKey(namespace, key) {
-    return dispatch => {
+    return (dispatch, getState) => {
+        console.log(hashHistory)
         dispatch(requestDeleteKey(namespace, key));
         return api.deleteValue(namespace, key)
             .then(() => dispatch(receiveDeleteKey(namespace, key)))
+            .then(res => {
+                if(getState().display.key == key) {
+                    dispatch(navigationAction.setNextNavigationConfirm(true));
+                    hashHistory.push("/");
+                }
+                return res;
+            })
             .then(() => dispatch(fetchKeys(namespace)))
             .catch(error => {
                 if (error.status === 404) { // If not found, we remove the namespace from UI
@@ -715,11 +723,15 @@ export function deleteKey(namespace, key) {
  * @return {object}           Action thunk
  */
 export function deleteNamespace(namespace) {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(requestDeleteNamespace(namespace));
         return api.deleteNamespace(namespace)
             .then(success => {
-                dispatch(receiveDeleteNamespace(namespace));
+                dispatch(receiveDeleteNamespace(namespace))
+                if(getState().display.namespace == namespace) {
+                    dispatch(navigationAction.setNextNavigationConfirm(true));
+                    hashHistory.push("/");
+                }
                 return success;
             })
             .catch((err) =>  {

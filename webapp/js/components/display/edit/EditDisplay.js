@@ -73,8 +73,8 @@ export class EditDisplay extends Component {
     }
 
     render() {
-        const { namespace, key, value, editedValue } = this.props.params;
-
+        const { namespace, key } = this.props.params;
+        const { value, editedValue } = this.props;
         let path = '';
 
         if (typeof namespace !== 'undefined') {
@@ -83,7 +83,7 @@ export class EditDisplay extends Component {
         if (typeof key !== 'undefined') {
             path += `/${key}`;
         }
-
+        const valueToEditor = editedValue && editedValue !== value ? editedValue : value;
         return (
         <Paper zDepth={0} className={'fff-display'}>
             <ConfirmNavigationDialog route={this.props.route} router={this.props.router}
@@ -91,7 +91,7 @@ export class EditDisplay extends Component {
             <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
             <EditArea namespace = { namespace }
                 selectedKey = { key }
-                value = { this.props.value }
+                value = { valueToEditor }
                 valueChange = { this.handleChangeValue.bind(this) }
             />
         </Paper>

@@ -16,7 +16,8 @@ export class JSONSearchBar extends React.Component {
     }
 
     changeEvent(event) {
-        this.props.changeAction(event.target.value);
+        const val = event.target.value;
+        this.props.changeAction(val);
     }
 
     render() {
@@ -26,6 +27,7 @@ export class JSONSearchBar extends React.Component {
                 floatingLabelStyle={{ top: '42px' }}
                 inputStyle={{ marginTop: '13px' }}
                 onChange={this.changeEvent}
+                value={this.props.value}
                 style={this.props.style}
                 onKeyUp={this.handleKeys}
                 ref={(searchField) => { this.searchField = searchField; }}
@@ -37,6 +39,7 @@ export class JSONSearchBar extends React.Component {
 JSONSearchBar.propTypes = {
     style: PropTypes.object,
     changeAction: PropTypes.func,
+    value: PropTypes.string,
 };
 
 export default JSONSearchBar;
