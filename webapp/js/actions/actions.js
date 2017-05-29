@@ -687,7 +687,6 @@ export function updateValue(namespace, key, value) {
   */
 export function deleteKey(namespace, key) {
     return (dispatch, getState) => {
-        console.log(hashHistory)
         dispatch(requestDeleteKey(namespace, key));
         return api.deleteValue(namespace, key)
             .then(() => dispatch(receiveDeleteKey(namespace, key)))

@@ -42,9 +42,6 @@ export class ConfirmNavigationDialog extends Component {
         const next = nextProps;
         const curr = this.props;
 
-        console.log(curr.ignoreNext);
-        console.log(next.ignoreNext);
-
         if(this.props.ignoreNext) {
             this.setState({...this.state, blockNext: false});
             this.props.setIgnoreNext(false);
@@ -58,7 +55,6 @@ export class ConfirmNavigationDialog extends Component {
     }
 
     routerWillLeave(nextLocation) {
-        console.log(this.state)
         const { value, editedValue } = this.props;
         if(this.state.confirmed) {
             this.setState({
