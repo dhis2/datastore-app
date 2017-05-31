@@ -20,6 +20,16 @@ export class NamespaceDialog extends Component {
         this.handleCreate = this.handleCreate.bind(this);
     }
 
+
+    /*Workaround for focusing the textfield, as the dropdown-menu when selecting "New Key" keeps the focus,
+    preventing material-UIs autoFocus to focus it */
+    componentDidMount() {
+        setTimeout(() => {
+            this.refs.key.focus();
+        }, 1);
+
+    }
+
     handleKeyInput(event) {
         const val = event.target.value;
         this.setState({
@@ -58,8 +68,9 @@ export class NamespaceDialog extends Component {
             approveAction={this.handleCreate}
             contentStyle={{maxWidth: '500px'}}
         >
-            <TextField hintText="Key value"
+            <TextField hintText="Key name"
                        autoFocus
+                       ref="key"
                        errorText={this.state.keyError}
                        style={fieldStyle}
                        onChange={this.handleKeyInput.bind(this)}

@@ -78,7 +78,7 @@ export class NewNamespaceDialog extends Component {
                     errorText={this.state.namespaceError}
                     onChange={this.handleNamespaceInput.bind(this)}
                 />
-                <TextField hintText="Key value" style={{fieldStyle}}
+                <TextField fullWidth hintText="Key name" style={{fieldStyle}}
                     errorText={this.state.keyError}
                     onChange={this.handleKeyInput.bind(this)}
                 />
