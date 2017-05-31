@@ -16,13 +16,17 @@ export class ConfirmDeleteKeyDialog extends Component {
     }
 
     render() {
+        const { namespace, keyValue} = this.props;
+        const keysInNamespace = Object.keys(this.props.namespaceStore[namespace].keys).length;
+        const lastKeyMsg = (<p>This will also delete the namespace {namespace}</p>);
         return (
             <DialogRoot
                 approveAction={this.handleConfirmed}
                 approveLabel={'Delete'}
                 contentStyle={{ maxWidth: '400px' }}
             >
-                Are you sure you want to delete '{this.props.keyValue}' in {this.props.namespace}?
+                <p>Are you sure you want to delete '{keyValue}' in {namespace}?</p>
+                {keysInNamespace < 2 ? lastKeyMsg : ''}
             </DialogRoot>
         );
     }
@@ -31,6 +35,7 @@ export class ConfirmDeleteKeyDialog extends Component {
 const mapStateToProps = state => ({
     namespace: state.dialog.namespace,
     keyValue: state.dialog.key,
+    namespaceStore: state.sidebar.namespaces
 });
 
 const mapDispatchToProps = dispatch => ({

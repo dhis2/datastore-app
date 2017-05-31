@@ -3,12 +3,9 @@ import {connect} from 'react-redux';
 import DialogRoot from './DialogRoot';
 import TextField from 'material-ui/TextField';
 import {createAndDisplayValue} from 'actions/actions'
+import { validateKeyOrNamespace } from '../../utils/validation';
 
 export class NamespaceDialog extends Component {
-
-    static validate(value) {
-        return value ? '' : 'Invalid Input. Field required';
-    }
 
     constructor(props) {
         super(props);
@@ -33,7 +30,7 @@ export class NamespaceDialog extends Component {
     handleKeyInput(event) {
         const val = event.target.value;
         this.setState({
-            keyError: NamespaceDialog.validate(val),
+            keyError: validateKeyOrNamespace(val).message,
             keyValue: val,
         });
     }
@@ -43,14 +40,14 @@ export class NamespaceDialog extends Component {
         const {namespace} = this.props;
 
         return new Promise((resolve, reject) => {
+            const validatedKey = validateKeyOrNamespace(keyValue);
 
-
-            if (namespace && keyValue) {
+            if (namespace && validatedKey.valid) {
                 this.props.createNamespace(namespace, keyValue);
                 resolve();
             } else {
                 this.setState({
-                    keyError: NamespaceDialog.validate(keyValue),
+                    keyError: validatedKey.message,
                 });
                 reject();
             }
@@ -64,7 +61,7 @@ export class NamespaceDialog extends Component {
         };
 
         return (<DialogRoot
-            title="New key"
+            title={"New key for " + this.props.namespace}
             approveAction={this.handleCreate}
             contentStyle={{maxWidth: '500px'}}
         >

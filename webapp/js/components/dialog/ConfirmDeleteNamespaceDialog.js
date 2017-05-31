@@ -21,7 +21,8 @@ export class ConfirmDeleteNamespaceDialog extends Component {
                 approveLabel={'Delete'}
                 contentStyle={{ maxWidth: '400px' }}
             >
-                Are you sure you want to delete '{this.props.namespace}'?
+                <p>Are you sure you want to delete '{this.props.namespace}'?</p>
+                <p>This will delete <u>all</u> keys in the namespace</p>
             </DialogRoot>)
         );
     }

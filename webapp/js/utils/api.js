@@ -69,6 +69,8 @@ class Api
         if (cache[namespace] === undefined || cache[namespace][key] === undefined) {
             return this.getMetaData(namespace, key)
                 .then(result => {
+                    const jsonLength = result.value.length;
+                    console.log(jsonLength);
                     const val = JSON.parse(result.value);
 
                     // cache result
@@ -102,7 +104,7 @@ class Api
      * @param log Should action be logged?
      */
     createValue(namespace, key, value, log = true) {
-        return getInstance().then(d2 => d2.dataStore.get(namespace)).then(resName => resName.set(key, value))
+        return getInstance().then(d2 => d2.dataStore.get(namespace)).then(resName => resName.set(key, value, true))
             .then(response => {
                 // cache value
                 if (this.cache[namespace] === undefined) {

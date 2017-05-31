@@ -22,7 +22,7 @@ const DisplayAreaHOC = (Area) => {
         }
 
         render() {
-            const { loading, error } = this.props;
+            const { loading, error, ...props } = this.props;
 
             if (loading) {
                 return this.renderLoading();
@@ -33,7 +33,7 @@ const DisplayAreaHOC = (Area) => {
             }
 
             return (
-                <Area {...this.props} {...this.state} />
+                <Area {...props} {...this.state} />
             );
         }
     }

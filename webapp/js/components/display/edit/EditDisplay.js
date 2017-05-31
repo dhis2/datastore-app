@@ -39,6 +39,7 @@ export class EditDisplay extends Component {
         // Get value when url is different from last.
         if ((currentParams.namespace !== nextParams.namespace ||
             currentParams.key !== nextParams.key)) {
+            console.log("GET VALUE")
             getValue(nextParams.namespace, nextParams.key);
         }
     }

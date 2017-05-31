@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import DialogRoot from './DialogRoot';
 import { createAndDisplayValue } from 'actions/actions';
+import { validateKeyOrNamespace } from '../../utils/validation';
 
 export class NewNamespaceDialog extends Component {
 
@@ -15,7 +16,7 @@ export class NewNamespaceDialog extends Component {
             namespaceError: '',
             keyError: '',
         };
-        this.validate = this.validate.bind(this);
+
         this.handleCreate = this.handleCreate.bind(this);
     }
 
@@ -23,7 +24,7 @@ export class NewNamespaceDialog extends Component {
     handleNamespaceInput(event) {
         const val = event.target.value;
         this.setState({
-            namespaceError: this.validate(val),
+            namespaceError: validateKeyOrNamespace(val).message,
             namespaceValue: event.target.value,
         });
     }
@@ -31,7 +32,7 @@ export class NewNamespaceDialog extends Component {
     handleKeyInput(event) {
         const val = event.target.value;
         this.setState({
-            keyError: this.validate(val),
+            keyError: validateKeyOrNamespace(val).message,
             keyValue: event.target.value,
         });
     }
@@ -43,22 +44,21 @@ export class NewNamespaceDialog extends Component {
     handleCreate() {
         const { namespaceValue, keyValue } = this.state;
         return new Promise((resolve, reject) => {
-            if (namespaceValue && keyValue) {
+            const validatedNamespace = validateKeyOrNamespace(namespaceValue);
+            const validatedKey = validateKeyOrNamespace(keyValue);
+
+            if (validatedKey.valid && validatedNamespace.valid) {
                 this.props.createNamespace(namespaceValue, keyValue);
                 resolve();
             } else {
                 this.setState({
-                    keyError: this.validate(keyValue),
-                    namespaceError: this.validate(namespaceValue),
+                    keyError: validatedKey.message,
+                    namespaceError: validatedNamespace.message,
                 });
                 reject();
             }
         })
 
-    }
-
-    validate(value) {
-        return value ? '' : 'Invalid Input. Field required';
     }
 
     render() {
