@@ -188,7 +188,6 @@ const sidebar = (state = initialState, action) => {
                 namespace,
                 key,
                 value,
-               // editedValue: value,
             };
         }
 

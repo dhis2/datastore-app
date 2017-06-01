@@ -66,7 +66,7 @@ const snackbar = (state = initialState, action) => {
 
         case actions.CREATE_VALUE_REJECTED: {
             let message = "Failed to create. ";
-            if (action.error.message) {
+            if (action.error && action.error.message) {
                 message += action.error.message;
             }
             return {

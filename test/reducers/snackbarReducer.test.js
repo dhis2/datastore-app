@@ -107,7 +107,7 @@ describe('Snackbar Reducer', () => {
         const action = { type: 'CREATE_VALUE_REJECTED' };
 
         const expectedResult = {
-            message: 'Failed to create.',
+            message: 'Failed to create. ',
         };
 
         const newState = reducer(initialState, action);

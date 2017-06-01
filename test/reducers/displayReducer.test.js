@@ -17,7 +17,7 @@ describe('Display Reducer', () => {
               type: 'CREATE_VALUE_PENDING',
           };
           const newState = reducer(initialState, action);
-          expect(newState).to.eql(fetchingState);
+          expect(newState).to.eql(initialState);
       });
 
       it('Should handle FETCH_NAMESPACES_PENDING', () => {
@@ -57,7 +57,7 @@ describe('Display Reducer', () => {
               type: 'CREATE_VALUE_REJECTED',
           };
           const newState = reducer(initialState, action);
-          expect(newState).to.eql(errorState);
+          expect(newState).to.eql(initialState);
       });
 
       it('Should handle FETCH_NAMESPACES_REJECTED', () => {
@@ -89,7 +89,7 @@ describe('Display Reducer', () => {
               type: 'CREATE_VALUE_FULFILLED',
           };
           const newState = reducer(initialState, action);
-          expect(newState).to.eql(fetchedState);
+          expect(newState).to.eql(initialState);
       });
 
       it('Should handle FETCH_VALUE_FULFILLED', () => {

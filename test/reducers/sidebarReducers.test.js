@@ -56,8 +56,8 @@ describe('JSON Editor Reducer', () => {
         };
 
         const expectedResult = {
-            compact: false,
-            format: true,
+            compact: true,
+            format: false,
         };
 
         const newState = reducer(initialState, action);
@@ -70,8 +70,8 @@ describe('JSON Editor Reducer', () => {
         };
 
         const expectedResult = {
-            compact: true,
-            format: false,
+            compact: false,
+            format: true,
         };
 
         const newState = reducer(initialState, action);

@@ -224,7 +224,6 @@ describe('Sidebar Reducer', () => {
             namespace: action.namespace,
             key: action.key,
             value: action.value,
-            editedValue: action.value,
         };
         const newState = reducer(initialState, action);
         expect(newState).to.eql(expectedResult);

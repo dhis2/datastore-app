@@ -41,8 +41,7 @@ const display = (state = initialState, action) => {
                 ...errorState,
             };
         }
-    case actions.CREATE_VALUE_REJECTED:
-    case actions.CREATE_VALUE_FULFILLED:
+
     case actions.FETCH_VALUE_FULFILLED:
     case actions.FETCH_NAMESPACES_FULFILLED:
         {
