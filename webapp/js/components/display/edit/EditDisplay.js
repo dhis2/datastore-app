@@ -80,8 +80,8 @@ export class EditDisplay extends Component {
         if (typeof namespace !== 'undefined') {
             path += namespace;
         }
-        if (typeof key !== 'undefined') {
-            path += `/${key}`;
+        if (typeof selectedKey !== 'undefined') {
+            path += `/${selectedKey}`;
         }
 
         return (
