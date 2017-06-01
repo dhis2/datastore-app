@@ -18,7 +18,7 @@ export class ConfirmDeleteKeyDialog extends Component {
     render() {
         const { namespace, keyValue} = this.props;
         const keysInNamespace = Object.keys(this.props.namespaceStore[namespace].keys).length;
-        const lastKeyMsg = (<p>This will also delete the namespace {namespace}</p>);
+        const lastKeyMsg = (<p>This will also delete the namespace {namespace}.</p>);
         return (
             <DialogRoot
                 approveAction={this.handleConfirmed}

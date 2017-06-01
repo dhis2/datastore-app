@@ -17,9 +17,6 @@ export class EditArea extends Component {
 
     render() {
         const { value, namespace, selectedKey } = this.props;
-        if(value) {
-            console.log(value.length)
-        }
 
         const backgroundStyle = {
             backgroundColor: Theme.palette.primary3Color,

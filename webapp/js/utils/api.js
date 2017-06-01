@@ -77,9 +77,13 @@ class Api
                     if (cache[namespace] === undefined) {
                         cache[namespace] = [];
                     }
-                    cache[namespace][key] = val;
+                    const ret = {
+                        length: jsonLength,
+                        value: val
+                    }
+                    cache[namespace][key] = ret;
 
-                    return val;
+                    return ret;
                 });
         }
 
@@ -107,11 +111,15 @@ class Api
         return getInstance().then(d2 => d2.dataStore.get(namespace)).then(resName => resName.set(key, value, true))
             .then(response => {
                 // cache value
+                console.log(response)
                 if (this.cache[namespace] === undefined) {
                     this.cache[namespace] = [];
                 }
-
-                this.cache[namespace][key] = value;
+                const ret = {
+                    length: 0,
+                    value: value
+                }
+                this.cache[namespace][key] = ret;
 
                 return response;
             });
@@ -130,8 +138,11 @@ class Api
                 if (this.cache[namespace] === undefined) {
                     this.cache[namespace] = [];
                 }
+                const ret = {
+                    value: value
+                }
 
-                this.cache[namespace][key] = value;
+                this.cache[namespace][key] = ret;
                 return response;
             });
     }

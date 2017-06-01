@@ -105,7 +105,7 @@ export class EditToolbar extends React.Component {
                             <RedoIcon />
                         </IconButton>
 
-                        <JSONSearchBar style={styles.searchBar} changeAction={this.handleJsonSearch.bind(this)} />
+                        <JSONSearchBar style={styles.searchBar} jsonLength={this.props.jsonEditor.jsonLength} changeAction={this.handleJsonSearch.bind(this)} />
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <DisplayToolbarTitle path={path} />

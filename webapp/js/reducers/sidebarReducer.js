@@ -140,7 +140,9 @@ const sidebar = (state = initialState, action) => {
     case actions.FETCH_VALUE_FULFILLED:
     case actions.CREATE_VALUE_FULFILLED:
         {
-            const { namespace, key, value } = action;
+            const { namespace, key } = action;
+            const value = action.value.value;
+
             const ns = {};
 
             if (typeof state.namespaces[namespace] !== 'undefined') {

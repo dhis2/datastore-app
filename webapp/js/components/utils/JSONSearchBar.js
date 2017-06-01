@@ -21,9 +21,18 @@ export class JSONSearchBar extends React.Component {
     }
 
     render() {
+        const { jsonLength } = this.props;
+        let fieldProps = {
+            disabled: false,
+
+        }
+        if(jsonLength && jsonLength > 500000) {
+            fieldProps.disabled = true;
+            fieldProps.title = 'Object is too big to search';
+        }
         return (
             <TextField name={'searchbar'}
-                       floatingLabelText={'Search JSON'}
+                       floatingLabelText={'Search Object'}
                        floatingLabelStyle={{top: '42px'}}
                        inputStyle={{marginTop: '13px'}}
                        onChange={this.changeEvent}
@@ -33,6 +42,7 @@ export class JSONSearchBar extends React.Component {
                        ref={(searchField) => {
                            this.searchField = searchField;
                        }}
+                       {...fieldProps}
             />
         );
     }
@@ -41,6 +51,7 @@ export class JSONSearchBar extends React.Component {
 JSONSearchBar.propTypes = {
     style: PropTypes.object,
     changeAction: PropTypes.func,
+    jsonLength: PropTypes.number
 };
 
 export default JSONSearchBar;

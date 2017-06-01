@@ -11,24 +11,21 @@ const initialState = {
 const jsonEditor = (state = initialState, action) => {
     switch (action.type) {
 
-    case actions.SEARCH_JSON:
-        {
+        case actions.SEARCH_JSON: {
             return {
                 ...state,
                 jsonSearchValue: action.searchValue,
             };
         }
 
-    case actions.COLLAPSE_JSON:
-        {
+        case actions.COLLAPSE_JSON: {
             return {
                 ...state,
                 expand: false,
                 collapse: true,
             };
         }
-    case actions.EXPAND_JSON:
-        {
+        case actions.EXPAND_JSON: {
             return {
                 ...state,
                 expand: true,
@@ -36,16 +33,14 @@ const jsonEditor = (state = initialState, action) => {
             };
         }
 
-    case actions.COMPACT_JSON:
-        {
+        case actions.COMPACT_JSON: {
             return {
                 ...state,
                 compact: false,
                 format: true,
             };
         }
-    case actions.FORMAT_JSON:
-        {
+        case actions.FORMAT_JSON: {
             return {
                 ...state,
                 compact: true,
@@ -53,32 +48,28 @@ const jsonEditor = (state = initialState, action) => {
             };
         }
 
-    case actions.REDO_JSON:
-        {
+        case actions.REDO_JSON: {
             return {
                 ...state,
                 redo: true,
             };
         }
 
-    case actions.UNDO_JSON:
-        {
+        case actions.UNDO_JSON: {
             return {
                 ...state,
                 undo: true,
             };
         }
 
-    case actions.CHANGE_JSON_MODE:
-        {
+        case actions.CHANGE_JSON_MODE: {
             return {
                 ...state,
                 mode: action.mode,
             };
         }
 
-    case actions.VALUE_CHANGE:
-        {
+        case actions.VALUE_CHANGE: {
             return {
                 ...state,
                 undo: false,
@@ -88,12 +79,18 @@ const jsonEditor = (state = initialState, action) => {
 
         case displayActions.SELECT_KEY: {
             return {
+                ...state,
                 ...initialState
             }
         }
-
-    default:
-        {
+        case displayActions.FETCH_VALUE_FULFILLED: {
+            const { length } = action.value;
+            return {
+                ...state,
+                jsonLength: length,
+            }
+        }
+        default: {
             return {
                 ...state,
             };

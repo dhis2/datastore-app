@@ -149,7 +149,7 @@ export function rejectCreateValue(namespace, key, value, error) {
  *
  * @param  {string} namespace Namespace holding key
  * @param  {string} key       Key holding value
- * @param  {string} value     Value requested
+ * @param  {string} value     Value received, of type: { length: number, value: any}
  * @return {object}           Action
  */
 export function recieveValue(namespace, key, value) {
@@ -157,7 +157,7 @@ export function recieveValue(namespace, key, value) {
         type: actions.FETCH_VALUE_FULFILLED,
         namespace,
         key,
-        value,
+        value: value,
     };
 }
 
@@ -530,8 +530,8 @@ export function fetchAndDisplayKeyValue(namespace, key) {
         dispatch(requestValue(namespace, key));
         return api.getValue(namespace, key)
             .then(value => {
-                dispatch(recieveValue(namespace, key, value));
-                dispatch(selectKey(namespace, key, value));
+                dispatch(recieveValue(namespace, key, value.value));
+                dispatch(selectKey(namespace, key, value.value));
             })
             .catch(error => dispatch(rejectValue(namespace, key, error)));
     };

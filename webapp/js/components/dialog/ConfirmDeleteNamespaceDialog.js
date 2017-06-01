@@ -22,7 +22,7 @@ export class ConfirmDeleteNamespaceDialog extends Component {
                 contentStyle={{ maxWidth: '400px' }}
             >
                 <p>Are you sure you want to delete '{this.props.namespace}'?</p>
-                <p>This will delete <u>all</u> keys in the namespace</p>
+                <p>This will delete <u>all</u> keys in this namespace.</p>
             </DialogRoot>)
         );
     }
