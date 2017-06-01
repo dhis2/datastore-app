@@ -26,6 +26,8 @@ import { searchJSON,
     jsonEditorFormat,
 } from 'actions/jsonEditorActions';
 import { debounce } from '../../../utils/utils';
+import { Spinner } from '../../utils/Loaders';
+
 const styles = {
     dropDownMenuIcon: {
         fill: 'black',
@@ -72,15 +74,20 @@ export class EditToolbar extends React.Component {
             debounced(value);
         }
     }
+
+    static renderSavingSpinner() {
+        return (<Spinner style={{position: 'relative'}} />)
+    }
+
     renderTreeEdit() {
-        const { path } = this.props;
+        const { path, saving } = this.props;
         return (
             <Paper style={{ zIndex: 5 }}>
                 <Toolbar>
 
                     <ToolbarGroup>
-                        <IconButton onTouchTap={this.props.handleSave} tooltip="Save">
-                            <SaveIcon />
+                        <IconButton onTouchTap={this.props.handleSave} tooltip="Save" disabled={saving}>
+                            { saving ? EditToolbar.renderSavingSpinner() : <SaveIcon /> }
                         </IconButton>
                         <DropDownMenu value={this.props.mode}
                                       style={styles.dropDownMenu}
@@ -176,6 +183,7 @@ EditToolbar.propTypes = {
 const mapStateToProps = state => ({
     mode: state.jsonEditor.mode,
     jsonEditor: state.jsonEditor,
+    saving: state.jsonEditor.saving,
 });
 
 const mapDispatchToProps = dispatch => ({

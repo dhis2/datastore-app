@@ -70,7 +70,6 @@ class Api
             return this.getMetaData(namespace, key)
                 .then(result => {
                     const jsonLength = result.value.length;
-                    console.log(jsonLength);
                     const val = JSON.parse(result.value);
 
                     // cache result

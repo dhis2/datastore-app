@@ -530,7 +530,7 @@ export function fetchAndDisplayKeyValue(namespace, key) {
         dispatch(requestValue(namespace, key));
         return api.getValue(namespace, key)
             .then(value => {
-                dispatch(recieveValue(namespace, key, value.value));
+                dispatch(recieveValue(namespace, key, value));
                 dispatch(selectKey(namespace, key, value.value));
             })
             .catch(error => dispatch(rejectValue(namespace, key, error)));
@@ -692,7 +692,7 @@ export function deleteKey(namespace, key) {
             .then(() => dispatch(receiveDeleteKey(namespace, key)))
             .then(res => {
                 if(getState().display.key == key) {
-                    dispatch(navigationAction.setNextNavigationConfirm(true));
+                    dispatch(navigationAction.setIgnoreNextNavigationConfirm(true));
                     hashHistory.push("/");
                 }
                 return res;
@@ -728,7 +728,7 @@ export function deleteNamespace(namespace) {
             .then(success => {
                 dispatch(receiveDeleteNamespace(namespace))
                 if(getState().display.namespace == namespace) {
-                    dispatch(navigationAction.setNextNavigationConfirm(true));
+                    dispatch(navigationAction.setIgnoreNextNavigationConfirm(true));
                     hashHistory.push("/");
                 }
                 return success;

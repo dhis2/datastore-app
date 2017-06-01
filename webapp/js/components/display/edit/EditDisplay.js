@@ -26,9 +26,9 @@ export class EditDisplay extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { fetchedNamespaces, params: nextParams } = nextProps;
+        const { fetchedNamespaces, params: nextParams, namespace: nextNamespace, value: nextValue, selectedKey: nextKey } = nextProps;
         const { fetchKeysForNamespace,
-            getValue, params: currentParams } = this.props;
+            getValue, params: currentParams, value, namespace, selectedKey } = this.props;
         // Load keys for namespace if its not already loaded
 
         if (!this.props.fetchedNamespaces && fetchedNamespaces ||
@@ -39,9 +39,9 @@ export class EditDisplay extends Component {
         // Get value when url is different from last.
         if ((currentParams.namespace !== nextParams.namespace ||
             currentParams.key !== nextParams.key)) {
-            console.log("GET VALUE")
             getValue(nextParams.namespace, nextParams.key);
         }
+
     }
 
     handleSaveValue() {
@@ -74,8 +74,7 @@ export class EditDisplay extends Component {
     }
 
     render() {
-        const { namespace, key } = this.props.params;
-        const { value, editedValue } = this.props;
+        const { namespace, selectedKey } = this.props;
         let path = '';
 
         if (typeof namespace !== 'undefined') {
@@ -84,14 +83,14 @@ export class EditDisplay extends Component {
         if (typeof key !== 'undefined') {
             path += `/${key}`;
         }
-        const valueToEditor = editedValue && editedValue !== value ? editedValue : value;
+
         return (
         <Paper zDepth={0} className={'fff-display'}>
             <ConfirmNavigationDialog route={this.props.route} router={this.props.router}
             value={this.props.value} editedValue={this.props.editedValue}/>
             <EditToolbar path={path} handleSave={this.handleSaveValue.bind(this)} />
             <EditArea namespace = { namespace }
-                selectedKey = { key }
+                selectedKey = { selectedKey }
                 value = { this.props.value }
                 valueChange = { this.handleChangeValue.bind(this) }
             />
@@ -116,6 +115,8 @@ EditDisplay.propTypes = {
 
 const mapStateToProps = (state) => ({
     value: state.display.value,
+    selectedKey: state.display.key,
+    namespace: state.display.namespace,
     editedValue: state.display.editedValue,
     fetchedNamespaces: state.sidebar.fetched,
 });

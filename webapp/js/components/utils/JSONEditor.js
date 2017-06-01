@@ -25,7 +25,7 @@ export class JSONEditor extends Component {
     * The state of the editor is lost if we update the state without saving*/
     shouldComponentUpdate(nextProps) {
         const {value, namespace, selectedKey} = this.props;
-        return value !== nextProps.value || namespace !== nextProps.namespace ||
+        return namespace !== nextProps.namespace ||
             selectedKey !== nextProps.selectedKey;
     }
 

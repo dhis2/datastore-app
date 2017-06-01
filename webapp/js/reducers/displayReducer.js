@@ -21,7 +21,6 @@ const display = (state = initialState, action) => {
             };
         }
 
-    case actions.CREATE_VALUE_PENDING:
     case actions.FETCH_NAMESPACES_PENDING:
     case actions.FETCH_HISTORY_PENDING:
     case actions.FETCH_VALUE_PENDING:
@@ -33,7 +32,6 @@ const display = (state = initialState, action) => {
             };
         }
 
-    case actions.CREATE_VALUE_REJECTED:
     case actions.FETCH_NAMESPACES_REJECTED:
     case actions.FETCH_HISTORY_REJECTED:
     case actions.FETCH_VALUE_REJECTED:
@@ -43,7 +41,7 @@ const display = (state = initialState, action) => {
                 ...errorState,
             };
         }
-
+    case actions.CREATE_VALUE_REJECTED:
     case actions.CREATE_VALUE_FULFILLED:
     case actions.FETCH_VALUE_FULFILLED:
     case actions.FETCH_NAMESPACES_FULFILLED:

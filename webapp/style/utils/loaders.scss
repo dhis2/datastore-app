@@ -38,10 +38,9 @@
 }
 
 .loading-small {
-	position: absolute;
+	position: relative;
 	width: 28px;
 	height: 28px;
-  	margin-left: -55px;
 
 	@include maskedCircle(20px, 3px, 12px);
 	@include mask(12px);

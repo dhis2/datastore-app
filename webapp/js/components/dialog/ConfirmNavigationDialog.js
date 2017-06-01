@@ -25,6 +25,7 @@ export class ConfirmNavigationDialog extends Component {
 
     handleCancel() {
         this.setState({...this.state, confirmed: false, show: false, blockNext: true});
+        this.props.onCancelNavigation();
     }
 
     handleConfirm() {

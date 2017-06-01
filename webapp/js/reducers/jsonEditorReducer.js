@@ -6,6 +6,7 @@ const initialState = {
     undo: false,
     redo: false,
     jsonSearchValue: '',
+    saving: false
 };
 
 const jsonEditor = (state = initialState, action) => {
@@ -36,15 +37,15 @@ const jsonEditor = (state = initialState, action) => {
         case actions.COMPACT_JSON: {
             return {
                 ...state,
-                compact: false,
-                format: true,
+                compact: true,
+                format: false,
             };
         }
         case actions.FORMAT_JSON: {
             return {
                 ...state,
-                compact: true,
-                format: false,
+                compact: false,
+                format: true,
             };
         }
 
@@ -88,6 +89,20 @@ const jsonEditor = (state = initialState, action) => {
             return {
                 ...state,
                 jsonLength: length,
+            }
+        }
+
+        case displayActions.UPDATE_VALUE_PENDING: {
+            return {
+                ...state,
+                saving: true,
+            }
+        }
+        case displayActions.UPDATE_VALUE_REJECTED:
+        case displayActions.UPDATE_VALUE_FULFILLED: {
+            return {
+                ...state,
+                saving: false,
             }
         }
         default: {
