@@ -5,6 +5,7 @@ var path = require('path');
 var config = {
     entry: [
         'webpack-dev-server/client?http://0.0.0.0:8081',
+        'babel-polyfill',
         'webpack/hot/only-dev-server',
         'whatwg-fetch',
         __dirname.concat('/webapp/js/main.js'),
@@ -49,6 +50,7 @@ var config = {
         port: 8081,
         inline: true,
         hot: true,
+        host: '0.0.0.0'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
