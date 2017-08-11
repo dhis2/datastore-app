@@ -49,8 +49,7 @@ var config = {
         contentBase: __dirname.concat('/webapp/'),
         port: 8081,
         inline: true,
-        hot: true,
-        host: '0.0.0.0'
+        hot: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
