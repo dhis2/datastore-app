@@ -1,14 +1,17 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var packageJSON = require('./package.json');
 
 var config = {
     entry: [
+        'babel-polyfill',
         'whatwg-fetch',
         __dirname.concat('/webapp/js/main.js'),
     ],
     output: {
         path: __dirname.concat('/build/'),
-        filename: 'app.bundle.js',
+        filename: `app-${packageJSON.version}.js`,
     },
     module: {
         loaders: [
@@ -49,7 +52,11 @@ var config = {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({ minimize: true }),
         new webpack.optimize.AggressiveMergingPlugin(),
-
+        new HtmlWebpackPlugin({
+            title: 'DHIS2 Datastore Manager',
+            filename: 'index.html',
+            template: 'webapp/index.html',
+        }),
     ],
 };
 

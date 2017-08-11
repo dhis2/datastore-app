@@ -1,5 +1,5 @@
 {
-    "version": "1.0",
+    "version": "1.0.1",
     "name": "Datastore App",
     "description": "The Datastore App allows you to manage namespaces and keys in a datastore.",
     "launch_path": "index.html",

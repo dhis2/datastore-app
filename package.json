@@ -1,6 +1,6 @@
 {
   "name": "dhis-datastore",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An app to edit and manage namespaces.",
   "main": "app.js",
   "scripts": {
@@ -35,6 +35,7 @@
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-prefer-object-spread": "^1.1.0",
     "eslint-plugin-react": "^4.1.0",
+    "html-webpack-plugin": "^2.30.1",
     "ignore-styles": "^5.0.1",
     "isomorphic-fetch": "^2.2.1",
     "jsdom": "^9.8.3",
