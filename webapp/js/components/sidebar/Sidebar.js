@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import NamespaceList from './NamespaceList';
 import { fetchNamespaces } from 'actions/actions';
 import RaisedButton from 'material-ui/RaisedButton';
-import SideBarHeader from './SideBarHeader';
+import SidebarHeader from './SidebarHeader';
 import { openDialog } from 'actions/dialogActions';
 import * as dialog from 'constants/dialogTypes';
 import SidebarAreaHOC from 'components/hoc/SidebarAreaHOC';
@@ -33,9 +33,9 @@ export class Sidebar extends Component {
 
         return (
             <div className={'fff-sidebar'}>
-                <SideBarHeader>
+                <SidebarHeader>
                     <RaisedButton label="New" onClick={this.showDialog.bind(this)} primary />
-                </SideBarHeader>
+                </SidebarHeader>
                 <NamespaceListImproved items={items} />
             </div>
         );
