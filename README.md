@@ -1,4 +1,6 @@
 # DHIS2 Datastore App
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdhis2%2Fdatastore-app.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdhis2%2Fdatastore-app?ref=badge_shield)
+
 A DHIS2 app for managing and editing keys and namespaces in the datastore.
 
 # Installation
@@ -27,3 +29,7 @@ yarn run test
  Build the app. Zip contents in /build/. Note that you cannot zip the /build folder directly. 
  Manifest needs to be in root of the archive.
  Upload the archive to DHIS2 using the App Management app.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdhis2%2Fdatastore-app.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdhis2%2Fdatastore-app?ref=badge_large)
