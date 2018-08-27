@@ -1,13 +1,14 @@
 {
-  "name": "dhis-datastore",
+  "name": "datastore-app",
   "version": "1.0.1",
   "description": "An app to edit and manage namespaces.",
   "main": "app.js",
   "scripts": {
-    "build": "webpack -p --config ./webpack.production.config.js",
+    "build": "webpack -p --config ./webpack.production.config.js && cp ./package.json ./build/package.json",
     "lint": "eslint --fix webapp --rule 'no-unused-expressions: 0'",
     "start": "webpack-dev-server",
-    "test": "NODE_PATH=./webapp/js mocha test/**/*.test.js"
+    "test": "NODE_PATH=./webapp/js mocha test/**/*.test.js",
+    "deploy": "deploy-build"
   },
   "repository": {
     "type": "git",
