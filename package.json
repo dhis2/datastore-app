@@ -1,6 +1,6 @@
 {
   "name": "datastore-app",
-  "version": "1.0.1",
+  "version": "31.0.0",
   "description": "An app to edit and manage namespaces.",
   "main": "app.js",
   "scripts": {
