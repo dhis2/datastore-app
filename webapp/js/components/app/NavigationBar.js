@@ -3,14 +3,12 @@ import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import Theme from 'utils/theme';
 import Api from '../../utils/api';
 
-const imageStyle = {
-    height: '20px',
-};
-
 const toolBarStyle = {
     alignItems: 'center',
     backgroundColor: Theme.palette.primary1Color,
     color: Theme.palette.alternateTextColor,
+    padding: '0 24px 0 0',
+    height: 44px,
 };
 
 class NavigationBar extends Component {
@@ -19,7 +17,7 @@ class NavigationBar extends Component {
         return (
             <Toolbar style={ toolBarStyle }>
                 <a href={Api.baseUrl}>
-                    <img src={`${Api.baseUrl}/api/staticContent/logo_banner`} style={ imageStyle }
+                    <img src={`${Api.baseUrl}/api/staticContent/logo_banner`}
                          alt="dhis2"
                     />
                 </a>
