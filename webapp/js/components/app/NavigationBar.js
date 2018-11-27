@@ -8,7 +8,7 @@ const toolBarStyle = {
     backgroundColor: Theme.palette.primary1Color,
     color: Theme.palette.alternateTextColor,
     padding: '0 24px 0 0',
-    height: 44px,
+    height: '44px',
 };
 
 class NavigationBar extends Component {
