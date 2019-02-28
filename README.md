@@ -1,4 +1,7 @@
 # DHIS2 Datastore App
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/dhis2/datastore-app.svg)](https://greenkeeper.io/)
+
 A DHIS2 app for managing and editing keys and namespaces in the datastore.
 
 # Installation
