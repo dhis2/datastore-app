@@ -103,7 +103,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     setIgnoreNext(ignoreNext) {
-        dispatch(navigationActions.setNextNavigationConfirm(ignoreNext));
+        dispatch(navigationActions.setIgnoreNextNavigationConfirm(ignoreNext));
     }
 })
 
