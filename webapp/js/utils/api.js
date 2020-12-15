@@ -2,6 +2,7 @@ import { API_URL } from 'constants/apiUrls';
 import { CREATED, UPDATED, DELETED } from 'constants/apiHistoryActions';
 import { sprintf } from 'sprintf-js';
 import { init, getInstance, getManifest } from 'd2/lib/d2';
+import jsonabc from 'jsonabc';
 
 class Api
 {
@@ -70,7 +71,8 @@ class Api
             return this.getMetaData(namespace, key)
                 .then(result => {
                     const jsonLength = result.value.length;
-                    const val = JSON.parse(result.value);
+                    var sortedObject = jsonabc.sort(result.value, false);
+                    var val = JSON.parse(sortedObject);
 
                     // cache result
                     if (cache[namespace] === undefined) {

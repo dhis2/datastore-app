@@ -3276,6 +3276,11 @@ json5@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.0.tgz#9b20715b026cbe3778fd769edccd822d8332a5b2"
 
+jsonabc@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/jsonabc/-/jsonabc-2.3.1.tgz#800a1bd158fb30ace2b4613f8725adfcb040bfb4"
+  integrity sha1-gAob0Vj7MKzitGE/hyWt/LBAv7Q=
+
 jsoneditor@^5.5.10:
   version "5.5.10"
   resolved "https://registry.yarnpkg.com/jsoneditor/-/jsoneditor-5.5.10.tgz#826348701cd4fe793be15a0c47d411c3c4455763"
