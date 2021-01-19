@@ -63,7 +63,6 @@
     "d2-ui": "^27.0.0-6",
     "d2-utilizr": "^0.2.9",
     "flow-bin": "^0.33.0",
-    "jsonabc": "^2.3.1",
     "jsoneditor": "^5.5.10",
     "material-ui": "^0.16.4",
     "react": "^15.4.0",

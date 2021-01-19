@@ -2,7 +2,6 @@ import { API_URL } from 'constants/apiUrls';
 import { CREATED, UPDATED, DELETED } from 'constants/apiHistoryActions';
 import { sprintf } from 'sprintf-js';
 import { init, getInstance, getManifest } from 'd2/lib/d2';
-import jsonabc from 'jsonabc';
 
 class Api
 {
@@ -71,8 +70,7 @@ class Api
             return this.getMetaData(namespace, key)
                 .then(result => {
                     const jsonLength = result.value.length;
-                    var sortedObject = jsonabc.sort(result.value, false);
-                    var val = JSON.parse(sortedObject);
+                    const val = sortObjectKeys(JSON.parse(result.value));
 
                     // cache result
                     if (cache[namespace] === undefined) {
@@ -244,3 +242,20 @@ class Api
 
 export default (() =>
     new Api(API_URL).initialize())();
+
+
+const sortObjectKeys = obj => {
+    console.log(obj);
+    if (!obj || typeof obj !== 'object') {
+        return obj
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(sortObjectKeys)
+    }
+    return Object.keys(obj)
+        .sort()
+        .reduce((res, key) => {
+            res[key] = sortObjectKeys(obj[key])
+            return res
+        }, {})
+}   
