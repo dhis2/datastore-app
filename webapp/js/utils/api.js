@@ -245,7 +245,6 @@ export default (() =>
 
 
 const sortObjectKeys = obj => {
-    console.log(obj);
     if (!obj || typeof obj !== 'object') {
         return obj
     }
