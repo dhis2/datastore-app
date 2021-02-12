@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dhis2/datastore-app/compare/v1.0.0...v1.1.0) (2021-02-12)
+
+
+### Features
+
+* Show object keys alphabetically rather than in jsonb style [DHIS2-7523] ([#16](https://github.com/dhis2/datastore-app/issues/16)) ([151e89f](https://github.com/dhis2/datastore-app/commit/151e89ffe555d63d85a85d60f172b04f3ec24c2e))
+
 # 1.0.0 (2020-12-01)
 
 
