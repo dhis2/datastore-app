@@ -13,3 +13,18 @@ export function debounce(func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 };
+
+export const sortObjectKeys = obj => {
+    if (!obj || typeof obj !== 'object') {
+        return obj
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(sortObjectKeys)
+    }
+    return Object.keys(obj)
+        .sort()
+        .reduce((res, key) => {
+            res[key] = sortObjectKeys(obj[key])
+            return res
+        }, {})
+}

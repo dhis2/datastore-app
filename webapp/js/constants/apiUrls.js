@@ -1,1 +1,1 @@
-export const API_URL = 'https://play.dhis2.org/test/api';
+export const API_URL = 'https://debug.dhis2.org/dev/api';
