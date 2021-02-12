@@ -70,7 +70,7 @@ class Api
             return this.getMetaData(namespace, key)
                 .then(result => {
                     const jsonLength = result.value.length;
-                    const val = sortObjectKeys(JSON.parse(result.value));
+                    const val = JSON.parse(result.value);
 
                     // cache result
                     if (cache[namespace] === undefined) {
@@ -242,19 +242,3 @@ class Api
 
 export default (() =>
     new Api(API_URL).initialize())();
-
-
-const sortObjectKeys = obj => {
-    if (!obj || typeof obj !== 'object') {
-        return obj
-    }
-    if (Array.isArray(obj)) {
-        return obj.map(sortObjectKeys)
-    }
-    return Object.keys(obj)
-        .sort()
-        .reduce((res, key) => {
-            res[key] = sortObjectKeys(obj[key])
-            return res
-        }, {})
-}   

@@ -5,6 +5,7 @@ import * as dialogTypes from 'constants/dialogTypes';
 import {jsonEditorChangeMode} from 'actions/jsonEditorActions';
 import {openDialog} from 'actions/dialogActions';
 import '../../../style/vendor/jsoneditor.css';
+import { sortObjectKeys } from '../../utils/utils';
 
 export class JSONEditor extends Component {
 
@@ -37,8 +38,12 @@ export class JSONEditor extends Component {
         }
     }
 
+    updateValue(value) {
+        this.editor.set(sortObjectKeys(value))
+    }
+
     componentWillUpdate(nextProps) {
-        this.editor.set(nextProps.value);
+        this.updateValue(nextProps.value);
         this.handleJsonEditor(nextProps);
     }
 
@@ -119,7 +124,7 @@ export class JSONEditor extends Component {
             };
             this.editor = new JSEditor(this.editorContainer, opts);
             this.removeBuiltInMenu();
-            this.editor.set(this.props.value);
+            this.updateValue(this.props.value);
         }
     }
 
