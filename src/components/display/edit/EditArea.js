@@ -19,7 +19,7 @@ export class EditArea extends Component {
         const { value, namespace, selectedKey } = this.props
 
         return (
-            <div className={styles.display}>
+            <div className={styles.displayArea}>
                 <JSONEditor
                     value={value}
                     namespace={namespace}
