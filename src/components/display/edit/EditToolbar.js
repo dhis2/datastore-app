@@ -62,13 +62,12 @@ export class EditToolbar extends React.Component {
         this.props.jsonChangeMode(mode)
     }
 
-    handleJsonSearch(value) {
+    handleJsonSearch = value => {
         //debounce search
         if (this.state.debounced) {
             this.state.debounced(value)
         } else {
             const debounced = debounce(val => {
-                console.log('asf')
                 this.props.jsonSearchAction(val)
             }, 250)
             this.setState({ ...this.state, debounced })
@@ -135,7 +134,7 @@ export class EditToolbar extends React.Component {
                         <JSONSearchBar
                             style={styles.searchBar}
                             jsonLength={this.props.jsonEditor.jsonLength}
-                            changeAction={this.handleJsonSearch.bind(this)}
+                            changeAction={this.handleJsonSearch}
                         />
                     </ToolbarGroup>
                     <ToolbarGroup>

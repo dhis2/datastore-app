@@ -579,47 +579,6 @@ export function fetchKeys(namespace) {
 }
 
 /**
- * fetchHistory - Gets history for a key in a namespace
- *
- * @param  {string} namespace Namespace for key
- * @param  {string} key       Key in namespace
- * @return {object}           Action thunk
- */
-export function fetchHistory(namespace, key) {
-    return dispatch => {
-        dispatch(requestHistory())
-        return api
-            .getHistoryOfKey(namespace, key)
-            .then(history => {
-                dispatch(receiveHistory(namespace, key, history))
-            })
-            .catch(error => {
-                dispatch(rejectHistory(namespace, key, error))
-            })
-    }
-}
-
-/**
- * fetchHistoryForNamespace - Fetch history for namespace
- *
- * @param  {string} namespace Fetch history for given namespace
- * @return {object}           Action thunk
- */
-export function fetchHistoryForNamespace(namespace) {
-    return dispatch => {
-        dispatch(requestHistory())
-        return api
-            .getHistoryOfNamespace(namespace)
-            .then(history => {
-                dispatch(receiveNamespaceHistory(namespace, history))
-            })
-            .catch(error => {
-                dispatch(rejectNamespaceHistory(namespace, error))
-            })
-    }
-}
-
-/**
  * updateValue - Updates a value with key in namespace.
  *
  * @param  {string} namespace Namespace containing value

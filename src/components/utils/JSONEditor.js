@@ -20,6 +20,12 @@ export class JSONEditor extends Component {
         this.initEditor()
     }
 
+    componentWillUnmount() {
+        if (this.editor) {
+            this.editor.destroy()
+        }
+    }
+
     /* Need custom update condition as we only re-render when switching keys/namespace .
      * The state of the editor is lost if we update the state without saving*/
     shouldComponentUpdate(nextProps) {
@@ -39,6 +45,7 @@ export class JSONEditor extends Component {
     }
 
     updateValue(value) {
+        console.log('updateValue', value)
         this.editor.set(sortObjectKeys(value))
     }
 

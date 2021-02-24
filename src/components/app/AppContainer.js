@@ -6,8 +6,6 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import Theme from '../../utils/theme'
 import EditDisplay from '../display/edit/EditDisplay'
 import EmptyDisplay from '../display/empty/EmptyDisplay'
-import HistoryDisplay from '../display/history/HistoryDisplay'
-import StatisticsDisplay from '../display/statistics/StatisticsDisplay'
 import Layout from './Layout'
 
 class AppContainer extends Component {
@@ -27,22 +25,6 @@ class AppContainer extends Component {
                             <Route
                                 path={'edit/:namespace/:key'}
                                 component={EditDisplay}
-                            />
-                            <Route
-                                path={'history/:namespace'}
-                                component={HistoryDisplay}
-                            />
-                            <Route
-                                path={'history/:namespace/:key'}
-                                component={HistoryDisplay}
-                            />
-                            <Route
-                                path={'stats/:namespace'}
-                                component={StatisticsDisplay}
-                            />
-                            <Route
-                                path={'stats/:namespace/:key'}
-                                component={StatisticsDisplay}
                             />
                         </Route>
                     </Router>
