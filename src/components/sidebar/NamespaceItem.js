@@ -61,7 +61,7 @@ export class NamespaceItem extends Component {
                 leftIcon={leftIcon}
                 rightIconButton={<NamespaceItemMenu name={name} />}
                 nestedItems={list}
-                onTouchTap={() => handleToggleNamespace(open, name)}
+                onTouchTap={() => this.handleToggleNamespace(open, name)}
             />
         )
     }

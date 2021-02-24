@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 class DialogRoot extends Component {
     static buildButton(action, text, primary = false) {
-        return <FlatButton label={text} primary={primary} onTouchTap={action} />
+        return <FlatButton label={text} primary={primary} onClick={action} />
     }
 
     render() {

@@ -84,7 +84,7 @@ export class EditToolbar extends React.Component {
                 <Toolbar>
                     <ToolbarGroup>
                         <IconButton
-                            onTouchTap={this.props.handleSave}
+                            onClick={this.props.handleSave}
                             tooltip="Save"
                             disabled={saving}
                         >
@@ -104,26 +104,26 @@ export class EditToolbar extends React.Component {
                             <MenuItem value={'code'} primaryText="Code" />
                         </DropDownMenu>
                         <IconButton
-                            onTouchTap={this.props.jsonCollapse}
+                            onClick={this.props.jsonCollapse}
                             tooltip="Collapse"
                         >
                             <ExpandLessIcon />
                         </IconButton>
                         <IconButton
-                            onTouchTap={this.props.jsonExpand}
+                            onClick={this.props.jsonExpand}
                             tooltip="Expand"
                         >
                             <ExpandMoreIcon />
                         </IconButton>
 
                         <IconButton
-                            onTouchTap={this.props.jsonUndo}
+                            onClick={this.props.jsonUndo}
                             tooltip="Undo"
                         >
                             <UndoIcon />
                         </IconButton>
                         <IconButton
-                            onTouchTap={this.props.jsonRedo}
+                            onClick={this.props.jsonRedo}
                             tooltip="Redo"
                         >
                             <RedoIcon />
@@ -150,7 +150,7 @@ export class EditToolbar extends React.Component {
                 <Toolbar>
                     <ToolbarGroup>
                         <IconButton
-                            onTouchTap={this.props.handleSave}
+                            onClick={this.props.handleSave}
                             tooltip="Save"
                         >
                             <SaveIcon />
@@ -165,13 +165,13 @@ export class EditToolbar extends React.Component {
                             <MenuItem value={'code'} primaryText="Code" />
                         </DropDownMenu>
                         <IconButton
-                            onTouchTap={this.props.jsonFormat}
+                            onClick={this.props.jsonFormat}
                             tooltip="Format"
                         >
                             <FormatAlignLeftIcon />
                         </IconButton>
                         <IconButton
-                            onTouchTap={this.props.jsonCompact}
+                            onClick={this.props.jsonCompact}
                             tooltip="Format Compact"
                         >
                             <FormatAlignJustifyIcon />
