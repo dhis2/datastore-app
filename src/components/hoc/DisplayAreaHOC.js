@@ -6,10 +6,6 @@ import LoadingArea from '../display/LoadingArea'
 
 const DisplayAreaHOC = Area => {
     class DisplayAreaBase extends Component {
-        constructor(props) {
-            super(props)
-        }
-
         renderLoading = () => {
             return <LoadingArea />
         }

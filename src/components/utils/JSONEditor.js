@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { PropTypes } from '@dhis2/prop-types'
 import JSEditor from 'jsoneditor/dist/jsoneditor.min.js'
 import React, { Component } from 'react'
@@ -9,6 +10,11 @@ import 'jsoneditor/dist/jsoneditor.min.css'
 import { sortObjectKeys } from '../../utils/utils'
 
 /* eslint-disable react/prop-types */
+
+const style = {
+    backgroundColor: 'white',
+    height: '100%',
+}
 
 export class JSONEditor extends Component {
     constructor(props) {
@@ -125,7 +131,9 @@ export class JSONEditor extends Component {
                     this.editor.setMode(mode)
                 } else {
                     this.props.openErrorMessage(
-                        'There seems to be an issue with your json, please fix all remaining issues and try again'
+                        i18n.t(
+                            'Invalid JSON. Please fix all remaining issues and try again.'
+                        )
                     )
                     this.props.jsonChangeMode(this.editor.getMode())
                 }
@@ -151,11 +159,6 @@ export class JSONEditor extends Component {
     }
 
     render() {
-        const style = {
-            backgroundColor: 'white',
-            height: '100%',
-        }
-
         return (
             <div
                 id="jsoneditor"
