@@ -3,28 +3,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class DialogRouter extends Component {
-    constructor(props) {
-        super(props)
-
-        this.matchDialog = this.matchDialog.bind(this)
-    }
-
-    matchDialog(dialogRoute) {
-        return dialogRoute.props.name === this.props.dialogType
-    }
+    matchDialog = dialogRoute =>
+        dialogRoute.props.name === this.props.dialogType
 
     render() {
         const MatchingDialog = this.props.children.find(this.matchDialog)
 
-        if (!MatchingDialog) return null
+        if (!MatchingDialog) {
+            return null
+        }
 
         const DialogType = MatchingDialog.props.component
-
         return <DialogType />
     }
 }
 
 DialogRouter.propTypes = {
+    children: PropTypes.any,
     dialogType: PropTypes.string,
 }
 

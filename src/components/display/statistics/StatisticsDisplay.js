@@ -55,8 +55,8 @@ StatisticsDisplay.propTypes = {
     getHistoryForNamespace: PropTypes.func,
     history: PropTypes.array,
     params: PropTypes.shape({
-        namespace: PropTypes.string,
         key: PropTypes.string,
+        namespace: PropTypes.string,
     }),
 }
 

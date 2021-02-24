@@ -1,44 +1,30 @@
 import { PropTypes } from '@dhis2/prop-types'
-import { Spinner } from 'components/utils/Loaders'
 import IconButton from 'material-ui/IconButton'
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styles from '../sidebar/Sidebar.module.css'
+import { Spinner } from '../utils/Loaders'
 
 const containerStyle = {
     alignItems: 'center',
     justifyContent: 'center',
 }
 
-const alignmentStyle = {
-    marginTop: '-60px',
-}
-
 const SidebarAreaHOC = (Area, errorRefresh) => {
     class SidebarAreaBase extends Component {
-        constructor(props) {
-            super(props)
-
-            this.renderLoading = this.renderLoading.bind(this)
-            this.renderError = this.renderError.bind(this)
-        }
-
-        renderLoading() {
+        renderLoading = () => {
             return (
                 <div className={styles.sidebarList} style={containerStyle}>
-                    <Spinner size={'medium'} style={alignmentStyle} />
+                    <Spinner size="medium" />
                 </div>
             )
         }
 
-        renderError() {
+        renderError = () => {
             return (
                 <div className={styles.sidebarList} style={containerStyle}>
-                    <IconButton
-                        style={alignmentStyle}
-                        onTouchTap={errorRefresh}
-                    >
+                    <IconButton onClick={errorRefresh}>
                         <NavigationRefresh />
                     </IconButton>
                     <p>Try again</p>
@@ -49,11 +35,7 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
         render() {
             const { loading, error, items } = this.props
 
-            if (items.length < 1) {
-                return <div>hello</div>
-            }
-
-            if (loading || items.length < 1) {
+            if (loading || items.length === 0) {
                 return this.renderLoading()
             }
 
@@ -66,10 +48,10 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
     }
 
     SidebarAreaBase.propTypes = {
-        loading: PropTypes.bool,
         error: PropTypes.bool,
         errorRefresh: PropTypes.func,
         items: PropTypes.object,
+        loading: PropTypes.bool,
     }
 
     const mapStateToProps = state => ({

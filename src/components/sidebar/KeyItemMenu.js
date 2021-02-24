@@ -1,13 +1,11 @@
-import * as dialog from 'constants/dialogTypes'
 import { PropTypes } from '@dhis2/prop-types'
-import { openDialog } from 'actions/dialogActions'
-import { openConfirmDeleteKeyDialog } from 'actions/dialogActions'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Delete from 'material-ui/svg-icons/action/delete'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { openDialog } from '../../actions/dialogActions'
+import * as dialog from '../../constants/dialogTypes'
 import IconButtonElement from '../utils/IconButtonElement'
 
 const anchorOrigin = {
@@ -29,6 +27,7 @@ export class KeyItemMenu extends Component {
         const {
             namespace,
             keyName,
+            // eslint-disable-next-line no-unused-vars
             deleteKeyInNamespace,
             ...props
         } = this.props
@@ -42,7 +41,7 @@ export class KeyItemMenu extends Component {
             >
                 <MenuItem
                     leftIcon={<Delete />}
-                    onTouchTap={this.deleteKey.bind(this, namespace, keyName)}
+                    onClick={this.deleteKey.bind(this, namespace, keyName)}
                 >
                     Delete
                 </MenuItem>
@@ -52,9 +51,9 @@ export class KeyItemMenu extends Component {
 }
 
 KeyItemMenu.propTypes = {
-    namespace: PropTypes.string,
-    keyName: PropTypes.string,
     deleteKeyInNamespace: PropTypes.func,
+    keyName: PropTypes.string,
+    namespace: PropTypes.string,
 }
 
 const mapDispatchToProps = dispatch => ({

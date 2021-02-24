@@ -1,15 +1,4 @@
-import {
-    searchJSON,
-    jsonEditorCollapse,
-    jsonEditorExpand,
-    jsonEditorUndo,
-    jsonEditorRedo,
-    jsonEditorChangeMode,
-    jsonEditorCompact,
-    jsonEditorFormat,
-} from 'actions/jsonEditorActions'
-import DisplayToolbarTitle from 'components/display/DisplayToolbarTitle'
-import JSONSearchBar from 'components/utils/JSONSearchBar'
+import { PropTypes } from '@dhis2/prop-types'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import IconButton from 'material-ui/IconButton'
 import MenuItem from 'material-ui/MenuItem'
@@ -21,11 +10,26 @@ import FormatAlignJustifyIcon from 'material-ui/svg-icons/editor/format-align-ju
 import FormatAlignLeftIcon from 'material-ui/svg-icons/editor/format-align-left'
 import ExpandLessIcon from 'material-ui/svg-icons/navigation/expand-less'
 import ExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
-import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar'
-import React, { PropTypes } from 'react'
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar'
+import React from 'react'
 import { connect } from 'react-redux'
+import {
+    searchJSON,
+    jsonEditorCollapse,
+    jsonEditorExpand,
+    jsonEditorUndo,
+    jsonEditorRedo,
+    jsonEditorChangeMode,
+    jsonEditorCompact,
+    jsonEditorFormat,
+} from '../../../actions/jsonEditorActions'
 import { debounce } from '../../../utils/utils'
+import JSONSearchBar from '../../utils/JSONSearchBar'
 import { Spinner } from '../../utils/Loaders'
+import DisplayToolbarTitle from '../DisplayToolbarTitle'
+
+/* eslint-disable react/sort-prop-types */
+/* eslint-disable react/prop-types */
 
 const styles = {
     dropDownMenuIcon: {
@@ -59,7 +63,6 @@ export class EditToolbar extends React.Component {
     }
 
     handleJsonSearch(value) {
-        const now = Date.now()
         //debounce search
         if (this.state.debounced) {
             this.state.debounced(value)

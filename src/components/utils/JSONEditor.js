@@ -1,21 +1,19 @@
-import * as dialogTypes from 'constants/dialogTypes'
 import { PropTypes } from '@dhis2/prop-types'
-import { openDialog } from 'actions/dialogActions'
-import { jsonEditorChangeMode } from 'actions/jsonEditorActions'
 import JSEditor from 'jsoneditor/dist/jsoneditor.min.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import '../../../style/vendor/jsoneditor.css'
+import { openDialog } from '../../actions/dialogActions'
+import { jsonEditorChangeMode } from '../../actions/jsonEditorActions'
+import * as dialogTypes from '../../constants/dialogTypes'
+import 'jsoneditor/dist/jsoneditor.min.css'
 import { sortObjectKeys } from '../../utils/utils'
+
+/* eslint-disable react/prop-types */
 
 export class JSONEditor extends Component {
     constructor(props) {
         super(props)
         this.editor = null
-
-        this.changedEvent = this.changedEvent.bind(this)
-        this.handleJsonEditor = this.handleJsonEditor.bind(this)
-        this.jsonEditorIsValid = this.jsonEditorIsValid.bind(this)
     }
 
     componentDidMount() {
@@ -25,7 +23,7 @@ export class JSONEditor extends Component {
     /* Need custom update condition as we only re-render when switching keys/namespace .
      * The state of the editor is lost if we update the state without saving*/
     shouldComponentUpdate(nextProps) {
-        const { value, namespace, selectedKey } = this.props
+        const { namespace, selectedKey } = this.props
         return (
             namespace !== nextProps.namespace ||
             selectedKey !== nextProps.selectedKey
@@ -60,11 +58,11 @@ export class JSONEditor extends Component {
         }
     }
 
-    changedEvent() {
+    changedEvent = () => {
         this.props.dataChanged(this.editor)
     }
 
-    jsonEditorIsValid() {
+    jsonEditorIsValid = () => {
         try {
             this.editor.get()
             return true
@@ -73,7 +71,7 @@ export class JSONEditor extends Component {
         }
     }
 
-    handleJsonEditor(props) {
+    handleJsonEditor = props => {
         const {
             jsonSearchValue,
             collapse,
@@ -164,6 +162,7 @@ export class JSONEditor extends Component {
 JSONEditor.propTypes = {
     dataChanged: PropTypes.func,
     jsonChangeMode: PropTypes.func,
+    value: PropTypes.any,
 }
 
 const mapStateToProps = state => ({

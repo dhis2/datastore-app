@@ -1,4 +1,3 @@
-import Paper from 'material-ui/Paper'
 import React, { Component } from 'react'
 import DisplayAreaHOC from '../../hoc/DisplayAreaHOC'
 import { ModeCommentIconWithText } from '../../utils/Icons'

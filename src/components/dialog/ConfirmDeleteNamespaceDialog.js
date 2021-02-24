@@ -1,16 +1,11 @@
 import { PropTypes } from '@dhis2/prop-types'
-import { deleteNamespace } from 'actions/actions'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { deleteNamespace } from '../../actions'
 import DialogRoot from './DialogRoot'
 
 export class ConfirmDeleteNamespaceDialog extends Component {
-    constructor(props) {
-        super(props)
-        this.handleConfirmed = this.handleConfirmed.bind(this)
-    }
-
-    handleConfirmed() {
+    handleConfirmed = () => {
         this.props.deleteNamespace(this.props.namespace)
     }
 
@@ -21,7 +16,10 @@ export class ConfirmDeleteNamespaceDialog extends Component {
                 approveLabel={'Delete'}
                 contentStyle={{ maxWidth: '400px' }}
             >
-                <p>Are you sure you want to delete '{this.props.namespace}'?</p>
+                <p>
+                    Are you sure you want to delete{' '}
+                    {`'${this.props.namespace}'`}?
+                </p>
                 <p>
                     This will delete <u>all</u> keys in this namespace.
                 </p>
@@ -32,7 +30,6 @@ export class ConfirmDeleteNamespaceDialog extends Component {
 
 ConfirmDeleteNamespaceDialog.propTypes = {
     namespace: PropTypes.string.isRequired,
-    closeDialog: PropTypes.func,
     deleteNamespace: PropTypes.func,
 }
 

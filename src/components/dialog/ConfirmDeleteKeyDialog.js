@@ -29,12 +29,20 @@ export class ConfirmDeleteKeyDialog extends Component {
                 contentStyle={{ maxWidth: '400px' }}
             >
                 <p>
-                    Are you sure you want to delete '{keyValue}' in {namespace}?
+                    Are you sure you want to delete {`'${keyValue}'`} in{' '}
+                    {namespace}?
                 </p>
                 {keysInNamespace < 2 ? lastKeyMsg : ''}
             </DialogRoot>
         )
     }
+}
+
+ConfirmDeleteKeyDialog.propTypes = {
+    keyValue: PropTypes.string.isRequired,
+    namespace: PropTypes.string.isRequired,
+    deleteKeyInNamespace: PropTypes.func,
+    namespaceStore: PropTypes.any,
 }
 
 const mapStateToProps = state => ({
@@ -48,13 +56,6 @@ const mapDispatchToProps = dispatch => ({
         dispatch(deleteKey(namespace, key))
     },
 })
-
-ConfirmDeleteKeyDialog.propTypes = {
-    namespace: PropTypes.string.isRequired,
-    keyValue: PropTypes.string.isRequired,
-    closeDialog: PropTypes.func,
-    deleteKeyInNamespace: PropTypes.func,
-}
 
 export default connect(
     mapStateToProps,

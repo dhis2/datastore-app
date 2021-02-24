@@ -1,7 +1,7 @@
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar'
 import React, { Component } from 'react'
-import Theme from 'utils/theme'
 import Api from '../../utils/api'
+import Theme from '../../utils/theme'
 
 const toolBarStyle = {
     alignItems: 'center',

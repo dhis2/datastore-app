@@ -1,24 +1,18 @@
-import DisplayToolbarTitle from 'components/display/DisplayToolbarTitle'
+import { PropTypes } from '@dhis2/prop-types'
 import Paper from 'material-ui/Paper'
 import { Toolbar } from 'material-ui/Toolbar'
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import DisplayToolbarTitle from '../DisplayToolbarTitle'
 
-class StatisticsToolbar extends Component {
-    render() {
-        const { namespace } = this.props
-
-        return (
-            <Paper style={{ zIndex: 5 }}>
-                <Toolbar>
-                    <DisplayToolbarTitle path={`${namespace}/statistics`} />
-                </Toolbar>
-            </Paper>
-        )
-    }
-}
+const StatisticsToolbar = ({ namespace }) => (
+    <Paper style={{ zIndex: 5 }}>
+        <Toolbar>
+            <DisplayToolbarTitle path={`${namespace}/statistics`} />
+        </Toolbar>
+    </Paper>
+)
 
 StatisticsToolbar.propTypes = {
-    selectedKey: PropTypes.string,
     namespace: PropTypes.string,
 }
 

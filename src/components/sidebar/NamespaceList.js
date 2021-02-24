@@ -2,7 +2,7 @@ import { PropTypes } from '@dhis2/prop-types'
 import { List } from 'material-ui/List'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Theme from 'utils/theme'
+import Theme from '../../utils/theme'
 import NamespaceItem from './NamespaceItem'
 
 const listStyle = {
@@ -15,14 +15,7 @@ const listStyle = {
 }
 
 export class NamespaceList extends Component {
-    constructor(props) {
-        super(props)
-
-        this.filterNamespaces = this.filterNamespaces.bind(this)
-        this.filterKeys = this.filterKeys.bind(this)
-    }
-
-    filterNamespaces(item) {
+    filterNamespaces = item => {
         const searchValue = this.props.search.toLowerCase() || ''
         if (!searchValue) {
             return true
@@ -46,7 +39,7 @@ export class NamespaceList extends Component {
      * @returns A string following '#' (excluding), empty string if separator is not
      * present.
      */
-    filterKeys() {
+    filterKeys = () => {
         const search = this.props.search.toLowerCase()
         const filterKeyIndex = search.indexOf('#') + 1
         const keySearch = search.substring(filterKeyIndex, search.length)

@@ -1,9 +1,7 @@
 import { PropTypes } from '@dhis2/prop-types'
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import * as navigationActions from '../../actions/navigationActions'
 import DialogRoot from './DialogRoot'
 
@@ -17,13 +15,9 @@ export class ConfirmNavigationDialog extends Component {
             confirmed: false,
             nextLocation: null,
         }
-
-        this.routerWillLeave = this.routerWillLeave.bind(this)
-        this.handleCancel = this.handleCancel.bind(this)
-        this.handleConfirm = this.handleConfirm.bind(this)
     }
 
-    handleCancel() {
+    handleCancel = () => {
         this.setState({
             ...this.state,
             confirmed: false,
@@ -32,7 +26,7 @@ export class ConfirmNavigationDialog extends Component {
         })
     }
 
-    handleConfirm() {
+    handleConfirm = () => {
         this.setState(
             { ...this.state, confirmed: true, show: false, blockNext: false },
             () => this.props.router.push(this.state.nextLocation)
@@ -48,7 +42,6 @@ export class ConfirmNavigationDialog extends Component {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         const next = nextProps
-        const curr = this.props
 
         if (this.props.ignoreNext) {
             this.setState({ ...this.state, blockNext: false })
@@ -62,8 +55,7 @@ export class ConfirmNavigationDialog extends Component {
         }
     }
 
-    routerWillLeave(nextLocation) {
-        const { value, editedValue } = this.props
+    routerWillLeave = nextLocation => {
         if (this.state.confirmed) {
             this.setState({
                 ...this.state,
@@ -85,8 +77,6 @@ export class ConfirmNavigationDialog extends Component {
     }
 
     render() {
-        const { value, editedValue } = this.props
-
         const cancelAction = DialogRoot.buildButton(
             this.handleCancel,
             'Stay',
@@ -97,7 +87,6 @@ export class ConfirmNavigationDialog extends Component {
             'Discard',
             true
         )
-        const saveAction = DialogRoot.buildButton(() => {}, 'Save', true)
         return (
             <Dialog
                 open={this.state.show}
@@ -111,11 +100,13 @@ export class ConfirmNavigationDialog extends Component {
         )
     }
 }
+
 ConfirmNavigationDialog.propTypes = {
-    closeDialog: PropTypes.func,
-    onConfirmNavigation: PropTypes.func,
-    onCancelNavigation: PropTypes.func,
+    cancelNavigation: PropTypes.any,
+    ignoreNext: PropTypes.any,
+    route: PropTypes.object,
     router: PropTypes.object,
+    setIgnoreNext: PropTypes.any,
 }
 
 const mapStateToProps = state => ({

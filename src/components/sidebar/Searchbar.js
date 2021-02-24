@@ -1,17 +1,12 @@
 import { PropTypes } from '@dhis2/prop-types'
-import { searchSidebarChange } from 'actions/sidebarActions'
 import TextField from 'material-ui/TextField'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { searchSidebarChange } from '../../actions/sidebarActions'
 
 export class Searchbar extends Component {
-    constructor(props) {
-        super(props)
-        this.handleKeys = this.handleKeys.bind(this)
-    }
-
-    handleKeys(event) {
-        if (event.keyCode === 27) {
+    handleKeys = event => {
+        if (event.key === 'Enter') {
             this.searchField.blur()
         }
     }

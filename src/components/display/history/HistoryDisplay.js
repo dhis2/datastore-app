@@ -57,20 +57,18 @@ export class HistoryDisplay extends Component {
 }
 
 HistoryDisplay.propTypes = {
-    history: PropTypes.array,
-    namespace: PropTypes.string,
-    selectedKey: PropTypes.string,
     getHistoryForKey: PropTypes.func,
     getHistoryForNamespace: PropTypes.func,
+    history: PropTypes.array,
+    namespace: PropTypes.string,
     params: PropTypes.shape({
-        namespace: PropTypes.string,
         key: PropTypes.string,
+        namespace: PropTypes.string,
     }),
 }
 
 const mapStateToProps = state => ({
     namespace: state.display.namespace,
-    selectedKey: state.display.key,
     history: state.display.history,
 })
 

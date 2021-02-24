@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { hashHistory } from 'react-router'
 import { withRouter } from 'react-router'
 import KeyItemMenu from './KeyItemMenu'
+
 const styles = {
     primaryText: {
         overflow: 'hidden',
@@ -24,9 +25,12 @@ export class KeyItem extends Component {
             index,
             namespace,
             keyName,
+            // eslint-disable-next-line no-unused-vars
             router,
             params,
+            // eslint-disable-next-line no-unused-vars
             routes,
+            // eslint-disable-next-line no-unused-vars
             location,
             ...props
         } = this.props
@@ -40,7 +44,7 @@ export class KeyItem extends Component {
                     <KeyItemMenu namespace={namespace} keyName={keyName} />
                 }
                 leftIcon={<EditorInsertDriveFile />}
-                onTouchTap={() =>
+                onClick={() =>
                     hashHistory.push(`/edit/${namespace}/${keyName}`)
                 }
                 style={isSelected ? styles.selectedKey : {}}
@@ -52,8 +56,12 @@ export class KeyItem extends Component {
 
 KeyItem.propTypes = {
     index: PropTypes.number,
-    namespace: PropTypes.string,
     keyName: PropTypes.string,
+    location: PropTypes.any,
+    namespace: PropTypes.string,
+    params: PropTypes.any,
+    router: PropTypes.any,
+    routes: PropTypes.any,
 }
 
 export default withRouter(KeyItem)

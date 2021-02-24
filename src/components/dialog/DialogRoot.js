@@ -1,9 +1,9 @@
 import { PropTypes } from '@dhis2/prop-types'
-import { closeDialog } from 'actions/dialogActions'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { closeDialog } from '../../actions/dialogActions'
 
 class DialogRoot extends Component {
     static buildButton(action, text, primary = false) {
@@ -61,13 +61,14 @@ class DialogRoot extends Component {
 }
 
 DialogRoot.propTypes = {
-    title: PropTypes.string,
-    cancelLabel: PropTypes.string,
+    approveAction: PropTypes.func,
     approveLabel: PropTypes.string,
     cancelAction: PropTypes.func,
-    approveAction: PropTypes.func,
-    defaultCloseDialog: PropTypes.func,
+    cancelLabel: PropTypes.string,
+    children: PropTypes.any,
     contentStyle: PropTypes.object,
+    defaultCloseDialog: PropTypes.func,
+    title: PropTypes.string,
 }
 
 const mapDispatchToProps = dispatch => ({

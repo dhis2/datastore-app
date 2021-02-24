@@ -90,14 +90,9 @@ export class NewNamespaceDialog extends Component {
 }
 
 NewNamespaceDialog.propTypes = {
-    namespace: PropTypes.string,
     closeDialog: PropTypes.func,
     createNamespace: PropTypes.func,
 }
-
-const mapStateToProps = state => ({
-    namespace: state.dialog.namespace,
-})
 
 const mapDispatchToProps = dispatch => ({
     createNamespace(namespace, key) {
@@ -105,4 +100,4 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewNamespaceDialog)
+export default connect(null, mapDispatchToProps)(NewNamespaceDialog)

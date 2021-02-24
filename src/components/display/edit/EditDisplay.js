@@ -15,6 +15,10 @@ import styles from '../Display.module.css'
 import EditArea from './EditArea'
 import EditToolbar from './EditToolbar'
 
+/* eslint-disable react/prop-types */
+/* eslint-disable react/sort-prop-types */
+/* eslint-disable max-params */
+
 export class EditDisplay extends Component {
     constructor() {
         super()
@@ -34,20 +38,11 @@ export class EditDisplay extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        const {
-            fetchedNamespaces,
-            params: nextParams,
-            namespace: nextNamespace,
-            value: nextValue,
-            selectedKey: nextKey,
-        } = nextProps
+        const { fetchedNamespaces, params: nextParams } = nextProps
         const {
             fetchKeysForNamespace,
             getValue,
             params: currentParams,
-            value,
-            namespace,
-            selectedKey,
         } = this.props
         // Load keys for namespace if its not already loaded
 

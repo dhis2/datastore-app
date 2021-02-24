@@ -1,18 +1,16 @@
 import { PropTypes } from '@dhis2/prop-types'
 import { ListItem } from 'material-ui/List'
+import ErrorIcon from 'material-ui/svg-icons/alert/error'
 import FileFolder from 'material-ui/svg-icons/file/folder'
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-    fetchAndDisplayKeyValue,
-    fetchAndToggleNamespace,
-    toggleNamespace,
-} from '../../actions'
-import { ErrorIcon } from '../utils/Icons'
+import { fetchAndToggleNamespace, toggleNamespace } from '../../actions'
 import { Spinner } from '../utils/Loaders'
 import KeyItem from './KeyItem'
 import NamespaceItemMenu from './NamespaceItemMenu'
+
+/* eslint-disable react/sort-prop-types */
 
 const namespaceItemStyle = {
     overflow: 'hidden',
@@ -61,14 +59,13 @@ export class NamespaceItem extends Component {
                 leftIcon={leftIcon}
                 rightIconButton={<NamespaceItemMenu name={name} />}
                 nestedItems={list}
-                onTouchTap={() => this.handleToggleNamespace(open, name)}
+                onClick={() => this.handleToggleNamespace(open, name)}
             />
         )
     }
 }
 
 NamespaceItem.propTypes = {
-    fetchAndDisplayKeyValue: PropTypes.func,
     openNamespace: PropTypes.func,
     closeNamespace: PropTypes.func,
     search: PropTypes.string,
@@ -82,9 +79,6 @@ NamespaceItem.propTypes = {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchAndDisplayKeyValue(namespace, key) {
-        dispatch(fetchAndDisplayKeyValue(namespace, key))
-    },
     openNamespace(namespace) {
         dispatch(fetchAndToggleNamespace(namespace))
     },

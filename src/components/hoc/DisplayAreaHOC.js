@@ -1,8 +1,8 @@
 import { PropTypes } from '@dhis2/prop-types'
-import ErrorArea from 'components/display/ErrorArea'
-import LoadingArea from 'components/display/LoadingArea'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ErrorArea from '../display/ErrorArea'
+import LoadingArea from '../display/LoadingArea'
 
 const DisplayAreaHOC = Area => {
     class DisplayAreaBase extends Component {
@@ -34,9 +34,9 @@ const DisplayAreaHOC = Area => {
     }
 
     DisplayAreaBase.propTypes = {
-        loading: PropTypes.bool,
         error: PropTypes.bool,
         errorMessage: PropTypes.object,
+        loading: PropTypes.bool,
     }
 
     const mapStateToProps = state => ({

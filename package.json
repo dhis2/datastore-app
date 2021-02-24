@@ -1,38 +1,38 @@
 {
-  "name": "datastore-app",
-  "version": "1.0.0",
-  "description": "",
-  "license": "BSD-3-Clause",
-  "private": true,
-  "scripts": {
-    "build": "d2-app-scripts build",
-    "start": "d2-app-scripts start",
-    "test": "d2-app-scripts test",
-    "lint:js": "d2-style js check",
-    "lint:text": "d2-style text check",
-    "lint:staged": "yarn lint:js --staged && yarn lint:text --staged",
-    "lint": "yarn lint:js && yarn lint:text",
-    "format:js": "d2-style js apply",
-    "format:text": "d2-style text apply",
-    "format:staged": "yarn format:js --staged && yarn format:text --staged",
-    "format": "yarn format:js && yarn format:text"
-  },
-  "devDependencies": {
-    "@dhis2/cli-app-scripts": "^5.7.0",
-    "@dhis2/cli-style": "^7.3.0"
-  },
-  "dependencies": {
-    "@dhis2/app-runtime": "^2.7.0",
-    "@dhis2/app-runtime-adapter-d2": "^1.0.2",
-    "@dhis2/prop-types": "^2.0.3",
-    "d2": "^31.9.0",
-    "jsoneditor": "5.5.10",
-    "material-ui": "0.19.0",
-    "react-chartjs-2": "1.5.1",
-    "react-redux": "^7.2.2",
-    "react-router": "3.0.5",
-    "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
-  }
+    "name": "datastore-app",
+    "version": "1.0.0",
+    "description": "",
+    "license": "BSD-3-Clause",
+    "private": true,
+    "scripts": {
+        "build": "d2-app-scripts build",
+        "start": "d2-app-scripts start",
+        "test": "d2-app-scripts test",
+        "lint:js": "d2-style js check",
+        "lint:text": "d2-style text check",
+        "lint:staged": "yarn lint:js --staged && yarn lint:text --staged",
+        "lint": "yarn lint:js && yarn lint:text",
+        "format:js": "d2-style js apply",
+        "format:text": "d2-style text apply",
+        "format:staged": "yarn format:js --staged && yarn format:text --staged",
+        "format": "yarn format:js && yarn format:text"
+    },
+    "devDependencies": {
+        "@dhis2/cli-app-scripts": "^5.7.0",
+        "@dhis2/cli-style": "^7.3.0"
+    },
+    "dependencies": {
+        "@dhis2/app-runtime": "^2.7.0",
+        "@dhis2/app-runtime-adapter-d2": "^1.0.2",
+        "@dhis2/prop-types": "^2.0.3",
+        "d2": "^31.9.0",
+        "jsoneditor": "5.5.10",
+        "material-ui": "0.19.0",
+        "react-chartjs-2": "1.5.1",
+        "react-redux": "^7.2.2",
+        "react-router": "3.0.5",
+        "react-router-dom": "^5.2.0",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0"
+    }
 }

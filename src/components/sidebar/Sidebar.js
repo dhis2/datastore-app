@@ -1,11 +1,11 @@
 import { PropTypes } from '@dhis2/prop-types'
-import SidebarAreaHOC from 'components/hoc/SidebarAreaHOC'
 import RaisedButton from 'material-ui/RaisedButton'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchNamespaces } from '../../actions'
 import { openDialog } from '../../actions/dialogActions'
 import * as dialog from '../../constants/dialogTypes'
+import SidebarAreaHOC from '../hoc/SidebarAreaHOC'
 import NamespaceList from './NamespaceList'
 import styles from './Sidebar.module.css'
 import SidebarHeader from './SidebarHeader'
@@ -51,10 +51,9 @@ export class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-    openNamespaceDialog: PropTypes.func,
     getNamespaces: PropTypes.func,
     items: PropTypes.object,
-    search: PropTypes.string,
+    openNamespaceDialog: PropTypes.func,
 }
 
 const mapStateToProps = state => ({

@@ -1,7 +1,6 @@
 import { PropTypes } from '@dhis2/prop-types'
 import FlatButton from 'material-ui/FlatButton'
 import React, { Component } from 'react'
-import Theme from '../../utils/theme'
 
 const style = {
     button: {
@@ -33,7 +32,6 @@ class BreadcrumbHistoryButton extends Component {
 
 BreadcrumbHistoryButton.propTypes = {
     label: PropTypes.string,
-    last: PropTypes.bool,
 }
 
 export default BreadcrumbHistoryButton

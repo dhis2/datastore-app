@@ -1,5 +1,4 @@
 import { PropTypes } from '@dhis2/prop-types'
-import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC'
 import {
     TableBody,
     TableHeaderColumn,
@@ -10,6 +9,7 @@ import {
 } from 'material-ui/Table'
 import React, { Component } from 'react'
 import Theme from '../../../utils/theme'
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC'
 import styles from '../Display.module.css'
 
 const tableHeaderStyle = {

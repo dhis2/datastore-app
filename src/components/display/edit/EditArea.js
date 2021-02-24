@@ -1,8 +1,7 @@
 import { PropTypes } from '@dhis2/prop-types'
-import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC'
-import JSONEditor from 'components/utils/JSONEditor'
 import React, { Component } from 'react'
-import Theme from '../../../utils/theme'
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC'
+import JSONEditor from '../../utils/JSONEditor'
 import styles from '../Display.module.css'
 
 export class EditArea extends Component {
@@ -19,10 +18,6 @@ export class EditArea extends Component {
     render() {
         const { value, namespace, selectedKey } = this.props
 
-        const backgroundStyle = {
-            backgroundColor: Theme.palette.primary3Color,
-        }
-
         return (
             <div className={styles.display}>
                 <JSONEditor
@@ -37,10 +32,10 @@ export class EditArea extends Component {
 }
 
 EditArea.propTypes = {
-    valueChange: PropTypes.func,
-    selectedKey: PropTypes.string,
     namespace: PropTypes.string,
+    selectedKey: PropTypes.string,
     value: PropTypes.any,
+    valueChange: PropTypes.func,
 }
 
 export default DisplayAreaHOC(EditArea)

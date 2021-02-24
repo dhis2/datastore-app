@@ -1,13 +1,13 @@
-import * as dialog from 'constants/dialogTypes'
 import { PropTypes } from '@dhis2/prop-types'
-import { openDialog } from 'actions/dialogActions'
-import IconButtonElement from 'components/utils/IconButtonElement'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Delete from 'material-ui/svg-icons/action/delete'
 import NoteAdd from 'material-ui/svg-icons/action/note-add'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { openDialog } from '../../actions/dialogActions'
+import * as dialog from '../../constants/dialogTypes'
+import IconButtonElement from '../utils/IconButtonElement'
 
 const anchorOrigin = {
     vertical: 'bottom',
@@ -29,6 +29,7 @@ export class NamespaceItemMenu extends Component {
     }
 
     render() {
+        // eslint-disable-next-line no-unused-vars
         const { name, deleteNamespace, newKey, ...props } = this.props
 
         return (
@@ -41,14 +42,14 @@ export class NamespaceItemMenu extends Component {
             >
                 <MenuItem
                     leftIcon={<NoteAdd />}
-                    onTouchTap={this.createKey.bind(this, name)}
+                    onClick={this.createKey.bind(this, name)}
                 >
                     New key
                 </MenuItem>
 
                 <MenuItem
                     leftIcon={<Delete />}
-                    onTouchTap={this.deleteNamespace.bind(this, name)}
+                    onClick={this.deleteNamespace.bind(this, name)}
                 >
                     Delete
                 </MenuItem>
@@ -58,8 +59,8 @@ export class NamespaceItemMenu extends Component {
 }
 
 NamespaceItemMenu.propTypes = {
-    name: PropTypes.string,
     deleteNamespace: PropTypes.func,
+    name: PropTypes.string,
     newKey: PropTypes.func,
 }
 

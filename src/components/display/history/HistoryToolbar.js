@@ -1,7 +1,8 @@
-import DisplayToolbarTitle from 'components/display/DisplayToolbarTitle'
+import { PropTypes } from '@dhis2/prop-types'
 import Paper from 'material-ui/Paper'
 import { Toolbar } from 'material-ui/Toolbar'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import DisplayToolbarTitle from '../DisplayToolbarTitle'
 
 const toolbarContainerStyle = {
     zIndex: 5,
@@ -26,8 +27,8 @@ class HistoryToolbar extends Component {
 }
 
 HistoryToolbar.propTypes = {
-    selectedKey: PropTypes.string,
     namespace: PropTypes.string,
+    selectedKey: PropTypes.string,
 }
 
 export default HistoryToolbar
