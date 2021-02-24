@@ -1,31 +1,17 @@
+import { useD2 } from '@dhis2/app-runtime-adapter-d2'
 import React from 'react'
-import { DataQuery } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
-import classes from './App.module.css'
+import AppContainer from './components/app/AppContainer'
+import store from './store'
+import './locales'
 
-const query = {
-    me: {
-        resource: 'me',
-    },
+const App = () => {
+    const { d2 } = useD2()
+
+    if (!d2) {
+        return null
+    }
+
+    return <AppContainer store={store} />
 }
 
-const MyApp = () => (
-    <div className={classes.container}>
-        <DataQuery query={query}>
-            {({ error, loading, data }) => {
-                if (error) return <span>ERROR</span>
-                if (loading) return <span>...</span>
-                return (
-                    <>
-                        <h1>
-                            {i18n.t('Hello {{name}}', { name: data.me.name })}
-                        </h1>
-                        <h3>{i18n.t('Welcome to DHIS2!')}</h3>
-                    </>
-                )
-            }}
-        </DataQuery>
-    </div>
-)
-
-export default MyApp
+export default App
