@@ -11,14 +11,12 @@ import NewNamespaceDialog from '../dialog/NewNamespaceDialog'
 import Sidebar from '../sidebar/Sidebar'
 import Snackbar from '../utils/Snackbar'
 import styles from './Layout.module.css'
-import NavigationBar from './NavigationBar'
 
 class Layout extends Component {
     render() {
         return (
             <div className={styles.wrapper}>
                 <div className={styles.layoutContainer}>
-                    <NavigationBar />
                     <div className={styles.pageContainer}>
                         <Sidebar />
                         {this.props.children}
