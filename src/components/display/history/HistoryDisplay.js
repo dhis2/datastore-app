@@ -2,10 +2,9 @@ import Paper from 'material-ui/Paper'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchHistoryForNamespace, fetchHistory } from '../../../actions'
+import styles from '../Display.module.css'
 import HistoryArea from './HistoryArea'
 import HistoryToolbar from './HistoryToolbar'
-
-import '../../../../style/display/display.scss'
 
 export class HistoryDisplay extends Component {
     componentDidMount() {
@@ -48,7 +47,7 @@ export class HistoryDisplay extends Component {
         const { namespace, key } = this.props.params
 
         return (
-            <Paper zDepth={0} className={'fff-display'}>
+            <Paper zDepth={0} className={styles.display}>
                 <HistoryToolbar namespace={namespace} selectedKey={key} />
                 <HistoryArea list={history} />
             </Paper>

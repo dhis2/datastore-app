@@ -1,11 +1,12 @@
+import { PropTypes } from '@dhis2/prop-types'
 import Paper from 'material-ui/Paper'
-import React, { Component, PropTypes } from 'react'
-import '../../../../style/display/display.scss'
+import React, { Component } from 'react'
 import { Line } from 'react-chartjs-2'
 import DisplayAreaHOC from '../../hoc/DisplayAreaHOC'
+import styles from '../Display.module.css'
 
 export class StatisticsArea extends Component {
-    prepareData() {
+    prepareData = () => {
         const { list } = this.props
         const yVal = []
         const datesToValMap = {}
@@ -46,12 +47,12 @@ export class StatisticsArea extends Component {
     }
 
     render() {
-        const data = this.prepareData.bind(this)()
+        const data = this.prepareData()
         const { namespace } = this.props
         const opts = {
             title: {
                 display: true,
-                text: '# of Edits in '.concat(namespace),
+                text: `# of Edits in ${namespace}`,
             },
             legend: {
                 display: false,
@@ -78,7 +79,7 @@ export class StatisticsArea extends Component {
         }
 
         return (
-            <Paper className={'fff-display-area'}>
+            <Paper className={styles.displayArea}>
                 <div style={{ width: '90%', margin: '0 auto 0 auto' }}>
                     <Line redraw data={data} options={opts} />
                 </div>
@@ -86,6 +87,7 @@ export class StatisticsArea extends Component {
         )
     }
 }
+
 StatisticsArea.propTypes = {
     list: PropTypes.array,
     namespace: PropTypes.string,

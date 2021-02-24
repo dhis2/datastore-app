@@ -9,7 +9,6 @@ import { Provider } from 'react-redux'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import Theme from '../utils/theme'
 import Layout from './Layout'
-import '../../../style/main.scss'
 
 class AppContainer extends Component {
     shouldComponentUpdate() {

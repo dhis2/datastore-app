@@ -1,11 +1,11 @@
 import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC'
 import JSONEditor from 'components/utils/JSONEditor'
 import React, { PropTypes, Component } from 'react'
-import Theme from 'utils/theme'
-import '../../../../style/display/display.scss'
+import Theme from '../../../utils/theme'
+import styles from '../Display.module.css'
 
 export class EditArea extends Component {
-    dataFromJSONEditor(editor) {
+    handleDataChange = editor => {
         try {
             // throws error if not valid json
             const data = editor.get()
@@ -23,12 +23,12 @@ export class EditArea extends Component {
         }
 
         return (
-            <div className={'fff-display-area'}>
+            <div className={styles.display}>
                 <JSONEditor
                     value={value}
                     namespace={namespace}
                     selectedKey={selectedKey}
-                    dataChanged={this.dataFromJSONEditor.bind(this)}
+                    dataChanged={this.handleDataChange}
                 />
             </div>
         )

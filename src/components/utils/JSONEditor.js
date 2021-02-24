@@ -33,7 +33,7 @@ export class JSONEditor extends Component {
 
     /* Handle the jsonEditor props here, as if we re-render the component, the state is lost,
      * as it's inside the jsoneditor which is not a react-component. */
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.jsonEditor !== this.props.jsonEditor) {
             this.handleJsonEditor(nextProps)
         }
@@ -43,7 +43,7 @@ export class JSONEditor extends Component {
         this.editor.set(sortObjectKeys(value))
     }
 
-    componentWillUpdate(nextProps) {
+    UNSAFE_componentWillUpdate(nextProps) {
         this.updateValue(nextProps.value)
         this.handleJsonEditor(nextProps)
     }

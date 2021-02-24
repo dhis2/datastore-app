@@ -1,3 +1,4 @@
+import { PropTypes } from '@dhis2/prop-types'
 import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC'
 import {
     TableBody,
@@ -7,9 +8,9 @@ import {
     TableRowColumn,
     Table,
 } from 'material-ui/Table'
-import React, { Component, PropTypes } from 'react'
-import Theme from 'utils/theme'
-import '../../../../style/display/display.scss'
+import React, { Component } from 'react'
+import Theme from '../../../utils/theme'
+import styles from '../Display.module.css'
 
 const tableHeaderStyle = {
     borderBottom: 'solid grey 1px',
@@ -23,7 +24,7 @@ export class HistoryArea extends Component {
         backgroundStyle.backgroundColor = Theme.palette.primary3Color
 
         return (
-            <div className={'fff-display-area'} style={backgroundStyle}>
+            <div className={styles.displayArea} style={backgroundStyle}>
                 <Table fixedHeader headerStyle={tableHeaderStyle}>
                     <TableHeader
                         displaySelectAll={false}

@@ -10,17 +10,15 @@ import Sidebar from 'components/sidebar/Sidebar'
 import Snackbar from 'components/utils/Snackbar'
 import React, { PropTypes, Component } from 'react'
 import NavigationBar from './NavigationBar'
-
-import '../../../style/layout/layout.scss'
-import '../../../style/pages/pages.scss'
+import styles from './Layout.module.css'
 
 class Layout extends Component {
     render() {
         return (
-            <div className={'fff-wrapper'}>
-                <div className={'fff-layout-container'}>
+            <div className={styles.wrapper}>
+                <div className={styles.layoutContainer}>
                     <NavigationBar />
-                    <div className={'fff-page-container'}>
+                    <div className={styles.pageContainer}>
                         <Sidebar />
                         {this.props.children}
                         <DialogRouter>

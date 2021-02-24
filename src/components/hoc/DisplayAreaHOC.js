@@ -2,22 +2,18 @@ import ErrorArea from 'components/display/ErrorArea'
 import LoadingArea from 'components/display/LoadingArea'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import '../../../style/display/display.scss'
 
 const DisplayAreaHOC = Area => {
     class DisplayAreaBase extends Component {
         constructor(props) {
             super(props)
-
-            this.renderLoading = this.renderLoading.bind(this)
-            this.renderError = this.renderError.bind(this)
         }
 
-        renderLoading() {
+        renderLoading = () => {
             return <LoadingArea />
         }
 
-        renderError() {
+        renderError = () => {
             return <ErrorArea error={this.props.errorMessage} />
         }
 

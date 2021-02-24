@@ -7,8 +7,8 @@ import { fetchNamespaces } from '../../actions'
 import { openDialog } from '../../actions/dialogActions'
 import * as dialog from '../../constants/dialogTypes'
 import NamespaceList from './NamespaceList'
+import styles from './Sidebar.module.css'
 import SidebarHeader from './SidebarHeader'
-import '../../../style/sidebar/sidebar.scss'
 
 export class Sidebar extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ export class Sidebar extends Component {
         const NamespaceListImproved = this.state.namespaceListImproved
 
         return (
-            <div className={'fff-sidebar'}>
+            <div className={styles.sidebar}>
                 <SidebarHeader>
                     <RaisedButton
                         label="New"

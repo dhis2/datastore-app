@@ -1,70 +1,19 @@
-import React, { PropTypes, Component } from 'react'
-import '../../../style/utils/loaders.scss'
+import React from 'react'
+import { CircularLoader } from '@dhis2/ui'
+import { PropTypes } from '@dhis2/prop-types'
 
-export class Spinner extends Component {
-    constructor(props) {
-        super(props)
-
-        this.renderSmall = this.renderSmall.bind(this)
-        this.renderMedium = this.renderMedium.bind(this)
-        this.renderLarge = this.renderLarge.bind(this)
+export const Spinner = ({ size = 'small' }) => {
+    switch (size) {
+    case 'small':
+        return <CircularLoader small />
+    case 'medium':
+        return <CircularLoader />
+    case 'large':
+        return <CircularLoader large />
     }
-
-    renderSmall() {
-        return (
-            <div className="loading-small" style={this.props.style}>
-                <div className="spinner">
-                    <div className="mask">
-                        <div className="maskedCircle"></div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    renderMedium() {
-        return (
-            <div className="loading-medium" style={this.props.style}>
-                <div className="spinner">
-                    <div className="mask">
-                        <div className="maskedCircle"></div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    renderLarge() {
-        return (
-            <div className="loading-large" style={this.props.style}>
-                <div className="spinner">
-                    <div className="mask">
-                        <div className="maskedCircle"></div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    render() {
-        switch (this.props.size) {
-            case 'small': {
-                return this.renderSmall()
-            }
-            case 'medium': {
-                return this.renderMedium()
-            }
-            case 'large': {
-                return this.renderLarge()
-            }
-            default: {
-                return this.renderSmall()
-            }
-        }
-    }
+    return null
 }
 
 Spinner.propTypes = {
-    size: PropTypes.string,
-    style: PropTypes.object,
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
 }

@@ -1,8 +1,8 @@
 import BreadcrumbHistoryButton from 'components/utils/BreadcrumbHistoryButton'
+import styles from 'DisplayToolbarTitle.module.css'
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right'
 import React, { PropTypes, Component } from 'react'
-import Theme from 'utils/theme'
-import '../../../style/toolbarTitle.scss'
+import Theme from '../../utils/theme'
 
 class DisplayToolbarTitle extends Component {
     renderPath(path) {
@@ -15,9 +15,9 @@ class DisplayToolbarTitle extends Component {
         const pathArray = path.split('/')
         const length = pathArray.length - 1
         return (
-            <span className={'fff-toolbar-title'}>
+            <span className={styles.toolbarTitle}>
                 {pathArray.map((item, index) => (
-                    <span key={'s'.concat(index)}>
+                    <span key={index}>
                         <BreadcrumbHistoryButton label={item} key={index} />
                         {index === length ? null : (
                             <ChevronRight style={chevStyle} />
@@ -29,7 +29,7 @@ class DisplayToolbarTitle extends Component {
     }
 
     renderDefault() {
-        return <span className="fff-toolbar-title">Value</span>
+        return <span className={styles.toolbarTitle}>Value</span>
     }
 
     render() {

@@ -1,13 +1,13 @@
-import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC'
-import { ModeCommentIconWithText } from 'components/utils/Icons'
 import Paper from 'material-ui/Paper'
 import React, { Component } from 'react'
-import '../../../../style/display/display.scss'
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC'
+import { ModeCommentIconWithText } from '../../utils/Icons'
+import styles from '../Display.module.css'
 
 export class EmptyArea extends Component {
     render() {
         return (
-            <div className={'fff-display'}>
+            <div className={styles.display}>
                 <ModeCommentIconWithText
                     text={'Select a namespace and a key to edit.'}
                 />

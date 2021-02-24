@@ -45,7 +45,7 @@ export class ConfirmNavigationDialog extends Component {
         )
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         const next = nextProps
         const curr = this.props
 

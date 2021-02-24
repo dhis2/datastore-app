@@ -118,25 +118,6 @@ export function requestCreateValue(namespace, key, value) {
 }
 
 /**
- * rejectCreateValue - Return reject signal for value creation
- *
- * @param  {string} namespace Namespce holding key
- * @param  {string} key       Key holding value
- * @param  {string} value     Value that was to be created
- * @param  {object} error     Error returned from rejected request
- * @return {object}           Action
- */
-export function rejectCreateValue(namespace, key, value, error) {
-    return {
-        type: actions.CREATE_VALUE_REJECTED,
-        namespace,
-        key,
-        value,
-        error,
-    }
-}
-
-/**
  * receiveValue - Return value received from request
  *
  * @param  {string} namespace Namespace holding key
@@ -402,7 +383,7 @@ export function rejectNamespaceHistory(namespace, error) {
 }
 
 /**
- * valueChange - Signal a value chagne in edit display area
+ * valueChange - Signal a value change in edit display area
  *
  * @param  {type} namespace Namespace of value changed
  * @param  {type} key       Key of value changed
@@ -536,7 +517,6 @@ export function fetchNamespaces() {
  *               keys and namespaces. We always create a value with empty values, and instead use
  *               updateValue to update values.
  *               If a namespace exists, the key will be created in namespace with an empty value
- *               If both namespace and key exists; rejectCreateValue will be dispatched.
  *
  * @param  {object} namespace Namespace to create or add key in
  * @param  {object} key       Key for tied to value
@@ -568,7 +548,13 @@ export function createAndDisplayValue(namespace, key) {
             .then(() => hashHistory.push(`/edit/${namespace}/${key}`))
             .then(() => dispatch(fetchAndToggleNamespace(namespace, true)))
             .catch(error =>
-                dispatch(rejectCreateValue(namespace, key, {}, error))
+                dispatch({
+                    type: actions.CREATE_VALUE_REJECTED,
+                    namespace,
+                    key,
+                    value: {},
+                    error,
+                })
             )
     }
 }
@@ -653,7 +639,7 @@ export function updateValue(namespace, key, value) {
 /**
  * deleteKey - Deletes a key from the API and store.
  *             If it's the last key in the namespace, the namespace is
- *             removed aswell (following the behavior of the API).
+ *             removed as well (following the behavior of the API).
  *
  * @param  {string} namespace Namespace containing the key to be removed
  * @param  {string} key       Key to be removed
@@ -667,9 +653,7 @@ export function deleteKey(namespace, key) {
             .then(() => dispatch(receiveDeleteKey(namespace, key)))
             .then(res => {
                 if (getState().display.key == key) {
-                    dispatch(
-                        navigationAction.setIgnoreNextNavigationConfirm(true)
-                    )
+                    dispatch(navigationAction.setIgnoreNextNavigationConfirm())
                     hashHistory.push('/')
                 }
                 return res
@@ -697,7 +681,7 @@ export function deleteKey(namespace, key) {
  * deleteNamespace - Deletes a namespace from the state and API.
  *                   This will also delete all keys in the namespace.
  *
- * @param  {string} namespace Namesapce to delete
+ * @param  {string} namespace Namespace to delete
  * @return {object}           Action thunk
  */
 export function deleteNamespace(namespace) {
@@ -708,9 +692,7 @@ export function deleteNamespace(namespace) {
             .then(success => {
                 dispatch(receiveDeleteNamespace(namespace))
                 if (getState().display.namespace === namespace) {
-                    dispatch(
-                        navigationAction.setIgnoreNextNavigationConfirm(true)
-                    )
+                    dispatch(navigationAction.setIgnoreNextNavigationConfirm())
                     hashHistory.push('/')
                 }
                 return success

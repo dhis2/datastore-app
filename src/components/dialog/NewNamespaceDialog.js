@@ -16,11 +16,9 @@ export class NewNamespaceDialog extends Component {
             namespaceError: '',
             keyError: '',
         }
-
-        this.handleCreate = this.handleCreate.bind(this)
     }
 
-    handleNamespaceInput(event) {
+    handleNamespaceInput = event => {
         const val = event.target.value
         this.setState({
             namespaceError: validateKeyOrNamespace(val).message,
@@ -28,7 +26,7 @@ export class NewNamespaceDialog extends Component {
         })
     }
 
-    handleKeyInput(event) {
+    handleKeyInput = event => {
         const val = event.target.value
         this.setState({
             keyError: validateKeyOrNamespace(val).message,
@@ -40,7 +38,7 @@ export class NewNamespaceDialog extends Component {
         this.props.closeDialog()
     }
 
-    handleCreate() {
+    handleCreate = () => {
         const { namespaceValue, keyValue } = this.state
         return new Promise((resolve, reject) => {
             const validatedNamespace = validateKeyOrNamespace(namespaceValue)
@@ -77,14 +75,14 @@ export class NewNamespaceDialog extends Component {
                     hintText="Namespace"
                     style={fieldStyle}
                     errorText={this.state.namespaceError}
-                    onChange={this.handleNamespaceInput.bind(this)}
+                    onChange={this.handleNamespaceInput}
                 />
                 <TextField
                     fullWidth
                     hintText="Key name"
                     style={{ fieldStyle }}
                     errorText={this.state.keyError}
-                    onChange={this.handleKeyInput.bind(this)}
+                    onChange={this.handleKeyInput}
                 />
             </DialogRoot>
         )

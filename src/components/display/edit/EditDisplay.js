@@ -1,3 +1,7 @@
+import Paper from 'material-ui/Paper'
+import React, { PropTypes, Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import {
     fetchAndDisplayKeyValue,
     fetchAndToggleNamespace,
@@ -5,14 +9,10 @@ import {
     valueChange,
     rejectUpdateValue,
 } from '../../../actions'
-import Paper from 'material-ui/Paper'
-import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
-import EditToolbar from './EditToolbar'
-import EditArea from './EditArea'
-import '../../../../style/display/display.scss'
-import { withRouter } from 'react-router'
 import ConfirmNavigationDialog from '../../dialog/ConfirmNavigationDialog'
+import styles from '../Display.module.css'
+import EditArea from './EditArea'
+import EditToolbar from './EditToolbar'
 
 export class EditDisplay extends Component {
     constructor() {
@@ -32,7 +32,7 @@ export class EditDisplay extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         const {
             fetchedNamespaces,
             params: nextParams,
@@ -112,7 +112,7 @@ export class EditDisplay extends Component {
         }
 
         return (
-            <Paper zDepth={0} className={'fff-display'}>
+            <Paper zDepth={0} className={styles.display}>
                 <ConfirmNavigationDialog
                     route={this.props.route}
                     router={this.props.router}

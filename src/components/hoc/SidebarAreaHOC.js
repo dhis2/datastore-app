@@ -3,7 +3,7 @@ import IconButton from 'material-ui/IconButton'
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh'
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import '../../../style/sidebar/sidebar.scss'
+import styles from '../sidebar/Sidebar.module.css'
 
 const containerStyle = {
     alignItems: 'center',
@@ -25,7 +25,7 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
 
         renderLoading() {
             return (
-                <div className={'fff-sidebar-list'} style={containerStyle}>
+                <div className={styles.sidebarList} style={containerStyle}>
                     <Spinner size={'medium'} style={alignmentStyle} />
                 </div>
             )
@@ -33,7 +33,7 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
 
         renderError() {
             return (
-                <div className={'fff-sidebar-list'} style={containerStyle}>
+                <div className={styles.sidebarList} style={containerStyle}>
                     <IconButton
                         style={alignmentStyle}
                         onTouchTap={errorRefresh}
