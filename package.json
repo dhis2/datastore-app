@@ -14,6 +14,16 @@
     "@dhis2/cli-app-scripts": "^5.7.0"
   },
   "dependencies": {
-    "@dhis2/app-runtime": "^2.7.0"
+    "@dhis2/app-runtime": "^2.7.0",
+    "@dhis2/app-runtime-adapter-d2": "^1.0.2",
+    "@dhis2/prop-types": "^2.0.3",
+    "d2": "^31.9.0",
+    "material-ui": "0.16.4",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-promise-middleware": "^6.1.2",
+    "redux-thunk": "^2.3.0",
+    "sprintf-js": "^1.1.2"
   }
 }
