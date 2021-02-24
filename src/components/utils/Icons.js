@@ -2,6 +2,7 @@ import { PropTypes } from '@dhis2/prop-types'
 import ErrorIcon from 'material-ui/svg-icons/alert/error'
 import ModeComment from 'material-ui/svg-icons/editor/mode-comment'
 import React, { Component } from 'react'
+import styles from '../display/Display.module.css'
 
 const containerStyle = {
     alignItems: 'center',
@@ -22,7 +23,7 @@ export class ModeCommentIconWithText extends Component {
     render() {
         const { text } = this.props
         return (
-            <div className={'fff-display-area'} style={containerStyle}>
+            <div className={styles.displayArea} style={containerStyle}>
                 <div>
                     <ModeComment style={iconStyle} />
                     <p>{text}</p>
@@ -36,7 +37,7 @@ export class ErrorIconWithText extends Component {
     render() {
         const { text } = this.props
         return (
-            <div className={'fff-display-area'} style={containerStyle}>
+            <div className={styles.displayArea} style={containerStyle}>
                 <div>
                     <ErrorIcon style={iconStyle} />
                     <p>{text}</p>

@@ -1,6 +1,7 @@
 import Paper from 'material-ui/Paper'
 import React, { Component } from 'react'
 import { Spinner } from '../utils/Loaders'
+import styles from './Display.module.css'
 
 const alignmentStyle = {
     alignItems: 'center',
@@ -12,7 +13,7 @@ class LoadingArea extends Component {
         return (
             <Paper
                 zDepth={0}
-                className={'fff-display-area'}
+                className={styles.displayArea}
                 style={alignmentStyle}
             >
                 <Spinner size={'large'} />
