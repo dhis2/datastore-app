@@ -1,12 +1,16 @@
 .toolbarTitle {
-    padding-right: 16px;
+    padding: 16px;
     line-height: 56px;
     font-size: 20px;
-    font-family: Roboto, sans-serif;
     position: relative;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     display: flex;
     align-items: center;
+}
+
+.toolbarTitle svg {
+    box-sizing: content-box;
+    padding-left: 0 !important;
 }

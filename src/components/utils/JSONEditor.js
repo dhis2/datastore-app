@@ -7,7 +7,6 @@ import { jsonEditorChangeMode } from '../../actions/jsonEditorActions'
 import * as dialogTypes from '../../constants/dialogTypes'
 import 'jsoneditor/dist/jsoneditor.min.css'
 import { sortObjectKeys } from '../../utils/utils'
-import './jsoneditor-overrides.css'
 
 /* eslint-disable react/prop-types */
 
