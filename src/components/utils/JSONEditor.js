@@ -51,7 +51,6 @@ export class JSONEditor extends Component {
     }
 
     updateValue(value) {
-        console.log('updateValue', value)
         this.editor.set(sortObjectKeys(value))
     }
 
