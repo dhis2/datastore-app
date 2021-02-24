@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import { PropTypes } from '@dhis2/prop-types'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class DialogRouter extends Component {

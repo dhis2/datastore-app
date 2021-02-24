@@ -1,6 +1,7 @@
+import { PropTypes } from '@dhis2/prop-types'
 import ErrorArea from 'components/display/ErrorArea'
 import LoadingArea from 'components/display/LoadingArea'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 const DisplayAreaHOC = Area => {

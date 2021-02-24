@@ -1,4 +1,4 @@
-import * as actions from 'constants/jsonEditorTypes'
+import * as actions from '../constants/jsonEditorTypes'
 
 /**
  * searchJSON - Search action in json editor

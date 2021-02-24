@@ -18,6 +18,7 @@ export class Snackbar extends Component {
 }
 
 Snackbar.propTypes = {
+    emptySnackbar: PropTypes.func,
     message: PropTypes.string,
 }
 

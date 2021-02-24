@@ -1,6 +1,7 @@
+import { PropTypes } from '@dhis2/prop-types'
 import ErrorIcon from 'material-ui/svg-icons/alert/error'
 import ModeComment from 'material-ui/svg-icons/editor/mode-comment'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 
 const containerStyle = {
     alignItems: 'center',

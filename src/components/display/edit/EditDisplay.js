@@ -1,5 +1,6 @@
+import { PropTypes } from '@dhis2/prop-types'
 import Paper from 'material-ui/Paper'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import {

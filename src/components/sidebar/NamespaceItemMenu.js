@@ -1,11 +1,12 @@
 import * as dialog from 'constants/dialogTypes'
+import { PropTypes } from '@dhis2/prop-types'
 import { openDialog } from 'actions/dialogActions'
 import IconButtonElement from 'components/utils/IconButtonElement'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Delete from 'material-ui/svg-icons/action/delete'
 import NoteAdd from 'material-ui/svg-icons/action/note-add'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 const anchorOrigin = {

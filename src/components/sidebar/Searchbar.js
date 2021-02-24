@@ -1,6 +1,7 @@
+import { PropTypes } from '@dhis2/prop-types'
 import { searchSidebarChange } from 'actions/sidebarActions'
 import TextField from 'material-ui/TextField'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 export class Searchbar extends Component {

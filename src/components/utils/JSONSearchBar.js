@@ -1,5 +1,6 @@
+import { PropTypes } from '@dhis2/prop-types'
 import TextField from 'material-ui/TextField'
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 export class JSONSearchBar extends React.Component {
     constructor(props) {
@@ -49,9 +50,9 @@ export class JSONSearchBar extends React.Component {
 }
 
 JSONSearchBar.propTypes = {
-    style: PropTypes.object,
     changeAction: PropTypes.func,
     jsonLength: PropTypes.number,
+    style: PropTypes.object,
 }
 
 export default JSONSearchBar

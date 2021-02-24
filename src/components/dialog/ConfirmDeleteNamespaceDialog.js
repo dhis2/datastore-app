@@ -1,5 +1,6 @@
+import { PropTypes } from '@dhis2/prop-types'
 import { deleteNamespace } from 'actions/actions'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DialogRoot from './DialogRoot'
 

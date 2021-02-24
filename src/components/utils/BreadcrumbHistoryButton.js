@@ -1,5 +1,6 @@
+import { PropTypes } from '@dhis2/prop-types'
 import FlatButton from 'material-ui/FlatButton'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import Theme from '../../utils/theme'
 
 const style = {

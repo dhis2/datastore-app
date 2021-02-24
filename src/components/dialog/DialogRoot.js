@@ -1,7 +1,8 @@
+import { PropTypes } from '@dhis2/prop-types'
 import { closeDialog } from 'actions/dialogActions'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class DialogRoot extends Component {

@@ -1,4 +1,5 @@
 import * as dialog from 'constants/dialogTypes'
+import { PropTypes } from '@dhis2/prop-types'
 import ConfirmDeleteNamespaceDialog from 'components/dialog//ConfirmDeleteNamespaceDialog'
 import NewKeyDialog from 'components/dialog//NewKeyDialog'
 import NewNamespaceDialog from 'components/dialog//NewNamespaceDialog'
@@ -8,9 +9,9 @@ import DialogRouter from 'components/dialog/DialogRouter'
 import ErrorDialog from 'components/dialog/ErrorDialog'
 import Sidebar from 'components/sidebar/Sidebar'
 import Snackbar from 'components/utils/Snackbar'
-import React, { PropTypes, Component } from 'react'
-import NavigationBar from './NavigationBar'
+import React, { Component } from 'react'
 import styles from './Layout.module.css'
+import NavigationBar from './NavigationBar'
 
 class Layout extends Component {
     render() {

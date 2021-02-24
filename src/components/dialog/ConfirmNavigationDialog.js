@@ -1,6 +1,7 @@
+import { PropTypes } from '@dhis2/prop-types'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as navigationActions from '../../actions/navigationActions'

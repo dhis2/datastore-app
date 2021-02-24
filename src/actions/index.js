@@ -209,6 +209,7 @@ export function receiveUpdateValue(namespace, key, value) {
  * @param  {object} error     Error returned from rejeted request
  * @return {object}           Action
  */
+// eslint-disable-next-line max-params
 export function rejectUpdateValue(namespace, key, value, error) {
     return {
         type: actions.UPDATE_VALUE_REJECTED,

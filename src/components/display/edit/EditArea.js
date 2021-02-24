@@ -1,6 +1,7 @@
+import { PropTypes } from '@dhis2/prop-types'
 import DisplayAreaHOC from 'components/hoc/DisplayAreaHOC'
 import JSONEditor from 'components/utils/JSONEditor'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import Theme from '../../../utils/theme'
 import styles from '../Display.module.css'
 

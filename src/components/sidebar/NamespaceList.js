@@ -1,5 +1,6 @@
+import { PropTypes } from '@dhis2/prop-types'
 import { List } from 'material-ui/List'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Theme from 'utils/theme'
 import NamespaceItem from './NamespaceItem'
