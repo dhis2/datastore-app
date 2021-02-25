@@ -1,35 +1,37 @@
 import { getInstance } from 'd2'
 import { API_URL } from '../constants/apiUrls'
 
-class Cache {
+export class Cache {
     constructor() {
-        this.cache = Object.create(null)
+        this.cache = new Map()
     }
 
     clearNamespace(namespace) {
-        this.cache[namespace] = Object.create(null)
+        if (this.cache.has(namespace)) {
+            this.cache.get(namespace).clear()
+        }
     }
 
     contains(namespace, key) {
-        return namespace in this.cache && key in this.cache[namespace]
+        return this.cache.has(namespace) && this.cache.get(namespace).has(key)
     }
 
     get(namespace, key) {
         if (this.contains(namespace, key)) {
-            return this.cache[namespace][key]
+            return this.cache.get(namespace).get(key)
         }
     }
 
     set(namespace, key, value) {
-        if (!(namespace in this.cache)) {
-            this.cache[namespace] = Object.create(null)
+        if (!this.cache.has(namespace)) {
+            this.cache.set(namespace, new Map())
         }
-        this.cache[namespace][key] = value
+        this.cache.get(namespace).set(key, value)
     }
 
     delete(namespace, key) {
         if (this.contains(namespace, key)) {
-            delete this.cache[namespace][key]
+            this.cache.get(namespace).delete(key)
         }
     }
 }
