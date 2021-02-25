@@ -6,7 +6,6 @@ const fetchingState = { fetching: true, fetched: false, error: false }
 const errorState = { fetching: false, fetched: false, error: true }
 
 const initialState = {
-    history: [],
     fetching: false,
     fetched: false,
 }
@@ -21,7 +20,6 @@ const display = (state = initialState, action) => {
         }
 
         case actions.FETCH_NAMESPACES_PENDING:
-        case actions.FETCH_HISTORY_PENDING:
         case actions.FETCH_VALUE_PENDING:
         case actions.LOAD_VALUE: {
             return {
@@ -31,7 +29,6 @@ const display = (state = initialState, action) => {
         }
 
         case actions.FETCH_NAMESPACES_REJECTED:
-        case actions.FETCH_HISTORY_REJECTED:
         case actions.FETCH_VALUE_REJECTED: {
             return {
                 ...state,
@@ -44,35 +41,6 @@ const display = (state = initialState, action) => {
             return {
                 ...state,
                 ...fetchedState,
-            }
-        }
-
-        case actions.FETCH_HISTORY_FULFILLED: {
-            const { history, namespace, key } = action
-            return {
-                ...state,
-                ...fetchedState,
-                history,
-                namespace,
-                key,
-            }
-        }
-
-        case actions.FETCH_NAMESPACE_HISTORY_FULFILLED: {
-            const { history, namespace } = action
-            return {
-                ...state,
-                ...fetchedState,
-                namespace,
-                history,
-            }
-        }
-
-        case actions.FETCH_NAMESPACE_HISTORY_REJECTED: {
-            return {
-                ...state,
-                ...errorState,
-                namespace: action.namespace,
             }
         }
 

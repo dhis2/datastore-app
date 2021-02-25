@@ -33,13 +33,6 @@ const snackbar = (state = initialState, action) => {
             }
         }
 
-        case actions.FETCH_HISTORY_REJECTED: {
-            return {
-                ...state,
-                message: 'Failed to get history.',
-            }
-        }
-
         case actions.FETCH_KEYS_REJECTED: {
             return {
                 ...state,
