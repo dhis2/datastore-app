@@ -1,6 +1,6 @@
 BSD 3-Clause License
 
-Copyright (c) 2019, DHIS2
+Copyright (c) 2021, DHIS2
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
