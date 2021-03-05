@@ -18,7 +18,7 @@
         "format": "yarn format:js && yarn format:text"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^5.7.0",
+        "@dhis2/cli-app-scripts": "^5.7.4",
         "@dhis2/cli-style": "^7.3.0"
     },
     "dependencies": {
