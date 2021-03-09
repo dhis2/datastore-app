@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/dhis2/datastore-app/compare/v1.1.0...v1.2.0) (2021-03-09)
+
+
+### Features
+
+* port to app-platform ([#17](https://github.com/dhis2/datastore-app/issues/17)) ([3012cb7](https://github.com/dhis2/datastore-app/commit/3012cb73aef845491d2f3446d16ae89b7a55ebf1))
+
 # [1.1.0](https://github.com/dhis2/datastore-app/compare/v1.0.0...v1.1.0) (2021-02-12)
 
 
