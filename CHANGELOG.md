@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dhis2/datastore-app/compare/v1.2.0...v1.3.0) (2021-03-11)
+
+
+### Features
+
+* upgrade to @dhis2/ui v6 and bump other dependency versions  ([#23](https://github.com/dhis2/datastore-app/issues/23)) ([5f55156](https://github.com/dhis2/datastore-app/commit/5f55156b51109fdd498945a6cdd5a1a799847325))
+
 # [1.2.0](https://github.com/dhis2/datastore-app/compare/v1.1.0...v1.2.0) (2021-03-09)
 
 
