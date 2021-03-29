@@ -82,7 +82,7 @@ class Api {
 
     createValue = async (namespace, key, value) => {
         const d2 = await getInstance()
-        const resName = await d2.dataStore.get(namespace)
+        const resName = await d2.dataStore.get(namespace, false)
         const response = await resName.set(key, value, true)
         this.cache.set(namespace, key, {
             length: 0,
