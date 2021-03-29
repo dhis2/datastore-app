@@ -383,7 +383,7 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
             })
             .then(() => dispatch(toggleNamespace(namespace, openNamespace)))
             .catch(error => {
-                if (error.status === 404) {
+                if (error.httpStatusCode === 404) {
                     // If not found, we remove the namespace from UI
                     return dispatch(receiveDeleteNamespace(namespace))
                 } else if (error) {
@@ -545,7 +545,7 @@ export function deleteKey(namespace, key) {
             })
             .then(() => dispatch(fetchKeys(namespace)))
             .catch(error => {
-                if (error.status === 404) {
+                if (error.httpStatusCode === 404) {
                     // If not found, we remove the namespace from UI
                     dispatch(receiveDeleteNamespace(namespace))
                 } else if (error) {
