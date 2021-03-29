@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/dhis2/datastore-app/compare/v1.3.0...v1.3.1) (2021-03-29)
+
+
+### Bug Fixes
+
+* don't fetch namespace keys when creating value in case namespace does not exist ([#32](https://github.com/dhis2/datastore-app/issues/32)) ([e552962](https://github.com/dhis2/datastore-app/commit/e5529620ff18176fb2eace7fdb0a54bbd5de09ae))
+
 # [1.3.0](https://github.com/dhis2/datastore-app/compare/v1.2.0...v1.3.0) (2021-03-11)
 
 
