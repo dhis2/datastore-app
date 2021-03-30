@@ -1,5 +1,4 @@
 import { getInstance } from 'd2'
-import { API_URL } from '../constants/apiUrls'
 
 export class Cache {
     constructor() {
@@ -108,5 +107,5 @@ class Api {
     }
 }
 
-const apiInstance = new Api(API_URL)
+const apiInstance = new Api()
 export default apiInstance
