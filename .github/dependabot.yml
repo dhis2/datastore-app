@@ -1,0 +1,35 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  target-branch: master
+  versioning-strategy: increase
+  ignore:
+  - dependency-name: jsoneditor
+    versions:
+    - 9.3.0
+    - 9.3.1
+    - 9.4.0
+  - dependency-name: "@dhis2/ui"
+    versions:
+    - 6.5.6
+    - 6.6.0
+    - 6.6.1
+  - dependency-name: "@dhis2/cli-app-scripts"
+    versions:
+    - 6.1.0
+  - dependency-name: d2
+    versions:
+    - 31.9.1
+    - 31.9.2
+    - 31.9.3
+  - dependency-name: react-redux
+    versions:
+    - 7.2.3
+  - dependency-name: "@dhis2/app-runtime"
+    versions:
+    - 2.7.1
+    - 2.8.0
