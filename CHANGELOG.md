@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/dhis2/datastore-app/compare/v1.3.2...v1.3.3) (2021-06-01)
+
+
+### Bug Fixes
+
+* obtain datastore values directly instead of from metadata  ([#57](https://github.com/dhis2/datastore-app/issues/57)) ([749edd7](https://github.com/dhis2/datastore-app/commit/749edd7e7c6ff05a91b4750b3f6127da4772476b))
+
 ## [1.3.2](https://github.com/dhis2/datastore-app/compare/v1.3.1...v1.3.2) (2021-03-29)
 
 
