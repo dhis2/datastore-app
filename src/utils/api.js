@@ -1,5 +1,4 @@
 import { getInstance } from 'd2'
-import { API_URL } from '../constants/apiUrls'
 
 export class Cache {
     constructor() {
@@ -64,20 +63,15 @@ class Api {
             return this.cache.get(namespace, key)
         }
 
-        const result = await this.getMetaData(namespace, key)
-        const jsonLength = result.value.length
+        const d2 = await getInstance()
+        const dataStore = await d2.dataStore.get(namespace, false)
+        const res = await dataStore.get(key)
         const value = {
-            length: jsonLength,
-            value: JSON.parse(result.value),
+            value: res,
+            length: JSON.stringify(res).length,
         }
         this.cache.set(namespace, key, value)
         return value
-    }
-
-    getMetaData = async (namespace, key) => {
-        const d2 = await getInstance()
-        const response = await d2.dataStore.get(namespace, false)
-        return response.getMetaData(key)
     }
 
     createValue = async (namespace, key, value) => {
@@ -108,5 +102,5 @@ class Api {
     }
 }
 
-const apiInstance = new Api(API_URL)
+const apiInstance = new Api()
 export default apiInstance
