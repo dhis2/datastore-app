@@ -22,11 +22,11 @@ Snackbar.propTypes = {
     message: PropTypes.string,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     message: state.snackbar.message,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     emptySnackbar() {
         dispatch(emptySnackbar())
     },

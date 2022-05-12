@@ -64,7 +64,7 @@ NamespaceItemMenu.propTypes = {
     newKey: PropTypes.func,
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     deleteNamespace(namespace) {
         dispatch(openDialog(dialog.CONFIRM_DELETE_NAMESPACE, { namespace }))
     },

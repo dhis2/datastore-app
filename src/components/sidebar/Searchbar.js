@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { searchSidebarChange } from '../../actions/sidebarActions'
 
 export class Searchbar extends Component {
-    handleKeys = event => {
+    handleKeys = (event) => {
         if (event.key === 'Enter') {
             this.searchField.blur()
         }
@@ -25,7 +25,7 @@ export class Searchbar extends Component {
                 onChange={({ target: { value } }) => searchChanged(value)}
                 onFocus={() => searchChanged('')}
                 onKeyUp={this.handleKeys}
-                ref={searchField => {
+                ref={(searchField) => {
                     this.searchField = searchField
                 }}
             />
@@ -33,13 +33,13 @@ export class Searchbar extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     searchChanged(value) {
         dispatch(searchSidebarChange(value))
     },
 })
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     searchValue: state.sidebar.searchValue,
 })
 

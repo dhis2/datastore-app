@@ -144,7 +144,7 @@ EditDisplay.propTypes = {
     }),
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     value: state.display.value,
     selectedKey: state.display.key,
     namespace: state.display.namespace,
@@ -152,7 +152,7 @@ const mapStateToProps = state => ({
     fetchedNamespaces: state.sidebar.fetched,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     getValue(namespace, key) {
         dispatch(fetchAndDisplayKeyValue(namespace, key))
     },

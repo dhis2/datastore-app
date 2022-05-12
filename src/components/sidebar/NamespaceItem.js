@@ -44,8 +44,8 @@ export class NamespaceItem extends Component {
 
         // Get a list of elements, filter on search-prop
         const list = Object.keys(this.props.namespace.keys)
-            .filter(key => !search || key.toLowerCase().includes(search))
-            .map(key => <KeyItem namespace={name} keyName={key} key={key} />)
+            .filter((key) => !search || key.toLowerCase().includes(search))
+            .map((key) => <KeyItem namespace={name} keyName={key} key={key} />)
 
         let leftIcon = <Spinner />
         if (!fetching) {
@@ -78,7 +78,7 @@ NamespaceItem.propTypes = {
     }),
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     openNamespace(namespace) {
         dispatch(fetchAndToggleNamespace(namespace))
     },

@@ -56,11 +56,11 @@ Sidebar.propTypes = {
     openNamespaceDialog: PropTypes.func,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     items: state.sidebar.namespaces,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     openNamespaceDialog() {
         dispatch(openDialog(dialog.NEW_NAMESPACE))
     },

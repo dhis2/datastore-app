@@ -55,7 +55,7 @@ export class ConfirmNavigationDialog extends Component {
         }
     }
 
-    routerWillLeave = nextLocation => {
+    routerWillLeave = (nextLocation) => {
         if (this.state.confirmed) {
             this.setState({
                 ...this.state,
@@ -109,11 +109,11 @@ ConfirmNavigationDialog.propTypes = {
     setIgnoreNext: PropTypes.any,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     ignoreNext: state.navigation.ignoreNextConfirm,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     setIgnoreNext(ignoreNext) {
         dispatch(navigationActions.setIgnoreNextNavigationConfirm(ignoreNext))
     },

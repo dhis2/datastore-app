@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import ErrorArea from '../display/ErrorArea'
 import LoadingArea from '../display/LoadingArea'
 
-const DisplayAreaHOC = Area => {
+const DisplayAreaHOC = (Area) => {
     class DisplayAreaBase extends Component {
         renderLoading = () => {
             return <LoadingArea />
@@ -35,7 +35,7 @@ const DisplayAreaHOC = Area => {
         loading: PropTypes.bool,
     }
 
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
         loading: state.display.fetching,
         error: state.display.error,
         errorMessage: state.display.errorMessage,

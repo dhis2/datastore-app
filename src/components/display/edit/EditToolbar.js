@@ -62,12 +62,12 @@ export class EditToolbar extends React.Component {
         this.props.jsonChangeMode(mode)
     }
 
-    handleJsonSearch = value => {
+    handleJsonSearch = (value) => {
         //debounce search
         if (this.state.debounced) {
             this.state.debounced(value)
         } else {
-            const debounced = debounce(val => {
+            const debounced = debounce((val) => {
                 this.props.jsonSearchAction(val)
             }, 250)
             this.setState({ ...this.state, debounced })
@@ -212,13 +212,13 @@ EditToolbar.propTypes = {
     jsonChangeMode: PropTypes.func,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     mode: state.jsonEditor.mode,
     jsonEditor: state.jsonEditor,
     saving: state.jsonEditor.saving,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     jsonSearchAction(value) {
         dispatch(searchJSON(value))
     },

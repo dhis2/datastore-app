@@ -18,7 +18,7 @@ export class NewNamespaceDialog extends Component {
         }
     }
 
-    handleNamespaceInput = event => {
+    handleNamespaceInput = (event) => {
         const val = event.target.value
         this.setState({
             namespaceError: validateKeyOrNamespace(val).message,
@@ -26,7 +26,7 @@ export class NewNamespaceDialog extends Component {
         })
     }
 
-    handleKeyInput = event => {
+    handleKeyInput = (event) => {
         const val = event.target.value
         this.setState({
             keyError: validateKeyOrNamespace(val).message,
@@ -94,7 +94,7 @@ NewNamespaceDialog.propTypes = {
     createNamespace: PropTypes.func,
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     createNamespace(namespace, key) {
         dispatch(createAndDisplayValue(namespace, key))
     },

@@ -86,7 +86,7 @@ export class JSONEditor extends Component {
         }
     }
 
-    handleJsonEditor = props => {
+    handleJsonEditor = (props) => {
         const {
             jsonSearchValue,
             collapse,
@@ -165,7 +165,7 @@ export class JSONEditor extends Component {
             <div
                 id="jsoneditor"
                 style={style}
-                ref={container => (this.editorContainer = container)}
+                ref={(container) => (this.editorContainer = container)}
             ></div>
         )
     }
@@ -177,11 +177,11 @@ JSONEditor.propTypes = {
     value: PropTypes.any,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     jsonEditor: state.jsonEditor,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     jsonChangeMode(mode) {
         dispatch(jsonEditorChangeMode(mode))
     },

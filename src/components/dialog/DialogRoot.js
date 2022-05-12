@@ -36,7 +36,7 @@ class DialogRoot extends Component {
                 cancelLabel || 'Cancel'
             )
         )
-        if (approveAction)
+        if (approveAction) {
             actions.push(
                 DialogRoot.buildButton(
                     finalAction,
@@ -44,6 +44,7 @@ class DialogRoot extends Component {
                     true
                 )
             )
+        }
 
         return (
             <Dialog
@@ -71,7 +72,7 @@ DialogRoot.propTypes = {
     title: PropTypes.string,
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     defaultCloseDialog() {
         dispatch(closeDialog())
     },

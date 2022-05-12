@@ -54,7 +54,7 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
         loading: PropTypes.bool,
     }
 
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
         loading: state.sidebar.fetching,
         error: state.sidebar.error,
     })

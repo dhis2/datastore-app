@@ -21,7 +21,7 @@ ErrorDialog.propTypes = {
     message: PropTypes.string,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     message: state.dialog.message,
 })
 

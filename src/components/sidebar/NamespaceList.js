@@ -15,7 +15,7 @@ const listStyle = {
 }
 
 export class NamespaceList extends Component {
-    filterNamespaces = item => {
+    filterNamespaces = (item) => {
         const searchValue = this.props.search.toLowerCase() || ''
         if (!searchValue) {
             return true
@@ -51,9 +51,9 @@ export class NamespaceList extends Component {
         return (
             <List style={listStyle}>
                 {Object.keys(items)
-                    .filter(item => this.filterNamespaces(item))
+                    .filter((item) => this.filterNamespaces(item))
                     .sort()
-                    .map(item => (
+                    .map((item) => (
                         <NamespaceItem
                             namespace={items[item]}
                             search={this.filterKeys()}
@@ -70,7 +70,7 @@ NamespaceList.propTypes = {
     search: PropTypes.string,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     search: state.sidebar.searchValue,
 })
 

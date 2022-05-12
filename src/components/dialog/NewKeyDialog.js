@@ -83,11 +83,11 @@ NamespaceDialog.propTypes = {
     createNamespace: PropTypes.func,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     namespace: state.dialog.namespace,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     createNamespace(namespace, key) {
         dispatch(createAndDisplayValue(namespace, key))
     },

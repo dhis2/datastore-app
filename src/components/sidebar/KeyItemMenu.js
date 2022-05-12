@@ -56,7 +56,7 @@ KeyItemMenu.propTypes = {
     namespace: PropTypes.string,
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     deleteKeyInNamespace(namespace, key) {
         dispatch(openDialog(dialog.CONFIRM_DELETE_KEY, { namespace, key }))
     },

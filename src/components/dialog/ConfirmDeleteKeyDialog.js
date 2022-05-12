@@ -45,13 +45,13 @@ ConfirmDeleteKeyDialog.propTypes = {
     namespaceStore: PropTypes.any,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     namespace: state.dialog.namespace,
     keyValue: state.dialog.key,
     namespaceStore: state.sidebar.namespaces,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     deleteKeyInNamespace(namespace, key) {
         dispatch(deleteKey(namespace, key))
     },

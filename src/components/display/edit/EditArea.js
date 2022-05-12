@@ -5,7 +5,7 @@ import JSONEditor from '../../utils/JSONEditor'
 import styles from '../Display.module.css'
 
 export class EditArea extends Component {
-    handleDataChange = editor => {
+    handleDataChange = (editor) => {
         try {
             // throws error if not valid json
             const data = editor.get()
