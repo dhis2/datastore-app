@@ -1,5 +1,5 @@
-import * as displayActions from '../constants/actionTypes'
-import * as actions from '../constants/jsonEditorTypes'
+import * as displayActions from '../constants/actionTypes.js'
+import * as actions from '../constants/jsonEditorTypes.js'
 
 const initialState = {
     mode: 'tree',

@@ -2,9 +2,9 @@ import { PropTypes } from '@dhis2/prop-types'
 import TextField from 'material-ui/TextField'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createAndDisplayValue } from '../../actions'
-import { validateKeyOrNamespace } from '../../utils/validation'
-import DialogRoot from './DialogRoot'
+import { createAndDisplayValue } from '../../actions/index.js'
+import { validateKeyOrNamespace } from '../../utils/validation.js'
+import DialogRoot from './DialogRoot.js'
 
 export class NamespaceDialog extends Component {
     constructor(props) {

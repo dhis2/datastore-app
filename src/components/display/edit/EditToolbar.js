@@ -3,13 +3,13 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import IconButton from 'material-ui/IconButton'
 import MenuItem from 'material-ui/MenuItem'
 import Paper from 'material-ui/Paper'
-import RedoIcon from 'material-ui/svg-icons/content/redo'
-import SaveIcon from 'material-ui/svg-icons/content/save'
-import UndoIcon from 'material-ui/svg-icons/content/undo'
-import FormatAlignJustifyIcon from 'material-ui/svg-icons/editor/format-align-justify'
-import FormatAlignLeftIcon from 'material-ui/svg-icons/editor/format-align-left'
-import ExpandLessIcon from 'material-ui/svg-icons/navigation/expand-less'
-import ExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
+import RedoIcon from 'material-ui/svg-icons/content/redo.js'
+import SaveIcon from 'material-ui/svg-icons/content/save.js'
+import UndoIcon from 'material-ui/svg-icons/content/undo.js'
+import FormatAlignJustifyIcon from 'material-ui/svg-icons/editor/format-align-justify.js'
+import FormatAlignLeftIcon from 'material-ui/svg-icons/editor/format-align-left.js'
+import ExpandLessIcon from 'material-ui/svg-icons/navigation/expand-less.js'
+import ExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more.js'
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -22,11 +22,11 @@ import {
     jsonEditorChangeMode,
     jsonEditorCompact,
     jsonEditorFormat,
-} from '../../../actions/jsonEditorActions'
-import { debounce } from '../../../utils/utils'
-import JSONSearchBar from '../../utils/JSONSearchBar'
-import { Spinner } from '../../utils/Loaders'
-import DisplayToolbarTitle from '../DisplayToolbarTitle'
+} from '../../../actions/jsonEditorActions.js'
+import { debounce } from '../../../utils/utils.js'
+import JSONSearchBar from '../../utils/JSONSearchBar.js'
+import { Spinner } from '../../utils/Loaders.js'
+import DisplayToolbarTitle from '../DisplayToolbarTitle.js'
 
 /* eslint-disable react/sort-prop-types */
 /* eslint-disable react/prop-types */

@@ -1,7 +1,7 @@
 import { PropTypes } from '@dhis2/prop-types'
 import React, { Component } from 'react'
-import DisplayAreaHOC from '../../hoc/DisplayAreaHOC'
-import JSONEditor from '../../utils/JSONEditor'
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC.js'
+import JSONEditor from '../../utils/JSONEditor.js'
 import styles from '../Display.module.css'
 
 export class EditArea extends Component {

@@ -1,4 +1,4 @@
-import { Cache } from './api'
+import { Cache } from './api.js'
 
 describe('Cache', () => {
     it('should be possible to set and get namespace/key combinations', () => {

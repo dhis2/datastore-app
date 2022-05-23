@@ -1,8 +1,8 @@
 import { PropTypes } from '@dhis2/prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteKey } from '../../actions'
-import DialogRoot from './DialogRoot'
+import { deleteKey } from '../../actions/index.js'
+import DialogRoot from './DialogRoot.js'
 
 export class ConfirmDeleteKeyDialog extends Component {
     handleConfirmed = () => {

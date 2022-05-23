@@ -1,4 +1,4 @@
-import * as actions from '../constants/actionTypes'
+import * as actions from '../constants/actionTypes.js'
 
 const emptyDialog = { dialogType: null }
 const initialState = {

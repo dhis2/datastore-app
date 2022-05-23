@@ -2,8 +2,8 @@ import { PropTypes } from '@dhis2/prop-types'
 import { List } from 'material-ui/List'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Theme from '../../utils/theme'
-import NamespaceItem from './NamespaceItem'
+import Theme from '../../utils/theme.js'
+import NamespaceItem from './NamespaceItem.js'
 
 const listStyle = {
     overflowY: 'auto',

@@ -1,14 +1,17 @@
 import { PropTypes } from '@dhis2/prop-types'
 import { ListItem } from 'material-ui/List'
-import ErrorIcon from 'material-ui/svg-icons/alert/error'
-import FileFolder from 'material-ui/svg-icons/file/folder'
-import FileFolderOpen from 'material-ui/svg-icons/file/folder-open'
+import ErrorIcon from 'material-ui/svg-icons/alert/error.js'
+import FileFolderOpen from 'material-ui/svg-icons/file/folder-open.js'
+import FileFolder from 'material-ui/svg-icons/file/folder.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchAndToggleNamespace, toggleNamespace } from '../../actions'
-import { Spinner } from '../utils/Loaders'
-import KeyItem from './KeyItem'
-import NamespaceItemMenu from './NamespaceItemMenu'
+import {
+    fetchAndToggleNamespace,
+    toggleNamespace,
+} from '../../actions/index.js'
+import { Spinner } from '../utils/Loaders.js'
+import KeyItem from './KeyItem.js'
+import NamespaceItemMenu from './NamespaceItemMenu.js'
 
 /* eslint-disable react/sort-prop-types */
 

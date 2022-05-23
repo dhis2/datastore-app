@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import DisplayAreaHOC from '../../hoc/DisplayAreaHOC'
-import { ModeCommentIconWithText } from '../../utils/Icons'
+import DisplayAreaHOC from '../../hoc/DisplayAreaHOC.js'
+import { ModeCommentIconWithText } from '../../utils/Icons.js'
 import styles from '../Display.module.css'
 
 export class EmptyArea extends Component {

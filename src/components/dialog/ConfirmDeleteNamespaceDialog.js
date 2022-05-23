@@ -1,8 +1,8 @@
 import { PropTypes } from '@dhis2/prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteNamespace } from '../../actions'
-import DialogRoot from './DialogRoot'
+import { deleteNamespace } from '../../actions/index.js'
+import DialogRoot from './DialogRoot.js'
 
 export class ConfirmDeleteNamespaceDialog extends Component {
     handleConfirmed = () => {

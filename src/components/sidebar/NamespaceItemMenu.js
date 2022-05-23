@@ -1,13 +1,13 @@
 import { PropTypes } from '@dhis2/prop-types'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
-import Delete from 'material-ui/svg-icons/action/delete'
-import NoteAdd from 'material-ui/svg-icons/action/note-add'
+import Delete from 'material-ui/svg-icons/action/delete.js'
+import NoteAdd from 'material-ui/svg-icons/action/note-add.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { openDialog } from '../../actions/dialogActions'
-import * as dialog from '../../constants/dialogTypes'
-import IconButtonElement from '../utils/IconButtonElement'
+import { openDialog } from '../../actions/dialogActions.js'
+import * as dialog from '../../constants/dialogTypes.js'
+import IconButtonElement from '../utils/IconButtonElement.js'
 
 const anchorOrigin = {
     vertical: 'bottom',

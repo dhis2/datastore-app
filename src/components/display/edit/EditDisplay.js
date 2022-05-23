@@ -9,11 +9,11 @@ import {
     updateValue,
     valueChange,
     rejectUpdateValue,
-} from '../../../actions'
-import ConfirmNavigationDialog from '../../dialog/ConfirmNavigationDialog'
+} from '../../../actions/index.js'
+import ConfirmNavigationDialog from '../../dialog/ConfirmNavigationDialog.js'
 import styles from '../Display.module.css'
-import EditArea from './EditArea'
-import EditToolbar from './EditToolbar'
+import EditArea from './EditArea.js'
+import EditToolbar from './EditToolbar.js'
 
 /* eslint-disable react/prop-types */
 /* eslint-disable react/sort-prop-types */

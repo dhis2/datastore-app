@@ -1,7 +1,7 @@
 import { PropTypes } from '@dhis2/prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import DialogRoot from './DialogRoot'
+import DialogRoot from './DialogRoot.js'
 
 export class ErrorDialog extends Component {
     render() {

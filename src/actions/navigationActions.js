@@ -1,4 +1,4 @@
-import { SET_IGNORE_NEXT_CONFIRM_NAVIGATION } from '../constants/actionTypes'
+import { SET_IGNORE_NEXT_CONFIRM_NAVIGATION } from '../constants/actionTypes.js'
 
 export function setIgnoreNextNavigationConfirm() {
     return {

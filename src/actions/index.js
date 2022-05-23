@@ -1,7 +1,7 @@
 import { hashHistory } from 'react-router'
-import * as actions from '../constants/actionTypes'
-import api from '../utils/api'
-import * as navigationAction from './navigationActions'
+import * as actions from '../constants/actionTypes.js'
+import api from '../utils/api.js'
+import * as navigationAction from './navigationActions.js'
 
 /**
  * receiveNamespaces - Deliver namespaces returned from request

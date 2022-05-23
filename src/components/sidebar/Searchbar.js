@@ -2,7 +2,7 @@ import { PropTypes } from '@dhis2/prop-types'
 import TextField from 'material-ui/TextField'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchSidebarChange } from '../../actions/sidebarActions'
+import { searchSidebarChange } from '../../actions/sidebarActions.js'
 
 export class Searchbar extends Component {
     handleKeys = (event) => {

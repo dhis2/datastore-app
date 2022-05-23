@@ -2,8 +2,8 @@ import { PropTypes } from '@dhis2/prop-types'
 import Dialog from 'material-ui/Dialog'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as navigationActions from '../../actions/navigationActions'
-import DialogRoot from './DialogRoot'
+import * as navigationActions from '../../actions/navigationActions.js'
+import DialogRoot from './DialogRoot.js'
 
 export class ConfirmNavigationDialog extends Component {
     constructor() {

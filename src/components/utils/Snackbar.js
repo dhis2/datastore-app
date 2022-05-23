@@ -2,7 +2,7 @@ import { PropTypes } from '@dhis2/prop-types'
 import SnackbarUI from 'material-ui/Snackbar'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { emptySnackbar } from '../../actions'
+import { emptySnackbar } from '../../actions/index.js'
 
 export class Snackbar extends Component {
     render() {
