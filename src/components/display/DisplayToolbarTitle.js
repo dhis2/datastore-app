@@ -1,8 +1,8 @@
 import { PropTypes } from '@dhis2/prop-types'
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right'
+import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right.js'
 import React, { Component } from 'react'
-import Theme from '../../utils/theme'
-import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton'
+import Theme from '../../utils/theme.js'
+import BreadcrumbHistoryButton from '../utils/BreadcrumbHistoryButton.js'
 import styles from './DisplayToolbarTitle.module.css'
 
 class DisplayToolbarTitle extends Component {

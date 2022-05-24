@@ -1,5 +1,5 @@
-import * as actions from '../constants/actionTypes'
-import * as jsonEditorActions from '../constants/jsonEditorTypes'
+import * as actions from '../constants/actionTypes.js'
+import * as jsonEditorActions from '../constants/jsonEditorTypes.js'
 
 const fetchedState = { fetching: false, fetched: true, error: false }
 const fetchingState = { fetching: true, fetched: false, error: false }

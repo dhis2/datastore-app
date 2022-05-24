@@ -10,10 +10,12 @@ export function validateKeyOrNamespace(value) {
         message: '',
     }
 
-    if (!value) return invalid
+    if (!value) {
+        return invalid
+    }
 
     let matchedChar = ''
-    invalidSymbols.forEach(symb => {
+    invalidSymbols.forEach((symb) => {
         if (value.includes(symb)) {
             matchedChar = symb
         }

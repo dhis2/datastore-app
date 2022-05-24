@@ -2,8 +2,8 @@ import { PropTypes } from '@dhis2/prop-types'
 import Dialog from 'material-ui/Dialog'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as navigationActions from '../../actions/navigationActions'
-import DialogRoot from './DialogRoot'
+import * as navigationActions from '../../actions/navigationActions.js'
+import DialogRoot from './DialogRoot.js'
 
 export class ConfirmNavigationDialog extends Component {
     constructor() {
@@ -55,7 +55,7 @@ export class ConfirmNavigationDialog extends Component {
         }
     }
 
-    routerWillLeave = nextLocation => {
+    routerWillLeave = (nextLocation) => {
         if (this.state.confirmed) {
             this.setState({
                 ...this.state,
@@ -109,11 +109,11 @@ ConfirmNavigationDialog.propTypes = {
     setIgnoreNext: PropTypes.any,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     ignoreNext: state.navigation.ignoreNextConfirm,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     setIgnoreNext(ignoreNext) {
         dispatch(navigationActions.setIgnoreNextNavigationConfirm(ignoreNext))
     },

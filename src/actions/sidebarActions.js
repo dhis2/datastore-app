@@ -1,4 +1,4 @@
-import * as actions from '../constants/actionTypes'
+import * as actions from '../constants/actionTypes.js'
 
 /**
  * searchSidebarChange - signal search bar in sidebar change

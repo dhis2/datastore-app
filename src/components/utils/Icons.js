@@ -1,6 +1,6 @@
 import { PropTypes } from '@dhis2/prop-types'
-import ErrorIcon from 'material-ui/svg-icons/alert/error'
-import ModeComment from 'material-ui/svg-icons/editor/mode-comment'
+import ErrorIcon from 'material-ui/svg-icons/alert/error.js'
+import ModeComment from 'material-ui/svg-icons/editor/mode-comment.js'
 import React, { Component } from 'react'
 import styles from '../display/Display.module.css'
 

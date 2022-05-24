@@ -1,4 +1,4 @@
-import * as actions from '../constants/actionTypes'
+import * as actions from '../constants/actionTypes.js'
 
 const emptySnackbar = { snackbarMessage: { message: '' } }
 const initialState = {}

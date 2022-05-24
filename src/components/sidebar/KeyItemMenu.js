@@ -1,12 +1,12 @@
 import { PropTypes } from '@dhis2/prop-types'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
-import Delete from 'material-ui/svg-icons/action/delete'
+import Delete from 'material-ui/svg-icons/action/delete.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { openDialog } from '../../actions/dialogActions'
-import * as dialog from '../../constants/dialogTypes'
-import IconButtonElement from '../utils/IconButtonElement'
+import { openDialog } from '../../actions/dialogActions.js'
+import * as dialog from '../../constants/dialogTypes.js'
+import IconButtonElement from '../utils/IconButtonElement.js'
 
 const anchorOrigin = {
     vertical: 'bottom',
@@ -56,7 +56,7 @@ KeyItemMenu.propTypes = {
     namespace: PropTypes.string,
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     deleteKeyInNamespace(namespace, key) {
         dispatch(openDialog(dialog.CONFIRM_DELETE_KEY, { namespace, key }))
     },

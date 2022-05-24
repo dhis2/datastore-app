@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { PropTypes } from '@dhis2/prop-types'
 import React, { Component } from 'react'
-import { ErrorIconWithText } from '../utils/Icons'
+import { ErrorIconWithText } from '../utils/Icons.js'
 
 class ErrorArea extends Component {
     render() {

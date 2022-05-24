@@ -1,10 +1,10 @@
 import { PropTypes } from '@dhis2/prop-types'
 import IconButton from 'material-ui/IconButton'
-import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh'
+import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styles from '../sidebar/Sidebar.module.css'
-import { Spinner } from '../utils/Loaders'
+import { Spinner } from '../utils/Loaders.js'
 
 const containerStyle = {
     alignItems: 'center',
@@ -54,7 +54,7 @@ const SidebarAreaHOC = (Area, errorRefresh) => {
         loading: PropTypes.bool,
     }
 
-    const mapStateToProps = state => ({
+    const mapStateToProps = (state) => ({
         loading: state.sidebar.fetching,
         error: state.sidebar.error,
     })

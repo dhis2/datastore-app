@@ -2,7 +2,7 @@ import { PropTypes } from '@dhis2/prop-types'
 import Paper from 'material-ui/Paper'
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar'
 import React, { Component } from 'react'
-import Searchbar from './Searchbar'
+import Searchbar from './Searchbar.js'
 
 class SidebarHeader extends Component {
     render() {

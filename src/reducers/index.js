@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import dialog from './dialogReducer'
-import display from './displayReducer'
-import jsonEditor from './jsonEditorReducer'
-import navigation from './navigationReducer'
-import sidebar from './sidebarReducer'
-import snackbar from './snackbarReducer'
+import dialog from './dialogReducer.js'
+import display from './displayReducer.js'
+import jsonEditor from './jsonEditorReducer.js'
+import navigation from './navigationReducer.js'
+import sidebar from './sidebarReducer.js'
+import snackbar from './snackbarReducer.js'
 
 export default combineReducers({
     display,

@@ -1,8 +1,8 @@
 import { PropTypes } from '@dhis2/prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deleteKey } from '../../actions'
-import DialogRoot from './DialogRoot'
+import { deleteKey } from '../../actions/index.js'
+import DialogRoot from './DialogRoot.js'
 
 export class ConfirmDeleteKeyDialog extends Component {
     handleConfirmed = () => {
@@ -45,13 +45,13 @@ ConfirmDeleteKeyDialog.propTypes = {
     namespaceStore: PropTypes.any,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     namespace: state.dialog.namespace,
     keyValue: state.dialog.key,
     namespaceStore: state.sidebar.namespaces,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     deleteKeyInNamespace(namespace, key) {
         dispatch(deleteKey(namespace, key))
     },

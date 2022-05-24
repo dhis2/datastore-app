@@ -1,10 +1,9 @@
 import { PropTypes } from '@dhis2/prop-types'
 import { ListItem } from 'material-ui/List'
-import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file'
+import EditorInsertDriveFile from 'material-ui/svg-icons/editor/insert-drive-file.js'
 import React, { Component } from 'react'
-import { hashHistory } from 'react-router'
-import { withRouter } from 'react-router'
-import KeyItemMenu from './KeyItemMenu'
+import { hashHistory, withRouter } from 'react-router'
+import KeyItemMenu from './KeyItemMenu.js'
 
 const styles = {
     primaryText: {

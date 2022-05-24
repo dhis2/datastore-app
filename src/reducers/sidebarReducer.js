@@ -1,4 +1,4 @@
-import * as actions from '../constants/actionTypes'
+import * as actions from '../constants/actionTypes.js'
 
 const fetchedState = { fetching: false, fetched: true, error: false }
 const fetchingState = { fetching: true, fetched: false, error: false }
@@ -15,8 +15,8 @@ const initialState = {
 const updateNamespaces = (currentNamespaces, newNamespaces) => {
     const namespaces = {}
     currentNamespaces
-        .filter(key => typeof newNamespaces[key] === 'undefined')
-        .forEach(key => {
+        .filter((key) => typeof newNamespaces[key] === 'undefined')
+        .forEach((key) => {
             namespaces[key] = {
                 name: key,
                 open: false,
@@ -26,9 +26,9 @@ const updateNamespaces = (currentNamespaces, newNamespaces) => {
     return namespaces
 }
 
-const createKeysFromArray = arrayOfKeys => {
+const createKeysFromArray = (arrayOfKeys) => {
     const keys = {}
-    arrayOfKeys.forEach(key => {
+    arrayOfKeys.forEach((key) => {
         keys[key] = {
             key,
         }

@@ -3,11 +3,11 @@ import { PropTypes } from '@dhis2/prop-types'
 import JSEditor from 'jsoneditor/dist/jsoneditor.min.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { openDialog } from '../../actions/dialogActions'
-import { jsonEditorChangeMode } from '../../actions/jsonEditorActions'
-import * as dialogTypes from '../../constants/dialogTypes'
+import { openDialog } from '../../actions/dialogActions.js'
+import { jsonEditorChangeMode } from '../../actions/jsonEditorActions.js'
+import * as dialogTypes from '../../constants/dialogTypes.js'
 import 'jsoneditor/dist/jsoneditor.min.css'
-import { sortObjectKeys } from '../../utils/utils'
+import { sortObjectKeys } from '../../utils/utils.js'
 
 /* eslint-disable react/prop-types */
 
@@ -86,7 +86,7 @@ export class JSONEditor extends Component {
         }
     }
 
-    handleJsonEditor = props => {
+    handleJsonEditor = (props) => {
         const {
             jsonSearchValue,
             collapse,
@@ -165,7 +165,7 @@ export class JSONEditor extends Component {
             <div
                 id="jsoneditor"
                 style={style}
-                ref={container => (this.editorContainer = container)}
+                ref={(container) => (this.editorContainer = container)}
             ></div>
         )
     }
@@ -177,11 +177,11 @@ JSONEditor.propTypes = {
     value: PropTypes.any,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     jsonEditor: state.jsonEditor,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     jsonChangeMode(mode) {
         dispatch(jsonEditorChangeMode(mode))
     },

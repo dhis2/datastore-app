@@ -2,9 +2,9 @@ import { PropTypes } from '@dhis2/prop-types'
 import TextField from 'material-ui/TextField'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createAndDisplayValue } from '../../actions'
-import { validateKeyOrNamespace } from '../../utils/validation'
-import DialogRoot from './DialogRoot'
+import { createAndDisplayValue } from '../../actions/index.js'
+import { validateKeyOrNamespace } from '../../utils/validation.js'
+import DialogRoot from './DialogRoot.js'
 
 export class NewNamespaceDialog extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ export class NewNamespaceDialog extends Component {
         }
     }
 
-    handleNamespaceInput = event => {
+    handleNamespaceInput = (event) => {
         const val = event.target.value
         this.setState({
             namespaceError: validateKeyOrNamespace(val).message,
@@ -26,7 +26,7 @@ export class NewNamespaceDialog extends Component {
         })
     }
 
-    handleKeyInput = event => {
+    handleKeyInput = (event) => {
         const val = event.target.value
         this.setState({
             keyError: validateKeyOrNamespace(val).message,
@@ -94,7 +94,7 @@ NewNamespaceDialog.propTypes = {
     createNamespace: PropTypes.func,
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     createNamespace(namespace, key) {
         dispatch(createAndDisplayValue(namespace, key))
     },

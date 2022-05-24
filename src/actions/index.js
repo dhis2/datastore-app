@@ -1,7 +1,7 @@
 import { hashHistory } from 'react-router'
-import * as actions from '../constants/actionTypes'
-import api from '../utils/api'
-import * as navigationAction from './navigationActions'
+import * as actions from '../constants/actionTypes.js'
+import api from '../utils/api.js'
+import * as navigationAction from './navigationActions.js'
 
 /**
  * receiveNamespaces - Deliver namespaces returned from request
@@ -374,15 +374,15 @@ export function emptySnackbar() {
  * @return {object}                       Action thunk
  */
 export function fetchAndToggleNamespace(namespace, openNamespace = false) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestKeys(namespace))
         return api
             .getKeys(namespace)
-            .then(keys => {
+            .then((keys) => {
                 dispatch(receiveKeys(namespace, keys))
             })
             .then(() => dispatch(toggleNamespace(namespace, openNamespace)))
-            .catch(error => {
+            .catch((error) => {
                 if (error.httpStatusCode === 404) {
                     // If not found, we remove the namespace from UI
                     return dispatch(receiveDeleteNamespace(namespace))
@@ -392,7 +392,7 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
                 }
                 return null
             })
-            .catch(error => {
+            .catch((error) => {
                 dispatch(rejectKeys(namespace, error))
             })
     }
@@ -408,15 +408,15 @@ export function fetchAndToggleNamespace(namespace, openNamespace = false) {
  * @return {object}           Action thunk
  */
 export function fetchAndDisplayKeyValue(namespace, key) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestValue(namespace, key))
         return api
             .getValue(namespace, key)
-            .then(value => {
+            .then((value) => {
                 dispatch(receiveValue(namespace, key, value))
                 dispatch(selectKey(namespace, key, value.value))
             })
-            .catch(error => dispatch(rejectValue(namespace, key, error)))
+            .catch((error) => dispatch(rejectValue(namespace, key, error)))
     }
 }
 
@@ -426,14 +426,14 @@ export function fetchAndDisplayKeyValue(namespace, key) {
  * @returns action thunk
  */
 export function fetchNamespaces() {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestNamespaces())
         return api
             .getNamespaces()
-            .then(namespaces => {
+            .then((namespaces) => {
                 dispatch(receiveNamespaces(namespaces))
             })
-            .catch(error => dispatch(rejectNamespaces(error)))
+            .catch((error) => dispatch(rejectNamespaces(error)))
     }
 }
 
@@ -450,7 +450,7 @@ export function fetchNamespaces() {
  * @return {string}           Action thunk
  */
 export function createValue(namespace, key, value) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestCreateValue(namespace, key, value))
         return api
             .createValue(namespace, key, value)
@@ -469,11 +469,11 @@ export function createValue(namespace, key, value) {
  * @return {object}           Action thunk
  */
 export function createAndDisplayValue(namespace, key) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(createValue(namespace, key, {}))
             .then(() => hashHistory.push(`/edit/${namespace}/${key}`))
             .then(() => dispatch(fetchAndToggleNamespace(namespace, true)))
-            .catch(error =>
+            .catch((error) =>
                 dispatch({
                     type: actions.CREATE_VALUE_REJECTED,
                     namespace,
@@ -492,9 +492,9 @@ export function createAndDisplayValue(namespace, key) {
  * @return {object}           Action thunk
  */
 export function fetchKeys(namespace) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestKeys(namespace))
-        return api.getKeys(namespace).then(keys => {
+        return api.getKeys(namespace).then((keys) => {
             if (keys.length < 1) {
                 return Promise.reject({ status: 404 })
             }
@@ -512,7 +512,7 @@ export function fetchKeys(namespace) {
  * @return {object}           Action thunk
  */
 export function updateValue(namespace, key, value) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestUpdateValue(namespace, key, value))
         return api
             .updateValue(namespace, key, value)
@@ -536,7 +536,7 @@ export function deleteKey(namespace, key) {
         return api
             .deleteValue(namespace, key)
             .then(() => dispatch(receiveDeleteKey(namespace, key)))
-            .then(res => {
+            .then((res) => {
                 if (getState().display.key == key) {
                     dispatch(navigationAction.setIgnoreNextNavigationConfirm())
                     hashHistory.push('/')
@@ -544,7 +544,7 @@ export function deleteKey(namespace, key) {
                 return res
             })
             .then(() => dispatch(fetchKeys(namespace)))
-            .catch(error => {
+            .catch((error) => {
                 if (error.httpStatusCode === 404) {
                     // If not found, we remove the namespace from UI
                     dispatch(receiveDeleteNamespace(namespace))
@@ -556,7 +556,7 @@ export function deleteKey(namespace, key) {
                     dispatch(toggleNamespace(namespace, true))
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 dispatch(rejectDeleteKey(namespace, key, error))
             })
     }
@@ -574,7 +574,7 @@ export function deleteNamespace(namespace) {
         dispatch(requestDeleteNamespace(namespace))
         return api
             .deleteNamespace(namespace)
-            .then(success => {
+            .then((success) => {
                 dispatch(receiveDeleteNamespace(namespace))
                 if (getState().display.namespace === namespace) {
                     dispatch(navigationAction.setIgnoreNextNavigationConfirm())
@@ -582,7 +582,7 @@ export function deleteNamespace(namespace) {
                 }
                 return success
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err)
                 dispatch(rejectDeleteNamespace(namespace))
             })

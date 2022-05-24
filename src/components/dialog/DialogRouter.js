@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class DialogRouter extends Component {
-    matchDialog = dialogRoute =>
+    matchDialog = (dialogRoute) =>
         dialogRoute.props.name === this.props.dialogType
 
     render() {
@@ -23,7 +23,7 @@ DialogRouter.propTypes = {
     dialogType: PropTypes.string,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     dialogType: state.dialog.dialogType,
 })
 

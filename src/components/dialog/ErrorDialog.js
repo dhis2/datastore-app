@@ -1,7 +1,7 @@
 import { PropTypes } from '@dhis2/prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import DialogRoot from './DialogRoot'
+import DialogRoot from './DialogRoot.js'
 
 export class ErrorDialog extends Component {
     render() {
@@ -21,7 +21,7 @@ ErrorDialog.propTypes = {
     message: PropTypes.string,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     message: state.dialog.message,
 })
 

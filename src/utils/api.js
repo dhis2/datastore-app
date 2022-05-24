@@ -45,14 +45,14 @@ class Api {
         return d2.dataStore.getAll()
     }
 
-    deleteNamespace = async namespace => {
+    deleteNamespace = async (namespace) => {
         const d2 = await getInstance()
         const response = await d2.dataStore.delete(namespace)
         this.cache.clearNamespace(namespace)
         return response
     }
 
-    getKeys = async namespace => {
+    getKeys = async (namespace) => {
         const d2 = await getInstance()
         const resName = await d2.dataStore.get(namespace)
         return resName.getKeys()

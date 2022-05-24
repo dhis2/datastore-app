@@ -1,6 +1,6 @@
 import Paper from 'material-ui/Paper'
 import React, { Component } from 'react'
-import { Spinner } from '../utils/Loaders'
+import { Spinner } from '../utils/Loaders.js'
 import styles from './Display.module.css'
 
 const alignmentStyle = {

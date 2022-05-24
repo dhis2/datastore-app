@@ -40,7 +40,7 @@ export class JSONSearchBar extends React.Component {
                 style={this.props.style}
                 onKeyUp={this.handleKeys}
                 underlineStyle={{ maxWidth: '150px' }}
-                ref={searchField => {
+                ref={(searchField) => {
                     this.searchField = searchField
                 }}
                 {...fieldProps}
