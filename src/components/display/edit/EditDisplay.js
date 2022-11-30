@@ -8,8 +8,13 @@ import {
     fetchAndToggleNamespace,
     updateValue,
     valueChange,
+    rejectFormat,
     rejectUpdateValue,
 } from '../../../actions/index.js'
+import {
+    jsonEditorCompact,
+    jsonEditorFormat,
+} from '../../../actions/jsonEditorActions.js'
 import ConfirmNavigationDialog from '../../dialog/ConfirmNavigationDialog.js'
 import styles from '../Display.module.css'
 import EditArea from './EditArea.js'
@@ -96,6 +101,22 @@ export class EditDisplay extends Component {
         }
     }
 
+    handleFormatValue() {
+        if (this.state.valueError) {
+            this.props.rejectFormat('Failed to format value: Not valid JSON')
+        } else {
+            this.props.jsonFormat()
+        }
+    }
+
+    handleFormatValueCompact() {
+        if (this.state.valueError) {
+            this.props.rejectFormat('Failed to format value: Not valid JSON')
+        } else {
+            this.props.jsonCompact()
+        }
+    }
+
     render() {
         const { namespace, selectedKey } = this.props
         let path = ''
@@ -118,6 +139,10 @@ export class EditDisplay extends Component {
                 <EditToolbar
                     path={path}
                     handleSave={this.handleSaveValue.bind(this)}
+                    handleFormat={this.handleFormatValue.bind(this)}
+                    handleFormatCompact={this.handleFormatValueCompact.bind(
+                        this
+                    )}
                 />
                 <EditArea
                     namespace={namespace}
@@ -167,6 +192,15 @@ const mapDispatchToProps = (dispatch) => ({
     },
     rejectUpdateValue(namespace, key, value, err) {
         dispatch(rejectUpdateValue(namespace, key, value, err))
+    },
+    rejectFormat(err) {
+        dispatch(rejectFormat(err))
+    },
+    jsonFormat() {
+        dispatch(jsonEditorFormat())
+    },
+    jsonCompact() {
+        dispatch(jsonEditorCompact())
     },
 })
 
