@@ -119,11 +119,22 @@ export class JSONEditor extends Component {
 
         if (this.editor.getMode() !== 'tree') {
             if (compact) {
-                this.editor.compact()
+                try {
+                    this.editor.compact()
+                } catch (e) {
+                    console.error(
+                        'An error occurred while formatting JSON (compact)',
+                        e
+                    )
+                }
             }
 
             if (format) {
-                this.editor.format()
+                try {
+                    this.editor.format()
+                } catch (e) {
+                    console.error('An error occurred while formatting JSON', e)
+                }
             }
         }
 
