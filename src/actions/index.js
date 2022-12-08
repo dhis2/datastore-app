@@ -220,6 +220,13 @@ export function rejectUpdateValue(namespace, key, value, error) {
     }
 }
 
+export function rejectFormat(error) {
+    return {
+        type: actions.FORMAT_VALUE_REJECTED,
+        error,
+    }
+}
+
 /**
  * requestDeleteKey - Request deleteion of a key
  *
