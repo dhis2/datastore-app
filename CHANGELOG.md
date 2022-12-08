@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/dhis2/datastore-app/compare/v1.3.3...v1.3.4) (2022-12-08)
+
+
+### Bug Fixes
+
+* show format warning when json invalid [DHIS2-14202] ([#112](https://github.com/dhis2/datastore-app/issues/112)) ([60768fb](https://github.com/dhis2/datastore-app/commit/60768fbeda4b7cd89268d28813e16b433ba88b30))
+
 ## [1.3.3](https://github.com/dhis2/datastore-app/compare/v1.3.2...v1.3.3) (2021-06-01)
 
 
