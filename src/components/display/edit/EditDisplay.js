@@ -30,6 +30,10 @@ export class EditDisplay extends Component {
         this.state = {
             valueError: null,
         }
+        this.handleChangeValue = this.handleChangeValue.bind(this)
+        this.handleFormatValue = this.handleFormatValue.bind(this)
+        this.handleFormatValueCompact = this.handleFormatValueCompact.bind(this)
+        this.handleSaveValue = this.handleSaveValue.bind(this)
     }
 
     componentDidMount() {
@@ -138,17 +142,15 @@ export class EditDisplay extends Component {
                 />
                 <EditToolbar
                     path={path}
-                    handleSave={this.handleSaveValue.bind(this)}
-                    handleFormat={this.handleFormatValue.bind(this)}
-                    handleFormatCompact={this.handleFormatValueCompact.bind(
-                        this
-                    )}
+                    handleSave={this.handleSaveValue}
+                    handleFormat={this.handleFormatValue}
+                    handleFormatCompact={this.handleFormatValueCompact}
                 />
                 <EditArea
                     namespace={namespace}
                     selectedKey={selectedKey}
                     value={this.props.value}
-                    valueChange={this.handleChangeValue.bind(this)}
+                    valueChange={this.handleChangeValue}
                 />
             </Paper>
         )
