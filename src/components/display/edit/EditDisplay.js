@@ -8,8 +8,13 @@ import {
     fetchAndToggleNamespace,
     updateValue,
     valueChange,
+    rejectFormat,
     rejectUpdateValue,
 } from '../../../actions/index.js'
+import {
+    jsonEditorCompact,
+    jsonEditorFormat,
+} from '../../../actions/jsonEditorActions.js'
 import ConfirmNavigationDialog from '../../dialog/ConfirmNavigationDialog.js'
 import styles from '../Display.module.css'
 import EditArea from './EditArea.js'
@@ -25,6 +30,10 @@ export class EditDisplay extends Component {
         this.state = {
             valueError: null,
         }
+        this.handleChangeValue = this.handleChangeValue.bind(this)
+        this.handleFormatValue = this.handleFormatValue.bind(this)
+        this.handleFormatValueCompact = this.handleFormatValueCompact.bind(this)
+        this.handleSaveValue = this.handleSaveValue.bind(this)
     }
 
     componentDidMount() {
@@ -96,6 +105,22 @@ export class EditDisplay extends Component {
         }
     }
 
+    handleFormatValue() {
+        if (this.state.valueError) {
+            this.props.rejectFormat('Failed to format value: Not valid JSON')
+        } else {
+            this.props.jsonFormat()
+        }
+    }
+
+    handleFormatValueCompact() {
+        if (this.state.valueError) {
+            this.props.rejectFormat('Failed to format value: Not valid JSON')
+        } else {
+            this.props.jsonCompact()
+        }
+    }
+
     render() {
         const { namespace, selectedKey } = this.props
         let path = ''
@@ -117,13 +142,15 @@ export class EditDisplay extends Component {
                 />
                 <EditToolbar
                     path={path}
-                    handleSave={this.handleSaveValue.bind(this)}
+                    handleSave={this.handleSaveValue}
+                    handleFormat={this.handleFormatValue}
+                    handleFormatCompact={this.handleFormatValueCompact}
                 />
                 <EditArea
                     namespace={namespace}
                     selectedKey={selectedKey}
                     value={this.props.value}
-                    valueChange={this.handleChangeValue.bind(this)}
+                    valueChange={this.handleChangeValue}
                 />
             </Paper>
         )
@@ -167,6 +194,15 @@ const mapDispatchToProps = (dispatch) => ({
     },
     rejectUpdateValue(namespace, key, value, err) {
         dispatch(rejectUpdateValue(namespace, key, value, err))
+    },
+    rejectFormat(err) {
+        dispatch(rejectFormat(err))
+    },
+    jsonFormat() {
+        dispatch(jsonEditorFormat())
+    },
+    jsonCompact() {
+        dispatch(jsonEditorCompact())
     },
 })
 
