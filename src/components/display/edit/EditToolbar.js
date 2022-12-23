@@ -20,8 +20,6 @@ import {
     jsonEditorUndo,
     jsonEditorRedo,
     jsonEditorChangeMode,
-    jsonEditorCompact,
-    jsonEditorFormat,
 } from '../../../actions/jsonEditorActions'
 import { debounce } from '../../../utils/utils'
 import JSONSearchBar from '../../utils/JSONSearchBar'
@@ -167,13 +165,13 @@ export class EditToolbar extends React.Component {
                             <MenuItem value={'code'} primaryText="Code" />
                         </DropDownMenu>
                         <IconButton
-                            onClick={this.props.jsonFormat}
+                            onClick={this.props.handleFormat}
                             tooltip="Format"
                         >
                             <FormatAlignLeftIcon />
                         </IconButton>
                         <IconButton
-                            onClick={this.props.jsonCompact}
+                            onClick={this.props.handleFormatCompact}
                             tooltip="Format Compact"
                         >
                             <FormatAlignJustifyIcon />
@@ -199,14 +197,14 @@ export class EditToolbar extends React.Component {
 }
 
 EditToolbar.propTypes = {
+    handleFormat: PropTypes.func,
+    handleFormatCompact: PropTypes.func,
     handleSave: PropTypes.func,
     path: PropTypes.string,
     mode: PropTypes.string,
-    jsonCompact: PropTypes.func,
     jsonSearchAction: PropTypes.func,
     jsonCollapse: PropTypes.func,
     jsonExpand: PropTypes.func,
-    jsonFormat: PropTypes.func,
     jsonUndo: PropTypes.func,
     jsonRedo: PropTypes.func,
     jsonChangeMode: PropTypes.func,
@@ -227,12 +225,6 @@ const mapDispatchToProps = dispatch => ({
     },
     jsonExpand() {
         dispatch(jsonEditorExpand())
-    },
-    jsonCompact() {
-        dispatch(jsonEditorCompact())
-    },
-    jsonFormat() {
-        dispatch(jsonEditorFormat())
     },
     jsonUndo() {
         dispatch(jsonEditorUndo())
