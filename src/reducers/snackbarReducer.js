@@ -33,6 +33,15 @@ const snackbar = (state = initialState, action) => {
             }
         }
 
+        case actions.FORMAT_VALUE_REJECTED: {
+            const msg = action.error || 'Failed to format'
+
+            return {
+                ...state,
+                message: msg,
+            }
+        }
+
         case actions.FETCH_KEYS_REJECTED: {
             return {
                 ...state,
