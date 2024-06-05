@@ -30,7 +30,7 @@
         "d2": "^31.10.2",
         "jsoneditor": "^9.2.0",
         "material-ui": "0.19.0",
-        "react-redux": "^7.2.2",
+        "react-redux": "^7.2.9",
         "react-router": "3.0.5",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0"
