@@ -18,15 +18,15 @@
         "format": "yarn format:js && yarn format:text"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^6.0.1",
+        "@dhis2/cli-app-scripts": "^11.7.0",
         "@dhis2/cli-style": "^10.4.1"
     },
     "dependencies": {
-        "@dhis2/app-runtime": "^2.8.0",
+        "@dhis2/app-runtime": "^3.10.6",
         "@dhis2/app-runtime-adapter-d2": "^1.0.2",
         "@dhis2/d2-i18n": "^1.1.0",
         "@dhis2/prop-types": "^2.0.3",
-        "@dhis2/ui": "^6.5.5",
+        "@dhis2/ui": "9",
         "d2": "^31.10.2",
         "jsoneditor": "^9.2.0",
         "material-ui": "0.19.0",
