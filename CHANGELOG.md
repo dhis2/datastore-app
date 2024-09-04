@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/dhis2/datastore-app/compare/v1.3.4...v1.3.5) (2024-09-04)
+
+
+### Bug Fixes
+
+* skip publishing to apphub ([5ab22c0](https://github.com/dhis2/datastore-app/commit/5ab22c075aa63875c86b6542f2340ba892e1d24f))
+
 ## [1.3.4](https://github.com/dhis2/datastore-app/compare/v1.3.3...v1.3.4) (2022-12-08)
 
 
