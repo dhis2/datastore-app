@@ -1,37 +1,34 @@
-import { useDataQuery } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
 import React, { FC } from 'react'
-import classes from './App.module.css'
+import { RouterProvider, createHashRouter } from 'react-router-dom'
+import AppWrapper from './components/appWrapper'
+import { DataStoreList, UserDataStoreList } from './components/list'
+import ErrorPage from './pages/errorPage'
+import Layout from './routes/layout'
 
-interface QueryResults {
-    me: {
-        name: string
-    }
-}
-
-const query = {
-    me: {
-        resource: 'me',
+export const router = createHashRouter([
+    {
+        path: '/',
+        errorElement: <ErrorPage />,
+        element: <Layout />,
+        children: [
+            {
+                path: 'dataStore',
+                element: <DataStoreList />,
+            },
+            {
+                path: 'userDataStore',
+                element: <UserDataStoreList />,
+            },
+        ],
     },
-}
+])
 
-const MyApp: FC = () => {
-    const { error, loading, data } = useDataQuery<QueryResults>(query)
-
-    if (error) {
-        return <span>{i18n.t('ERROR')}</span>
-    }
-
-    if (loading) {
-        return <span>{i18n.t('Loading...')}</span>
-    }
-
+const App: FC = () => {
     return (
-        <div className={classes.container}>
-            <h1>{i18n.t('Hello {{name}}', { name: data?.me?.name })}</h1>
-            <h3>{i18n.t('Welcome to DHIS2 with TypeScript!')}</h3>
-        </div>
+        <AppWrapper>
+            <RouterProvider router={router} />
+        </AppWrapper>
     )
 }
 
-export default MyApp
+export default App
