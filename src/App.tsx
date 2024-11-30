@@ -1,27 +1,7 @@
 import React, { FC } from 'react'
-import { RouterProvider, createHashRouter } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 import AppWrapper from './components/appWrapper'
-import { DataStoreList, UserDataStoreList } from './components/list'
-import ErrorPage from './pages/errorPage'
-import Layout from './routes/layout'
-
-export const router = createHashRouter([
-    {
-        path: '/',
-        errorElement: <ErrorPage />,
-        element: <Layout />,
-        children: [
-            {
-                path: 'dataStore',
-                element: <DataStoreList />,
-            },
-            {
-                path: 'userDataStore',
-                element: <UserDataStoreList />,
-            },
-        ],
-    },
-])
+import { router } from './routes/router'
 
 const App: FC = () => {
     return (

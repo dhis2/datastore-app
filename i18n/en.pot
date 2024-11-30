@@ -5,14 +5,23 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-28T02:03:19.120Z\n"
-"PO-Revision-Date: 2024-11-28T02:03:19.121Z\n"
-
-msgid "dataStore"
-msgstr "dataStore"
-
-msgid "userDataStore"
-msgstr "userDataStore"
+"POT-Creation-Date: 2024-11-29T23:15:51.985Z\n"
+"PO-Revision-Date: 2024-11-29T23:15:51.986Z\n"
 
 msgid "ERROR"
 msgstr "ERROR"
+
+msgid "Namespaces"
+msgstr "Namespaces"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Namespace"
+msgstr "Namespace"
+
+msgid "DataStore"
+msgstr "DataStore"
+
+msgid "User DataStore"
+msgstr "User DataStore"

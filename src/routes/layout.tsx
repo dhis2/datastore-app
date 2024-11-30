@@ -1,41 +1,15 @@
 import React from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+import classes from '../App.module.css'
+import Sidebar from '../components/sidebar/sidebar'
 
 export default function Layout() {
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'row',
-                height: '100%',
-                width: '100%',
-            }}
-        >
-            <div
-                id="sidebar"
-                style={{
-                    width: '20%',
-                    border: '1px groove white',
-                }}
-            >
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to={`/dataStore`}>DataStore</Link>
-                        </li>
-                        <li>
-                            <Link to={`/userDataStore`}>User DataStore</Link>
-                        </li>
-                    </ul>
-                </nav>
+        <div className={classes.container}>
+            <div id="sidebar" className={classes.sidebar}>
+                <Sidebar />
             </div>
-            <div
-                id="main"
-                style={{
-                    width: '80%',
-                    paddingLeft: '1em',
-                }}
-            >
+            <div id="main" className={classes.main}>
                 <Outlet />
             </div>
         </div>
