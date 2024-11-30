@@ -1,8 +1,8 @@
 import React from 'react'
 import { createHashRouter } from 'react-router-dom'
-import Keys from '../components/keys/keysTable'
-import ErrorPage from '../pages/errorPage'
-import Layout from './layout'
+import KeysTable from '../components/keys/KeysTable'
+import ErrorPage from '../pages/ErrorPage'
+import Layout from './Layout'
 
 export const router = createHashRouter([
     {
@@ -15,7 +15,7 @@ export const router = createHashRouter([
                 children: [
                     {
                         path: ':namespace',
-                        element: <Keys />,
+                        element: <KeysTable />,
                     },
                 ],
             },

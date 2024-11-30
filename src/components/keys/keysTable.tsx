@@ -7,9 +7,9 @@ import {
     TableBody,
     TableHead,
 } from '@dhis2/ui'
-import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import CenteredLoader from '../Loader'
 
 interface QueryResults {
     results: []
@@ -31,18 +31,18 @@ const useNameSpaceQuery = ({ store, namespace }) => {
     )
 }
 
-const Keys = () => {
+const KeysTable = () => {
     const { store, namespace } = useParams()
-    const { data, refetch } = useNameSpaceQuery({ store, namespace })
+    const { data, loading, refetch } = useNameSpaceQuery({ store, namespace })
 
     useEffect(() => {
         refetch({ id: namespace })
     }, [namespace])
 
-    return <KeysTable data={data} />
-}
+    if (loading) {
+        return <CenteredLoader />
+    }
 
-export const KeysTable = ({ data }) => {
     return (
         <DataTable>
             <TableHead>
@@ -56,8 +56,10 @@ export const KeysTable = ({ data }) => {
                     <>
                         {data.results.map((key, index) => (
                             <DataTableRow key={`${key}-${index}`}>
-                                <DataTableCell>{key}</DataTableCell>
-                                <DataTableCell>Edit, Delete</DataTableCell>
+                                <DataTableCell bordered>{key}</DataTableCell>
+                                <DataTableCell bordered>
+                                    Edit, Delete
+                                </DataTableCell>
                             </DataTableRow>
                         ))}
                     </>
@@ -67,8 +69,4 @@ export const KeysTable = ({ data }) => {
     )
 }
 
-KeysTable.propTypes = {
-    data: PropTypes.object,
-}
-
-export default Keys
+export default KeysTable

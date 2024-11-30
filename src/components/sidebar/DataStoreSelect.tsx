@@ -4,7 +4,7 @@ import React from 'react'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
 
-const SelectDataStore = ({ option, handleChange }) => {
+const DataStoreSelect = ({ option, handleChange }) => {
     return (
         <div className={classes.bottom}>
             <SingleSelectField
@@ -25,9 +25,9 @@ const SelectDataStore = ({ option, handleChange }) => {
     )
 }
 
-SelectDataStore.propTypes = {
+DataStoreSelect.propTypes = {
     handleChange: PropTypes.func,
     option: PropTypes.string,
 }
 
-export default SelectDataStore
+export default DataStoreSelect
