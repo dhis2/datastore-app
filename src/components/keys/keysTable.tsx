@@ -9,6 +9,7 @@ import {
 } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import classes from '../../App.module.css'
 import CenteredLoader from '../Loader'
 
 interface QueryResults {
@@ -44,28 +45,32 @@ const KeysTable = () => {
     }
 
     return (
-        <DataTable>
-            <TableHead>
-                <DataTableRow>
-                    <DataTableColumnHeader>Keys</DataTableColumnHeader>
-                    <DataTableColumnHeader>Actions</DataTableColumnHeader>
-                </DataTableRow>
-            </TableHead>
-            <TableBody>
-                {data?.results?.length && (
-                    <>
-                        {data.results.map((key, index) => (
-                            <DataTableRow key={`${key}-${index}`}>
-                                <DataTableCell bordered>{key}</DataTableCell>
-                                <DataTableCell bordered>
-                                    Edit, Delete
-                                </DataTableCell>
-                            </DataTableRow>
-                        ))}
-                    </>
-                )}
-            </TableBody>
-        </DataTable>
+        <div className={classes.keysTable}>
+            <DataTable>
+                <TableHead>
+                    <DataTableRow>
+                        <DataTableColumnHeader>Keys</DataTableColumnHeader>
+                        <DataTableColumnHeader>Actions</DataTableColumnHeader>
+                    </DataTableRow>
+                </TableHead>
+                <TableBody>
+                    {data?.results?.length && (
+                        <>
+                            {data.results.map((key, index) => (
+                                <DataTableRow key={`${key}-${index}`}>
+                                    <DataTableCell bordered>
+                                        {key}
+                                    </DataTableCell>
+                                    <DataTableCell bordered>
+                                        Edit, Delete
+                                    </DataTableCell>
+                                </DataTableRow>
+                            ))}
+                        </>
+                    )}
+                </TableBody>
+            </DataTable>
+        </div>
     )
 }
 

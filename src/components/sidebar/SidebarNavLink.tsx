@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import classes from '../../App.module.css'
 
 const SidebarNavLink = ({ to, label }) => {
     return (
-        <li>
+        <li className={classes.navLink}>
             <NavLink
                 to={to}
                 className={({ isActive, isPending }) =>

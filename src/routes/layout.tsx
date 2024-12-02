@@ -1,20 +1,21 @@
+import { Card } from '@dhis2/ui'
 import React from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import classes from '../App.module.css'
+import EmptyArea from '../components/EmptyArea'
 import Sidebar from '../components/sidebar/Sidebar'
 
 function Layout() {
-    const { store, namespace } = useParams()
     return (
         <div className={classes.container}>
             <div id="sidebar" className={classes.sidebar}>
                 <Sidebar />
             </div>
             <div id="main" className={classes.main}>
-                {/* Empty Display component */}
-                {!store && <p>Select a datastore to show namespaces</p>}
-                {store && !namespace && <p>Click a namespace to show keys</p>}
-                <Outlet />
+                <Card>
+                    <EmptyArea />
+                    <Outlet />
+                </Card>
             </div>
         </div>
     )

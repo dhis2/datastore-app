@@ -6,7 +6,7 @@ function AppWrapper({ children }) {
     return (
         <>
             <CssReset />
-            <CssVariables />
+            <CssVariables theme spacers colors />
             {children}
         </>
     )
