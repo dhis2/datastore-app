@@ -1,4 +1,4 @@
-import { Center } from '@dhis2/ui'
+import { Center, NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -8,12 +8,16 @@ const EmptyArea = () => {
         <>
             {!store && (
                 <Center>
-                    <p>Select a datastore to show namespaces</p>
+                    <NoticeBox>
+                        <p>Select a datastore to show namespaces</p>
+                    </NoticeBox>
                 </Center>
             )}
             {store && !namespace && (
                 <Center>
-                    <p>Click a namespace to show keys</p>
+                    <NoticeBox>
+                        <p>Click a namespace to show keys</p>
+                    </NoticeBox>
                 </Center>
             )}
         </>
