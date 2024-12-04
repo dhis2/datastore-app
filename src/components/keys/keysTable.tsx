@@ -7,7 +7,7 @@ import {
     TableBody,
     TableHead,
 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
@@ -43,6 +43,10 @@ const KeysTable = () => {
     const [deleteNamespace, setDeleteNamespace] = useState(false)
     const [deleteKey, setDeleteKey] = useState('')
     const [openModal, setOpenModal] = useState(false)
+
+    useEffect(() => {
+        refetch({ id: namespace })
+    }, [namespace])
 
     const handleDeleteAction = async (key) => {
         await engine.mutate({
