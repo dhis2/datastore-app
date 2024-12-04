@@ -1,12 +1,12 @@
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import classes from '../../App.module.css'
+// import classes from '../../App.module.css'
 import i18n from '../../locales'
 
 const DataStoreSelect = ({ option, handleChange }) => {
     return (
-        <div className={classes.bottom}>
+        <div>
             <SingleSelectField
                 label="Select Datastore"
                 selected={option}

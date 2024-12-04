@@ -1,6 +1,7 @@
 import React from 'react'
 import { createHashRouter } from 'react-router-dom'
-import KeysTable from '../components/keys/KeysTable'
+import Edit from '../components/edit/Edit'
+import Keys from '../components/keys/Keys'
 import ErrorPage from '../pages/ErrorPage'
 import Layout from './Layout'
 
@@ -15,7 +16,11 @@ export const router = createHashRouter([
                 children: [
                     {
                         path: ':namespace',
-                        element: <KeysTable />,
+                        element: <Keys />,
+                    },
+                    {
+                        path: ':namespace/edit/:key',
+                        element: <Edit />,
                     },
                 ],
             },

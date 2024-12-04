@@ -6,6 +6,15 @@
     font-size: 1rem;
 }
 
+.top {
+    margin-top: 0.5em;
+}
+
+.bottom {
+    margin-bottom: 0.5em;
+}
+
+/* sidebar */
 .sidebar {
     width: 20%;
     margin: 0.1em;
@@ -16,8 +25,13 @@
     width: 20%;
 }
 
-.sidebarList {
+/* .sidebarList {
     margin-top: 1em;
+} */
+
+.sidebarList h4 {
+    padding: 0;
+    margin: 0.5em;
 }
 
 .sidebarList ul {
@@ -25,25 +39,38 @@
     padding: 0;
 }
 
-.top {
-    margin-top: 0.5em;
+.select {
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    /* border: 1px solid var(--colors-grey200)   */
 }
 
-.bottom {
-    margin-bottom: 0.5em;
-}
+/* main area */
 
 .main {
     width: 80%;
     margin: 0.1em;
 }
 
+/* keys */
+
 .keysTable {
     margin-top: 10px;
     padding: 0.2em;
 }
 
+/* nav link */
+
 /* sourced and adapted from https://github.com/dhis2/design-specs/blob/b65e6518dcc7c16733379cd80688e67a422fc742/src/components/sidenav.css#L73 (-> 104) */
+.navLink {
+    display: grid;
+    grid-template-columns: 2.5fr 0.5fr;
+}
+
+.navLink button {
+    border: 0;
+}
 
 .navLink a {
     display: block;
@@ -75,4 +102,20 @@
 }
 .navLink.active:hover {
     background: var(--colors-grey300);
+}
+
+/* Toolbar */
+.toolbar {
+    margin-top: 5px;
+    height: 70px;
+    /* border: 1px solid var(--colors-grey200) */
+    display: flex;
+    flex-direction: row;
+    /* align-content: center; */
+}
+
+.toolbar button {
+    /* border: none; */
+    align-self: center;
+    margin: 0 0 0 15px;
 }

@@ -17,12 +17,11 @@ export default function ErrorPage() {
     return (
         <div id="error-page">
             <Center>
-                <NoticeBox title={i18n.t("An error has occurred")} error>
-                <p>
-                    <i>{error.statusText || error.message}</i>
-                </p>
+                <NoticeBox title={i18n.t('An error has occurred')} error>
+                    <p>
+                        <i>{error.statusText || error.message}</i>
+                    </p>
                 </NoticeBox>
-               
             </Center>
         </div>
     )

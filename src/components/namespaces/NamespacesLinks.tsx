@@ -7,11 +7,11 @@ const NameSpaceLinks = () => {
     const { store } = useParams()
 
     if (store === 'userDataStore') {
-        return <UserDataStoreLinks store={store} />
+        return <UserDataStoreLinks />
     }
 
     if (store === 'dataStore') {
-        return <DataStoreLinks store={store} />
+        return <DataStoreLinks />
     }
 }
 

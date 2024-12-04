@@ -1,5 +1,4 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import PropTypes from 'prop-types'
 import React from 'react'
 import LinksList from './LinksList'
 
@@ -13,16 +12,18 @@ const dataStoreQuery = {
     },
 }
 
-function DataStoreLinks({ store }) {
-    const { error, loading, data } = useDataQuery<QueryResults>(dataStoreQuery)
+function DataStoreLinks() {
+    const { error, loading, data, refetch } =
+        useDataQuery<QueryResults>(dataStoreQuery)
 
     return (
-        <LinksList store={store} error={error} data={data} loading={loading} />
+        <LinksList
+            error={error}
+            data={data}
+            loading={loading}
+            refetch={refetch}
+        />
     )
-}
-
-DataStoreLinks.propTypes = {
-    store: PropTypes.string,
 }
 
 export default DataStoreLinks
