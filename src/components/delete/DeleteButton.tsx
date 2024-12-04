@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import i18n from '../../locales'
 
-export default function DeleteAction({ openModal }) {
+export default function DeleteButton({ openModal }) {
     return (
         <Button
-            aria-label="Delete key"
-            name="Delete key"
+            aria-label={i18n.t('Delete')}
+            name="Delete"
             onClick={openModal}
-            title="Delete key"
+            title={i18n.t('Delete')}
         >
             {i18n.t('Delete')}
         </Button>
     )
 }
 
-DeleteAction.propTypes = {
+DeleteButton.propTypes = {
     openModal: PropTypes.func,
 }

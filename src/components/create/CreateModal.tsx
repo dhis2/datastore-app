@@ -12,50 +12,62 @@ import React from 'react'
 import i18n from '../../locales'
 
 const CreateModal = ({
-    saveFn,
-    showNamespaceModal,
-    showAddKeyModal,
-    namespace,
-    newKey,
-    setNamespace,
-    setNewKey,
+    addNewKey,
+    addNewNamespace,
+    createFn,
+    values,
+    setValues,
     closeModal,
 }) => {
     return (
         <Modal>
-            <ModalTitle>Add New Namespace</ModalTitle>
+            <ModalTitle>
+                {addNewKey && i18n.t('Add New Key')}
+                {addNewNamespace && i18n.t('Add New Namespace')}
+            </ModalTitle>
             <ModalContent>
-                {showNamespaceModal && (
+                {addNewNamespace && (
                     <InputField
-                        label="Namespace"
+                        label={i18n.t("Namespace")}
                         required
-                        value={namespace}
-                        onChange={({ value }) => setNamespace(value)}
+                        initialFocus
+                        value={values?.namespace}
+                        onChange={({ value }) => {
+                            setValues({
+                                ...values,
+                                ["namespace"]: value
+                            })
+                        }
+                        }
                     />
                 )}
                 <InputField
-                    label="Key"
+                    label={i18n.t("Key")}
                     required
-                    value={newKey}
-                    onChange={({ value }) => setNewKey(value)}
+                    initialFocus={addNewKey}
+                    value={values?.key}
+                        onChange={({ value }) => {
+                            setValues({
+                                ...values,
+                                ["key"]: value
+                            })
+                        }
+                        }
                 />
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
                     <Button secondary onClick={closeModal}>
-                        Cancel
+                        {i18n.t('Cancel')}
                     </Button>
                     <Button
                         primary
                         onClick={() =>
-                            saveFn({
-                                newKey,
-                                namespace,
-                            })
+                            createFn(values)
                         }
                     >
-                        {showAddKeyModal && i18n.t('Add Key')}
-                        {showNamespaceModal && i18n.t('Add Namespace')}
+                        {addNewKey && i18n.t('Add Key')}
+                        {addNewNamespace && i18n.t('Add Namespace')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>
@@ -64,14 +76,12 @@ const CreateModal = ({
 }
 
 CreateModal.propTypes = {
-    closeModal: PropTypes.func,
-    namespace: PropTypes.string,
-    newKey: PropTypes.string,
-    saveFn: PropTypes.func,
-    setNamespace: PropTypes.func,
-    setNewKey: PropTypes.func,
-    showAddKeyModal: PropTypes.bool,
-    showNamespaceModal: PropTypes.bool,
+    addNewKey: PropTypes.bool,
+    addNewNamespace: PropTypes.bool,
+    createFn: PropTypes.func,
+    values: PropTypes.object,
+    setValues: PropTypes.func,
+    closeModal: PropTypes.func
 }
 
 export default CreateModal

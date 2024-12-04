@@ -23,7 +23,6 @@ const Sidebar = () => {
                     handleChange={handleDataStoreSelect}
                 />
             </div>
-
             <Divider />
             {store && (
                 <>

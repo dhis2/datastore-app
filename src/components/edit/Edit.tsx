@@ -2,75 +2,71 @@ import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import { Button } from '@dhis2-ui/button'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import i18n from '../../locales'
 import Editor from './Editor'
 
-const useSaveChangesMutation = ({ store, namespace, mutationOptions }) => {
-    return useDataMutation(
-        // @ts-expect-error("")
-        {
-            type: 'update',
-            resource: `${store}/${namespace}`,
-            id: ({ id }) => id,
-            data: ({ data }) => {
-                console.log(data)
-                return {
-                    data: JSON.parse(data),
-                }
-            },
-        },
-        mutationOptions
-    )
-}
+const modifyKeyMutation = ({ store }) => ({
+    type: 'update' as const,
+    resource: `${store}`,
+    id: ({ key, namespace }: { key: string, namespace: string }) => `${namespace}/${key}`,
+    data: ({ value }) => JSON.parse(value),
+})
 
-const useFetchKeyValueQuery = ({ store, namespace, key }) => {
-    return useDataQuery(
-        {
-            results: {
-                resource: `${store}/${namespace}`,
-                id: ({ id }) => id,
-            },
-        },
-        {
-            variables: {
-                id: key,
-            },
-        }
-    )
-}
+const keyValuesQuery = ({
+    store
+}: {
+    store: string
+}) => ({
+    results: {
+        resource: `${store}`,
+        id: ({ key, namespace }: { key: string, namespace: string }) => `${namespace}/${key}`,
+    },
+})
 
 const Edit = () => {
     const { key, namespace, store } = useParams()
-    const { data, refetch } = useFetchKeyValueQuery({ store, namespace, key })
+
+    const {
+        data,
+        loading: queryLoading,
+        refetch,
+    } = useDataQuery(keyValuesQuery({ store }), {
+        variables: {
+            key,
+            namespace
+        },
+    })
 
     const [value, setValue] = useState(
-        JSON.stringify(data?.results?.['data'], null, 4) || ''
+        JSON.stringify(data?.results, null, 4) || ''
     )
-    const onChange = (value) => {
-        setValue(value)
-    }
 
     const saveChanges = () => {
         // todo: show alert
-        console.log('save edited key stuff')
+        console.log('show success alert')
     }
 
-    useEffect(() => {
-        refetch({ id: key })
-    }, [key, namespace, store])
+    const [updateKey, { loading }] = useDataMutation(
+        // @ts-expect-error("")
+        modifyKeyMutation({ store }),
+        {
+            onComplete: saveChanges,
+        }
+    )
 
+    const handleEditorChange = (value) => {
+        setValue(value)
+    }
+   
     useEffect(() => {
-        setValue(JSON.stringify(data?.results?.['data'], null, 4))
+        setValue(JSON.stringify(data?.results, null, 4))
     }, [data])
 
-    const mutationOptions = {
-        onComplete: saveChanges,
-    }
+    useEffect(() => {
+        refetch({ key, namespace })
+    }, [key, namespace, store, refetch])
 
-    const [mutate, { loading }] = useSaveChangesMutation({
-        store,
-        namespace,
-        mutationOptions,
-    })
+    const loadingText = i18n.t("Loading")
 
     return (
         <div
@@ -78,7 +74,10 @@ const Edit = () => {
                 border: '1px solid grey',
             }}
         >
-            <Editor value={value} handleChange={onChange} />
+            <Editor
+                value={queryLoading ? `${loadingText}...` : value}
+                handleChange={handleEditorChange}
+            />
             <div
                 style={{
                     position: 'absolute',
@@ -89,16 +88,17 @@ const Edit = () => {
                     aria-label="Save"
                     name="save"
                     onClick={async () => {
-                        await mutate({
-                            id: key,
-                            data: value,
+                        await updateKey({
+                            key,
+                            namespace,
+                            value,
                         })
                     }}
                     title="Save"
                     primary
                     loading={loading}
                 >
-                    Save changes
+                    {i18n.t('Save changes')}
                 </Button>
             </div>
         </div>

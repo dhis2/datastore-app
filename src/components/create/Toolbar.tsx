@@ -9,23 +9,22 @@ import CreateModal from './CreateModal'
 const Toolbar = () => {
     const { store, namespace } = useParams()
 
-    const [showAddNamespaceModal, setShowAddNamespaceModal] = useState(false)
-    const [showAddKeyModal, setShowAddKeyModal] = useState(false)
-    const [newNamespace, setNewNamespace] = useState('')
-    const [newKey, setNewKey] = useState('')
+    const [addNewNamespace, setAddNewNamespace] = useState(false)
+    const [addNewKey, setAddNewKey] = useState(false)
+    const [values, setValues] = useState({})
 
     const engine = useDataEngine()
     const navigate = useNavigate()
 
-    const handleAddNamespace = async (values: {
+    const handleAddNamespaceOrKey = async (values: {
         namespace?: string
-        newKey?: unknown
+        key?: unknown
     }) => {
-        let resource = `${store}`
-        if (showAddNamespaceModal) {
-            resource = `${resource}/${values?.namespace}/${values?.newKey}`
-        } else if (showAddKeyModal) {
-            resource = `${resource}/${namespace}/${values?.newKey}`
+        let resource = ""
+        if (addNewNamespace) {
+            resource = `${store}/${values?.namespace}/${values?.key}`
+        } else if (addNewKey) {
+            resource = `${store}/${namespace}/${values?.key}`
         }
 
         await engine.mutate(
@@ -36,25 +35,24 @@ const Toolbar = () => {
             },
             {
                 onComplete: () => {
-                    if (showAddNamespaceModal) {
-                        navigate(
-                            `${store}/${values?.namespace}/edit/${values?.newKey}`
-                        )
-                    } else if (showAddKeyModal) {
-                        navigate(`${store}/${namespace}/edit/${values?.newKey}`)
+                    let url = ''
+                    if (addNewNamespace) {
+                        url = `${store}/${values?.namespace}/edit/${values?.key}`
+                    } else if (addNewKey) {
+                        url = `${store}/${namespace}/edit/${values?.key}`
                     }
-                    setNewKey('')
-                    setNewNamespace('')
+                    navigate(url)
+
+                    setValues({})
                 },
             }
         )
-
-        handleCloseModal()
+        closeModal()
     }
 
-    const handleCloseModal = () => {
-        setShowAddNamespaceModal(false)
-        setShowAddKeyModal(false)
+    const closeModal = () => {
+        setAddNewKey(false)
+        setAddNewNamespace(false)
     }
 
     return (
@@ -63,23 +61,23 @@ const Toolbar = () => {
                 <>
                     <div className={classes.toolbar}>
                         <Button
-                            aria-label="Add new namespace"
+                            aria-label={i18n.t('Add new namespace')}
                             name="New namespace button"
                             onClick={() => {
-                                setShowAddNamespaceModal(true)
+                                setAddNewNamespace(true)
                             }}
-                            title="New namespace"
+                            title={i18n.t('New namespace')}
                         >
                             {i18n.t('Add new namespace')}
                         </Button>
                         {namespace && (
                             <Button
-                                aria-label="Add new key"
+                                aria-label={i18n.t('Add new key')}
                                 name="New key button"
                                 onClick={() => {
-                                    setShowAddKeyModal(true)
+                                    setAddNewKey(true)
                                 }}
-                                title="New key"
+                                title={i18n.t('New key')}
                             >
                                 {i18n.t('Add new key')}
                             </Button>
@@ -88,16 +86,14 @@ const Toolbar = () => {
                     <Divider />
                 </>
             )}
-            {(showAddNamespaceModal || showAddKeyModal) && (
+            {(addNewKey || addNewNamespace) && (
                 <CreateModal
-                    showNamespaceModal={showAddNamespaceModal}
-                    showAddKeyModal={showAddKeyModal}
-                    saveFn={handleAddNamespace}
-                    closeModal={handleCloseModal}
-                    namespace={newNamespace}
-                    setNamespace={setNewNamespace}
-                    newKey={newKey}
-                    setNewKey={setNewKey}
+                    addNewKey={addNewKey}
+                    addNewNamespace={addNewNamespace}
+                    createFn={handleAddNamespaceOrKey}
+                    closeModal={closeModal}
+                    values={values}
+                    setValues={setValues}
                 />
             )}
         </>

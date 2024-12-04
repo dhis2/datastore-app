@@ -25,10 +25,6 @@
     width: 20%;
 }
 
-/* .sidebarList {
-    margin-top: 1em;
-} */
-
 .sidebarList h4 {
     padding: 0;
     margin: 0.5em;
@@ -43,7 +39,6 @@
     height: 70px;
     padding: 0;
     margin: 0;
-    /* border: 1px solid var(--colors-grey200)   */
 }
 
 /* main area */
@@ -53,7 +48,7 @@
     margin: 0.1em;
 }
 
-/* keys */
+/* --- keys */
 
 .keysTable {
     margin-top: 10px;
@@ -108,14 +103,11 @@
 .toolbar {
     margin-top: 5px;
     height: 70px;
-    /* border: 1px solid var(--colors-grey200) */
     display: flex;
     flex-direction: row;
-    /* align-content: center; */
 }
 
 .toolbar button {
-    /* border: none; */
     align-self: center;
     margin: 0 0 0 15px;
 }

@@ -13,35 +13,35 @@ import classes from '../../App.module.css'
 import i18n from '../../locales'
 import DeleteModal from '../delete/DeleteModal'
 import CenteredLoader from '../Loader'
-import DeleteAction from './DeleteAction'
+import DeleteButton from '../delete/DeleteButton'
 
 interface QueryResults {
     results: []
 }
 
-const useNameSpaceQuery = ({ store, namespace }) => {
-    return useDataQuery<QueryResults>(
-        {
-            results: {
-                resource: `${store}`,
-                id: ({ id }) => id,
-            },
-        },
+const fetchNamespaceQuery = ({ store }) => ({
+    results: {
+        resource: `${store}`,
+        id: ({ id }) => id,
+    },
+})
+
+const KeysTable = () => {
+    const { store, namespace } = useParams()
+    const navigate = useNavigate()
+    const engine = useDataEngine()
+
+    const { data, loading, refetch } = useDataQuery(
+        fetchNamespaceQuery({ store }),
         {
             variables: {
                 id: namespace,
             },
         }
     )
-}
 
-const KeysTable = () => {
-    const { store, namespace } = useParams()
-    const navigate = useNavigate()
-    const engine = useDataEngine()
-    const { data, loading, refetch } = useNameSpaceQuery({ store, namespace })
     const [deleteNamespace, setDeleteNamespace] = useState(false)
-    const [deleteKey, setDeleteKey] = useState('')
+    const [selectedKey, setSelectedKey] = useState('')
     const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
@@ -97,14 +97,14 @@ const KeysTable = () => {
                                                 {key}
                                             </DataTableCell>
                                             <DataTableCell bordered>
-                                                <DeleteAction
+                                                <DeleteButton
                                                     openModal={() => {
                                                         setOpenModal(true)
                                                         setDeleteNamespace(
                                                             data?.results
                                                                 ?.length < 2
                                                         )
-                                                        setDeleteKey(key)
+                                                        setSelectedKey(key)
                                                     }}
                                                 />
                                             </DataTableCell>
@@ -118,12 +118,12 @@ const KeysTable = () => {
             )}
             {openModal && (
                 <DeleteModal
-                    deleteFn={() => handleDeleteAction(deleteKey)}
+                    deleteFn={() => handleDeleteAction(selectedKey)}
                     closeModal={() => setOpenModal(false)}
                 >
                     <p>
                         {i18n.t(
-                            `Are you sure you want to delete '${deleteKey}' in ${namespace}?`
+                            `Are you sure you want to delete '${selectedKey}' in ${namespace}?`
                         )}
                     </p>
                     {deleteNamespace && (
