@@ -2,6 +2,7 @@ import { useDataMutation, useDataQuery } from '@dhis2/app-runtime'
 import { Button } from '@dhis2-ui/button'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import Editor from './Editor'
 
@@ -23,6 +24,7 @@ const keyValuesQuery = ({ store }: { store: string }) => ({
 
 const Edit = () => {
     const { key, namespace, store } = useParams()
+    const { showSuccess, showError } = useCustomAlert()
 
     const {
         data,
@@ -33,22 +35,28 @@ const Edit = () => {
             key,
             namespace,
         },
+        onError: () => {
+            const message = i18n.t('Failed to fetch key values!')
+            showError(message)
+        },
     })
 
     const [value, setValue] = useState(
         JSON.stringify(data?.results, null, 4) || ''
     )
 
-    const saveChanges = () => {
-        // todo: show alert
-        console.log('show success alert')
-    }
-
     const [updateKey, { loading }] = useDataMutation(
         // @ts-expect-error("")
         modifyKeyMutation({ store }),
         {
-            onComplete: saveChanges,
+            onComplete: () => {
+                const message = i18n.t('Key successfully updated')
+                showSuccess(message)
+            },
+            onError: () => {
+                const message = i18n.t('There was an error updating the key')
+                showError(message)
+            },
         }
     )
 

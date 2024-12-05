@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import DeleteModal from '../delete/DeleteModal'
 import CenteredLoader from '../Loader'
@@ -14,13 +15,33 @@ function LinksList({ data, error, loading, refetchList }) {
     const [selectedNamespace, setSelectedNamespace] = useState('')
     const engine = useDataEngine()
     const navigate = useNavigate()
+    const { showError, showSuccess } = useCustomAlert()
 
     const handleDeleteAction = async (selectedNamespace) => {
-        await engine.mutate({
-            type: 'delete',
-            resource: `${store}/${selectedNamespace}`,
-            id: key,
-        })
+        await engine.mutate(
+            {
+                type: 'delete',
+                resource: `${store}/${selectedNamespace}`,
+                id: key,
+            },
+            {
+                onComplete: () => {
+                    const message = i18n.t('Key deleted successfully', {
+                        key,
+                    })
+                    showSuccess(message)
+                },
+                onError: (error) => {
+                    const message = i18n.t(
+                        'There was an error while deleting the key',
+                        {
+                            error: error.message,
+                        }
+                    )
+                    showError(message)
+                },
+            }
+        )
 
         setOpenModal(false)
         refetchList()
@@ -33,7 +54,7 @@ function LinksList({ data, error, loading, refetchList }) {
 
     return (
         <div className={classes.sidebarList}>
-            {error && <span>{i18n.t('ERROR')}</span>}
+            {error && <span>{i18n.t('Error fetching namespaces')}</span>}
             {loading && <CenteredLoader />}
             {data && (
                 <>

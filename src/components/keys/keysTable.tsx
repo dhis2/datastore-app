@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import DeleteButton from '../delete/DeleteButton'
 import DeleteModal from '../delete/DeleteModal'
@@ -30,8 +31,9 @@ const KeysTable = () => {
     const { store, namespace } = useParams()
     const navigate = useNavigate()
     const engine = useDataEngine()
+    const { showError, showSuccess } = useCustomAlert()
 
-    const { data, loading, refetch } = useDataQuery<QueryResults>(
+    const { data, loading, refetch, error } = useDataQuery<QueryResults>(
         fetchNamespaceQuery({ store }),
         {
             variables: {
@@ -49,11 +51,28 @@ const KeysTable = () => {
     }, [namespace])
 
     const handleDeleteAction = async (key) => {
-        await engine.mutate({
-            type: 'delete',
-            resource: `${store}/${namespace}`,
-            id: key,
-        })
+        await engine.mutate(
+            {
+                type: 'delete',
+                resource: `${store}/${namespace}`,
+                id: key,
+            },
+            {
+                onComplete: () => {
+                    const message = i18n.t('Key deleted successfully')
+                    showSuccess(message)
+                },
+                onError: (error) => {
+                    const message = i18n.t(
+                        'There was an error deleting the key',
+                        {
+                            error: error.message,
+                        }
+                    )
+                    showError(message)
+                },
+            }
+        )
         setOpenModal(false)
 
         if (deleteNamespace) {
@@ -65,6 +84,10 @@ const KeysTable = () => {
 
     if (loading) {
         return <CenteredLoader />
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>
     }
 
     return (

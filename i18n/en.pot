@@ -5,17 +5,89 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-03T15:46:13.768Z\n"
-"PO-Revision-Date: 2024-12-03T15:46:13.769Z\n"
+"POT-Creation-Date: 2024-12-05T03:27:06.316Z\n"
+"PO-Revision-Date: 2024-12-05T03:27:06.317Z\n"
+
+msgid "View keys"
+msgstr "View keys"
+
+msgid "Click a namespace to view its keys"
+msgstr "Click a namespace to view its keys"
+
+msgid "Add New Key"
+msgstr "Add New Key"
+
+msgid "Add New Namespace"
+msgstr "Add New Namespace"
+
+msgid "Namespace"
+msgstr "Namespace"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Add Key"
+msgstr "Add Key"
+
+msgid "Add Namespace"
+msgstr "Add Namespace"
+
+msgid "Key created successfully"
+msgstr "Key created successfully"
+
+msgid "There was an error creating the key"
+msgstr "There was an error creating the key"
 
 msgid "Add new namespace"
 msgstr "Add new namespace"
 
-msgid "ERROR"
-msgstr "ERROR"
+msgid "New namespace"
+msgstr "New namespace"
+
+msgid "Add new key"
+msgstr "Add new key"
+
+msgid "New key"
+msgstr "New key"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Failed to fetch key values!"
+msgstr "Failed to fetch key values!"
+
+msgid "Key successfully updated"
+msgstr "Key successfully updated"
+
+msgid "There was an error updating the key"
+msgstr "There was an error updating the key"
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "Key deleted successfully"
+msgstr "Key deleted successfully"
+
+msgid "There was an error deleting the key"
+msgstr "There was an error deleting the key"
+
+msgid "There was an error while deleting the key"
+msgstr "There was an error while deleting the key"
+
+msgid "Error fetching namespaces"
+msgstr "Error fetching namespaces"
 
 msgid "Namespaces"
 msgstr "Namespaces"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
 
 msgid "DataStore"
 msgstr "DataStore"
@@ -26,8 +98,11 @@ msgstr "User DataStore"
 msgid "Search"
 msgstr "Search"
 
-msgid "Namespace"
-msgstr "Namespace"
-
 msgid "An error has occurred"
 msgstr "An error has occurred"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Back to DataStore"
+msgstr "Back to DataStore"

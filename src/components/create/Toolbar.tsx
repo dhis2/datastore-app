@@ -3,18 +3,20 @@ import { Button, Divider } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import CreateModal from './CreateModal'
 
 const Toolbar = () => {
     const { store, namespace } = useParams()
+    const engine = useDataEngine()
+    const navigate = useNavigate()
 
     const [addNewNamespace, setAddNewNamespace] = useState(false)
     const [addNewKey, setAddNewKey] = useState(false)
     const [values, setValues] = useState({})
 
-    const engine = useDataEngine()
-    const navigate = useNavigate()
+    const { showSuccess, showError } = useCustomAlert()
 
     const handleAddNamespaceOrKey = async (values: {
         namespace?: string
@@ -41,9 +43,16 @@ const Toolbar = () => {
                     } else if (addNewKey) {
                         url = `${store}/edit/${namespace}/${values?.key}`
                     }
+                    const message = i18n.t('Key created successfully')
+                    showSuccess(message)
                     navigate(url)
-
                     setValues({})
+                },
+                onError: () => {
+                    const message = i18n.t(
+                        'There was an error creating the key'
+                    )
+                    showError(message)
                 },
             }
         )
