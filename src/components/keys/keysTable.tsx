@@ -11,9 +11,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
+import DeleteButton from '../delete/DeleteButton'
 import DeleteModal from '../delete/DeleteModal'
 import CenteredLoader from '../Loader'
-import DeleteButton from '../delete/DeleteButton'
 
 interface QueryResults {
     results: []
@@ -31,7 +31,7 @@ const KeysTable = () => {
     const navigate = useNavigate()
     const engine = useDataEngine()
 
-    const { data, loading, refetch } = useDataQuery(
+    const { data, loading, refetch } = useDataQuery<QueryResults>(
         fetchNamespaceQuery({ store }),
         {
             variables: {
@@ -84,10 +84,9 @@ const KeysTable = () => {
                             <>
                                 {data.results.map((key, index) => {
                                     const handleClick = () => {
-                                        const url = `/${store}/${namespace}/edit/${key}`
+                                        const url = `/${store}/edit/${namespace}/${key}`
                                         navigate(url)
                                     }
-
                                     return (
                                         <DataTableRow key={`${key}-${index}`}>
                                             <DataTableCell

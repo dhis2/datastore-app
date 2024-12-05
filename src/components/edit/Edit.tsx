@@ -8,18 +8,16 @@ import Editor from './Editor'
 const modifyKeyMutation = ({ store }) => ({
     type: 'update' as const,
     resource: `${store}`,
-    id: ({ key, namespace }: { key: string, namespace: string }) => `${namespace}/${key}`,
+    id: ({ key, namespace }: { key: string; namespace: string }) =>
+        `${namespace}/${key}`,
     data: ({ value }) => JSON.parse(value),
 })
 
-const keyValuesQuery = ({
-    store
-}: {
-    store: string
-}) => ({
+const keyValuesQuery = ({ store }: { store: string }) => ({
     results: {
         resource: `${store}`,
-        id: ({ key, namespace }: { key: string, namespace: string }) => `${namespace}/${key}`,
+        id: ({ key, namespace }: { key: string; namespace: string }) =>
+            `${namespace}/${key}`,
     },
 })
 
@@ -33,7 +31,7 @@ const Edit = () => {
     } = useDataQuery(keyValuesQuery({ store }), {
         variables: {
             key,
-            namespace
+            namespace,
         },
     })
 
@@ -57,7 +55,7 @@ const Edit = () => {
     const handleEditorChange = (value) => {
         setValue(value)
     }
-   
+
     useEffect(() => {
         setValue(JSON.stringify(data?.results, null, 4))
     }, [data])
@@ -66,7 +64,7 @@ const Edit = () => {
         refetch({ key, namespace })
     }, [key, namespace, store, refetch])
 
-    const loadingText = i18n.t("Loading")
+    const loadingText = i18n.t('Loading')
 
     return (
         <div

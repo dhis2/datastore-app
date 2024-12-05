@@ -7,18 +7,10 @@ const EmptyArea = () => {
     const { store, namespace } = useParams()
     return (
         <>
-            {!store && (
-                <Center>
-                    <NoticeBox title={i18n.t('View namespaces')}>
-                        {i18n.t("Select a datastore to show namespaces")}
-                    </NoticeBox>
-                </Center>
-            )}
             {store && !namespace && (
                 <Center>
                     <NoticeBox title={i18n.t('View keys')}>
-                        {i18n.t("Click a namespace to show keys")}
-                        
+                        {i18n.t('Click a namespace to view its keys')}
                     </NoticeBox>
                 </Center>
             )}

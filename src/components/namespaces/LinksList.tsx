@@ -8,7 +8,7 @@ import DeleteModal from '../delete/DeleteModal'
 import CenteredLoader from '../Loader'
 import SidebarNavLink from '../sidebar/SidebarNavLink'
 
-function LinksList({ data, error, loading, refetch }) {
+function LinksList({ data, error, loading, refetchList }) {
     const { store, namespace, key } = useParams()
     const [openModal, setOpenModal] = useState(false)
     const [selectedNamespace, setSelectedNamespace] = useState('')
@@ -23,13 +23,14 @@ function LinksList({ data, error, loading, refetch }) {
         })
 
         setOpenModal(false)
-        refetch()
+        refetchList()
         navigate(`${store}`)
     }
 
     useEffect(() => {
-        refetch()
+        refetchList()
     }, [store, namespace, key])
+
     return (
         <div className={classes.sidebarList}>
             {error && <span>{i18n.t('ERROR')}</span>}
@@ -42,7 +43,7 @@ function LinksList({ data, error, loading, refetch }) {
                             return (
                                 <SidebarNavLink
                                     key={`${index}-${namespace}`}
-                                    to={`/${store}/${namespace}`}
+                                    to={`/${store}/edit/${namespace}`}
                                     label={namespace}
                                     handleDeleteModal={() => {
                                         setOpenModal(true)
@@ -79,7 +80,7 @@ LinksList.propTypes = {
     data: PropTypes.object,
     error: PropTypes.any,
     loading: PropTypes.any,
-    refetch: PropTypes.func,
+    refetchList: PropTypes.func,
 }
 
 export default LinksList

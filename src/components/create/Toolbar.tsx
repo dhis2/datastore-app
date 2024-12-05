@@ -20,7 +20,7 @@ const Toolbar = () => {
         namespace?: string
         key?: unknown
     }) => {
-        let resource = ""
+        let resource = ''
         if (addNewNamespace) {
             resource = `${store}/${values?.namespace}/${values?.key}`
         } else if (addNewKey) {
@@ -37,9 +37,9 @@ const Toolbar = () => {
                 onComplete: () => {
                     let url = ''
                     if (addNewNamespace) {
-                        url = `${store}/${values?.namespace}/edit/${values?.key}`
+                        url = `${store}/edit/${values?.namespace}/${values?.key}`
                     } else if (addNewKey) {
-                        url = `${store}/${namespace}/edit/${values?.key}`
+                        url = `${store}/edit/${namespace}/${values?.key}`
                     }
                     navigate(url)
 

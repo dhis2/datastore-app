@@ -1,6 +1,6 @@
-import { Center, NoticeBox } from '@dhis2/ui'
+import { Button, Card, NoticeBox } from '@dhis2/ui'
 import React from 'react'
-import { useRouteError } from 'react-router-dom'
+import { useNavigate, useRouteError } from 'react-router-dom'
 import i18n from '../locales'
 
 interface Error {
@@ -13,16 +13,35 @@ interface Error {
 
 export default function ErrorPage() {
     const error: Error = useRouteError()
+    const navigate = useNavigate()
 
     return (
-        <div id="error-page">
-            <Center>
+        <div
+            id="error-page"
+            className=""
+            style={{
+                height: '100vh',
+                padding: '1em',
+                display: 'flex',
+                flexDirection: 'row',
+            }}
+        >
+            <Card>
                 <NoticeBox title={i18n.t('An error has occurred')} error>
-                    <p>
-                        <i>{error.statusText || error.message}</i>
-                    </p>
+                    {/* <p><i>{error.statusText || error.message}</i></p> */}
+                    {error.data && <p>{error.data}</p>}
                 </NoticeBox>
-            </Center>
+                <Button
+                    aria-label={i18n.t('Back')}
+                    name="Back"
+                    onClick={() => {
+                        navigate('dataStore')
+                    }}
+                    title={i18n.t('Back')}
+                >
+                    {i18n.t('Back to DataStore')}
+                </Button>
+            </Card>
         </div>
     )
 }

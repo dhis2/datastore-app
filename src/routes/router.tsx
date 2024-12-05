@@ -1,6 +1,7 @@
 import React from 'react'
-import { createHashRouter } from 'react-router-dom'
+import { Navigate, createHashRouter } from 'react-router-dom'
 import Edit from '../components/edit/Edit'
+import EmptyArea from '../components/EmptyArea'
 import Keys from '../components/keys/Keys'
 import ErrorPage from '../pages/ErrorPage'
 import Layout from './Layout'
@@ -11,15 +12,20 @@ export const router = createHashRouter([
         errorElement: <ErrorPage />,
         element: <Layout />,
         children: [
+            { index: true, element: <Navigate to={'dataStore'} replace /> },
             {
                 path: ':store',
                 children: [
                     {
-                        path: ':namespace',
+                        index: true,
+                        element: <EmptyArea />,
+                    },
+                    {
+                        path: 'edit/:namespace',
                         element: <Keys />,
                     },
                     {
-                        path: ':namespace/edit/:key',
+                        path: 'edit/:namespace/:key',
                         element: <Edit />,
                     },
                 ],

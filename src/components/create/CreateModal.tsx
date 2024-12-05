@@ -28,31 +28,29 @@ const CreateModal = ({
             <ModalContent>
                 {addNewNamespace && (
                     <InputField
-                        label={i18n.t("Namespace")}
+                        label={i18n.t('Namespace')}
                         required
                         initialFocus
                         value={values?.namespace}
                         onChange={({ value }) => {
                             setValues({
                                 ...values,
-                                ["namespace"]: value
+                                ['namespace']: value,
                             })
-                        }
-                        }
+                        }}
                     />
                 )}
                 <InputField
-                    label={i18n.t("Key")}
+                    label={i18n.t('Key')}
                     required
                     initialFocus={addNewKey}
                     value={values?.key}
-                        onChange={({ value }) => {
-                            setValues({
-                                ...values,
-                                ["key"]: value
-                            })
-                        }
-                        }
+                    onChange={({ value }) => {
+                        setValues({
+                            ...values,
+                            ['key']: value,
+                        })
+                    }}
                 />
             </ModalContent>
             <ModalActions>
@@ -60,12 +58,7 @@ const CreateModal = ({
                     <Button secondary onClick={closeModal}>
                         {i18n.t('Cancel')}
                     </Button>
-                    <Button
-                        primary
-                        onClick={() =>
-                            createFn(values)
-                        }
-                    >
+                    <Button primary onClick={() => createFn(values)}>
                         {addNewKey && i18n.t('Add Key')}
                         {addNewNamespace && i18n.t('Add Namespace')}
                     </Button>
@@ -78,10 +71,10 @@ const CreateModal = ({
 CreateModal.propTypes = {
     addNewKey: PropTypes.bool,
     addNewNamespace: PropTypes.bool,
+    closeModal: PropTypes.func,
     createFn: PropTypes.func,
-    values: PropTypes.object,
     setValues: PropTypes.func,
-    closeModal: PropTypes.func
+    values: PropTypes.object,
 }
 
 export default CreateModal

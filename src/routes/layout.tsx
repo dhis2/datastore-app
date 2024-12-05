@@ -3,23 +3,21 @@ import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import classes from '../App.module.css'
 import Toolbar from '../components/create/Toolbar'
-import EmptyArea from '../components/EmptyArea'
 import Sidebar from '../components/sidebar/Sidebar'
 
 function Layout() {
     const { store } = useParams()
     return (
         <div className={classes.container}>
-            <div id="sidebar" className={classes.sidebar}>
+            <nav id="sidebar" className={classes.sidebar}>
                 <Sidebar />
-            </div>
-            <div id="main" className={classes.main}>
+            </nav>
+            <main id="main" className={classes.main}>
                 <Card>
                     {store && <Toolbar />}
-                    <EmptyArea />
                     <Outlet />
                 </Card>
-            </div>
+            </main>
         </div>
     )
 }
