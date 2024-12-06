@@ -4,19 +4,17 @@ import React from 'react'
 import i18n from '../../../locales'
 import classes from '../Panel.module.css'
 
-const CreateButton = () => {
+const CreateButton = ({ label, handleClick }) => {
     return (
         <div className={classes.createButton}>
             <Button
-                aria-label={i18n.t('New')}
+                aria-label={label}
                 icon={<IconAdd16 />}
-                name="New button"
-                onClick={() => {
-                    console.log('Launch create modal')
-                }}
-                title={i18n.t('New')}
+                name="create"
+                onClick={handleClick}
+                title={label}
             >
-                {i18n.t('New')}
+                {label}
             </Button>
         </div>
     )
