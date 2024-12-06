@@ -1,7 +1,7 @@
 import { InputField } from '@dhis2/ui'
 import React from 'react'
-import i18n from '../../locales'
-import classes from './Panel.module.css'
+import i18n from '../../../locales'
+import classes from '../Panel.module.css'
 
 const PanelSearchField = () => {
     return (

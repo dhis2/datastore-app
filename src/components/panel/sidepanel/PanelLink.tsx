@@ -7,7 +7,7 @@ import {
 } from '@dhis2/ui-icons'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import classes from './Panel.module.css'
+import classes from '../Panel.module.css'
 
 type SidebarPanelLinkProps = {
     label: string

@@ -1,18 +1,18 @@
 import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import i18n from '../../locales'
-import EmptyPanelEditor from './EmptyPanelEditor'
-import classes from './Panel.module.css'
-import { PanelHeader } from './PanelHeader'
+import i18n from '../../../locales'
+import classes from '../Panel.module.css'
+import { PanelHeader } from '../PanelHeader'
+import EmptyPanelEditor from './EmptyEditor'
 
-const PanelEmptyArea = () => {
+const EmptyArea = () => {
     const { store, namespace } = useParams()
     return (
         <>
             <div className={classes.sidebar}>
                 <PanelHeader>
-                    <span>Keys Panel</span>
+                    <span>{''}</span>
                 </PanelHeader>
                 {store && !namespace && (
                     <div className={classes.sidebarContent}>
@@ -26,4 +26,4 @@ const PanelEmptyArea = () => {
         </>
     )
 }
-export default PanelEmptyArea
+export default EmptyArea

@@ -1,6 +1,6 @@
 import { SegmentedControl } from '@dhis2/ui'
 import React from 'react'
-import i18n from '../../locales'
+import i18n from '../../../locales'
 
 type DataStoreControlProps = {
     option: string

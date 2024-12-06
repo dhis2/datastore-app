@@ -1,11 +1,11 @@
 import React from 'react'
+import { ErrorResponse } from '../error/ErrorComponent'
+import classes from '../Panel.module.css'
 import CreateButton from './CreateButton'
-import classes from './Panel.module.css'
-import { ErrorResponse } from './PanelError'
 import PanelLinksList from './PanelLinksList'
 import PanelSearchField from './SearchField'
 
-type SidebarPanelProps = {
+type SidePanelProps = {
     data: { results: [] }
     error: { details: ErrorResponse }
     loading: boolean
@@ -13,13 +13,13 @@ type SidebarPanelProps = {
     type: string
 }
 
-const SidebarPanel = ({
+const SidePanel = ({
     data,
     error,
     loading,
     refetchList,
     type,
-}: SidebarPanelProps) => {
+}: SidePanelProps) => {
     console.log(data, type, 'sidebar panel')
     return (
         <div className={classes.sidebarContent}>
@@ -36,4 +36,4 @@ const SidebarPanel = ({
     )
 }
 
-export default SidebarPanel
+export default SidePanel

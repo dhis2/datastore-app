@@ -8,7 +8,7 @@
     /* font-size: 1rem; */
     display: grid;
     grid-template-columns: 400px auto;
-    border-bottom: 1px solid var(--colors-grey100);
+    border: 1px solid var(--colors-grey300);
 }
 
 .panelHeader {

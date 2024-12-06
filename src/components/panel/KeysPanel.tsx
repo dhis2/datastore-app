@@ -2,7 +2,7 @@ import { useDataQuery } from '@dhis2/app-service-data'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { PanelHeader } from './PanelHeader'
-import SidebarPanel from './SidebarPanel'
+import SidebarPanel from './sidepanel/SidePanel'
 
 interface QueryResults {
     results: []
@@ -22,7 +22,7 @@ const userDataStoreQuery = {
     },
 }
 
-const KeysSidePanel = () => {
+const KeysPanel = () => {
     // const navigate = useNavigate()
     const { store, namespace } = useParams()
     // const [option, setOption] = useState(store || '')
@@ -106,4 +106,4 @@ const KeysSidePanel = () => {
     )
 }
 
-export default KeysSidePanel
+export default KeysPanel

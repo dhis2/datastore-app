@@ -1,8 +1,8 @@
 import { Button } from '@dhis2/ui'
 import { IconAdd16 } from '@dhis2/ui-icons'
 import React from 'react'
-import i18n from '../../locales'
-import classes from './Panel.module.css'
+import i18n from '../../../locales'
+import classes from '../Panel.module.css'
 
 const CreateButton = () => {
     return (

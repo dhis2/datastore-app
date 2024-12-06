@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-06T19:16:44.628Z\n"
-"PO-Revision-Date: 2024-12-06T19:16:44.628Z\n"
+"POT-Creation-Date: 2024-12-06T20:56:19.444Z\n"
+"PO-Revision-Date: 2024-12-06T20:56:19.445Z\n"
 
 msgid "View keys"
 msgstr "View keys"
@@ -89,6 +89,12 @@ msgstr "Namespaces"
 msgid "This will delete all the keys in this namespace"
 msgstr "This will delete all the keys in this namespace"
 
+msgid "Select a namespace and key to edit its values"
+msgstr "Select a namespace and key to edit its values"
+
+msgid "Error"
+msgstr "Error"
+
 msgid "New"
 msgstr "New"
 
@@ -97,12 +103,6 @@ msgstr "DataStore"
 
 msgid "User DataStore"
 msgstr "User DataStore"
-
-msgid "Select a namespace and key to edit its values"
-msgstr "Select a namespace and key to edit its values"
-
-msgid "Error"
-msgstr "Error"
 
 msgid "Search"
 msgstr "Search"

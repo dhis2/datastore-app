@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import NamespacesSidePanel from './NamespacesSidePanel'
-import classes from './Panel.module.css'
+import NamespacesSidePanel from '../NamespacesPanel'
+import classes from '../Panel.module.css'
 
 function ThreePanelLayout() {
     return (

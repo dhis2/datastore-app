@@ -1,9 +1,9 @@
 import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { Link, isRouteErrorResponse, useRouteError } from 'react-router-dom'
-import i18n from '../../locales'
-import classes from './Panel.module.css'
-import { PanelHeader } from './PanelHeader'
+import i18n from '../../../locales'
+import classes from '../Panel.module.css'
+import { PanelHeader } from '../PanelHeader'
 
 interface Error {
     status?: number
@@ -25,13 +25,13 @@ type PassedErrorProps = {
     err?: ErrorResponse
 }
 
-export default function PanelError({ err }: PassedErrorProps) {
+export default function ErrorComponent({ err }: PassedErrorProps) {
     const error: Error = useRouteError()
 
     return (
         <div id="error-page" className={classes.sidebar}>
             <PanelHeader>
-                <span>Error</span>
+                <span>{''}</span>
             </PanelHeader>
             <div className={classes.sidebarContent}>
                 <NoticeBox title={i18n.t('An error occurred')} error>

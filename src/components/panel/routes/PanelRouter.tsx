@@ -1,11 +1,11 @@
 import React from 'react'
 import { Navigate, createHashRouter } from 'react-router-dom'
-import EmptyPanelEditor from './EmptyPanelEditor'
+import PanelEdit from '../EditPanel'
+import PanelEmptyArea from '../empty/EmptyArea'
+import EmptyPanelEditor from '../empty/EmptyEditor'
+import PanelError from '../error/ErrorComponent'
+import PanelErrorPage from '../error/ErrorPanel'
 import Main from './Main'
-import PanelEdit from './PanelEdit'
-import PanelEmptyArea from './PanelEmptyArea'
-import PanelError from './PanelError'
-import PanelErrorPage from './PanelErrorPage'
 import ThreePanelLayout from './ThreePanelLayout'
 
 export const threePanelRouter = createHashRouter([

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import CenteredLoader from '../Loader'
-import classes from './Panel.module.css'
-import { ErrorResponse } from './PanelError'
+import CenteredLoader from '../../Loader'
+import { ErrorResponse } from '../error/ErrorComponent'
+import classes from '../Panel.module.css'
 import SidebarPanelLink from './PanelLink'
 
 type PanelLinksListProps = {

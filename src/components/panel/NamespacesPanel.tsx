@@ -1,9 +1,9 @@
 import { useDataQuery } from '@dhis2/app-service-data'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import DataStoreControl from './DataStoreControl'
 import { PanelHeader } from './PanelHeader'
-import SidebarPanel from './SidebarPanel'
+import DataStoreControl from './sidepanel/DataStoreControl'
+import SidebarPanel from './sidepanel/SidePanel'
 
 interface QueryResults {
     results: []
@@ -21,10 +21,10 @@ const userDataStoreQuery = {
     },
 }
 
-const NamespacesSidePanel = () => {
+const NamespacesPanel = () => {
     const navigate = useNavigate()
     const { store } = useParams()
-    const [option, setOption] = useState(store || '')
+    const [option, setOption] = useState(store || 'dataStore')
 
     const RenderUserDataStorePanel = () => {
         const {
@@ -77,8 +77,10 @@ const NamespacesSidePanel = () => {
         navigate(`/${value}`)
     }
 
+    console.log('store', store)
     useEffect(() => {
         const storeOptions = ['dataStore', 'userDataStore']
+        // console.log("store", store)
         if (!storeOptions.includes(store)) {
             navigate('/dataStore')
         } else {
@@ -100,4 +102,4 @@ const NamespacesSidePanel = () => {
     )
 }
 
-export default NamespacesSidePanel
+export default NamespacesPanel
