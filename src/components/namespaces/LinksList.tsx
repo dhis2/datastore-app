@@ -50,7 +50,7 @@ function LinksList({ data, error, loading, refetchList }) {
 
     useEffect(() => {
         refetchList()
-    }, [store, namespace, key])
+    }, [store, namespace, key, refetchList])
 
     return (
         <div className={classes.sidebarList}>

@@ -49,7 +49,7 @@ const Sidebar = () => {
         } else {
             setOption(store)
         }
-    }, [store])
+    }, [store, navigate])
 
     const handleDataStoreSelect = ({ selected }) => {
         setOption(selected)

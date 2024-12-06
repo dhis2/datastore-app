@@ -49,7 +49,7 @@ const KeysTable = () => {
 
     useEffect(() => {
         refetch({ id: namespace })
-    }, [namespace])
+    }, [namespace, refetch])
 
     const handleDeleteAction = async (key) => {
         await engine.mutate(

@@ -5,14 +5,17 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-05T03:27:06.316Z\n"
-"PO-Revision-Date: 2024-12-05T03:27:06.317Z\n"
+"POT-Creation-Date: 2024-12-06T19:16:44.628Z\n"
+"PO-Revision-Date: 2024-12-06T19:16:44.628Z\n"
 
 msgid "View keys"
 msgstr "View keys"
 
 msgid "Click a namespace to view its keys"
 msgstr "Click a namespace to view its keys"
+
+msgid "An error occurred"
+msgstr "An error occurred"
 
 msgid "Add New Key"
 msgstr "Add New Key"
@@ -56,9 +59,6 @@ msgstr "New key"
 msgid "Delete"
 msgstr "Delete"
 
-msgid "Failed to fetch key values!"
-msgstr "Failed to fetch key values!"
-
 msgid "Key successfully updated"
 msgstr "Key successfully updated"
 
@@ -89,20 +89,20 @@ msgstr "Namespaces"
 msgid "This will delete all the keys in this namespace"
 msgstr "This will delete all the keys in this namespace"
 
+msgid "New"
+msgstr "New"
+
 msgid "DataStore"
 msgstr "DataStore"
 
 msgid "User DataStore"
 msgstr "User DataStore"
 
+msgid "Select a namespace and key to edit its values"
+msgstr "Select a namespace and key to edit its values"
+
+msgid "Error"
+msgstr "Error"
+
 msgid "Search"
 msgstr "Search"
-
-msgid "An error has occurred"
-msgstr "An error has occurred"
-
-msgid "Back"
-msgstr "Back"
-
-msgid "Back to DataStore"
-msgstr "Back to DataStore"
