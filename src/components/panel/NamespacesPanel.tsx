@@ -77,10 +77,8 @@ const NamespacesPanel = () => {
         navigate(`/${value}`)
     }
 
-    console.log('store', store)
     useEffect(() => {
         const storeOptions = ['dataStore', 'userDataStore']
-        // console.log("store", store)
         if (!storeOptions.includes(store)) {
             navigate('/dataStore')
         } else {

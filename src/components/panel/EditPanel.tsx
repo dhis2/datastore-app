@@ -24,24 +24,6 @@ const keyValuesQuery = ({ store }: { store: string }) => ({
     },
 })
 
-// const useKeyValuesQuery = ({ store, key, namespace }) => {
-//     if (key && namespace) {
-//         return useDataQuery(keyValuesQuery({ store }), {
-//             variables: {
-//                 key,
-//                 namespace,
-//             },
-//         })
-//     } else {
-//         return {
-//             data: null,
-//             loading: false,
-//             error: null,
-//             refetch: () => Promise.resolve(),
-//         }
-//     }
-// }
-
 const PanelEdit = () => {
     const { key, namespace, store } = useParams()
     const { showSuccess, showError } = useCustomAlert()
@@ -81,6 +63,20 @@ const PanelEdit = () => {
         setValue(value)
     }
 
+    const handleUpdate = async () => {
+        try {
+            await updateKey({
+                key,
+                namespace,
+                value,
+            })  
+        } catch (error) {
+            const message = i18n.t('There was an error updating the key')
+            showError(message)
+        }
+       
+    }
+
     useEffect(() => {
         setValue(JSON.stringify(data?.results, null, 4))
     }, [data])
@@ -110,13 +106,7 @@ const PanelEdit = () => {
                     <Button
                         aria-label="Save"
                         name="save"
-                        onClick={async () => {
-                            await updateKey({
-                                key,
-                                namespace,
-                                value,
-                            })
-                        }}
+                        onClick={handleUpdate}
                         title="Save"
                         primary
                         loading={loading}
