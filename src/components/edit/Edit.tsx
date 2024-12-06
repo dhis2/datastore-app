@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
+import Error from '../Error'
 import Editor from './Editor'
 
 const modifyKeyMutation = ({ store }) => ({
@@ -29,15 +30,12 @@ const Edit = () => {
     const {
         data,
         loading: queryLoading,
+        error,
         refetch,
     } = useDataQuery(keyValuesQuery({ store }), {
         variables: {
             key,
             namespace,
-        },
-        onError: () => {
-            const message = i18n.t('Failed to fetch key values!')
-            showError(message)
         },
     })
 
@@ -71,6 +69,14 @@ const Edit = () => {
     useEffect(() => {
         refetch({ key, namespace })
     }, [key, namespace, store, refetch])
+
+    if (error) {
+        // throw new Response(error.message, {
+        //     status: error.details.httpStatusCode,
+        //     statusText: error.details.httpStatus,
+        // })
+        return <Error err={error.details} />
+    }
 
     const loadingText = i18n.t('Loading')
 

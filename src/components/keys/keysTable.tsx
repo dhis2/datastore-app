@@ -14,6 +14,7 @@ import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import DeleteButton from '../delete/DeleteButton'
 import DeleteModal from '../delete/DeleteModal'
+import Error from '../Error'
 import CenteredLoader from '../Loader'
 
 interface QueryResults {
@@ -87,7 +88,11 @@ const KeysTable = () => {
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>
+        // throw new Response(error.message, {
+        //     status: error.details.httpStatusCode,
+        //     statusText: error.details.httpStatus,
+        // })
+        return <Error err={error.details} />
     }
 
     return (

@@ -43,7 +43,12 @@ const Sidebar = () => {
     } = useDataQuery<QueryResults>(userDataStoreQuery)
 
     useEffect(() => {
-        setOption(store)
+        const storeOptions = ['dataStore', 'userDataStore']
+        if (!storeOptions.includes(store)) {
+            navigate('/dataStore')
+        } else {
+            setOption(store)
+        }
     }, [store])
 
     const handleDataStoreSelect = ({ selected }) => {
