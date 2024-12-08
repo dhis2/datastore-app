@@ -12,9 +12,7 @@ const KeysPage = () => {
     }
     return (
         <>
-            <Header>
-                <span> Keys - Breadcrumbs go here</span>
-            </Header>
+            <Header />
             <div className={classes.midSection}>
                 <SearchField
                     placeholder={i18n.t('Search keys in this namespace')}
