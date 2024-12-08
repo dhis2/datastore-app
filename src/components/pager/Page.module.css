@@ -27,7 +27,7 @@
 /* keys and namespace views */
 
 .midSection {
-    padding: 0.5em;
+    padding: 0.7em;
     display: grid;
     grid-template-columns: repeat(1fr, 5);
 }
