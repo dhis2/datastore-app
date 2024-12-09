@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import i18n from '../../../locales'
-import CreateButton from '../buttons/CreateButton'
+import CreateAction from '../CreateAction'
 import DataStoreTabBar from '../DataStoreTabBar'
 import classes from '../Page.module.css'
 import SearchField from '../SearchField'
-import ItemsTable from '../Table'
+import ItemsTable from '../table/Table'
 
 const NamespacesPage = () => {
     const data = {
@@ -23,10 +23,7 @@ const NamespacesPage = () => {
             <>
                 <div className={classes.midSection}>
                     <SearchField placeholder={i18n.t('Search namespaces')} />
-                    <CreateButton
-                        label={i18n.t('New Namespace')}
-                        handleClick={() => console.log('create new namespace')}
-                    />
+                    <CreateAction type={'namespace'} />
                 </div>
                 <div>
                     <ItemsTable data={data} label={i18n.t('Namespace')} />
