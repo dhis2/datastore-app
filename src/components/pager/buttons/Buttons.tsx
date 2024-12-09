@@ -15,13 +15,13 @@ export function DeleteButton() {
     )
 }
 
-export function EditButton() {
+export function EditButton({ handleClick }: { handleClick: () => void }) {
     return (
         <Button
             aria-label={i18n.t('Edit')}
             icon={<IconEdit16 />}
             name="create"
-            onClick={() => console.log('edit')}
+            onClick={handleClick}
             title={i18n.t('Edit')}
         />
     )

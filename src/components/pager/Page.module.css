@@ -65,9 +65,13 @@
 
 .editButtons {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
     gap: 10px;
     margin-top: 0.45em;
+}
+
+.editButtons button {
+    width: fit-content;
 }
 
 /* breadcrumbs */
@@ -76,7 +80,7 @@
     list-style-type: none;
     width: fit-content;
     padding: 0;
-    margin: 0.8em;
+    margin: 0.8em 0.3em;
     color: var(--colors-grey900);
 }
 
