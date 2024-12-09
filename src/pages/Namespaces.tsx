@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import i18n from '../../../locales'
-import CreateAction from '../CreateAction'
-import DataStoreTabBar from '../DataStoreTabBar'
+import CreateAction from '../components/actions/CreateAction'
+import DataStoreTabBar from '../components/DataStoreTabBar'
+import SearchField from '../components/SearchField'
+import ItemsTable from '../components/Table'
+import i18n from '../locales'
 import classes from '../Page.module.css'
-import SearchField from '../SearchField'
-import ItemsTable from '../table/Table'
 
 const NamespacesPage = () => {
     const navigate = useNavigate()

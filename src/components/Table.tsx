@@ -7,7 +7,7 @@ import {
     TableHead,
 } from '@dhis2/ui'
 import React from 'react'
-import i18n from '../../../locales'
+import i18n from '../locales'
 import TableActions from './actions/TableActions'
 
 type TableProps = {
@@ -42,9 +42,7 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                                 {item}
                                             </DataTableCell>
                                             <DataTableCell bordered width="12%">
-                                                <TableActions
-                                                    item={item}
-                                                />
+                                                <TableActions item={item} />
                                             </DataTableCell>
                                         </DataTableRow>
                                     )

@@ -1,7 +1,7 @@
 import { NoticeBox, Center } from '@dhis2/ui'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import i18n from '../../../locales'
+import i18n from '../locales'
 
 const ErrorComponent = () => {
     return (

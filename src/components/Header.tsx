@@ -1,6 +1,6 @@
 import React from 'react'
+import classes from '../Page.module.css'
 import Breadcrumbs from './Breadcrumbs'
-import classes from './Page.module.css'
 
 type HeaderProps = {
     children?: React.ReactElement

@@ -1,8 +1,8 @@
 import { Button } from '@dhis2-ui/button'
 import React from 'react'
-import i18n from '../../../locales'
-import Editor from '../Editor'
-import Header from '../Header'
+import Editor from '../components/Editor'
+import Header from '../components/Header'
+import i18n from '../locales'
 import classes from '../Page.module.css'
 
 const EditPage = () => {

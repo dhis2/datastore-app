@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation, useMatches } from 'react-router-dom'
-import classes from './Page.module.css'
+import classes from '../Page.module.css'
 
 function Breadcrumbs() {
     const matches = useMatches()
@@ -9,7 +9,9 @@ function Breadcrumbs() {
     const finalMatch = matches.filter(
         (match) => match.pathname === location.pathname
     )
-    const { params: { store, namespace, key } } = finalMatch[0]
+    const {
+        params: { store, namespace, key },
+    } = finalMatch[0]
 
     const storeLabels = {
         dataStore: 'DataStore',

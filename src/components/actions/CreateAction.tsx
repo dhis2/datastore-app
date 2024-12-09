@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import i18n from '../../locales'
-import CreateButton from './buttons/CreateButton'
+import CreateButton from './CreateButton'
 import CreateModal from './CreateModal'
 
 type CreateActionProps = {

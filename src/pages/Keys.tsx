@@ -1,10 +1,10 @@
 import React from 'react'
-import i18n from '../../../locales'
-import CreateAction from '../CreateAction'
-import Header from '../Header'
+import CreateAction from '../components/actions/CreateAction'
+import Header from '../components/Header'
+import SearchField from '../components/SearchField'
+import ItemsTable from '../components/Table'
+import i18n from '../locales'
 import classes from '../Page.module.css'
-import SearchField from '../SearchField'
-import ItemsTable from '../table/Table'
 
 const KeysPage = () => {
     const data = {

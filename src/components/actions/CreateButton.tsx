@@ -1,7 +1,7 @@
 import { Button, colors } from '@dhis2/ui'
 import { IconAdd24 } from '@dhis2/ui-icons'
 import React from 'react'
-import classes from '../Page.module.css'
+import classes from '../../Page.module.css'
 
 type CreateButtonProps = {
     label: string

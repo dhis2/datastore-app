@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ContextButton, EditButton } from '../../buttons/Buttons'
 import classes from '../../Page.module.css'
+import { ContextButton, EditButton } from './Buttons'
 import DeleteButton from './DeleteButton'
 import DeleteModal from './DeleteModal'
 

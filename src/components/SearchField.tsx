@@ -1,7 +1,7 @@
 import { InputField } from '@dhis2/ui'
 import React from 'react'
-import i18n from '../../locales'
-import classes from './Page.module.css'
+import i18n from '../locales'
+import classes from '../Page.module.css'
 
 const SearchField = ({ placeholder }: { placeholder?: string }) => {
     return (
