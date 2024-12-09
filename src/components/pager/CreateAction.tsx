@@ -3,7 +3,11 @@ import i18n from '../../locales'
 import CreateButton from './buttons/CreateButton'
 import CreateModal from './CreateModal'
 
-function CreateAction({ type }) {
+type CreateActionProps = {
+    type: string
+}
+
+function CreateAction({ type }: CreateActionProps) {
     const [openModal, setOpenModal] = useState(false)
     const [values, setValues] = useState({})
     const label = type === 'key' ? i18n.t('New Key') : i18n.t('New Namespace')

@@ -42,7 +42,9 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                                 {item}
                                             </DataTableCell>
                                             <DataTableCell bordered width="12%">
-                                                <TableActions />
+                                                <TableActions
+                                                    item={item}
+                                                />
                                             </DataTableCell>
                                         </DataTableRow>
                                     )

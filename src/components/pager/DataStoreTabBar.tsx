@@ -4,18 +4,18 @@ import i18n from '../../locales'
 
 type DataStoreProps = {
     activeTab: string
-    setActiveTab: (string) => void
+    switchTab: (string) => void
 }
 
 export default function DataStoreTabBar({
     activeTab,
-    setActiveTab,
+    switchTab,
 }: DataStoreProps) {
     return (
         <TabBar>
             <Tab
                 onClick={() => {
-                    setActiveTab('dataStore')
+                    switchTab('dataStore')
                 }}
                 selected={activeTab === 'dataStore'}
             >
@@ -23,7 +23,7 @@ export default function DataStoreTabBar({
             </Tab>
             <Tab
                 onClick={() => {
-                    setActiveTab('userDataStore')
+                    switchTab('userDataStore')
                 }}
                 selected={activeTab === 'userDataStore'}
             >

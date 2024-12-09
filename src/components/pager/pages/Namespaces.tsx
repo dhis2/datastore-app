@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import i18n from '../../../locales'
 import CreateAction from '../CreateAction'
 import DataStoreTabBar from '../DataStoreTabBar'
@@ -7,6 +8,8 @@ import SearchField from '../SearchField'
 import ItemsTable from '../table/Table'
 
 const NamespacesPage = () => {
+    const navigate = useNavigate()
+
     const data = {
         results: ['tea', 'coffee', 'chocolate', 'rose'],
     }
@@ -16,6 +19,10 @@ const NamespacesPage = () => {
 
     const [activeTab, setActiveTab] = useState('dataStore')
 
+    const handleSwitchTab = (selectedTab) => {
+        setActiveTab(selectedTab)
+        navigate(`/${selectedTab}`)
+    }
     // question: fetch data outside? filter it inside? handling search
 
     const RenderMidSection = ({ data }: { data: { results: string[] } }) => {
@@ -36,7 +43,7 @@ const NamespacesPage = () => {
             <div>
                 <DataStoreTabBar
                     activeTab={activeTab}
-                    setActiveTab={setActiveTab}
+                    switchTab={handleSwitchTab}
                 />
             </div>
             {activeTab === 'dataStore' && <RenderMidSection data={data} />}

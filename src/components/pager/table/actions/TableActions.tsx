@@ -5,7 +5,11 @@ import classes from '../../Page.module.css'
 import DeleteButton from './DeleteButton'
 import DeleteModal from './DeleteModal'
 
-const TableActions = () => {
+type TableActionProps = {
+    item: string
+}
+
+const TableActions = ({ item }: TableActionProps) => {
     const navigate = useNavigate()
     const { namespace } = useParams()
 
@@ -17,9 +21,9 @@ const TableActions = () => {
                 <EditButton
                     handleClick={() => {
                         if (namespace) {
-                            navigate(`key`)
+                            navigate(`${item}`)
                         } else {
-                            navigate(`edit/namespace`)
+                            navigate(`edit/${item}`)
                         }
                     }}
                 />
