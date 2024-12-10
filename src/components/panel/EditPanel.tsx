@@ -69,12 +69,11 @@ const PanelEdit = () => {
                 key,
                 namespace,
                 value,
-            })  
+            })
         } catch (error) {
             const message = i18n.t('There was an error updating the key')
             showError(message)
         }
-       
     }
 
     useEffect(() => {
@@ -96,12 +95,21 @@ const PanelEdit = () => {
             <PanelHeader>
                 <div
                     style={{
+                        width: '100%',
                         display: 'flex',
                         flexDirection: 'row',
+                        alignItems: 'center',
                         justifyContent: 'space-between',
                     }}
                 >
-                    <span>{key && key}</span>
+                    <span
+                        style={{
+                            fontSize: '15px',
+                            fontWeight: '700',
+                        }}
+                    >
+                        {key && key}
+                    </span>
 
                     <Button
                         aria-label="Save"
@@ -109,6 +117,7 @@ const PanelEdit = () => {
                         onClick={handleUpdate}
                         title="Save"
                         primary
+                        small
                         loading={loading}
                     >
                         {i18n.t('Save changes')}

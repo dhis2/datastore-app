@@ -88,7 +88,7 @@ const KeysPanel = () => {
                     <PanelHeader>
                         <>
                             {' '}
-                            <b>{namespace}</b>
+                            <span>{namespace}</span>
                         </>
                     </PanelHeader>
 

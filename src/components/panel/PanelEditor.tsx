@@ -10,6 +10,7 @@ type PanelEditorProps = {
 const PanelEditor = ({ value, handleChange }: PanelEditorProps) => {
     return (
         <CodeMirror
+            theme="dark"
             value={value}
             height="90vh"
             extensions={[json()]}
