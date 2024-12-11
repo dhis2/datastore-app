@@ -10,6 +10,7 @@ type EditorProps = {
 const Editor = ({ value, handleChange }: EditorProps) => {
     return (
         <CodeMirror
+            theme={'dark'}
             value={value}
             height="85vh"
             extensions={[json()]}
