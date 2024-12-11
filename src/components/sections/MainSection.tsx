@@ -67,9 +67,7 @@ const MainSection = ({
                     handleCreate={handleCreate}
                 />
             </div>
-            <div>
-                {data && <ItemsTable data={data} label={tableLabel} />}
-            </div>
+            <div>{data && <ItemsTable data={data} label={tableLabel} />}</div>
         </>
     )
 }

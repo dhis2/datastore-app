@@ -1,5 +1,6 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import MainSection from './MainSection'
 
 interface QueryResults {
@@ -25,6 +26,7 @@ export type FieldValues = {
 
 export const DataStoreNamespaces = () => {
     const engine = useDataEngine()
+    const navigate = useNavigate()
     const [values, setValues] = useState<FieldValues>({})
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         dataStoreNamespacesQuery
@@ -37,7 +39,7 @@ export const DataStoreNamespaces = () => {
             data: () => ({}),
         })
         refetch()
-        // navigate(`${store}/edit/${values?.namespace}/${values?.key}`)
+        navigate(`edit/${values?.namespace}/${values?.key}`)
     }
 
     return (
@@ -55,6 +57,7 @@ export const DataStoreNamespaces = () => {
 
 export const UserDataStoreNamespaces = () => {
     const engine = useDataEngine()
+    const navigate = useNavigate()
     const [values, setValues] = useState<FieldValues>({})
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         userDataStoreNamespacesQuery
@@ -67,7 +70,7 @@ export const UserDataStoreNamespaces = () => {
             data: () => ({}),
         })
         refetch()
-        // navigate(`${store}/edit/${values?.namespace}/${values?.key}`)
+        navigate(`edit/${values?.namespace}/${values?.key}`)
     }
 
     return (
