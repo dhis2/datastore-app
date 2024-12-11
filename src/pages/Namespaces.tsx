@@ -1,22 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import CreateAction from '../components/actions/CreateAction'
 import DataStoreTabBar from '../components/DataStoreTabBar'
-import SearchField from '../components/SearchField'
-import ItemsTable from '../components/Table'
-import i18n from '../locales'
-import classes from '../Page.module.css'
+import {
+    DataStoreNamespaces,
+    UserDataStoreNamespaces,
+} from '../components/sections/NamespaceSections'
 
 const NamespacesPage = () => {
     const navigate = useNavigate()
     const { store } = useParams()
-
-    const data = {
-        results: ['tea', 'coffee', 'chocolate', 'rose'],
-    }
-    const userData = {
-        results: ['milk', 'cheese', 'ghee', 'cream'],
-    }
 
     const [activeTab, setActiveTab] = useState(store || 'dataStore')
 
@@ -24,21 +16,16 @@ const NamespacesPage = () => {
         setActiveTab(selectedTab)
         navigate(`/${selectedTab}`)
     }
-    // question: fetch data outside? filter it inside? handling search
 
-    const RenderMidSection = ({ data }: { data: { results: string[] } }) => {
-        return (
-            <>
-                <div className={classes.midSection}>
-                    <SearchField placeholder={i18n.t('Search namespaces')} />
-                    <CreateAction type={'namespace'} />
-                </div>
-                <div>
-                    <ItemsTable data={data} label={i18n.t('Namespace')} />
-                </div>
-            </>
-        )
-    }
+    useEffect(() => {
+        const storeOptions = ['dataStore', 'userDataStore']
+        if (!storeOptions.includes(store)) {
+            navigate('/dataStore')
+        } else {
+            setActiveTab(store)
+        }
+    }, [store])
+
     return (
         <>
             <div>
@@ -47,10 +34,8 @@ const NamespacesPage = () => {
                     switchTab={handleSwitchTab}
                 />
             </div>
-            {activeTab === 'dataStore' && <RenderMidSection data={data} />}
-            {activeTab === 'userDataStore' && (
-                <RenderMidSection data={userData} />
-            )}
+            {activeTab === 'dataStore' && <DataStoreNamespaces />}
+            {activeTab === 'userDataStore' && <UserDataStoreNamespaces />}
         </>
     )
 }
