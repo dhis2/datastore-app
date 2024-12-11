@@ -1,13 +1,9 @@
-import { Button } from '@dhis2/ui'
-import {
-    IconFile16,
-    IconMore16,
-    IconFolder16,
-    IconFolderOpen16,
-} from '@dhis2/ui-icons'
-import React from 'react'
+import { IconFile16, IconFolder16, IconFolderOpen16 } from '@dhis2/ui-icons'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useSidePanelContext } from '../../context/SidePanelContext'
 import classes from '../Panel.module.css'
+import ContextMenuButton from './ContextButton'
 
 type SidePanelLinkProps = {
     label: string
@@ -16,6 +12,13 @@ type SidePanelLinkProps = {
 }
 
 const SidePanelLink = ({ to, label, type }: SidePanelLinkProps) => {
+    const { setSelectedLinkItem } = useSidePanelContext()
+    const [openContextMenu, setOpenContextMenu] = useState(false)
+
+    const handleContextMenu = () => {
+        setSelectedLinkItem(label)
+        setOpenContextMenu((prev) => !prev)
+    }
     const renderIcon = ({ isActive }) =>
         type === 'namespace' ? (
             isActive ? (
@@ -38,16 +41,14 @@ const SidePanelLink = ({ to, label, type }: SidePanelLinkProps) => {
                     <>
                         {renderIcon({ isActive })}
                         <span>{label}</span>
-                        <Button
-                            aria-label="More"
-                            icon={<IconMore16 />}
-                            name="more"
-                            // onClick={}
-                            title="More"
-                        />
                     </>
                 )}
             </NavLink>
+            <ContextMenuButton
+                handleContextMenu={handleContextMenu}
+                openContextMenu={openContextMenu}
+                setOpenContextMenu={setOpenContextMenu}
+            />
         </li>
     )
 }

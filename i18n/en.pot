@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-11T00:48:22.223Z\n"
-"PO-Revision-Date: 2024-12-11T00:48:22.223Z\n"
+"POT-Creation-Date: 2024-12-20T17:43:52.507Z\n"
+"PO-Revision-Date: 2024-12-20T17:43:52.508Z\n"
 
 msgid "View keys"
 msgstr "View keys"
@@ -23,6 +23,18 @@ msgstr "An error occurred"
 msgid "Error"
 msgstr "Error"
 
+msgid "Add New Namespace"
+msgstr "Add New Namespace"
+
+msgid "Add New Key"
+msgstr "Add New Key"
+
+msgid "Add Namespace"
+msgstr "Add Namespace"
+
+msgid "Add Key"
+msgstr "Add Key"
+
 msgid "Namespace"
 msgstr "Namespace"
 
@@ -31,6 +43,18 @@ msgstr "Key"
 
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Delete Namespace"
+msgstr "Delete Namespace"
+
+msgid "Delete Key"
+msgstr "Delete Key"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
+
+msgid "Delete"
+msgstr "Delete"
 
 msgid "Key successfully updated"
 msgstr "Key successfully updated"
@@ -43,6 +67,15 @@ msgstr "Loading"
 
 msgid "Save changes"
 msgstr "Save changes"
+
+msgid "delete"
+msgstr "delete"
+
+msgid "New namespace"
+msgstr "New namespace"
+
+msgid "New key"
+msgstr "New key"
 
 msgid "create"
 msgstr "create"
@@ -59,20 +92,5 @@ msgstr "Search"
 msgid "Key created successfully"
 msgstr "Key created successfully"
 
-msgid "Add New Namespace"
-msgstr "Add New Namespace"
-
-msgid "Add New Key"
-msgstr "Add New Key"
-
-msgid "Add Namespace"
-msgstr "Add Namespace"
-
-msgid "Add Key"
-msgstr "Add Key"
-
-msgid "New namespace"
-msgstr "New namespace"
-
-msgid "New key"
-msgstr "New key"
+msgid "There was an error creating the key"
+msgstr "There was an error creating the key"

@@ -75,6 +75,7 @@ const EditPanel = () => {
             })
         } catch (error) {
             // setUpdateError(error.message)
+            console.error(error.message)
             const message = i18n.t('There was an error updating the key')
             showError(message)
         }

@@ -8,6 +8,7 @@ import {
     InputField,
 } from '@dhis2/ui'
 import React from 'react'
+import { useSidePanelContext } from '../../context/SidePanelContext'
 import i18n from '../../locales'
 import { CreateFieldValues } from '../sidepanel/SidePanel'
 
@@ -16,9 +17,6 @@ type CreateModalProps = {
     values: CreateFieldValues
     setValues: (values) => void
     closeModal: () => void
-    title: string
-    type: string
-    buttonLabel: string
 }
 
 const CreateModal = ({
@@ -26,12 +24,18 @@ const CreateModal = ({
     values,
     setValues,
     closeModal,
-    title,
-    type,
-    buttonLabel,
 }: CreateModalProps) => {
+    const { panelType: type } = useSidePanelContext()
+
+    const title =
+        type === 'namespace'
+            ? i18n.t('Add New Namespace')
+            : i18n.t('Add New Key')
+    const buttonLabel =
+        type === 'namespace' ? i18n.t('Add Namespace') : i18n.t('Add Key')
+
     return (
-        <Modal>
+        <Modal position="middle">
             <ModalTitle>{title}</ModalTitle>
             <ModalContent>
                 {type === 'namespace' && (

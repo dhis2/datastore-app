@@ -1,14 +1,16 @@
-import { useDataEngine } from '@dhis2/app-service-data'
+import { useDataEngine } from '@dhis2/app-runtime'
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
+import { SidePanelContextProvider } from '../../context/SidePanelContext'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import { ErrorResponse } from '../error/ErrorComponent'
 import CreateModal from '../modals/CreateModal'
 import classes from '../Panel.module.css'
 import CreateButton from './CreateButton'
+import CenteredLoader from './Loader'
 import PanelLinksList from './PanelLinksList'
 import PanelSearchField from './SearchField'
-import useCustomAlert from '../../hooks/useCustomAlert'
 
 type SidePanelProps = {
     data: { results: [] }
@@ -33,7 +35,7 @@ const SidePanel = ({
     const engine = useDataEngine()
     const navigate = useNavigate()
     const { store, namespace: currentNamespace } = useParams()
-    const [openModal, setOpenModal] = useState(false)
+    const [openCreateModal, setOpenCreateModal] = useState(false)
     const [values, setValues] = useState({})
 
     const { showSuccess, showError } = useCustomAlert()
@@ -73,47 +75,36 @@ const SidePanel = ({
                 },
             }
         )
-        setOpenModal(false)
+        setOpenCreateModal(false)
     }
 
-    const derivedModalProps = {
-        title:
-            type === 'namespace'
-                ? i18n.t('Add New Namespace')
-                : i18n.t('Add New Key'),
-        buttonLabel:
-            type === 'namespace' ? i18n.t('Add Namespace') : i18n.t('Add Key'),
+    if (error) {
+        throw new Response('', {
+            status: error?.details.httpStatusCode,
+            statusText: error?.details.status || error.details.message,
+        })
     }
-    const createButtonLabel =
-        type === 'namespace' ? i18n.t('New namespace') : i18n.t('New key')
 
     return (
-        <>
+        <SidePanelContextProvider
+            panelType={type}
+            totalItems={data?.results?.length}
+        >
             <div className={classes.sidebarContent}>
                 <PanelSearchField />
-                <CreateButton
-                    label={createButtonLabel}
-                    handleClick={() => setOpenModal(true)}
-                />
-                <PanelLinksList
-                    data={data}
-                    error={error}
-                    loading={loading}
-                    refetchList={refetchList}
-                    type={type}
-                />
+                <CreateButton handleClick={() => setOpenCreateModal(true)} />
+                {loading && <CenteredLoader />}
+                <PanelLinksList data={data} refetchList={refetchList} />
             </div>
-            {openModal && (
+            {openCreateModal && (
                 <CreateModal
                     createFn={handleCreate}
                     values={values}
                     setValues={setValues}
-                    closeModal={() => setOpenModal(false)}
-                    type={type}
-                    {...derivedModalProps}
+                    closeModal={() => setOpenCreateModal(false)}
                 />
             )}
-        </>
+        </SidePanelContextProvider>
     )
 }
 

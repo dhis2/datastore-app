@@ -1,49 +1,68 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { ErrorResponse } from '../error/ErrorComponent'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useSidePanelContext } from '../../context/SidePanelContext'
+import {
+    useDeleteKeyMutation,
+    useDeleteNamespaceMutation,
+} from '../../hooks/useDeleteMutation'
+import DeleteModal from '../modals/DeleteModal'
 import classes from '../Panel.module.css'
-import CenteredLoader from './Loader'
 import SidePanelLink from './PanelLink'
 
 type PanelLinksListProps = {
     data: { results: [] }
-    error: { details: ErrorResponse }
-    loading: boolean
     refetchList: () => void
-    type: string
 }
 
-function PanelLinksList({
-    data,
-    error,
-    loading,
-    refetchList,
-    type,
-}: PanelLinksListProps) {
-    const { store, namespace, key } = useParams()
-    // const [selectedLink, setSelectedLink] = useState('')
+function PanelLinksList({ data, refetchList }: PanelLinksListProps) {
+    const { store, namespace: currentNamespace, key } = useParams()
+    const navigate = useNavigate()
+    const {
+        panelType: type,
+        openDeleteModal,
+        selectedLinkItem,
+    } = useSidePanelContext()
 
     useEffect(() => {
         refetchList()
-    }, [store, namespace, key, refetchList])
+    }, [store, currentNamespace, key, refetchList])
 
-    if (error) {
-        throw new Response('', {
-            status: error?.details.httpStatusCode,
-            statusText: error?.details.status || error.details.message,
-        })
-    }
+    const handleDeleteAction =
+        type === 'namespace'
+            ? useDeleteNamespaceMutation({
+                  namespace: selectedLinkItem,
+                  store,
+                  refetch: () => {
+                      refetchList()
+                      navigate(`${store}`)
+                  },
+              })
+            : type === 'keys'
+            ? data?.results?.length < 2
+                ? useDeleteNamespaceMutation({
+                      namespace: currentNamespace,
+                      store,
+                      refetch: () => {
+                          navigate(`/${store}`)
+                      },
+                  })
+                : useDeleteKeyMutation({
+                      namespace: currentNamespace,
+                      key: selectedLinkItem,
+                      store,
+                      refetch: refetchList,
+                  })
+            : null
 
     return (
         <div className={classes.sidebarList}>
-            {loading && <CenteredLoader />}
             {data && (
                 <ul>
                     {data.results.map((value: string, index) => {
                         const path =
                             type === 'namespace'
                                 ? `/${store}/edit/${value}`
-                                : `/${store}/edit/${namespace}/${value}`
+                                : `/${store}/edit/${currentNamespace}/${value}`
                         return (
                             <SidePanelLink
                                 key={`${index}-${value}`}
@@ -54,6 +73,9 @@ function PanelLinksList({
                         )
                     })}
                 </ul>
+            )}
+            {openDeleteModal && (
+                <DeleteModal handleDeleteAction={handleDeleteAction} />
             )}
         </div>
     )
