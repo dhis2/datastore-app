@@ -7,15 +7,27 @@ import CreateAction from '../actions/CreateAction'
 import CenteredLoader from '../CenteredLoader'
 import SearchField from '../SearchField'
 import ItemsTable from '../Table'
+import { FieldValues } from './NamespaceSections'
 
 type MainSectionProps = {
     data: { results: string[] }
-    type: string
+    sectionType: string
     loading: boolean
     error: object
+    handleCreate?: () => void
+    values: FieldValues
+    setValues: React.Dispatch<React.SetStateAction<FieldValues>>
 }
 
-const MainSection = ({ error, data, loading, type }: MainSectionProps) => {
+const MainSection = ({
+    error,
+    data,
+    loading,
+    sectionType: type,
+    handleCreate,
+    values,
+    setValues,
+}: MainSectionProps) => {
     const placeholder =
         type === 'namespace'
             ? i18n.t('Search namespaces')
@@ -48,7 +60,12 @@ const MainSection = ({ error, data, loading, type }: MainSectionProps) => {
         <>
             <div className={classes.midSection}>
                 <SearchField placeholder={placeholder} />
-                <CreateAction type={type} />
+                <CreateAction
+                    values={values}
+                    setValues={setValues}
+                    type={type}
+                    handleCreate={handleCreate}
+                />
             </div>
             <div>
                 <ItemsTable data={data} label={tableLabel} />
