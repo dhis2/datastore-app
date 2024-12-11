@@ -68,7 +68,7 @@ const MainSection = ({
                 />
             </div>
             <div>
-                <ItemsTable data={data} label={tableLabel} />
+                {data && <ItemsTable data={data} label={tableLabel} />}
             </div>
         </>
     )
