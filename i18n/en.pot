@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-06T20:56:19.444Z\n"
-"PO-Revision-Date: 2024-12-06T20:56:19.445Z\n"
+"POT-Creation-Date: 2024-12-11T00:48:22.223Z\n"
+"PO-Revision-Date: 2024-12-11T00:48:22.223Z\n"
 
 msgid "View keys"
 msgstr "View keys"
@@ -14,14 +14,14 @@ msgstr "View keys"
 msgid "Click a namespace to view its keys"
 msgstr "Click a namespace to view its keys"
 
+msgid "Select a namespace and key to edit its values"
+msgstr "Select a namespace and key to edit its values"
+
 msgid "An error occurred"
 msgstr "An error occurred"
 
-msgid "Add New Key"
-msgstr "Add New Key"
-
-msgid "Add New Namespace"
-msgstr "Add New Namespace"
+msgid "Error"
+msgstr "Error"
 
 msgid "Namespace"
 msgstr "Namespace"
@@ -31,33 +31,6 @@ msgstr "Key"
 
 msgid "Cancel"
 msgstr "Cancel"
-
-msgid "Add Key"
-msgstr "Add Key"
-
-msgid "Add Namespace"
-msgstr "Add Namespace"
-
-msgid "Key created successfully"
-msgstr "Key created successfully"
-
-msgid "There was an error creating the key"
-msgstr "There was an error creating the key"
-
-msgid "Add new namespace"
-msgstr "Add new namespace"
-
-msgid "New namespace"
-msgstr "New namespace"
-
-msgid "Add new key"
-msgstr "Add new key"
-
-msgid "New key"
-msgstr "New key"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Key successfully updated"
 msgstr "Key successfully updated"
@@ -71,38 +44,35 @@ msgstr "Loading"
 msgid "Save changes"
 msgstr "Save changes"
 
-msgid "Key deleted successfully"
-msgstr "Key deleted successfully"
-
-msgid "There was an error deleting the key"
-msgstr "There was an error deleting the key"
-
-msgid "There was an error while deleting the key"
-msgstr "There was an error while deleting the key"
-
-msgid "Error fetching namespaces"
-msgstr "Error fetching namespaces"
-
-msgid "Namespaces"
-msgstr "Namespaces"
-
-msgid "This will delete all the keys in this namespace"
-msgstr "This will delete all the keys in this namespace"
-
-msgid "Select a namespace and key to edit its values"
-msgstr "Select a namespace and key to edit its values"
-
-msgid "Error"
-msgstr "Error"
-
-msgid "New"
-msgstr "New"
+msgid "create"
+msgstr "create"
 
 msgid "DataStore"
 msgstr "DataStore"
 
-msgid "User DataStore"
-msgstr "User DataStore"
+msgid "UserDataStore"
+msgstr "UserDataStore"
 
 msgid "Search"
 msgstr "Search"
+
+msgid "Key created successfully"
+msgstr "Key created successfully"
+
+msgid "Add New Namespace"
+msgstr "Add New Namespace"
+
+msgid "Add New Key"
+msgstr "Add New Key"
+
+msgid "Add Namespace"
+msgstr "Add Namespace"
+
+msgid "Add Key"
+msgstr "Add Key"
+
+msgid "New namespace"
+msgstr "New namespace"
+
+msgid "New key"
+msgstr "New key"
