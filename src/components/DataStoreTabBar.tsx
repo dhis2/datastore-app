@@ -28,7 +28,7 @@ export default function DataStoreTabBar({
                 selected={activeTab === 'userDataStore'}
             >
                 {' '}
-                {i18n.t('User DataStore')}
+                {i18n.t('UserDataStore')}
             </Tab>
         </TabBar>
     )

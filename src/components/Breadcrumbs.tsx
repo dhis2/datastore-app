@@ -15,7 +15,7 @@ function Breadcrumbs() {
 
     const storeLabels = {
         dataStore: 'DataStore',
-        userDataStore: 'User DataStore',
+        userDataStore: 'UserDataStore',
     }
 
     return (

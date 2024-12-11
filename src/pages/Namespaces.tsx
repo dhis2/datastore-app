@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import CreateAction from '../components/actions/CreateAction'
 import DataStoreTabBar from '../components/DataStoreTabBar'
 import SearchField from '../components/SearchField'
@@ -9,6 +9,7 @@ import classes from '../Page.module.css'
 
 const NamespacesPage = () => {
     const navigate = useNavigate()
+    const { store } = useParams()
 
     const data = {
         results: ['tea', 'coffee', 'chocolate', 'rose'],
@@ -17,7 +18,7 @@ const NamespacesPage = () => {
         results: ['milk', 'cheese', 'ghee', 'cream'],
     }
 
-    const [activeTab, setActiveTab] = useState('dataStore')
+    const [activeTab, setActiveTab] = useState(store || 'dataStore')
 
     const handleSwitchTab = (selectedTab) => {
         setActiveTab(selectedTab)
