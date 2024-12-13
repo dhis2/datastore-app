@@ -26,7 +26,7 @@ const modifyDSKeyMutation = {
     resource: 'dataStore',
     id: ({ key, namespace }: { key: string; namespace: string }) =>
         `${namespace}/${key}`,
-    data: ({ value }) => JSON.parse(value),
+    data: ({ body }) => body,
 }
 
 const modifyUserDSKeyMutation = {
@@ -34,7 +34,7 @@ const modifyUserDSKeyMutation = {
     resource: 'userDataStore',
     id: ({ key, namespace }: { key: string; namespace: string }) =>
         `${namespace}/${key}`,
-    data: ({ value }) => JSON.parse(value),
+    data: ({ body }) => body,
 }
 
 const DataStoreEditSection = () => {
@@ -50,8 +50,6 @@ const DataStoreEditSection = () => {
             namespace,
         },
     })
-
-    console.log(data, 'data')
 
     const { showError, showSuccess } = useCustomAlert()
 
