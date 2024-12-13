@@ -1,44 +1,85 @@
-import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import i18n from '../../locales'
 import classes from '../../Page.module.css'
 import { ContextButton, EditButton } from './Buttons'
 import DeleteButton from './DeleteButton'
 import DeleteModal from './DeleteModal'
 
 type TableActionProps = {
-    item: string
+    selectedItem: string
+    rowsLength: number
+    handleEditAction: (string) => void
+    handleDeleteAction: (string) => void
+    openDeleteModal: boolean
+    setOpenDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const TableActions = ({ item }: TableActionProps) => {
-    const navigate = useNavigate()
-    const { namespace } = useParams()
+const TableActions = ({
+    selectedItem,
+    rowsLength,
+    handleDeleteAction,
+    handleEditAction,
+    openDeleteModal,
+    setOpenDeleteModal,
+}: TableActionProps) => {
+    const { store, namespace: currentNamespace } = useParams()
 
-    const [openModal, setOpenModal] = useState(false)
+    const isKeyPage = Boolean(store && currentNamespace)
+    const isNamespacePage = Boolean(store && !currentNamespace)
+
+    const renderModalContent = () => {
+        return (
+            <>
+                {isNamespacePage && (
+                    <>
+                        <p>
+                            {i18n.t(
+                                `Are you sure you want to delete '${selectedItem}'?`
+                            )}
+                        </p>
+                        <p>
+                            {i18n.t(
+                                `This will delete all the keys in this namespace`
+                            )}
+                        </p>
+                    </>
+                )}
+                {isKeyPage && (
+                    <>
+                        {i18n.t(
+                            `Are you sure you want to delete '${selectedItem}' in ${currentNamespace}?`
+                        )}
+                        {rowsLength < 2 && (
+                            <p>
+                                {i18n.t(
+                                    `This will also delete the namespace '${currentNamespace}'`
+                                )}
+                            </p>
+                        )}
+                    </>
+                )}
+            </>
+        )
+    }
 
     return (
         <>
             <div className={classes.actionButtons}>
                 <EditButton
-                    handleClick={() => {
-                        if (namespace) {
-                            navigate(`${item}`)
-                        } else {
-                            navigate(`edit/${item}`)
-                        }
-                    }}
+                    handleClick={() => handleEditAction({ selectedItem })}
                 />
-                <DeleteButton openModal={() => setOpenModal(true)} />
+                <DeleteButton openModal={() => setOpenDeleteModal(true)} />
                 <ContextButton />
             </div>
-            {openModal && (
+            {openDeleteModal && (
                 <DeleteModal
-                    closeModal={() => setOpenModal(false)}
+                    closeModal={() => setOpenDeleteModal(false)}
                     deleteFn={() => {
-                        console.log('immersion')
-                        setOpenModal(false)
+                        handleDeleteAction({ selectedItem })
                     }}
                 >
-                    <p>Delete modal fields</p>
+                    {renderModalContent()}
                 </DeleteModal>
             )}
         </>

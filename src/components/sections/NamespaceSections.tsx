@@ -39,7 +39,7 @@ export const DataStoreNamespaces = () => {
             data: () => ({}),
         })
         refetch()
-        navigate(`edit/${values?.namespace}/${values?.key}`)
+        navigate(`edit/${values?.namespace}`)
     }
 
     return (
@@ -51,6 +51,7 @@ export const DataStoreNamespaces = () => {
             handleCreate={handleCreate}
             values={values}
             setValues={setValues}
+            handleRefetch={() => refetch()}
         />
     )
 }
@@ -70,7 +71,7 @@ export const UserDataStoreNamespaces = () => {
             data: () => ({}),
         })
         refetch()
-        navigate(`edit/${values?.namespace}/${values?.key}`)
+        navigate(`edit/${values?.namespace}`)
     }
 
     return (
@@ -82,6 +83,7 @@ export const UserDataStoreNamespaces = () => {
             handleCreate={handleCreate}
             values={values}
             setValues={setValues}
+            handleRefetch={() => refetch()}
         />
     )
 }

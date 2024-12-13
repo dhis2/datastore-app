@@ -20,7 +20,7 @@ export function ContextButton() {
         <Button
             aria-label={i18n.t('More')}
             icon={<IconMore16 />}
-            name="create"
+            name="more"
             onClick={() => console.log('more')}
             title={i18n.t('Delete')}
         />

@@ -17,6 +17,7 @@ type MainSectionProps = {
     handleCreate?: () => void
     values: FieldValues
     setValues: React.Dispatch<React.SetStateAction<FieldValues>>
+    handleRefetch: () => void
 }
 
 const MainSection = ({
@@ -27,14 +28,8 @@ const MainSection = ({
     handleCreate,
     values,
     setValues,
+    handleRefetch,
 }: MainSectionProps) => {
-    const placeholder =
-        type === 'namespace'
-            ? i18n.t('Search namespaces')
-            : i18n.t('Search keys in this namespace')
-    const tableLabel =
-        type === 'namespace' ? i18n.t('Namespace') : i18n.t('Key Name')
-
     if (error) {
         return (
             <div
@@ -59,7 +54,13 @@ const MainSection = ({
     return (
         <>
             <div className={classes.midSection}>
-                <SearchField placeholder={placeholder} />
+                <SearchField
+                    placeholder={
+                        type === 'namespace'
+                            ? i18n.t('Search namespaces')
+                            : i18n.t('Search keys in this namespace')
+                    }
+                />
                 <CreateAction
                     values={values}
                     setValues={setValues}
@@ -67,7 +68,19 @@ const MainSection = ({
                     handleCreate={handleCreate}
                 />
             </div>
-            <div>{data && <ItemsTable data={data} label={tableLabel} />}</div>
+            <div>
+                {data && (
+                    <ItemsTable
+                        data={data}
+                        label={
+                            type === 'namespace'
+                                ? i18n.t('Namespace')
+                                : i18n.t('Key Name')
+                        }
+                        refetchList={handleRefetch}
+                    />
+                )}
+            </div>
         </>
     )
 }
