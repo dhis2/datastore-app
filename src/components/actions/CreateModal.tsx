@@ -5,10 +5,16 @@ import {
     ModalActions,
     Button,
     ButtonStrip,
-    InputField,
+    ReactFinalForm,
+    InputFieldFF,
+    hasValue,
+    composeValidators,
+    alphaNumeric,
 } from '@dhis2/ui'
 import React from 'react'
 import i18n from '../../locales'
+
+const { Form, Field } = ReactFinalForm
 
 type FieldValues = {
     key?: string
@@ -33,51 +39,62 @@ const CreateModal = ({
     const addNewKey = type === 'key'
     const addNewNamespace = type === 'namespace'
 
+    const onSubmit = (values) => {
+        console.log(values)
+    }
+
     return (
         <Modal>
-            <ModalTitle>
-                {addNewKey && i18n.t('Add New Key')}
-                {addNewNamespace && i18n.t('Add New Namespace')}
-            </ModalTitle>
-            <ModalContent>
-                {addNewNamespace && (
-                    <InputField
-                        label={i18n.t('Namespace')}
-                        required
-                        initialFocus
-                        value={values?.namespace}
-                        onChange={({ value }) => {
-                            setValues({
-                                ...values,
-                                ['namespace']: value,
-                            })
-                        }}
-                    />
+            <Form onSubmit={onSubmit}>
+                {({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit}>
+                        <ModalTitle>
+                            {addNewKey && i18n.t('Add New Key')}
+                            {addNewNamespace && i18n.t('Add New Namespace')}
+                        </ModalTitle>
+                        <ModalContent>
+                            {addNewNamespace && (
+                                <Field
+                                    name="namespace"
+                                    component={InputFieldFF}
+                                    required
+                                    label="Namespace"
+                                    validate={composeValidators(
+                                        hasValue,
+                                        alphaNumeric
+                                    )}
+                                    initialFocus={addNewNamespace}
+                                />
+                            )}
+                            <Field
+                                name="key"
+                                component={InputFieldFF}
+                                required
+                                label="key"
+                                validate={composeValidators(
+                                    hasValue,
+                                    alphaNumeric
+                                )}
+                                initialFocus={addNewKey}
+                            />
+                        </ModalContent>
+                        <ModalActions>
+                            <ButtonStrip end>
+                                <Button secondary onClick={closeModal}>
+                                    {i18n.t('Cancel')}
+                                </Button>
+                                <Button
+                                    primary
+                                    onClick={() => createFn(values)}
+                                >
+                                    {addNewKey && i18n.t('Add Key')}
+                                    {addNewNamespace && i18n.t('Add Namespace')}
+                                </Button>
+                            </ButtonStrip>
+                        </ModalActions>
+                    </form>
                 )}
-                <InputField
-                    label={i18n.t('Key')}
-                    required
-                    initialFocus={addNewKey}
-                    value={values?.key}
-                    onChange={({ value }) => {
-                        setValues({
-                            ...values,
-                            ['key']: value,
-                        })
-                    }}
-                />
-            </ModalContent>
-            <ModalActions>
-                <ButtonStrip end>
-                    <Button secondary onClick={closeModal}>
-                        {i18n.t('Cancel')}
-                    </Button>
-                    <Button primary onClick={() => createFn(values)}>
-                        {addNewKey && i18n.t('Add Key')}
-                        {addNewNamespace && i18n.t('Add Namespace')}
-                    </Button>
-                </ButtonStrip>
-            </ModalActions>
+            </Form>
         </Modal>
     )
 }

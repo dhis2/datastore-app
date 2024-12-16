@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-13T09:39:44.127Z\n"
-"PO-Revision-Date: 2024-12-13T09:39:44.128Z\n"
+"POT-Creation-Date: 2024-12-16T12:36:28.842Z\n"
+"PO-Revision-Date: 2024-12-16T12:36:28.843Z\n"
 
 msgid "DataStore"
 msgstr "DataStore"
@@ -16,6 +16,12 @@ msgstr "UserDataStore"
 
 msgid "Search"
 msgstr "Search"
+
+msgid "Key deleted successfully"
+msgstr "Key deleted successfully"
+
+msgid "There was an error deleting the key"
+msgstr "There was an error deleting the key"
 
 msgid "Actions"
 msgstr "Actions"
@@ -41,12 +47,6 @@ msgstr "Add New Key"
 msgid "Add New Namespace"
 msgstr "Add New Namespace"
 
-msgid "Namespace"
-msgstr "Namespace"
-
-msgid "Key"
-msgstr "Key"
-
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -55,6 +55,21 @@ msgstr "Add Key"
 
 msgid "Add Namespace"
 msgstr "Add Namespace"
+
+msgid "Namespace"
+msgstr "Namespace"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Delete Key"
+msgstr "Delete Key"
+
+msgid "Delete Namespace"
+msgstr "Delete Namespace"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
 
 msgid "Invalid JSON value"
 msgstr "Invalid JSON value"
@@ -71,6 +86,12 @@ msgstr "Loading"
 msgid "Error getting this information"
 msgstr "Error getting this information"
 
+msgid "An error has occurred"
+msgstr "An error has occurred"
+
+msgid "Back to datastore"
+msgstr "Back to datastore"
+
 msgid "Search namespaces"
 msgstr "Search namespaces"
 
@@ -79,12 +100,6 @@ msgstr "Search keys in this namespace"
 
 msgid "Key Name"
 msgstr "Key Name"
-
-msgid "An error has occurred"
-msgstr "An error has occurred"
-
-msgid "Back to datastore"
-msgstr "Back to datastore"
 
 msgid "Key updated successfully"
 msgstr "Key updated successfully"
