@@ -4,12 +4,11 @@ import { useParams } from 'react-router-dom'
 import Editor from './Editor'
 
 const EditorSection = ({ query }) => {
-    const { key, namespace, store } = useParams()
+    const { key, namespace } = useParams()
     const { show: showError } = useAlert('An error fetching this data', {
         critical: true,
     })
-
-    const { data, loading, refetch } = useDataQuery(query, {
+    const { data, loading } = useDataQuery(query, {
         variables: {
             key,
             namespace,
@@ -24,13 +23,6 @@ const EditorSection = ({ query }) => {
     useEffect(() => {
         setValue(JSON.stringify(data?.results, null, 4))
     }, [data])
-
-    useEffect(() => {
-        refetch({
-            key,
-            namespace,
-        })
-    }, [store, namespace, key])
 
     return (
         <div>
