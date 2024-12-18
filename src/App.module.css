@@ -1,0 +1,159 @@
+/* layout */
+.page {
+    height: 100%;
+    background-color: var(--colors-grey300);
+    box-sizing: border-box;
+    overflow-y: hidden;
+}
+
+/* first page */
+
+.firstPage {
+    margin: 0 auto;
+    padding: 0;
+    width: 70vw;
+}
+
+.firstPageContainer {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    font-size: 1rem;
+    background-color: white;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+}
+
+/* second page */
+
+.secondPage {
+    margin: 0 auto;
+    width: 98vw;
+    padding: 0;
+}
+
+.secondPageContainer {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 100%;
+    font-size: 1rem;
+    background-color: white;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+}
+
+/* page header */
+.pageHeader {
+    height: 40px;
+    display: flex;
+}
+
+.firstPageHeader {
+    font-size: 20px;
+    font-weight: 400;
+    align-self: center;
+}
+
+.secondPageHeader {
+    width: fit-content;
+    color: var(--colors-grey700);
+    text-decoration: none;
+    align-self: center;
+    font-size: 14px;
+}
+
+.secondPageHeader span {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5px;
+}
+
+/* panel header */
+
+.panelHeader {
+    height: 50px;
+    padding: 0 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--colors-grey300);
+}
+
+.keysPanelHeader {
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--colors-grey800);
+}
+
+.keysPanelMidSection {
+    padding: 10px;
+}
+
+.emptyEditorPanelHeader {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--colors-grey600);
+}
+
+.editorPanelHeader {
+    font-size: 16px;
+    color: var(--colors-grey800);
+    font-weight: 500;
+}
+
+/* namespace view */
+
+.midSection {
+    padding: 0.7em;
+    display: grid;
+    grid-template-columns: repeat(1fr, 4);
+}
+
+.search {
+    grid-column: 1 / 2;
+}
+
+.createButton {
+    grid-column: 5;
+    color: var(--colors-grey600);
+}
+
+.createButton button {
+    width: fit-content;
+    float: right;
+}
+
+/* table */
+.columnHeader {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.actionButtons {
+    padding: 0;
+    margin: 0;
+}
+
+.actionButtons button {
+    height: fit-content;
+    border: none;
+    margin: 0 0.3em;
+    background-color: transparent;
+}
+
+.actionButtons button:active button:focus-visible {
+    background-color: transparent;
+}
+
+/* edit page */
+
+.editButtons {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+}
+
+.editButtons button {
+    width: fit-content;
+}
