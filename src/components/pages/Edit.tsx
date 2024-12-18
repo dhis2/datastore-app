@@ -3,8 +3,8 @@ import React from 'react'
 import { Link, Outlet, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
-import KeysPanel from '../panels/KeysPanel'
 import PageHeader from '../header/PageHeader'
+import KeysPanel from '../panels/KeysPanel'
 
 const EditPage = () => {
     const { store } = useParams()
