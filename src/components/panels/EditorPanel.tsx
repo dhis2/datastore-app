@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
-import Editor from '../sections/Editor'
 import PanelHeader from '../header/PanelHeader'
+import Editor from '../sections/Editor'
 
 const EditorPanel = () => {
     const { key, namespace, store } = useParams()
