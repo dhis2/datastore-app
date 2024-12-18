@@ -6,7 +6,7 @@ import {
     TableBody,
     TableHead,
 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
@@ -21,9 +21,7 @@ type TableProps = {
 
 const ItemsTable = ({ data, label }: TableProps) => {
     const navigate = useNavigate()
-    const { namespace: currentNamespace, key } = useParams()
-
-    const [activeCell, setActiveCell] = useState(key || null)
+    const { namespace: currentNamespace } = useParams()
 
     return (
         <div>
@@ -52,10 +50,7 @@ const ItemsTable = ({ data, label }: TableProps) => {
                             <>
                                 {data.results.map((item, index) => {
                                     return (
-                                        <DataTableRow
-                                            key={`${item}-${index}`}
-                                            selected={item === activeCell}
-                                        >
+                                        <DataTableRow key={`${item}-${index}`}>
                                             <DataTableCell
                                                 bordered
                                                 width={
@@ -69,7 +64,6 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                                     } else {
                                                         navigate(`edit/${item}`)
                                                     }
-                                                    setActiveCell(item)
                                                 }}
                                             >
                                                 {item}

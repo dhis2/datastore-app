@@ -9,6 +9,7 @@ function PageLayout() {
     useEffect(() => {
         const storeOptions = ['dataStore', 'userDataStore']
         if (!storeOptions.includes(store)) {
+            console.log("pGE LOAYOUT IN CONDITIONAL", store)
             navigate('dataStore')
         }
     }, [store])
