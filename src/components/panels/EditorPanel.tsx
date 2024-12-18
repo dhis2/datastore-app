@@ -1,10 +1,26 @@
 import { Button } from '@dhis2/ui'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
 import PanelHeader from '../header/PanelHeader'
-import Editor from '../sections/Editor'
+import EditorSection from '../sections/EditorSection'
+
+const DataStoreKeyValuesQuery = {
+    results: {
+        resource: 'dataStore',
+        id: ({ key, namespace }: { key: string; namespace: string }) =>
+            `${namespace}/${key}`,
+    },
+}
+
+const UserDataStoreKeyValuesQuery = {
+    results: {
+        resource: 'userDataStore',
+        id: ({ key, namespace }: { key: string; namespace: string }) =>
+            `${namespace}/${key}`,
+    },
+}
 
 const EditorPanel = () => {
     const { key, namespace, store } = useParams()
@@ -17,13 +33,7 @@ const EditorPanel = () => {
             mission_status: 'active',
         },
     }
-    const [value, setValue] = useState(
-        JSON.stringify(data?.results, null, 4) || ''
-    )
 
-    useEffect(() => {
-        setValue(JSON.stringify(data?.results, null, 4))
-    }, [data])
     return (
         <div>
             <PanelHeader>
@@ -53,12 +63,12 @@ const EditorPanel = () => {
                     </Button>
                 </div>
             </PanelHeader>
-            <div>
-                <Editor
-                    value={value}
-                    handleChange={() => console.log('editor changes')}
-                />
-            </div>
+            {store === 'dataStore' && (
+                <EditorSection query={DataStoreKeyValuesQuery} />
+            )}
+            {store === 'userDataStore' && (
+                <EditorSection query={UserDataStoreKeyValuesQuery} />
+            )}
         </div>
     )
 }
