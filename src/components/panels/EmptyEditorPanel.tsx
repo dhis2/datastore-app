@@ -1,8 +1,8 @@
 import React from 'react'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
-import Editor from '../sections/Editor'
 import PanelHeader from '../header/PanelHeader'
+import Editor from '../sections/Editor'
 
 const EmptyEditorPanel = () => {
     return (
