@@ -19,7 +19,7 @@ interface FieldValues {
 
 interface CreateModalProps {
     closeModal: () => void
-    handleCreate: (FieldValues) => void
+    handleCreate: ({ key, namespace }: FieldValues) => void
     children: React.ReactNode
     title: string
 }
@@ -35,7 +35,7 @@ const CreateModal = ({
     }
 
     return (
-        <Modal>
+        <Modal position="middle">
             <Form onSubmit={onSubmit}>
                 {({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>

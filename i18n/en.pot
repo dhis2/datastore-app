@@ -47,8 +47,8 @@ msgstr "New Key"
 msgid "Search keys"
 msgstr "Search keys"
 
-msgid "Key"
-msgstr "Key"
+msgid "Add New Key"
+msgstr "Add New Key"
 
 msgid "Search namespaces"
 msgstr "Search namespaces"
