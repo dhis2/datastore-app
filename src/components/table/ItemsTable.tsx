@@ -21,9 +21,9 @@ type TableProps = {
 
 const ItemsTable = ({ data, label }: TableProps) => {
     const navigate = useNavigate()
-    const { namespace: currentNamespace } = useParams()
+    const { namespace: currentNamespace, key } = useParams()
 
-    const [activeCell, setActiveCell] = useState(null)
+    const [activeCell, setActiveCell] = useState(key || null)
 
     return (
         <div>
