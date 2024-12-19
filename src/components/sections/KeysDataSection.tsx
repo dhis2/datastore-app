@@ -74,40 +74,50 @@ const KeysDataSection = ({ query }) => {
     }
 
     const handleDelete = async () => {
-        let resource = `${store}`
-
-        if (numberOfKeysInNamespace > 1) {
-            resource = `${resource}/${currentNamespace}`
-            await engine.mutate(
-                {
-                    type: 'delete' as const,
-                    resource: resource,
-                    id: selectedKey,
-                },
-                {
-                    onComplete: () => {
-                        setOpenDeleteModal(false)
-                        refetch({ id: currentNamespace })
-                        navigate(`/${store}/edit/${currentNamespace}`)
-                    },
-                }
-            )
-        } else {
-            await engine.mutate(
-                {
-                    type: 'delete' as const,
-                    resource: resource,
-                    id: currentNamespace,
-                },
-                {
-                    onComplete: () => {
-                        setOpenDeleteModal(false)
-                        navigate(`/${store}`)
-                    },
-                }
-            )
-        }
-    }
+        const namespaceHasMultipleKeys = numberOfKeysInNamespace > 1;
+        const resource = namespaceHasMultipleKeys ? `${store}/${currentNamespace}` : `${store}`;
+        const id = namespaceHasMultipleKeys ? selectedKey : currentNamespace;
+    
+        const onComplete = () => {
+            setOpenDeleteModal(false);
+            showSuccess(
+                i18n.t("Key '{{selectedKey}}' deleted successfully!", { selectedKey })
+            );
+            const navigatePath = namespaceHasMultipleKeys
+                ? `/${store}/edit/${currentNamespace}` 
+                : `/${store}`;
+            navigate(navigatePath);
+    
+            if (namespaceHasMultipleKeys) {
+                refetch({ id: currentNamespace });
+            }
+        };
+    
+        const onError = (error) => {
+            showError(
+                i18n.t(
+                    'There was a problem deleting this key - {{error}}',
+                    {
+                        error: error.message,
+                        interpolation: { escapeValue: false },
+                    }
+                )
+            );
+        };
+    
+        await engine.mutate(
+            {
+                type: 'delete' as const,
+                resource: resource,
+                id: id,
+            },
+            {
+                onComplete,
+                onError,
+            }
+        );
+    };
+    
 
     useEffect(() => {
         refetch({ id: currentNamespace })
