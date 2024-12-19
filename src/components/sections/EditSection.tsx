@@ -3,6 +3,7 @@ import { Button } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import PanelHeader from '../header/PanelHeader'
 import Editor from './Editor'
@@ -11,10 +12,10 @@ const EditSection = ({ query }) => {
     const { key, namespace, store } = useParams()
     const engine = useDataEngine()
     const navigate = useNavigate()
-    const { show: showError } = useAlert('An error fetching this data', {
-        critical: true,
-    })
-    const [setEditError] = useState(null)
+
+    const { showError, showSuccess } = useCustomAlert()
+
+    const [editError, setEditError] = useState(null)
     const [updateLoading, setUpdateLoading] = useState(false)
 
     const { data, loading, refetch } = useDataQuery(query, {
@@ -22,7 +23,14 @@ const EditSection = ({ query }) => {
             key,
             namespace,
         },
-        onError: () => showError(),
+        onError(error) {
+            showError(
+                i18n.t('There was a problem fetching this data - {{error}}', {
+                    error: error.message,
+                    interpolation: { escapeValue: false },
+                })
+            )
+        },
     })
 
     const [value, setValue] = useState(
@@ -72,16 +80,37 @@ const EditSection = ({ query }) => {
                 },
                 {
                     onComplete: () => {
+                        showSuccess(
+                            i18n.t("Key '{{key}}' updated successfully", {
+                                key,
+                            })
+                        )
                         refetch({
                             key,
                             namespace,
                         })
                     },
+                    onError(error) {
+                        showError(
+                            i18n.t(
+                                'There was a problem updating the key - {{error}}',
+                                {
+                                    error: error.message,
+                                    interpolation: { escapeValue: false },
+                                }
+                            )
+                        )
+                    },
                 }
             )
         } catch (error) {
-            console.error(error)
             setEditError(error.message)
+            showError(
+                i18n.t('There was a problem - {{error}}', {
+                    error: error.message,
+                    interpolation: { escapeValue: false },
+                })
+            )
         }
         setUpdateLoading(false)
     }
@@ -100,29 +129,34 @@ const EditSection = ({ query }) => {
     return (
         <div>
             <PanelHeader>
-                <span className={classes.editorPanelHeader}>{key}</span>
-                <div className={classes.editButtons}>
-                    <Button
-                        small
-                        aria-label={i18n.t('Close')}
-                        name="close"
-                        onClick={() => handleClose()}
-                        title={i18n.t('Close')}
-                        disabled={updateLoading}
-                    >
-                        {i18n.t('Close')}
-                    </Button>
-                    <Button
-                        small
-                        aria-label={i18n.t('Save')}
-                        name="save"
-                        onClick={() => handleUpdate()}
-                        title={i18n.t('Save')}
-                        primary
-                    >
-                        {i18n.t('Save changes')}
-                    </Button>
-                </div>
+                {data && (
+                    <>
+                        <span className={classes.editorPanelHeader}>{key}</span>
+                        <div className={classes.editButtons}>
+                            <Button
+                                small
+                                aria-label={i18n.t('Close')}
+                                name="close"
+                                onClick={() => handleClose()}
+                                title={i18n.t('Close')}
+                                disabled={updateLoading}
+                            >
+                                {i18n.t('Close')}
+                            </Button>
+                            <Button
+                                small
+                                aria-label={i18n.t('Save')}
+                                name="save"
+                                onClick={() => handleUpdate()}
+                                title={i18n.t('Save')}
+                                primary
+                                loading={!editError && updateLoading}
+                            >
+                                {i18n.t('Save changes')}
+                            </Button>
+                        </div>
+                    </>
+                )}
             </PanelHeader>
             <Editor
                 value={loading ? 'Loading...' : value}
