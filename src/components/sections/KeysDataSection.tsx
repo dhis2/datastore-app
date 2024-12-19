@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import { DATASTORE, USERDATASTORE } from '../../constants/constants'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 import PanelHeader from '../header/PanelHeader'
@@ -22,7 +23,9 @@ const KeysDataSection = ({ query }) => {
     const engine = useDataEngine()
     const { store, namespace: currentNamespace } = useParams()
 
-    const [openModal, setOpenModal] = useState(false)
+    const [openCreateModal, setOpenCreateModal] = useState(false)
+
+    const { showError, showSuccess } = useCustomAlert()
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         query,
@@ -41,10 +44,28 @@ const KeysDataSection = ({ query }) => {
                 data: () => ({}),
             },
             {
-                onComplete: () => setOpenModal(false),
+                onComplete() {
+                    setOpenCreateModal(false)
+                    showSuccess(
+                        i18n.t("Key '{{key}}' added successfully", {
+                            key,
+                        })
+                    )
+                    refetch({ id: currentNamespace })
+                },
+                onError(error) {
+                    showError(
+                        i18n.t(
+                            'There was a problem adding this key - {{error}}',
+                            {
+                                error: error.message,
+                                interpolation: { escapeValue: false },
+                            }
+                        )
+                    )
+                },
             }
         )
-        refetch({ id: currentNamespace })
     }
 
     useEffect(() => {
@@ -77,7 +98,7 @@ const KeysDataSection = ({ query }) => {
                 </div>
                 <CreateButton
                     label={i18n.t('New Key')}
-                    handleClick={() => setOpenModal(true)}
+                    handleClick={() => setOpenCreateModal(true)}
                     icon={<IconAdd16 color={colors.grey600} />}
                 />
             </PanelHeader>
@@ -87,10 +108,10 @@ const KeysDataSection = ({ query }) => {
             <div>
                 {data && <ItemsTable data={data} label={i18n.t('Key')} />}
             </div>
-            {openModal && (
+            {openCreateModal && (
                 <CreateModal
                     title={i18n.t('Add New Key')}
-                    closeModal={() => setOpenModal(false)}
+                    closeModal={() => setOpenCreateModal(false)}
                     handleCreate={handleCreate}
                 >
                     <KeysField initialFocus />
