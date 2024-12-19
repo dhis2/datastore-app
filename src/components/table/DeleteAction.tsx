@@ -3,13 +3,19 @@ import { Button } from '@dhis2-ui/button'
 import React from 'react'
 import i18n from '../../locales'
 
-export default function DeleteAction() {
+interface DeleteActionProps {
+    handleDeleteBtnClick: () => void
+}
+
+export default function DeleteAction({
+    handleDeleteBtnClick,
+}: DeleteActionProps) {
     return (
         <Button
             aria-label={i18n.t('Delete')}
             icon={<IconDelete16 />}
             name="delete"
-            onClick={() => console.log('delete item')}
+            onClick={handleDeleteBtnClick}
             title={i18n.t('Delete')}
         />
     )

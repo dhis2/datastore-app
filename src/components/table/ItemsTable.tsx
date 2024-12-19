@@ -10,20 +10,33 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
-import TableActions from './TableActions'
+import DeleteAction from './DeleteAction'
+import SharingAction from './SharingAction'
 
-type TableProps = {
+interface TableProps {
     data: {
         results: string[]
     }
     label: string
+    setOpenDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
+    setSelectedItem: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ItemsTable = ({ data, label }: TableProps) => {
+const ItemsTable = ({
+    data,
+    label,
+    setOpenDeleteModal,
+    setSelectedItem,
+}: TableProps) => {
     const navigate = useNavigate()
     const { namespace: currentNamespace, key } = useParams()
 
-    const [activeCell, setActiveCell] = useState(key || null)
+    const [activeRow, setActiveRow] = useState(key || null)
+
+    const handleDeleteBtnClick = (item) => {
+        setOpenDeleteModal(true)
+        setSelectedItem(item)
+    }
 
     return (
         <div>
@@ -54,7 +67,7 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                     return (
                                         <DataTableRow
                                             key={`${item}-${index}`}
-                                            selected={item === activeCell}
+                                            selected={item === activeRow}
                                         >
                                             <DataTableCell
                                                 bordered
@@ -70,7 +83,7 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                                     } else {
                                                         navigate(`edit/${item}`)
                                                     }
-                                                    setActiveCell(item)
+                                                    setActiveRow(item)
                                                 }}
                                             >
                                                 {item}
@@ -83,7 +96,20 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                                         : '10%'
                                                 }
                                             >
-                                                <TableActions />
+                                                <div
+                                                    className={
+                                                        classes.actionButtons
+                                                    }
+                                                >
+                                                    <SharingAction />
+                                                    <DeleteAction
+                                                        handleDeleteBtnClick={() =>
+                                                            handleDeleteBtnClick(
+                                                                item
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </DataTableCell>
                                         </DataTableRow>
                                     )
