@@ -79,6 +79,25 @@ const NamespaceDataSection = ({ query }) => {
                 onComplete: () => {
                     setOpenDeleteModal(false)
                     refetch()
+                    showSuccess(
+                        i18n.t(
+                            "Namespace '{{namespace}}' deleted successfully!",
+                            {
+                                namespace: selectedNamespace
+                            }
+                        )
+                    )
+                },
+                onError(error) {
+                    showError(
+                        i18n.t(
+                            'There was a problem deleting this namespace - {{error}}',
+                            {
+                                error: error.message,
+                                interpolation: { escapeValue: false },
+                            }
+                        )
+                    )
                 },
             }
         )
