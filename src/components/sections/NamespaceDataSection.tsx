@@ -8,6 +8,7 @@ import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
+import DeleteModal from '../modals/DeleteModal'
 import { KeysField, NamespaceField } from '../modals/Fields'
 import ItemsTable from '../table/ItemsTable'
 import CreateButton from './CreateButton'
@@ -21,9 +22,12 @@ const NamespaceDataSection = ({ query }) => {
     const engine = useDataEngine()
     const navigate = useNavigate()
     const { store } = useParams()
-    const [openCreateModal, setOpenCreateModal] = useState(false)
 
     const { showError, showSuccess } = useCustomAlert()
+
+    const [openCreateModal, setOpenCreateModal] = useState(false)
+    const [openDeleteModal, setOpenDeleteModal] = useState(false)
+    const [selectedNamespace, setSelectedNamespace] = useState(null)
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(query)
 
@@ -64,6 +68,22 @@ const NamespaceDataSection = ({ query }) => {
         )
     }
 
+    const handleDelete = async () => {
+        await engine.mutate(
+            {
+                type: 'delete' as const,
+                resource: `${store}`,
+                id: selectedNamespace,
+            },
+            {
+                onComplete: () => {
+                    setOpenDeleteModal(false)
+                    refetch()
+                },
+            }
+        )
+    }
+
     if (error) {
         return <ErrorNotice />
     }
@@ -83,7 +103,14 @@ const NamespaceDataSection = ({ query }) => {
                 />
             </div>
             <div>
-                {data && <ItemsTable data={data} label={i18n.t('Namespace')} />}
+                {data && (
+                    <ItemsTable
+                        data={data}
+                        label={i18n.t('Namespace')}
+                        setOpenDeleteModal={setOpenDeleteModal}
+                        setSelectedItem={setSelectedNamespace}
+                    />
+                )}
             </div>
             {openCreateModal && (
                 <CreateModal
@@ -94,6 +121,24 @@ const NamespaceDataSection = ({ query }) => {
                     <NamespaceField initialFocus />
                     <KeysField />
                 </CreateModal>
+            )}
+            {openDeleteModal && (
+                <DeleteModal
+                    closeModal={() => setOpenDeleteModal(false)}
+                    handleDelete={handleDelete}
+                    title={i18n.t('Delete Namespace')}
+                >
+                    <p>
+                        {i18n.t(
+                            `Are you sure you want to delete '${selectedNamespace}'?`
+                        )}
+                    </p>
+                    <p>
+                        {i18n.t(
+                            `This will delete all the keys in this namespace`
+                        )}
+                    </p>
+                </DeleteModal>
             )}
         </>
     )
