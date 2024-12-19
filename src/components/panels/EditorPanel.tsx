@@ -25,14 +25,6 @@ const UserDataStoreKeyValuesQuery = {
 const EditorPanel = () => {
     const { key, namespace, store } = useParams()
     const navigate = useNavigate()
-    const data = {
-        results: {
-            name: 'Mars Perseverance Rover',
-            launch_date: '2020-07-30',
-            landing_date: '2021-02-18',
-            mission_status: 'active',
-        },
-    }
 
     return (
         <div>
