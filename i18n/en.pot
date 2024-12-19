@@ -5,26 +5,38 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-18T09:41:03.249Z\n"
-"PO-Revision-Date: 2024-12-18T09:41:03.250Z\n"
+"POT-Creation-Date: 2024-12-19T16:36:13.574Z\n"
+"PO-Revision-Date: 2024-12-19T16:36:13.575Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
 
+msgid "404 Page Not Found"
+msgstr "404 Page Not Found"
+
 msgid "Back to datastore"
 msgstr "Back to datastore"
+
+msgid "An error has occurred. Try again"
+msgstr "An error has occurred. Try again"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Namespace"
+msgstr "Namespace"
 
 msgid "Back to all namespaces"
 msgstr "Back to all namespaces"
 
-msgid "Search namespaces"
-msgstr "Search namespaces"
-
-msgid "New Namespace"
-msgstr "New Namespace"
-
-msgid "Namespace"
-msgstr "Namespace"
+msgid "Configure Namespaces"
+msgstr "Configure Namespaces"
 
 msgid "Close"
 msgstr "Close"
@@ -38,8 +50,14 @@ msgstr "Save changes"
 msgid "Choose a key to start editing"
 msgstr "Choose a key to start editing"
 
-msgid "Keys"
-msgstr "Keys"
+msgid "DataStore"
+msgstr "DataStore"
+
+msgid "UserDataStore"
+msgstr "UserDataStore"
+
+msgid "keys"
+msgstr "keys"
 
 msgid "New Key"
 msgstr "New Key"
@@ -47,14 +65,17 @@ msgstr "New Key"
 msgid "Search keys"
 msgstr "Search keys"
 
-msgid "Key"
-msgstr "Key"
+msgid "Add New Key"
+msgstr "Add New Key"
 
-msgid "DataStore"
-msgstr "DataStore"
+msgid "Search namespaces"
+msgstr "Search namespaces"
 
-msgid "UserDataStore"
-msgstr "UserDataStore"
+msgid "New Namespace"
+msgstr "New Namespace"
+
+msgid "Add New Namespace"
+msgstr "Add New Namespace"
 
 msgid "Search"
 msgstr "Search"

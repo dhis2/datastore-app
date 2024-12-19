@@ -18,11 +18,6 @@ const dataStoreNamespacesQuery = {
     },
 }
 
-export type FieldValues = {
-    namespace?: string
-    key?: string
-}
-
 const NamespacesPage = () => {
     const navigate = useNavigate()
     const { store } = useParams()
