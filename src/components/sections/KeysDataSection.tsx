@@ -1,12 +1,14 @@
-import { useDataQuery } from '@dhis2/app-runtime'
+import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import { IconAdd16, colors } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 import PanelHeader from '../header/PanelHeader'
 import CenteredLoader from '../loader/Loader'
+import CreateModal from '../modals/CreateModal'
+import { KeysField } from '../modals/Fields'
 import ItemsTable from '../table/ItemsTable'
 import CreateButton from './CreateButton'
 import SearchField from './SearchField'
@@ -16,7 +18,10 @@ interface QueryResults {
 }
 
 const KeysDataSection = ({ query }) => {
-    const { namespace: currentNamespace } = useParams()
+    const engine = useDataEngine()
+    const { store, namespace: currentNamespace } = useParams()
+
+    const [openModal, setOpenModal] = useState(false)
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         query,
@@ -26,6 +31,20 @@ const KeysDataSection = ({ query }) => {
             },
         }
     )
+
+    const handleCreate = async ({ key }) => {
+        await engine.mutate(
+            {
+                type: 'create',
+                resource: `${store}/${currentNamespace}/${key}`,
+                data: () => ({}),
+            },
+            {
+                onComplete: () => setOpenModal(false),
+            }
+        )
+        refetch({ id: currentNamespace })
+    }
 
     useEffect(() => {
         refetch({ id: currentNamespace })
@@ -47,7 +66,7 @@ const KeysDataSection = ({ query }) => {
                 </span>
                 <CreateButton
                     label={i18n.t('New Key')}
-                    handleClick={() => console.log('create new key')}
+                    handleClick={() => setOpenModal(true)}
                     icon={<IconAdd16 color={colors.grey600} />}
                 />
             </PanelHeader>
@@ -57,6 +76,15 @@ const KeysDataSection = ({ query }) => {
             <div>
                 {data && <ItemsTable data={data} label={i18n.t('Key')} />}
             </div>
+            {openModal && (
+                <CreateModal
+                    title={i18n.t('Add New Key')}
+                    closeModal={() => setOpenModal(false)}
+                    handleCreate={handleCreate}
+                >
+                    <KeysField initialFocus />
+                </CreateModal>
+            )}
         </>
     )
 }
