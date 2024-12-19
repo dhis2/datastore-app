@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-22T09:21:04.011Z\n"
-"PO-Revision-Date: 2025-01-22T09:21:04.012Z\n"
+"POT-Creation-Date: 2024-12-19T16:57:20.491Z\n"
+"PO-Revision-Date: 2024-12-19T16:57:20.492Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -22,6 +22,26 @@ msgstr "An error has occurred. Try again"
 
 msgid "Namespaces"
 msgstr "Namespaces"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Namespace"
+msgstr "Namespace"
+
+msgid "Back to all namespaces"
+msgstr "Back to all namespaces"
+
+msgid "Configure Namespaces"
+msgstr "Configure Namespaces"
 
 msgid "Close"
 msgstr "Close"
@@ -50,6 +70,9 @@ msgstr "Search keys"
 msgid "Add New Key"
 msgstr "Add New Key"
 
+msgid "Delete Key"
+msgstr "Delete Key"
+
 msgid "Search namespaces"
 msgstr "Search namespaces"
 
@@ -59,11 +82,14 @@ msgstr "New namespace"
 msgid "Namespace"
 msgstr "Namespace"
 
+msgid "Delete Namespace"
+msgstr "Delete Namespace"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
+
 msgid "Search"
 msgstr "Search"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Actions"
 msgstr "Actions"

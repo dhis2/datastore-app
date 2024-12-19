@@ -36,6 +36,7 @@ const ItemsTable = ({
     const handleDeleteBtnClick = (item) => {
         setOpenDeleteModal(true)
         setSelectedItem(item)
+        setActiveRow(item)
     }
 
     return (

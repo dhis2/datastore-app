@@ -1,7 +1,7 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import { IconAdd16, colors } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import useCustomAlert from '../../hooks/useCustomAlert'
@@ -10,6 +10,7 @@ import ErrorNotice from '../error/ErrorNotice'
 import PanelHeader from '../header/PanelHeader'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
+import DeleteModal from '../modals/DeleteModal'
 import { KeysField } from '../modals/Fields'
 import ItemsTable from '../table/ItemsTable'
 import CreateButton from './CreateButton'
@@ -21,11 +22,14 @@ interface QueryResults {
 
 const KeysDataSection = ({ query }) => {
     const engine = useDataEngine()
+    const navigate = useNavigate()
     const { store, namespace: currentNamespace } = useParams()
 
-    const [openCreateModal, setOpenCreateModal] = useState(false)
-
     const { showError, showSuccess } = useCustomAlert()
+
+    const [openCreateModal, setOpenCreateModal] = useState(false)
+    const [openDeleteModal, setOpenDeleteModal] = useState(false)
+    const [selectedKey, setSelectedKey] = useState(null)
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         query,
@@ -35,6 +39,8 @@ const KeysDataSection = ({ query }) => {
             },
         }
     )
+
+    const numberOfKeysInNamespace = data?.results?.length
 
     const handleCreate = async ({ key }) => {
         await engine.mutate(
@@ -66,6 +72,42 @@ const KeysDataSection = ({ query }) => {
                 },
             }
         )
+    }
+
+    const handleDelete = async () => {
+        let resource = `${store}`
+
+        if (numberOfKeysInNamespace > 1) {
+            resource = `${resource}/${currentNamespace}`
+            await engine.mutate(
+                {
+                    type: 'delete' as const,
+                    resource: resource,
+                    id: selectedKey,
+                },
+                {
+                    onComplete: () => {
+                        setOpenDeleteModal(false)
+                        refetch({ id: currentNamespace })
+                        navigate(`/${store}/edit/${currentNamespace}`)
+                    },
+                }
+            )
+        } else {
+            await engine.mutate(
+                {
+                    type: 'delete' as const,
+                    resource: resource,
+                    id: currentNamespace,
+                },
+                {
+                    onComplete: () => {
+                        setOpenDeleteModal(false)
+                        navigate(`/${store}`)
+                    },
+                }
+            )
+        }
     }
 
     useEffect(() => {
@@ -106,7 +148,14 @@ const KeysDataSection = ({ query }) => {
                 <SearchField placeholder={i18n.t('Search keys')} />
             </div>
             <div>
-                {data && <ItemsTable data={data} label={i18n.t('Key')} />}
+                {data && (
+                    <ItemsTable
+                        data={data}
+                        label={i18n.t('Key')}
+                        setOpenDeleteModal={setOpenDeleteModal}
+                        setSelectedItem={setSelectedKey}
+                    />
+                )}
             </div>
             {openCreateModal && (
                 <CreateModal
@@ -116,6 +165,24 @@ const KeysDataSection = ({ query }) => {
                 >
                     <KeysField initialFocus />
                 </CreateModal>
+            )}
+            {openDeleteModal && (
+                <DeleteModal
+                    closeModal={() => setOpenDeleteModal(false)}
+                    handleDelete={handleDelete}
+                    title={i18n.t('Delete Key')}
+                >
+                    {i18n.t(
+                        `Are you sure you want to delete '${selectedKey}' in ${currentNamespace}?`
+                    )}
+                    {numberOfKeysInNamespace < 2 && (
+                        <p>
+                            {i18n.t(
+                                `This will also delete the namespace '${currentNamespace}'`
+                            )}
+                        </p>
+                    )}
+                </DeleteModal>
             )}
         </>
     )
