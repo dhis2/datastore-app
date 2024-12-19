@@ -83,7 +83,7 @@ const NamespaceDataSection = ({ query }) => {
                         i18n.t(
                             "Namespace '{{namespace}}' deleted successfully!",
                             {
-                                namespace: selectedNamespace
+                                namespace: selectedNamespace,
                             }
                         )
                     )
