@@ -3,7 +3,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import classes from '../App.module.css'
 import EmptyArea from '../components/EmptyArea'
-import Sidebar from '../components/sidebar/Sidebar'
+import Sidebar from '../components/sidebar/sidebar'
 
 function Layout() {
     return (

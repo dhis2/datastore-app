@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import NameSpaceLinks from '../namespaces/NamespacesLinks'
 import DataStoreSelect from './DataStoreSelect'
-import SearchField from './SearchField'
+import SearchField from './searchField'
 
 const Sidebar = () => {
     const navigate = useNavigate()

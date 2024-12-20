@@ -1,8 +1,8 @@
 import React from 'react'
 import { createHashRouter } from 'react-router-dom'
-import KeysTable from '../components/keys/KeysTable'
-import ErrorPage from '../pages/ErrorPage'
-import Layout from './Layout'
+import KeysTable from '../components/keys/keysTable'
+import ErrorPage from '../pages/errorPage'
+import Layout from './layout'
 
 export const router = createHashRouter([
     {
