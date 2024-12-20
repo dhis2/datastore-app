@@ -6,7 +6,7 @@ import {
     TableBody,
     TableHead,
 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
@@ -38,6 +38,10 @@ const ItemsTable = ({
         setSelectedItem(item)
         setActiveRow(item)
     }
+
+    useEffect(() => {
+        setActiveRow(key)
+    }, [key])
 
     return (
         <div>
