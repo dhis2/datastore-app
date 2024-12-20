@@ -42,7 +42,7 @@ const ItemsTable = ({
     return (
         <div>
             {data && (
-                <DataTable layout="fixed">
+                <DataTable layout="fixed" scrollHeight="75vh">
                     <TableHead>
                         <DataTableRow>
                             <DataTableColumnHeader
