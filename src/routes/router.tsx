@@ -4,7 +4,7 @@ import Edit from '../components/edit/Edit'
 import EmptyArea from '../components/EmptyArea'
 import Error from '../components/Error'
 import Keys from '../components/keys/Keys'
-import Layout from './Layout'
+import Layout from './layout'
 
 export const router = createHashRouter([
     {

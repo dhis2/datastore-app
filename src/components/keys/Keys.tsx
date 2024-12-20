@@ -1,5 +1,5 @@
 import React from 'react'
-import KeysTable from './KeysTable'
+import KeysTable from './keysTable'
 
 export default function Keys() {
     return (

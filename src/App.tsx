@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import AppWrapper from './components/AppWrapper'
-import { router } from './routes/Router'
+import AppWrapper from './components/appWrapper'
+import { router } from './routes/router'
 
 const App: FC = () => {
     return (

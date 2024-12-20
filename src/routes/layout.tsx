@@ -3,7 +3,7 @@ import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import classes from '../App.module.css'
 import Toolbar from '../components/create/Toolbar'
-import Sidebar from '../components/sidebar/Sidebar'
+import Sidebar from '../components/sidebar/sidebar'
 
 function Layout() {
     const { store } = useParams()
