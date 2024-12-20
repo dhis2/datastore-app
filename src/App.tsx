@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import AppWrapper from './components/AppWrapper'
+import AppWrapper from './components/appWrapper'
 import { threePanelRouter } from './routes/PanelRouter'
 
 const App: FC = () => {
