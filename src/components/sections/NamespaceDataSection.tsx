@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
+import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 import CenteredLoader from '../loader/Loader'
@@ -30,6 +31,10 @@ const NamespaceDataSection = ({ query }) => {
     const [selectedNamespace, setSelectedNamespace] = useState(null)
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(query)
+
+    const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
+        data?.results
+    )
 
     const handleCreate = async (values) => {
         await engine.mutate(
@@ -114,7 +119,11 @@ const NamespaceDataSection = ({ query }) => {
     return (
         <>
             <div className={classes.midSection}>
-                <SearchField placeholder={i18n.t('Search namespaces')} />
+                <SearchField
+                    placeholder={i18n.t('Search namespaces')}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                />
                 <CreateButton
                     label={i18n.t('New Namespace')}
                     handleClick={() => setOpenCreateModal(true)}
@@ -122,9 +131,9 @@ const NamespaceDataSection = ({ query }) => {
                 />
             </div>
             <div>
-                {data && (
+                {filteredData && (
                     <ItemsTable
-                        data={data}
+                        tableData={filteredData}
                         label={i18n.t('Namespace')}
                         setOpenDeleteModal={setOpenDeleteModal}
                         setSelectedItem={setSelectedNamespace}

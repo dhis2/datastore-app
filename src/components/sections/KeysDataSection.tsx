@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
+import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 import PanelHeader from '../header/PanelHeader'
@@ -37,6 +38,10 @@ const KeysDataSection = ({ query }) => {
                 id: currentNamespace,
             },
         }
+    )
+
+    const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
+        data?.results
     )
 
     const numberOfKeysInNamespace = data?.results?.length
@@ -144,12 +149,16 @@ const KeysDataSection = ({ query }) => {
                 />
             </PanelHeader>
             <div className={classes.keysPanelMidSection}>
-                <SearchField placeholder={i18n.t('Search keys')} />
+                <SearchField
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    placeholder={i18n.t('Search keys')}
+                />
             </div>
             <div>
-                {data && (
+                {filteredData && (
                     <ItemsTable
-                        data={data}
+                        tableData={filteredData}
                         label={i18n.t('Key')}
                         setOpenDeleteModal={setOpenDeleteModal}
                         setSelectedItem={setSelectedKey}
