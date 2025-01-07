@@ -13,21 +13,19 @@ import i18n from '../../locales'
 import DeleteAction from './DeleteAction'
 import SharingAction from './SharingAction'
 
-interface TableProps {
-    data: {
-        results: string[]
-    }
+interface ItemsTableProps {
+    tableData: string[]
     label: string
     setOpenDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
     setSelectedItem: React.Dispatch<React.SetStateAction<string>>
 }
 
 const ItemsTable = ({
-    data,
+    tableData,
     label,
     setOpenDeleteModal,
     setSelectedItem,
-}: TableProps) => {
+}: ItemsTableProps) => {
     const navigate = useNavigate()
     const { namespace: currentNamespace, key } = useParams()
 
@@ -45,7 +43,7 @@ const ItemsTable = ({
 
     return (
         <div>
-            {data && (
+            {tableData && (
                 <DataTable layout="fixed" scrollHeight="75vh">
                     <TableHead>
                         <DataTableRow>
@@ -66,9 +64,9 @@ const ItemsTable = ({
                         </DataTableRow>
                     </TableHead>
                     <TableBody>
-                        {data?.results?.length && (
+                        {tableData?.length ? (
                             <>
-                                {data.results.map((item, index) => {
+                                {tableData.map((item, index) => {
                                     return (
                                         <DataTableRow
                                             key={`${item}-${index}`}
@@ -120,6 +118,12 @@ const ItemsTable = ({
                                     )
                                 })}
                             </>
+                        ) : (
+                            <DataTableRow>
+                                <DataTableCell bordered>
+                                    {i18n.t('No items found')}
+                                </DataTableCell>
+                            </DataTableRow>
                         )}
                     </TableBody>
                 </DataTable>
