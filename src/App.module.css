@@ -1,7 +1,7 @@
 /* layout */
 .page {
     height: 100%;
-    background-color: var(--colors-grey300);
+    background-color: var(--colors-grey200);
     box-sizing: border-box;
     overflow-y: hidden;
 }
@@ -21,7 +21,7 @@
     font-size: 1rem;
     background-color: white;
     border: 1px solid var(--colors-grey400);
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 /* second page */
@@ -39,12 +39,13 @@
     font-size: 1rem;
     background-color: white;
     border: 1px solid var(--colors-grey400);
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 /* page header */
 .pageHeader {
     height: 40px;
+    margin: var(--spacers-dp8) 0;
     display: flex;
 }
 
@@ -56,16 +57,22 @@
 
 .secondPageHeader {
     width: fit-content;
-    color: var(--colors-grey700);
+    color: var(--colors-grey800);
     text-decoration: none;
     align-self: center;
     font-size: 14px;
+    padding: var(--spacers-dp12) var(--spacers-dp8);
+    border-radius: 7px;
 }
 
+.secondPageHeader:hover {
+    background-color: var(--colors-grey300);
+    text-decoration: underline;
+}
 .secondPageHeader span {
     display: grid;
     grid-template-columns: auto auto;
-    gap: 5px;
+    gap: var(--spacers-dp8);
 }
 
 /* panel header */
@@ -77,7 +84,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--colors-grey300);
+    border-block-end: 1px solid var(--colors-grey300);
+    border-inline-end: 1px solid var(--colors-grey300);
 }
 
 .keysPanelHeader {
@@ -87,17 +95,17 @@
 }
 
 .keysPanelMidSection {
-    padding: 10px;
+    padding: var(--spacers-dp8);
 }
 
 .emptyEditorPanelHeader {
     font-style: italic;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--colors-grey600);
 }
 
 .editorPanelHeader {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--colors-grey800);
     font-weight: 500;
 }
@@ -151,7 +159,7 @@
 .editButtons {
     display: grid;
     grid-template-columns: auto auto;
-    gap: 10px;
+    gap: var(--spacers-dp4);
 }
 
 .editButtons button {
