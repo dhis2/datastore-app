@@ -1,22 +1,23 @@
 import { Card } from '@dhis2/ui'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import classes from '../App.module.css'
-import EmptyArea from '../components/EmptyArea'
+import Toolbar from '../components/create/Toolbar'
 import Sidebar from '../components/sidebar/sidebar'
 
 function Layout() {
+    const { store } = useParams()
     return (
         <div className={classes.container}>
-            <div id="sidebar" className={classes.sidebar}>
+            <nav id="sidebar" className={classes.sidebar}>
                 <Sidebar />
-            </div>
-            <div id="main" className={classes.main}>
+            </nav>
+            <main id="main" className={classes.main}>
                 <Card>
-                    <EmptyArea />
+                    {store && <Toolbar />}
                     <Outlet />
                 </Card>
-            </div>
+            </main>
         </div>
     )
 }

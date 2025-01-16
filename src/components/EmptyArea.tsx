@@ -1,19 +1,17 @@
-import { Center } from '@dhis2/ui'
+import { Center, NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import i18n from '../locales'
 
 const EmptyArea = () => {
     const { store, namespace } = useParams()
     return (
         <>
-            {!store && (
-                <Center>
-                    <p>Select a datastore to show namespaces</p>
-                </Center>
-            )}
             {store && !namespace && (
                 <Center>
-                    <p>Click a namespace to show keys</p>
+                    <NoticeBox title={i18n.t('View keys')}>
+                        {i18n.t('Click a namespace to view its keys')}
+                    </NoticeBox>
                 </Center>
             )}
         </>
