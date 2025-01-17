@@ -12,6 +12,7 @@ const CreateButton = ({ label, handleClick, icon }: CreateButtonProps) => {
     return (
         <div className={classes.createButton}>
             <Button
+                small
                 aria-label={label}
                 icon={icon}
                 name="create"

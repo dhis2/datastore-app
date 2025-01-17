@@ -1,7 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { IconAdd16, colors } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
@@ -16,6 +16,7 @@ interface QueryResults {
 }
 
 const KeysDataSection = ({ query }) => {
+    const { store } = useParams()
     const { namespace: currentNamespace } = useParams()
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
@@ -42,9 +43,19 @@ const KeysDataSection = ({ query }) => {
     return (
         <>
             <PanelHeader>
-                <span className={classes.keysPanelHeader}>
-                    {currentNamespace} {i18n.t('keys')}
-                </span>
+                <div className={classes.keysHeaderLabel}>
+                    <Link to={`/${store}`} className={classes.keysHeaderLink}>
+                        <span>
+                            {store === 'dataStore' && 'DataStore'}
+                            {store === 'userDataStore' && 'UserDatastore'}
+                        </span>
+                    </Link>
+                    <span className={classes.keysHeaderLabelDivider}>/</span>
+
+                    <span className={classes.keysPanelHeader}>
+                        {currentNamespace}
+                    </span>
+                </div>
                 <CreateButton
                     label={i18n.t('New Key')}
                     handleClick={() => console.log('create new key')}

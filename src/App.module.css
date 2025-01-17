@@ -11,7 +11,7 @@
 .firstPage {
     margin: 0 auto;
     padding: 0;
-    width: 70vw;
+    width: 100vw;
 }
 
 .firstPageContainer {
@@ -19,16 +19,14 @@
     padding: 0;
     width: 100%;
     font-size: 1rem;
-    background-color: white;
-    border: 1px solid var(--colors-grey400);
-    border-radius: 3px;
 }
 
 /* second page */
 
 .secondPage {
     margin: 0 auto;
-    width: 98vw;
+    width: 100vw;
+    height: 100vh;
     padding: 0;
 }
 
@@ -44,15 +42,13 @@
 
 /* page header */
 .pageHeader {
-    height: 40px;
-    margin: var(--spacers-dp8) 0;
+    font-weight: 500;
+    font-size: 15px;
+    padding: var(--spacers-dp16) var(--spacers-dp8);
     display: flex;
-}
-
-.firstPageHeader {
-    font-size: 20px;
-    font-weight: 400;
-    align-self: center;
+    color: var(--colors-grey900);
+    background: var(--colors-white);
+    border-block-end: 1px solid var(--colors-grey300);
 }
 
 .secondPageHeader {
@@ -90,8 +86,28 @@
 
 .keysPanelHeader {
     font-weight: 500;
-    font-size: 18px;
-    color: var(--colors-grey800);
+    font-size: 15px;
+    color: var(--colors-grey900);
+}
+
+.keysHeaderLabel {
+    display: flex;
+    gap: var(--spacers-dp4);
+}
+
+.keysHeaderLink {
+    font-size: 15px;
+    color: var(--colors-grey600);
+    text-decoration: none;
+}
+
+.keysHeaderLink:hover {
+    color: var(--colors-grey900);
+    text-decoration: underline;
+}
+
+.keysHeaderLabelDivider {
+    color: var(--colors-grey600);
 }
 
 .keysPanelMidSection {
@@ -112,8 +128,16 @@
 
 /* namespace view */
 
+.namespaceDataContainer {
+    margin: var(--spacers-dp16);
+    max-width: 60rem;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 3px;
+    background: var(--colors-white);
+}
+
 .midSection {
-    padding: 0.7em;
+    padding: var(--spacers-dp8);
     display: grid;
     grid-template-columns: repeat(1fr, 4);
 }

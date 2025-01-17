@@ -7,17 +7,10 @@ import PageHeader from '../header/PageHeader'
 import KeysPanel from '../panels/KeysPanel'
 
 const EditPage = () => {
-    const { store } = useParams()
+    // const { store } = useParams()
 
     return (
         <div className={classes.secondPage}>
-            <PageHeader>
-                <Link to={`/${store}`} className={classes.secondPageHeader}>
-                    <span>
-                        <IconArrowLeft16 /> {i18n.t('Back to all namespaces')}
-                    </span>
-                </Link>
-            </PageHeader>
             <div className={classes.secondPageContainer}>
                 <div className={classes.keysPanel}>
                     <KeysPanel />

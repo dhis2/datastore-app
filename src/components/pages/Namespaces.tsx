@@ -45,7 +45,7 @@ const NamespacesPage = () => {
         <div className={classes.firstPage}>
             <PageHeader>
                 <span className={classes.firstPageHeader}>
-                    {i18n.t('Configure Namespaces')}
+                    {i18n.t('Namespaces')}
                 </span>
             </PageHeader>
             <div className={classes.firstPageContainer}>
@@ -53,14 +53,18 @@ const NamespacesPage = () => {
                     activeTab={activeTab}
                     switchTab={handleSwitchTab}
                 />
-                {store === 'dataStore' && (
-                    <NamespaceDataSection query={dataStoreNamespacesQuery} />
-                )}
-                {store === 'userDataStore' && (
-                    <NamespaceDataSection
-                        query={userDataStoreNamespacesQuery}
-                    />
-                )}
+                <div className={classes.namespaceDataContainer}>
+                    {store === 'dataStore' && (
+                        <NamespaceDataSection
+                            query={dataStoreNamespacesQuery}
+                        />
+                    )}
+                    {store === 'userDataStore' && (
+                        <NamespaceDataSection
+                            query={userDataStoreNamespacesQuery}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     )
