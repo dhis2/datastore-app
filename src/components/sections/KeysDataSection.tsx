@@ -16,8 +16,7 @@ interface QueryResults {
 }
 
 const KeysDataSection = ({ query }) => {
-    const { store } = useParams()
-    const { namespace: currentNamespace } = useParams()
+    const { store, namespace: currentNamespace } = useParams()
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         query,
