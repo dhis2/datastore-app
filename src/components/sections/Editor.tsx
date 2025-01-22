@@ -12,7 +12,7 @@ const Editor = ({ value, handleChange }: EditorProps) => {
         <CodeMirror
             theme={'dark'}
             value={value}
-            height="83vh"
+            height="100vh"
             extensions={[json()]}
             onChange={handleChange}
         />

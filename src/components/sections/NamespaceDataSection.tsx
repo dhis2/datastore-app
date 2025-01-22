@@ -29,7 +29,7 @@ const NamespaceDataSection = ({ query }) => {
             <div className={classes.midSection}>
                 <SearchField placeholder={i18n.t('Search namespaces')} />
                 <CreateButton
-                    label={i18n.t('New Namespace')}
+                    label={i18n.t('New namespace')}
                     handleClick={() => console.log('create new namespace')}
                     icon={<IconAdd24 color={colors.grey600} />}
                 />
