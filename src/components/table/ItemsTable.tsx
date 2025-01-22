@@ -58,6 +58,7 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                         >
                                             <DataTableCell
                                                 bordered
+                                                large={!currentNamespace}
                                                 width={
                                                     currentNamespace
                                                         ? '85%'
