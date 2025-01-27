@@ -1,5 +1,6 @@
 import { Tab, TabBar } from '@dhis2/ui'
 import React from 'react'
+import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import i18n from '../../locales'
 
 type DataStoreProps = {
@@ -15,17 +16,17 @@ export default function DataStoreTabBar({
         <TabBar>
             <Tab
                 onClick={() => {
-                    switchTab('dataStore')
+                    switchTab(DATASTORE)
                 }}
-                selected={activeTab === 'dataStore'}
+                selected={activeTab === DATASTORE}
             >
                 {i18n.t('DataStore')}
             </Tab>
             <Tab
                 onClick={() => {
-                    switchTab('userDataStore')
+                    switchTab(USERDATASTORE)
                 }}
-                selected={activeTab === 'userDataStore'}
+                selected={activeTab === USERDATASTORE}
             >
                 {' '}
                 {i18n.t('UserDataStore')}
