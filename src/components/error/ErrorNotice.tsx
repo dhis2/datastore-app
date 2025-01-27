@@ -1,5 +1,6 @@
 import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
+import classes from '../../App.module.css'
 import i18n from '../../locales'
 
 interface ErrorNoticeProps {
@@ -9,14 +10,7 @@ interface ErrorNoticeProps {
 const ErrorNotice = ({ error }: ErrorNoticeProps) => {
     console.error(error)
     return (
-        <div
-            style={{
-                width: '100%',
-                padding: '2em',
-                display: 'flex',
-                justifyContent: 'center',
-            }}
-        >
+        <div className={classes.errorNotice}>
             <NoticeBox warning>
                 <p>{i18n.t('An error has occurred. Try again')}</p>
             </NoticeBox>
