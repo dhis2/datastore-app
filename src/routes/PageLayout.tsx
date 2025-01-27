@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react'
-import { Outlet, useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import { Navigate, Outlet, useParams } from 'react-router-dom'
 import classes from '../App.module.css'
+import { DATASTORE_OPTIONS } from '../constants/constants'
 
 function PageLayout() {
     const { store } = useParams()
-    const navigate = useNavigate()
 
-    useEffect(() => {
-        const storeOptions = ['dataStore', 'userDataStore']
-        if (!storeOptions.includes(store)) {
-            navigate('dataStore')
-        }
-    }, [store])
+    if (!DATASTORE_OPTIONS.includes(store)) {
+        return <Navigate to={'dataStore'} replace />
+    }
 
     return (
         <div className={classes.page}>
