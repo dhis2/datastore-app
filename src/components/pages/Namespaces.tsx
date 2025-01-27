@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import {
+    DATASTORE,
+    DATASTORE_OPTIONS,
+    USERDATASTORE,
+} from '../../constants/constants'
 import i18n from '../../locales'
 import PageHeader from '../header/PageHeader'
 import DataStoreTabBar from '../sections/DataStoreTabBar'
@@ -27,7 +32,7 @@ const NamespacesPage = () => {
     const navigate = useNavigate()
     const { store } = useParams()
 
-    const [activeTab, setActiveTab] = useState(store || 'dataStore')
+    const [activeTab, setActiveTab] = useState(store || DATASTORE)
 
     const handleSwitchTab = (selectedTab) => {
         setActiveTab(selectedTab)
@@ -35,8 +40,7 @@ const NamespacesPage = () => {
     }
 
     useEffect(() => {
-        const storeOptions = ['dataStore', 'userDataStore']
-        if (storeOptions.includes(store)) {
+        if (DATASTORE_OPTIONS.includes(store)) {
             setActiveTab(store)
         }
     }, [store])
@@ -54,12 +58,12 @@ const NamespacesPage = () => {
                     switchTab={handleSwitchTab}
                 />
                 <div className={classes.namespaceDataContainer}>
-                    {store === 'dataStore' && (
+                    {store === DATASTORE && (
                         <NamespaceDataSection
                             query={dataStoreNamespacesQuery}
                         />
                     )}
-                    {store === 'userDataStore' && (
+                    {store === USERDATASTORE && (
                         <NamespaceDataSection
                             query={userDataStoreNamespacesQuery}
                         />

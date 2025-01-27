@@ -2,6 +2,7 @@ import { Button } from '@dhis2/ui'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import i18n from '../../locales'
 import PanelHeader from '../header/PanelHeader'
 import EditorSection from '../sections/EditorSection'
@@ -55,10 +56,10 @@ const EditorPanel = () => {
                     </Button>
                 </div>
             </PanelHeader>
-            {store === 'dataStore' && (
+            {store === DATASTORE && (
                 <EditorSection query={DataStoreKeyValuesQuery} />
             )}
-            {store === 'userDataStore' && (
+            {store === USERDATASTORE && (
                 <EditorSection query={UserDataStoreKeyValuesQuery} />
             )}
         </div>

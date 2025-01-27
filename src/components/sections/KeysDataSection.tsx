@@ -3,6 +3,7 @@ import { IconAdd16, colors } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 import PanelHeader from '../header/PanelHeader'
@@ -45,8 +46,8 @@ const KeysDataSection = ({ query }) => {
                 <div className={classes.keysHeaderLabel}>
                     <Link to={`/${store}`} className={classes.keysHeaderLink}>
                         <span>
-                            {store === 'dataStore' && 'DataStore'}
-                            {store === 'userDataStore' && 'UserDatastore'}
+                            {store === DATASTORE && 'DataStore'}
+                            {store === USERDATASTORE && 'UserDataStore'}
                         </span>
                     </Link>
                     <span className={classes.keysHeaderLabelDivider}>/</span>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import KeysDataSection from '../sections/KeysDataSection'
 
 const userDataStoreKeysQuery = {
@@ -21,10 +22,10 @@ const KeysPanel = () => {
 
     return (
         <>
-            {store === 'dataStore' && (
+            {store === DATASTORE && (
                 <KeysDataSection query={dataStoreKeysQuery} />
             )}
-            {store === 'userDataStore' && (
+            {store === USERDATASTORE && (
                 <KeysDataSection query={userDataStoreKeysQuery} />
             )}
         </>
