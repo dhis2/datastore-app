@@ -5,26 +5,47 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-05T03:27:06.316Z\n"
-"PO-Revision-Date: 2024-12-05T03:27:06.317Z\n"
+"POT-Creation-Date: 2024-12-16T12:36:28.842Z\n"
+"PO-Revision-Date: 2024-12-16T12:36:28.843Z\n"
 
-msgid "View keys"
-msgstr "View keys"
+msgid "DataStore"
+msgstr "DataStore"
 
-msgid "Click a namespace to view its keys"
-msgstr "Click a namespace to view its keys"
+msgid "UserDataStore"
+msgstr "UserDataStore"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Key deleted successfully"
+msgstr "Key deleted successfully"
+
+msgid "There was an error deleting the key"
+msgstr "There was an error deleting the key"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "More"
+msgstr "More"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "New Key"
+msgstr "New Key"
+
+msgid "New Namespace"
+msgstr "New Namespace"
 
 msgid "Add New Key"
 msgstr "Add New Key"
 
 msgid "Add New Namespace"
 msgstr "Add New Namespace"
-
-msgid "Namespace"
-msgstr "Namespace"
-
-msgid "Key"
-msgstr "Key"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -35,74 +56,53 @@ msgstr "Add Key"
 msgid "Add Namespace"
 msgstr "Add Namespace"
 
-msgid "Key created successfully"
-msgstr "Key created successfully"
+msgid "Namespace"
+msgstr "Namespace"
 
-msgid "There was an error creating the key"
-msgstr "There was an error creating the key"
+msgid "Key"
+msgstr "Key"
 
-msgid "Add new namespace"
-msgstr "Add new namespace"
+msgid "Delete Key"
+msgstr "Delete Key"
 
-msgid "New namespace"
-msgstr "New namespace"
-
-msgid "Add new key"
-msgstr "Add new key"
-
-msgid "New key"
-msgstr "New key"
-
-msgid "Delete"
-msgstr "Delete"
-
-msgid "Failed to fetch key values!"
-msgstr "Failed to fetch key values!"
-
-msgid "Key successfully updated"
-msgstr "Key successfully updated"
-
-msgid "There was an error updating the key"
-msgstr "There was an error updating the key"
-
-msgid "Loading"
-msgstr "Loading"
-
-msgid "Save changes"
-msgstr "Save changes"
-
-msgid "Key deleted successfully"
-msgstr "Key deleted successfully"
-
-msgid "There was an error deleting the key"
-msgstr "There was an error deleting the key"
-
-msgid "There was an error while deleting the key"
-msgstr "There was an error while deleting the key"
-
-msgid "Error fetching namespaces"
-msgstr "Error fetching namespaces"
-
-msgid "Namespaces"
-msgstr "Namespaces"
+msgid "Delete Namespace"
+msgstr "Delete Namespace"
 
 msgid "This will delete all the keys in this namespace"
 msgstr "This will delete all the keys in this namespace"
 
-msgid "DataStore"
-msgstr "DataStore"
+msgid "Invalid JSON value"
+msgstr "Invalid JSON value"
 
-msgid "User DataStore"
-msgstr "User DataStore"
+msgid "Save"
+msgstr "Save"
 
-msgid "Search"
-msgstr "Search"
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "Error getting this information"
+msgstr "Error getting this information"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
 
-msgid "Back"
-msgstr "Back"
+msgid "Back to datastore"
+msgstr "Back to datastore"
 
-msgid "Back to DataStore"
-msgstr "Back to DataStore"
+msgid "Search namespaces"
+msgstr "Search namespaces"
+
+msgid "Search keys in this namespace"
+msgstr "Search keys in this namespace"
+
+msgid "Key Name"
+msgstr "Key Name"
+
+msgid "Key updated successfully"
+msgstr "Key updated successfully"
+
+msgid "There was an error updating the key"
+msgstr "There was an error updating the key"

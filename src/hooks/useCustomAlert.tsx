@@ -1,9 +1,10 @@
-import { useAlert } from '@dhis2/app-service-alerts'
+import { useAlert } from '@dhis2/app-runtime'
 
 const useCustomAlert = () => {
     const { show } = useAlert(
         ({ message }) => message,
-        ({ isError }) => (isError ? { critical: true } : { success: true })
+        ({ isError }) =>
+            isError ? { critical: true } : { success: true, duration: 3000 }
     )
     return {
         showSuccess: (message) => show({ message }),
