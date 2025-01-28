@@ -1,8 +1,7 @@
 import { CssReset, CssVariables } from '@dhis2/ui'
-import PropTypes from 'prop-types'
 import React from 'react'
 
-function AppWrapper({ children }) {
+function AppWrapper({ children }: { children: React.ReactNode }) {
     return (
         <>
             <CssReset />
@@ -10,10 +9,6 @@ function AppWrapper({ children }) {
             {children}
         </>
     )
-}
-
-AppWrapper.propTypes = {
-    children: PropTypes.node,
 }
 
 export default AppWrapper

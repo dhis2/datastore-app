@@ -1,113 +1,208 @@
-.container {
-    width: 100%;
+/* layout */
+.page {
     height: 100%;
-    display: flex;
-    flex-direction: row;
+    background-color: var(--colors-grey200);
+    box-sizing: border-box;
+    overflow-y: hidden;
+}
+
+/* first page */
+
+.firstPage {
+    margin: 0 auto;
+    padding: 0;
+    width: 100vw;
+}
+
+.firstPageContainer {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
     font-size: 1rem;
 }
 
-.top {
-    margin-top: 0.5em;
-}
+/* second page */
 
-.bottom {
-    margin-bottom: 0.5em;
-}
-
-/* sidebar */
-.sidebar {
-    width: 20%;
-    margin: 0.1em;
-}
-
-.sidebarContent {
-    padding: 0.3em;
-    width: 20%;
-}
-
-.sidebarList h4 {
-    padding: 0;
-    margin: 0.5em;
-}
-
-.sidebarList ul {
-    margin: 0;
+.secondPage {
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
     padding: 0;
 }
 
-.select {
-    height: 70px;
-    padding: 0;
-    margin: 0;
-}
-
-/* main area */
-
-.main {
-    width: 80%;
-    margin: 0.1em;
-}
-
-/* --- keys */
-
-.keysTable {
-    margin-top: 10px;
-    padding: 0.2em;
-}
-
-/* nav link */
-
-/* sourced and adapted from https://github.com/dhis2/design-specs/blob/b65e6518dcc7c16733379cd80688e67a422fc742/src/components/sidenav.css#L73 (-> 104) */
-.navLink {
+.secondPageContainer {
     display: grid;
-    grid-template-columns: 2.5fr 0.5fr;
+    grid-template-columns: 40% 60%;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    background-color: white;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 3px;
 }
 
-.navLink button {
-    border: 0;
+.keysPanel {
+    height: 100%;
 }
 
-.navLink a {
-    display: block;
-    min-height: 36px;
-    padding: 10px;
-    /* background: var(--colors-grey100); */
-    text-decoration: none;
-    color: var(--colors-grey900);
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-}
-.navLink:hover,
-.navLink a:hover {
-    background: var(--colors-grey300);
-}
-.navLink:focus,
-.navLink a:focus {
-    outline: 2px solid white;
-    background: var(--colors-grey200);
-    outline-offset: -2px;
+.editorPanel {
+    height: 100%;
 }
 
-.navLink a.active,
-.navLink :global(.active) {
+/* page header */
+.pageHeader {
     font-weight: 500;
-    background: var(--colors-grey200);
-    box-shadow: inset 6px 0px 0px 0px var(--colors-grey500);
-}
-.navLink.active:hover {
-    background: var(--colors-grey300);
+    font-size: 15px;
+    padding: var(--spacers-dp16) var(--spacers-dp8);
+    display: flex;
+    color: var(--colors-grey900);
+    background: var(--colors-white);
+    border-block-end: 1px solid var(--colors-grey300);
 }
 
-/* Toolbar */
-.toolbar {
-    margin-top: 5px;
-    height: 70px;
+.secondPageHeader {
+    width: fit-content;
+    color: var(--colors-grey800);
+    text-decoration: none;
+    align-self: center;
+    font-size: 14px;
+    padding: var(--spacers-dp12) var(--spacers-dp8);
+    border-radius: 7px;
+}
+
+.secondPageHeader:hover {
+    background-color: var(--colors-grey300);
+    text-decoration: underline;
+}
+.secondPageHeader span {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: var(--spacers-dp8);
+}
+
+/* panel header */
+
+.panelHeader {
+    height: 50px;
+    padding: 0 0.5em;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-block-end: 1px solid var(--colors-grey300);
+    border-inline-end: 1px solid var(--colors-grey300);
 }
 
-.toolbar button {
-    align-self: center;
-    margin: 0 0 0 15px;
+.keysPanelHeader {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--colors-grey900);
+}
+
+.keysHeaderLabel {
+    display: flex;
+    gap: var(--spacers-dp4);
+}
+
+.keysHeaderLink {
+    font-size: 15px;
+    color: var(--colors-grey600);
+    text-decoration: none;
+}
+
+.keysHeaderLink:hover {
+    color: var(--colors-grey900);
+    text-decoration: underline;
+}
+
+.keysHeaderLabelDivider {
+    color: var(--colors-grey600);
+}
+
+.keysPanelMidSection {
+    padding: var(--spacers-dp8);
+}
+
+.emptyEditorPanelHeader {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--colors-grey600);
+}
+
+.editorPanelHeader {
+    font-size: 15px;
+    color: var(--colors-grey800);
+    font-weight: 500;
+}
+
+/* namespace view */
+
+.namespaceDataContainer {
+    margin: var(--spacers-dp16);
+    max-width: 60rem;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 3px;
+    background: var(--colors-white);
+}
+
+.midSection {
+    padding: var(--spacers-dp8);
+    display: grid;
+    grid-template-columns: repeat(1fr, 4);
+}
+
+.search {
+    grid-column: 1 / 2;
+}
+
+.createButton {
+    grid-column: 5;
+    color: var(--colors-grey600);
+}
+
+.createButton button {
+    width: fit-content;
+    float: right;
+}
+
+/* table */
+.columnHeader {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.actionButtons {
+    padding: 0;
+    margin: 0;
+}
+
+.actionButtons button {
+    height: fit-content;
+    border: none;
+    margin: 0 0.3em;
+    background-color: transparent;
+}
+
+.actionButtons button:active button:focus-visible {
+    background-color: transparent;
+}
+
+/* edit page */
+
+.editButtons {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: var(--spacers-dp4);
+}
+
+.editButtons button {
+    width: fit-content;
+}
+
+/* error */
+.errorNotice {
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    justify-content: center;
 }

@@ -3,13 +3,13 @@ import React from 'react'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
 
-const SearchField = () => {
+const SearchField = ({ placeholder }: { placeholder?: string }) => {
     return (
-        <div className={classes.bottom}>
+        <div className={classes.search}>
             <InputField
-                label={i18n.t('Search')}
-                name="search-namespace"
-                placeholder={i18n.t('Namespace')}
+                dense
+                name="search"
+                placeholder={placeholder || i18n.t('Search')}
             />
         </div>
     )
