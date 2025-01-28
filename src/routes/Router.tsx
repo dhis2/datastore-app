@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate, createHashRouter } from 'react-router-dom'
 import ErrorComponent from '../components/error/ErrorComponent'
-import Edit from '../components/pages/Edit'
+import EditPage from '../components/pages/Edit'
 import NamespacesPage from '../components/pages/Namespaces'
 import EditorPanel from '../components/panels/EditorPanel'
 import EmptyEditorPanel from '../components/panels/EmptyEditorPanel'
@@ -20,7 +20,7 @@ export const hashRouter = createHashRouter([
             },
             {
                 path: ':store/edit/:namespace',
-                element: <Edit />,
+                element: <EditPage />,
                 children: [
                     {
                         index: true,

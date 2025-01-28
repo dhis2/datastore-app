@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-19T22:29:04.401Z\n"
-"PO-Revision-Date: 2024-12-19T22:29:04.402Z\n"
+"POT-Creation-Date: 2024-12-19T22:30:05.381Z\n"
+"PO-Revision-Date: 2024-12-19T22:30:05.382Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -41,6 +41,33 @@ msgstr "Back to all namespaces"
 msgid "Configure Namespaces"
 msgstr "Configure Namespaces"
 
+msgid "Choose a key to start editing"
+msgstr "Choose a key to start editing"
+
+msgid "DataStore"
+msgstr "DataStore"
+
+msgid "UserDataStore"
+msgstr "UserDataStore"
+
+msgid "There was a problem fetching this data - {{error}}"
+msgstr "There was a problem fetching this data - {{error}}"
+
+msgid "Do not save these changes?"
+msgstr "Do not save these changes?"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Key '{{key}}' updated successfully"
+msgstr "Key '{{key}}' updated successfully"
+
+msgid "There was a problem updating the key - {{error}}"
+msgstr "There was a problem updating the key - {{error}}"
+
+msgid "There was a problem - {{error}}"
+msgstr "There was a problem - {{error}}"
+
 msgid "Close"
 msgstr "Close"
 
@@ -50,14 +77,17 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
-msgid "Choose a key to start editing"
-msgstr "Choose a key to start editing"
+msgid "Key '{{key}}' added successfully"
+msgstr "Key '{{key}}' added successfully"
 
-msgid "DataStore"
-msgstr "DataStore"
+msgid "There was a problem adding this key - {{error}}"
+msgstr "There was a problem adding this key - {{error}}"
 
-msgid "UserDataStore"
-msgstr "UserDataStore"
+msgid "Key '{{selectedKey}}' deleted successfully!"
+msgstr "Key '{{selectedKey}}' deleted successfully!"
+
+msgid "There was a problem deleting this key - {{error}}"
+msgstr "There was a problem deleting this key - {{error}}"
 
 msgid "Key '{{key}}' added successfully"
 msgstr "Key '{{key}}' added successfully"
