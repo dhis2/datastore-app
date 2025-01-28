@@ -43,7 +43,7 @@ const KeysDataSection = ({ query }) => {
     const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
         data?.results
     )
-
+    
     const numberOfKeysInNamespace = data?.results?.length
 
     const handleCreate = async ({ key }) => {

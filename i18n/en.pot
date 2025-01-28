@@ -89,6 +89,18 @@ msgstr "Key '{{selectedKey}}' deleted successfully!"
 msgid "There was a problem deleting this key - {{error}}"
 msgstr "There was a problem deleting this key - {{error}}"
 
+msgid "Key '{{key}}' added successfully"
+msgstr "Key '{{key}}' added successfully"
+
+msgid "There was a problem adding this key - {{error}}"
+msgstr "There was a problem adding this key - {{error}}"
+
+msgid "Key '{{selectedKey}}' deleted successfully!"
+msgstr "Key '{{selectedKey}}' deleted successfully!"
+
+msgid "There was a problem deleting this key - {{error}}"
+msgstr "There was a problem deleting this key - {{error}}"
+
 msgid "keys"
 msgstr "keys"
 
