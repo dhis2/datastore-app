@@ -1,4 +1,4 @@
-import { useAlert } from '@dhis2/app-service-alerts'
+import { useAlert } from '@dhis2/app-runtime'
 
 const useCustomAlert = () => {
     const { show } = useAlert(
