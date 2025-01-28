@@ -2,8 +2,112 @@
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
     font-size: 1rem;
+}
+
+.top {
+    margin-top: 0.5em;
+}
+
+.bottom {
+    margin-bottom: 0.5em;
+}
+
+/* sidebar */
+.sidebar {
+    width: 20%;
+    margin: 0.1em;
+}
+
+.sidebarContent {
+    padding: 0.3em;
+    width: 20%;
+}
+
+.sidebarList h4 {
+    padding: 0;
+    margin: 0.5em;
+}
+
+.sidebarList ul {
+    margin: 0;
+    padding: 0;
+}
+
+.select {
+    height: 70px;
+    padding: 0;
+    margin: 0;
+}
+
+/* main area */
+
+.main {
+    width: 80%;
+    margin: 0.1em;
+}
+
+/* --- keys */
+
+.keysTable {
+    margin-top: 10px;
+    padding: 0.2em;
+}
+
+/* nav link */
+
+/* sourced and adapted from https://github.com/dhis2/design-specs/blob/b65e6518dcc7c16733379cd80688e67a422fc742/src/components/sidenav.css#L73 (-> 104) */
+.navLink {
+    display: grid;
+    grid-template-columns: 2.5fr 0.5fr;
+}
+
+.navLink button {
+    border: 0;
+}
+
+.navLink a {
+    display: block;
+    min-height: 36px;
+    padding: 10px;
+    /* background: var(--colors-grey100); */
+    text-decoration: none;
+    color: var(--colors-grey900);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+.navLink:hover,
+.navLink a:hover {
+    background: var(--colors-grey300);
+}
+.navLink:focus,
+.navLink a:focus {
+    outline: 2px solid white;
+    background: var(--colors-grey200);
+    outline-offset: -2px;
+}
+
+.navLink a.active,
+.navLink :global(.active) {
+    font-weight: 500;
+    background: var(--colors-grey200);
+    box-shadow: inset 6px 0px 0px 0px var(--colors-grey500);
+}
+.navLink.active:hover {
+    background: var(--colors-grey300);
+}
+
+/* Toolbar */
+.toolbar {
+    margin-top: 5px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+}
+
+.toolbar button {
+    align-self: center;
+    margin: 0 0 0 15px;
 }
