@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-19T16:36:13.574Z\n"
-"PO-Revision-Date: 2024-12-19T16:36:13.575Z\n"
+"POT-Creation-Date: 2024-12-19T22:29:04.401Z\n"
+"PO-Revision-Date: 2024-12-19T22:29:04.402Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -25,6 +25,9 @@ msgstr "Cancel"
 
 msgid "Add"
 msgstr "Add"
+
+msgid "Delete"
+msgstr "Delete"
 
 msgid "Key"
 msgstr "Key"
@@ -56,6 +59,18 @@ msgstr "DataStore"
 msgid "UserDataStore"
 msgstr "UserDataStore"
 
+msgid "Key '{{key}}' added successfully"
+msgstr "Key '{{key}}' added successfully"
+
+msgid "There was a problem adding this key - {{error}}"
+msgstr "There was a problem adding this key - {{error}}"
+
+msgid "Key '{{selectedKey}}' deleted successfully!"
+msgstr "Key '{{selectedKey}}' deleted successfully!"
+
+msgid "There was a problem deleting this key - {{error}}"
+msgstr "There was a problem deleting this key - {{error}}"
+
 msgid "keys"
 msgstr "keys"
 
@@ -68,6 +83,21 @@ msgstr "Search keys"
 msgid "Add New Key"
 msgstr "Add New Key"
 
+msgid "Delete Key"
+msgstr "Delete Key"
+
+msgid "Namespace '{{namespace}}' and key '{{key}}' added successfully!"
+msgstr "Namespace '{{namespace}}' and key '{{key}}' added successfully!"
+
+msgid "There was a problem adding this namespace - {{error}}"
+msgstr "There was a problem adding this namespace - {{error}}"
+
+msgid "Namespace '{{namespace}}' deleted successfully!"
+msgstr "Namespace '{{namespace}}' deleted successfully!"
+
+msgid "There was a problem deleting this namespace - {{error}}"
+msgstr "There was a problem deleting this namespace - {{error}}"
+
 msgid "Search namespaces"
 msgstr "Search namespaces"
 
@@ -77,11 +107,14 @@ msgstr "New Namespace"
 msgid "Add New Namespace"
 msgstr "Add New Namespace"
 
+msgid "Delete Namespace"
+msgstr "Delete Namespace"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
+
 msgid "Search"
 msgstr "Search"
-
-msgid "Delete"
-msgstr "Delete"
 
 msgid "Actions"
 msgstr "Actions"
