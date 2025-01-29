@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-19T22:30:05.381Z\n"
-"PO-Revision-Date: 2024-12-19T22:30:05.382Z\n"
+"POT-Creation-Date: 2025-01-29T15:36:45.297Z\n"
+"PO-Revision-Date: 2025-01-29T15:36:45.298Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -35,11 +35,8 @@ msgstr "Key"
 msgid "Namespace"
 msgstr "Namespace"
 
-msgid "Back to all namespaces"
-msgstr "Back to all namespaces"
-
-msgid "Configure Namespaces"
-msgstr "Configure Namespaces"
+msgid "Namespaces"
+msgstr "Namespaces"
 
 msgid "Choose a key to start editing"
 msgstr "Choose a key to start editing"
@@ -53,8 +50,8 @@ msgstr "UserDataStore"
 msgid "There was a problem fetching this data - {{error}}"
 msgstr "There was a problem fetching this data - {{error}}"
 
-msgid "Do not save these changes?"
-msgstr "Do not save these changes?"
+msgid "Discard these changes?"
+msgstr "Discard these changes?"
 
 msgid "Confirm"
 msgstr "Confirm"
@@ -89,21 +86,6 @@ msgstr "Key '{{selectedKey}}' deleted successfully!"
 msgid "There was a problem deleting this key - {{error}}"
 msgstr "There was a problem deleting this key - {{error}}"
 
-msgid "Key '{{key}}' added successfully"
-msgstr "Key '{{key}}' added successfully"
-
-msgid "There was a problem adding this key - {{error}}"
-msgstr "There was a problem adding this key - {{error}}"
-
-msgid "Key '{{selectedKey}}' deleted successfully!"
-msgstr "Key '{{selectedKey}}' deleted successfully!"
-
-msgid "There was a problem deleting this key - {{error}}"
-msgstr "There was a problem deleting this key - {{error}}"
-
-msgid "keys"
-msgstr "keys"
-
 msgid "New Key"
 msgstr "New Key"
 
@@ -134,9 +116,6 @@ msgstr "Search namespaces"
 msgid "New namespace"
 msgstr "New namespace"
 
-msgid "Namespace"
-msgstr "Namespace"
-
 msgid "Add New Namespace"
 msgstr "Add New Namespace"
 
@@ -151,6 +130,9 @@ msgstr "Search"
 
 msgid "Actions"
 msgstr "Actions"
+
+msgid "No items found"
+msgstr "No items found"
 
 msgid "Share"
 msgstr "Share"

@@ -206,3 +206,13 @@
     display: flex;
     justify-content: center;
 }
+
+.errorComponent {
+    margin-top: 200px;
+}
+
+/* loader */
+.centeredLoader {
+    display: flex;
+    justify-content: center;
+}

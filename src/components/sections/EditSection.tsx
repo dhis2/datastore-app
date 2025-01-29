@@ -41,7 +41,7 @@ const EditSection = ({ query }) => {
         setValue(value)
     }
 
-    const closeEditorAlert = useAlert(i18n.t('Do not save these changes?'), {
+    const closeEditorAlert = useAlert(i18n.t('Discard these changes?'), {
         warning: true,
         actions: [
             {
