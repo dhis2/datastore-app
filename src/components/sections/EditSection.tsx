@@ -159,7 +159,7 @@ const EditSection = ({ query }) => {
                 )}
             </PanelHeader>
             <Editor
-                value={loading ? 'Loading...' : value}
+                value={loading ? i18n.t('Loading') : value}
                 handleChange={handleEditorChange}
             />
         </div>

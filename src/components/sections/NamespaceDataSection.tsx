@@ -7,13 +7,14 @@ import useCustomAlert from '../../hooks/useCustomAlert'
 import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
+import KeyField from '../fields/KeyField'
+import NamespaceField from '../fields/NamespaceField'
+import SearchField from '../fields/SearchField'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
-import { KeysField, NamespaceField } from '../modals/Fields'
 import ItemsTable from '../table/ItemsTable'
 import CreateButton from './CreateButton'
-import SearchField from './SearchField'
 
 interface QueryResults {
     results: []
@@ -45,15 +46,6 @@ const NamespaceDataSection = ({ query }) => {
             },
             {
                 onComplete() {
-                    showSuccess(
-                        i18n.t(
-                            "Namespace '{{namespace}}' and key '{{key}}' added successfully!",
-                            {
-                                namespace: values.namespace,
-                                key: values.key,
-                            }
-                        )
-                    )
                     refetch()
                     navigate(`edit/${values?.namespace}`)
                     setOpenCreateModal(false)
@@ -86,7 +78,7 @@ const NamespaceDataSection = ({ query }) => {
                     refetch()
                     showSuccess(
                         i18n.t(
-                            "Namespace '{{namespace}}' deleted successfully!",
+                            "Namespace '{{namespace}}' deleted successfully",
                             {
                                 namespace: selectedNamespace,
                             }
@@ -146,8 +138,10 @@ const NamespaceDataSection = ({ query }) => {
                     closeModal={() => setOpenCreateModal(false)}
                     handleCreate={handleCreate}
                 >
-                    <NamespaceField initialFocus />
-                    <KeysField />
+                    <div className={classes.namespaceModalFields}>
+                        <NamespaceField initialFocus />
+                        <KeyField />
+                    </div>
                 </CreateModal>
             )}
             {openDeleteModal && (

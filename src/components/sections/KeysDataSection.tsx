@@ -8,14 +8,14 @@ import useCustomAlert from '../../hooks/useCustomAlert'
 import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
+import KeyField from '../fields/KeyField'
+import SearchField from '../fields/SearchField'
 import PanelHeader from '../header/PanelHeader'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
-import { KeysField } from '../modals/Fields'
 import ItemsTable from '../table/ItemsTable'
 import CreateButton from './CreateButton'
-import SearchField from './SearchField'
 
 interface QueryResults {
     results: []
@@ -57,11 +57,6 @@ const KeysDataSection = ({ query }) => {
             {
                 onComplete() {
                     setOpenCreateModal(false)
-                    showSuccess(
-                        i18n.t("Key '{{key}}' added successfully", {
-                            key,
-                        })
-                    )
                     refetch({ id: currentNamespace })
                 },
                 onError(error) {
@@ -89,7 +84,7 @@ const KeysDataSection = ({ query }) => {
         const onComplete = () => {
             setOpenDeleteModal(false)
             showSuccess(
-                i18n.t("Key '{{selectedKey}}' deleted successfully!", {
+                i18n.t("Key '{{selectedKey}}' deleted successfully", {
                     selectedKey,
                 })
             )
@@ -182,7 +177,7 @@ const KeysDataSection = ({ query }) => {
                     closeModal={() => setOpenCreateModal(false)}
                     handleCreate={handleCreate}
                 >
-                    <KeysField initialFocus />
+                    <KeyField initialFocus />
                 </CreateModal>
             )}
             {openDeleteModal && (

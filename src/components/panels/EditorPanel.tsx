@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import EditSection from '../sections/EditSection'
 
-const DataStoreKeyValuesQuery = {
+const dataStoreKeyValuesQuery = {
     results: {
         resource: 'dataStore',
         id: ({ key, namespace }: { key: string; namespace: string }) =>
@@ -11,7 +11,7 @@ const DataStoreKeyValuesQuery = {
     },
 }
 
-const UserDataStoreKeyValuesQuery = {
+const userDataStoreKeyValuesQuery = {
     results: {
         resource: 'userDataStore',
         id: ({ key, namespace }: { key: string; namespace: string }) =>
@@ -25,10 +25,10 @@ const EditorPanel = () => {
     return (
         <div>
             {store === DATASTORE && (
-                <EditSection query={DataStoreKeyValuesQuery} />
+                <EditSection query={dataStoreKeyValuesQuery} />
             )}
             {store === USERDATASTORE && (
-                <EditSection query={UserDataStoreKeyValuesQuery} />
+                <EditSection query={userDataStoreKeyValuesQuery} />
             )}
         </div>
     )

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-29T15:36:45.297Z\n"
-"PO-Revision-Date: 2025-01-29T15:36:45.298Z\n"
+"POT-Creation-Date: 2025-01-31T12:29:22.937Z\n"
+"PO-Revision-Date: 2025-01-31T12:29:22.938Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -29,11 +29,11 @@ msgstr "Add"
 msgid "Delete"
 msgstr "Delete"
 
-msgid "Key"
-msgstr "Key"
+msgid "Special characters are not allowed in this field"
+msgstr "Special characters are not allowed in this field"
 
-msgid "Namespace"
-msgstr "Namespace"
+msgid "Alphanumeric characters only"
+msgstr "Alphanumeric characters only"
 
 msgid "Namespaces"
 msgstr "Namespaces"
@@ -74,14 +74,14 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
-msgid "Key '{{key}}' added successfully"
-msgstr "Key '{{key}}' added successfully"
+msgid "Loading"
+msgstr "Loading"
 
 msgid "There was a problem adding this key - {{error}}"
 msgstr "There was a problem adding this key - {{error}}"
 
-msgid "Key '{{selectedKey}}' deleted successfully!"
-msgstr "Key '{{selectedKey}}' deleted successfully!"
+msgid "Key '{{selectedKey}}' deleted successfully"
+msgstr "Key '{{selectedKey}}' deleted successfully"
 
 msgid "There was a problem deleting this key - {{error}}"
 msgstr "There was a problem deleting this key - {{error}}"
@@ -92,20 +92,20 @@ msgstr "New Key"
 msgid "Search keys"
 msgstr "Search keys"
 
+msgid "Key"
+msgstr "Key"
+
 msgid "Add New Key"
 msgstr "Add New Key"
 
 msgid "Delete Key"
 msgstr "Delete Key"
 
-msgid "Namespace '{{namespace}}' and key '{{key}}' added successfully!"
-msgstr "Namespace '{{namespace}}' and key '{{key}}' added successfully!"
-
 msgid "There was a problem adding this namespace - {{error}}"
 msgstr "There was a problem adding this namespace - {{error}}"
 
-msgid "Namespace '{{namespace}}' deleted successfully!"
-msgstr "Namespace '{{namespace}}' deleted successfully!"
+msgid "Namespace '{{namespace}}' deleted successfully"
+msgstr "Namespace '{{namespace}}' deleted successfully"
 
 msgid "There was a problem deleting this namespace - {{error}}"
 msgstr "There was a problem deleting this namespace - {{error}}"
@@ -115,6 +115,9 @@ msgstr "Search namespaces"
 
 msgid "New namespace"
 msgstr "New namespace"
+
+msgid "Namespace"
+msgstr "Namespace"
 
 msgid "Add New Namespace"
 msgstr "Add New Namespace"
