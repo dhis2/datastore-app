@@ -1,13 +1,9 @@
-import { Button } from '@dhis2/ui'
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import classes from '../../App.module.css'
+import { useParams } from 'react-router-dom'
 import { DATASTORE, USERDATASTORE } from '../../constants/constants'
-import i18n from '../../locales'
-import PanelHeader from '../header/PanelHeader'
-import EditorSection from '../sections/EditorSection'
+import EditSection from '../sections/EditSection'
 
-const DataStoreKeyValuesQuery = {
+const dataStoreKeyValuesQuery = {
     results: {
         resource: 'dataStore',
         id: ({ key, namespace }: { key: string; namespace: string }) =>
@@ -15,7 +11,7 @@ const DataStoreKeyValuesQuery = {
     },
 }
 
-const UserDataStoreKeyValuesQuery = {
+const userDataStoreKeyValuesQuery = {
     results: {
         resource: 'userDataStore',
         id: ({ key, namespace }: { key: string; namespace: string }) =>
@@ -24,43 +20,15 @@ const UserDataStoreKeyValuesQuery = {
 }
 
 const EditorPanel = () => {
-    const { key, namespace, store } = useParams()
-    const navigate = useNavigate()
+    const { store } = useParams()
 
     return (
         <div>
-            <PanelHeader>
-                <span className={classes.editorPanelHeader}>{key}</span>
-                <div className={classes.editButtons}>
-                    <Button
-                        small
-                        aria-label={i18n.t('Close')}
-                        name="close"
-                        onClick={() => {
-                            console.log('deselect key and cancel mutation?')
-                            navigate(`/${store}/edit/${namespace}`)
-                        }}
-                        title={i18n.t('Close')}
-                    >
-                        {i18n.t('Close')}
-                    </Button>
-                    <Button
-                        small
-                        aria-label={i18n.t('Save')}
-                        name="save"
-                        onClick={() => console.log('save changes')}
-                        title={i18n.t('Save')}
-                        primary
-                    >
-                        {i18n.t('Save changes')}
-                    </Button>
-                </div>
-            </PanelHeader>
             {store === DATASTORE && (
-                <EditorSection query={DataStoreKeyValuesQuery} />
+                <EditSection query={dataStoreKeyValuesQuery} />
             )}
             {store === USERDATASTORE && (
-                <EditorSection query={UserDataStoreKeyValuesQuery} />
+                <EditSection query={userDataStoreKeyValuesQuery} />
             )}
         </div>
     )

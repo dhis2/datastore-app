@@ -6,29 +6,45 @@ import {
     TableBody,
     TableHead,
 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import i18n from '../../locales'
-import TableActions from './TableActions'
+import DeleteAction from './DeleteAction'
+import SharingAction from './SharingAction'
 
-type TableProps = {
-    data: {
-        results: string[]
-    }
+interface ItemsTableProps {
+    tableData: string[]
     label: string
+    setOpenDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
+    setSelectedItem: React.Dispatch<React.SetStateAction<string>>
 }
 
-const ItemsTable = ({ data, label }: TableProps) => {
+const ItemsTable = ({
+    tableData,
+    label,
+    setOpenDeleteModal,
+    setSelectedItem,
+}: ItemsTableProps) => {
     const navigate = useNavigate()
     const { namespace: currentNamespace, key } = useParams()
 
-    const [activeCell, setActiveCell] = useState(key || null)
+    const [activeRow, setActiveRow] = useState(key || null)
+
+    const handleDeleteBtnClick = (item) => {
+        setOpenDeleteModal(true)
+        setSelectedItem(item)
+        setActiveRow(item)
+    }
+
+    useEffect(() => {
+        setActiveRow(key)
+    }, [key])
 
     return (
         <div>
-            {data && (
-                <DataTable layout="fixed">
+            {tableData && (
+                <DataTable layout="fixed" scrollHeight="75vh">
                     <TableHead>
                         <DataTableRow>
                             <DataTableColumnHeader
@@ -48,13 +64,13 @@ const ItemsTable = ({ data, label }: TableProps) => {
                         </DataTableRow>
                     </TableHead>
                     <TableBody>
-                        {data?.results?.length && (
+                        {tableData?.length ? (
                             <>
-                                {data.results.map((item, index) => {
+                                {tableData.map((item, index) => {
                                     return (
                                         <DataTableRow
                                             key={`${item}-${index}`}
-                                            selected={item === activeCell}
+                                            selected={item === activeRow}
                                         >
                                             <DataTableCell
                                                 bordered
@@ -70,7 +86,7 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                                     } else {
                                                         navigate(`edit/${item}`)
                                                     }
-                                                    setActiveCell(item)
+                                                    setActiveRow(item)
                                                 }}
                                             >
                                                 {item}
@@ -83,12 +99,31 @@ const ItemsTable = ({ data, label }: TableProps) => {
                                                         : '10%'
                                                 }
                                             >
-                                                <TableActions />
+                                                <div
+                                                    className={
+                                                        classes.actionButtons
+                                                    }
+                                                >
+                                                    <SharingAction />
+                                                    <DeleteAction
+                                                        handleDeleteBtnClick={() =>
+                                                            handleDeleteBtnClick(
+                                                                item
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </DataTableCell>
                                         </DataTableRow>
                                     )
                                 })}
                             </>
+                        ) : (
+                            <DataTableRow>
+                                <DataTableCell bordered>
+                                    {i18n.t('No items found')}
+                                </DataTableCell>
+                            </DataTableRow>
                         )}
                     </TableBody>
                 </DataTable>

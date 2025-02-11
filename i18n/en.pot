@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-22T09:21:04.011Z\n"
-"PO-Revision-Date: 2025-01-22T09:21:04.012Z\n"
+"POT-Creation-Date: 2025-01-31T12:29:22.937Z\n"
+"PO-Revision-Date: 2025-01-31T12:29:22.938Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -20,17 +20,23 @@ msgstr "Back to datastore"
 msgid "An error has occurred. Try again"
 msgstr "An error has occurred. Try again"
 
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Special characters are not allowed in this field"
+msgstr "Special characters are not allowed in this field"
+
+msgid "Alphanumeric characters only"
+msgstr "Alphanumeric characters only"
+
 msgid "Namespaces"
 msgstr "Namespaces"
-
-msgid "Close"
-msgstr "Close"
-
-msgid "Save"
-msgstr "Save"
-
-msgid "Save changes"
-msgstr "Save changes"
 
 msgid "Choose a key to start editing"
 msgstr "Choose a key to start editing"
@@ -41,6 +47,45 @@ msgstr "DataStore"
 msgid "UserDataStore"
 msgstr "UserDataStore"
 
+msgid "There was a problem fetching this data - {{error}}"
+msgstr "There was a problem fetching this data - {{error}}"
+
+msgid "Discard these changes?"
+msgstr "Discard these changes?"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Key '{{key}}' updated successfully"
+msgstr "Key '{{key}}' updated successfully"
+
+msgid "There was a problem updating the key - {{error}}"
+msgstr "There was a problem updating the key - {{error}}"
+
+msgid "There was a problem - {{error}}"
+msgstr "There was a problem - {{error}}"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "There was a problem adding this key - {{error}}"
+msgstr "There was a problem adding this key - {{error}}"
+
+msgid "Key '{{selectedKey}}' deleted successfully"
+msgstr "Key '{{selectedKey}}' deleted successfully"
+
+msgid "There was a problem deleting this key - {{error}}"
+msgstr "There was a problem deleting this key - {{error}}"
+
 msgid "New Key"
 msgstr "New Key"
 
@@ -49,6 +94,21 @@ msgstr "Search keys"
 
 msgid "Key"
 msgstr "Key"
+
+msgid "Add New Key"
+msgstr "Add New Key"
+
+msgid "Delete Key"
+msgstr "Delete Key"
+
+msgid "There was a problem adding this namespace - {{error}}"
+msgstr "There was a problem adding this namespace - {{error}}"
+
+msgid "Namespace '{{namespace}}' deleted successfully"
+msgstr "Namespace '{{namespace}}' deleted successfully"
+
+msgid "There was a problem deleting this namespace - {{error}}"
+msgstr "There was a problem deleting this namespace - {{error}}"
 
 msgid "Search namespaces"
 msgstr "Search namespaces"
@@ -59,14 +119,23 @@ msgstr "New namespace"
 msgid "Namespace"
 msgstr "Namespace"
 
+msgid "Add New Namespace"
+msgstr "Add New Namespace"
+
+msgid "Delete Namespace"
+msgstr "Delete Namespace"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
+
 msgid "Search"
 msgstr "Search"
 
-msgid "Delete"
-msgstr "Delete"
-
 msgid "Actions"
 msgstr "Actions"
+
+msgid "No items found"
+msgstr "No items found"
 
 msgid "Share"
 msgstr "Share"

@@ -13,10 +13,7 @@ const EmptyEditorPanel = () => {
                 </span>
             </PanelHeader>
             <div>
-                <Editor
-                    value={''}
-                    handleChange={() => console.log('editor changes')}
-                />
+                <Editor value={''} />
             </div>
         </div>
     )
