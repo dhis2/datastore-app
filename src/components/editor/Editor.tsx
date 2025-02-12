@@ -1,38 +1,53 @@
-import { json, jsonParseLinter } from '@codemirror/lang-json'
-import { linter, lintGutter } from '@codemirror/lint'
-import { search } from '@codemirror/search'
-import CodeMirror, { EditorView } from '@uiw/react-codemirror'
-import React from 'react'
-import './editor-styles.css'
-import { useEditContext } from '../context/EditContext'
+import { Tab, TabBar } from '@dhis2/ui'
+import { EditorView } from '@uiw/react-codemirror'
+import React, { useState } from 'react'
+import i18n from '../../locales'
+import CodeEditor from './CodeEditor'
+import TreeViewEditor from './TreeEditor'
+
+type EditorViewMode = 'tree' | 'code'
 
 type EditorProps = {
-    value?: string
+    loading: boolean
+    value: string
     setEditorView?: (view: EditorView) => void
 }
 
-const Editor = ({ value, setEditorView }: EditorProps) => {
-    const { setHasUnsavedChanges } = useEditContext()
-
+const Editor = ({ loading, value, setEditorView }: EditorProps) => {
+    const [view, setView] = useState<EditorViewMode>('code')
     return (
-        <CodeMirror
-            theme={'dark'}
-            value={value}
-            height="90vh"
-            extensions={[
-                json(),
-                lintGutter(),
-                search({
-                    top: true,
-                }),
-                linter(jsonParseLinter(), {
-                    delay: 500,
-                }),
-            ]}
-            onChange={() => setHasUnsavedChanges(true)}
-            onCreateEditor={(view) => setEditorView(view)}
-            autoFocus
-        />
+        <>
+            <TabBar>
+                <Tab
+                    onClick={() => {
+                        setView('code')
+                    }}
+                    selected={view === 'code'}
+                >
+                    {i18n.t('Code')}
+                </Tab>
+                <Tab
+                    onClick={() => {
+                        setView('tree')
+                    }}
+                    selected={view === 'tree'}
+                >
+                    {' '}
+                    {i18n.t('Tree')}
+                </Tab>
+            </TabBar>
+            <div>
+                {!loading &&
+                    (view === 'code' ? (
+                        <CodeEditor
+                            value={value}
+                            setEditorView={setEditorView}
+                        />
+                    ) : (
+                        view === 'tree' && <TreeViewEditor data={value} />
+                    ))}
+            </div>
+        </>
     )
 }
 

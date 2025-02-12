@@ -105,6 +105,7 @@
 
 .keysPanelMidSection {
     padding: var(--spacers-dp8);
+    border-inline-end: 1px solid var(--colors-grey300);
 }
 
 /* namespace view */

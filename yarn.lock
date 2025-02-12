@@ -3440,6 +3440,11 @@
     "@uiw/codemirror-extensions-basic-setup" "4.23.6"
     codemirror "^6.0.0"
 
+"@uiw/react-json-view@^2.0.0-alpha.30":
+  version "2.0.0-alpha.30"
+  resolved "https://registry.yarnpkg.com/@uiw/react-json-view/-/react-json-view-2.0.0-alpha.30.tgz#85db25b1a61cccc5c6c51350894515f8b7100e52"
+  integrity sha512-ufvvirUQcITU9s4R12b7hn/t7ngLCYp1KbBxE+eAD35o3Ey+uxfKvgWmIwGFhV3hFXXxMJ8SHQKwl/ywNCHsDA==
+
 "@ungap/structured-clone@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"

@@ -128,6 +128,7 @@ const EditSection = ({ query }: EditSectionProps) => {
                     </Center>
                 ) : (
                     <Editor
+                        loading={loading}
                         value={JSON.stringify(data?.results, null, 4) || '{}'}
                         setEditorView={setEditorView}
                     />
