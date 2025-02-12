@@ -1,15 +1,15 @@
 import { json, jsonParseLinter } from '@codemirror/lang-json'
 import { linter, lintGutter } from '@codemirror/lint'
 import { search } from '@codemirror/search'
-import CodeMirror, { ViewUpdate } from '@uiw/react-codemirror'
+import CodeMirror from '@uiw/react-codemirror'
 import React from 'react'
 
-type EditorProps = {
-    handleChange?: (value: string, viewUpdate: ViewUpdate) => void
-    value?: string
+type CodeEditorProps = {
+    onChange: (value: string) => void
+    initialData: string
 }
 
-const Editor = ({ value, handleChange }: EditorProps) => {
+const CodeEditor = ({ initialData: value, onChange }: CodeEditorProps) => {
     return (
         <CodeMirror
             theme={'dark'}
@@ -25,10 +25,10 @@ const Editor = ({ value, handleChange }: EditorProps) => {
                     delay: 1000,
                 }),
             ]}
-            onChange={handleChange}
+            onChange={onChange}
             autoFocus
         />
     )
 }
 
-export default Editor
+export default CodeEditor
