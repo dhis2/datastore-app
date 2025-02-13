@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
+import { DATASTORE } from '../../constants/constants'
 import i18n from '../../locales'
 import DeleteAction from './DeleteAction'
 import SharingAction from './SharingAction'
@@ -27,7 +28,9 @@ const ItemsTable = ({
     setSelectedItem,
 }: ItemsTableProps) => {
     const navigate = useNavigate()
-    const { namespace: currentNamespace, key } = useParams()
+    const { store, namespace: currentNamespace, key } = useParams()
+
+    const showShareAction = Boolean(store === DATASTORE && currentNamespace)
 
     const [activeRow, setActiveRow] = useState(key || null)
 
@@ -104,7 +107,11 @@ const ItemsTable = ({
                                                         classes.actionButtons
                                                     }
                                                 >
-                                                    <SharingAction />
+                                                    {showShareAction && (
+                                                        <SharingAction
+                                                            dataStoreKey={item}
+                                                        />
+                                                    )}
                                                     <DeleteAction
                                                         handleDeleteBtnClick={() =>
                                                             handleDeleteBtnClick(
