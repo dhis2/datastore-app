@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-01-31T12:29:22.937Z\n"
-"PO-Revision-Date: 2025-01-31T12:29:22.938Z\n"
+"POT-Creation-Date: 2025-02-13T07:30:11.793Z\n"
+"PO-Revision-Date: 2025-02-13T07:30:11.794Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -20,6 +20,21 @@ msgstr "Back to datastore"
 msgid "An error has occurred. Try again"
 msgstr "An error has occurred. Try again"
 
+msgid "Key"
+msgstr "Key"
+
+msgid "Namespace"
+msgstr "Namespace"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Special characters are not allowed in this field"
+msgstr "Special characters are not allowed in this field"
+
+msgid "Alphanumeric characters only"
+msgstr "Alphanumeric characters only"
+
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -28,12 +43,6 @@ msgstr "Add"
 
 msgid "Delete"
 msgstr "Delete"
-
-msgid "Special characters are not allowed in this field"
-msgstr "Special characters are not allowed in this field"
-
-msgid "Alphanumeric characters only"
-msgstr "Alphanumeric characters only"
 
 msgid "Namespaces"
 msgstr "Namespaces"
@@ -92,9 +101,6 @@ msgstr "New Key"
 msgid "Search keys"
 msgstr "Search keys"
 
-msgid "Key"
-msgstr "Key"
-
 msgid "Add New Key"
 msgstr "Add New Key"
 
@@ -116,9 +122,6 @@ msgstr "Search namespaces"
 msgid "New namespace"
 msgstr "New namespace"
 
-msgid "Namespace"
-msgstr "Namespace"
-
 msgid "Add New Namespace"
 msgstr "Add New Namespace"
 
@@ -127,9 +130,6 @@ msgstr "Delete Namespace"
 
 msgid "This will delete all the keys in this namespace"
 msgstr "This will delete all the keys in this namespace"
-
-msgid "Search"
-msgstr "Search"
 
 msgid "Actions"
 msgstr "Actions"
