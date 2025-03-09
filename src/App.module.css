@@ -43,10 +43,12 @@
 
 .keysPanel {
     height: 100%;
+    width: 100%;
 }
 
 .editorPanel {
     height: 100%;
+    width: 100%;
 }
 
 /* page header */
@@ -60,79 +62,49 @@
     border-block-end: 1px solid var(--colors-grey300);
 }
 
-.secondPageHeader {
-    width: fit-content;
-    color: var(--colors-grey800);
-    text-decoration: none;
-    align-self: center;
-    font-size: 14px;
-    padding: var(--spacers-dp12) var(--spacers-dp8);
-    border-radius: 7px;
-}
-
-.secondPageHeader:hover {
-    background-color: var(--colors-grey300);
-    text-decoration: underline;
-}
-.secondPageHeader span {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: var(--spacers-dp8);
-}
-
 /* panel header */
 
 .panelHeader {
     height: 50px;
     padding: 0 0.5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    gap: var(--spacers-dp4);
+    grid-template-columns: auto auto;
     align-items: center;
     border-block-end: 1px solid var(--colors-grey300);
     border-inline-end: 1px solid var(--colors-grey300);
 }
 
-.keysPanelHeader {
-    font-weight: 500;
-    font-size: 15px;
-    color: var(--colors-grey900);
-}
-
-.keysHeaderLabel {
+.keysPanelHeaderLabel {
     display: flex;
     gap: var(--spacers-dp4);
+    font-size: 15px;
+    flex-wrap: wrap;
+    width: fit-content;
 }
 
-.keysHeaderLink {
+.dataStoreLink {
     font-size: 15px;
     color: var(--colors-grey600);
     text-decoration: none;
 }
 
-.keysHeaderLink:hover {
+.dataStoreLink:hover {
     color: var(--colors-grey900);
     text-decoration: underline;
 }
 
-.keysHeaderLabelDivider {
+.labelDivider {
     color: var(--colors-grey600);
+}
+
+.namespaceLabel {
+    font-weight: 500;
+    color: var(--colors-grey900);
 }
 
 .keysPanelMidSection {
     padding: var(--spacers-dp8);
-}
-
-.emptyEditorPanelHeader {
-    font-style: italic;
-    font-size: 15px;
-    color: var(--colors-grey600);
-}
-
-.editorPanelHeader {
-    font-size: 15px;
-    color: var(--colors-grey800);
-    font-weight: 500;
 }
 
 /* namespace view */
@@ -155,12 +127,12 @@
     grid-column: 1 / 2;
 }
 
-.createButton {
+.createNamespace {
     grid-column: 5;
     color: var(--colors-grey600);
 }
 
-.createButton button {
+.createButton {
     width: fit-content;
     float: right;
 }
@@ -192,13 +164,26 @@
 
 /* edit page */
 
-.editButtons {
+.emptyEditorPanelHeader {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--colors-grey600);
+}
+
+.editorPanelKeysLabel {
+    font-size: 15px;
+    color: var(--colors-grey800);
+    font-weight: 500;
+}
+
+.editorPanelEditButtons {
     display: grid;
     grid-template-columns: auto auto;
     gap: var(--spacers-dp4);
+    justify-content: end;
 }
 
-.editButtons button {
+.editorPanelEditButtons button {
     width: fit-content;
 }
 
@@ -225,4 +210,38 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacers-dp8);
+}
+
+@media screen and (max-width: 600px) {
+    .panelHeader {
+        height: 75px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacers-dp8);
+        align-items: flex-start;
+        justify-content: center;
+        margin: 0.5em 0;
+    }
+
+    .keysPanelHeaderLabel {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacers-dp4);
+    }
+    .namespaceLabel {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .midSection {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: var(--spacers-dp8);
+    }
+    .createButton {
+        width: 100%;
+        float: none;
+    }
 }

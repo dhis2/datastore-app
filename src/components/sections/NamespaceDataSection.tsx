@@ -120,6 +120,7 @@ const NamespaceDataSection = ({ query }) => {
                     label={i18n.t('New namespace')}
                     handleClick={() => setOpenCreateModal(true)}
                     icon={<IconAdd24 color={colors.grey600} />}
+                    className={classes.createNamespace}
                 />
             </div>
             <div>
