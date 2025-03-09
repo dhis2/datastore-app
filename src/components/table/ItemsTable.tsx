@@ -45,12 +45,14 @@ const ItemsTable = ({
     }, [key])
 
     return (
-        <div>
+        <>
             {tableData && (
-                <DataTable layout="fixed" scrollHeight="75vh">
+                <DataTable scrollHeight="75vh">
                     <TableHead>
                         <DataTableRow>
                             <DataTableColumnHeader
+                                fixed
+                                top={'0'}
                                 width={currentNamespace ? '85%' : '90%'}
                             >
                                 <span className={classes.columnHeader}>
@@ -58,6 +60,8 @@ const ItemsTable = ({
                                 </span>
                             </DataTableColumnHeader>
                             <DataTableColumnHeader
+                                fixed
+                                top={'0'}
                                 width={currentNamespace ? '15%' : '10%'}
                             >
                                 <span className={classes.columnHeader}>
@@ -135,7 +139,7 @@ const ItemsTable = ({
                     </TableBody>
                 </DataTable>
             )}
-        </div>
+        </>
     )
 }
 
