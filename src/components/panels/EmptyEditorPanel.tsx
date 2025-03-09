@@ -12,9 +12,7 @@ const EmptyEditorPanel = () => {
                     <i>{i18n.t('Choose a key to start editing')}</i>
                 </span>
             </PanelHeader>
-            <div>
-                <Editor value={''} />
-            </div>
+            <Editor active={false} />
         </div>
     )
 }

@@ -4,10 +4,11 @@ import React from 'react'
 
 type EditorProps = {
     handleChange?: (value: string, viewUpdate: ViewUpdate) => void
-    value: string
+    value?: string
+    active: boolean
 }
 
-const Editor = ({ value, handleChange }: EditorProps) => {
+const Editor = ({ value, handleChange, active }: EditorProps) => {
     return (
         <CodeMirror
             theme={'dark'}
@@ -15,6 +16,9 @@ const Editor = ({ value, handleChange }: EditorProps) => {
             height="100vh"
             extensions={[json()]}
             onChange={handleChange}
+            readOnly={!active}
+            editable={active}
+            autoFocus={active}
         />
     )
 }

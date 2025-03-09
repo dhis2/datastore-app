@@ -135,6 +135,7 @@ const EditSection = ({ query }) => {
             <Editor
                 value={loading ? i18n.t('Loading') : value}
                 handleChange={handleEditorChange}
+                active
             />
         </div>
     )
