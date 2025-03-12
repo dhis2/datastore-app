@@ -51,7 +51,11 @@ export default function SharingAction({
                 icon={<IconShare16 />}
                 name="share"
                 onClick={() => {
-                    refetch()
+                    if (keyID) {
+                        setOpenSharingDialog(true)
+                    } else {
+                        refetch()
+                    }
                 }}
                 title={i18n.t('Share')}
             />
@@ -59,10 +63,7 @@ export default function SharingAction({
                 <SharingDialog
                     type={DATASTORE}
                     id={keyID}
-                    onClose={() => {
-                        setOpenSharingDialog(false)
-                        setKeyID(null)
-                    }}
+                    onClose={() => setOpenSharingDialog(false)}
                 />
             )}
         </>
