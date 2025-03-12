@@ -6,14 +6,14 @@ import Editor from '../sections/Editor'
 
 const EmptyEditorPanel = () => {
     return (
-        <div>
+        <>
             <PanelHeader>
                 <span className={classes.emptyEditorPanelHeader}>
                     <i>{i18n.t('Choose a key to start editing')}</i>
                 </span>
             </PanelHeader>
             <Editor active={false} />
-        </div>
+        </>
     )
 }
 

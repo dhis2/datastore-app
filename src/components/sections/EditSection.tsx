@@ -125,7 +125,7 @@ const EditSection = ({ query }) => {
     }, [store, namespace, key, refetch])
 
     return (
-        <div>
+        <>
             <EditPanelHeader
                 handleClose={handleClose}
                 disableCloseButton={updateLoading}
@@ -137,7 +137,7 @@ const EditSection = ({ query }) => {
                 handleChange={handleEditorChange}
                 active
             />
-        </div>
+        </>
     )
 }
 
