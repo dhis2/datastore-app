@@ -23,14 +23,14 @@ const EditorPanel = () => {
     const { store } = useParams()
 
     return (
-        <div>
+        <>
             {store === DATASTORE && (
                 <EditSection query={dataStoreKeyValuesQuery} />
             )}
             {store === USERDATASTORE && (
                 <EditSection query={userDataStoreKeyValuesQuery} />
             )}
-        </div>
+        </>
     )
 }
 

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-13T07:30:11.793Z\n"
-"PO-Revision-Date: 2025-02-13T07:30:11.794Z\n"
+"POT-Creation-Date: 2025-03-12T12:25:26.754Z\n"
+"PO-Revision-Date: 2025-03-12T12:25:26.755Z\n"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -34,6 +34,18 @@ msgstr "Special characters are not allowed in this field"
 
 msgid "Alphanumeric characters only"
 msgstr "Alphanumeric characters only"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "New Key"
+msgstr "New Key"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -74,15 +86,6 @@ msgstr "There was a problem updating the key - {{error}}"
 msgid "There was a problem - {{error}}"
 msgstr "There was a problem - {{error}}"
 
-msgid "Close"
-msgstr "Close"
-
-msgid "Save"
-msgstr "Save"
-
-msgid "Save changes"
-msgstr "Save changes"
-
 msgid "Loading"
 msgstr "Loading"
 
@@ -94,9 +97,6 @@ msgstr "Key '{{selectedKey}}' deleted successfully"
 
 msgid "There was a problem deleting this key - {{error}}"
 msgstr "There was a problem deleting this key - {{error}}"
-
-msgid "New Key"
-msgstr "New Key"
 
 msgid "Search keys"
 msgstr "Search keys"
@@ -136,6 +136,9 @@ msgstr "Actions"
 
 msgid "No items found"
 msgstr "No items found"
+
+msgid "There was a problem fetching this key's ID"
+msgstr "There was a problem fetching this key's ID"
 
 msgid "Share"
 msgstr "Share"

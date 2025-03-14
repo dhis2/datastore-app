@@ -1,11 +1,9 @@
 import { useAlert, useDataEngine, useDataQuery } from '@dhis2/app-runtime'
-import { Button } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
-import PanelHeader from '../header/PanelHeader'
+import EditPanelHeader from '../header/EditPanelHeader'
 import Editor from './Editor'
 
 const EditSection = ({ query }) => {
@@ -124,45 +122,22 @@ const EditSection = ({ query }) => {
             key,
             namespace,
         })
-    }, [store, namespace, key])
+    }, [store, namespace, key, refetch])
 
     return (
-        <div>
-            <PanelHeader>
-                {data && (
-                    <>
-                        <span className={classes.editorPanelHeader}>{key}</span>
-                        <div className={classes.editButtons}>
-                            <Button
-                                small
-                                aria-label={i18n.t('Close')}
-                                name="close"
-                                onClick={() => handleClose()}
-                                title={i18n.t('Close')}
-                                disabled={updateLoading}
-                            >
-                                {i18n.t('Close')}
-                            </Button>
-                            <Button
-                                small
-                                aria-label={i18n.t('Save')}
-                                name="save"
-                                onClick={() => handleUpdate()}
-                                title={i18n.t('Save')}
-                                primary
-                                loading={!editError && updateLoading}
-                            >
-                                {i18n.t('Save changes')}
-                            </Button>
-                        </div>
-                    </>
-                )}
-            </PanelHeader>
+        <>
+            <EditPanelHeader
+                handleClose={handleClose}
+                disableCloseButton={updateLoading}
+                handleUpdate={handleUpdate}
+                loading={!editError && updateLoading}
+            />
             <Editor
                 value={loading ? i18n.t('Loading') : value}
                 handleChange={handleEditorChange}
+                active
             />
-        </div>
+        </>
     )
 }
 

@@ -6,11 +6,17 @@ type CreateButtonProps = {
     label: string
     handleClick: () => void
     icon: React.ReactElement
+    className?: string
 }
 
-const CreateButton = ({ label, handleClick, icon }: CreateButtonProps) => {
+const CreateButton = ({
+    label,
+    handleClick,
+    icon,
+    className,
+}: CreateButtonProps) => {
     return (
-        <div className={classes.createButton}>
+        <div className={className}>
             <Button
                 small
                 aria-label={label}
@@ -18,6 +24,7 @@ const CreateButton = ({ label, handleClick, icon }: CreateButtonProps) => {
                 name="create"
                 onClick={handleClick}
                 title={label}
+                className={classes.createButton}
             >
                 {label}
             </Button>

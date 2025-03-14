@@ -4,6 +4,7 @@ import {
     hasValue,
     composeValidators,
     alphaNumeric,
+    createMaxCharacterLength,
 } from '@dhis2/ui'
 import React from 'react'
 import i18n from '../../locales'
@@ -32,7 +33,11 @@ const TextField = ({
             component={InputFieldFF}
             required={required}
             label={label}
-            validate={composeValidators(hasValue, customAlphaNumeric)}
+            validate={composeValidators(
+                hasValue,
+                customAlphaNumeric,
+                createMaxCharacterLength(255)
+            )}
             initialFocus={initialFocus}
             helpText={i18n.t('Alphanumeric characters only')}
         />

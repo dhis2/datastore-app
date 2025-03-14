@@ -1,21 +1,18 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
-import { IconAdd16, colors } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
-import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 import KeyField from '../fields/KeyField'
 import SearchField from '../fields/SearchField'
-import PanelHeader from '../header/PanelHeader'
+import KeysPanelHeader from '../header/KeysPanelHeader'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
 import ItemsTable from '../table/ItemsTable'
-import CreateButton from './CreateButton'
 
 interface QueryResults {
     results: []
@@ -134,26 +131,7 @@ const KeysDataSection = ({ query }) => {
 
     return (
         <>
-            <PanelHeader>
-                <div className={classes.keysHeaderLabel}>
-                    <Link to={`/${store}`} className={classes.keysHeaderLink}>
-                        <span>
-                            {store === DATASTORE && 'DataStore'}
-                            {store === USERDATASTORE && 'UserDataStore'}
-                        </span>
-                    </Link>
-                    <span className={classes.keysHeaderLabelDivider}>/</span>
-
-                    <span className={classes.keysPanelHeader}>
-                        {currentNamespace}
-                    </span>
-                </div>
-                <CreateButton
-                    label={i18n.t('New Key')}
-                    handleClick={() => setOpenCreateModal(true)}
-                    icon={<IconAdd16 color={colors.grey600} />}
-                />
-            </PanelHeader>
+            <KeysPanelHeader setOpenCreateModal={setOpenCreateModal} />
             <div className={classes.keysPanelMidSection}>
                 <SearchField
                     searchTerm={searchTerm}
