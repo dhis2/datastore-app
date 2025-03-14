@@ -1,6 +1,8 @@
 import { useAlert, useDataEngine, useDataQuery } from '@dhis2/app-runtime'
+import { Center, CircularLoader } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import EditPanelHeader from '../header/EditPanelHeader'
@@ -132,11 +134,15 @@ const EditSection = ({ query }) => {
                 handleUpdate={handleUpdate}
                 loading={!editError && updateLoading}
             />
-            <Editor
-                value={loading ? i18n.t('Loading') : value}
-                handleChange={handleEditorChange}
-                active
-            />
+            <div className={classes.editorBackground}>
+                {loading ? (
+                    <Center>
+                        <CircularLoader />
+                    </Center>
+                ) : (
+                    <Editor value={value} handleChange={handleEditorChange} />
+                )}
+            </div>
         </>
     )
 }

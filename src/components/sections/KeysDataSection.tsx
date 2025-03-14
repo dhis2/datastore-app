@@ -119,7 +119,7 @@ const KeysDataSection = ({ query }) => {
 
     useEffect(() => {
         refetch({ id: currentNamespace })
-    }, [currentNamespace])
+    }, [currentNamespace, refetch])
 
     if (error) {
         return <ErrorNotice />

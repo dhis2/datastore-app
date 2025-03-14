@@ -11,7 +11,7 @@ type DataStoreProps = {
 export default function DataStoreTabBar({
     activeTab,
     switchTab,
-}: DataStoreProps) {
+}: Readonly<DataStoreProps>) {
     return (
         <TabBar>
             <Tab
