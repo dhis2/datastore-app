@@ -8,7 +8,6 @@ import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
 import { useEditContext } from '../context/EditContext'
 import ErrorNotice from '../error/ErrorNotice'
-import KeyField from '../fields/KeyField'
 import SearchField from '../fields/SearchField'
 import KeysPanelHeader from '../header/KeysPanelHeader'
 import CenteredLoader from '../loader/Loader'
@@ -204,27 +203,19 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
                     title={i18n.t('Add New Key')}
                     closeModal={() => setOpenCreateModal(false)}
                     handleCreate={handleCreate}
-                >
-                    <KeyField initialFocus />
-                </CreateModal>
+                    type="key"
+                />
             )}
             {openDeleteModal && (
                 <DeleteModal
                     closeModal={() => setOpenDeleteModal(false)}
                     handleDelete={handleDelete}
                     title={i18n.t('Delete Key')}
-                >
-                    {i18n.t(
-                        `Are you sure you want to delete '${selectedKey}' in ${currentNamespace}?`
-                    )}
-                    {numberOfKeysInNamespace < 2 && (
-                        <p>
-                            {i18n.t(
-                                `This will also delete the namespace '${currentNamespace}'`
-                            )}
-                        </p>
-                    )}
-                </DeleteModal>
+                    type={'key'}
+                    activeKey={selectedKey}
+                    activeNamespace={currentNamespace}
+                    deleteNamespace={numberOfKeysInNamespace <= 1}
+                />
             )}
         </>
     )
