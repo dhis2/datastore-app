@@ -9,7 +9,7 @@ interface DeleteActionProps {
 
 export default function DeleteAction({
     handleDeleteBtnClick,
-}: DeleteActionProps) {
+}: Readonly<DeleteActionProps>) {
     return (
         <Button
             aria-label={i18n.t('Delete')}
