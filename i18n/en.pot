@@ -53,6 +53,9 @@ msgstr "Cancel"
 msgid "Add"
 msgstr "Add"
 
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
+
 msgid "Delete"
 msgstr "Delete"
 
@@ -71,12 +74,6 @@ msgstr "UserDataStore"
 msgid "There was a problem fetching this data - {{error}}"
 msgstr "There was a problem fetching this data - {{error}}"
 
-msgid "Discard these changes?"
-msgstr "Discard these changes?"
-
-msgid "Confirm"
-msgstr "Confirm"
-
 msgid "Key '{{key}}' updated successfully"
 msgstr "Key '{{key}}' updated successfully"
 
@@ -85,9 +82,6 @@ msgstr "There was a problem updating the key - {{error}}"
 
 msgid "There was a problem - {{error}}"
 msgstr "There was a problem - {{error}}"
-
-msgid "Loading"
-msgstr "Loading"
 
 msgid "There was a problem adding this key - {{error}}"
 msgstr "There was a problem adding this key - {{error}}"
@@ -128,9 +122,6 @@ msgstr "Add New Namespace"
 msgid "Delete Namespace"
 msgstr "Delete Namespace"
 
-msgid "This will delete all the keys in this namespace"
-msgstr "This will delete all the keys in this namespace"
-
 msgid "Actions"
 msgstr "Actions"
 
@@ -142,3 +133,9 @@ msgstr "There was a problem fetching this key's ID"
 
 msgid "Share"
 msgstr "Share"
+
+msgid "Discard these changes"
+msgstr "Discard these changes"
+
+msgid "Confirm"
+msgstr "Confirm"

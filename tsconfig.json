@@ -9,5 +9,5 @@
         "module": "esnext",
         "moduleResolution": "node"
     },
-    "include": ["src", "types"]
+    "include": ["src", "types", "setup-tests.js"]
 }
