@@ -29,6 +29,7 @@ const NamespaceDataSection = ({ query }) => {
 
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
+    const [activeRow, setActiveRow] = useState(null)
     const [selectedNamespace, setSelectedNamespace] = useState(null)
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(query)
@@ -36,6 +37,16 @@ const NamespaceDataSection = ({ query }) => {
     const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
         data?.results
     )
+
+    const handleNamespaceRowClick = (row) => {
+        setActiveRow(row)
+        navigate(`edit/${row}`)
+    }
+
+    const handleDeleteActionClick = (item) => {
+        setOpenDeleteModal(true)
+        setSelectedNamespace(item)
+    }
 
     const handleCreate = async (values) => {
         await engine.mutate(
@@ -126,10 +137,11 @@ const NamespaceDataSection = ({ query }) => {
             <div>
                 {filteredData && (
                     <ItemsTable
+                        activeRow={activeRow}
                         tableData={filteredData}
                         label={i18n.t('Namespace')}
-                        setOpenDeleteModal={setOpenDeleteModal}
-                        setSelectedItem={setSelectedNamespace}
+                        handleDeleteAction={handleDeleteActionClick}
+                        handleRowClick={handleNamespaceRowClick}
                     />
                 )}
             </div>

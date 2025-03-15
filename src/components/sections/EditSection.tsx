@@ -1,10 +1,12 @@
-import { useAlert, useDataEngine, useDataQuery } from '@dhis2/app-runtime'
+import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import { Center, CircularLoader } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
+import useDiscardAlert from '../../hooks/useDiscardAlert'
 import i18n from '../../locales'
+import { useEditContext } from '../context/EditContext'
 import EditPanelHeader from '../header/EditPanelHeader'
 import Editor from './Editor'
 
@@ -13,10 +15,13 @@ const EditSection = ({ query }) => {
     const engine = useDataEngine()
     const navigate = useNavigate()
 
-    const { showError, showSuccess } = useCustomAlert()
-
     const [editError, setEditError] = useState(null)
     const [updateLoading, setUpdateLoading] = useState(false)
+
+    const { showError, showSuccess } = useCustomAlert()
+    const discardAlert = useDiscardAlert()
+
+    const { hasUnsavedChanges, setHasUnsavedChanges } = useEditContext()
 
     const { data, loading, refetch } = useDataQuery(query, {
         variables: {
@@ -39,27 +44,20 @@ const EditSection = ({ query }) => {
 
     const handleEditorChange = (value) => {
         setValue(value)
+        setHasUnsavedChanges(true)
     }
 
-    const closeEditorAlert = useAlert(i18n.t('Discard these changes?'), {
-        warning: true,
-        actions: [
-            {
-                label: i18n.t('Confirm'),
-                onClick: () => navigate(`/${store}/edit/${namespace}`),
-            },
-            {
-                label: i18n.t('Cancel'),
-                onClick: () => closeEditorAlert.hide(),
-            },
-        ],
-    })
-
     const handleClose = () => {
-        if (JSON.stringify(data?.results, null, 4) === value) {
+        const handler = () => {
+            setHasUnsavedChanges(null)
             navigate(`/${store}/edit/${namespace}`)
+        }
+        if (hasUnsavedChanges) {
+            discardAlert.show({
+                onConfirm: handler,
+            })
         } else {
-            closeEditorAlert.show()
+            handler()
         }
     }
 
@@ -89,6 +87,7 @@ const EditSection = ({ query }) => {
                             key,
                             namespace,
                         })
+                        setHasUnsavedChanges(false)
                     },
                     onError(error) {
                         showError(

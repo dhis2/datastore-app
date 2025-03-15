@@ -6,8 +6,8 @@ import {
     TableBody,
     TableHead,
 } from '@dhis2/ui'
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import { DATASTORE } from '../../constants/constants'
 import i18n from '../../locales'
@@ -15,34 +15,23 @@ import DeleteAction from './DeleteAction'
 import SharingAction from './SharingAction'
 
 interface ItemsTableProps {
-    tableData: string[]
+    activeRow: string
+    handleDeleteAction: (string) => void
+    handleRowClick: (string) => void
     label: string
-    setOpenDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
-    setSelectedItem: React.Dispatch<React.SetStateAction<string>>
+    tableData: string[]
 }
 
 const ItemsTable = ({
+    activeRow,
     tableData,
     label,
-    setOpenDeleteModal,
-    setSelectedItem,
+    handleDeleteAction,
+    handleRowClick,
 }: ItemsTableProps) => {
-    const navigate = useNavigate()
-    const { store, namespace: currentNamespace, key } = useParams()
+    const { store, namespace: currentNamespace } = useParams()
 
     const showShareAction = Boolean(store === DATASTORE && currentNamespace)
-
-    const [activeRow, setActiveRow] = useState(key || null)
-
-    const handleDeleteBtnClick = (item) => {
-        setOpenDeleteModal(true)
-        setSelectedItem(item)
-        setActiveRow(item)
-    }
-
-    useEffect(() => {
-        setActiveRow(key)
-    }, [key])
 
     return (
         <>
@@ -88,12 +77,7 @@ const ItemsTable = ({
                                                         : '90%'
                                                 }
                                                 onClick={() => {
-                                                    if (currentNamespace) {
-                                                        navigate(`${item}`)
-                                                    } else {
-                                                        navigate(`edit/${item}`)
-                                                    }
-                                                    setActiveRow(item)
+                                                    handleRowClick(item)
                                                 }}
                                             >
                                                 {item}
@@ -118,7 +102,7 @@ const ItemsTable = ({
                                                     )}
                                                     <DeleteAction
                                                         handleDeleteBtnClick={() =>
-                                                            handleDeleteBtnClick(
+                                                            handleDeleteAction(
                                                                 item
                                                             )
                                                         }
