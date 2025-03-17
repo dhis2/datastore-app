@@ -53,9 +53,6 @@ msgstr "Cancel"
 msgid "Add"
 msgstr "Add"
 
-msgid "This will delete all the keys in this namespace"
-msgstr "This will delete all the keys in this namespace"
-
 msgid "Delete"
 msgstr "Delete"
 
@@ -121,6 +118,9 @@ msgstr "Add New Namespace"
 
 msgid "Delete Namespace"
 msgstr "Delete Namespace"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
 
 msgid "Actions"
 msgstr "Actions"
