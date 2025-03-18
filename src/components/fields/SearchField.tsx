@@ -22,6 +22,7 @@ const SearchField = ({
                 placeholder={placeholder || i18n.t('Search')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.value)}
+                clearable
             />
         </div>
     )
