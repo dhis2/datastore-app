@@ -7,8 +7,8 @@ import useCustomAlert from '../../hooks/useCustomAlert'
 import useDiscardAlert from '../../hooks/useDiscardAlert'
 import i18n from '../../locales'
 import { useEditContext } from '../context/EditContext'
+import Editor from '../editor/Editor'
 import EditPanelHeader from '../header/EditPanelHeader'
-import Editor from './Editor'
 
 const EditSection = ({ query }) => {
     const { key, namespace, store } = useParams()

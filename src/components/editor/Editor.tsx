@@ -3,6 +3,7 @@ import { linter, lintGutter } from '@codemirror/lint'
 import { search } from '@codemirror/search'
 import CodeMirror, { ViewUpdate } from '@uiw/react-codemirror'
 import React from 'react'
+import './editor-styles.css'
 
 type EditorProps = {
     handleChange?: (value: string, viewUpdate: ViewUpdate) => void
@@ -14,7 +15,7 @@ const Editor = ({ value, handleChange }: EditorProps) => {
         <CodeMirror
             theme={'dark'}
             value={value}
-            height="100vh"
+            height="90vh"
             extensions={[
                 json(),
                 lintGutter(),
@@ -22,7 +23,7 @@ const Editor = ({ value, handleChange }: EditorProps) => {
                     top: true,
                 }),
                 linter(jsonParseLinter(), {
-                    delay: 1000,
+                    delay: 500,
                 }),
             ]}
             onChange={handleChange}
