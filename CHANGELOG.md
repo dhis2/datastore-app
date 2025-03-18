@@ -1,3 +1,10 @@
+# [1.4.0-beta.2](https://github.com/dhis2/datastore-app/compare/v1.4.0-beta.1...v1.4.0-beta.2) (2025-03-18)
+
+
+### Features
+
+* editor panel enhancements ([#148](https://github.com/dhis2/datastore-app/issues/148)) ([2fdb860](https://github.com/dhis2/datastore-app/commit/2fdb860a3721dde49c954f296d5d1daf94ece2d1))
+
 # [1.4.0-beta.1](https://github.com/dhis2/datastore-app/compare/v1.3.5...v1.4.0-beta.1) (2025-03-18)
 
 
