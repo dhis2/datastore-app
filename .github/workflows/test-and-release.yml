@@ -12,8 +12,8 @@ jobs:
         uses: dhis2/workflows-platform/.github/workflows/lint-commits.yml@v1
     lint:
         uses: dhis2/workflows-platform/.github/workflows/lint.yml@v1
-    # test:
-    #     uses: dhis2/workflows-platform/.github/workflows/test.yml@v1
+    test:
+        uses: dhis2/workflows-platform/.github/workflows/test.yml@v1
     # e2e:
     #     uses: dhis2/workflows-platform/.github/workflows/legacy-e2e.yml@v1
     #     # Skips forks and dependabot PRs
