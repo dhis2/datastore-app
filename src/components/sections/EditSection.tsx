@@ -4,9 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import EditPanelHeader from '../header/EditPanelHeader'
+import { dataStoreKeyValuesQuery } from '../panels/EditorPanel'
 import Editor from './Editor'
 
-const EditSection = ({ query }) => {
+type EditSectionProps = {
+    query: typeof dataStoreKeyValuesQuery
+}
+
+const EditSection = ({ query }: EditSectionProps) => {
     const { key, namespace, store } = useParams()
     const engine = useDataEngine()
     const navigate = useNavigate()

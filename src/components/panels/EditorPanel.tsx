@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import EditSection from '../sections/EditSection'
 
-const dataStoreKeyValuesQuery = {
+export const dataStoreKeyValuesQuery = {
     results: {
         resource: 'dataStore',
         id: ({ key, namespace }: { key: string; namespace: string }) =>

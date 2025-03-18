@@ -17,7 +17,7 @@ const userDataStoreNamespacesQuery = {
     },
 }
 
-const dataStoreNamespacesQuery = {
+export const dataStoreNamespacesQuery = {
     results: {
         resource: 'dataStore',
     },
