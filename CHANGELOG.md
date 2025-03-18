@@ -1,3 +1,15 @@
+# [100.0.0](https://github.com/dhis2/datastore-app/compare/v99.10.1...v100.0.0) (2025-03-18)
+
+
+### Features
+
+* release app version 100.0.0 ([2ed9093](https://github.com/dhis2/datastore-app/commit/2ed9093420c5cbbc318dc58fffc3325d4e341e30))
+
+
+### BREAKING CHANGES
+
+* major interface changes
+
 # [99.10.0](https://github.com/dhis2/datastore-app/compare/v99.9.9...v99.10.0) (2025-03-18)
 
 
