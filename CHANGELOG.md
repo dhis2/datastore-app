@@ -1,3 +1,10 @@
+## [99.10.1](https://github.com/dhis2/datastore-app/compare/v99.10.0...v99.10.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* trigger 100.0.0 publish ([6b30b1a](https://github.com/dhis2/datastore-app/commit/6b30b1a6c725a224f4478c5697e94dc72d305006))
+
 # [99.10.0](https://github.com/dhis2/datastore-app/compare/v99.9.9...v99.10.0) (2025-03-18)
 
 
