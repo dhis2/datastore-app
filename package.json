@@ -1,38 +1,37 @@
 {
     "name": "datastore-app",
-    "version": "1.3.5",
+    "version": "1.4.0-beta.2",
     "description": "",
     "license": "BSD-3-Clause",
     "private": true,
     "scripts": {
         "build": "d2-app-scripts build",
+        "lint": "yarn tsc && d2-style check",
+        "lint:staged": "d2-style check --staged",
+        "format": "d2-style apply",
+        "format:staged": "d2-style apply --staged",
         "start": "d2-app-scripts start",
         "test": "d2-app-scripts test",
-        "lint:js": "d2-style check js",
-        "lint:text": "d2-style check text",
-        "lint:staged": "yarn lint:js --staged && yarn lint:text --staged",
-        "lint": "yarn lint:js && yarn lint:text",
-        "format:js": "d2-style apply js",
-        "format:text": "d2-style apply text",
-        "format:staged": "yarn format:js --staged && yarn format:text --staged",
-        "format": "yarn format:js && yarn format:text"
+        "deploy": "d2-app-scripts deploy"
     },
     "devDependencies": {
-        "@dhis2/cli-app-scripts": "^11.7.0",
-        "@dhis2/cli-style": "^10.4.1"
+        "@dhis2/cli-app-scripts": "^12.3.0",
+        "@dhis2/cli-style": "^10.7.5",
+        "@testing-library/dom": "^10.4.0",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.2.0",
+        "@testing-library/user-event": "^14.6.1",
+        "@types/jest": "^29.5.14",
+        "@types/react": "^18.3.12",
+        "@types/react-dom": "^18.3.1",
+        "react-router-dom": "^7.0.1",
+        "typescript": "^5"
     },
     "dependencies": {
-        "@dhis2/app-runtime": "^3.10.6",
-        "@dhis2/app-runtime-adapter-d2": "^1.0.2",
-        "@dhis2/d2-i18n": "^1.1.0",
-        "@dhis2/prop-types": "^2.0.3",
-        "@dhis2/ui": "9",
-        "d2": "^31.10.2",
-        "jsoneditor": "^9.2.0",
-        "material-ui": "0.19.0",
-        "react-redux": "^7.2.2",
-        "react-router": "3.0.5",
-        "redux": "^4.0.5",
-        "redux-thunk": "^2.3.0"
+        "@codemirror/lang-json": "^6.0.1",
+        "@dhis2/app-runtime": "^3.13.1",
+        "@dhis2/ui": "^10.5.0",
+        "@uiw/react-codemirror": "^4.23.6",
+        "prop-types": "^15.8.1"
     }
 }

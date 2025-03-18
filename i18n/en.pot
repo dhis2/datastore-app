@@ -5,11 +5,140 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-02-24T22:13:18.605Z\n"
-"PO-Revision-Date: 2021-02-24T22:13:18.605Z\n"
+"POT-Creation-Date: 2025-03-14T23:05:08.489Z\n"
+"PO-Revision-Date: 2025-03-14T23:05:08.490Z\n"
 
-msgid "An error has occurred."
-msgstr ""
+msgid "An error has occurred"
+msgstr "An error has occurred"
 
-msgid "Invalid JSON. Please fix all remaining issues and try again."
-msgstr ""
+msgid "404 Page Not Found"
+msgstr "404 Page Not Found"
+
+msgid "Back to datastore"
+msgstr "Back to datastore"
+
+msgid "An error has occurred. Try again"
+msgstr "An error has occurred. Try again"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Namespace"
+msgstr "Namespace"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Special characters are not allowed in this field"
+msgstr "Special characters are not allowed in this field"
+
+msgid "Alphanumeric characters only"
+msgstr "Alphanumeric characters only"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "New Key"
+msgstr "New Key"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Namespaces"
+msgstr "Namespaces"
+
+msgid "Choose a key to start editing"
+msgstr "Choose a key to start editing"
+
+msgid "DataStore"
+msgstr "DataStore"
+
+msgid "UserDataStore"
+msgstr "UserDataStore"
+
+msgid "There was a problem fetching this data - {{error}}"
+msgstr "There was a problem fetching this data - {{error}}"
+
+msgid "Discard these changes?"
+msgstr "Discard these changes?"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Key '{{key}}' updated successfully"
+msgstr "Key '{{key}}' updated successfully"
+
+msgid "There was a problem updating the key - {{error}}"
+msgstr "There was a problem updating the key - {{error}}"
+
+msgid "There was a problem - {{error}}"
+msgstr "There was a problem - {{error}}"
+
+msgid "Loading"
+msgstr "Loading"
+
+msgid "There was a problem adding this key - {{error}}"
+msgstr "There was a problem adding this key - {{error}}"
+
+msgid "Key '{{selectedKey}}' deleted successfully"
+msgstr "Key '{{selectedKey}}' deleted successfully"
+
+msgid "There was a problem deleting this key - {{error}}"
+msgstr "There was a problem deleting this key - {{error}}"
+
+msgid "Search keys"
+msgstr "Search keys"
+
+msgid "Add New Key"
+msgstr "Add New Key"
+
+msgid "Delete Key"
+msgstr "Delete Key"
+
+msgid "There was a problem adding this namespace - {{error}}"
+msgstr "There was a problem adding this namespace - {{error}}"
+
+msgid "Namespace '{{namespace}}' deleted successfully"
+msgstr "Namespace '{{namespace}}' deleted successfully"
+
+msgid "There was a problem deleting this namespace - {{error}}"
+msgstr "There was a problem deleting this namespace - {{error}}"
+
+msgid "Search namespaces"
+msgstr "Search namespaces"
+
+msgid "New namespace"
+msgstr "New namespace"
+
+msgid "Add New Namespace"
+msgstr "Add New Namespace"
+
+msgid "Delete Namespace"
+msgstr "Delete Namespace"
+
+msgid "This will delete all the keys in this namespace"
+msgstr "This will delete all the keys in this namespace"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "No items found"
+msgstr "No items found"
+
+msgid "There was a problem fetching this key's ID"
+msgstr "There was a problem fetching this key's ID"
+
+msgid "Share"
+msgstr "Share"
