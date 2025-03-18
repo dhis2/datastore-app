@@ -65,8 +65,20 @@ const KeysDataSection = ({ query }) => {
     }
 
     const handleDeleteActionClick = (item) => {
-        setOpenDeleteModal(true)
-        setSelectedKey(item)
+        const action = () => {
+            setOpenDeleteModal(true)
+            setSelectedKey(item)
+        }
+        if (hasUnsavedChanges && item === activeRow) {
+            discardAlert.show({
+                onConfirm: () => {
+                    setHasUnsavedChanges(null)
+                    action()
+                },
+            })
+        } else {
+            action()
+        }
     }
 
     const numberOfKeysInNamespace = data?.results?.length
@@ -115,7 +127,10 @@ const KeysDataSection = ({ query }) => {
             const navigatePath = namespaceHasMultipleKeys
                 ? `/${store}/edit/${currentNamespace}`
                 : `/${store}`
-            navigate(navigatePath)
+
+            if (selectedKey === activeRow) {
+                navigate(navigatePath)
+            }
 
             if (namespaceHasMultipleKeys) {
                 refetch({ id: currentNamespace })
