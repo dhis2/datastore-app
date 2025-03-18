@@ -13,6 +13,7 @@ import SearchField from '../fields/SearchField'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
+import { dataStoreNamespacesQuery } from '../pages/Namespaces'
 import ItemsTable from '../table/ItemsTable'
 import CreateButton from './CreateButton'
 
@@ -20,7 +21,11 @@ interface QueryResults {
     results: []
 }
 
-const NamespaceDataSection = ({ query }) => {
+type NamespaceDataSectionProps = {
+    query: typeof dataStoreNamespacesQuery
+}
+
+const NamespaceDataSection = ({ query }: NamespaceDataSectionProps) => {
     const engine = useDataEngine()
     const navigate = useNavigate()
     const { store } = useParams()
