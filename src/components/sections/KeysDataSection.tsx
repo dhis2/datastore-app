@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
+import useDiscardAlert from '../../hooks/useDiscardAlert'
 import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
+import { useEditContext } from '../context/EditContext'
 import ErrorNotice from '../error/ErrorNotice'
 import KeyField from '../fields/KeyField'
 import SearchField from '../fields/SearchField'
@@ -24,13 +26,17 @@ type KeysDataSectionProps = { query: typeof dataStoreKeysQuery }
 const KeysDataSection = ({ query }: KeysDataSectionProps) => {
     const engine = useDataEngine()
     const navigate = useNavigate()
-    const { store, namespace: currentNamespace } = useParams()
-
-    const { showError, showSuccess } = useCustomAlert()
+    const { store, namespace: currentNamespace, key } = useParams()
 
     const [openCreateModal, setOpenCreateModal] = useState(false)
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
     const [selectedKey, setSelectedKey] = useState(null)
+    const [activeRow, setActiveRow] = useState(null)
+
+    const { showError, showSuccess } = useCustomAlert()
+    const discardAlert = useDiscardAlert()
+
+    const { hasUnsavedChanges, setHasUnsavedChanges } = useEditContext()
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         query,
@@ -44,6 +50,39 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
     const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
         data?.results
     )
+
+    const handleKeyRowClick = (row) => {
+        const handler = () => {
+            setHasUnsavedChanges(null)
+            setActiveRow(row)
+            navigate(`${row}`)
+        }
+
+        if (hasUnsavedChanges) {
+            discardAlert.show({
+                onConfirm: handler,
+            })
+        } else {
+            handler()
+        }
+    }
+
+    const handleDeleteActionClick = (item) => {
+        const action = () => {
+            setOpenDeleteModal(true)
+            setSelectedKey(item)
+        }
+        if (hasUnsavedChanges && item === activeRow) {
+            discardAlert.show({
+                onConfirm: () => {
+                    setHasUnsavedChanges(null)
+                    action()
+                },
+            })
+        } else {
+            action()
+        }
+    }
 
     const numberOfKeysInNamespace = data?.results?.length
 
@@ -91,7 +130,10 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
             const navigatePath = namespaceHasMultipleKeys
                 ? `/${store}/edit/${currentNamespace}`
                 : `/${store}`
-            navigate(navigatePath)
+
+            if (selectedKey === activeRow) {
+                navigate(navigatePath)
+            }
 
             if (namespaceHasMultipleKeys) {
                 refetch({ id: currentNamespace })
@@ -124,6 +166,10 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
         refetch({ id: currentNamespace })
     }, [currentNamespace, refetch])
 
+    useEffect(() => {
+        setActiveRow(key)
+    }, [key])
+
     if (error) {
         return <ErrorNotice />
     }
@@ -145,10 +191,11 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
             <div>
                 {filteredData && (
                     <ItemsTable
+                        activeRow={activeRow}
                         tableData={filteredData}
                         label={i18n.t('Key')}
-                        setOpenDeleteModal={setOpenDeleteModal}
-                        setSelectedItem={setSelectedKey}
+                        handleDeleteAction={handleDeleteActionClick}
+                        handleRowClick={handleKeyRowClick}
                     />
                 )}
             </div>

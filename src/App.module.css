@@ -170,6 +170,11 @@
     color: var(--colors-grey600);
 }
 
+.editorBackground {
+    height: 100vh;
+    background-color: #292c34;
+}
+
 .editorPanelKeysLabel {
     font-size: 15px;
     color: var(--colors-grey800);
