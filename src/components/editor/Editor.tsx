@@ -3,6 +3,7 @@ import { linter, lintGutter } from '@codemirror/lint'
 import { search } from '@codemirror/search'
 import CodeMirror, { ViewUpdate } from '@uiw/react-codemirror'
 import React from 'react'
+import { activeLine } from './EditorActiveLinePanel'
 
 type EditorProps = {
     handleChange?: (value: string, viewUpdate: ViewUpdate) => void
@@ -22,8 +23,9 @@ const Editor = ({ value, handleChange }: EditorProps) => {
                     top: true,
                 }),
                 linter(jsonParseLinter(), {
-                    delay: 1000,
+                    delay: 500,
                 }),
+                activeLine(),
             ]}
             onChange={handleChange}
             autoFocus
