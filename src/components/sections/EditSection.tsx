@@ -9,8 +9,13 @@ import i18n from '../../locales'
 import { useEditContext } from '../context/EditContext'
 import Editor from '../editor/Editor'
 import EditPanelHeader from '../header/EditPanelHeader'
+import { dataStoreKeyValuesQuery } from '../panels/EditorPanel'
 
-const EditSection = ({ query }) => {
+type EditSectionProps = {
+    query: typeof dataStoreKeyValuesQuery
+}
+
+const EditSection = ({ query }: EditSectionProps) => {
     const { key, namespace, store } = useParams()
     const engine = useDataEngine()
     const navigate = useNavigate()

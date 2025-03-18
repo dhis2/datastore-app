@@ -6,14 +6,14 @@ import KeysDataSection from '../sections/KeysDataSection'
 const userDataStoreKeysQuery = {
     results: {
         resource: 'userDataStore',
-        id: ({ id }) => id,
+        id: ({ id }: { id: string }) => id,
     },
 }
 
-const dataStoreKeysQuery = {
+export const dataStoreKeysQuery = {
     results: {
         resource: 'dataStore',
-        id: ({ id }) => id,
+        id: ({ id }: { id: string }) => id,
     },
 }
 

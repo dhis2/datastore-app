@@ -41,6 +41,7 @@ const ItemsTable = ({
                         <DataTableRow>
                             <DataTableColumnHeader
                                 fixed
+                                // @ts-expect-error - passing a string '0' to a boolean param
                                 top={'0'}
                                 width={currentNamespace ? '85%' : '90%'}
                             >
@@ -50,6 +51,7 @@ const ItemsTable = ({
                             </DataTableColumnHeader>
                             <DataTableColumnHeader
                                 fixed
+                                // @ts-expect-error - passing a string '0' to a boolean param
                                 top={'0'}
                                 width={currentNamespace ? '15%' : '10%'}
                             >

@@ -14,13 +14,16 @@ import KeysPanelHeader from '../header/KeysPanelHeader'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
+import { dataStoreKeysQuery } from '../panels/KeysPanel'
 import ItemsTable from '../table/ItemsTable'
 
 interface QueryResults {
     results: []
 }
 
-const KeysDataSection = ({ query }) => {
+type KeysDataSectionProps = { query: typeof dataStoreKeysQuery }
+
+const KeysDataSection = ({ query }: KeysDataSectionProps) => {
     const engine = useDataEngine()
     const navigate = useNavigate()
     const { store, namespace: currentNamespace, key } = useParams()
