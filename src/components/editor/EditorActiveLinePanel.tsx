@@ -2,10 +2,13 @@ import { EditorView, Extension, Panel, showPanel } from '@uiw/react-codemirror'
 
 const activeLinePanelTheme = EditorView.baseTheme({
     '.cm-active-panel': {
-        padding: '5px',
+        padding: '4px 6px',
+        fontSize: '13px',
         backgroundColor: '#292c34',
-        color: '#acb4be',
-        borderTop: '1px solid #acb4be',
+        color: '#A4ABB7',
+    },
+    '.cm-panels.cm-panels-bottom': {
+        borderTop: '1px solid #16181D !important',
     },
 })
 
