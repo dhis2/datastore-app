@@ -1,3 +1,10 @@
+# [99.10.0](https://github.com/dhis2/datastore-app/compare/v99.9.9...v99.10.0) (2025-03-18)
+
+
+### Features
+
+* new interface for datastore app supporting UserDataStore and Sharing ([d3962e0](https://github.com/dhis2/datastore-app/commit/d3962e0d3de1783cf3afdea054338943f50ecfc3))
+
 # [1.4.0-beta.2](https://github.com/dhis2/datastore-app/compare/v1.4.0-beta.1...v1.4.0-beta.2) (2025-03-18)
 
 
