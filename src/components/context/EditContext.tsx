@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
 
 type EditContextProps = {
-    hasUnsavedChanges: boolean
-    setHasUnsavedChanges: React.Dispatch<React.SetStateAction<boolean>>
+    editorChanges: string
+    setEditorChanges: React.Dispatch<React.SetStateAction<string>>
 }
 
 const EditContext = createContext<EditContextProps>({
-    hasUnsavedChanges: false,
-    setHasUnsavedChanges: () => {},
+    editorChanges: null,
+    setEditorChanges: () => {},
 })
 
 export const EditContextProvider = ({
@@ -15,14 +15,14 @@ export const EditContextProvider = ({
 }: {
     children: React.ReactNode
 }) => {
-    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
+    const [editorChanges, setEditorChanges] = useState(null)
 
     const contextValue = useMemo(
         () => ({
-            hasUnsavedChanges,
-            setHasUnsavedChanges,
+            editorChanges,
+            setEditorChanges,
         }),
-        [hasUnsavedChanges]
+        [editorChanges]
     )
 
     return (

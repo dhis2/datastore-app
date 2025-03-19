@@ -36,7 +36,7 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
     const { showError, showSuccess } = useCustomAlert()
     const discardAlert = useDiscardAlert()
 
-    const { hasUnsavedChanges, setHasUnsavedChanges } = useEditContext()
+    const { editorChanges, setEditorChanges } = useEditContext()
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         query,
@@ -53,12 +53,12 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
 
     const handleKeyRowClick = (row) => {
         const handler = () => {
-            setHasUnsavedChanges(null)
+            setEditorChanges(null)
             setActiveRow(row)
             navigate(`${row}`)
         }
 
-        if (hasUnsavedChanges) {
+        if (editorChanges) {
             discardAlert.show({
                 onConfirm: handler,
             })
@@ -72,10 +72,10 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
             setOpenDeleteModal(true)
             setSelectedKey(item)
         }
-        if (hasUnsavedChanges && item === activeRow) {
+        if (editorChanges && item === activeRow) {
             discardAlert.show({
                 onConfirm: () => {
-                    setHasUnsavedChanges(null)
+                    setEditorChanges(null)
                     action()
                 },
             })
