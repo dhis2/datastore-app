@@ -1,3 +1,10 @@
+## [100.0.1](https://github.com/dhis2/datastore-app/compare/v100.0.0...v100.0.1) (2025-03-20)
+
+
+### Bug Fixes
+
+* force release to AppHub ([21980c1](https://github.com/dhis2/datastore-app/commit/21980c12195bdcbb34918b944f6e2a7fafd6eddd))
+
 # [100.0.0](https://github.com/dhis2/datastore-app/compare/v99.10.1...v100.0.0) (2025-03-18)
 
 
