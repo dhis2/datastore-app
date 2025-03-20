@@ -1,3 +1,10 @@
+## [100.0.3](https://github.com/dhis2/datastore-app/compare/v100.0.2...v100.0.3) (2025-03-20)
+
+
+### Bug Fixes
+
+* issue with github action logic ([42ed0be](https://github.com/dhis2/datastore-app/commit/42ed0bef17d0aad6f99a4e6835de0249607aa50a))
+
 ## [100.0.2](https://github.com/dhis2/datastore-app/compare/v100.0.1...v100.0.2) (2025-03-20)
 
 
