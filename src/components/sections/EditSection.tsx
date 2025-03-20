@@ -26,7 +26,7 @@ const EditSection = ({ query }: EditSectionProps) => {
     const { showError, showSuccess } = useCustomAlert()
     const discardAlert = useDiscardAlert()
 
-    const { hasUnsavedChanges, setHasUnsavedChanges } = useEditContext()
+    const { editorChanges, setEditorChanges } = useEditContext()
 
     const { data, loading, refetch } = useDataQuery(query, {
         variables: {
@@ -43,21 +43,20 @@ const EditSection = ({ query }: EditSectionProps) => {
         },
     })
 
-    const [value, setValue] = useState(
+    const [keyValue, setKeyValue] = useState(
         JSON.stringify(data?.results, null, 4) || ''
     )
 
     const handleEditorChange = (value) => {
-        setValue(value)
-        setHasUnsavedChanges(true)
+        setEditorChanges(value)
     }
 
     const handleClose = () => {
         const handler = () => {
-            setHasUnsavedChanges(null)
+            setEditorChanges(null)
             navigate(`/${store}/edit/${namespace}`)
         }
-        if (hasUnsavedChanges) {
+        if (editorChanges) {
             discardAlert.show({
                 onConfirm: handler,
             })
@@ -67,60 +66,64 @@ const EditSection = ({ query }: EditSectionProps) => {
     }
 
     const handleUpdate = async () => {
-        let body
-        const resource = `${store}`
-        setEditError(null)
-        setUpdateLoading(true)
+        if (editorChanges) {
+            let body
+            const resource = `${store}`
+            setEditError(null)
+            setUpdateLoading(true)
 
-        try {
-            body = JSON.parse(value)
-            await engine.mutate(
-                {
-                    type: 'update' as const,
-                    resource: resource,
-                    id: `${namespace}/${key}`,
-                    data: body,
-                },
-                {
-                    onComplete: () => {
-                        showSuccess(
-                            i18n.t("Key '{{key}}' updated successfully", {
-                                key,
-                            })
-                        )
-                        refetch({
-                            key,
-                            namespace,
-                        })
-                        setHasUnsavedChanges(false)
+            try {
+                body = JSON.parse(editorChanges)
+                await engine.mutate(
+                    {
+                        type: 'update' as const,
+                        resource: resource,
+                        id: `${namespace}/${key}`,
+                        data: body,
                     },
-                    onError(error) {
-                        showError(
-                            i18n.t(
-                                'There was a problem updating the key - {{error}}',
-                                {
-                                    error: error.message,
-                                    interpolation: { escapeValue: false },
-                                }
+                    {
+                        onComplete: () => {
+                            showSuccess(
+                                i18n.t("Key '{{key}}' updated successfully", {
+                                    key,
+                                })
                             )
-                        )
-                    },
-                }
-            )
-        } catch (error) {
-            setEditError(error.message)
-            showError(
-                i18n.t('There was a problem - {{error}}', {
-                    error: error.message,
-                    interpolation: { escapeValue: false },
-                })
-            )
+                            refetch({
+                                key,
+                                namespace,
+                            })
+                            setEditorChanges(null)
+                        },
+                        onError(error) {
+                            showError(
+                                i18n.t(
+                                    'There was a problem updating the key - {{error}}',
+                                    {
+                                        error: error.message,
+                                        interpolation: { escapeValue: false },
+                                    }
+                                )
+                            )
+                        },
+                    }
+                )
+            } catch (error) {
+                setEditError(error.message)
+                showError(
+                    i18n.t('There was a problem - {{error}}', {
+                        error: error.message,
+                        interpolation: { escapeValue: false },
+                    })
+                )
+            }
+            setUpdateLoading(false)
+        } else {
+            return
         }
-        setUpdateLoading(false)
     }
 
     useEffect(() => {
-        setValue(JSON.stringify(data?.results, null, 4))
+        setKeyValue(JSON.stringify(data?.results, null, 4))
     }, [data])
 
     useEffect(() => {
@@ -144,7 +147,10 @@ const EditSection = ({ query }: EditSectionProps) => {
                         <CircularLoader />
                     </Center>
                 ) : (
-                    <Editor value={value} handleChange={handleEditorChange} />
+                    <Editor
+                        value={editorChanges ?? keyValue}
+                        handleChange={handleEditorChange}
+                    />
                 )}
             </div>
         </>
