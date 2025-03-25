@@ -1,10 +1,16 @@
 import React from 'react'
-import { render } from '../../../utils/test-utils'
+import { render } from '../../../test-utils/render'
 import ItemsTable from '../ItemsTable'
 
 it('Items Table', () => {
     const { debug } = render(
-        <ItemsTable  tableData={[]} label={"Test Table"} setOpenDeleteModal={() => jest.fn()} setSelectedItem={() => jest.fn()}/>
+        <ItemsTable
+            tableData={[]}
+            label={'Test Table'}
+            activeRow={'key1'}
+            handleDeleteAction={() => jest.fn()}
+            handleRowClick={() => jest.fn()}
+        />
     )
 
     debug()

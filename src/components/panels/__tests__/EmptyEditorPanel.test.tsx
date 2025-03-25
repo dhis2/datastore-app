@@ -1,13 +1,9 @@
 import React from 'react'
+import { renderComponentWithRouter } from '../../../test-utils/render'
 import EmptyEditorPanel from '../EmptyEditorPanel'
-import { RenderWrapper } from '../../../utils/test-utils'
-import { render } from '@testing-library/react'
 
 it('Empy Editor Panel', () => {
-    const { debug } = render(
-        <RenderWrapper>
-    <EmptyEditorPanel />
-    </RenderWrapper>)
+    const { debug } = renderComponentWithRouter(<EmptyEditorPanel />)
 
     debug()
 })

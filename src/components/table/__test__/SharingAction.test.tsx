@@ -1,10 +1,10 @@
 import React from 'react'
-import { render } from '../../../utils/test-utils'
+import { renderComponentWithRouter } from '../../../test-utils/render'
 import SharingAction from '../SharingAction'
 
 it('Sharing action', () => {
-    const { debug } = render(
-        <SharingAction dataStoreKey='' />
+    const { debug } = renderComponentWithRouter(
+        <SharingAction dataStoreKey="" />
     )
 
     debug()

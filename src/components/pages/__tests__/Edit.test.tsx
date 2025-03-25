@@ -1,14 +1,9 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { renderComponentWithRouter } from '../../../test-utils/render'
 import EditPage from '../Edit'
-import { RenderWrapper } from '../../../utils/test-utils'
 
 it('Edit', () => {
-    const { debug } = render(
-        <RenderWrapper>
-<EditPage />
-        </RenderWrapper>)
-    
+    const { debug } = renderComponentWithRouter(<EditPage />)
 
     debug()
 })

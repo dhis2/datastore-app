@@ -1,12 +1,14 @@
 import React from 'react'
-import { render } from '../../../utils/test-utils'
+import { renderComponentWithRouter } from '../../../test-utils/render'
 import KeysDataSection from '../KeysDataSection'
 
 it('KeysDataSection', () => {
-    const { debug } = render(
-        <KeysDataSection query={""} />
+    const query = { results: { resource: '', id: ({ id }) => '' } }
+
+    const { debug } = renderComponentWithRouter(
+        <KeysDataSection query={query} />
     )
 
     debug()
 })
-// 
+//

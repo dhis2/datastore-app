@@ -1,13 +1,9 @@
 import React from 'react'
+import { renderComponentWithRouter } from '../../../test-utils/render'
 import KeysPanel from '../KeysPanel'
-import { RenderWrapper } from '../../../utils/test-utils'
-import { render } from '@testing-library/react'
 
 it('Keys Panel', () => {
-    const { debug } = render(
-        <RenderWrapper>
-    <KeysPanel />
-    </RenderWrapper>)
+    const { debug } = renderComponentWithRouter(<KeysPanel />)
 
     debug()
 })

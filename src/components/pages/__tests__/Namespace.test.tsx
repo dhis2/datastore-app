@@ -1,15 +1,9 @@
 import React from 'react'
-import { render } from '@testing-library/react'
-import { RenderWrapper } from '../../../utils/test-utils'
+import { renderComponentWithRouter } from '../../../test-utils/render'
 import NamespacesPage from '../Namespaces'
 
 it('Edit', () => {
-    const { debug } = render(
-        <RenderWrapper>
-<NamespacesPage />
-        </RenderWrapper>)
-    
+    const { debug } = renderComponentWithRouter(<NamespacesPage />)
 
     debug()
 })
-
