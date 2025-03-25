@@ -21,7 +21,12 @@ const EditPanelHeader = ({
     const { key } = useParams()
     return (
         <PanelHeader>
-            <span className={classes.editorPanelKeysLabel}>{key}</span>
+            <span
+                className={classes.editorPanelKeysLabel}
+                data-test="editor-panel-key-label"
+            >
+                {key}
+            </span>
             <div className={classes.editorPanelEditButtons}>
                 <Button
                     small
@@ -30,6 +35,7 @@ const EditPanelHeader = ({
                     onClick={() => handleClose()}
                     title={i18n.t('Close')}
                     disabled={disableCloseButton}
+                    dataTest="close-editor-button"
                 >
                     {i18n.t('Close')}
                 </Button>
@@ -41,6 +47,7 @@ const EditPanelHeader = ({
                     title={i18n.t('Save')}
                     primary
                     loading={loading}
+                    dataTest="save-changes-button"
                 >
                     {i18n.t('Save changes')}
                 </Button>

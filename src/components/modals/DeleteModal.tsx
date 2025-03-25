@@ -20,7 +20,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
     deleteNamespace,
 }) => {
     return (
-        <Modal position="middle">
+        <Modal position="middle" dataTest="delete-modal">
             <ModalTitle>{title}</ModalTitle>
             <ModalContent>
                 {type === 'namespace' && (

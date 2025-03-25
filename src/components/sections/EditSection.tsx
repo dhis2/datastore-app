@@ -141,7 +141,7 @@ const EditSection = ({ query }: EditSectionProps) => {
             <div className={classes.editorBackground}>
                 {loading ? (
                     <Center>
-                        <CircularLoader />
+                        <CircularLoader dataTest="editor-loader" />
                     </Center>
                 ) : (
                     <Editor value={value} handleChange={handleEditorChange} />

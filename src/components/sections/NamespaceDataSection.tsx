@@ -6,6 +6,7 @@ import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
+import CreateButton from '../buttons/CreateButton'
 import ErrorNotice from '../error/ErrorNotice'
 import SearchField from '../fields/SearchField'
 import CenteredLoader from '../loader/Loader'
@@ -13,7 +14,6 @@ import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
 import { dataStoreNamespacesQuery } from '../pages/Namespaces'
 import ItemsTable from '../table/ItemsTable'
-import CreateButton from './CreateButton'
 
 interface QueryResults {
     results: []

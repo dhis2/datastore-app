@@ -40,6 +40,7 @@ const TextField = ({
             )}
             initialFocus={initialFocus}
             helpText={i18n.t('Alphanumeric characters only')}
+            dataTest={`${name}-field`}
         />
     )
 }

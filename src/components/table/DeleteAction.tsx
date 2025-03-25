@@ -9,7 +9,7 @@ interface DeleteActionProps {
 
 export default function DeleteAction({
     handleDeleteBtnClick,
-}: DeleteActionProps) {
+}: Readonly<DeleteActionProps>) {
     return (
         <Button
             aria-label={i18n.t('Delete')}
@@ -17,6 +17,7 @@ export default function DeleteAction({
             name="delete"
             onClick={handleDeleteBtnClick}
             title={i18n.t('Delete')}
+            dataTest="delete-action-button"
         />
     )
 }

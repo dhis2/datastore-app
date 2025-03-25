@@ -7,8 +7,8 @@ import {
     USERDATASTORE,
 } from '../../constants/constants'
 import i18n from '../../locales'
+import DataStoreTabBar from '../buttons/DataStoreTabBar'
 import PageHeader from '../header/PageHeader'
-import DataStoreTabBar from '../sections/DataStoreTabBar'
 import NamespaceDataSection from '../sections/NamespaceDataSection'
 
 const userDataStoreNamespacesQuery = {
@@ -43,7 +43,10 @@ const NamespacesPage = () => {
     return (
         <div className={classes.firstPage}>
             <PageHeader>
-                <span className={classes.firstPageHeader}>
+                <span
+                    className={classes.firstPageHeader}
+                    data-test="first-page-header"
+                >
                     {i18n.t('Namespaces')}
                 </span>
             </PageHeader>

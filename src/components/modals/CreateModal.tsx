@@ -29,7 +29,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
     const showNamespaceField = type === 'namespace'
 
     return (
-        <Modal position="middle">
+        <Modal position="middle" dataTest="create-modal">
             <Form onSubmit={onSubmit}>
                 {({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>

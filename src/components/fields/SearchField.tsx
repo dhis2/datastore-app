@@ -23,6 +23,7 @@ const SearchField = ({
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.value)}
                 clearable
+                dataTest="search-field"
             />
         </div>
     )

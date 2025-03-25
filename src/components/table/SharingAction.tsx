@@ -41,7 +41,7 @@ export default function SharingAction({
     )
 
     if (loading) {
-        return <CircularLoader extrasmall />
+        return <CircularLoader extrasmall dataTest="circular-loader" />
     }
 
     return (
@@ -58,6 +58,7 @@ export default function SharingAction({
                     }
                 }}
                 title={i18n.t('Share')}
+                dataTest="sharing-action-button"
             />
             {openSharingDialog && (
                 <SharingDialog

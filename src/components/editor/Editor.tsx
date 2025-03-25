@@ -13,6 +13,7 @@ type EditorProps = {
 const Editor = ({ value, handleChange }: EditorProps) => {
     return (
         <CodeMirror
+            data-test="editor"
             theme={'dark'}
             value={value}
             height="90vh"
