@@ -38,6 +38,8 @@ const EditSection = ({ query }) => {
         },
     })
 
+    console.log(data, "edit data")
+
     const [value, setValue] = useState(
         JSON.stringify(data?.results, null, 4) || ''
     )

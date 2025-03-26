@@ -43,6 +43,8 @@ const KeysDataSection = ({ query }) => {
         }
     )
 
+    console.log(data, "keys data")
+
     const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
         data?.results
     )

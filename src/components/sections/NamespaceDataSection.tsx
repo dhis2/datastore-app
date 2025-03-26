@@ -32,6 +32,8 @@ const NamespaceDataSection = ({ query }) => {
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(query)
 
+    console.log(data, "data")
+
     const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
         data?.results
     )
