@@ -6,5 +6,5 @@ type HeaderProps = {
 }
 
 export default function PageHeader({ children }: HeaderProps) {
-    return <div className={classes.pageHeader}>{children}</div>
+    return <div className={classes.pageHeader} data-test="page-header">{children}</div>
 }
