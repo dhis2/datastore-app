@@ -1,6 +1,6 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useBlocker, useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import useDiscardAlert from '../../hooks/useDiscardAlert'
@@ -36,7 +36,8 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
     const { showError, showSuccess } = useCustomAlert()
     const discardAlert = useDiscardAlert()
 
-    const { hasUnsavedChanges, setHasUnsavedChanges } = useEditContext()
+    const { hasUnsavedChanges, setHasUnsavedChanges, revertChanges } =
+        useEditContext()
 
     const { error, loading, data, refetch } = useDataQuery<QueryResults>(
         query,
@@ -51,31 +52,27 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
         data?.results
     )
 
-    const handleKeyRowClick = (row) => {
-        const handler = () => {
-            setHasUnsavedChanges(null)
-            setActiveRow(row)
-            navigate(`${row}`)
-        }
+    const blocker = useBlocker(
+        ({ currentLocation, nextLocation }) =>
+            hasUnsavedChanges &&
+            currentLocation.pathname !== nextLocation.pathname
+    )
 
-        if (hasUnsavedChanges) {
-            discardAlert.show({
-                onConfirm: handler,
-            })
-        } else {
-            handler()
-        }
+    const handleKeyRowClick = (row) => {
+        setActiveRow(row)
+        navigate(`${row}`)
     }
 
     const handleDeleteActionClick = (item) => {
         const action = () => {
             setOpenDeleteModal(true)
             setSelectedKey(item)
+            setHasUnsavedChanges(null)
         }
         if (hasUnsavedChanges && item === activeRow) {
             discardAlert.show({
                 onConfirm: () => {
-                    setHasUnsavedChanges(null)
+                    revertChanges()
                     action()
                 },
             })
@@ -169,6 +166,22 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
     useEffect(() => {
         setActiveRow(key)
     }, [key])
+
+    useEffect(() => {
+        if (blocker.state !== 'blocked') {
+            return
+        }
+
+        discardAlert.show({
+            onConfirm: () => {
+                setHasUnsavedChanges(null)
+                blocker.proceed()
+            },
+            onCancel: () => blocker.reset(),
+        })
+
+        return () => blocker.reset()
+    }, [blocker, discardAlert, setHasUnsavedChanges])
 
     if (error) {
         return <ErrorNotice />
