@@ -131,9 +131,7 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
                 ? `/${store}/edit/${currentNamespace}`
                 : `/${store}`
 
-            if (selectedKey === activeRow) {
-                navigate(navigatePath)
-            }
+            navigate(navigatePath)
 
             if (namespaceHasMultipleKeys) {
                 refetch({ id: currentNamespace })
