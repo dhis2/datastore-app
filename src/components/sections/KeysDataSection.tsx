@@ -1,9 +1,8 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useBlocker, useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
-import useDiscardAlert from '../../hooks/useDiscardAlert'
 import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
 import { useEditContext } from '../context/EditContext'
@@ -14,6 +13,7 @@ import KeysPanelHeader from '../header/KeysPanelHeader'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
+import DiscardModal from '../modals/DiscardModal'
 import { dataStoreKeysQuery } from '../panels/KeysPanel'
 import ItemsTable from '../table/ItemsTable'
 
@@ -34,7 +34,6 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
     const [activeRow, setActiveRow] = useState(null)
 
     const { showError, showSuccess } = useCustomAlert()
-    const discardAlert = useDiscardAlert()
 
     const { hasUnsavedChanges, setHasUnsavedChanges } = useEditContext()
 
@@ -51,40 +50,27 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
         data?.results
     )
 
-    const handleKeyRowClick = (row) => {
-        const handler = () => {
-            setHasUnsavedChanges(null)
-            setActiveRow(row)
-            navigate(`${row}`)
-        }
+    const blocker = useBlocker(
+        ({ currentLocation, nextLocation }) =>
+            hasUnsavedChanges &&
+            currentLocation.pathname !== nextLocation.pathname
+    )
 
-        if (hasUnsavedChanges) {
-            discardAlert.show({
-                onConfirm: handler,
-            })
-        } else {
-            handler()
+    const handleKeyRowClick = (row) => {
+        navigate(`${row}`)
+        if (key === row) {
+            setActiveRow(row)
         }
     }
 
     const handleDeleteActionClick = (item) => {
-        const action = () => {
-            setOpenDeleteModal(true)
-            setSelectedKey(item)
-        }
-        if (hasUnsavedChanges && item === activeRow) {
-            discardAlert.show({
-                onConfirm: () => {
-                    setHasUnsavedChanges(null)
-                    action()
-                },
-            })
-        } else {
-            action()
-        }
+        setOpenDeleteModal(true)
+        setSelectedKey(item)
     }
 
     const numberOfKeysInNamespace = data?.results?.length
+    const currentKeyHasUnsavedChanges =
+        activeRow === selectedKey && hasUnsavedChanges
 
     const handleCreate = async ({ key }) => {
         await engine.mutate(
@@ -210,13 +196,29 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
             )}
             {openDeleteModal && (
                 <DeleteModal
-                    closeModal={() => setOpenDeleteModal(false)}
-                    handleDelete={handleDelete}
+                    closeModal={() => {
+                        setOpenDeleteModal(false)
+                    }}
+                    handleDelete={() => {
+                        handleDelete()
+                        if (currentKeyHasUnsavedChanges) {
+                            setHasUnsavedChanges(null)
+                        }
+                    }}
                     title={i18n.t('Delete Key')}
                 >
-                    {i18n.t(
-                        `Are you sure you want to delete '${selectedKey}' in ${currentNamespace}?`
-                    )}
+                    <p>
+                        {currentKeyHasUnsavedChanges && (
+                            <span>
+                                {i18n.t('This key has unsaved changes.')}
+                            </span>
+                        )}{' '}
+                        <span>
+                            {i18n.t(
+                                `Are you sure you want to delete '${selectedKey}' in ${currentNamespace}?`
+                            )}
+                        </span>
+                    </p>
                     {numberOfKeysInNamespace < 2 && (
                         <p>
                             {i18n.t(
@@ -225,6 +227,15 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
                         </p>
                     )}
                 </DeleteModal>
+            )}
+            {blocker.state === 'blocked' && hasUnsavedChanges && (
+                <DiscardModal
+                    handleDiscard={() => {
+                        setHasUnsavedChanges(null)
+                        blocker.proceed()
+                    }}
+                    closeModal={() => blocker.reset()}
+                />
             )}
         </>
     )
