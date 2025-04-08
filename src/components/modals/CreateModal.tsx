@@ -8,39 +8,46 @@ import {
     ReactFinalForm,
 } from '@dhis2/ui'
 import React from 'react'
+import classes from '../../App.module.css'
 import i18n from '../../locales'
+import KeyField from '../fields/KeyField'
+import NamespaceField from '../fields/NamespaceField'
+import { CreateModalProps, ModalFieldValues } from './types'
 
 const { Form } = ReactFinalForm
 
-interface FieldValues {
-    key: string
-    namespace?: string
-}
-
-interface CreateModalProps {
-    closeModal: () => void
-    handleCreate: ({ key, namespace }: FieldValues) => void
-    children: React.ReactNode
-    title: string
-}
-
-const CreateModal = ({
+const CreateModal: React.FC<CreateModalProps> = ({
     handleCreate,
     closeModal,
-    children,
+    type,
     title,
-}: CreateModalProps) => {
-    const onSubmit = (values) => {
+}) => {
+    const onSubmit = (values: ModalFieldValues) => {
         handleCreate(values)
     }
 
+    const showNamespaceField = type === 'namespace'
+
     return (
-        <Modal position="middle">
+        <Modal position="middle" dataTest="create-modal">
             <Form onSubmit={onSubmit}>
                 {({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                         <ModalTitle>{title}</ModalTitle>
-                        <ModalContent>{children}</ModalContent>
+                        <ModalContent>
+                            <div
+                                className={
+                                    showNamespaceField
+                                        ? classes.namespaceModalFields
+                                        : undefined
+                                }
+                            >
+                                {showNamespaceField && (
+                                    <NamespaceField initialFocus />
+                                )}
+                                <KeyField initialFocus={type === 'key'} />
+                            </div>
+                        </ModalContent>
                         <ModalActions>
                             <ButtonStrip end>
                                 <Button secondary onClick={closeModal}>

@@ -10,7 +10,7 @@ interface ErrorNoticeProps {
 const ErrorNotice = ({ error }: ErrorNoticeProps) => {
     console.error(error)
     return (
-        <div className={classes.errorNotice}>
+        <div className={classes.errorNotice} data-test="error-notice">
             <NoticeBox warning>
                 <p>{i18n.t('An error has occurred. Try again')}</p>
             </NoticeBox>

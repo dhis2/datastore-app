@@ -13,7 +13,7 @@ export default function DataStoreTabBar({
     switchTab,
 }: Readonly<DataStoreProps>) {
     return (
-        <TabBar>
+        <TabBar dataTest="datastore-tab-bar">
             <Tab
                 onClick={() => {
                     switchTab(DATASTORE)
@@ -28,7 +28,6 @@ export default function DataStoreTabBar({
                 }}
                 selected={activeTab === USERDATASTORE}
             >
-                {' '}
                 {i18n.t('UserDataStore')}
             </Tab>
         </TabBar>

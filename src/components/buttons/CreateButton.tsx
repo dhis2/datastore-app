@@ -25,6 +25,7 @@ const CreateButton = ({
                 onClick={handleClick}
                 title={label}
                 className={classes.createButton}
+                dataTest="create-button"
             >
                 {label}
             </Button>

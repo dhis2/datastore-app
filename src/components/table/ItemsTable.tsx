@@ -36,7 +36,7 @@ const ItemsTable = ({
     return (
         <>
             {tableData && (
-                <DataTable scrollHeight="75vh">
+                <DataTable scrollHeight="75vh" dataTest="datastore-items-table">
                     <TableHead>
                         <DataTableRow>
                             <DataTableColumnHeader
@@ -44,6 +44,7 @@ const ItemsTable = ({
                                 // @ts-expect-error - passing a string '0' to a boolean param
                                 top={'0'}
                                 width={currentNamespace ? '85%' : '90%'}
+                                dataTest="items-column-header"
                             >
                                 <span className={classes.columnHeader}>
                                     {label}
@@ -54,6 +55,7 @@ const ItemsTable = ({
                                 // @ts-expect-error - passing a string '0' to a boolean param
                                 top={'0'}
                                 width={currentNamespace ? '15%' : '10%'}
+                                dataTest="actions-column-header"
                             >
                                 <span className={classes.columnHeader}>
                                     {i18n.t('Actions')}
@@ -81,6 +83,7 @@ const ItemsTable = ({
                                                 onClick={() => {
                                                     handleRowClick(item)
                                                 }}
+                                                dataTest={`data-table-cell-${index}`}
                                             >
                                                 {item}
                                             </DataTableCell>

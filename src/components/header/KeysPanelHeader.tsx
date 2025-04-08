@@ -4,8 +4,8 @@ import { Link, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import { DATASTORE, USERDATASTORE } from '../../constants/constants'
 import i18n from '../../locales'
+import CreateButton from '../buttons/CreateButton'
 import PanelHeader from '../header/PanelHeader'
-import CreateButton from '../sections/CreateButton'
 
 const KeysPanelHeader = ({
     setOpenCreateModal,
@@ -15,7 +15,10 @@ const KeysPanelHeader = ({
     const { namespace: currentNamespace, store } = useParams()
     return (
         <PanelHeader>
-            <div className={classes.keysPanelHeaderLabel}>
+            <div
+                className={classes.keysPanelHeaderLabel}
+                data-test="keys-panel-header"
+            >
                 <Link to={`/${store}`} className={classes.dataStoreLink}>
                     <span>
                         {store === DATASTORE && 'DataStore'}

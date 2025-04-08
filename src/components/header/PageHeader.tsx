@@ -5,6 +5,10 @@ type HeaderProps = {
     children?: React.ReactNode
 }
 
-export default function PageHeader({ children }: HeaderProps) {
-    return <div className={classes.pageHeader}>{children}</div>
+export default function PageHeader({ children }: Readonly<HeaderProps>) {
+    return (
+        <div data-test="page-header" className={classes.pageHeader}>
+            {children}
+        </div>
+    )
 }

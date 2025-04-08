@@ -8,24 +8,52 @@ import {
 } from '@dhis2/ui'
 import React from 'react'
 import i18n from '../../locales'
+import { DeleteModalProps } from './types'
 
-type DeleteModalProps = {
-    closeModal: () => void
-    handleDelete: () => void
-    children: React.ReactNode
-    title: string
-}
-
-const DeleteModal = ({
-    children,
+const DeleteModal: React.FC<DeleteModalProps> = ({
     handleDelete,
     closeModal,
     title,
-}: DeleteModalProps) => {
+    type,
+    activeNamespace,
+    activeKey,
+    deleteNamespace,
+}) => {
     return (
-        <Modal position="middle">
+        <Modal position="middle" dataTest="delete-modal">
             <ModalTitle>{title}</ModalTitle>
-            <ModalContent>{children}</ModalContent>
+            <ModalContent>
+                {type === 'namespace' && (
+                    <>
+                        <p>
+                            {i18n.t(
+                                `Are you sure you want to delete '${activeNamespace}'?`
+                            )}
+                        </p>
+                        <p>
+                            {i18n.t(
+                                `This will delete all the keys in this namespace`
+                            )}
+                        </p>
+                    </>
+                )}
+                {type === 'key' && (
+                    <>
+                        <p>
+                            {i18n.t(
+                                `Are you sure you want to delete '${activeKey}' in ${activeNamespace}?`
+                            )}
+                        </p>
+                        {deleteNamespace && (
+                            <p>
+                                {i18n.t(
+                                    `This will also delete the namespace '${activeNamespace}'`
+                                )}
+                            </p>
+                        )}
+                    </>
+                )}
+            </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
                     <Button secondary onClick={closeModal}>

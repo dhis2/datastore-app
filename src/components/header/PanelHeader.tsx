@@ -5,6 +5,10 @@ type HeaderProps = {
     children?: React.ReactNode
 }
 
-export default function PanelHeader({ children }: HeaderProps) {
-    return <div className={classes.panelHeader}>{children}</div>
+export default function PanelHeader({ children }: Readonly<HeaderProps>) {
+    return (
+        <div className={classes.panelHeader} data-test="panel-header">
+            {children}
+        </div>
+    )
 }

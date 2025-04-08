@@ -9,10 +9,13 @@ const EditPage = () => {
         <EditContextProvider>
             <div className={classes.secondPage}>
                 <div className={classes.secondPageContainer}>
-                    <div className={classes.keysPanel}>
+                    <div className={classes.keysPanel} data-test="keys-panel">
                         <KeysPanel />
                     </div>
-                    <div className={classes.editorPanel}>
+                    <div
+                        className={classes.editorPanel}
+                        data-test="editor-panel"
+                    >
                         <Outlet />
                     </div>
                 </div>

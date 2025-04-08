@@ -11,7 +11,10 @@ const EmptyEditorPanel = () => {
                     <i>{i18n.t('Choose a key to start editing')}</i>
                 </span>
             </PanelHeader>
-            <div className={classes.editorBackground} />
+            <div
+                className={classes.editorBackground}
+                data-test="empty-editor-placeholder"
+            />
         </>
     )
 }

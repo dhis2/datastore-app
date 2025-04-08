@@ -6,16 +6,14 @@ import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import useSearchFilter from '../../hooks/useSearchFilter'
 import i18n from '../../locales'
+import CreateButton from '../buttons/CreateButton'
 import ErrorNotice from '../error/ErrorNotice'
-import KeyField from '../fields/KeyField'
-import NamespaceField from '../fields/NamespaceField'
 import SearchField from '../fields/SearchField'
 import CenteredLoader from '../loader/Loader'
 import CreateModal from '../modals/CreateModal'
 import DeleteModal from '../modals/DeleteModal'
 import { dataStoreNamespacesQuery } from '../pages/Namespaces'
 import ItemsTable from '../table/ItemsTable'
-import CreateButton from './CreateButton'
 
 interface QueryResults {
     results: []
@@ -155,30 +153,17 @@ const NamespaceDataSection = ({ query }: NamespaceDataSectionProps) => {
                     title={i18n.t('Add New Namespace')}
                     closeModal={() => setOpenCreateModal(false)}
                     handleCreate={handleCreate}
-                >
-                    <div className={classes.namespaceModalFields}>
-                        <NamespaceField initialFocus />
-                        <KeyField />
-                    </div>
-                </CreateModal>
+                    type={'namespace'}
+                />
             )}
             {openDeleteModal && (
                 <DeleteModal
                     closeModal={() => setOpenDeleteModal(false)}
                     handleDelete={handleDelete}
                     title={i18n.t('Delete Namespace')}
-                >
-                    <p>
-                        {i18n.t(
-                            `Are you sure you want to delete '${selectedNamespace}'?`
-                        )}
-                    </p>
-                    <p>
-                        {i18n.t(
-                            `This will delete all the keys in this namespace`
-                        )}
-                    </p>
-                </DeleteModal>
+                    type={'namespace'}
+                    activeNamespace={selectedNamespace}
+                />
             )}
         </>
     )

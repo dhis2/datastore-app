@@ -1,11 +1,11 @@
 import { IconAdd16 } from '@dhis2/ui-icons'
 import React from 'react'
-import { customRender } from '../../../test-utils/render'
+import { render } from '../../../test-utils/render'
 import CreateButton from '../CreateButton'
 
 it('renders Create Button', async () => {
     const handleClick = jest.fn()
-    const { user, getByRole } = customRender(
+    const { user, getByRole } = render(
         <CreateButton
             label={'Create'}
             handleClick={handleClick}
