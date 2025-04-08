@@ -121,9 +121,7 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
                 : `/${store}`
 
             setTimeout(() => {
-                if (selectedKey === activeRow) {
-                    navigate(navigatePath)
-                }
+                navigate(navigatePath)
             }, 50)
 
             if (namespaceHasMultipleKeys) {
