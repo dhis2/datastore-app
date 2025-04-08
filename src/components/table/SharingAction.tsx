@@ -12,6 +12,13 @@ interface SharingActionProps {
     dataStoreKey: string
 }
 
+const dataStoreKeyIDQuery = {
+    metadata: {
+        resource: 'dataStore',
+        id: ({ id }: { id: string }) => id,
+    },
+}
+
 export default function SharingAction({
     dataStoreKey,
 }: Readonly<SharingActionProps>) {
@@ -20,25 +27,21 @@ export default function SharingAction({
     const [keyID, setKeyID] = useState(null)
     const { showError } = useCustomAlert()
 
-    const { loading, refetch } = useDataQuery(
-        {
-            metadata: {
-                resource: `dataStore/${currentNamespace}/${dataStoreKey}/metaData`,
-            },
+    const { loading, refetch } = useDataQuery(dataStoreKeyIDQuery, {
+        variables: {
+            id: `${currentNamespace}/${dataStoreKey}/metaData`,
         },
-        {
-            lazy: true,
-            onComplete(data) {
-                if (data?.['metadata']?.['id']) {
-                    setKeyID(data['metadata']['id'])
-                    setOpenSharingDialog(true)
-                }
-            },
-            onError() {
-                showError(i18n.t("There was a problem fetching this key's ID"))
-            },
-        }
-    )
+        lazy: true,
+        onComplete(data) {
+            if (data?.['metadata']?.['id']) {
+                setKeyID(data['metadata']['id'])
+                setOpenSharingDialog(true)
+            }
+        },
+        onError() {
+            showError(i18n.t("There was a problem fetching this key's ID"))
+        },
+    })
 
     if (loading) {
         return <CircularLoader extrasmall />
