@@ -1,3 +1,24 @@
+## [100.0.3](https://github.com/dhis2/datastore-app/compare/v100.0.2...v100.0.3) (2025-03-20)
+
+
+### Bug Fixes
+
+* issue with github action logic ([42ed0be](https://github.com/dhis2/datastore-app/commit/42ed0bef17d0aad6f99a4e6835de0249607aa50a))
+
+## [100.0.2](https://github.com/dhis2/datastore-app/compare/v100.0.1...v100.0.2) (2025-03-20)
+
+
+### Bug Fixes
+
+* force release to AppHub ([1db68ef](https://github.com/dhis2/datastore-app/commit/1db68ef930d06e20f44a87021f6e5e193b791013))
+
+## [100.0.1](https://github.com/dhis2/datastore-app/compare/v100.0.0...v100.0.1) (2025-03-20)
+
+
+### Bug Fixes
+
+* force release to AppHub ([21980c1](https://github.com/dhis2/datastore-app/commit/21980c12195bdcbb34918b944f6e2a7fafd6eddd))
+
 # [100.0.0](https://github.com/dhis2/datastore-app/compare/v99.10.1...v100.0.0) (2025-03-18)
 
 
