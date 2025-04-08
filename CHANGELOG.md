@@ -1,3 +1,10 @@
+## [100.0.4](https://github.com/dhis2/datastore-app/compare/v100.0.3...v100.0.4) (2025-04-08)
+
+
+### Bug Fixes
+
+* navigation after deleting key in a namespace ([#157](https://github.com/dhis2/datastore-app/issues/157)) ([0d6f2ab](https://github.com/dhis2/datastore-app/commit/0d6f2ab9d8f1dbf8e8e95055e02fd2046a63cd86))
+
 ## [100.0.3](https://github.com/dhis2/datastore-app/compare/v100.0.2...v100.0.3) (2025-03-20)
 
 
