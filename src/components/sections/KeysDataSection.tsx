@@ -107,6 +107,9 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
         const id = namespaceHasMultipleKeys ? selectedKey : currentNamespace
 
         const onComplete = () => {
+            if (activeRow === selectedKey) {
+                setHasUnsavedChanges(null)
+            }
             setOpenDeleteModal(false)
             showSuccess(
                 i18n.t("Key '{{selectedKey}}' deleted successfully", {
@@ -117,9 +120,11 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
                 ? `/${store}/edit/${currentNamespace}`
                 : `/${store}`
 
-            if (selectedKey === activeRow) {
-                navigate(navigatePath)
-            }
+            setTimeout(() => {
+                if (selectedKey === activeRow) {
+                    navigate(navigatePath)
+                }
+            }, 50)
 
             if (namespaceHasMultipleKeys) {
                 refetch({ id: currentNamespace })
@@ -127,6 +132,7 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
         }
 
         const onError = (error) => {
+            setOpenDeleteModal(false)
             showError(
                 i18n.t('There was a problem deleting this key - {{error}}', {
                     error: error.message,
@@ -147,6 +153,14 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
             }
         )
     }
+
+    useEffect(() => {
+        return () => {
+            if (blocker.state == 'blocked') {
+                blocker.reset()
+            }
+        }
+    }, [blocker])
 
     useEffect(() => {
         refetch({ id: currentNamespace })
@@ -199,12 +213,7 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
                     closeModal={() => {
                         setOpenDeleteModal(false)
                     }}
-                    handleDelete={() => {
-                        handleDelete()
-                        if (currentKeyHasUnsavedChanges) {
-                            setHasUnsavedChanges(null)
-                        }
-                    }}
+                    handleDelete={handleDelete}
                     title={i18n.t('Delete Key')}
                 >
                     <p>
