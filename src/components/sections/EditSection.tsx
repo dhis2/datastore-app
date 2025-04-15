@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
+import { parseEditorValue, stringifyEditorValue } from '../../utils/json-utils'
 import { useEditContext } from '../context/EditContext'
 import Editor from '../editor/Editor'
 import EditPanelHeader from '../header/EditPanelHeader'
@@ -60,7 +61,8 @@ const EditSection = ({ query }: EditSectionProps) => {
         }
 
         try {
-            body = JSON.parse(editorView.state.doc.toString())
+            body = parseEditorValue(editorView.state.doc.toString())
+
             await engine.mutate(
                 {
                     type: 'update' as const,
@@ -128,7 +130,7 @@ const EditSection = ({ query }: EditSectionProps) => {
                     </Center>
                 ) : (
                     <Editor
-                        value={JSON.stringify(data?.results, null, 4) || '{}'}
+                        value={stringifyEditorValue(data?.results) ?? '{}'}
                         setEditorView={setEditorView}
                     />
                 )}
