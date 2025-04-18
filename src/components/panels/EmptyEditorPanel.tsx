@@ -7,7 +7,10 @@ const EmptyEditorPanel = () => {
     return (
         <>
             <PanelHeader>
-                <span className={classes.emptyEditorPanelHeader}>
+                <span
+                    className={classes.emptyEditorPanelHeader}
+                    data-test="empty-editor-panel-label"
+                >
                     <i>{i18n.t('Choose a key to start editing')}</i>
                 </span>
             </PanelHeader>

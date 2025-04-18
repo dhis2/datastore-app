@@ -17,4 +17,9 @@ export default defineConfig({
         baseUrl: 'http://localhost:3000',
         specPattern: 'cypress/e2e/**/*.feature',
     },
+    env: {
+        dhis2Username: 'admin',
+        dhis2Password: 'district',
+        dhis2BaseUrl: 'https://debug.dhis2.org/dev',
+    },
 })

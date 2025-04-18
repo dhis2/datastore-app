@@ -19,6 +19,7 @@ export default function DataStoreTabBar({
                     switchTab(DATASTORE)
                 }}
                 selected={activeTab === DATASTORE}
+                dataTest="datastore-tab"
             >
                 {i18n.t('DataStore')}
             </Tab>
@@ -27,6 +28,7 @@ export default function DataStoreTabBar({
                     switchTab(USERDATASTORE)
                 }}
                 selected={activeTab === USERDATASTORE}
+                dataTest="user-datastore-tab"
             >
                 {i18n.t('UserDataStore')}
             </Tab>

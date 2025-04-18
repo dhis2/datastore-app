@@ -50,10 +50,18 @@ const CreateModal: React.FC<CreateModalProps> = ({
                         </ModalContent>
                         <ModalActions>
                             <ButtonStrip end>
-                                <Button secondary onClick={closeModal}>
+                                <Button
+                                    secondary
+                                    onClick={closeModal}
+                                    dataTest="cancel-btn"
+                                >
                                     {i18n.t('Cancel')}
                                 </Button>
-                                <Button primary type="submit">
+                                <Button
+                                    primary
+                                    type="submit"
+                                    dataTest="add-btn"
+                                >
                                     {i18n.t('Add')}
                                 </Button>
                             </ButtonStrip>
