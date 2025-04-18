@@ -5,8 +5,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-25T17:30:17.712Z\n"
-"PO-Revision-Date: 2025-03-25T17:30:17.713Z\n"
+"POT-Creation-Date: 2025-04-17T09:31:24.060Z\n"
+"PO-Revision-Date: 2025-04-17T09:31:24.060Z\n"
+
+msgid "DataStore"
+msgstr "DataStore"
+
+msgid "UserDataStore"
+msgstr "UserDataStore"
 
 msgid "An error has occurred"
 msgstr "An error has occurred"
@@ -64,12 +70,6 @@ msgstr "Namespaces"
 
 msgid "Choose a key to start editing"
 msgstr "Choose a key to start editing"
-
-msgid "DataStore"
-msgstr "DataStore"
-
-msgid "UserDataStore"
-msgstr "UserDataStore"
 
 msgid "There was a problem fetching this data - {{error}}"
 msgstr "There was a problem fetching this data - {{error}}"

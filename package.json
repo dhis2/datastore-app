@@ -12,11 +12,24 @@
         "format:staged": "d2-style apply --staged",
         "start": "d2-app-scripts start",
         "test": "d2-app-scripts test",
-        "deploy": "d2-app-scripts deploy"
+        "deploy": "d2-app-scripts deploy",
+        "cy:start": "REACT_APP_NODE_ENV=test BROWSER=none yarn start",
+        "cy:prepare": "start-server-and-test 'yarn cy:start' http://localhost:3000",
+        "cy:open": "yarn cy:prepare 'yarn cypress open --env networkMode=live'",
+        "_cy:live": "yarn cypress run --env networkMode=live",
+        "cy:live": "yarn cy:prepare 'yarn _cy:live'",
+        "_cy:capture": "yarn cypress run --env networkMode=capture",
+        "cy:capture": "yarn cy:prepare 'yarn _cy:capture'",
+        "_cy:stub": "yarn cypress run --env networkMode=stub",
+        "cy:stub": "yarn cy:prepare 'yarn _cy:stub'"
     },
     "devDependencies": {
+        "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+        "@cypress/webpack-preprocessor": "^6.0.4",
         "@dhis2/cli-app-scripts": "^12.3.0",
         "@dhis2/cli-style": "^10.7.5",
+        "@dhis2/cypress-commands": "^10.0.6",
+        "@dhis2/cypress-plugins": "^10.0.6",
         "@testing-library/dom": "^10.4.0",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.2.0",
@@ -24,6 +37,8 @@
         "@types/jest": "^29.5.14",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
+        "cypress": "^14.2.1",
+        "start-server-and-test": "^2.0.11",
         "typescript": "^5"
     },
     "dependencies": {
