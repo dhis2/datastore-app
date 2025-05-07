@@ -1,3 +1,10 @@
+# [100.1.0](https://github.com/dhis2/datastore-app/compare/v100.0.4...v100.1.0) (2025-05-07)
+
+
+### Features
+
+* **editor:**  modify user flow of discarding unsaved changes ([#156](https://github.com/dhis2/datastore-app/issues/156)) ([c5faaeb](https://github.com/dhis2/datastore-app/commit/c5faaebb66ee2a2129fdc8a5146b14bf89ba1c3e))
+
 ## [100.0.4](https://github.com/dhis2/datastore-app/compare/v100.0.3...v100.0.4) (2025-04-08)
 
 
