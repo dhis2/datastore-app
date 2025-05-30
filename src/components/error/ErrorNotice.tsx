@@ -13,11 +13,7 @@ const ErrorNotice = ({ error, message }: ErrorNoticeProps) => {
     return (
         <div className={classes.errorNotice}>
             <NoticeBox warning>
-                <p>
-                    {message
-                        ? message
-                        : i18n.t('An error has occurred. Try again')}
-                </p>
+                <p>{message || i18n.t('An error has occurred. Try again')}</p>
             </NoticeBox>
         </div>
     )

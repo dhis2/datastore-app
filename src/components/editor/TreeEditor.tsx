@@ -39,7 +39,8 @@ const treeEditorStyle = {
     ...customTheme,
     fontSize: '17px',
     height: '100%',
-    fontFamily:  "ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono','Roboto Mono', 'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro','Fira Mono', 'Droid Sans Mono', 'Consolas','Courier New', monospace"
+    fontFamily:
+        "ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono','Roboto Mono', 'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro','Fira Mono', 'Droid Sans Mono', 'Consolas','Courier New', monospace",
 }
 
 const TreeViewEditor = ({ data }: { data: string }) => {
@@ -65,7 +66,9 @@ const TreeViewEditor = ({ data }: { data: string }) => {
 
     return error ? (
         <ErrorNotice
-            message={i18n.t('Invalid JSON detected. Fix the value in the Code Editor')}
+            message={i18n.t(
+                'Invalid JSON detected. Fix the value in the Code Editor'
+            )}
         />
     ) : (
         <div
