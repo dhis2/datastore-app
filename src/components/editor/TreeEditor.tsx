@@ -1,14 +1,8 @@
-/* 
-    Library of use: https://uiwjs.github.io/react-json-view/
-    Pending: edit functionality
-*/
-
-import JsonView from '@uiw/react-json-view'
 // eslint-disable-next-line import/no-unresolved
-import { TriangleSolidArrow } from '@uiw/react-json-view/triangle-solid-arrow'
-import React from 'react'
-import useCustomAlert from '../../hooks/useCustomAlert'
+import JsonViewEditor from '@uiw/react-json-view/editor'
+import React, { useMemo, useState } from 'react'
 import i18n from '../../locales'
+import ErrorNotice from '../error/ErrorNotice'
 
 const customTheme = {
     '--w-rjv-color': '#e16c73',
@@ -41,9 +35,18 @@ const customTheme = {
     '--w-rjv-type-undefined-color': '#9cba7d',
 }
 
+const treeEditorStyle = {
+    ...customTheme,
+    fontSize: '17px',
+    height: '100%',
+    fontFamily:  "ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono','Roboto Mono', 'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro','Fira Mono', 'Droid Sans Mono', 'Consolas','Courier New', monospace"
+}
+
 const TreeViewEditor = ({ data }: { data: string }) => {
-    const { showError } = useCustomAlert()
-    const formattedData = () => {
+    // Todo: edit functionality pending
+    const [error, setError] = useState(null)
+    const formattedData = useMemo(() => {
+        setError(null)
         try {
             if (data === null || data === undefined) {
                 return {}
@@ -56,35 +59,30 @@ const TreeViewEditor = ({ data }: { data: string }) => {
                 return { value: jsonValue }
             }
         } catch (e) {
-            showError(i18n.t('Invalid JSON - {{error}}', { error: e.message }))
+            setError(e.message)
         }
-    }
+    }, [data])
 
-    return (
+    return error ? (
+        <ErrorNotice
+            message={i18n.t('Invalid JSON detected. Fix the value in the Code Editor')}
+        />
+    ) : (
         <div
             style={{
                 overflowY: 'auto',
                 height: '100%',
             }}
         >
-            <JsonView
-                value={formattedData()}
-                keyName={'object'}
+            <JsonViewEditor
+                value={formattedData}
                 shortenTextAfterLength={0}
-                style={{
-                    ...customTheme,
-                    fontSize: '16px',
-                    fontFamily: 'Roboto, sans-serif',
-                    height: '100%',
-                }}
+                style={treeEditorStyle}
                 displayDataTypes={false}
+                displayObjectSize={true}
                 collapsed={1}
-                indentWidth={30}
-            >
-                <JsonView.Arrow>
-                    <TriangleSolidArrow />
-                </JsonView.Arrow>
-            </JsonView>
+                indentWidth={40}
+            />
         </div>
     )
 }

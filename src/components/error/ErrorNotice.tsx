@@ -5,14 +5,19 @@ import i18n from '../../locales'
 
 interface ErrorNoticeProps {
     error?: string
+    message?: string
 }
 
-const ErrorNotice = ({ error }: ErrorNoticeProps) => {
+const ErrorNotice = ({ error, message }: ErrorNoticeProps) => {
     console.error(error)
     return (
         <div className={classes.errorNotice}>
             <NoticeBox warning>
-                <p>{i18n.t('An error has occurred. Try again')}</p>
+                <p>
+                    {message
+                        ? message
+                        : i18n.t('An error has occurred. Try again')}
+                </p>
             </NoticeBox>
         </div>
     )

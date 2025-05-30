@@ -1,19 +1,16 @@
 import { json, jsonParseLinter } from '@codemirror/lang-json'
 import { linter, lintGutter } from '@codemirror/lint'
 import { search } from '@codemirror/search'
-import CodeMirror, { EditorView } from '@uiw/react-codemirror'
+import CodeMirror from '@uiw/react-codemirror'
 import React from 'react'
 import './editor-styles.css'
-import { useEditContext } from '../context/EditContext'
 
 type CodeEditorProps = {
     value?: string
-    setEditorView?: (view: EditorView) => void
+    onChange?: (string) => void
 }
 
-const CodeEditor = ({ value, setEditorView }: CodeEditorProps) => {
-    const { setHasUnsavedChanges } = useEditContext()
-
+const CodeEditor = ({ value, onChange }: CodeEditorProps) => {
     return (
         <CodeMirror
             theme={'dark'}
@@ -29,8 +26,7 @@ const CodeEditor = ({ value, setEditorView }: CodeEditorProps) => {
                     delay: 500,
                 }),
             ]}
-            onChange={() => setHasUnsavedChanges(true)}
-            onCreateEditor={(view) => setEditorView(view)}
+            onChange={onChange}
             autoFocus
         />
     )

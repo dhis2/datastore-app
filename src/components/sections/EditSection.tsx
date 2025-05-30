@@ -1,6 +1,6 @@
 import { useDataEngine, useDataQuery } from '@dhis2/app-runtime'
 import { Center, CircularLoader } from '@dhis2/ui'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
 import useCustomAlert from '../../hooks/useCustomAlert'
@@ -18,12 +18,6 @@ const EditSection = ({ query }: EditSectionProps) => {
     const { key, namespace, store } = useParams()
     const engine = useDataEngine()
     const navigate = useNavigate()
-
-    const editorRef = useRef(null)
-    const editorView = editorRef.current
-    const setEditorView = (view) => {
-        editorRef.current = view
-    }
 
     const [editError, setEditError] = useState(null)
     const [updateLoading, setUpdateLoading] = useState(false)
@@ -49,18 +43,28 @@ const EditSection = ({ query }: EditSectionProps) => {
 
     const handleClose = () => navigate(`/${store}/edit/${namespace}`)
 
+    const [value, setValue] = useState(
+        JSON.stringify(data?.results, null, 4) || ''
+    )
+
+    useEffect(() => {
+        setValue(JSON.stringify(data?.results, null, 4))
+    }, [data])
+
+    const handleCodeEditorChange = (value) => {
+        setValue(value)
+        setHasUnsavedChanges(true)
+    }
+
     const handleUpdate = async () => {
         let body
         const resource = `${store}`
         setEditError(null)
         setUpdateLoading(true)
 
-        if (!editorView) {
-            return
-        }
-
         try {
-            body = JSON.parse(editorView.state.doc.toString())
+            body = JSON.parse(value)
+
             await engine.mutate(
                 {
                     type: 'update' as const,
@@ -129,8 +133,8 @@ const EditSection = ({ query }: EditSectionProps) => {
                 ) : (
                     <Editor
                         loading={loading}
-                        value={JSON.stringify(data?.results, null, 4) || '{}'}
-                        setEditorView={setEditorView}
+                        value={value}
+                        handleCodeEditorChange={handleCodeEditorChange}
                     />
                 )}
             </div>

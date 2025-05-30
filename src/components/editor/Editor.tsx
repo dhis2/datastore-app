@@ -1,5 +1,4 @@
 import { Tab, TabBar } from '@dhis2/ui'
-import { EditorView } from '@uiw/react-codemirror'
 import React, { useState } from 'react'
 import i18n from '../../locales'
 import CodeEditor from './CodeEditor'
@@ -10,10 +9,10 @@ type EditorViewMode = 'tree' | 'code'
 type EditorProps = {
     loading: boolean
     value: string
-    setEditorView?: (view: EditorView) => void
+    handleCodeEditorChange: (string) => void
 }
 
-const Editor = ({ loading, value, setEditorView }: EditorProps) => {
+const Editor = ({ loading, value, handleCodeEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
     return (
         <>
@@ -32,7 +31,6 @@ const Editor = ({ loading, value, setEditorView }: EditorProps) => {
                     }}
                     selected={view === 'tree'}
                 >
-                    {' '}
                     {i18n.t('Tree')}
                 </Tab>
             </TabBar>
@@ -41,7 +39,7 @@ const Editor = ({ loading, value, setEditorView }: EditorProps) => {
                     (view === 'code' ? (
                         <CodeEditor
                             value={value}
-                            setEditorView={setEditorView}
+                            onChange={handleCodeEditorChange}
                         />
                     ) : (
                         view === 'tree' && <TreeViewEditor data={value} />
