@@ -32,7 +32,7 @@
         "@dhis2/app-runtime": "^3.13.1",
         "@dhis2/ui": "^10.5.0",
         "@uiw/react-codemirror": "^4.23.6",
-        "@uiw/react-json-view": "^2.0.0-alpha.30",
+        "@uiw/react-json-view": "1.12.2",
         "prop-types": "^15.8.1"
     }
 }
