@@ -42,7 +42,7 @@ const Editor = ({ loading, value, handleCodeEditorChange }: EditorProps) => {
                             onChange={handleCodeEditorChange}
                         />
                     ) : (
-                        view === 'tree' && <TreeViewEditor data={value} />
+                        view === 'tree' && <TreeViewEditor value={value} />
                     ))}
             </div>
         </>
