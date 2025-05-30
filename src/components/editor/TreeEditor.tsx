@@ -38,21 +38,19 @@ const customTheme = {
 const treeEditorStyle = {
     ...customTheme,
     fontSize: '17px',
-    height: '100%',
     fontFamily:
         "ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono','Roboto Mono', 'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro','Fira Mono', 'Droid Sans Mono', 'Consolas','Courier New', monospace",
 }
 
-const TreeViewEditor = ({ data }: { data: string }) => {
-    // Todo: edit functionality pending
+const TreeViewEditor = ({ value }: { value: string }) => {
     const [error, setError] = useState(null)
-    const formattedData = useMemo(() => {
+    const formattedValue = useMemo(() => {
         setError(null)
         try {
-            if (data === null || data === undefined) {
+            if (value === null || value === undefined) {
                 return {}
             }
-            const jsonValue = JSON.parse(data)
+            const jsonValue = JSON.parse(value)
 
             if (typeof jsonValue === 'object') {
                 return jsonValue
@@ -62,7 +60,7 @@ const TreeViewEditor = ({ data }: { data: string }) => {
         } catch (e) {
             setError(e.message)
         }
-    }, [data])
+    }, [value])
 
     return error ? (
         <ErrorNotice
@@ -73,12 +71,13 @@ const TreeViewEditor = ({ data }: { data: string }) => {
     ) : (
         <div
             style={{
-                overflowY: 'auto',
-                height: '100%',
+                overflow: 'auto',
+                height: '95vh',
             }}
         >
             <JsonViewEditor
-                value={formattedData}
+                value={formattedValue}
+                keyName="root"
                 shortenTextAfterLength={0}
                 style={treeEditorStyle}
                 displayDataTypes={false}
