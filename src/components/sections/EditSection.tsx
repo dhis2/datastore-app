@@ -51,7 +51,7 @@ const EditSection = ({ query }: EditSectionProps) => {
         setValue(JSON.stringify(data?.results, null, 4))
     }, [data])
 
-    const handleCodeEditorChange = (value) => {
+    const handleEditorChange = (value) => {
         setValue(value)
         setHasUnsavedChanges(true)
     }
@@ -134,7 +134,7 @@ const EditSection = ({ query }: EditSectionProps) => {
                     <Editor
                         loading={loading}
                         value={value}
-                        handleCodeEditorChange={handleCodeEditorChange}
+                        handleEditorChange={handleEditorChange}
                     />
                 )}
             </div>

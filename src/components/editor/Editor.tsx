@@ -9,10 +9,10 @@ type EditorViewMode = 'tree' | 'code'
 type EditorProps = {
     loading: boolean
     value: string
-    handleCodeEditorChange: (string) => void
+    handleEditorChange: (string) => void
 }
 
-const Editor = ({ loading, value, handleCodeEditorChange }: EditorProps) => {
+const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
     return (
         <>
@@ -34,17 +34,22 @@ const Editor = ({ loading, value, handleCodeEditorChange }: EditorProps) => {
                     {i18n.t('Tree')}
                 </Tab>
             </TabBar>
-            <div>
+            <>
                 {!loading &&
                     (view === 'code' ? (
                         <CodeEditor
                             value={value}
-                            onChange={handleCodeEditorChange}
+                            onChange={handleEditorChange}
                         />
                     ) : (
-                        view === 'tree' && <TreeViewEditor value={value} />
+                        view === 'tree' && (
+                            <TreeViewEditor
+                                value={value}
+                                onChange={handleEditorChange}
+                            />
+                        )
                     ))}
-            </div>
+            </>
         </>
     )
 }

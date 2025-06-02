@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React, { useMemo, useState } from 'react'
@@ -42,7 +43,13 @@ const treeEditorStyle = {
         "ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono','Roboto Mono', 'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro','Fira Mono', 'Droid Sans Mono', 'Consolas','Courier New', monospace",
 }
 
-const TreeViewEditor = ({ value }: { value: string }) => {
+const TreeViewEditor = ({
+    value,
+    onChange,
+}: {
+    value: string
+    onChange?: (string) => void
+}) => {
     const [error, setError] = useState(null)
     const formattedValue = useMemo(() => {
         setError(null)
@@ -84,6 +91,33 @@ const TreeViewEditor = ({ value }: { value: string }) => {
                 displayObjectSize={true}
                 collapsed={1}
                 indentWidth={40}
+                // editable editor
+                editable
+                onDelete={(_v, _k, _l, opt) => {
+                    let selectedValue = formattedValue
+                    try {
+                        if (opt?.namespace.length > 0) {
+                            for (let i = 0; i < opt.namespace.length - 1; i++) {
+                                selectedValue = selectedValue[opt?.namespace[i]]
+                            }
+
+                            const lastKey =
+                                opt.namespace[opt.namespace.length - 1]
+
+                            if (typeof lastKey === 'number') {
+                                selectedValue.splice(lastKey, 1)
+                            } else {
+                                delete selectedValue[lastKey]
+                            }
+                            onChange?.(JSON.stringify(formattedValue, null, 4))
+                        }
+                        return true
+                    } catch {
+                        return false
+                    }
+                }}
+                // onAdd={}
+                // onEdit={}
             />
         </div>
     )
