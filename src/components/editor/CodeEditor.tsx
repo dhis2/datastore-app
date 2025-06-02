@@ -15,7 +15,7 @@ const CodeEditor = ({ value, onChange }: CodeEditorProps) => {
         <CodeMirror
             theme={'dark'}
             value={value}
-            height="90vh"
+            height="80vh"
             extensions={[
                 json(),
                 lintGutter(),

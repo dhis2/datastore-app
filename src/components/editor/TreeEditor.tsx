@@ -79,7 +79,7 @@ const TreeViewEditor = ({
         <div
             style={{
                 overflow: 'auto',
-                height: '95vh',
+                height: '80vh',
             }}
         >
             <JsonViewEditor

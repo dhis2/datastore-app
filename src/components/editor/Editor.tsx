@@ -1,5 +1,6 @@
 import { Tab, TabBar } from '@dhis2/ui'
 import React, { useState } from 'react'
+import classes from '../../App.module.css'
 import i18n from '../../locales'
 import CodeEditor from './CodeEditor'
 import TreeViewEditor from './TreeEditor'
@@ -16,7 +17,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
     return (
         <>
-            <TabBar>
+            <TabBar className={classes.tabs}>
                 <Tab
                     onClick={() => {
                         setView('code')
