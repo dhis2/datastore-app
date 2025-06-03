@@ -105,7 +105,6 @@ const TreeViewEditor = ({
         >
             <JsonViewEditor
                 value={treeEditorValue}
-                keyName="root"
                 shortenTextAfterLength={0}
                 style={treeEditorStyle}
                 displayDataTypes={false}
