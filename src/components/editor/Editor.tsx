@@ -1,6 +1,7 @@
 import { Tab, TabBar } from '@dhis2/ui'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import classes from '../../App.module.css'
+import { CODE_VIEW, TREE_VIEW } from '../../constants/constants'
 import i18n from '../../locales'
 import CodeEditor from './CodeEditor'
 import TreeViewEditor from './TreeEditor'
@@ -15,38 +16,64 @@ type EditorProps = {
 
 const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
+
+    const [error, setError] = useState(null)
+    const [disableTreeView, setDisableTreeView] = useState(false)
+
+    const treeEditorValue = useMemo(() => {
+        setError(null)
+        setDisableTreeView(false)
+        try {
+            if (value === null || value === undefined) {
+                return {}
+            }
+            const jsonValue = JSON.parse(value)
+
+            if (typeof jsonValue === 'object') {
+                return jsonValue
+            } else {
+                setDisableTreeView(true)
+                setView(CODE_VIEW)
+            }
+        } catch (e) {
+            setError(e.message)
+        }
+    }, [value])
+
     return (
         <>
             <TabBar className={classes.tabs}>
                 <Tab
                     onClick={() => {
-                        setView('code')
+                        setView(CODE_VIEW)
                     }}
-                    selected={view === 'code'}
+                    selected={view === CODE_VIEW}
                 >
                     {i18n.t('Code')}
                 </Tab>
                 <Tab
                     onClick={() => {
-                        setView('tree')
+                        setView(TREE_VIEW)
                     }}
-                    selected={view === 'tree'}
+                    disabled={disableTreeView}
+                    selected={view === TREE_VIEW}
                 >
                     {i18n.t('Tree')}
                 </Tab>
             </TabBar>
             <>
                 {!loading &&
-                    (view === 'code' ? (
+                    (view === CODE_VIEW ? (
                         <CodeEditor
                             value={value}
                             onChange={handleEditorChange}
                         />
                     ) : (
-                        view === 'tree' && (
+                        view === TREE_VIEW && (
                             <TreeViewEditor
-                                value={value}
+                                value={treeEditorValue}
                                 onChange={handleEditorChange}
+                                error={error}
                             />
                         )
                     ))}

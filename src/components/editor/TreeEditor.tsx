@@ -1,7 +1,7 @@
 /* eslint-disable max-params */
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
-import React, { useMemo, useState } from 'react'
+import React from 'react'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 
@@ -43,31 +43,52 @@ const treeEditorStyle = {
         "ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono','Roboto Mono', 'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro','Fira Mono', 'Droid Sans Mono', 'Consolas','Courier New', monospace",
 }
 
-const TreeViewEditor = ({
-    value,
-    onChange,
-}: {
-    value: string
-    onChange?: (string) => void
-}) => {
-    const [error, setError] = useState(null)
-    const formattedValue = useMemo(() => {
-        setError(null)
-        try {
-            if (value === null || value === undefined) {
-                return {}
-            }
-            const jsonValue = JSON.parse(value)
+const retrieveSelectedValue = ({ mainObj, path }) => {
+    let selectedValue = mainObj
+    const lastKey = path[path.length - 1]
 
-            if (typeof jsonValue === 'object') {
-                return jsonValue
-            } else {
-                return { value: jsonValue }
-            }
-        } catch (e) {
-            setError(e.message)
+    if (path.length > 0) {
+        for (let i = 0; i < path.length - 1; i++) {
+            selectedValue = selectedValue[path[i]]
         }
-    }, [value])
+    }
+
+    return {
+        selectedValue,
+        lastKey,
+    }
+}
+
+const TreeViewEditor = ({
+    value: treeEditorValue,
+    onChange,
+    error,
+}: {
+    value: object
+    onChange?: (string) => void
+    error?: string
+}) => {
+    const editedValue = JSON.parse(JSON.stringify(treeEditorValue))
+
+    const handleDelete = (_v, _k, _l, opt) => {
+        try {
+            const { selectedValue, lastKey } = retrieveSelectedValue({
+                mainObj: editedValue,
+                path: opt.namespace,
+            })
+
+            if (typeof lastKey === 'number') {
+                // delete array item
+                selectedValue?.splice(lastKey, 1)
+            } else {
+                delete selectedValue[lastKey]
+            }
+            onChange?.(JSON.stringify(editedValue, null, 4))
+            return true
+        } catch {
+            return false
+        }
+    }
 
     return error ? (
         <ErrorNotice
@@ -83,7 +104,7 @@ const TreeViewEditor = ({
             }}
         >
             <JsonViewEditor
-                value={formattedValue}
+                value={treeEditorValue}
                 keyName="root"
                 shortenTextAfterLength={0}
                 style={treeEditorStyle}
@@ -91,33 +112,8 @@ const TreeViewEditor = ({
                 displayObjectSize={true}
                 collapsed={1}
                 indentWidth={40}
-                // editable editor
                 editable
-                onDelete={(_v, _k, _l, opt) => {
-                    let selectedValue = formattedValue
-                    try {
-                        if (opt?.namespace.length > 0) {
-                            for (let i = 0; i < opt.namespace.length - 1; i++) {
-                                selectedValue = selectedValue[opt?.namespace[i]]
-                            }
-
-                            const lastKey =
-                                opt.namespace[opt.namespace.length - 1]
-
-                            if (typeof lastKey === 'number') {
-                                selectedValue.splice(lastKey, 1)
-                            } else {
-                                delete selectedValue[lastKey]
-                            }
-                            onChange?.(JSON.stringify(formattedValue, null, 4))
-                        }
-                        return true
-                    } catch {
-                        return false
-                    }
-                }}
-                // onAdd={}
-                // onEdit={}
+                onDelete={handleDelete}
             />
         </div>
     )
