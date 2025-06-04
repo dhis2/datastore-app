@@ -43,12 +43,14 @@
     display: grid;
     grid-template-rows: 50px 50px 1fr;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .editorPanel {
     display: grid;
     grid-template-rows: 50px 1fr;
     width: 100%;
+    overflow-x: hidden;
 }
 
 /* page header */

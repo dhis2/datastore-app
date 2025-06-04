@@ -60,7 +60,7 @@ const retrieveSelectedValue = ({ mainObj, path }) => {
 }
 
 const TreeViewEditor = ({
-    value: treeEditorValue,
+    value,
     onChange,
     error,
 }: {
@@ -68,12 +68,12 @@ const TreeViewEditor = ({
     onChange?: (string) => void
     error?: string
 }) => {
-    const editedValue = JSON.parse(JSON.stringify(treeEditorValue))
+    const treeEditorValue = JSON.parse(JSON.stringify(value))
 
     const handleDelete = (_v, _k, _l, opt) => {
         try {
             const { selectedValue, lastKey } = retrieveSelectedValue({
-                mainObj: editedValue,
+                mainObj: treeEditorValue,
                 path: opt.namespace,
             })
 
@@ -83,7 +83,33 @@ const TreeViewEditor = ({
             } else {
                 delete selectedValue[lastKey]
             }
-            onChange?.(JSON.stringify(editedValue, null, 4))
+            onChange?.(JSON.stringify(treeEditorValue, null, 4))
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    const handleEdit = ({ value, oldValue, type, namespace }) => {
+        try {
+            const { selectedValue, lastKey } = retrieveSelectedValue({
+                mainObj: treeEditorValue,
+                path: namespace,
+            })
+            if (type === 'key') {
+                if (
+                    typeof lastKey === 'string' &&
+                    typeof oldValue === 'string' &&
+                    typeof value === 'string'
+                ) {
+                    const temp = selectedValue[oldValue]
+                    selectedValue[value] = temp
+                    delete selectedValue[oldValue]
+                }
+            } else if (type === 'value') {
+                selectedValue[lastKey] = value
+            }
+            onChange?.(JSON.stringify(treeEditorValue, null, 4))
             return true
         } catch {
             return false
@@ -113,6 +139,8 @@ const TreeViewEditor = ({
                 indentWidth={40}
                 editable
                 onDelete={handleDelete}
+                onEdit={handleEdit}
+                onAdd={(_kv, _nv, _v, isAdd) => isAdd}
             />
         </div>
     )
