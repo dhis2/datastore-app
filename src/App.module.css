@@ -51,6 +51,7 @@
     grid-template-rows: 50px 1fr;
     width: 100%;
     overflow-x: hidden;
+    border-inline: 1px solid var(--colors-grey300);
 }
 
 /* page header */
@@ -74,7 +75,6 @@
     grid-template-columns: auto auto;
     align-items: center;
     border-block-end: 1px solid var(--colors-grey300);
-    border-inline-end: 1px solid var(--colors-grey300);
 }
 
 .keysPanelHeaderLabel {
@@ -107,7 +107,6 @@
 
 .keysPanelMidSection {
     padding: var(--spacers-dp8);
-    border-inline-end: 1px solid var(--colors-grey300);
 }
 
 /* namespace view */
