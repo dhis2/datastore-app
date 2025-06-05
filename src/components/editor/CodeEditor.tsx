@@ -8,9 +8,10 @@ import './editor-styles.css'
 type CodeEditorProps = {
     value?: string
     onChange?: (string) => void
+    loading: boolean
 }
 
-const CodeEditor = ({ value, onChange }: CodeEditorProps) => {
+const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
     return (
         <CodeMirror
             theme={'dark'}
@@ -28,6 +29,7 @@ const CodeEditor = ({ value, onChange }: CodeEditorProps) => {
             ]}
             onChange={onChange}
             autoFocus
+            editable={!loading}
         />
     )
 }

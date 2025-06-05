@@ -62,21 +62,22 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                 </Tab>
             </TabBar>
             <>
-                {!loading &&
-                    (view === CODE_VIEW ? (
-                        <CodeEditor
-                            value={value}
+                {view === CODE_VIEW ? (
+                    <CodeEditor
+                        value={value}
+                        onChange={handleEditorChange}
+                        loading={loading}
+                    />
+                ) : (
+                    view === TREE_VIEW && (
+                        <TreeViewEditor
+                            value={treeEditorValue}
                             onChange={handleEditorChange}
+                            error={error}
+                            loading={loading}
                         />
-                    ) : (
-                        view === TREE_VIEW && (
-                            <TreeViewEditor
-                                value={treeEditorValue}
-                                onChange={handleEditorChange}
-                                error={error}
-                            />
-                        )
-                    ))}
+                    )
+                )}
             </>
         </>
     )

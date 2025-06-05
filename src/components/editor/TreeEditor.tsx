@@ -63,10 +63,12 @@ const TreeViewEditor = ({
     value,
     onChange,
     error,
+    loading,
 }: {
     value: object
     onChange?: (string) => void
     error?: string
+    loading: boolean
 }) => {
     const treeEditorValue = JSON.parse(JSON.stringify(value))
 
@@ -137,7 +139,7 @@ const TreeViewEditor = ({
                 displayObjectSize={true}
                 collapsed={1}
                 indentWidth={40}
-                editable
+                editable={!loading}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
                 onAdd={(_kv, _nv, _v, isAdd) => isAdd}

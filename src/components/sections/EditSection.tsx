@@ -26,7 +26,11 @@ const EditSection = ({ query }: EditSectionProps) => {
 
     const { setHasUnsavedChanges, hasUnsavedChanges } = useEditContext()
 
-    const { data, loading, refetch } = useDataQuery(query, {
+    const {
+        data,
+        loading: queryLoading,
+        refetch,
+    } = useDataQuery(query, {
         variables: {
             key,
             namespace,
@@ -128,13 +132,13 @@ const EditSection = ({ query }: EditSectionProps) => {
                 loading={!editError && updateLoading}
             />
             <div className={classes.editorBackground}>
-                {loading ? (
+                {queryLoading ? (
                     <Center>
                         <CircularLoader />
                     </Center>
                 ) : (
                     <Editor
-                        loading={loading}
+                        loading={updateLoading}
                         value={value}
                         handleEditorChange={handleEditorChange}
                     />
