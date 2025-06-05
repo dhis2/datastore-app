@@ -98,8 +98,11 @@ const TreeViewEditor = ({
                 mainObj: treeEditorValue,
                 path: namespace,
             })
+
             if (type === 'key') {
-                if (
+                if (oldValue === value) {
+                    return false
+                } else if (
                     typeof lastKey === 'string' &&
                     typeof oldValue === 'string' &&
                     typeof value === 'string'
