@@ -175,6 +175,7 @@
 .editorBackground {
     height: 90vh;
     background-color: #292c34;
+    overflow-x: hidden;
 }
 
 .editorPanelKeysLabel {
