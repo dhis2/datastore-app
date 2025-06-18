@@ -102,11 +102,9 @@ const TreeViewEditor = ({
             if (type === 'key') {
                 if (oldValue === value) {
                     return false
-                } else if (
-                    typeof lastKey === 'string' &&
-                    typeof oldValue === 'string' &&
-                    typeof value === 'string'
-                ) {
+                } else if (oldValue === 'AddKeyOrValue') {
+                    selectedValue[value] = ''
+                } else {
                     const temp = selectedValue[oldValue]
                     selectedValue[value] = temp
                     delete selectedValue[oldValue]
