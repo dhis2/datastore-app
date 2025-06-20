@@ -2,6 +2,7 @@
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
+import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 
@@ -60,7 +61,7 @@ const retrieveSelectedValue = ({ mainObj, path }) => {
 }
 
 const TreeViewEditor = ({
-    value,
+    value: treeEditorValue,
     onChange,
     error,
     loading,
@@ -70,7 +71,7 @@ const TreeViewEditor = ({
     error?: string
     loading: boolean
 }) => {
-    const treeEditorValue = JSON.parse(JSON.stringify(value))
+    const { showError } = useCustomAlert()
 
     const handleDelete = (_v, _k, _l, opt) => {
         try {
@@ -102,15 +103,27 @@ const TreeViewEditor = ({
             if (type === 'key') {
                 if (oldValue === value) {
                     return false
-                } else if (oldValue === 'AddKeyOrValue') {
-                    selectedValue[value] = ''
                 } else {
                     const temp = selectedValue[oldValue]
-                    selectedValue[value] = temp
-                    delete selectedValue[oldValue]
+
+                    if (oldValue === 'AddKeyOrValue' && temp === undefined) {
+                        selectedValue[value] = ''
+                    } else {
+                        selectedValue[value] = temp
+                        delete selectedValue[oldValue]
+                    }
                 }
             } else if (type === 'value') {
-                selectedValue[lastKey] = value
+                try {
+                    selectedValue[lastKey] = JSON.parse(value)
+                } catch {
+                    showError(
+                        i18n.t(
+                            'There was an error parsing this value. Fix in the code editor.'
+                        )
+                    )
+                    // console.log(e?.message)
+                }
             }
             onChange?.(JSON.stringify(treeEditorValue, null, 4))
             return true
