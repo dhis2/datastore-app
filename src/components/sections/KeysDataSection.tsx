@@ -37,14 +37,16 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
 
     const { hasUnsavedChanges, setHasUnsavedChanges } = useEditContext()
 
-    const { error, loading, data, refetch } = useDataQuery<QueryResults>(
-        query,
-        {
-            variables: {
-                id: currentNamespace,
-            },
-        }
-    )
+    const {
+        error: fetchError,
+        loading,
+        data,
+        refetch,
+    } = useDataQuery<QueryResults>(query, {
+        variables: {
+            id: currentNamespace,
+        },
+    })
 
     const { searchTerm, setSearchTerm, filteredData } = useSearchFilter(
         data?.results
@@ -168,82 +170,95 @@ const KeysDataSection = ({ query }: KeysDataSectionProps) => {
         setActiveRow(key)
     }, [key])
 
-    if (error) {
-        return <ErrorNotice />
-    }
-
     if (loading) {
         return <CenteredLoader />
     }
 
     return (
         <>
-            <KeysPanelHeader setOpenCreateModal={setOpenCreateModal} />
-            <div className={classes.keysPanelMidSection}>
-                <SearchField
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    placeholder={i18n.t('Search keys')}
-                />
-            </div>
+            <KeysPanelHeader
+                showButton={!fetchError}
+                setOpenCreateModal={setOpenCreateModal}
+            />
             <div>
-                {filteredData && (
-                    <ItemsTable
-                        activeRow={activeRow}
-                        tableData={filteredData}
-                        label={i18n.t('Key')}
-                        handleDeleteAction={handleDeleteActionClick}
-                        handleRowClick={handleKeyRowClick}
+                {fetchError ? (
+                    <ErrorNotice
+                        message={i18n.t(
+                            'There was a problem fetching the keys in this namespace.'
+                        )}
                     />
+                ) : (
+                    <>
+                        <div className={classes.keysPanelMidSection}>
+                            <SearchField
+                                searchTerm={searchTerm}
+                                setSearchTerm={setSearchTerm}
+                                placeholder={i18n.t('Search keys')}
+                            />
+                        </div>
+                        <div>
+                            {filteredData && (
+                                <ItemsTable
+                                    activeRow={activeRow}
+                                    tableData={filteredData}
+                                    label={i18n.t('Key')}
+                                    handleDeleteAction={handleDeleteActionClick}
+                                    handleRowClick={handleKeyRowClick}
+                                />
+                            )}
+                        </div>
+                        {openCreateModal && (
+                            <CreateModal
+                                title={i18n.t('Add New Key')}
+                                closeModal={() => setOpenCreateModal(false)}
+                                handleCreate={handleCreate}
+                            >
+                                <KeyField initialFocus />
+                            </CreateModal>
+                        )}
+                        {openDeleteModal && (
+                            <DeleteModal
+                                closeModal={() => {
+                                    setOpenDeleteModal(false)
+                                }}
+                                handleDelete={handleDelete}
+                                title={i18n.t('Delete Key')}
+                            >
+                                <p>
+                                    {currentKeyHasUnsavedChanges && (
+                                        <span>
+                                            {i18n.t(
+                                                'This key has unsaved changes.'
+                                            )}
+                                        </span>
+                                    )}{' '}
+                                    <span>
+                                        {i18n.t(
+                                            `Are you sure you want to delete '${selectedKey}' in ${currentNamespace}?`
+                                        )}
+                                    </span>
+                                </p>
+                                {numberOfKeysInNamespace < 2 && (
+                                    <p>
+                                        {i18n.t(
+                                            `This will also delete the namespace '${currentNamespace}'`
+                                        )}
+                                    </p>
+                                )}
+                            </DeleteModal>
+                        )}
+                        {blocker.state === 'blocked' && hasUnsavedChanges && (
+                            <DiscardModal
+                                handleDiscard={() => {
+                                    setHasUnsavedChanges(null)
+                                    blocker.proceed()
+                                }}
+                                closeModal={() => blocker.reset()}
+                            />
+                        )}
+                    </>
                 )}
             </div>
-            {openCreateModal && (
-                <CreateModal
-                    title={i18n.t('Add New Key')}
-                    closeModal={() => setOpenCreateModal(false)}
-                    handleCreate={handleCreate}
-                >
-                    <KeyField initialFocus />
-                </CreateModal>
-            )}
-            {openDeleteModal && (
-                <DeleteModal
-                    closeModal={() => {
-                        setOpenDeleteModal(false)
-                    }}
-                    handleDelete={handleDelete}
-                    title={i18n.t('Delete Key')}
-                >
-                    <p>
-                        {currentKeyHasUnsavedChanges && (
-                            <span>
-                                {i18n.t('This key has unsaved changes.')}
-                            </span>
-                        )}{' '}
-                        <span>
-                            {i18n.t(
-                                `Are you sure you want to delete '${selectedKey}' in ${currentNamespace}?`
-                            )}
-                        </span>
-                    </p>
-                    {numberOfKeysInNamespace < 2 && (
-                        <p>
-                            {i18n.t(
-                                `This will also delete the namespace '${currentNamespace}'`
-                            )}
-                        </p>
-                    )}
-                </DeleteModal>
-            )}
-            {blocker.state === 'blocked' && hasUnsavedChanges && (
-                <DiscardModal
-                    handleDiscard={() => {
-                        setHasUnsavedChanges(null)
-                        blocker.proceed()
-                    }}
-                    closeModal={() => blocker.reset()}
-                />
-            )}
         </>
     )
 }

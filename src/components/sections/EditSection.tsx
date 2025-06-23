@@ -7,6 +7,7 @@ import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import { useEditContext } from '../context/EditContext'
 import Editor from '../editor/Editor'
+import ErrorNotice from '../error/ErrorNotice'
 import EditPanelHeader from '../header/EditPanelHeader'
 import { dataStoreKeyValuesQuery } from '../panels/EditorPanel'
 
@@ -30,18 +31,11 @@ const EditSection = ({ query }: EditSectionProps) => {
         data,
         loading: queryLoading,
         refetch,
+        error: fetchError,
     } = useDataQuery(query, {
         variables: {
             key,
             namespace,
-        },
-        onError(error) {
-            showError(
-                i18n.t('There was a problem fetching this data - {{error}}', {
-                    error: error.message,
-                    interpolation: { escapeValue: false },
-                })
-            )
         },
     })
 
@@ -130,9 +124,21 @@ const EditSection = ({ query }: EditSectionProps) => {
                 disableCloseButton={updateLoading}
                 handleUpdate={handleUpdate}
                 loading={!editError && updateLoading}
+                showButtons={!fetchError}
             />
+
             <div className={classes.editorBackground}>
-                {queryLoading ? (
+                {fetchError ? (
+                    <ErrorNotice
+                        message={i18n.t(
+                            "There was a problem fetching this key's value. {{error}}",
+                            {
+                                error: fetchError.message,
+                                interpolation: { escapeValue: false },
+                            }
+                        )}
+                    />
+                ) : queryLoading ? (
                     <Center>
                         <CircularLoader />
                     </Center>
