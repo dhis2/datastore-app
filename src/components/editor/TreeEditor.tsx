@@ -2,7 +2,6 @@
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
-import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import ErrorNotice from '../error/ErrorNotice'
 
@@ -71,8 +70,6 @@ const TreeViewEditor = ({
     error?: string
     loading: boolean
 }) => {
-    const { showError } = useCustomAlert()
-
     const handleDelete = (_v, _k, _l, opt) => {
         try {
             const { selectedValue, lastKey } = retrieveSelectedValue({
@@ -117,12 +114,7 @@ const TreeViewEditor = ({
                 try {
                     selectedValue[lastKey] = JSON.parse(value)
                 } catch {
-                    showError(
-                        i18n.t(
-                            'There was an error parsing this value. Fix in the code editor.'
-                        )
-                    )
-                    // console.log(e?.message)
+                    selectedValue[lastKey] = value
                 }
             }
             onChange?.(JSON.stringify(treeEditorValue, null, 4))
