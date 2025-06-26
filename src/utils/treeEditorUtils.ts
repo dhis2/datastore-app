@@ -41,7 +41,7 @@ const getPatternMatchingKeys = ({
 }) => {
     const matches = []
     Object.keys(obj).forEach((key) => {
-        if (key === 'key' || pattern.test(key)) {
+        if (pattern.test(key)) {
             matches.push(key)
         }
     })
@@ -69,21 +69,38 @@ const getNextIterator = ({
     }
 }
 
-export const retrieveNextKey = ({
-    obj,
-    defaultKey,
-}: {
-    obj: object
-    defaultKey: string
-}) => {
+export const retrieveNextKey = ({ obj, key }: { obj: object; key: string }) => {
     // default pattern: key(n), e.g key1,.....,key(n)
-    const pattern = new RegExp(defaultKey + '+\\d')
-    const matches = getPatternMatchingKeys({ obj, pattern })
+    const pattern = new RegExp('^' + key + '[0-9]*\\b', 'i')
+    const matches = getPatternMatchingKeys({
+        obj,
+        pattern,
+    })
 
     const nextIterator = getNextIterator({
         arr: matches,
-        keyLength: defaultKey.length,
+        keyLength: key.length,
     })
 
-    return nextIterator ? `${defaultKey}${nextIterator}` : defaultKey
+    return nextIterator ? `${key}${nextIterator}` : key
+}
+
+export const findAndReplaceLibraryDefaultKeyAndValues = ({
+    value,
+    defaultLabel,
+    newKeyName,
+}) => {
+    if (Array.isArray(value)) {
+        const index = value.findIndex((el) => el === defaultLabel)
+        console.log('index', index)
+        value[index] = null
+    } else {
+        const nextKeyName = retrieveNextKey({
+            obj: value,
+            key: newKeyName,
+        })
+        value[nextKeyName] = null
+        delete value[defaultLabel]
+    }
+    return value
 }

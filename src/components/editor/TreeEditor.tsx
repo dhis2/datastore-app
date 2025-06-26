@@ -5,6 +5,7 @@ import React from 'react'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import {
+    findAndReplaceLibraryDefaultKeyAndValues,
     findReferenceToValueToUpdate,
     getPathToTarget,
     retrieveNextKey,
@@ -86,22 +87,16 @@ const TreeViewEditor = ({
             return
         }
 
+        newValue = findAndReplaceLibraryDefaultKeyAndValues({
+            value: newValue,
+            defaultLabel: keyOrValue,
+            newKeyName: defaultKeyName,
+        })
+
         const { selectedValue, lastKey } = findReferenceToValueToUpdate({
             mainObj: treeEditorValue,
             path: path,
         })
-
-        if (Array.isArray(newValue)) {
-            const index = newValue.findIndex((el) => el === keyOrValue)
-            newValue[index] = null
-        } else {
-            const nextKeyName = retrieveNextKey({
-                obj: newValue,
-                defaultKey: defaultKeyName,
-            })
-            newValue[nextKeyName] = null
-            delete newValue[keyOrValue]
-        }
 
         if (lastKey !== null) {
             selectedValue[lastKey] = newValue
@@ -110,7 +105,7 @@ const TreeViewEditor = ({
         } else {
             const nextKeyName = retrieveNextKey({
                 obj: selectedValue,
-                defaultKey: defaultKeyName,
+                key: defaultKeyName,
             })
             selectedValue[nextKeyName] = null
             delete selectedValue[keyOrValue]
