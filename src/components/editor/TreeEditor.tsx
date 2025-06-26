@@ -5,12 +5,12 @@ import React from 'react'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import {
-    findPath,
+    findReferenceToValueToUpdate,
+    getPathToTarget,
     retrieveNextKey,
-    retrieveSelectedValue,
-    treeEditorStyle,
 } from '../../utils/treeEditorUtils'
 import ErrorNotice from '../error/ErrorNotice'
+import { treeEditorStyle } from './treeEditorTheme'
 
 const TreeViewEditor = ({
     value: treeEditorValue,
@@ -24,10 +24,11 @@ const TreeViewEditor = ({
     loading: boolean
 }) => {
     const { showError } = useCustomAlert()
+    const defaultKeyName = 'key'
 
     const handleDelete = (_v, _k, _l, opt) => {
         try {
-            const { selectedValue, lastKey } = retrieveSelectedValue({
+            const { selectedValue, lastKey } = findReferenceToValueToUpdate({
                 mainObj: treeEditorValue,
                 path: opt.namespace,
             })
@@ -47,7 +48,7 @@ const TreeViewEditor = ({
 
     const handleEdit = ({ value, oldValue, type, namespace }) => {
         try {
-            const { selectedValue, lastKey } = retrieveSelectedValue({
+            const { selectedValue, lastKey } = findReferenceToValueToUpdate({
                 mainObj: treeEditorValue,
                 path: namespace,
             })
@@ -79,14 +80,13 @@ const TreeViewEditor = ({
     }
 
     const handleAdd = (keyOrValue, newValue, value, isAdd) => {
-        const defaultKeyName = 'key'
-        const path = findPath(treeEditorValue, value)
+        const path = getPathToTarget(treeEditorValue, value)
 
         if (path === null) {
             return
         }
 
-        const { selectedValue, lastKey } = retrieveSelectedValue({
+        const { selectedValue, lastKey } = findReferenceToValueToUpdate({
             mainObj: treeEditorValue,
             path: path,
         })
