@@ -6,6 +6,7 @@ import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import {
     findPath,
+    retrieveNextKey,
     retrieveSelectedValue,
     treeEditorStyle,
 } from '../../utils/treeEditorUtils'
@@ -78,6 +79,7 @@ const TreeViewEditor = ({
     }
 
     const handleAdd = (keyOrValue, newValue, value, isAdd) => {
+        const defaultKeyName = 'key'
         const path = findPath(treeEditorValue, value)
 
         if (path === null) {
@@ -93,7 +95,12 @@ const TreeViewEditor = ({
             const index = newValue.findIndex((el) => el === keyOrValue)
             newValue[index] = null
         } else {
-            newValue[keyOrValue] = null
+            const nextKeyName = retrieveNextKey({
+                obj: newValue,
+                defaultKey: defaultKeyName,
+            })
+            newValue[nextKeyName] = null
+            delete newValue[keyOrValue]
         }
 
         if (lastKey !== null) {
@@ -101,7 +108,12 @@ const TreeViewEditor = ({
         } else if (Array.isArray(selectedValue)) {
             selectedValue.push(null)
         } else {
-            selectedValue[keyOrValue] = null
+            const nextKeyName = retrieveNextKey({
+                obj: selectedValue,
+                defaultKey: defaultKeyName,
+            })
+            selectedValue[nextKeyName] = null
+            delete selectedValue[keyOrValue]
         }
 
         onChange?.(JSON.stringify(treeEditorValue, null, 4))

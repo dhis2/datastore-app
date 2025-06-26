@@ -69,3 +69,59 @@ export const findPath = (parent, target, path = []) => {
     }
     return null
 }
+
+const getPatternMatchingKeys = ({
+    obj,
+    pattern,
+}: {
+    obj: object
+    pattern: RegExp
+}) => {
+    const matches = []
+    Object.keys(obj).forEach((key) => {
+        if (key === 'key' || pattern.test(key)) {
+            matches.push(key)
+        }
+    })
+    return matches
+}
+
+const getNextIterator = ({
+    arr,
+    keyLength,
+}: {
+    arr: string[]
+    keyLength: number
+}) => {
+    let iterator = 0
+
+    try {
+        const postfixArr = arr.map((value) => Number(value.slice(keyLength)))
+        if (arr?.length) {
+            iterator = Math.max(...postfixArr)
+            return iterator + 1
+        }
+        return iterator
+    } catch {
+        return iterator
+    }
+}
+
+export const retrieveNextKey = ({
+    obj,
+    defaultKey,
+}: {
+    obj: object
+    defaultKey: string
+}) => {
+    // default pattern: key(n), e.g key1,.....,key(n)
+    const pattern = new RegExp(defaultKey + '+\\d')
+    const matches = getPatternMatchingKeys({ obj, pattern })
+
+    const nextIterator = getNextIterator({
+        arr: matches,
+        keyLength: defaultKey.length,
+    })
+
+    return nextIterator ? `${defaultKey}${nextIterator}` : defaultKey
+}
