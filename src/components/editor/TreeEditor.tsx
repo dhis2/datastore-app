@@ -90,7 +90,6 @@ const TreeViewEditor = ({
             return
         }
 
-        // using retrieve selected value
         const { selectedValue, lastKey } = retrieveSelectedValue({
             mainObj: treeEditorValue,
             path: path,
@@ -105,12 +104,10 @@ const TreeViewEditor = ({
 
         if (lastKey !== null) {
             selectedValue[lastKey] = newValue
+        } else if (Array.isArray(selectedValue)) {
+            selectedValue.push('value')
         } else {
-            if (Array.isArray(selectedValue)) {
-                selectedValue.push('value')
-            } else {
-                selectedValue[keyOrValue] = 'value'
-            }
+            selectedValue[keyOrValue] = 'value'
         }
 
         onChange?.(JSON.stringify(treeEditorValue, null, 4))
