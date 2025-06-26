@@ -55,14 +55,8 @@ const TreeViewEditor = ({
                 if (oldValue === value) {
                     return false
                 } else {
-                    const temp = selectedValue[oldValue]
-
-                    if (oldValue === 'AddKeyOrValue' && temp === undefined) {
-                        selectedValue[value] = ''
-                    } else {
-                        selectedValue[value] = temp
-                        delete selectedValue[oldValue]
-                    }
+                    selectedValue[value] = selectedValue[oldValue]
+                    delete selectedValue[oldValue]
                 }
             } else if (type === 'value') {
                 try {
@@ -97,17 +91,17 @@ const TreeViewEditor = ({
 
         if (Array.isArray(newValue)) {
             const index = newValue.findIndex((el) => el === keyOrValue)
-            newValue[index] = 'value'
+            newValue[index] = null
         } else {
-            newValue[keyOrValue] = 'value'
+            newValue[keyOrValue] = null
         }
 
         if (lastKey !== null) {
             selectedValue[lastKey] = newValue
         } else if (Array.isArray(selectedValue)) {
-            selectedValue.push('value')
+            selectedValue.push(null)
         } else {
-            selectedValue[keyOrValue] = 'value'
+            selectedValue[keyOrValue] = null
         }
 
         onChange?.(JSON.stringify(treeEditorValue, null, 4))
