@@ -55,7 +55,10 @@ const TreeViewEditor = ({
             })
 
             if (type === 'key') {
-                if (oldValue === value) {
+                const keyAlreadyExists =
+                    Object.keys(selectedValue).includes(value)
+                const noChange = oldValue === value
+                if (noChange || keyAlreadyExists) {
                     return false
                 } else {
                     selectedValue[value] = selectedValue[oldValue]
