@@ -2,14 +2,17 @@
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
+import { CUSTOM_KEY_NAME } from '../../constants/constants'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
+import { findAndReplaceLibraryDefaultKeyAndValues } from '../../utils/treeEditor/customiseLibraryHelpers'
 import {
-    findAndReplaceLibraryDefaultKeyAndValues,
+    findReferenceToParentValue,
     findReferenceToValueToUpdate,
+    getKeyToUpdate,
     getPathToTarget,
-    retrieveNextKey,
-} from '../../utils/treeEditorUtils'
+    validateObject,
+} from '../../utils/treeEditor/treeEditorUtils'
 import ErrorNotice from '../error/ErrorNotice'
 import { treeEditorStyle } from './treeEditorTheme'
 
@@ -25,7 +28,6 @@ const TreeViewEditor = ({
     loading: boolean
 }) => {
     const { showError } = useCustomAlert()
-    const defaultKeyName = 'key'
 
     const handleDelete = (_v, _k, _l, opt) => {
         try {
@@ -84,35 +86,41 @@ const TreeViewEditor = ({
     }
 
     const handleAdd = (keyOrValue, newValue, value, isAdd) => {
-        const path = getPathToTarget(treeEditorValue, value)
-
-        if (path === null) {
-            return
-        }
-
-        newValue = findAndReplaceLibraryDefaultKeyAndValues({
-            value: newValue,
-            defaultLabel: keyOrValue,
-            newKeyName: defaultKeyName,
+        const oldValue = validateObject({
+            obj: value,
+            label: keyOrValue,
         })
 
-        const { selectedValue, lastKey } = findReferenceToValueToUpdate({
+        let updatedValue = validateObject({
+            obj: newValue,
+            label: keyOrValue,
+        })
+
+        updatedValue = findAndReplaceLibraryDefaultKeyAndValues({
+            value: updatedValue,
+            defaultLabel: keyOrValue,
+            newKeyName: CUSTOM_KEY_NAME,
+        })
+
+        const path = getPathToTarget(treeEditorValue, oldValue)
+
+        if (path === null) {
+            return false
+        }
+
+        if (path.length === 0) {
+            treeEditorValue = updatedValue
+            onChange?.(JSON.stringify(updatedValue, null, 4))
+            return isAdd
+        }
+
+        const keyToUpdate = getKeyToUpdate({ path })
+        const selectedValue = findReferenceToParentValue({
             mainObj: treeEditorValue,
             path: path,
         })
 
-        if (lastKey !== null) {
-            selectedValue[lastKey] = newValue
-        } else if (Array.isArray(selectedValue)) {
-            selectedValue.push(null)
-        } else {
-            const nextKeyName = retrieveNextKey({
-                obj: selectedValue,
-                key: defaultKeyName,
-            })
-            selectedValue[nextKeyName] = null
-            delete selectedValue[keyOrValue]
-        }
+        selectedValue[keyToUpdate] = updatedValue
 
         onChange?.(JSON.stringify(treeEditorValue, null, 4))
         return isAdd
