@@ -3,12 +3,10 @@
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
 import { CUSTOM_KEY_NAME } from '../../constants/constants'
-import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import { findAndReplaceLibraryDefaultKeyAndValues } from '../../utils/treeEditor/customiseLibraryHelpers'
 import {
     findReferenceToParentValue,
-    findReferenceToValueToUpdate,
     getKeyToUpdate,
     getPathToTarget,
     validateObject,
@@ -27,65 +25,47 @@ const TreeViewEditor = ({
     error?: string
     loading: boolean
 }) => {
-    const { showError } = useCustomAlert()
-
-    const handleDelete = (_v, _k, _l, opt) => {
-        try {
-            const { selectedValue, lastKey } = findReferenceToValueToUpdate({
-                mainObj: treeEditorValue,
-                path: opt.namespace,
-            })
-
-            if (typeof lastKey === 'number') {
-                // delete array item
-                selectedValue?.splice(lastKey, 1)
-            } else {
-                delete selectedValue[lastKey]
-            }
-            onChange?.(JSON.stringify(treeEditorValue, null, 4))
-            return true
-        } catch {
-            return false
+    const handleDelete = (keyName, _value, parentValue) => {
+        // bypass library's delete functionality and handle it here
+        // return false
+        if (Array.isArray(parentValue)) {
+            parentValue.splice(keyName, 1)
+        } else if (keyName in parentValue) {
+            delete parentValue[keyName]
         }
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        return false
     }
 
     const handleEdit = ({ value, oldValue, type, namespace }) => {
-        try {
-            const { selectedValue, lastKey } = findReferenceToValueToUpdate({
-                mainObj: treeEditorValue,
-                path: namespace,
-            })
+        // modify library's edit functionality
+        // return false
+        const keyToUpdate = getKeyToUpdate({ path: namespace })
+        const selectedValue = findReferenceToParentValue({
+            mainObj: treeEditorValue,
+            path: namespace,
+        })
 
-            if (type === 'key') {
-                const keyAlreadyExists =
-                    Object.keys(selectedValue).includes(value)
-                const noChange = oldValue === value
-                if (noChange || keyAlreadyExists) {
-                    return false
-                } else {
-                    selectedValue[value] = selectedValue[oldValue]
-                    delete selectedValue[oldValue]
-                }
-            } else if (type === 'value') {
-                try {
-                    selectedValue[lastKey] = JSON.parse(value)
-                } catch {
-                    showError(
-                        i18n.t(
-                            'There was an error parsing this value. Fix in the code editor.'
-                        )
-                    )
-                    // console.log(e?.message)
-                }
+        if (type === 'key') {
+            const keyAlreadyExists = Object.keys(selectedValue).includes(value)
+            const hasChanges = oldValue !== value
+            if (hasChanges && !keyAlreadyExists) {
+                selectedValue[value] = selectedValue[oldValue]
+                delete selectedValue[oldValue]
             }
-            onChange?.(JSON.stringify(treeEditorValue, null, 4))
-            return true
-        } catch {
-            return false
+        } else if (type === 'value') {
+            try {
+                selectedValue[keyToUpdate] = JSON.parse(value)
+            } catch {
+                selectedValue[keyToUpdate] = value
+            }
         }
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        return false
     }
 
     const handleAdd = (keyOrValue, newValue, value, isAdd) => {
+        // customise library's add functionality
         const oldValue = validateObject({
             obj: value,
             label: keyOrValue,

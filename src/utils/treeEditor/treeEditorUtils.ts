@@ -14,22 +14,6 @@ export const findReferenceToParentValue = ({ mainObj, path }) => {
     return parentValue
 }
 
-export const findReferenceToValueToUpdate = ({ mainObj, path }) => {
-    let selectedValue = mainObj
-    const lastKey = path && path.length > 0 ? path[path.length - 1] : null
-
-    if (path && path.length > 0) {
-        for (let i = 0; i < path.length - 1; i++) {
-            selectedValue = selectedValue[path[i]]
-        }
-    }
-
-    return {
-        selectedValue,
-        lastKey,
-    }
-}
-
 export const getPathToTarget = (parent, target, path = []) => {
     if (isEqual(parent, target)) {
         return path
