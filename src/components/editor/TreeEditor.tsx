@@ -1,4 +1,3 @@
-/* eslint-disable max-params */
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
@@ -64,6 +63,7 @@ const TreeViewEditor = ({
         return false
     }
 
+    // eslint-disable-next-line max-params
     const handleAdd = (keyOrValue, newValue, value, isAdd) => {
         // customise library's add functionality
         const oldValue = validateObject({
@@ -90,17 +90,14 @@ const TreeViewEditor = ({
 
         if (path.length === 0) {
             treeEditorValue = updatedValue
-            onChange?.(JSON.stringify(updatedValue, null, 4))
-            return isAdd
+        } else {
+            const keyToUpdate = getKeyToUpdate({ path })
+            const selectedValue = findReferenceToParentValue({
+                mainObj: treeEditorValue,
+                path: path,
+            })
+            selectedValue[keyToUpdate] = updatedValue
         }
-
-        const keyToUpdate = getKeyToUpdate({ path })
-        const selectedValue = findReferenceToParentValue({
-            mainObj: treeEditorValue,
-            path: path,
-        })
-
-        selectedValue[keyToUpdate] = updatedValue
 
         onChange?.(JSON.stringify(treeEditorValue, null, 4))
         return isAdd
