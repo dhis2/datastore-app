@@ -1,63 +1,17 @@
-/* eslint-disable max-params */
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
+import { CUSTOM_KEY_NAME } from '../../constants/constants'
 import i18n from '../../locales'
+import { findAndReplaceLibraryDefaultKeyAndValues } from '../../utils/treeEditor/customiseLibraryHelpers'
+import {
+    findReferenceToParentValue,
+    getKeyToUpdate,
+    getPathToTarget,
+    validateObject,
+} from '../../utils/treeEditor/treeEditorUtils'
 import ErrorNotice from '../error/ErrorNotice'
-
-const customTheme = {
-    '--w-rjv-color': '#e16c73',
-    '--w-rjv-key-number': '#818499',
-    '--w-rjv-key-string': '#e16c73', // root, key,
-    '--w-rjv-background-color': '#292c34',
-    '--w-rjv-line-color': 'transparent', // line colour
-    '--w-rjv-arrow-color': '#818499',
-    '--w-rjv-edit-color': '',
-    '--w-rjv-info-color': '#818499',
-    '--w-rjv-update-color': '',
-    '--w-rjv-copied-color': '',
-    '--w-rjv-copied-success-color': '',
-    '--w-rjv-curlybraces-color': '#acb4be',
-    '--w-rjv-colon-color': '#acb4be',
-    '--w-rjv-brackets-color': '#acb4be',
-    '--w-rjv-ellipsis-color': '',
-    '--w-rjv-quotes-color': '#eb6383',
-    '--w-rjv-quotes-string-color': '#9bc181',
-    // different data types - values
-    '--w-rjv-type-string-color': '#9cba7d',
-    '--w-rjv-type-int-color': '#e4c07c',
-    '--w-rjv-type-float-color': '#e4c07c',
-    '--w-rjv-type-bigint-color': '#e4c07c',
-    '--w-rjv-type-boolean-color': '#d9985f',
-    '--w-rjv-type-date-color': '#9cba7d',
-    '--w-rjv-type-url-color': '#9cba7d',
-    '--w-rjv-type-null-color': '#9cba7d',
-    '--w-rjv-type-nan-color': '#9cba7d',
-    '--w-rjv-type-undefined-color': '#9cba7d',
-}
-
-const treeEditorStyle = {
-    ...customTheme,
-    fontSize: '17px',
-    fontFamily:
-        "ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono','Roboto Mono', 'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro','Fira Mono', 'Droid Sans Mono', 'Consolas','Courier New', monospace",
-}
-
-const retrieveSelectedValue = ({ mainObj, path }) => {
-    let selectedValue = mainObj
-    const lastKey = path[path.length - 1]
-
-    if (path.length > 0) {
-        for (let i = 0; i < path.length - 1; i++) {
-            selectedValue = selectedValue[path[i]]
-        }
-    }
-
-    return {
-        selectedValue,
-        lastKey,
-    }
-}
+import { treeEditorStyle } from './treeEditorTheme'
 
 const TreeViewEditor = ({
     value: treeEditorValue,
@@ -70,58 +24,83 @@ const TreeViewEditor = ({
     error?: string
     loading: boolean
 }) => {
-    const handleDelete = (_v, _k, _l, opt) => {
-        try {
-            const { selectedValue, lastKey } = retrieveSelectedValue({
-                mainObj: treeEditorValue,
-                path: opt.namespace,
-            })
-
-            if (typeof lastKey === 'number') {
-                // delete array item
-                selectedValue?.splice(lastKey, 1)
-            } else {
-                delete selectedValue[lastKey]
-            }
-            onChange?.(JSON.stringify(treeEditorValue, null, 4))
-            return true
-        } catch {
-            return false
+    const handleDelete = (keyName, _value, parentValue) => {
+        // bypass library's delete functionality and handle it here
+        // return false
+        if (Array.isArray(parentValue)) {
+            parentValue.splice(keyName, 1)
+        } else if (keyName in parentValue) {
+            delete parentValue[keyName]
         }
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        return false
     }
 
     const handleEdit = ({ value, oldValue, type, namespace }) => {
-        try {
-            const { selectedValue, lastKey } = retrieveSelectedValue({
-                mainObj: treeEditorValue,
-                path: namespace,
-            })
+        // modify library's edit functionality
+        // return false
+        const keyToUpdate = getKeyToUpdate({ path: namespace })
+        const selectedValue = findReferenceToParentValue({
+            mainObj: treeEditorValue,
+            path: namespace,
+        })
 
-            if (type === 'key') {
-                if (oldValue === value) {
-                    return false
-                } else {
-                    const temp = selectedValue[oldValue]
-
-                    if (oldValue === 'AddKeyOrValue' && temp === undefined) {
-                        selectedValue[value] = ''
-                    } else {
-                        selectedValue[value] = temp
-                        delete selectedValue[oldValue]
-                    }
-                }
-            } else if (type === 'value') {
-                try {
-                    selectedValue[lastKey] = JSON.parse(value)
-                } catch {
-                    selectedValue[lastKey] = value
-                }
+        if (type === 'key') {
+            const keyAlreadyExists = Object.keys(selectedValue).includes(value)
+            const hasChanges = oldValue !== value
+            if (hasChanges && !keyAlreadyExists) {
+                selectedValue[value] = selectedValue[oldValue]
+                delete selectedValue[oldValue]
             }
-            onChange?.(JSON.stringify(treeEditorValue, null, 4))
-            return true
-        } catch {
+        } else if (type === 'value') {
+            try {
+                selectedValue[keyToUpdate] = JSON.parse(value)
+            } catch {
+                selectedValue[keyToUpdate] = value
+            }
+        }
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        return false
+    }
+
+    // eslint-disable-next-line max-params
+    const handleAdd = (keyOrValue, newValue, value, isAdd) => {
+        // customise library's add functionality
+        const oldValue = validateObject({
+            obj: value,
+            label: keyOrValue,
+        })
+
+        let updatedValue = validateObject({
+            obj: newValue,
+            label: keyOrValue,
+        })
+
+        updatedValue = findAndReplaceLibraryDefaultKeyAndValues({
+            value: updatedValue,
+            defaultLabel: keyOrValue,
+            newKeyName: CUSTOM_KEY_NAME,
+        })
+
+        const path = getPathToTarget(treeEditorValue, oldValue)
+
+        if (path === null) {
             return false
         }
+
+        if (path.length === 0) {
+            treeEditorValue = updatedValue
+        } else {
+            const keyToUpdate = getKeyToUpdate({ path })
+            const selectedValue = findReferenceToParentValue({
+                mainObj: treeEditorValue,
+                path: path,
+            })
+            selectedValue[keyToUpdate] = updatedValue
+        }
+
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        return isAdd
     }
 
     return error ? (
@@ -148,7 +127,7 @@ const TreeViewEditor = ({
                 editable={!loading}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
-                onAdd={(_kv, _nv, _v, isAdd) => isAdd}
+                onAdd={handleAdd}
             />
         </div>
     )

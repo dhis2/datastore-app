@@ -5,3 +5,6 @@ export const DATASTORE_OPTIONS = [DATASTORE, USERDATASTORE]
 // editor views
 export const CODE_VIEW = 'code'
 export const TREE_VIEW = 'tree'
+
+// tree view
+export const CUSTOM_KEY_NAME = 'key'
