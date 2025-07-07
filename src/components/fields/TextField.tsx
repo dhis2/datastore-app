@@ -3,18 +3,18 @@ import {
     InputFieldFF,
     hasValue,
     composeValidators,
-    alphaNumeric,
     createMaxCharacterLength,
+    createPattern,
 } from '@dhis2/ui'
 import React from 'react'
 import i18n from '../../locales'
 
 const { Field } = ReactFinalForm
 
-const customAlphaNumeric = (value) =>
-    alphaNumeric(value)
-        ? i18n.t('Special characters are not allowed in this field')
-        : undefined
+const fieldValidationRegex = /^\w+$/
+const fieldValidationMessage = i18n.t(
+    'Special characters are not allowed in this field'
+)
 
 const TextField = ({
     initialFocus,
@@ -35,7 +35,7 @@ const TextField = ({
             label={label}
             validate={composeValidators(
                 hasValue,
-                customAlphaNumeric,
+                createPattern(fieldValidationRegex, fieldValidationMessage),
                 createMaxCharacterLength(255)
             )}
             initialFocus={initialFocus}

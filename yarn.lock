@@ -1031,6 +1031,11 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.22.6":
+  version "7.27.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.3.tgz#10491113799fb8d77e1d9273384d5d68deeea8f6"
+  integrity sha512-7EYtGezsdiDMyY80+65EzwiGmcJqpmcZCojSXaRgdrBaGtWTgDZKq69cPIVped6MkIM78cTQ2GOiEYjwOlG4xw==
+
 "@babel/template@^7.25.9", "@babel/template@^7.3.3":
   version "7.25.9"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.25.9.tgz#ecb62d81a8a6f5dc5fe8abfc3901fc52ddf15016"
@@ -3439,6 +3444,13 @@
     "@codemirror/theme-one-dark" "^6.0.0"
     "@uiw/codemirror-extensions-basic-setup" "4.23.6"
     codemirror "^6.0.0"
+
+"@uiw/react-json-view@1.12.2":
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/@uiw/react-json-view/-/react-json-view-1.12.2.tgz#ee76cb080c090e0c2a5c0e3363d72b88690aa0ba"
+  integrity sha512-IrL7tqPMgPMgdpjsgfArUepVE37DHlgcmkNgUQ92uNcRbO2+iUHXWysNc9nNsJB6ctb+wIinI5JNRqsqwHER5g==
+  dependencies:
+    "@babel/runtime" "^7.22.6"
 
 "@ungap/structured-clone@^1.2.0":
   version "1.2.0"
@@ -8317,6 +8329,11 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
+
+lodash-es@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
 lodash.debounce@^4.0.8:
   version "4.0.8"
