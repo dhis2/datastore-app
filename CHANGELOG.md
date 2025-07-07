@@ -1,3 +1,10 @@
+# [100.2.0-beta.1](https://github.com/dhis2/datastore-app/compare/v100.1.0...v100.2.0-beta.1) (2025-07-07)
+
+
+### Features
+
+* tree view mode ([#149](https://github.com/dhis2/datastore-app/issues/149)) ([4f92c63](https://github.com/dhis2/datastore-app/commit/4f92c637422058d855e74f546320c7fc2d13c011)), closes [#168](https://github.com/dhis2/datastore-app/issues/168)
+
 # [100.1.0](https://github.com/dhis2/datastore-app/compare/v100.0.4...v100.1.0) (2025-05-07)
 
 
