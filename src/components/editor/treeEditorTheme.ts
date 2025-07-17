@@ -5,7 +5,7 @@ const customTheme = {
     '--w-rjv-background-color': '#292c34',
     '--w-rjv-line-color': 'transparent', // line colour
     '--w-rjv-arrow-color': '#818499',
-    '--w-rjv-edit-color': '#789849',
+    '--w-rjv-edit-color': '#2196f3',
     '--w-rjv-add-color': '#789849',
     '--w-rjv-info-color': '#818499',
     '--w-rjv-update-color': '',
