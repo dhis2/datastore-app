@@ -1,10 +1,10 @@
 import { Tab, TabBar } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import classes from '../../App.module.css'
-import { CODE_VIEW, TREE_VIEW, TEXT_VIEW } from '../../constants/constants';
+import { CODE_VIEW, TREE_VIEW, TEXT_VIEW } from '../../constants/constants'
 import i18n from '../../locales'
 import CodeEditor from './CodeEditor'
-import TextEditor from './TextEditor';
+import TextEditor from './TextEditor'
 import TreeViewEditor from './TreeEditor'
 
 type EditorViewMode = 'tree' | 'code' | 'text'
@@ -31,7 +31,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
             if (typeof jsonValue !== 'object') {
                 setDisableTreeView(true)
             } else {
-                setDisableTreeView(false) 
+                setDisableTreeView(false)
             }
 
             // if (typeof jsonValue === "string"){
@@ -47,11 +47,10 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
             // } else {
             //     setCodeEditorValue(value)
             // }
-            
         } catch {
-            setError("Invalid JSON detected. Fix in the code editor.")
+            setError('Invalid JSON detected. Fix in the code editor.')
         }
-}, [value])
+    }, [value])
 
     return (
         <>
@@ -71,7 +70,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                     disabled={disableTreeView}
                     selected={view === TREE_VIEW}
                 >
-                    {i18n.t('Tree')} 
+                    {i18n.t('Tree')}
                 </Tab>
                 <Tab
                     onClick={() => {
@@ -82,7 +81,6 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                 >
                     {i18n.t('Text')}
                 </Tab>
-                 
             </TabBar>
             <>
                 {view === CODE_VIEW && (

@@ -11,12 +11,11 @@ type CodeEditorProps = {
     loading: boolean
 }
 
-const CodeEditor = ({ 
-    value,
-    onChange, 
-    loading 
-}: CodeEditorProps) => {
-    const codeEditorValue = useMemo(() =>  JSON.stringify(value, null, 4), [value])
+const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
+    const codeEditorValue = useMemo(
+        () => JSON.stringify(value, null, 4),
+        [value]
+    )
 
     return (
         <CodeMirror

@@ -10,13 +10,13 @@ type TextEditorProps = {
 }
 
 const TextEditor = ({ value, onChange, loading }: TextEditorProps) => {
-  // const textEditorValue = useMemo(() => {
-  //       if (typeof value === 'string') {
-  //           return value
-  //       } else {
-  //           return JSON.stringify(value, null, 4)
-  //       }
-  //   }, [value])
+    // const textEditorValue = useMemo(() => {
+    //       if (typeof value === 'string') {
+    //           return value
+    //       } else {
+    //           return JSON.stringify(value, null, 4)
+    //       }
+    //   }, [value])
 
     return (
         <CodeMirror
