@@ -2,7 +2,7 @@ import { json, jsonParseLinter } from '@codemirror/lang-json'
 import { linter, lintGutter } from '@codemirror/lint'
 import { search } from '@codemirror/search'
 import CodeMirror from '@uiw/react-codemirror'
-import React from 'react'
+import React, { useMemo } from 'react'
 import './editor-styles.css'
 
 type CodeEditorProps = {
@@ -11,11 +11,17 @@ type CodeEditorProps = {
     loading: boolean
 }
 
-const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
+const CodeEditor = ({ 
+    value,
+    onChange, 
+    loading 
+}: CodeEditorProps) => {
+    const codeEditorValue = useMemo(() =>  JSON.stringify(value, null, 4), [value])
+
     return (
         <CodeMirror
             theme={'dark'}
-            value={value}
+            value={codeEditorValue}
             height="80vh"
             extensions={[
                 json(),

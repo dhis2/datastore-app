@@ -47,12 +47,12 @@ const EditSection = ({ query }: EditSectionProps) => {
 
     const handleClose = () => navigate(`/${store}/edit/${namespace}`)
 
-    const [value, setValue] = useState(
-        JSON.stringify(data?.results, null, 4) || ''
-    )
+    // const [value, setValue] = useState(data?.results)
+    const [value, setValue] = useState(JSON.stringify(data?.results, null, 4) || '')
 
     useEffect(() => {
         setValue(JSON.stringify(data?.results, null, 4))
+        // setValue(data?.results)
     }, [data])
 
     const handleEditorChange = (value) => {

@@ -33,6 +33,7 @@ const TreeViewEditor = ({
             delete parentValue[keyName]
         }
         onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        // onChange?.(treeEditorValue)
         return false
     }
 
@@ -60,6 +61,7 @@ const TreeViewEditor = ({
             }
         }
         onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        // onChange?.(treeEditorValue)
         return false
     }
 
@@ -100,6 +102,7 @@ const TreeViewEditor = ({
         }
 
         onChange?.(JSON.stringify(treeEditorValue, null, 4))
+        // onChange?.(treeEditorValue)
         return isAdd
     }
 
