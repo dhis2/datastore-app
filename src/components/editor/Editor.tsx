@@ -1,4 +1,4 @@
-import { Tab, TabBar } from '@dhis2/ui'
+import { IconQuestion16, Tab, TabBar, Tooltip } from '@dhis2/ui'
 import React, { useMemo, useState } from 'react'
 import classes from '../../App.module.css'
 import { CODE_VIEW, TREE_VIEW } from '../../constants/constants'
@@ -42,25 +42,40 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
 
     return (
         <>
-            <TabBar className={classes.tabs}>
-                <Tab
-                    onClick={() => {
-                        setView(CODE_VIEW)
-                    }}
-                    selected={view === CODE_VIEW}
-                >
-                    {i18n.t('Code')}
-                </Tab>
-                <Tab
-                    onClick={() => {
-                        setView(TREE_VIEW)
-                    }}
-                    disabled={disableTreeView}
-                    selected={view === TREE_VIEW}
-                >
-                    {i18n.t('Tree')}
-                </Tab>
-            </TabBar>
+            <div className={classes.tabsContainer}>
+                <TabBar className={classes.tabs}>
+                    <Tab
+                        onClick={() => {
+                            setView(CODE_VIEW)
+                        }}
+                        selected={view === CODE_VIEW}
+                    >
+                        {i18n.t('Code')}
+                    </Tab>
+                    <Tab
+                        onClick={() => {
+                            setView(TREE_VIEW)
+                        }}
+                        disabled={disableTreeView}
+                        selected={view === TREE_VIEW}
+                    >
+                        {i18n.t('Tree')}
+                    </Tab>
+                </TabBar>
+                <div className={classes.helperIcon}>
+                    <Tooltip
+                        content={i18n.t(
+                            'The Code Editor shows the key value in proper JSON format. The Tree Editor shows collapsible nodes of the key value of object and array data types only.'
+                        )}
+                        placement="right"
+                        openDelay={0}
+                        closeDelay={0}
+                        className={classes.tooltip}
+                    >
+                        <IconQuestion16 color="#6C7787" />
+                    </Tooltip>
+                </div>
+            </div>
             <>
                 {view === CODE_VIEW ? (
                     <CodeEditor

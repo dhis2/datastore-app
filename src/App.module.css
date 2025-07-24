@@ -195,6 +195,23 @@
     width: fit-content;
 }
 
+.tabsContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 50px;
+    background-color: white;
+    column-gap: 20px;
+}
+
+.tabs {
+    height: 100%;
+    width: fit-content;
+}
+
+.helperIcon {
+    align-self: center;
+}
+
 /* error */
 .errorNotice {
     width: 100%;
@@ -252,8 +269,4 @@
         width: 100%;
         float: none;
     }
-}
-
-.tabs {
-    height: 50px;
 }
