@@ -1,4 +1,4 @@
-import { IconQuestion16, Tab, TabBar, Tooltip } from '@dhis2/ui'
+import { IconInfo16, Tab, TabBar, Tooltip } from '@dhis2/ui'
 import React, { useMemo, useState } from 'react'
 import classes from '../../App.module.css'
 import { CODE_VIEW, TREE_VIEW } from '../../constants/constants'
@@ -64,15 +64,23 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                 </TabBar>
                 <div className={classes.helperIcon}>
                     <Tooltip
-                        content={i18n.t(
-                            'The Code Editor shows the key value in proper JSON format. The Tree Editor shows collapsible nodes of the key value of object and array data types only.'
-                        )}
+                        content={
+                            <>
+                                {i18n.t(
+                                    'The Code editor is a free-form JSON editor.'
+                                )}
+                                <br />
+                                {i18n.t(
+                                    'The Tree editor shows expandable nodes of the JSON object.'
+                                )}
+                            </>
+                        }
                         placement="right"
                         openDelay={0}
                         closeDelay={0}
                         className={classes.tooltip}
                     >
-                        <IconQuestion16 color="#6C7787" />
+                        <IconInfo16 color="#6C7787" />
                     </Tooltip>
                 </div>
             </div>
