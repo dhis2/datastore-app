@@ -5,10 +5,11 @@ const customTheme = {
     '--w-rjv-background-color': '#292c34',
     '--w-rjv-line-color': 'transparent', // line colour
     '--w-rjv-arrow-color': '#818499',
-    '--w-rjv-edit-color': '',
+    '--w-rjv-edit-color': '#2196f3',
+    '--w-rjv-add-color': '#789849',
     '--w-rjv-info-color': '#818499',
     '--w-rjv-update-color': '',
-    '--w-rjv-copied-color': '',
+    '--w-rjv-copied-color': '#d7d7d7',
     '--w-rjv-copied-success-color': '',
     '--w-rjv-curlybraces-color': '#acb4be',
     '--w-rjv-colon-color': '#acb4be',
