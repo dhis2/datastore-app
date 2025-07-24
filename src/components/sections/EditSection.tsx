@@ -117,6 +117,38 @@ const EditSection = ({ query }: EditSectionProps) => {
         })
     }, [store, namespace, key, refetch])
 
+    const renderComponent = () => {
+        let childComponent
+        if (fetchError) {
+            childComponent = (
+                <ErrorNotice
+                    message={i18n.t(
+                        "There was a problem fetching this key's value. {{error}}",
+                        {
+                            error: fetchError.message,
+                            interpolation: { escapeValue: false },
+                        }
+                    )}
+                />
+            )
+        } else if (queryLoading) {
+            childComponent = (
+                <Center>
+                    <CircularLoader />
+                </Center>
+            )
+        } else {
+            childComponent = (
+                <Editor
+                    loading={updateLoading}
+                    value={value}
+                    handleEditorChange={handleEditorChange}
+                />
+            )
+        }
+        return childComponent
+    }
+
     return (
         <>
             <EditPanelHeader
@@ -127,29 +159,7 @@ const EditSection = ({ query }: EditSectionProps) => {
                 showButtons={!fetchError}
             />
 
-            <div className={classes.editorBackground}>
-                {fetchError ? (
-                    <ErrorNotice
-                        message={i18n.t(
-                            "There was a problem fetching this key's value. {{error}}",
-                            {
-                                error: fetchError.message,
-                                interpolation: { escapeValue: false },
-                            }
-                        )}
-                    />
-                ) : queryLoading ? (
-                    <Center>
-                        <CircularLoader />
-                    </Center>
-                ) : (
-                    <Editor
-                        loading={updateLoading}
-                        value={value}
-                        handleEditorChange={handleEditorChange}
-                    />
-                )}
-            </div>
+            <div className={classes.editorBackground}>{renderComponent()}</div>
         </>
     )
 }
