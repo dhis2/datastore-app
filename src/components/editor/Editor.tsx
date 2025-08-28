@@ -1,4 +1,4 @@
-import { Tab, TabBar } from '@dhis2/ui'
+import { IconInfo16, Tab, TabBar, Tooltip } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import classes from '../../App.module.css'
 import { CODE_VIEW, TREE_VIEW, TEXT_VIEW } from '../../constants/constants'
@@ -54,34 +54,48 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
 
     return (
         <>
-            <TabBar className={classes.tabs}>
-                <Tab
-                    onClick={() => {
-                        setView(CODE_VIEW)
-                    }}
-                    selected={view === CODE_VIEW}
-                >
-                    {i18n.t('Code')}
-                </Tab>
-                <Tab
-                    onClick={() => {
-                        setView(TREE_VIEW)
-                    }}
-                    disabled={disableTreeView}
-                    selected={view === TREE_VIEW}
-                >
-                    {i18n.t('Tree')}
-                </Tab>
-                <Tab
-                    onClick={() => {
-                        setView(TEXT_VIEW)
-                    }}
-                    // disabled={disableTextView}
-                    selected={view === TEXT_VIEW}
-                >
-                    {i18n.t('Text')}
-                </Tab>
-            </TabBar>
+            <div className={classes.tabsContainer}>
+                <TabBar className={classes.tabs}>
+                    <Tab
+                        onClick={() => {
+                            setView(CODE_VIEW)
+                        }}
+                        selected={view === CODE_VIEW}
+                    >
+                        {i18n.t('Code')}
+                    </Tab>
+                    <Tab
+                        onClick={() => {
+                            setView(TREE_VIEW)
+                        }}
+                        disabled={disableTreeView}
+                        selected={view === TREE_VIEW}
+                    >
+                        {i18n.t('Tree')}
+                    </Tab>
+                </TabBar>
+                <div className={classes.helperIcon}>
+                    <Tooltip
+                        content={
+                            <>
+                                {i18n.t(
+                                    'The Code editor is a free-form JSON editor.'
+                                )}
+                                <br />
+                                {i18n.t(
+                                    'The Tree editor shows expandable nodes of the JSON object.'
+                                )}
+                            </>
+                        }
+                        placement="right"
+                        openDelay={0}
+                        closeDelay={0}
+                        className={classes.tooltip}
+                    >
+                        <IconInfo16 color="#6C7787" />
+                    </Tooltip>
+                </div>
+            </div>
             <>
                 {view === CODE_VIEW && (
                     <CodeEditor

@@ -127,6 +127,7 @@ const TreeViewEditor = ({
                 displayObjectSize={true}
                 collapsed={1}
                 indentWidth={40}
+                highlightUpdates
                 editable={!loading}
                 onDelete={handleDelete}
                 onEdit={handleEdit}

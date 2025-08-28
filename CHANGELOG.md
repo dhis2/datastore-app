@@ -1,3 +1,11 @@
+# [100.2.0-beta.2](https://github.com/dhis2/datastore-app/compare/v100.2.0-beta.1...v100.2.0-beta.2) (2025-07-24)
+
+
+### Features
+
+* add editor description text ([#170](https://github.com/dhis2/datastore-app/issues/170)) ([ab28a5a](https://github.com/dhis2/datastore-app/commit/ab28a5a23fa4c1cb70a104d67842a4cee339fba0))
+* **tree-view:** modify colour of edit icons ([#171](https://github.com/dhis2/datastore-app/issues/171)) ([11028bd](https://github.com/dhis2/datastore-app/commit/11028bd9855da870fb6c6f867aeddce9b185b39c))
+
 # [100.2.0-beta.1](https://github.com/dhis2/datastore-app/compare/v100.1.0...v100.2.0-beta.1) (2025-07-07)
 
 
