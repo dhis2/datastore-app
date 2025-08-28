@@ -2,25 +2,22 @@ import { json, jsonParseLinter } from '@codemirror/lang-json'
 import { linter, lintGutter } from '@codemirror/lint'
 import { search } from '@codemirror/search'
 import CodeMirror from '@uiw/react-codemirror'
-import React, { useMemo } from 'react'
+import React from 'react'
 import './editor-styles.css'
+import { CODE_VIEW } from '../../constants/constants'
+import { EditorValueProps } from '../sections/EditSection'
 
 type CodeEditorProps = {
     value?: string
-    onChange?: (string) => void
+    onChange?: (param: EditorValueProps) => void
     loading: boolean
 }
 
 const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
-    const codeEditorValue = useMemo(
-        () => JSON.stringify(value, null, 4),
-        [value]
-    )
-
     return (
         <CodeMirror
             theme={'dark'}
-            value={codeEditorValue}
+            value={value}
             height="80vh"
             extensions={[
                 json(),
@@ -32,7 +29,7 @@ const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
                     delay: 500,
                 }),
             ]}
-            onChange={onChange}
+            onChange={(value) => onChange({ value, editor: CODE_VIEW })}
             autoFocus
             editable={!loading}
         />

@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
-import { CUSTOM_KEY_NAME } from '../../constants/constants'
+import { CUSTOM_KEY_NAME, TREE_VIEW } from '../../constants/constants'
 import i18n from '../../locales'
 import { findAndReplaceLibraryDefaultKeyAndValues } from '../../utils/treeEditor/customiseLibraryHelpers'
 import {
@@ -11,6 +11,7 @@ import {
     validateObject,
 } from '../../utils/treeEditor/treeEditorUtils'
 import ErrorNotice from '../error/ErrorNotice'
+import { EditorValueProps } from '../sections/EditSection'
 import { treeEditorStyle } from './treeEditorTheme'
 
 const TreeViewEditor = ({
@@ -20,7 +21,7 @@ const TreeViewEditor = ({
     loading,
 }: {
     value: object
-    onChange?: (string) => void
+    onChange?: (param: EditorValueProps) => void
     error?: string
     loading: boolean
 }) => {
@@ -32,8 +33,10 @@ const TreeViewEditor = ({
         } else if (keyName in parentValue) {
             delete parentValue[keyName]
         }
-        onChange?.(JSON.stringify(treeEditorValue, null, 4))
-        // onChange?.(treeEditorValue)
+        onChange?.({
+            value: JSON.stringify(treeEditorValue, null, 4),
+            editor: TREE_VIEW,
+        })
         return false
     }
 
@@ -60,8 +63,10 @@ const TreeViewEditor = ({
                 selectedValue[keyToUpdate] = value
             }
         }
-        onChange?.(JSON.stringify(treeEditorValue, null, 4))
-        // onChange?.(treeEditorValue)
+        onChange?.({
+            value: JSON.stringify(treeEditorValue, null, 4),
+            editor: TREE_VIEW,
+        })
         return false
     }
 
@@ -101,8 +106,10 @@ const TreeViewEditor = ({
             selectedValue[keyToUpdate] = updatedValue
         }
 
-        onChange?.(JSON.stringify(treeEditorValue, null, 4))
-        // onChange?.(treeEditorValue)
+        onChange?.({
+            value: JSON.stringify(treeEditorValue, null, 4),
+            editor: TREE_VIEW,
+        })
         return isAdd
     }
 

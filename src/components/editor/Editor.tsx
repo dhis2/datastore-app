@@ -1,8 +1,9 @@
 import { IconInfo16, Tab, TabBar, Tooltip } from '@dhis2/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import classes from '../../App.module.css'
-import { CODE_VIEW, TREE_VIEW, TEXT_VIEW } from '../../constants/constants'
+import { CODE_VIEW, TEXT_VIEW, TREE_VIEW } from '../../constants/constants'
 import i18n from '../../locales'
+import { EditorValueProps } from '../sections/EditSection'
 import CodeEditor from './CodeEditor'
 import TextEditor from './TextEditor'
 import TreeViewEditor from './TreeEditor'
@@ -12,43 +13,38 @@ type EditorViewMode = 'tree' | 'code' | 'text'
 type EditorProps = {
     loading: boolean
     value: string
-    handleEditorChange: (string) => void
+    handleEditorChange: (param: EditorValueProps) => void
 }
 
 const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
-    const [disableTreeView, setDisableTreeView] = useState(false)
-    // const [disableTextView, setDisableTextView] = useState(false)
+
     const [error, setError] = useState(null)
+    const [disableTreeView, setDisableTreeView] = useState(false)
+    const [disableTextView, setDisableTextView] = useState(true)
 
-    const [treeEditorValue, setTreeEditorValue] = useState(null)
-    // const [codeEditorValue, setCodeEditorValue] = useState(value)
-
-    useEffect(() => {
+    const treeEditorValue = useMemo(() => {
         setError(null)
+        setDisableTreeView(false)
         try {
-            const jsonValue = JSON.parse(value)
-            if (typeof jsonValue !== 'object') {
-                setDisableTreeView(true)
-            } else {
-                setDisableTreeView(false)
+            if (value === null || value === undefined) {
+                return {}
             }
+            const jsonValue = JSON.parse(value)
 
-            // if (typeof jsonValue === "string"){
-            //     setDisableTextView(false)
-            // } else {
-            //     setDisableTextView(true)
-            // }
-
-            setTreeEditorValue(jsonValue)
-
-            // if (typeof jsonValue === "string"){
-            //     setCodeEditorValue(JSON.stringify(value))
-            // } else {
-            //     setCodeEditorValue(value)
-            // }
-        } catch {
-            setError('Invalid JSON detected. Fix in the code editor.')
+            if (typeof jsonValue === 'object') {
+                return jsonValue
+            } else {
+                setDisableTreeView(true)
+                setView(CODE_VIEW)
+            }
+            if (typeof jsonValue === 'string') {
+                setDisableTextView(false)
+            } else {
+                setDisableTextView(true)
+            }
+        } catch (e) {
+            setError(e.message)
         }
     }, [value])
 
@@ -73,6 +69,15 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                     >
                         {i18n.t('Tree')}
                     </Tab>
+                    <Tab
+                        onClick={() => {
+                            setView(TEXT_VIEW)
+                        }}
+                        disabled={disableTextView}
+                        selected={view === TEXT_VIEW}
+                    >
+                        {i18n.t('Text')}
+                    </Tab>
                 </TabBar>
                 <div className={classes.helperIcon}>
                     <Tooltip
@@ -84,6 +89,10 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                                 <br />
                                 {i18n.t(
                                     'The Tree editor shows expandable nodes of the JSON object.'
+                                )}
+                                <br />
+                                {i18n.t(
+                                    'The Text editor allows you to add and edit non-JSON data and stores it as a string.'
                                 )}
                             </>
                         }
