@@ -11,7 +11,6 @@ import {
     validateObject,
 } from '../../utils/treeEditor/treeEditorUtils'
 import ErrorNotice from '../error/ErrorNotice'
-import { EditorValueProps } from '../sections/EditSection'
 import { treeEditorStyle } from './treeEditorTheme'
 
 const TreeViewEditor = ({
@@ -21,7 +20,7 @@ const TreeViewEditor = ({
     loading,
 }: {
     value: object
-    onChange?: (param: EditorValueProps) => void
+    onChange?: (string) => void
     error?: string
     loading: boolean
 }) => {
@@ -33,10 +32,7 @@ const TreeViewEditor = ({
         } else if (keyName in parentValue) {
             delete parentValue[keyName]
         }
-        onChange?.({
-            value: JSON.stringify(treeEditorValue, null, 4),
-            editor: TREE_VIEW,
-        })
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
         return false
     }
 
@@ -63,10 +59,7 @@ const TreeViewEditor = ({
                 selectedValue[keyToUpdate] = value
             }
         }
-        onChange?.({
-            value: JSON.stringify(treeEditorValue, null, 4),
-            editor: TREE_VIEW,
-        })
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
         return false
     }
 
@@ -106,10 +99,7 @@ const TreeViewEditor = ({
             selectedValue[keyToUpdate] = updatedValue
         }
 
-        onChange?.({
-            value: JSON.stringify(treeEditorValue, null, 4),
-            editor: TREE_VIEW,
-        })
+        onChange?.(JSON.stringify(treeEditorValue, null, 4))
         return isAdd
     }
 

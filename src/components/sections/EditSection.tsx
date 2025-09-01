@@ -3,7 +3,6 @@ import { Center, CircularLoader } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import classes from '../../App.module.css'
-import { TEXT_VIEW } from '../../constants/constants'
 import useCustomAlert from '../../hooks/useCustomAlert'
 import i18n from '../../locales'
 import { useEditContext } from '../context/EditContext'
@@ -13,11 +12,6 @@ import { dataStoreKeyValuesQuery } from '../panels/EditorPanel'
 
 type EditSectionProps = {
     query: typeof dataStoreKeyValuesQuery
-}
-
-export type EditorValueProps = {
-    value: string
-    editor: string
 }
 
 const EditSection = ({ query }: EditSectionProps) => {
@@ -53,23 +47,16 @@ const EditSection = ({ query }: EditSectionProps) => {
 
     const handleClose = () => navigate(`/${store}/edit/${namespace}`)
 
-    const [editorValue, setEditorValue] = useState({
-        value: JSON.stringify(data?.results, null, 4) || '',
-        editorSource: null,
-    })
+    const [editorValue, setEditorValue] = useState(
+        JSON.stringify(data?.results, null, 4) || ''
+    )
 
     useEffect(() => {
-        setEditorValue({
-            value: JSON.stringify(data?.results, null, 4),
-            editorSource: null,
-        })
+        setEditorValue(JSON.stringify(data?.results, null, 4))
     }, [data])
 
-    const handleEditorChange = ({ value, editor }: EditorValueProps) => {
-        setEditorValue({
-            value,
-            editorSource: editor,
-        })
+    const handleEditorChange = (value) => {
+        setEditorValue(value)
         setHasUnsavedChanges(true)
     }
 
@@ -80,15 +67,8 @@ const EditSection = ({ query }: EditSectionProps) => {
             setEditError(null)
             setUpdateLoading(true)
 
-            const { value, editorSource } = editorValue
-
             try {
-                if (editorSource === TEXT_VIEW) {
-                    body = value
-                } else {
-                    body = JSON.parse(value)
-                }
-
+                body = JSON.parse(editorValue)
                 await engine.mutate(
                     {
                         type: 'update' as const,
@@ -158,7 +138,7 @@ const EditSection = ({ query }: EditSectionProps) => {
                 ) : (
                     <Editor
                         loading={updateLoading}
-                        value={editorValue.value}
+                        value={editorValue}
                         handleEditorChange={handleEditorChange}
                     />
                 )}

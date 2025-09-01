@@ -4,12 +4,10 @@ import { search } from '@codemirror/search'
 import CodeMirror from '@uiw/react-codemirror'
 import React from 'react'
 import './editor-styles.css'
-import { CODE_VIEW } from '../../constants/constants'
-import { EditorValueProps } from '../sections/EditSection'
 
 type CodeEditorProps = {
     value?: string
-    onChange?: (param: EditorValueProps) => void
+    onChange?: (string) => void
     loading: boolean
 }
 
@@ -29,7 +27,7 @@ const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
                     delay: 500,
                 }),
             ]}
-            onChange={(value) => onChange({ value, editor: CODE_VIEW })}
+            onChange={(value) => onChange(value)}
             autoFocus
             editable={!loading}
         />

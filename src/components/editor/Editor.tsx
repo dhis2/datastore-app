@@ -3,7 +3,6 @@ import React, { useMemo, useState } from 'react'
 import classes from '../../App.module.css'
 import { CODE_VIEW, TEXT_VIEW, TREE_VIEW } from '../../constants/constants'
 import i18n from '../../locales'
-import { EditorValueProps } from '../sections/EditSection'
 import CodeEditor from './CodeEditor'
 import TextEditor from './TextEditor'
 import TreeViewEditor from './TreeEditor'
@@ -13,40 +12,52 @@ type EditorViewMode = 'tree' | 'code' | 'text'
 type EditorProps = {
     loading: boolean
     value: string
-    handleEditorChange: (param: EditorValueProps) => void
+    handleEditorChange: (string) => void
 }
 
 const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
-
     const [error, setError] = useState(null)
     const [disableTreeView, setDisableTreeView] = useState(false)
-    const [disableTextView, setDisableTextView] = useState(true)
 
-    const treeEditorValue = useMemo(() => {
+    const jsonValue = useMemo(() => {
         setError(null)
-        setDisableTreeView(false)
         try {
-            if (value === null || value === undefined) {
-                return {}
-            }
-            const jsonValue = JSON.parse(value)
-
-            if (typeof jsonValue === 'object') {
-                return jsonValue
-            } else {
-                setDisableTreeView(true)
-                setView(CODE_VIEW)
-            }
-            if (typeof jsonValue === 'string') {
-                setDisableTextView(false)
-            } else {
-                setDisableTextView(true)
-            }
+            return JSON.parse(value)
         } catch (e) {
             setError(e.message)
         }
     }, [value])
+
+    const treeEditorValue = useMemo(() => {
+        setDisableTreeView(false)
+        if (value === null || value === undefined) {
+            return {}
+        }
+        if (typeof jsonValue === 'object') {
+            return jsonValue
+        } else {
+            setDisableTreeView(true)
+        }
+    }, [jsonValue, value])
+
+    const textEditorValue = useMemo(() => {
+        if (jsonValue === null || jsonValue === undefined) {
+            return value
+        } else if (typeof jsonValue === 'string') {
+            return jsonValue
+        } else {
+            const isEmptyObject =
+                typeof jsonValue === 'object' &&
+                Object.keys(jsonValue).length === 0
+
+            if (isEmptyObject || jsonValue === '') {
+                return ''
+            } else {
+                return value
+            }
+        }
+    }, [jsonValue, value])
 
     return (
         <>
@@ -73,7 +84,6 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                         onClick={() => {
                             setView(TEXT_VIEW)
                         }}
-                        disabled={disableTextView}
                         selected={view === TEXT_VIEW}
                     >
                         {i18n.t('Text')}
@@ -123,7 +133,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                 )}
                 {view === TEXT_VIEW && (
                     <TextEditor
-                        value={value}
+                        value={textEditorValue}
                         onChange={handleEditorChange}
                         loading={loading}
                     />
