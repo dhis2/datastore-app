@@ -1,37 +1,32 @@
-import { json, jsonParseLinter } from '@codemirror/lang-json'
-import { linter, lintGutter } from '@codemirror/lint'
+import { lintGutter } from '@codemirror/lint'
 import { search } from '@codemirror/search'
 import CodeMirror from '@uiw/react-codemirror'
 import React from 'react'
 import './editor-styles.css'
 
-type CodeEditorProps = {
+type TextEditorProps = {
     value?: string
     onChange?: (string) => void
     loading: boolean
 }
 
-const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
+const TextEditor = ({ value, onChange, loading }: TextEditorProps) => {
     return (
         <CodeMirror
             theme={'dark'}
             value={value}
             height="80vh"
             extensions={[
-                json(),
-                lintGutter(),
                 search({
                     top: true,
                 }),
-                linter(jsonParseLinter(), {
-                    delay: 500,
-                }),
+                lintGutter(),
             ]}
-            onChange={(value) => onChange(value)}
+            onChange={(value) => onChange(JSON.stringify(value, null, 4))}
             autoFocus
             editable={!loading}
         />
     )
 }
 
-export default CodeEditor
+export default TextEditor

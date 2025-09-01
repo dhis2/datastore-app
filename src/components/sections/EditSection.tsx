@@ -47,16 +47,16 @@ const EditSection = ({ query }: EditSectionProps) => {
 
     const handleClose = () => navigate(`/${store}/edit/${namespace}`)
 
-    const [value, setValue] = useState(
+    const [editorValue, setEditorValue] = useState(
         JSON.stringify(data?.results, null, 4) || ''
     )
 
     useEffect(() => {
-        setValue(JSON.stringify(data?.results, null, 4))
+        setEditorValue(JSON.stringify(data?.results, null, 4))
     }, [data])
 
     const handleEditorChange = (value) => {
-        setValue(value)
+        setEditorValue(value)
         setHasUnsavedChanges(true)
     }
 
@@ -68,8 +68,7 @@ const EditSection = ({ query }: EditSectionProps) => {
             setUpdateLoading(true)
 
             try {
-                body = JSON.parse(value)
-
+                body = JSON.parse(editorValue)
                 await engine.mutate(
                     {
                         type: 'update' as const,
@@ -139,7 +138,7 @@ const EditSection = ({ query }: EditSectionProps) => {
                 ) : (
                     <Editor
                         loading={updateLoading}
-                        value={value}
+                        value={editorValue}
                         handleEditorChange={handleEditorChange}
                     />
                 )}
