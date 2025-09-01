@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import JsonViewEditor from '@uiw/react-json-view/editor'
 import React from 'react'
-import { CUSTOM_KEY_NAME, TREE_VIEW } from '../../constants/constants'
+import { CUSTOM_KEY_NAME } from '../../constants/constants'
 import i18n from '../../locales'
 import { findAndReplaceLibraryDefaultKeyAndValues } from '../../utils/treeEditor/customiseLibraryHelpers'
 import {
