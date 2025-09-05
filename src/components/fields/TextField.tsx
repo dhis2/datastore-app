@@ -3,18 +3,30 @@ import {
     InputFieldFF,
     hasValue,
     composeValidators,
-    alphaNumeric,
     createMaxCharacterLength,
+    createPattern,
 } from '@dhis2/ui'
 import React from 'react'
 import i18n from '../../locales'
 
 const { Field } = ReactFinalForm
 
-const customAlphaNumeric = (value) =>
-    alphaNumeric(value)
-        ? i18n.t('Special characters are not allowed in this field')
-        : undefined
+// source: https://stackoverflow.com/questions/1547899/which-characters-make-a-url-invalid/13500078#13500078
+
+// tests that the string does not contain any invalid characters
+const validCharactersRegex = /^[^(){}[\]^|`;?:@=+$,\\/#%]+$/
+
+const invalidCharactersMessage = i18n.t(
+    'Your input should not contain any of these invalid characters: {{characters_list}}',
+    {
+        characters_list: "{}',|\\/^[]`;?:@=+$#%",
+        interpolation: { escapeValue: false },
+    }
+)
+const validateInputCharacters = createPattern(
+    validCharactersRegex,
+    invalidCharactersMessage
+)
 
 const TextField = ({
     initialFocus,
@@ -35,11 +47,10 @@ const TextField = ({
             label={label}
             validate={composeValidators(
                 hasValue,
-                customAlphaNumeric,
-                createMaxCharacterLength(255)
+                createMaxCharacterLength(255),
+                validateInputCharacters
             )}
             initialFocus={initialFocus}
-            helpText={i18n.t('Alphanumeric characters only')}
         />
     )
 }
