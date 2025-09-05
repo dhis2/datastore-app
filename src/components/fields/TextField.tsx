@@ -12,12 +12,12 @@ import i18n from '../../locales'
 const { Field } = ReactFinalForm
 
 // source: https://stackoverflow.com/questions/1547899/which-characters-make-a-url-invalid/13500078#13500078
-const invalidCharactersRegex = /^[^(){}[\]^|`;?:@=+$,\\]+$/
+const invalidCharactersRegex = /^[^(){}[\]^|`;?:@=+$,\\/#%]+$/
 
 const invalidCharactersMessage = i18n.t(
     'Your input should not contain any of these invalid characters: {{characters_list}}',
     {
-        characters_list: "{}',|\\^[]`;?:@=+$",
+        characters_list: "{}',|\\/^[]`;?:@=+$#%",
         interpolation: { escapeValue: false },
     }
 )
