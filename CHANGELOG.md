@@ -1,3 +1,10 @@
+# [100.2.0-beta.3](https://github.com/dhis2/datastore-app/compare/v100.2.0-beta.2...v100.2.0-beta.3) (2025-09-05)
+
+
+### Features
+
+* modify the error ui styles for the edit page ([#167](https://github.com/dhis2/datastore-app/issues/167)) ([c2caaf5](https://github.com/dhis2/datastore-app/commit/c2caaf59252da4cf2c27dc26ad1204256b2a87c8))
+
 # [100.2.0-beta.2](https://github.com/dhis2/datastore-app/compare/v100.2.0-beta.1...v100.2.0-beta.2) (2025-07-24)
 
 
