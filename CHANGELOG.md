@@ -1,3 +1,10 @@
+# [100.2.0](https://github.com/dhis2/datastore-app/compare/v100.1.0...v100.2.0) (2025-09-05)
+
+
+### Features
+
+* escape key closes the modals ([#173](https://github.com/dhis2/datastore-app/issues/173)) ([50dfe57](https://github.com/dhis2/datastore-app/commit/50dfe57e70becd3f84a637e2f19ae880cd645aa7))
+
 # [100.1.0](https://github.com/dhis2/datastore-app/compare/v100.0.4...v100.1.0) (2025-05-07)
 
 
