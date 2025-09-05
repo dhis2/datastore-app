@@ -1,3 +1,10 @@
+# [100.3.0](https://github.com/dhis2/datastore-app/compare/v100.2.0...v100.3.0) (2025-09-05)
+
+
+### Features
+
+* validate against URL unsafe characters for new key and namespace names ([#172](https://github.com/dhis2/datastore-app/issues/172)) ([31a2f42](https://github.com/dhis2/datastore-app/commit/31a2f42732f3516e7020207b394ac72fc52e18d4))
+
 # [100.2.0](https://github.com/dhis2/datastore-app/compare/v100.1.0...v100.2.0) (2025-09-05)
 
 
