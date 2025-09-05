@@ -15,7 +15,7 @@ const { Field } = ReactFinalForm
 const invalidCharactersRegex = /^[^(){}[\]^|`;?:@=+$,\\]+$/
 
 const invalidCharactersMessage = i18n.t(
-    "Your input should not contain any of these invalid characters: {{characters_list}}",
+    'Your input should not contain any of these invalid characters: {{characters_list}}',
     {
         characters_list: "{}',|\\^[]`;?:@=+$",
         interpolation: { escapeValue: false },
