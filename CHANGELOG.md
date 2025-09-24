@@ -1,3 +1,13 @@
+# [100.4.0-beta.1](https://github.com/dhis2/datastore-app/compare/v100.3.0...v100.4.0-beta.1) (2025-09-24)
+
+
+### Features
+
+* add editor description text ([#170](https://github.com/dhis2/datastore-app/issues/170)) ([ab28a5a](https://github.com/dhis2/datastore-app/commit/ab28a5a23fa4c1cb70a104d67842a4cee339fba0))
+* modify the error ui styles for the edit page ([#167](https://github.com/dhis2/datastore-app/issues/167)) ([c2caaf5](https://github.com/dhis2/datastore-app/commit/c2caaf59252da4cf2c27dc26ad1204256b2a87c8))
+* **tree-view:** modify colour of edit icons ([#171](https://github.com/dhis2/datastore-app/issues/171)) ([11028bd](https://github.com/dhis2/datastore-app/commit/11028bd9855da870fb6c6f867aeddce9b185b39c))
+* tree view mode ([#149](https://github.com/dhis2/datastore-app/issues/149)) ([4f92c63](https://github.com/dhis2/datastore-app/commit/4f92c637422058d855e74f546320c7fc2d13c011)), closes [#168](https://github.com/dhis2/datastore-app/issues/168)
+
 # [100.2.0-beta.3](https://github.com/dhis2/datastore-app/compare/v100.2.0-beta.2...v100.2.0-beta.3) (2025-09-05)
 
 
