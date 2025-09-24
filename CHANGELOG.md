@@ -6,6 +6,9 @@
 * modify the error ui styles for the edit page ([#167](https://github.com/dhis2/datastore-app/issues/167)) ([c2caaf5](https://github.com/dhis2/datastore-app/commit/c2caaf59252da4cf2c27dc26ad1204256b2a87c8))
 
 # [100.2.0-beta.2](https://github.com/dhis2/datastore-app/compare/v100.2.0-beta.1...v100.2.0-beta.2) (2025-07-24)
+* validate against URL unsafe characters for new key and namespace names ([#172](https://github.com/dhis2/datastore-app/issues/172)) ([31a2f42](https://github.com/dhis2/datastore-app/commit/31a2f42732f3516e7020207b394ac72fc52e18d4))
+
+# [100.2.0](https://github.com/dhis2/datastore-app/compare/v100.1.0...v100.2.0) (2025-09-05)
 
 
 ### Features
@@ -19,6 +22,7 @@
 ### Features
 
 * tree view mode ([#149](https://github.com/dhis2/datastore-app/issues/149)) ([4f92c63](https://github.com/dhis2/datastore-app/commit/4f92c637422058d855e74f546320c7fc2d13c011)), closes [#168](https://github.com/dhis2/datastore-app/issues/168)
+* escape key closes the modals ([#173](https://github.com/dhis2/datastore-app/issues/173)) ([50dfe57](https://github.com/dhis2/datastore-app/commit/50dfe57e70becd3f84a637e2f19ae880cd645aa7))
 
 # [100.1.0](https://github.com/dhis2/datastore-app/compare/v100.0.4...v100.1.0) (2025-05-07)
 

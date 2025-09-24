@@ -35,7 +35,7 @@ const CreateModal = ({
     }
 
     return (
-        <Modal position="middle">
+        <Modal position="middle" onClose={closeModal}>
             <Form onSubmit={onSubmit}>
                 {({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
