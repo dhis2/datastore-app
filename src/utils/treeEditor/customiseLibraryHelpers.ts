@@ -6,11 +6,11 @@ const getPatternMatchingKeys = ({
     pattern: RegExp
 }) => {
     const matches = []
-    Object.keys(obj).forEach((key) => {
+    for(const key of Object.keys(obj)){
         if (pattern.test(key)) {
             matches.push(key)
         }
-    })
+    }
     return matches
 }
 
@@ -37,7 +37,7 @@ const getNextIterator = ({
 
 export const retrieveNextKey = ({ obj, key }: { obj: object; key: string }) => {
     // default pattern: key(n), e.g key1,.....,key(n)
-    const pattern = new RegExp('^' + key + '[0-9]*\\b$', 'i')
+    const pattern = new RegExp(`^${key}[0-9]*\\b$`, 'i')
     const matches = getPatternMatchingKeys({
         obj,
         pattern,
@@ -57,7 +57,7 @@ export const findAndReplaceLibraryDefaultKeyAndValues = ({
     newKeyName,
 }) => {
     if (Array.isArray(value)) {
-        const index = value.findIndex((el) => el === defaultLabel)
+        const index = value.indexOf(defaultLabel)
         if (index >= 0) {
             value[index] = null
         }
