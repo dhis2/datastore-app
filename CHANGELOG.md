@@ -1,3 +1,10 @@
+# [100.4.0-beta.2](https://github.com/dhis2/datastore-app/compare/v100.4.0-beta.1...v100.4.0-beta.2) (2025-10-03)
+
+
+### Bug Fixes
+
+* sonarqube issues ([#179](https://github.com/dhis2/datastore-app/issues/179)) ([0602686](https://github.com/dhis2/datastore-app/commit/060268666305005ebe8f67f4660969396e7f2e84))
+
 # [100.4.0-beta.1](https://github.com/dhis2/datastore-app/compare/v100.3.0...v100.4.0-beta.1) (2025-09-24)
 
 
