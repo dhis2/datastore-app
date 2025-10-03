@@ -6,7 +6,7 @@ const getPatternMatchingKeys = ({
     pattern: RegExp
 }) => {
     const matches = []
-    for(const key of Object.keys(obj)){
+    for (const key of Object.keys(obj)) {
         if (pattern.test(key)) {
             matches.push(key)
         }
