@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash-es'
 
 export const getKeyToUpdate = ({ path }: { path: string | number[] }) => {
-    return path && path.length > 0 ? path[path.length - 1] : null
+    return path && path.length > 0 ? path.at(-1) : null
 }
 
 export const findReferenceToParentValue = ({ mainObj, path }) => {
@@ -53,7 +53,7 @@ export const validateObject = ({ obj, label }) => {
             return values
         }
         if (hasNumericalAndLibraryLabelKeys) {
-            return values.map((value) => (value !== undefined ? value : null))
+            return values.map((value) => (value === undefined ? null : value))
         }
     }
     return obj
