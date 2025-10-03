@@ -9,8 +9,10 @@ import CreateButton from '../sections/CreateButton'
 
 const KeysPanelHeader = ({
     setOpenCreateModal,
+    showButton,
 }: {
     setOpenCreateModal: React.Dispatch<React.SetStateAction<boolean>>
+    showButton: boolean
 }) => {
     const { namespace: currentNamespace, store } = useParams()
     return (
@@ -28,11 +30,13 @@ const KeysPanelHeader = ({
                     {currentNamespace}
                 </span>
             </div>
-            <CreateButton
-                label={i18n.t('New Key')}
-                handleClick={() => setOpenCreateModal(true)}
-                icon={<IconAdd16 color={colors.grey600} />}
-            />
+            {showButton ? (
+                <CreateButton
+                    label={i18n.t('New Key')}
+                    handleClick={() => setOpenCreateModal(true)}
+                    icon={<IconAdd16 color={colors.grey600} />}
+                />
+            ) : null}
         </PanelHeader>
     )
 }
