@@ -1,4 +1,46 @@
+# [100.4.0](https://github.com/dhis2/datastore-app/compare/v100.3.0...v100.4.0) (2025-10-03)
+
+
+### Bug Fixes
+
+* sonarqube issues ([#179](https://github.com/dhis2/datastore-app/issues/179)) ([0602686](https://github.com/dhis2/datastore-app/commit/060268666305005ebe8f67f4660969396e7f2e84))
+
+
+### Features
+
+* add editor description text ([#170](https://github.com/dhis2/datastore-app/issues/170)) ([ab28a5a](https://github.com/dhis2/datastore-app/commit/ab28a5a23fa4c1cb70a104d67842a4cee339fba0))
+* modify the error ui styles for the edit page ([#167](https://github.com/dhis2/datastore-app/issues/167)) ([c2caaf5](https://github.com/dhis2/datastore-app/commit/c2caaf59252da4cf2c27dc26ad1204256b2a87c8))
+* **tree-view:** modify colour of edit icons ([#171](https://github.com/dhis2/datastore-app/issues/171)) ([11028bd](https://github.com/dhis2/datastore-app/commit/11028bd9855da870fb6c6f867aeddce9b185b39c))
+* tree view mode ([#149](https://github.com/dhis2/datastore-app/issues/149)) ([4f92c63](https://github.com/dhis2/datastore-app/commit/4f92c637422058d855e74f546320c7fc2d13c011)), closes [#168](https://github.com/dhis2/datastore-app/issues/168)
+
+# [100.4.0-beta.2](https://github.com/dhis2/datastore-app/compare/v100.4.0-beta.1...v100.4.0-beta.2) (2025-10-03)
+
+
+### Bug Fixes
+
+* sonarqube issues ([#179](https://github.com/dhis2/datastore-app/issues/179)) ([0602686](https://github.com/dhis2/datastore-app/commit/060268666305005ebe8f67f4660969396e7f2e84))
+
+# [100.4.0-beta.1](https://github.com/dhis2/datastore-app/compare/v100.3.0...v100.4.0-beta.1) (2025-09-24)
+
+
+### Features
+
+* add editor description text ([#170](https://github.com/dhis2/datastore-app/issues/170)) ([ab28a5a](https://github.com/dhis2/datastore-app/commit/ab28a5a23fa4c1cb70a104d67842a4cee339fba0))
+* modify the error ui styles for the edit page ([#167](https://github.com/dhis2/datastore-app/issues/167)) ([c2caaf5](https://github.com/dhis2/datastore-app/commit/c2caaf59252da4cf2c27dc26ad1204256b2a87c8))
+* **tree-view:** modify colour of edit icons ([#171](https://github.com/dhis2/datastore-app/issues/171)) ([11028bd](https://github.com/dhis2/datastore-app/commit/11028bd9855da870fb6c6f867aeddce9b185b39c))
+* tree view mode ([#149](https://github.com/dhis2/datastore-app/issues/149)) ([4f92c63](https://github.com/dhis2/datastore-app/commit/4f92c637422058d855e74f546320c7fc2d13c011)), closes [#168](https://github.com/dhis2/datastore-app/issues/168)
+
+# [100.2.0-beta.3](https://github.com/dhis2/datastore-app/compare/v100.2.0-beta.2...v100.2.0-beta.3) (2025-09-05)
+
+
+### Features
+
+* modify the error ui styles for the edit page ([#167](https://github.com/dhis2/datastore-app/issues/167)) ([c2caaf5](https://github.com/dhis2/datastore-app/commit/c2caaf59252da4cf2c27dc26ad1204256b2a87c8))
+
 # [100.2.0-beta.2](https://github.com/dhis2/datastore-app/compare/v100.2.0-beta.1...v100.2.0-beta.2) (2025-07-24)
+* validate against URL unsafe characters for new key and namespace names ([#172](https://github.com/dhis2/datastore-app/issues/172)) ([31a2f42](https://github.com/dhis2/datastore-app/commit/31a2f42732f3516e7020207b394ac72fc52e18d4))
+
+# [100.2.0](https://github.com/dhis2/datastore-app/compare/v100.1.0...v100.2.0) (2025-09-05)
 
 
 ### Features
@@ -12,6 +54,7 @@
 ### Features
 
 * tree view mode ([#149](https://github.com/dhis2/datastore-app/issues/149)) ([4f92c63](https://github.com/dhis2/datastore-app/commit/4f92c637422058d855e74f546320c7fc2d13c011)), closes [#168](https://github.com/dhis2/datastore-app/issues/168)
+* escape key closes the modals ([#173](https://github.com/dhis2/datastore-app/issues/173)) ([50dfe57](https://github.com/dhis2/datastore-app/commit/50dfe57e70becd3f84a637e2f19ae880cd645aa7))
 
 # [100.1.0](https://github.com/dhis2/datastore-app/compare/v100.0.4...v100.1.0) (2025-05-07)
 

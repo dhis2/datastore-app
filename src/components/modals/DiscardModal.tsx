@@ -16,7 +16,7 @@ type DiscardModalProps = {
 
 const DiscardModal = ({ handleDiscard, closeModal }: DiscardModalProps) => {
     return (
-        <Modal position="middle">
+        <Modal position="middle" onClose={closeModal}>
             <ModalTitle>{i18n.t('Discard')}</ModalTitle>
             <ModalContent>
                 {i18n.t('Do you want to discard the unsaved changes?')}

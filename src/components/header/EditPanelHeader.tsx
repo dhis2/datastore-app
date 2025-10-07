@@ -10,6 +10,7 @@ type EditPanelHeaderProps = {
     disableCloseButton: boolean
     handleUpdate: () => void
     loading: boolean
+    showButtons: boolean
 }
 
 const EditPanelHeader = ({
@@ -17,34 +18,37 @@ const EditPanelHeader = ({
     disableCloseButton,
     handleUpdate,
     loading,
+    showButtons,
 }: EditPanelHeaderProps) => {
     const { key } = useParams()
     return (
         <PanelHeader>
             <span className={classes.editorPanelKeysLabel}>{key}</span>
-            <div className={classes.editorPanelEditButtons}>
-                <Button
-                    small
-                    aria-label={i18n.t('Close')}
-                    name="close"
-                    onClick={() => handleClose()}
-                    title={i18n.t('Close')}
-                    disabled={disableCloseButton}
-                >
-                    {i18n.t('Close')}
-                </Button>
-                <Button
-                    small
-                    aria-label={i18n.t('Save')}
-                    name="save"
-                    onClick={() => handleUpdate()}
-                    title={i18n.t('Save')}
-                    primary
-                    loading={loading}
-                >
-                    {i18n.t('Save changes')}
-                </Button>
-            </div>
+            {showButtons && (
+                <div className={classes.editorPanelEditButtons}>
+                    <Button
+                        small
+                        aria-label={i18n.t('Close')}
+                        name="close"
+                        onClick={() => handleClose()}
+                        title={i18n.t('Close')}
+                        disabled={disableCloseButton}
+                    >
+                        {i18n.t('Close')}
+                    </Button>
+                    <Button
+                        small
+                        aria-label={i18n.t('Save')}
+                        name="save"
+                        onClick={() => handleUpdate()}
+                        title={i18n.t('Save')}
+                        primary
+                        loading={loading}
+                    >
+                        {i18n.t('Save changes')}
+                    </Button>
+                </div>
+            )}
         </PanelHeader>
     )
 }

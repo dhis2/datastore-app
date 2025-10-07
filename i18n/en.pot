@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-08-28T14:29:51.846Z\n"
-"PO-Revision-Date: 2025-08-28T14:29:51.847Z\n"
+"POT-Creation-Date: 2025-09-24T06:47:33.938Z\n"
+"PO-Revision-Date: 2025-09-24T06:47:33.938Z\n"
 
 msgid "Code"
 msgstr "Code"
@@ -54,12 +54,6 @@ msgstr "Namespace"
 msgid "Search"
 msgstr "Search"
 
-msgid "Special characters are not allowed in this field"
-msgstr "Special characters are not allowed in this field"
-
-msgid "Alphanumeric characters only"
-msgstr "Alphanumeric characters only"
-
 msgid "Close"
 msgstr "Close"
 
@@ -99,9 +93,6 @@ msgstr "DataStore"
 msgid "UserDataStore"
 msgstr "UserDataStore"
 
-msgid "There was a problem fetching this data - {{error}}"
-msgstr "There was a problem fetching this data - {{error}}"
-
 msgid "Key '{{key}}' updated successfully"
 msgstr "Key '{{key}}' updated successfully"
 
@@ -111,6 +102,9 @@ msgstr "There was a problem updating the key - {{error}}"
 msgid "There was a problem - {{error}}"
 msgstr "There was a problem - {{error}}"
 
+msgid "There was a problem fetching this key's value. {{error}}"
+msgstr "There was a problem fetching this key's value. {{error}}"
+
 msgid "There was a problem adding this key - {{error}}"
 msgstr "There was a problem adding this key - {{error}}"
 
@@ -119,6 +113,9 @@ msgstr "Key '{{selectedKey}}' deleted successfully"
 
 msgid "There was a problem deleting this key - {{error}}"
 msgstr "There was a problem deleting this key - {{error}}"
+
+msgid "There was a problem fetching the keys in this namespace."
+msgstr "There was a problem fetching the keys in this namespace."
 
 msgid "Search keys"
 msgstr "Search keys"

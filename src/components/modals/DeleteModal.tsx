@@ -23,7 +23,7 @@ const DeleteModal = ({
     title,
 }: DeleteModalProps) => {
     return (
-        <Modal position="middle">
+        <Modal position="middle" onClose={closeModal}>
             <ModalTitle>{title}</ModalTitle>
             <ModalContent>{children}</ModalContent>
             <ModalActions>

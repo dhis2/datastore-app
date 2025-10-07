@@ -27,7 +27,7 @@ const CodeEditor = ({ value, onChange, loading }: CodeEditorProps) => {
                     delay: 500,
                 }),
             ]}
-            onChange={(value) => onChange(value)}
+            onChange={onChange}
             autoFocus
             editable={!loading}
         />
