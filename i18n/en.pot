@@ -14,11 +14,21 @@ msgstr "Code"
 msgid "Tree"
 msgstr "Tree"
 
+msgid "Text"
+msgstr "Text"
+
 msgid "The Code editor is a free-form JSON editor."
 msgstr "The Code editor is a free-form JSON editor."
 
 msgid "The Tree editor shows expandable nodes of the JSON object."
 msgstr "The Tree editor shows expandable nodes of the JSON object."
+
+msgid ""
+"The Text editor allows you to add and edit non-JSON data and stores it as a "
+"string."
+msgstr ""
+"The Text editor allows you to add and edit non-JSON data and stores it as a "
+"string."
 
 msgid "Invalid JSON detected. Fix the value in the Code Editor"
 msgstr "Invalid JSON detected. Fix the value in the Code Editor"
