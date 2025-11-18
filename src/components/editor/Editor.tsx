@@ -19,6 +19,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
     const [error, setError] = useState(null)
     const [disableTreeView, setDisableTreeView] = useState(false)
+    const [disableTextView, setDisableTextView] = useState(false)
 
     const jsonValue = useMemo(() => {
         setError(null)
@@ -42,9 +43,11 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     }, [jsonValue, value])
 
     const textEditorValue = useMemo(() => {
+        setDisableTextView(true)
         if (jsonValue === null || jsonValue === undefined) {
             return value
         } else if (typeof jsonValue === 'string') {
+            setDisableTextView(false)
             return jsonValue
         } else {
             const isEmptyObject =
@@ -52,6 +55,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                 Object.keys(jsonValue).length === 0
 
             if (isEmptyObject || jsonValue === '') {
+                setDisableTextView(false)
                 return ''
             } else {
                 return value
@@ -84,6 +88,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                         onClick={() => {
                             setView(TEXT_VIEW)
                         }}
+                        disabled={disableTextView}
                         selected={view === TEXT_VIEW}
                     >
                         {i18n.t('Text')}
