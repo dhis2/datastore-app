@@ -107,7 +107,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                                 )}
                                 <br />
                                 {i18n.t(
-                                    'The Text editor allows you to add and edit non-JSON data, e.g. JSONata expressions, and stores it as a string.'
+                                    'The Text editor allows you to add and edit non-JSON data, e.g. JSONata, DataSonnet, or other mapping expressions; and stores it as a string.'
                                 )}
                             </>
                         }
