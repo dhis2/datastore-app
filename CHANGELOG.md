@@ -1,3 +1,10 @@
+# [100.5.0-beta.2](https://github.com/dhis2/datastore-app/compare/v100.5.0-beta.1...v100.5.0-beta.2) (2025-11-19)
+
+
+### Features
+
+* enable text view for only empty objects and string data types ([#183](https://github.com/dhis2/datastore-app/issues/183)) ([292a82d](https://github.com/dhis2/datastore-app/commit/292a82d71fb1d08184dd95c68d7ea2ce3465e0d5))
+
 # [100.5.0-beta.1](https://github.com/dhis2/datastore-app/compare/v100.4.0...v100.5.0-beta.1) (2025-10-15)
 
 
