@@ -1,12 +1,13 @@
 import { IconInfo16, Tab, TabBar, Tooltip } from '@dhis2/ui'
 import React, { useMemo, useState } from 'react'
 import classes from '../../App.module.css'
-import { CODE_VIEW, TREE_VIEW } from '../../constants/constants'
+import { CODE_VIEW, TEXT_VIEW, TREE_VIEW } from '../../constants/constants'
 import i18n from '../../locales'
 import CodeEditor from './CodeEditor'
+import TextEditor from './TextEditor'
 import TreeViewEditor from './TreeEditor'
 
-type EditorViewMode = 'tree' | 'code'
+type EditorViewMode = 'tree' | 'code' | 'text'
 
 type EditorProps = {
     loading: boolean
@@ -16,29 +17,49 @@ type EditorProps = {
 
 const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
-
     const [error, setError] = useState(null)
     const [disableTreeView, setDisableTreeView] = useState(false)
 
-    const treeEditorValue = useMemo(() => {
+    const jsonValue = useMemo(() => {
         setError(null)
-        setDisableTreeView(false)
         try {
-            if (value === null || value === undefined) {
-                return {}
-            }
-            const jsonValue = JSON.parse(value)
-
-            if (typeof jsonValue === 'object') {
-                return jsonValue
-            } else {
-                setDisableTreeView(true)
-                setView(CODE_VIEW)
-            }
+            return JSON.parse(value)
         } catch (e) {
             setError(e.message)
         }
     }, [value])
+
+    const isEmptyObject =
+        typeof jsonValue === 'object' && Object.keys(jsonValue).length === 0
+
+    const disableTextView = useMemo(() => {
+        // Disable text view unless the value is a string or an empty object:
+        return !(typeof jsonValue === 'string' || isEmptyObject)
+    }, [isEmptyObject, jsonValue])
+
+    const treeEditorValue = useMemo(() => {
+        setDisableTreeView(false)
+        if (value === null || value === undefined) {
+            return {}
+        }
+        if (typeof jsonValue === 'object') {
+            return jsonValue
+        } else {
+            setDisableTreeView(true)
+        }
+    }, [jsonValue, value])
+
+    const textEditorValue = useMemo(() => {
+        if (jsonValue === null || jsonValue === undefined) {
+            return value
+        } else if (typeof jsonValue === 'string') {
+            return jsonValue
+        } else if (isEmptyObject || jsonValue === '') {
+            return ''
+        } else {
+            return value
+        }
+    }, [isEmptyObject, jsonValue, value])
 
     return (
         <>
@@ -61,6 +82,15 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                     >
                         {i18n.t('Tree')}
                     </Tab>
+                    <Tab
+                        onClick={() => {
+                            setView(TEXT_VIEW)
+                        }}
+                        disabled={disableTextView}
+                        selected={view === TEXT_VIEW}
+                    >
+                        {i18n.t('Text')}
+                    </Tab>
                 </TabBar>
                 <div className={classes.helperIcon}>
                     <Tooltip
@@ -72,6 +102,10 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                                 <br />
                                 {i18n.t(
                                     'The Tree editor shows expandable nodes of the JSON object.'
+                                )}
+                                <br />
+                                {i18n.t(
+                                    'The Text editor allows you to add and edit non-JSON data, e.g. JSONata, DataSonnet, or other mapping expressions, and stores it as a string.'
                                 )}
                             </>
                         }
@@ -85,21 +119,27 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                 </div>
             </div>
             <>
-                {view === CODE_VIEW ? (
+                {view === CODE_VIEW && (
                     <CodeEditor
                         value={value}
                         onChange={handleEditorChange}
                         loading={loading}
                     />
-                ) : (
-                    view === TREE_VIEW && (
-                        <TreeViewEditor
-                            value={treeEditorValue}
-                            onChange={handleEditorChange}
-                            error={error}
-                            loading={loading}
-                        />
-                    )
+                )}
+                {view === TREE_VIEW && (
+                    <TreeViewEditor
+                        value={treeEditorValue}
+                        onChange={handleEditorChange}
+                        error={error}
+                        loading={loading}
+                    />
+                )}
+                {view === TEXT_VIEW && (
+                    <TextEditor
+                        value={textEditorValue}
+                        onChange={handleEditorChange}
+                        loading={loading}
+                    />
                 )}
             </>
         </>
