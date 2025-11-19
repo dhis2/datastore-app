@@ -19,7 +19,6 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     const [view, setView] = useState<EditorViewMode>('code')
     const [error, setError] = useState(null)
     const [disableTreeView, setDisableTreeView] = useState(false)
-    const [disableTextView, setDisableTextView] = useState(false)
 
     const jsonValue = useMemo(() => {
         setError(null)
@@ -29,6 +28,14 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
             setError(e.message)
         }
     }, [value])
+
+    const isEmptyObject =
+        typeof jsonValue === 'object' && Object.keys(jsonValue).length === 0
+
+    const disableTextView = useMemo(() => {
+        // Disable text view unless the value is a string or an empty object:
+        return !(typeof jsonValue === 'string' || isEmptyObject)
+    }, [isEmptyObject, jsonValue])
 
     const treeEditorValue = useMemo(() => {
         setDisableTreeView(false)
@@ -43,25 +50,16 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
     }, [jsonValue, value])
 
     const textEditorValue = useMemo(() => {
-        setDisableTextView(true)
         if (jsonValue === null || jsonValue === undefined) {
             return value
         } else if (typeof jsonValue === 'string') {
-            setDisableTextView(false)
             return jsonValue
+        } else if (isEmptyObject || jsonValue === '') {
+            return ''
         } else {
-            const isEmptyObject =
-                typeof jsonValue === 'object' &&
-                Object.keys(jsonValue).length === 0
-
-            if (isEmptyObject || jsonValue === '') {
-                setDisableTextView(false)
-                return ''
-            } else {
-                return value
-            }
+            return value
         }
-    }, [jsonValue, value])
+    }, [isEmptyObject, jsonValue, value])
 
     return (
         <>
@@ -107,7 +105,7 @@ const Editor = ({ loading, value, handleEditorChange }: EditorProps) => {
                                 )}
                                 <br />
                                 {i18n.t(
-                                    'The Text editor allows you to add and edit non-JSON data, e.g. JSONata, DataSonnet, or other mapping expressions; and stores it as a string.'
+                                    'The Text editor allows you to add and edit non-JSON data, e.g. JSONata, DataSonnet, or other mapping expressions, and stores it as a string.'
                                 )}
                             </>
                         }
