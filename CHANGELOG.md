@@ -1,3 +1,10 @@
+## [100.5.1](https://github.com/dhis2/datastore-app/compare/v100.5.0...v100.5.1) (2026-10-07)
+
+
+### Bug Fixes
+
+* **i18n:** enable transifex ([a85bac4](https://github.com/dhis2/datastore-app/commit/a85bac4d49b605b0a1c5776ca42758b066348755))
+
 # [100.5.0](https://github.com/dhis2/datastore-app/compare/v100.4.0...v100.5.0) (2025-11-19)
 
 
