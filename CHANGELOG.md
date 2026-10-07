@@ -1,3 +1,10 @@
+## [100.5.2](https://github.com/dhis2/datastore-app/compare/v100.5.1...v100.5.2) (2026-10-07)
+
+
+### Bug Fixes
+
+* **i18n:** correct transifex resource id ([58eca64](https://github.com/dhis2/datastore-app/commit/58eca647972648b2fd1393cfa18ae428d9c2a3e9))
+
 ## [100.5.1](https://github.com/dhis2/datastore-app/compare/v100.5.0...v100.5.1) (2026-10-07)
 
 
