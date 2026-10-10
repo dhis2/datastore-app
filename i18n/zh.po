@@ -2,16 +2,16 @@
 # Transifex Bot <>, 2026
 # Andres Miguel Rubio, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
-# easylin <lin_xd@126.com>, 2026
 # 晓东 林 <13981924470@126.com>, 2026
 # Philip Larsen Donnelly, 2026
+# easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2025-11-19T10:20:11.111Z\n"
 "PO-Revision-Date: 2026-10-07 21:14+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -23,42 +23,42 @@ msgid "Code"
 msgstr "代码"
 
 msgid "Tree"
-msgstr ""
+msgstr "树"
 
 msgid "Text"
 msgstr "文本"
 
 msgid "The Code editor is a free-form JSON editor."
-msgstr ""
+msgstr "“代码编辑器”是一款自由格式 JSON 编辑器。"
 
 msgid "The Tree editor shows expandable nodes of the JSON object."
-msgstr ""
+msgstr "“树”编辑器显示了 JSON 对象的可展开节点。"
 
 msgid ""
 "The Text editor allows you to add and edit non-JSON data, e.g. JSONata, "
 "DataSonnet, or other mapping expressions, and stores it as a string."
-msgstr ""
+msgstr "文本编辑器允许您添加和编辑非 JSON 数据（例如 JSONata、DataSonnet 或其他映射表达式），并将其存储为字符串。"
 
 msgid "Invalid JSON detected. Fix the value in the Code Editor"
-msgstr ""
+msgstr "检测到无效的 JSON。请在代码编辑器中修正该值"
 
 msgid "An error has occurred"
 msgstr "发生了错误"
 
 msgid "404 Page Not Found"
-msgstr ""
+msgstr "404 页面未找到"
 
 msgid "Back to datastore"
-msgstr ""
+msgstr "返回数据存储"
 
 msgid "An error has occurred. Try again"
-msgstr ""
+msgstr "发生错误。请重试"
 
 msgid "Key"
 msgstr "键值"
 
 msgid "Namespace"
-msgstr ""
+msgstr "命名空间"
 
 msgid "Search"
 msgstr "搜索"
@@ -88,79 +88,79 @@ msgid "Discard"
 msgstr "放弃"
 
 msgid "Do you want to discard the unsaved changes?"
-msgstr ""
+msgstr "您要放弃未保存的更改吗？"
 
 msgid "Namespaces"
-msgstr ""
+msgstr "命名空间"
 
 msgid "Choose a key to start editing"
-msgstr ""
+msgstr "选择一个键开始编辑"
 
 msgid "DataStore"
-msgstr ""
+msgstr "DataStore"
 
 msgid "UserDataStore"
-msgstr ""
+msgstr "UserDataStore"
 
 msgid "Key '{{key}}' updated successfully"
-msgstr ""
+msgstr "键“{{key}} ”已成功更新"
 
 msgid "There was a problem updating the key - {{error}}"
-msgstr ""
+msgstr "更新密钥时出现了一个问题——{{error}}"
 
 msgid "There was a problem - {{error}}"
-msgstr ""
+msgstr "出现了一个问题——{{error}}"
 
 msgid "There was a problem fetching this key's value. {{error}}"
-msgstr ""
+msgstr "获取此键的值时出现问题。{{error}}"
 
 msgid "There was a problem adding this key - {{error}}"
-msgstr ""
+msgstr "添加此键时出现了一个问题——{{error}}"
 
 msgid "Key '{{selectedKey}}' deleted successfully"
-msgstr ""
+msgstr "键“{{selectedKey}} ”已成功删除"
 
 msgid "There was a problem deleting this key - {{error}}"
-msgstr ""
+msgstr "删除此键时出现了一个问题——{{error}}"
 
 msgid "There was a problem fetching the keys in this namespace."
-msgstr ""
+msgstr "在获取此命名空间中的密钥时出现了一个问题。"
 
 msgid "Search keys"
-msgstr ""
+msgstr "搜索关键词"
 
 msgid "Add New Key"
-msgstr ""
+msgstr "添加新密钥"
 
 msgid "Delete Key"
-msgstr ""
+msgstr "删除键"
 
 msgid "This key has unsaved changes."
-msgstr ""
+msgstr "该密钥有未保存的更改。"
 
 msgid "There was a problem adding this namespace - {{error}}"
-msgstr ""
+msgstr "添加此命名空间时出现了一个问题——{{error}}"
 
 msgid "Namespace '{{namespace}}' deleted successfully"
-msgstr ""
+msgstr "命名空间“{{namespace}} ”已成功删除"
 
 msgid "There was a problem deleting this namespace - {{error}}"
-msgstr ""
+msgstr "删除此命名空间时出现了一个问题——{{error}}"
 
 msgid "Search namespaces"
-msgstr ""
+msgstr "搜索命名空间"
 
 msgid "New namespace"
-msgstr ""
+msgstr "新命名空间"
 
 msgid "Add New Namespace"
-msgstr ""
+msgstr "添加新命名空间"
 
 msgid "Delete Namespace"
-msgstr ""
+msgstr "删除命名空间"
 
 msgid "This will delete all the keys in this namespace"
-msgstr ""
+msgstr "这将删除该命名空间中的所有键"
 
 msgid "Actions"
 msgstr "行动"
@@ -169,7 +169,7 @@ msgid "No items found"
 msgstr "未找到任何项目"
 
 msgid "There was a problem fetching this key's ID"
-msgstr ""
+msgstr "获取此密钥的ID时出现问题"
 
 msgid "Share"
 msgstr "分享"
