@@ -1,1 +1,12 @@
+# Navigation file for the DHIS2 documentation builder (dhis2-docs-builder).
+#
+# The docs site does not read the pages in this folder directly. The builder's
+# navigation points at this file with
+#   @github(dhis2/datastore-app, docs/user/index.yml, master)
+# and expands it into the pages of this app.
+#
+# Each line is: Navigation title: 'file name'
+# - The navigation title is the name of the page in the docs site menu.
+# - The file name is relative to this folder (docs/user).
+# Add a line here when you add a page, and update it when you rename a page.
 - Datastore Management: 'datastore-app.md'
