@@ -1,0 +1,172 @@
+# Translators:
+# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2026
+# Andres Miguel Rubio, 2026
+# Yury Rogachev <yury@dhis2.org>, 2026
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2025-11-19T10:20:11.111Z\n"
+"PO-Revision-Date: 2026-10-07 21:14+0000\n"
+"Last-Translator: Yury Rogachev <yury@dhis2.org>, 2026\n"
+"Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uz@Latn\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Code"
+msgstr "Kod"
+
+msgid "Tree"
+msgstr ""
+
+msgid "Text"
+msgstr "Matn"
+
+msgid "The Code editor is a free-form JSON editor."
+msgstr ""
+
+msgid "The Tree editor shows expandable nodes of the JSON object."
+msgstr ""
+
+msgid ""
+"The Text editor allows you to add and edit non-JSON data, e.g. JSONata, "
+"DataSonnet, or other mapping expressions, and stores it as a string."
+msgstr ""
+
+msgid "Invalid JSON detected. Fix the value in the Code Editor"
+msgstr ""
+
+msgid "An error has occurred"
+msgstr "Xatolik yuz berdi"
+
+msgid "404 Page Not Found"
+msgstr ""
+
+msgid "Back to datastore"
+msgstr ""
+
+msgid "An error has occurred. Try again"
+msgstr ""
+
+msgid "Key"
+msgstr "Kalit"
+
+msgid "Namespace"
+msgstr ""
+
+msgid "Search"
+msgstr "Izlash"
+
+msgid "Close"
+msgstr "Yopmoq"
+
+msgid "Save"
+msgstr "Saqlash"
+
+msgid "Save changes"
+msgstr "Oʼzgartirishni saqlash"
+
+msgid "New Key"
+msgstr "Yangi Kalit"
+
+msgid "Cancel"
+msgstr "Бекор қилиш"
+
+msgid "Add"
+msgstr "Qoʼshish"
+
+msgid "Delete"
+msgstr "Oʼchirib tashlash"
+
+msgid "Discard"
+msgstr "Bekor qilish"
+
+msgid "Do you want to discard the unsaved changes?"
+msgstr ""
+
+msgid "Namespaces"
+msgstr ""
+
+msgid "Choose a key to start editing"
+msgstr ""
+
+msgid "DataStore"
+msgstr ""
+
+msgid "UserDataStore"
+msgstr ""
+
+msgid "Key '{{key}}' updated successfully"
+msgstr ""
+
+msgid "There was a problem updating the key - {{error}}"
+msgstr ""
+
+msgid "There was a problem - {{error}}"
+msgstr ""
+
+msgid "There was a problem fetching this key's value. {{error}}"
+msgstr ""
+
+msgid "There was a problem adding this key - {{error}}"
+msgstr ""
+
+msgid "Key '{{selectedKey}}' deleted successfully"
+msgstr ""
+
+msgid "There was a problem deleting this key - {{error}}"
+msgstr ""
+
+msgid "There was a problem fetching the keys in this namespace."
+msgstr ""
+
+msgid "Search keys"
+msgstr ""
+
+msgid "Add New Key"
+msgstr ""
+
+msgid "Delete Key"
+msgstr ""
+
+msgid "This key has unsaved changes."
+msgstr ""
+
+msgid "There was a problem adding this namespace - {{error}}"
+msgstr ""
+
+msgid "Namespace '{{namespace}}' deleted successfully"
+msgstr ""
+
+msgid "There was a problem deleting this namespace - {{error}}"
+msgstr ""
+
+msgid "Search namespaces"
+msgstr ""
+
+msgid "New namespace"
+msgstr ""
+
+msgid "Add New Namespace"
+msgstr ""
+
+msgid "Delete Namespace"
+msgstr ""
+
+msgid "This will delete all the keys in this namespace"
+msgstr ""
+
+msgid "Actions"
+msgstr "Аmallar"
+
+msgid "No items found"
+msgstr "Бирор нарса топилмади"
+
+msgid "There was a problem fetching this key's ID"
+msgstr ""
+
+msgid "Share"
+msgstr "Улашиш"
